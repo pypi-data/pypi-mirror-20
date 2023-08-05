@@ -1,0 +1,14 @@
+sphinx
+
+[:sys_platform=="win32"]
+colorama>=0.3.5
+
+[test]
+nose
+mock
+simplejson
+html5lib
+
+[websupport]
+sqlalchemy>=0.9
+whoosh>=2.0
