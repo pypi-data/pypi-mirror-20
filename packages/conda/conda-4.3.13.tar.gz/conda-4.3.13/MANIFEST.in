@@ -1,0 +1,9 @@
+include CHANGELOG.md
+include LICENSE.txt
+include MANIFEST.in
+include README.rst
+include setup.cfg
+include setup.py
+include conda/resources/*
+recursive-exclude tests *
+recursive-exclude shell *
