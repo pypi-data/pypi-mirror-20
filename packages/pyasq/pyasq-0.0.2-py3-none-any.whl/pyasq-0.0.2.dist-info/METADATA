@@ -1,0 +1,38 @@
+Metadata-Version: 2.0
+Name: pyasq
+Version: 0.0.2
+Summary: A pure Python API API.
+Home-page: http://github.com/textbook/pyasq/
+Author: Jonathan Sharpe
+Author-email: mail@jonrshar.pe
+License: License :: OSI Approved :: ISC License (ISCL)
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Dist: requests
+
+PyASq
+=====
+
+A pure Python API API.
+
+Compatibility
+-------------
+
+PyASq uses attribute annotations, so requires Python 3.6 and up.
+
+Examples
+--------
+
+Below is an example of how PyASq could be used to access the
+`Random User Generator`_ with a simple interface.
+
+.. literalinclude:: ../examples/random_user.py
+
+.. _Random User Generator: https://randomuser.me/
+
+
