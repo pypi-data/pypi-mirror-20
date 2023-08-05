@@ -1,0 +1,22 @@
+Metadata-Version: 2.0
+Name: rule30
+Version: 0.1
+Summary: Implementation of Stephen Wolfram's elementary cellular automata
+Home-page: https://github.com/zmwangx/rule30
+Author: Zhiming Wang
+Author-email: zmwangx@gmail.com
+License: MIT
+Keywords: elementary cellular automaton
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Dist: Pillow (>=4.0.0)
+Requires-Dist: bitarray (>=0.8.1)
+Provides-Extra: doc
+Requires-Dist: Sphinx (>=1.5.2); extra == 'doc'
+Requires-Dist: sphinx-rtd-theme (>=0.1.9); extra == 'doc'
+
+See `README <https://github.com/zmwangx/rule30#readme>`_.
+
+
