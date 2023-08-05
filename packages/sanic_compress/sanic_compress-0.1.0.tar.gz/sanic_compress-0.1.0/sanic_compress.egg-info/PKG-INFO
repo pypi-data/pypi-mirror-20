@@ -1,0 +1,116 @@
+Metadata-Version: 1.1
+Name: sanic-compress
+Version: 0.1.0
+Summary: An extension which allows you to easily gzip your Sanic responses.
+Home-page: http://github.com/subyraman/sanic_session
+Author: Suby Raman
+Author-email: UNKNOWN
+License: MIT
+Description: sanic\_compress
+        ~~~~~~~~~~~~~~~
+        
+        sanic\_compress is an extension which allows you to easily gzip your
+        Sanic responses. It is a port of the
+        `Flask-Compress <https://github.com/libwilliam/flask-compress>`__
+        extension.
+        
+        Installation
+        ------------
+        
+        Install with ``pip``:
+        
+        ``pip install sanic_compress``
+        
+        Usage
+        -----
+        
+        Usage is simple. Simply pass in the Sanic app object to the ``Compress``
+        class, and responses will be gzipped.
+        
+        .. code:: python
+        
+            from sanic import Sanic
+            from sanic_compress import Compress
+        
+            app = Sanic(__name__)
+            Compress(app)
+        
+        Alternatively, if you want to initialize the ``Compress`` class later,
+        you can do so with the ``init_app`` method;
+        
+        .. code:: python
+        
+            compress = Compress()
+            app = Flask(__name__)
+            compress.init_app(app)
+        
+        Options
+        -------
+        
+        Within the Sanic application config you can provide the following
+        settings to control the behavior of sanic\_compress. None of the
+        settings are required.
+        
+        +---------+--------------+----------+
+        | Option  | Description  | Default  |
+        +=========+==============+==========+
+        | ``COMPR | Set the list | ``[``\ \ |
+        | ESS_MIM | of mimetypes |  ``'text |
+        | ETYPES` | to compress  | /html',` |
+        | `       | here.        | `\ \ ``' |
+        |         |              | text/css |
+        |         |              | ',``\ \  |
+        |         |              | ``'text/ |
+        |         |              | xml',``\ |
+        |         |              |  \ ``'ap |
+        |         |              | plicatio |
+        |         |              | n/json', |
+        |         |              | ``\ \ `` |
+        |         |              | 'applica |
+        |         |              | tion/jav |
+        |         |              | ascript' |
+        |         |              | ``\ \ `` |
+        |         |              | ]``      |
+        +---------+--------------+----------+
+        | ``COMPR | Specifies    | ``6``    |
+        | ESS_LEV | the gzip     |          |
+        | EL``    | compression  |          |
+        |         | level (1-9). |          |
+        +---------+--------------+----------+
+        | ``COMPR | Specifies    | ``500``  |
+        | ESS_MIN | the minimum  |          |
+        | _SIZE`` | file size    |          |
+        |         | threshold    |          |
+        |         | for          |          |
+        |         | compressing  |          |
+        |         | files.       |          |
+        +---------+--------------+----------+
+        
+        A higher ``COMPRESS_LEVEL`` will result in a gzipped response that is
+        smaller, but the compression will take longer.
+        
+        Example of using custom configuration:
+        
+        ::
+        
+            from sanic import Sanic
+            from sanic_compress import Compress
+        
+            app = Sanic(__name__)
+            app.config['COMPRESS_MIMETYPES'] = set(['text/html', 'application/json'])
+            app.config['COMPRESS_LEVEL'] = 4
+            app.config['COMPRESS_MIN_SIZE'] = 300
+            Compress(app)
+        
+        Note about gzipping static files:
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        Sanic is not at heart a file server. You should consider serving static
+        files with nginx or on a separate file server.
+        
+Keywords: sanic,gzip
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Internet :: WWW/HTTP :: Session
