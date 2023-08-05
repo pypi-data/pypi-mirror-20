@@ -1,0 +1,21 @@
+# gqrx_hamlib - a gqrx to Hamlib interface to keep frequency
+# between gqrx and a radio in sync when using gqrx as a panadaptor
+# using Hamlib to control the radio
+#
+# The Hamlib daemon (rigctld) must be running, gqrx started with
+# the 'Remote Control via TCP' button clicked and
+# comms to the radio working otherwise an error will occur when
+# starting this program. Ports used are the defaults for gqrx and Hamlib.
+#
+# Return codes from gqrx and Hamlib are printed to the GUI window
+#
+# This program is written in Python 3.5/PyQt4
+# Python libraries required are:
+#   - socket
+#   - sys
+#   - time
+#	- PyQt4
+#   - xmlrpc.client
+#
+# 
+#
