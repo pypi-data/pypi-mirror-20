@@ -1,0 +1,36 @@
+Metadata-Version: 2.0
+Name: osmcha
+Version: 0.2.dev0
+Summary: Python package to detect suspicious OpenStreetMap changesets
+Home-page: https://github.com/willemarcel/osmcha
+Author: Wille Marcel
+Author-email: wille@wille.blog.br
+License: GPLv3+
+Keywords: openstreetmap,osm,QA,gis
+Platform: UNKNOWN
+Requires-Dist: click
+Requires-Dist: homura
+Requires-Dist: python-dateutil
+Requires-Dist: requests
+Requires-Dist: shapely
+Provides-Extra: test
+Requires-Dist: pytest; extra == 'test'
+
+osmcha
+============
+
+OSM Changeset Analyser, a Python package to detect suspicious OSM changesets
+
+
+.. image:: https://travis-ci.org/willemarcel/osmcha.svg
+    :target: https://travis-ci.org/willemarcel/osmcha
+
+.. image:: https://coveralls.io/repos/willemarcel/osmcha/badge.svg
+    :target: https://coveralls.io/r/willemarcel/osmcha
+
+License
+=======
+
+GPLv3
+
+
