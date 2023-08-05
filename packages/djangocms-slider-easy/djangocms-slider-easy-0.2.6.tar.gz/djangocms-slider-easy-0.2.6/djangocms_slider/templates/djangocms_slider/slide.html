@@ -1,0 +1,12 @@
+{% load thumbnail %}
+
+<li class="slideshow-slide">
+    {% if slider_thumb_id and not simple_settings %}
+        <img src="{{ instance.image | thumbnail_url:slider_thumb_id  }}" alt="{{ instance.alt }}"
+                {% if instance.longdesc %} title="{{ instance.longdesc }}"{% endif %} />
+    {% else %}
+        {% thumbnail instance.image "1920x480" crop="center" as thumb %}
+        <img src="{{ thumb.url }}" width="1920" height="480" alt="{{ instance.alt }}"{% if instance.longdesc %}
+             title="{{ instance.longdesc }}"{% endif %} />
+    {% endif %}
+</li>
