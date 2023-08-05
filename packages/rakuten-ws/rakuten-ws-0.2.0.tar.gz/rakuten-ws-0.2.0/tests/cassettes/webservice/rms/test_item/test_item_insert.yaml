@@ -1,0 +1,70 @@
+interactions:
+- request:
+    body: "<?xml version='1.0' encoding='utf-8'?>\n<request>\n  <itemDeleteRequest>\n
+      \   <item>\n      <itemUrl>item-test-01</itemUrl>\n    </item>\n  </itemDeleteRequest>\n</request>\n"
+    headers:
+      Authorization: [ESA XXXXXX]
+      Content-Length: ['166']
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: https://api.rms.rakuten.co.jp/es/1.0/item/delete
+  response:
+    body: {string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <result><status><interfaceId>item.delete</interfaceId><systemStatus>OK</systemStatus><message>OK</message><requestId>a2605025-0121-4e0b-ba86-aaf1f35039dd</requestId><requests/></status><itemDeleteResult><code>C001</code><item><itemUrl>item-test-01</itemUrl></item></itemDeleteResult></result>'}
+    headers:
+      Connection: [close]
+      Content-Length: ['331']
+      Content-Type: [text/xml; charset=utf-8]
+      Date: ['Mon, 20 Feb 2017 15:33:26 GMT']
+      Vary: [Accept-Encoding]
+      X-Powered-By: [Servlet/2.5 JSP/2.1]
+    status: {code: 200, message: OK}
+- request:
+    body: "<?xml version='1.0' encoding='utf-8'?>\n<request>\n  <itemDeleteRequest>\n
+      \   <item>\n      <itemUrl>item-test-02</itemUrl>\n    </item>\n  </itemDeleteRequest>\n</request>\n"
+    headers:
+      Authorization: [ESA XXXXXX]
+      Content-Length: ['166']
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: https://api.rms.rakuten.co.jp/es/1.0/item/delete
+  response:
+    body: {string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <result><status><interfaceId>item.delete</interfaceId><systemStatus>OK</systemStatus><message>OK</message><requestId>f4f8985f-0c4f-4848-9086-6347d26761d3</requestId><requests/></status><itemDeleteResult><code>N000</code><item><itemUrl>item-test-02</itemUrl></item></itemDeleteResult></result>'}
+    headers:
+      Connection: [close]
+      Content-Length: ['331']
+      Content-Type: [text/xml; charset=utf-8]
+      Date: ['Mon, 20 Feb 2017 15:33:27 GMT']
+      Vary: [Accept-Encoding]
+      X-Powered-By: [Servlet/2.5 JSP/2.1]
+    status: {code: 200, message: OK}
+- request:
+    body: "<?xml version='1.0' encoding='utf-8'?>\n<request>\n  <itemInsertRequest>\n
+      \   <item>\n      <itemUrl>item-test-01</itemUrl>\n      <itemNumber>item-test-01</itemNumber>\n
+      \     <itemName>item-test-01 name</itemName>\n      <itemPrice>298000</itemPrice>\n
+      \     <genreId>409148</genreId>\n      <itemInventory>\n        <inventoryType>1</inventoryType>\n
+      \       <inventories>\n          <inventory>\n            <inventoryCount>11</inventoryCount>\n
+      \         </inventory>\n        </inventories>\n      </itemInventory>\n    </item>\n
+      \ </itemInsertRequest>\n</request>\n"
+    headers:
+      Authorization: [ESA XXXXXX]
+      Content-Length: ['547']
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: https://api.rms.rakuten.co.jp/es/1.0/item/insert
+  response:
+    body: {string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <result><status><interfaceId>item.insert</interfaceId><systemStatus>OK</systemStatus><message>OK</message><requestId>6e4f86d2-6fb7-4271-8d72-ec87dca528f9</requestId><requests/></status><itemInsertResult><code>N000</code><item><itemUrl>item-test-01</itemUrl></item></itemInsertResult></result>'}
+    headers:
+      Connection: [close]
+      Content-Length: ['331']
+      Content-Type: [text/xml; charset=UTF-8]
+      Date: ['Mon, 20 Feb 2017 15:33:28 GMT']
+      Vary: [Accept-Encoding]
+      X-Powered-By: [Servlet/2.5 JSP/2.1]
+    status: {code: 200, message: OK}
+version: 1
