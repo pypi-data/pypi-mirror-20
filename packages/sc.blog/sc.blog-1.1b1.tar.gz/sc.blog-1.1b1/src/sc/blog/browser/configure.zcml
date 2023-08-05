@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="sc.blog">
+
+  <browser:page
+      for="..content.IBlog"
+      name="view"
+      class=".blog.View"
+      permission="zope2.View"
+      layer="..interfaces.IBlogLayer"
+      />
+
+  <browser:page
+      for="..content.IBlog"
+      name="blog_summary_view"
+      class=".blog.BlogSummaryView"
+      permission="zope2.View"
+      layer="..interfaces.IBlogLayer"
+      />
+
+  <browser:viewlet
+      name="sc.blog.blogheader"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+      class=".blog.BlogHeader"
+      template="templates/blogheader.pt"
+      permission="zope2.View"
+      layer="..interfaces.IBlogLayer"
+      />
+
+</configure>
