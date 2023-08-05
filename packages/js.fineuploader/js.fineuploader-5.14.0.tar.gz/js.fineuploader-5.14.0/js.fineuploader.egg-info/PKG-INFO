@@ -1,0 +1,76 @@
+Metadata-Version: 1.1
+Name: js.fineuploader
+Version: 5.14.0
+Summary: Fanstatic packaging of Fine Uploader
+Home-page: https://github.com/fanstatic/js.fineuploader
+Author: Andreas Kaiser
+Author-email: disko@binarypunks.com
+License: BSD
+Description: js.fineuploader
+        ===============
+        
+        Introduction
+        ------------
+        
+        This library packages `Fine Uploader`_ for `fanstatic`_.
+        
+        .. _`fanstatic`: http://fanstatic.org
+        .. _`Fine Uploader`: http://fineuploader.com/
+        
+        This requires integration between your web framework and ``fanstatic``,
+        and making sure that the original resources (shipped in the ``resources``
+        directory in ``js.fineuploader``) are published to some URL.
+        
+        
+        How to use?
+        -----------
+        
+        You can import ``fineuploader`` from ``js.fineuploader`` and ``need`` it where
+        you want these resources to be included on a page::
+        
+          >>> from js.fineuploader import fineuploader
+          >>> fineuploader.need()
+        
+        Or if you want the jQuery plugin version::
+        
+          >>> from js.fineuploader import jquery_fineuploader
+          >>> jquery_fineuploader.need()
+        
+        With either version you might also want the CSS::
+        
+          >>> from js.fineuploader import fineuploader_css
+          >>> fineuploader_css.need()
+        
+        CHANGES
+        =======
+        
+        5.14.0
+        ------
+        
+        - Update to Fine Uploader 5.14.0.
+        - Test against Python 3.3, 3.4, 3.5 and 3.6 with tox and on TravisCI.
+        - Add a script to update from npm automatically.
+        
+        3.3.0
+        -----
+        
+        -   Initial release.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
