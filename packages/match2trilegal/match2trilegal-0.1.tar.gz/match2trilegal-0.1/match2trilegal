@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+
+from match2trilegal import process_match_sfh
+
+
+def main(argv):
+    """Main function for the process_match_sfh.py script"""
+
+    parser = argparse.ArgumentParser(description="Convert MATCH SFH file to TRILEGAL SFR, Z file")
+
+    parser.add_argument('-z', '--zdisp', type=float, default=0.,
+                        help='include a constant value of z-dispersion')
+
+    parser.add_argument('infile', type=str, help='match sfh file')
+
+    parser.add_argument('outfile', type=str, help='output trilegal sfr,z file',
+                        default='trilegal_sfrz.dat')
+
+    args = parser.parse_args(argv)
+
+    process_match_sfh(args.infile, outfile=args.outfile, zdisp=args.zdisp)
+    
+    return    
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
