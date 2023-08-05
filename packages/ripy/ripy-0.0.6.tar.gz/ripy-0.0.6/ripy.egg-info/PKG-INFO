@@ -1,0 +1,18 @@
+Metadata-Version: 1.0
+Name: ripy
+Version: 0.0.6
+Summary: Parsing of refractive index data, designed to be used with the tmmpy package.
+Home-page: https://git.kern.phys.au.dk/SunTune/ripy/
+Author: Emil Haldrup Eriksen
+Author-email: emher@au.dk
+License: MIT
+Description: Ripy is a small project aiming to allow easy access to refractive index information on materials. Besides basic objects representing materials, bindings to various databases are provided. Currently the following databases are supported:
+        
+        * The *http://refractiveindex.info/* database
+        * Exports from PV Lighthouse (experimental)
+        
+        More databases will be added in the future if needed.
+        
+        * Change of sign in complex refractive index (convention)
+        
+Platform: any
