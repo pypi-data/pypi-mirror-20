@@ -1,0 +1,46 @@
+Metadata-Version: 1.0
+Name: wherehouse
+Version: 0.1.1
+Summary: A Python client for Wherehouse modules
+Home-page: https://github.com/wherehouse/wherehouse-sdk-py
+Author: Dan Abdinoor
+Author-email: dan@wherehou.se
+License: MIT
+Description: wherehouse-sdk-py
+        =================
+        
+        A Python 2.x client for Wherehouse modules.
+        
+        Centroid
+        --------
+        
+        NetworkUtils
+        ~~~~~~~~~~~~
+        
+        Utilities for converting shapefiles into edges and nodes.
+        
+        Usage
+        ~~~~~
+        .. code-block:: bash
+        
+            $ python
+            >>> from wherehouse.centroid import NetworkUtils
+            >>> NetworkUtils.create_network_files(<path>, <path>)
+        
+        
+        Installation
+        ------------
+        
+        .. code-block:: bash
+        
+            $ pip install wherehouse
+        
+        
+        Requirements
+        ------------
+        
+        .. code-block:: bash
+        
+            $ pip install -r requirements.txt
+        
+Platform: UNKNOWN
