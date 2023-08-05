@@ -1,0 +1,49 @@
+{
+
+  "environments": [
+    "production",
+    "lab"
+  ],
+
+  "apis": {
+    "example_api": {
+      "production": {
+        "signatures": "1.0",
+        "key": "12345",
+        "secret": "",
+        "user": "",
+        "password": "",
+        "parameters": []
+      },
+      "lab": {
+        "signatures": [
+          "2.0/some_endpoint",
+          "2.0/some_other_endpoint"
+        ],
+        "key": "67890",
+        "secret": "",
+        "user": "",
+        "password": "",
+        "parameters": []
+      }
+    }
+  },
+
+  "endpoints": {
+    "server1.example.com": {
+      "port": 80,
+      "environment": "production",
+      "apis": [
+        "example_api"
+      ]
+    },
+    "server1.lab.example.com": {
+      "port": 80,
+      "environment": "lab",
+      "apis": [
+        "example_api"
+      ]
+    }
+  }
+
+}
