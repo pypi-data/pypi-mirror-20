@@ -1,0 +1,23 @@
+{% load cms_tags %}
+
+<div id="{{ auto_id }}" class="carousel slide" data-ride="carousel" data-interval="{{ rotate_interval }}">
+
+    <ol class="carousel-indicators">
+        {% for object in objects_list %}
+        <li {% if forloop.first %}class=active{% else %}class=""{% endif %} data-target="#{{ auto_id }}" data-slide-to="{{ forloop.counter0 }}"></li>
+        {% endfor %}
+    </ol>
+
+    <div class="carousel-inner">
+        {% for plugin in objects_list %}
+            <div class="item {% if forloop.first %}active{% endif %}">
+                {% render_plugin plugin %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#{{ auto_id }}" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#{{ auto_id }}" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+</div>
