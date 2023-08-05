@@ -1,0 +1,202 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Line Plus Bar Chart &#8212; sphinxcontrib.nvd3 0.1.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://nvd3.org/assets/css/nv.d3.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://nvd3.org/assets/lib/d3.v3.js"></script>
+    <script type="text/javascript" src="http://nvd3.org/assets/js/nv.d3.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Line With Focus Chart" href="linewithfocus.html" />
+    <link rel="prev" title="Line Chart" href="line.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="linewithfocus.html" title="Line With Focus Chart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="line.html" title="Line Chart"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">sphinxcontrib.nvd3 0.1.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="line.html"
+                        title="previous chapter">Line Chart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="linewithfocus.html"
+                        title="next chapter">Line With Focus Chart</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/charts/lineplusbar.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="line-plus-bar-chart">
+<h1>Line Plus Bar Chart<a class="headerlink" href="#line-plus-bar-chart" title="Permalink to this headline">¶</a></h1>
+<div>
+
+    <div id="lineplusbarchart"><svg style="height:450px;"></svg></div>
+
+
+    <script>
+
+    (window.onload = function(){
+
+
+            data_lineplusbarchart=[{"yAxis": "1", "bar": "true", "key": "ydata1", "values": [{"x": 0, "y": 2}, {"x": 1, "y": 10}, {"x": 2, "y": 6}, {"x": 3, "y": 7}, {"x": 4, "y": 11}, {"x": 5, "y": 9}, {"x": 6, "y": 12}, {"x": 7, "y": 12}, {"x": 8, "y": 13}, {"x": 9, "y": 13}, {"x": 10, "y": 14}, {"x": 11, "y": 12}, {"x": 12, "y": 15}, {"x": 13, "y": 15}, {"x": 14, "y": 19}, {"x": 15, "y": 24}, {"x": 16, "y": 20}, {"x": 17, "y": 19}, {"x": 18, "y": 21}, {"x": 19, "y": 25}, {"x": 20, "y": 29}, {"x": 21, "y": 28}, {"x": 22, "y": 28}, {"x": 23, "y": 29}]}, {"yAxis": "1", "key": "ydata2", "values": [{"x": 0, "y": 0}, {"x": 1, "y": 10}, {"x": 2, "y": 4}, {"x": 3, "y": 3}, {"x": 4, "y": 8}, {"x": 5, "y": 25}, {"x": 6, "y": 18}, {"x": 7, "y": 28}, {"x": 8, "y": 40}, {"x": 9, "y": 45}, {"x": 10, "y": 60}, {"x": 11, "y": 11}, {"x": 12, "y": 48}, {"x": 13, "y": 13}, {"x": 14, "y": 140}, {"x": 15, "y": 135}, {"x": 16, "y": 16}, {"x": 17, "y": 34}, {"x": 18, "y": 180}, {"x": 19, "y": 171}, {"x": 20, "y": 60}, {"x": 21, "y": 105}, {"x": 22, "y": 44}, {"x": 23, "y": 23}]}];
+
+
+        nv.addGraph(function() {
+        var chart = nv.models.linePlusBarChart();
+
+        chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+
+        var datum = data_lineplusbarchart;
+
+
+
+        chart.focusEnable = false;
+
+                chart.y1Axis
+                .tickFormat(function(d) { return d3.format(',f')(d) });
+            chart.xAxis
+                .tickFormat(d3.format(',.2f'));
+            chart.y2Axis
+                .tickFormat(function(d) { return d3.format(',f')(d) });
+
+
+          chart.showLegend(true);
+
+
+    
+
+        
+
+
+
+            d3.select('#lineplusbarchart svg')
+            .datum(datum)
+            .transition().duration(500)
+            .attr('height', 450)
+            .call(chart);
+
+
+        });
+
+
+
+        });
+    </script>
+</div><p>Contents of CSV file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xdata</span><span class="p">,</span><span class="n">ydata1</span><span class="p">,</span><span class="n">ydata2</span>
+<span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span>
+<span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span>
+<span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span>
+<span class="mi">4</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">8</span>
+<span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">25</span>
+<span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">18</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">28</span>
+<span class="mi">8</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">40</span>
+<span class="mi">9</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">45</span>
+<span class="mi">10</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">60</span>
+<span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">11</span>
+<span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">48</span>
+<span class="mi">13</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">13</span>
+<span class="mi">14</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">140</span>
+<span class="mi">15</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">135</span>
+<span class="mi">16</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">16</span>
+<span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">34</span>
+<span class="mi">18</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">180</span>
+<span class="mi">19</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">171</span>
+<span class="mi">20</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">60</span>
+<span class="mi">21</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">105</span>
+<span class="mi">22</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">44</span>
+<span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">23</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="linewithfocus.html" title="Line With Focus Chart"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="line.html" title="Line Chart"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">sphinxcontrib.nvd3 0.1.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015, Shoji KUMAGAI.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

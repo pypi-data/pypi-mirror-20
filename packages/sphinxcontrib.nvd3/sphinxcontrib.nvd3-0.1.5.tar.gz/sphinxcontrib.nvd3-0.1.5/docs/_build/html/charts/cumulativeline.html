@@ -1,0 +1,238 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cumulative Line Chart &#8212; sphinxcontrib.nvd3 0.1.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://nvd3.org/assets/css/nv.d3.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://nvd3.org/assets/lib/d3.v3.js"></script>
+    <script type="text/javascript" src="http://nvd3.org/assets/js/nv.d3.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Discrete Bar Chart" href="discretebar.html" />
+    <link rel="prev" title="Line With Focus Chart" href="linewithfocus.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="discretebar.html" title="Discrete Bar Chart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="linewithfocus.html" title="Line With Focus Chart"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">sphinxcontrib.nvd3 0.1.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="linewithfocus.html"
+                        title="previous chapter">Line With Focus Chart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="discretebar.html"
+                        title="next chapter">Discrete Bar Chart</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/charts/cumulativeline.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cumulative-line-chart">
+<h1>Cumulative Line Chart<a class="headerlink" href="#cumulative-line-chart" title="Permalink to this headline">¶</a></h1>
+<div>
+
+    <div id="cumulativelinechart"><svg style="height:450px;"></svg></div>
+
+
+    <script>
+
+    (window.onload = function(){
+
+
+        data_cumulativelinechart=[{"yAxis": "1", "key": "ydata1", "values": [{"x": 1338476400000, "y": 4}, {"x": 1339476400000, "y": 8}, {"x": 1340476400000, "y": 8}, {"x": 1341476400000, "y": 7}, {"x": 1342476400000, "y": 7}, {"x": 1343476400000, "y": 8}, {"x": 1344476400000, "y": 11}, {"x": 1345476400000, "y": 14}, {"x": 1346476400000, "y": 15}, {"x": 1347476400000, "y": 10}, {"x": 1348476400000, "y": 15}, {"x": 1349476400000, "y": 19}, {"x": 1350476400000, "y": 18}, {"x": 1351476400000, "y": 23}, {"x": 1352476400000, "y": 19}, {"x": 1353476400000, "y": 25}, {"x": 1354476400000, "y": 20}, {"x": 1355476400000, "y": 21}, {"x": 1356476400000, "y": 20}, {"x": 1357476400000, "y": 28}, {"x": 1358476400000, "y": 24}, {"x": 1359476400000, "y": 31}, {"x": 1360476400000, "y": 24}, {"x": 1361476400000, "y": 25}, {"x": 1362476400000, "y": 28}, {"x": 1363476400000, "y": 31}, {"x": 1364476400000, "y": 27}, {"x": 1365476400000, "y": 32}, {"x": 1366476400000, "y": 38}, {"x": 1367476400000, "y": 32}, {"x": 1368476400000, "y": 37}, {"x": 1369476400000, "y": 38}, {"x": 1370476400000, "y": 42}, {"x": 1371476400000, "y": 34}, {"x": 1372476400000, "y": 39}, {"x": 1373476400000, "y": 45}, {"x": 1374476400000, "y": 43}, {"x": 1375476400000, "y": 40}, {"x": 1376476400000, "y": 41}, {"x": 1377476400000, "y": 47}, {"x": 1378476400000, "y": 49}, {"x": 1379476400000, "y": 50}, {"x": 1380476400000, "y": 45}, {"x": 1381476400000, "y": 50}, {"x": 1382476400000, "y": 51}, {"x": 1383476400000, "y": 52}, {"x": 1384476400000, "y": 51}, {"x": 1385476400000, "y": 57}, {"x": 1386476400000, "y": 51}, {"x": 1387476400000, "y": 57}]}, {"yAxis": "1", "key": "ydata2", "values": [{"x": 1338476400000, "y": 8}, {"x": 1339476400000, "y": 16}, {"x": 1340476400000, "y": 16}, {"x": 1341476400000, "y": 14}, {"x": 1342476400000, "y": 14}, {"x": 1343476400000, "y": 16}, {"x": 1344476400000, "y": 22}, {"x": 1345476400000, "y": 28}, {"x": 1346476400000, "y": 30}, {"x": 1347476400000, "y": 20}, {"x": 1348476400000, "y": 30}, {"x": 1349476400000, "y": 38}, {"x": 1350476400000, "y": 36}, {"x": 1351476400000, "y": 46}, {"x": 1352476400000, "y": 38}, {"x": 1353476400000, "y": 50}, {"x": 1354476400000, "y": 40}, {"x": 1355476400000, "y": 42}, {"x": 1356476400000, "y": 40}, {"x": 1357476400000, "y": 56}, {"x": 1358476400000, "y": 48}, {"x": 1359476400000, "y": 62}, {"x": 1360476400000, "y": 48}, {"x": 1361476400000, "y": 50}, {"x": 1362476400000, "y": 56}, {"x": 1363476400000, "y": 62}, {"x": 1364476400000, "y": 54}, {"x": 1365476400000, "y": 64}, {"x": 1366476400000, "y": 76}, {"x": 1367476400000, "y": 64}, {"x": 1368476400000, "y": 74}, {"x": 1369476400000, "y": 76}, {"x": 1370476400000, "y": 84}, {"x": 1371476400000, "y": 68}, {"x": 1372476400000, "y": 78}, {"x": 1373476400000, "y": 90}, {"x": 1374476400000, "y": 86}, {"x": 1375476400000, "y": 80}, {"x": 1376476400000, "y": 82}, {"x": 1377476400000, "y": 94}, {"x": 1378476400000, "y": 98}, {"x": 1379476400000, "y": 100}, {"x": 1380476400000, "y": 90}, {"x": 1381476400000, "y": 100}, {"x": 1382476400000, "y": 102}, {"x": 1383476400000, "y": 104}, {"x": 1384476400000, "y": 102}, {"x": 1385476400000, "y": 114}, {"x": 1386476400000, "y": 102}, {"x": 1387476400000, "y": 114}]}];
+
+    nv.addGraph(function() {
+        var chart = nv.models.cumulativeLineChart();
+
+        chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+
+        var datum = data_cumulativelinechart;
+
+
+
+
+
+            chart.yAxis
+                .tickFormat(d3.format(',.1%'));
+            chart.xAxis
+                .tickFormat(function(d) { return d3.time.format('%d %b %Y')(new Date(parseInt(d))) }
+);
+
+                chart.tooltipContent(function(key, y, e, graph) {
+                    var x = d3.time.format("%d %b %Y")(new Date(parseInt(graph.point.x)));
+                    var y = String(graph.point.y);
+                    if(key == 'ydata1'){
+                        var y =  String(e) ;
+                    }
+if(key == 'ydata2'){
+                        var y =  String(e) ;
+                    }
+
+                    tooltip_str = '<center><b>'+key+'</b></center>' + y + ' on ' + x;
+                    return tooltip_str;
+                });
+
+      chart.showLegend(true);
+
+
+
+        
+
+
+        d3.select('#cumulativelinechart svg')
+            .datum(datum)
+            .transition().duration(500)
+            .attr('height', 450)
+            .call(chart);
+
+
+    });
+
+
+
+
+        });
+    </script>
+</div><p>Contents of CSV file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xdata</span><span class="p">,</span><span class="n">ydata1</span><span class="p">,</span><span class="n">ydata2</span>
+<span class="mi">1338476400000</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span>
+<span class="mi">1339476400000</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span>
+<span class="mi">1340476400000</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span>
+<span class="mi">1341476400000</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">14</span>
+<span class="mi">1342476400000</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">14</span>
+<span class="mi">1343476400000</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span>
+<span class="mi">1344476400000</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span>
+<span class="mi">1345476400000</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">28</span>
+<span class="mi">1346476400000</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">30</span>
+<span class="mi">1347476400000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span>
+<span class="mi">1348476400000</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">30</span>
+<span class="mi">1349476400000</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">38</span>
+<span class="mi">1350476400000</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">36</span>
+<span class="mi">1351476400000</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">46</span>
+<span class="mi">1352476400000</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">38</span>
+<span class="mi">1353476400000</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">50</span>
+<span class="mi">1354476400000</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span>
+<span class="mi">1355476400000</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">42</span>
+<span class="mi">1356476400000</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span>
+<span class="mi">1357476400000</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">56</span>
+<span class="mi">1358476400000</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">48</span>
+<span class="mi">1359476400000</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">62</span>
+<span class="mi">1360476400000</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">48</span>
+<span class="mi">1361476400000</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">50</span>
+<span class="mi">1362476400000</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">56</span>
+<span class="mi">1363476400000</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">62</span>
+<span class="mi">1364476400000</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">54</span>
+<span class="mi">1365476400000</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span>
+<span class="mi">1366476400000</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="mi">76</span>
+<span class="mi">1367476400000</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span>
+<span class="mi">1368476400000</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">74</span>
+<span class="mi">1369476400000</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="mi">76</span>
+<span class="mi">1370476400000</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">84</span>
+<span class="mi">1371476400000</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">68</span>
+<span class="mi">1372476400000</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">78</span>
+<span class="mi">1373476400000</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">90</span>
+<span class="mi">1374476400000</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">86</span>
+<span class="mi">1375476400000</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">80</span>
+<span class="mi">1376476400000</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">82</span>
+<span class="mi">1377476400000</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">94</span>
+<span class="mi">1378476400000</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">98</span>
+<span class="mi">1379476400000</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span>
+<span class="mi">1380476400000</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">90</span>
+<span class="mi">1381476400000</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span>
+<span class="mi">1382476400000</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">102</span>
+<span class="mi">1383476400000</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">104</span>
+<span class="mi">1384476400000</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">102</span>
+<span class="mi">1385476400000</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="mi">114</span>
+<span class="mi">1386476400000</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">102</span>
+<span class="mi">1387476400000</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="mi">114</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="discretebar.html" title="Discrete Bar Chart"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="linewithfocus.html" title="Line With Focus Chart"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">sphinxcontrib.nvd3 0.1.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015, Shoji KUMAGAI.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Scatter Chart &#8212; sphinxcontrib.nvd3 0.1.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://nvd3.org/assets/css/nv.d3.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://nvd3.org/assets/lib/d3.v3.js"></script>
+    <script type="text/javascript" src="http://nvd3.org/assets/js/nv.d3.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stacked Area Chart" href="stackedarea.html" />
+    <link rel="prev" title="Pie Chart" href="pie.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="stackedarea.html" title="Stacked Area Chart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pie.html" title="Pie Chart"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">sphinxcontrib.nvd3 0.1.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pie.html"
+                        title="previous chapter">Pie Chart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="stackedarea.html"
+                        title="next chapter">Stacked Area Chart</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/charts/scatter.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scatter-chart">
+<h1>Scatter Chart<a class="headerlink" href="#scatter-chart" title="Permalink to this headline">¶</a></h1>
+<div>
+
+    <div id="scatterchart"><svg style="height:450px;"></svg></div>
+
+
+    <script>
+
+    (window.onload = function(){
+
+
+            data_scatterchart=[{"yAxis": "1", "key": "ydata1", "values": [{"x": 5, "y": 0}, {"x": 4, "y": 6}, {"x": 7, "y": 18}, {"x": 11, "y": 9}, {"x": 14, "y": 16}, {"x": 6, "y": 10}, {"x": 13, "y": 30}, {"x": 12, "y": 7}, {"x": 17, "y": 64}, {"x": 15, "y": 18}, {"x": 17, "y": 30}, {"x": 14, "y": 55}, {"x": 15, "y": 36}, {"x": 17, "y": 91}, {"x": 18, "y": 112}, {"x": 22, "y": 45}, {"x": 22, "y": 48}, {"x": 24, "y": 170}, {"x": 28, "y": 162}, {"x": 22, "y": 190}, {"x": 23, "y": 60}, {"x": 28, "y": 168}, {"x": 24, "y": 66}, {"x": 30, "y": 115}, {"x": 29, "y": 240}, {"x": 32, "y": 200}, {"x": 27, "y": 234}, {"x": 30, "y": 162}, {"x": 37, "y": 140}, {"x": 30, "y": 232}, {"x": 34, "y": 240}, {"x": 41, "y": 186}, {"x": 33, "y": 128}, {"x": 41, "y": 231}, {"x": 36, "y": 306}, {"x": 41, "y": 105}, {"x": 37, "y": 288}, {"x": 39, "y": 37}, {"x": 42, "y": 76}, {"x": 45, "y": 312}, {"x": 41, "y": 120}, {"x": 43, "y": 410}, {"x": 48, "y": 84}, {"x": 45, "y": 43}, {"x": 48, "y": 220}, {"x": 53, "y": 315}, {"x": 48, "y": 276}, {"x": 54, "y": 282}, {"x": 55, "y": 96}, {"x": 56, "y": 98}]}, {"yAxis": "1", "key": "ydata2", "values": [{"x": 5, "y": 0}, {"x": 4, "y": 12}, {"x": 7, "y": 36}, {"x": 11, "y": 18}, {"x": 14, "y": 32}, {"x": 6, "y": 20}, {"x": 13, "y": 60}, {"x": 12, "y": 14}, {"x": 17, "y": 128}, {"x": 15, "y": 36}, {"x": 17, "y": 60}, {"x": 14, "y": 110}, {"x": 15, "y": 72}, {"x": 17, "y": 182}, {"x": 18, "y": 224}, {"x": 22, "y": 90}, {"x": 22, "y": 96}, {"x": 24, "y": 340}, {"x": 28, "y": 324}, {"x": 22, "y": 380}, {"x": 23, "y": 120}, {"x": 28, "y": 336}, {"x": 24, "y": 132}, {"x": 30, "y": 230}, {"x": 29, "y": 480}, {"x": 32, "y": 400}, {"x": 27, "y": 468}, {"x": 30, "y": 324}, {"x": 37, "y": 280}, {"x": 30, "y": 464}, {"x": 34, "y": 480}, {"x": 41, "y": 372}, {"x": 33, "y": 256}, {"x": 41, "y": 462}, {"x": 36, "y": 612}, {"x": 41, "y": 210}, {"x": 37, "y": 576}, {"x": 39, "y": 74}, {"x": 42, "y": 152}, {"x": 45, "y": 624}, {"x": 41, "y": 240}, {"x": 43, "y": 820}, {"x": 48, "y": 168}, {"x": 45, "y": 86}, {"x": 48, "y": 440}, {"x": 53, "y": 630}, {"x": 48, "y": 552}, {"x": 54, "y": 564}, {"x": 55, "y": 192}, {"x": 56, "y": 196}]}, {"yAxis": "1", "key": "ydata3", "values": [{"x": 5, "y": 0}, {"x": 4, "y": 30}, {"x": 7, "y": 90}, {"x": 11, "y": 45}, {"x": 14, "y": 80}, {"x": 6, "y": 50}, {"x": 13, "y": 150}, {"x": 12, "y": 35}, {"x": 17, "y": 320}, {"x": 15, "y": 90}, {"x": 17, "y": 150}, {"x": 14, "y": 275}, {"x": 15, "y": 180}, {"x": 17, "y": 455}, {"x": 18, "y": 560}, {"x": 22, "y": 225}, {"x": 22, "y": 240}, {"x": 24, "y": 850}, {"x": 28, "y": 810}, {"x": 22, "y": 950}, {"x": 23, "y": 300}, {"x": 28, "y": 840}, {"x": 24, "y": 330}, {"x": 30, "y": 575}, {"x": 29, "y": 1200}, {"x": 32, "y": 1000}, {"x": 27, "y": 1170}, {"x": 30, "y": 810}, {"x": 37, "y": 700}, {"x": 30, "y": 1160}, {"x": 34, "y": 1200}, {"x": 41, "y": 930}, {"x": 33, "y": 640}, {"x": 41, "y": 1155}, {"x": 36, "y": 1530}, {"x": 41, "y": 525}, {"x": 37, "y": 1440}, {"x": 39, "y": 185}, {"x": 42, "y": 380}, {"x": 45, "y": 1560}, {"x": 41, "y": 600}, {"x": 43, "y": 2050}, {"x": 48, "y": 420}, {"x": 45, "y": 215}, {"x": 48, "y": 1100}, {"x": 53, "y": 1575}, {"x": 48, "y": 1380}, {"x": 54, "y": 1410}, {"x": 55, "y": 480}, {"x": 56, "y": 490}]}];
+
+
+        nv.addGraph(function() {
+        var chart = nv.models.scatterChart();
+
+        chart.margin({top: 30, right: 60, bottom: 20, left: 60});
+
+        var datum = data_scatterchart;
+
+
+
+                chart.yAxis
+                .tickFormat(d3.format(',.02f'));
+            chart.xAxis
+                .tickFormat(d3.format(',.02f'));
+
+
+
+          chart.showLegend(true);
+
+
+    
+
+        
+
+
+
+
+    chart
+        .showDistX(true)
+        .showDistY(true)
+        .color(d3.scale.category10().range());
+
+            d3.select('#scatterchart svg')
+            .datum(datum)
+            .transition().duration(500)
+            .attr('height', 450)
+            .call(chart);
+
+
+        });
+
+
+
+        });
+    </script>
+</div><p>Contents of CSV file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xdata</span><span class="p">,</span><span class="n">ydata1</span><span class="p">,</span><span class="n">ydata2</span><span class="p">,</span><span class="n">ydata3</span>
+<span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+<span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">30</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">90</span>
+<span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">45</span>
+<span class="mi">14</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">80</span>
+<span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">50</span>
+<span class="mi">13</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">150</span>
+<span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">35</span>
+<span class="mi">17</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">320</span>
+<span class="mi">15</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">90</span>
+<span class="mi">17</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">150</span>
+<span class="mi">14</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">275</span>
+<span class="mi">15</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">180</span>
+<span class="mi">17</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">182</span><span class="p">,</span><span class="mi">455</span>
+<span class="mi">18</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">560</span>
+<span class="mi">22</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">225</span>
+<span class="mi">22</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">240</span>
+<span class="mi">24</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">340</span><span class="p">,</span><span class="mi">850</span>
+<span class="mi">28</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">324</span><span class="p">,</span><span class="mi">810</span>
+<span class="mi">22</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="mi">380</span><span class="p">,</span><span class="mi">950</span>
+<span class="mi">23</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">300</span>
+<span class="mi">28</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">336</span><span class="p">,</span><span class="mi">840</span>
+<span class="mi">24</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">132</span><span class="p">,</span><span class="mi">330</span>
+<span class="mi">30</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="mi">575</span>
+<span class="mi">29</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">480</span><span class="p">,</span><span class="mi">1200</span>
+<span class="mi">32</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">1000</span>
+<span class="mi">27</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">468</span><span class="p">,</span><span class="mi">1170</span>
+<span class="mi">30</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">324</span><span class="p">,</span><span class="mi">810</span>
+<span class="mi">37</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">280</span><span class="p">,</span><span class="mi">700</span>
+<span class="mi">30</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="mi">464</span><span class="p">,</span><span class="mi">1160</span>
+<span class="mi">34</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">480</span><span class="p">,</span><span class="mi">1200</span>
+<span class="mi">41</span><span class="p">,</span><span class="mi">186</span><span class="p">,</span><span class="mi">372</span><span class="p">,</span><span class="mi">930</span>
+<span class="mi">33</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">640</span>
+<span class="mi">41</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="mi">462</span><span class="p">,</span><span class="mi">1155</span>
+<span class="mi">36</span><span class="p">,</span><span class="mi">306</span><span class="p">,</span><span class="mi">612</span><span class="p">,</span><span class="mi">1530</span>
+<span class="mi">41</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="mi">525</span>
+<span class="mi">37</span><span class="p">,</span><span class="mi">288</span><span class="p">,</span><span class="mi">576</span><span class="p">,</span><span class="mi">1440</span>
+<span class="mi">39</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">185</span>
+<span class="mi">42</span><span class="p">,</span><span class="mi">76</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">380</span>
+<span class="mi">45</span><span class="p">,</span><span class="mi">312</span><span class="p">,</span><span class="mi">624</span><span class="p">,</span><span class="mi">1560</span>
+<span class="mi">41</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">600</span>
+<span class="mi">43</span><span class="p">,</span><span class="mi">410</span><span class="p">,</span><span class="mi">820</span><span class="p">,</span><span class="mi">2050</span>
+<span class="mi">48</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">420</span>
+<span class="mi">45</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">215</span>
+<span class="mi">48</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">440</span><span class="p">,</span><span class="mi">1100</span>
+<span class="mi">53</span><span class="p">,</span><span class="mi">315</span><span class="p">,</span><span class="mi">630</span><span class="p">,</span><span class="mi">1575</span>
+<span class="mi">48</span><span class="p">,</span><span class="mi">276</span><span class="p">,</span><span class="mi">552</span><span class="p">,</span><span class="mi">1380</span>
+<span class="mi">54</span><span class="p">,</span><span class="mi">282</span><span class="p">,</span><span class="mi">564</span><span class="p">,</span><span class="mi">1410</span>
+<span class="mi">55</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">192</span><span class="p">,</span><span class="mi">480</span>
+<span class="mi">56</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">196</span><span class="p">,</span><span class="mi">490</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="stackedarea.html" title="Stacked Area Chart"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pie.html" title="Pie Chart"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">sphinxcontrib.nvd3 0.1.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015, Shoji KUMAGAI.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>
