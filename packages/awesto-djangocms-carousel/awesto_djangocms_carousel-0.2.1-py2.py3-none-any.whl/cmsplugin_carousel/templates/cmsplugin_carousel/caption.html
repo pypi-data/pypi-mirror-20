@@ -1,0 +1,9 @@
+{% load cms_tags %}
+
+<div class="container">
+    <div class="carousel-caption">
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    </div>
+</div>
