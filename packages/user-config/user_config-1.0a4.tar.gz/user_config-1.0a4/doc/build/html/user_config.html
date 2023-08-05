@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>user_config package &#8212; user_config 1.0a4 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0a4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="user_config" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="user-config-package">
+<h1>user_config package<a class="headerlink" href="#user-config-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-user_config.ini">
+<span id="user-config-ini-module"></span><h2>user_config.ini module<a class="headerlink" href="#module-user_config.ini" title="Permalink to this headline">¶</a></h2>
+<p>ini configuration file format.</p>
+<dl class="function">
+<dt id="user_config.ini.ini_read">
+<code class="descclassname">user_config.ini.</code><code class="descname">ini_read</code><span class="sig-paren">(</span><em>_</em>, <em>path</em>, <em>elements</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config/ini.html#ini_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ini.ini_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read ini configuration file and populate <cite>data</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_</strong> (<a class="reference internal" href="#user_config.Config" title="user_config.Config"><em>user_config.Config</em></a>) &#8211; IGNORED</li>
+<li><strong>path</strong> (<em>pathlib.Path</em>) &#8211; path to configuration file</li>
+<li><strong>elements</strong> (<em>Dict</em><em>[</em><a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><em>ConfigElement</em></a><em>]</em><em></em>) &#8211; configuration element tree</li>
+<li><strong>data</strong> (<em>Dict</em>) &#8211; data tree</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">None</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="user_config.ini.ini_validate">
+<code class="descclassname">user_config.ini.</code><code class="descname">ini_validate</code><span class="sig-paren">(</span><em>_</em>, <em>elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config/ini.html#ini_validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ini.ini_validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure element tree is suitable for ini files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_</strong> (<a class="reference internal" href="#user_config.Config" title="user_config.Config"><em>user_config.Config</em></a>) &#8211; IGNORED</li>
+<li><strong>elements</strong> (<em>Dict</em><em>[</em><a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><em>ConfigElement</em></a><em>]</em><em></em>) &#8211; element tree</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first">InvalidConfigTree: &#8211; if the config tree is inappropriate for ini files</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="user_config.ini.ini_write">
+<code class="descclassname">user_config.ini.</code><code class="descname">ini_write</code><span class="sig-paren">(</span><em>_</em>, <em>elements</em>, <em>data</em>, <em>doc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config/ini.html#ini_write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ini.ini_write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print default ini file.</p>
+<p>This includes data already set in the existing configuration files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_</strong> (<a class="reference internal" href="#user_config.Config" title="user_config.Config"><em>user_config.Config</em></a>) &#8211; IGNORED</li>
+<li><strong>elements</strong> (<em>Dict</em><em>[</em><a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><em>ConfigElement</em></a><em>]</em><em></em>) &#8211; configuration element tree</li>
+<li><strong>data</strong> (<em>Dict</em>) &#8211; data tree</li>
+<li><strong>doc</strong> (<em>Option</em><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em></em>) &#8211; <cite>Config</cite> class docstring</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">None</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="user_config.ini.register_extension">
+<code class="descclassname">user_config.ini.</code><code class="descname">register_extension</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config/ini.html#register_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ini.register_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register ini file format functions with <cite>user_config</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Dict</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">register_extension</span><span class="p">()</span>
+<span class="go">{&#39;read&#39;: &lt;function ini_read at 0x...&gt;, &#39;write&#39;: &lt;function ini_write at 0x...&gt;, &#39;validate&#39;: &lt;function ini_validate at 0x...&gt;, &#39;extension&#39;: &#39;cfg&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-user_config">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-user_config" title="Permalink to this headline">¶</a></h2>
+<p>User config management.</p>
+<dl class="class">
+<dt id="user_config.BooleanOption">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">BooleanOption</code><span class="sig-paren">(</span><em>doc=None</em>, <em>default=None</em>, <em>required=True</em>, <em>short_name=None</em>, <em>long_name=None</em>, <em>validate=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#BooleanOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.BooleanOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><code class="xref py py-class docutils literal"><span class="pre">user_config.ConfigElement</span></code></a></p>
+<p>Configuration element with boolean value.</p>
+<dl class="attribute">
+<dt id="user_config.BooleanOption.type_">
+<code class="descname">type_</code><a class="headerlink" href="#user_config.BooleanOption.type_" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.Config">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">Config</code><a class="reference internal" href="_modules/user_config.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#user_config.MappingMixin" title="user_config.MappingMixin"><code class="xref py py-class docutils literal"><span class="pre">user_config.MappingMixin</span></code></a></p>
+<p>Base class for application configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>AttributeError: &#8211; if <cite>application</cite> or <cite>author</cite> is not set</li>
+<li>InvalidConfigTree: &#8211; if configuration tree is inappropriate for <cite>file_type</cite></li>
+<li>InvalidData: &#8211; if user supplied invalid data for a configuration element</li>
+<li>MissingData: &#8211; if an element marked as required has no value</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="user_config.Config.file_type">
+<code class="descname">file_type</code><a class="headerlink" href="#user_config.Config.file_type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; file type to use for configuration files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="user_config.Config.application">
+<code class="descname">application</code><a class="headerlink" href="#user_config.Config.application" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; application name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="user_config.Config.author">
+<code class="descname">author</code><a class="headerlink" href="#user_config.Config.author" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; application author</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="user_config.Config.version">
+<code class="descname">version</code><a class="headerlink" href="#user_config.Config.version" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str, optional</em> &#8211; application version (set if your configuration is version
+dependent)</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt>
+<code class="descname">application</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">author</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">version</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.ConfigElement">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">ConfigElement</code><span class="sig-paren">(</span><em>doc=None</em>, <em>default=None</em>, <em>required=True</em>, <em>short_name=None</em>, <em>long_name=None</em>, <em>validate=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Base class for configuration elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>doc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; documentation for this option, defaults to None</li>
+<li><strong>default</strong> (<em>Any</em><em>, </em><em>optional</em>) &#8211; fallback value, defaults to None</li>
+<li><strong>required</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; MUST a value be present? If no default is provided, this can
+result in a MissingData exception. Defaults to True</li>
+<li><strong>short_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; short name for use with command line arguments, defaults to None</li>
+<li><strong>long_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; overwrite default name for command line arguments, defaults to None</li>
+<li><strong>validate</strong> (<em>Callable</em><em>[</em><em>Any</em><em>, </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a><em>]</em><em></em><em>, </em><em>optional</em>) &#8211; additional validation function, defaults to None</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">InvalidArgument: &#8211; if default value does not pass validation</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="user_config.ConfigElement.element_name">
+<code class="descname">element_name</code><a class="headerlink" href="#user_config.ConfigElement.element_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; name of instance, provided by containing class</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="user_config.ConfigElement.type_">
+<code class="descname">type_</code><a class="headerlink" href="#user_config.ConfigElement.type_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>type</em> &#8211; python type of variable that this class represents</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="user_config.ConfigElement.construct_parser">
+<code class="descname">construct_parser</code><span class="sig-paren">(</span><em>parser</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement.construct_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement.construct_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add self to parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parser</strong> (<a class="reference external" href="https://docs.python.org/2/library/argparse.html#argparse.ArgumentParser" title="(in Python v2.7)"><em>argparse.ArgumentParser</em></a>) &#8211; the argument parser to add an option to</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">None</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">element_name</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="user_config.ConfigElement.extract_data_from_parser">
+<code class="descname">extract_data_from_parser</code><span class="sig-paren">(</span><em>command_line_arguments</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement.extract_data_from_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement.extract_data_from_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get value from parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>command_line_arguments</strong> (<a class="reference external" href="https://docs.python.org/2/library/argparse.html#argparse.Namespace" title="(in Python v2.7)"><em>argparse.Namespace</em></a>) &#8211; parsed arguments</li>
+<li><strong>data</strong> (<em>Dict</em>) &#8211; dictionary to put values in (assumes tree structure is
+already in place)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">None</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.ConfigElement.get_default">
+<code class="descname">get_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement.get_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return default value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.ConfigElement.has_default">
+<code class="descname">has_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement.has_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement.has_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if element has a default value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">type_</code></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.ConfigElement.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate individual value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>Any</em>) &#8211; to be validated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">InvalidData: &#8211; if validation fails</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.ConfigElement.validate_data">
+<code class="descname">validate_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#ConfigElement.validate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigElement.validate_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> (<em>Dict</em>) &#8211; data structure in which to find and validate our own element</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
+<li>InvalidData: &#8211; if validation fails</li>
+<li>MissingData: &#8211; if <cite>self.required</cite> is <cite>True</cite> and our value in <cite>data</cite>
+is <cite>None</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.ConfigMeta">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">ConfigMeta</code><a class="reference internal" href="_modules/user_config.html#ConfigMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.ConfigMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#type" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></a></p>
+<p>ORM-like magic for configuration class.</p>
+<p>Gather all <cite>ConfigElement</cite> attributes into <cite>_elements</cite> and
+get correct <cite>_validate</cite>, <cite>_read</cite> and <cite>_writer</cite> functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cls_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; class name</li>
+<li><strong>cls_parents</strong> (<em>Tuple</em><em>[</em><em>class</em><em>]</em><em></em>) &#8211; class parents</li>
+<li><strong>cls_attributes</strong> (<em>Dict</em>) &#8211; class attributes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>AttributeError: &#8211; if class tries to overwrite a reserved attribute</li>
+<li>ImportError: &#8211; if no appropriate <cite>entry_point</cite> could be found for <cite>file_type</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.FloatOption">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">FloatOption</code><span class="sig-paren">(</span><em>doc=None</em>, <em>default=None</em>, <em>required=True</em>, <em>short_name=None</em>, <em>long_name=None</em>, <em>validate=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#FloatOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.FloatOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><code class="xref py py-class docutils literal"><span class="pre">user_config.ConfigElement</span></code></a></p>
+<p>Configuration element with float value.</p>
+<dl class="attribute">
+<dt id="user_config.FloatOption.type_">
+<code class="descname">type_</code><a class="headerlink" href="#user_config.FloatOption.type_" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">float</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.IntegerOption">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">IntegerOption</code><span class="sig-paren">(</span><em>doc=None</em>, <em>default=None</em>, <em>required=True</em>, <em>short_name=None</em>, <em>long_name=None</em>, <em>validate=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#IntegerOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.IntegerOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><code class="xref py py-class docutils literal"><span class="pre">user_config.ConfigElement</span></code></a></p>
+<p>Configuration element with integer value.</p>
+<dl class="attribute">
+<dt id="user_config.IntegerOption.type_">
+<code class="descname">type_</code><a class="headerlink" href="#user_config.IntegerOption.type_" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="user_config.InvalidConfigTree">
+<em class="property">exception </em><code class="descclassname">user_config.</code><code class="descname">InvalidConfigTree</code><a class="reference internal" href="_modules/user_config.html#InvalidConfigTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.InvalidConfigTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Inappropriate configuration tree for file type.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="user_config.InvalidData">
+<em class="property">exception </em><code class="descclassname">user_config.</code><code class="descname">InvalidData</code><a class="reference internal" href="_modules/user_config.html#InvalidData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.InvalidData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>User supplied invalid data for a configuration element.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.MappingMixin">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">MappingMixin</code><a class="reference internal" href="_modules/user_config.html#MappingMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MappingMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Methods for emulating a mapping type.</p>
+<dl class="method">
+<dt id="user_config.MappingMixin.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key</em>, <em>default</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#MappingMixin.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MappingMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get items without risking a KeyError.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.MappingMixin.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#MappingMixin.items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MappingMixin.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a view of dictionary key, value pairs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.MappingMixin.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#MappingMixin.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MappingMixin.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a view of dictionary keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.MappingMixin.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#MappingMixin.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MappingMixin.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update more than one key at a time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.MappingMixin.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#MappingMixin.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MappingMixin.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a view of dictionary values.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="user_config.MissingData">
+<em class="property">exception </em><code class="descclassname">user_config.</code><code class="descname">MissingData</code><a class="reference internal" href="_modules/user_config.html#MissingData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.MissingData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>An element marked as required is missing a value.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.Section">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">Section</code><span class="sig-paren">(</span><em>doc=None</em>, <em>default=None</em>, <em>required=True</em>, <em>short_name=None</em>, <em>long_name=None</em>, <em>validate=None</em>, <em>**content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><code class="xref py py-class docutils literal"><span class="pre">user_config.ConfigElement</span></code></a>, <a class="reference internal" href="#user_config.MappingMixin" title="user_config.MappingMixin"><code class="xref py py-class docutils literal"><span class="pre">user_config.MappingMixin</span></code></a></p>
+<p>Named container that contains ConfigElements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>doc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; documentation for this option, defaults to None</li>
+<li><strong>default</strong> (<em>Any</em><em>, </em><em>optional</em>) &#8211; IGNORED</li>
+<li><strong>required</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) &#8211; MUST section be present? If no default is provided for any
+required content elements, this can result in a
+MissingData exception. to find out if an optional section
+is complete, see <cite>self.incomplete_count</cite>. Defaults to True</li>
+<li><strong>short_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; IGNORED</li>
+<li><strong>long_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>, </em><em>optional</em>) &#8211; IGNORED</li>
+<li><strong>validate</strong> (<em>Callable</em><em>[</em><em>Any</em><em>, </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a><em>]</em><em></em><em>, </em><em>optional</em>) &#8211; additional validation function, defaults to None</li>
+<li><strong>**content</strong> (<a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><em>ConfigElement</em></a><em>, </em><em>optional</em>) &#8211; content of section</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">AttributeError: &#8211; if content element is not a <cite>ConfigElement</cite></p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="user_config.Section.incomplete_count">
+<code class="descname">incomplete_count</code><a class="headerlink" href="#user_config.Section.incomplete_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; Number of content elements which are required, but do not have a
+value. Useful for sections which are not marked as required, but
+do have required elements.</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="user_config.Section.construct_parser">
+<code class="descname">construct_parser</code><span class="sig-paren">(</span><em>parser</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.construct_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.construct_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="user_config.Section.extract_data_from_parser">
+<code class="descname">extract_data_from_parser</code><span class="sig-paren">(</span><em>command_line_arguments</em>, <em>_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.extract_data_from_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.extract_data_from_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="user_config.Section.get_default">
+<code class="descname">get_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.get_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch and store default Section elements.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.Section.get_elements">
+<code class="descname">get_elements</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.get_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.get_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return elements and data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user_config.Section.has_default">
+<code class="descname">has_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.has_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.has_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True because Section always has a default value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">incomplete_count</code><em class="property"> = 0</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="user_config.Section.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="user_config.Section.validate_data">
+<code class="descname">validate_data</code><span class="sig-paren">(</span><em>_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#Section.validate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.Section.validate_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="user_config.StringOption">
+<em class="property">class </em><code class="descclassname">user_config.</code><code class="descname">StringOption</code><span class="sig-paren">(</span><em>doc=None</em>, <em>default=None</em>, <em>required=True</em>, <em>short_name=None</em>, <em>long_name=None</em>, <em>validate=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#StringOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.StringOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#user_config.ConfigElement" title="user_config.ConfigElement"><code class="xref py py-class docutils literal"><span class="pre">user_config.ConfigElement</span></code></a></p>
+<p>Configuration element with string value.</p>
+<dl class="attribute">
+<dt id="user_config.StringOption.type_">
+<code class="descname">type_</code><a class="headerlink" href="#user_config.StringOption.type_" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="user_config.with_metaclass">
+<code class="descclassname">user_config.</code><code class="descname">with_metaclass</code><span class="sig-paren">(</span><em>meta</em>, <em>*bases</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_config.html#with_metaclass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user_config.with_metaclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a base class with a metaclass.</p>
+<p>Drops the middle class upon creation.
+Source: <a class="reference external" href="http://lucumr.pocoo.org/2013/5/21/porting-to-python-3-redux/">http://lucumr.pocoo.org/2013/5/21/porting-to-python-3-redux/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>meta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#type" title="(in Python v2.7)"><em>type</em></a>) &#8211; meta class or function</li>
+<li><strong>*bases</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><em>object</em></a>) &#8211; parents of class to be created</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">None</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">class of type <cite>name</cite></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>..doctest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">user_config package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-user_config.ini">user_config.ini module</a></li>
+<li><a class="reference internal" href="#module-user_config">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">user_config</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">user_config</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/user_config.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, nihlaeth.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/user_config.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

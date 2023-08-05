@@ -1,0 +1,719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>user_config &#8212; user_config 1.0a4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0a4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for user_config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;User config management.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="k">import</span> <span class="n">iter_entry_points</span>
+<span class="kn">from</span> <span class="nn">appdirs</span> <span class="k">import</span> <span class="n">AppDirs</span>
+
+<div class="viewcode-block" id="MappingMixin"><a class="viewcode-back" href="../user_config.html#user_config.MappingMixin">[docs]</a><span class="k">class</span> <span class="nc">MappingMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Methods for emulating a mapping type.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s1">&#39;no field with name </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span>
+
+<div class="viewcode-block" id="MappingMixin.keys"><a class="viewcode-back" href="../user_config.html#user_config.MappingMixin.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a view of dictionary keys.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MappingMixin.values"><a class="viewcode-back" href="../user_config.html#user_config.MappingMixin.values">[docs]</a>    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a view of dictionary values.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">values</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MappingMixin.items"><a class="viewcode-back" href="../user_config.html#user_config.MappingMixin.items">[docs]</a>    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a view of dictionary key, value pairs.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MappingMixin.get"><a class="viewcode-back" href="../user_config.html#user_config.MappingMixin.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get items without risking a KeyError.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MappingMixin.update"><a class="viewcode-back" href="../user_config.html#user_config.MappingMixin.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update more than one key at a time.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: validate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="ConfigElement"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement">[docs]</a><span class="k">class</span> <span class="nc">ConfigElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for configuration elements.</span>
+
+<span class="sd">    Keyword Arguments</span>
+<span class="sd">    -----------------</span>
+<span class="sd">    doc: str, optional</span>
+<span class="sd">        documentation for this option, defaults to None</span>
+<span class="sd">    default: Any, optional</span>
+<span class="sd">        fallback value, defaults to None</span>
+<span class="sd">    required: bool, optional</span>
+<span class="sd">        MUST a value be present? If no default is provided, this can</span>
+<span class="sd">        result in a MissingData exception. Defaults to True</span>
+<span class="sd">    short_name: str, optional</span>
+<span class="sd">        short name for use with command line arguments, defaults to None</span>
+<span class="sd">    long_name: str, optional</span>
+<span class="sd">        overwrite default name for command line arguments, defaults to None</span>
+<span class="sd">    validate: Callable[Any, None], optional</span>
+<span class="sd">        additional validation function, defaults to None</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    InvalidArgument:</span>
+<span class="sd">        if default value does not pass validation</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    element_name: str</span>
+<span class="sd">        name of instance, provided by containing class</span>
+<span class="sd">    type_: type</span>
+<span class="sd">        python type of variable that this class represents</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ..doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">element_name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">type_</span> <span class="o">=</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">validate</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">doc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="o">=</span> <span class="n">required</span>
+        <span class="k">if</span> <span class="n">short_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">short_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_short_name</span> <span class="o">=</span> <span class="n">short_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_short_name</span> <span class="o">=</span> <span class="s1">&#39;-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">short_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">long_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">long_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_long_name</span> <span class="o">=</span> <span class="n">long_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_long_name</span> <span class="o">=</span> <span class="s1">&#39;--</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">long_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span> <span class="o">=</span> <span class="n">validate</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_default</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ConfigElement.has_default"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement.has_default">[docs]</a>    <span class="k">def</span> <span class="nf">has_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if element has a default value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ConfigElement.get_default"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement.get_default">[docs]</a>    <span class="k">def</span> <span class="nf">get_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return default value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span></div>
+
+<div class="viewcode-block" id="ConfigElement.construct_parser"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement.construct_parser">[docs]</a>    <span class="k">def</span> <span class="nf">construct_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add self to parser.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        parser: argparse.ArgumentParser</span>
+<span class="sd">            the argument parser to add an option to</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        ..doctest::</span>
+
+<span class="sd">            &gt;&gt;&gt; TODO</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_short_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_short_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_long_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_long_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">element_name</span><span class="p">))</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
+            <span class="c1">#nargs=1,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type_</span><span class="p">,</span>
+            <span class="n">choices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ConfigElement.extract_data_from_parser"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement.extract_data_from_parser">[docs]</a>    <span class="k">def</span> <span class="nf">extract_data_from_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_line_arguments</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get value from parser.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        command_line_arguments: argparse.Namespace</span>
+<span class="sd">            parsed arguments</span>
+<span class="sd">        data: Dict</span>
+<span class="sd">            dictionary to put values in (assumes tree structure is</span>
+<span class="sd">            already in place)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        ..doctest::</span>
+
+<span class="sd">            &gt;&gt;&gt; TODO</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_name</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_long_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_long_name</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">command_line_arguments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">element_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">command_line_arguments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ConfigElement.validate"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate individual value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value: Any</span>
+<span class="sd">            to be validated</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        InvalidData:</span>
+<span class="sd">            if validation fails</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        ..doctest::</span>
+
+<span class="sd">            &gt;&gt;&gt; TODO</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;expected a </span><span class="si">{}</span><span class="s1">, not </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">type_</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ConfigElement.validate_data"><a class="viewcode-back" href="../user_config.html#user_config.ConfigElement.validate_data">[docs]</a>    <span class="k">def</span> <span class="nf">validate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data: Dict</span>
+<span class="sd">            data structure in which to find and validate our own element</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        InvalidData:</span>
+<span class="sd">            if validation fails</span>
+<span class="sd">        MissingData:</span>
+<span class="sd">            if `self.required` is `True` and our value in `data`</span>
+<span class="sd">            is `None`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        ..doctest::</span>
+
+<span class="sd">            &gt;&gt;&gt; TODO</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">element_name</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># none of the configuration locations provided a required</span>
+            <span class="c1"># value, raise an error now</span>
+            <span class="k">raise</span> <span class="n">MissingData</span><span class="p">(</span>
+                <span class="s1">&#39;no value was provided for required option </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">element_name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">element_name</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">element_name</span><span class="p">])</span></div></div>
+
+<div class="viewcode-block" id="Section"><a class="viewcode-back" href="../user_config.html#user_config.Section">[docs]</a><span class="k">class</span> <span class="nc">Section</span><span class="p">(</span><span class="n">ConfigElement</span><span class="p">,</span> <span class="n">MappingMixin</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Named container that contains ConfigElements.</span>
+
+<span class="sd">    Keyword Arguments</span>
+<span class="sd">    -----------------</span>
+<span class="sd">    doc: str, optional</span>
+<span class="sd">        documentation for this option, defaults to None</span>
+<span class="sd">    default: Any, optional</span>
+<span class="sd">        IGNORED</span>
+<span class="sd">    required: bool, optional</span>
+<span class="sd">        MUST section be present? If no default is provided for any</span>
+<span class="sd">        required content elements, this can result in a</span>
+<span class="sd">        MissingData exception. to find out if an optional section</span>
+<span class="sd">        is complete, see `self.incomplete_count`. Defaults to True</span>
+<span class="sd">    short_name: str, optional</span>
+<span class="sd">        IGNORED</span>
+<span class="sd">    long_name: str, optional</span>
+<span class="sd">        IGNORED</span>
+<span class="sd">    validate: Callable[Any, None], optional</span>
+<span class="sd">        additional validation function, defaults to None</span>
+<span class="sd">    **content: ConfigElement, optional</span>
+<span class="sd">        content of section</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AttributeError:</span>
+<span class="sd">        if content element is not a `ConfigElement`</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    incomplete_count: int</span>
+<span class="sd">        Number of content elements which are required, but do not have a</span>
+<span class="sd">        value. Useful for sections which are not marked as required, but</span>
+<span class="sd">        do have required elements.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ..doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">incomplete_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">_elements</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">validate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">content</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="n">ConfigElement</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="n">required</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="n">short_name</span><span class="p">,</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="n">long_name</span><span class="p">,</span>
+            <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="n">element</span><span class="p">],</span> <span class="n">ConfigElement</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                    <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not a ConfigElement&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+            <span class="n">content</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">element_name</span> <span class="o">=</span> <span class="n">element</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="n">element</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Section.has_default"><a class="viewcode-back" href="../user_config.html#user_config.Section.has_default">[docs]</a>    <span class="k">def</span> <span class="nf">has_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True because Section always has a default value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Section.get_default"><a class="viewcode-back" href="../user_config.html#user_config.Section.get_default">[docs]</a>    <span class="k">def</span> <span class="nf">get_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fetch and store default Section elements.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">has_default</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Section.get_elements"><a class="viewcode-back" href="../user_config.html#user_config.Section.get_elements">[docs]</a>    <span class="k">def</span> <span class="nf">get_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return elements and data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span></div>
+
+<div class="viewcode-block" id="Section.construct_parser"><a class="viewcode-back" href="../user_config.html#user_config.Section.construct_parser">[docs]</a>    <span class="k">def</span> <span class="nf">construct_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">construct_parser</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Section.extract_data_from_parser"><a class="viewcode-back" href="../user_config.html#user_config.Section.extract_data_from_parser">[docs]</a>    <span class="k">def</span> <span class="nf">extract_data_from_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_line_arguments</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">extract_data_from_parser</span><span class="p">(</span>
+                <span class="n">command_line_arguments</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Section.validate"><a class="viewcode-back" href="../user_config.html#user_config.Section.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Section.validate_data"><a class="viewcode-back" href="../user_config.html#user_config.Section.validate_data">[docs]</a>    <span class="k">def</span> <span class="nf">validate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">validate_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">MissingData</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">incomplete_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span></div></div>
+
+<div class="viewcode-block" id="StringOption"><a class="viewcode-back" href="../user_config.html#user_config.StringOption">[docs]</a><span class="k">class</span> <span class="nc">StringOption</span><span class="p">(</span><span class="n">ConfigElement</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Configuration element with string value.&quot;&quot;&quot;</span>
+
+    <span class="n">type_</span> <span class="o">=</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="IntegerOption"><a class="viewcode-back" href="../user_config.html#user_config.IntegerOption">[docs]</a><span class="k">class</span> <span class="nc">IntegerOption</span><span class="p">(</span><span class="n">ConfigElement</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Configuration element with integer value.&quot;&quot;&quot;</span>
+
+    <span class="n">type_</span> <span class="o">=</span> <span class="nb">int</span></div>
+
+<div class="viewcode-block" id="FloatOption"><a class="viewcode-back" href="../user_config.html#user_config.FloatOption">[docs]</a><span class="k">class</span> <span class="nc">FloatOption</span><span class="p">(</span><span class="n">ConfigElement</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Configuration element with float value.&quot;&quot;&quot;</span>
+
+    <span class="n">type_</span> <span class="o">=</span> <span class="nb">float</span></div>
+
+<div class="viewcode-block" id="BooleanOption"><a class="viewcode-back" href="../user_config.html#user_config.BooleanOption">[docs]</a><span class="k">class</span> <span class="nc">BooleanOption</span><span class="p">(</span><span class="n">ConfigElement</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Configuration element with boolean value.&quot;&quot;&quot;</span>
+
+    <span class="n">type_</span> <span class="o">=</span> <span class="nb">bool</span></div>
+
+<div class="viewcode-block" id="with_metaclass"><a class="viewcode-back" href="../user_config.html#user_config.with_metaclass">[docs]</a><span class="k">def</span> <span class="nf">with_metaclass</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="o">*</span><span class="n">bases</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a base class with a metaclass.</span>
+
+<span class="sd">    Drops the middle class upon creation.</span>
+<span class="sd">    Source: http://lucumr.pocoo.org/2013/5/21/porting-to-python-3-redux/</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    meta: type</span>
+<span class="sd">        meta class or function</span>
+<span class="sd">    *bases: object</span>
+<span class="sd">        parents of class to be created</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    class of type `name`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ..doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">class</span> <span class="nc">MetaClass</span><span class="p">(</span><span class="n">meta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Man-in-the-middle class.&quot;&quot;&quot;</span>
+        <span class="fm">__call__</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__call__</span>
+        <span class="fm">__init__</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__init__</span>
+
+        <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">this_bases</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">this_bases</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="p">(),</span> <span class="n">dictionary</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">meta</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">MetaClass</span><span class="p">(</span><span class="s1">&#39;temporary_class&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{})</span></div>
+
+<div class="viewcode-block" id="ConfigMeta"><a class="viewcode-back" href="../user_config.html#user_config.ConfigMeta">[docs]</a><span class="k">class</span> <span class="nc">ConfigMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ORM-like magic for configuration class.</span>
+
+<span class="sd">    Gather all `ConfigElement` attributes into `_elements` and</span>
+<span class="sd">    get correct `_validate`, `_read` and `_writer` functions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cls_name: str</span>
+<span class="sd">        class name</span>
+<span class="sd">    cls_parents: Tuple[class]</span>
+<span class="sd">        class parents</span>
+<span class="sd">    cls_attributes: Dict</span>
+<span class="sd">        class attributes</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AttributeError:</span>
+<span class="sd">        if class tries to overwrite a reserved attribute</span>
+<span class="sd">    ImportError:</span>
+<span class="sd">        if no appropriate `entry_point` could be found for `file_type`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ..doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_parents</span><span class="p">,</span> <span class="n">cls_attributes</span><span class="p">):</span>
+        <span class="n">reserved_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;_elements&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;_extension&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;_read&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;_write&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;_validate&#39;</span><span class="p">]</span>
+        <span class="n">new_attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_elements&#39;</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()}</span>
+        <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">cls_attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">reserved_names</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                    <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is a reserved attribute for Config classes&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">attribute</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cls_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">],</span> <span class="n">ConfigElement</span><span class="p">):</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="s1">&#39;_elements&#39;</span><span class="p">][</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="s1">&#39;_elements&#39;</span><span class="p">][</span><span class="n">attribute</span><span class="p">]</span><span class="o">.</span><span class="n">element_name</span> <span class="o">=</span> <span class="n">attribute</span>
+            <span class="k">elif</span> <span class="n">attribute</span> <span class="o">==</span> <span class="s1">&#39;file_type&#39;</span><span class="p">:</span>
+                <span class="n">file_types</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">entry_point</span> <span class="ow">in</span> <span class="n">iter_entry_points</span><span class="p">(</span><span class="s1">&#39;user_config.file_type&#39;</span><span class="p">):</span>
+                    <span class="c1"># TODO: deal with duplicate entry point names</span>
+                    <span class="n">file_types</span><span class="p">[</span><span class="n">entry_point</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry_point</span>
+                <span class="k">if</span> <span class="n">cls_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">file_types</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                        <span class="s1">&#39;no entry point found for file type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">cls_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]))</span>
+                <span class="n">extension</span> <span class="o">=</span> <span class="n">file_types</span><span class="p">[</span><span class="n">cls_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]]</span><span class="o">.</span><span class="n">load</span><span class="p">()()</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="s1">&#39;_extension&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension</span><span class="p">[</span><span class="s1">&#39;extension&#39;</span><span class="p">]</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="s1">&#39;_read&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="s1">&#39;_write&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="s1">&#39;_validate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension</span><span class="p">[</span><span class="s1">&#39;validate&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_parents</span><span class="p">,</span> <span class="n">new_attributes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="InvalidConfigTree"><a class="viewcode-back" href="../user_config.html#user_config.InvalidConfigTree">[docs]</a><span class="k">class</span> <span class="nc">InvalidConfigTree</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Inappropriate configuration tree for file type.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="InvalidData"><a class="viewcode-back" href="../user_config.html#user_config.InvalidData">[docs]</a><span class="k">class</span> <span class="nc">InvalidData</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;User supplied invalid data for a configuration element.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="MissingData"><a class="viewcode-back" href="../user_config.html#user_config.MissingData">[docs]</a><span class="k">class</span> <span class="nc">MissingData</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;An element marked as required is missing a value.&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../user_config.html#user_config.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">ConfigMeta</span><span class="p">,</span> <span class="n">MappingMixin</span><span class="p">)):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for application configuration.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AttributeError:</span>
+<span class="sd">        if `application` or `author` is not set</span>
+<span class="sd">    InvalidConfigTree:</span>
+<span class="sd">        if configuration tree is inappropriate for `file_type`</span>
+<span class="sd">    InvalidData:</span>
+<span class="sd">        if user supplied invalid data for a configuration element</span>
+<span class="sd">    MissingData:</span>
+<span class="sd">        if an element marked as required has no value</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_type: str</span>
+<span class="sd">        file type to use for configuration files</span>
+<span class="sd">    application: str</span>
+<span class="sd">        application name</span>
+<span class="sd">    author: str</span>
+<span class="sd">        application author</span>
+<span class="sd">    version: str, optional</span>
+<span class="sd">        application version (set if your configuration is version</span>
+<span class="sd">        dependent)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ..doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">file_type</span> <span class="o">=</span> <span class="s2">&quot;ini&quot;</span>
+    <span class="n">application</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s1">&#39;application not set, please provide an application name&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s1">&#39;author not set, please provide an application author&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="c1"># validate _elements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">)</span>
+        <span class="c1"># populate _data</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">has_default</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># read global config</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="n">AppDirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+        <span class="n">global_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">site_config_dir</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span>
+            <span class="s2">&quot;config.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_extension</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">global_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">global_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+        <span class="c1"># read user config</span>
+        <span class="n">user_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">user_config_dir</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span>
+            <span class="s2">&quot;config.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_extension</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">user_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">user_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+        <span class="c1"># construct a commandline parser</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+            <span class="n">prog</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n\n</span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+                <span class="s2">&quot;Command line arguments overwrite configuration found in:&quot;</span><span class="p">,</span>
+                <span class="n">user_path</span><span class="p">,</span>
+                <span class="n">global_path</span><span class="p">))</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--generate-config&#39;</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_const&#39;</span><span class="p">,</span>
+            <span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print a complete configuration file with current settings&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">construct_parser</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">command_line_arguments</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+        <span class="c1"># check if we should print a configuration file</span>
+        <span class="k">if</span> <span class="n">command_line_arguments</span><span class="p">[</span><span class="s1">&#39;generate_config&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># put command line argument data into _data</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">extract_data_from_parser</span><span class="p">(</span>
+                <span class="n">command_line_arguments</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+            <span class="c1"># validate _data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">[</span><span class="n">element</span><span class="p">]</span><span class="o">.</span><span class="n">validate_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, nihlaeth.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
