@@ -1,0 +1,137 @@
+/*
+Fonts
+
+1. Base font: <div class="sg-font-base">Fallback: </div>
+2. Header font: <div class="sg-font-header">Fallback: </div>
+2. Mono font – mostly for numbers: <div class="sg-font-mono">Fallback: </div>
+
+- Never use other fonts than these.
+- Never specify `font-family` anywhere, use the include method.
+- Never specify font-weight, use the include method.
+
+Example: {syntax: scss, preview: false} Use these includes when a font is needed
+    @include font(header);
+    @include font(header, bold);
+    @include font(base);
+    @include font(base, bold);
+    @include font(mono);
+
+Styleguide 2.1
+*/
+
+// TODO: Should remove all these variables, it's better to just override the map itself
+$font-base-font: Roboto, "Helvetica Neue" !default;
+$font-base-fallback: Arial, sans-serif !default;
+$font-base-normal: 400 !default;
+$font-base-bold: 700 !default;
+
+$font-header-font: Georgia !default;
+$font-header-fallback: sans-serif !default;
+$font-header-normal: 400 !default;
+$font-header-bold: 700 !default;
+
+$fonts: (
+    base: (
+        font: $font-base-font,
+        fallback: $font-base-fallback,
+        normal: $font-base-normal,
+        bold: $font-base-bold
+    ),
+    mono: (
+        font: $font-base-font,
+        fallback: $font-base-fallback,
+        normal: $font-base-normal,
+        bold: $font-base-normal
+    ),
+    header: (
+        font: $font-header-font,
+        fallback: $font-header-fallback,
+        normal: $font-header-normal,
+        bold: $font-header-bold
+    )
+) !default;
+
+/* Font sizes
+
+Font sizes should be consistant, therefor never refer to a specific font size anywhere in the css.
+
+# Just refer to the following sizes:
+
+1. `xsmall` - Rare cases where the font needs tro be smaller than usual</li>
+1. `small` - The default font size</li>
+1. `medium` - For small headers and preamble text</li>
+1. `large` - For headers</li>
+1. `xlarge` - For headers</li>
+1. `xxlarge` - For headers, use with care</li>
+
+Styleguide 2.2
+*/
+
+// TODO: Should remove all these variables, it's better to just override the map itself
+$font-size-xsmall-base: 15px !default;
+$font-size-xsmall-md: ($font-size-xsmall-base + 1) !default;
+
+$font-size-small-base: (19px, 1.4) !default;
+$font-size-small-md: 21px !default;
+
+$font-size-medium-base: 22px !default;
+$font-size-medium-md: 24px !default;
+
+$font-size-large-base: 26px !default;
+$font-size-large-md: 32px !default;
+
+$font-size-xlarge-base: 34px !default;
+$font-size-xlarge-md: 42px !default;
+
+$font-size-xxlarge-base: 48px !default;
+$font-size-xxlarge-md: round($font-size-xxlarge-base * 1.25) !default;
+$font-size-xxlarge-lg: round($font-size-xxlarge-md * 1.24) !default;
+$font-size-xxlarge-xl: round($font-size-xxlarge-lg * 1.11) !default;
+
+$font-size: (
+    xsmall: (
+        base: $font-size-xsmall-base,
+        md: $font-size-xsmall-md,
+    ),
+    small: (
+        base: $font-size-small-base,
+        md: $font-size-small-md,
+    ),
+    medium: (
+        base: $font-size-medium-base,
+        md: $font-size-medium-base,
+    ),
+    large: (
+        base: $font-size-large-base,
+        md: $font-size-large-md,
+    ),
+    xlarge: (
+        base: $font-size-xlarge-base,
+        md: $font-size-xlarge-md,
+    ),
+    xxlarge: (
+        base: $font-size-xxlarge-base,
+        md: $font-size-xxlarge-md,
+        lg: $font-size-xxlarge-lg,
+        xl: $font-size-xxlarge-xl,
+    ),
+    xxxlarge: (
+        base: $font-size-xxlarge-base,
+        md: $font-size-xxlarge-md,
+        lg: $font-size-xxlarge-lg,
+        xl: $font-size-xxlarge-xl,
+    ),
+    smallcaps: (
+        base: 0.78em
+    )
+) !default;
+
+/*
+Golden ratio font sizes:
+http://designmodo.com/wp-content/uploads/2015/06/readymag-hint-1113x876-99041.png
+
+18px
+29px
+47px
+76px
+*/
