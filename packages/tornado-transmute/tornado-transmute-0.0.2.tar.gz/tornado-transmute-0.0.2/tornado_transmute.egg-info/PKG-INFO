@@ -1,0 +1,41 @@
+Metadata-Version: 1.1
+Name: tornado-transmute
+Version: 0.0.2
+Summary: a toolset to generate routes from objects for tornado.
+Home-page: UNKNOWN
+Author: Yusuke Tsutsumi
+Author-email: yusuke@tsutsumi.io
+License: UNKNOWN
+Description: =================
+        tornado-transmute
+        =================
+        
+        .. warn:: this is an incomplete project! the owner has migrated to
+                  aiohttp. Refer to aiohttp for a complete implementation of
+                  transmute.
+        
+                  If you are interested in developing this implementation, please contact me via github issue or e-mail
+        
+        route generation from function signatures in Python, for the tornado framework
+        
+        -------
+        Caveats
+        -------
+        
+        * In alpha.
+        * transmute functions must be tornado coroutines.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: System :: Software Distribution
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
