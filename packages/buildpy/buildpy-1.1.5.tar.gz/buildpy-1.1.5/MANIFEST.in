@@ -1,0 +1,14 @@
+include README.md
+include build.py
+include buildpy/__init__.py
+include buildpy/v1/__init__.py
+include buildpy/v1/tests/depth_first.sh
+include buildpy/v1/tests/dry_run.sh
+include buildpy/v1/tests/dry_run2.sh
+include buildpy/v1/tests/load_avg.sh
+include buildpy/v1/tests/runtests.py
+include buildpy/v1/tests/t1.sh
+include buildpy/v1/tests/t2.sh
+include buildpy/v1/tests/t3.sh
+include buildpy/v1/tests/t4.sh
+include setup.py
