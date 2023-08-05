@@ -1,0 +1,130 @@
+Metadata-Version: 2.0
+Name: lambdarest
+Version: 1.0.1
+Summary: pico framework for aws lambda with optional json schema validation
+Home-page: https://github.com/trustpilot/python-lambdarest
+Author: jgv
+Author-email: jgv@trustpilot.com
+License: UNKNOWN
+Keywords: lambda aws rest json schema jsonschema
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: jsonschema (>=2.5.1)
+Requires-Dist: strict-rfc3339 (>=0.7)
+
+lambdarest
+==========
+
+|Build Status| |Latest Version| |Python Support|
+
+Python pico framework for `AWS
+Lambda <https://aws.amazon.com/lambda/>`__ with optional JSON-schema
+validation.
+
+Features
+~~~~~~~~
+
+-  ``lambda_handler`` function constructor with built-in dispatcher
+-  Decorator to register functions to handle HTTP methods
+-  Optional JSON-schema input validation using same decorator
+
+Installation
+------------
+
+Install the package from `PyPI <http://pypi.python.org/pypi/>`__ using
+`pip <https://pip.pypa.io/>`__:
+
+.. code:: bash
+
+    pip install lambdarest
+
+Getting Started
+---------------
+
+This module helps you to handle different HTTP methods in your AWS
+Lambda.
+
+.. code:: python
+
+    from lambdarest import create_lambda_handler
+
+    lambda_handler = create_lambda_handler()
+
+    @lambda_handler.handle("get")
+    def my_own_get(event):
+        return {"this": "will be json dumped"}
+
+    input_event = {
+        "body": '{}',
+        "httpMethod": "GET"
+    }
+    result = lambda_handler(event=input_event)
+    assert result == {"body": '{"this": "will be json dumped"}', "statusCode": 200, "headers":{}}
+
+Optionally you can validate an incoming JSON body against a JSON schema:
+
+.. code:: python
+
+    from lambdarest import create_lambda_handler
+
+    lambda_handler = create_lambda_handler()
+
+    my_schema = {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+            "foo": {
+                "type": "string"
+            }
+        }
+    }
+
+    @lambda_handler.handle("get", schema=my_schema)
+    def my_own_get(event):
+        return {"this": "will be json dumped"}
+
+    valid_input_event = {
+        "body": '{"foo":"bar"}',
+        "httpMethod": "GET"
+    }
+    result = lambda_handler(event=valid_input_event)
+    assert result == {"body": '{"this": "will be json dumped"}', "statusCode": 200, "headers":{}}
+
+
+    invalid_input_event = {
+        "body": '{"foo":666}',
+        "httpMethod": "GET"
+    }
+    result = lambda_handler(event=invalid_input_event)
+    assert result == {"body": '"Validation Error"', "statusCode": 400, "headers":{}}
+
+Tests
+-----
+
+You can use pytest to run tests against your current Python version. To
+run tests for all platforms, use tox or the built-in ``test-all`` Make
+target:
+
+::
+
+    make test-all
+
+See ```requirements_dev.txt`` <requirements_dev.txt>`__ for test
+dependencies.
+
+.. |Build Status| image:: http://travis-ci.org/trustpilot/python-lambdarest.svg?branch=master
+   :target: https://travis-ci.org/trustpilot/python-lambdarest
+.. |Latest Version| image:: https://img.shields.io/pypi/v/lambdarest.svg
+   :target: https://pypi.python.org/pypi/lambdarest
+.. |Python Support| image:: https://img.shields.io/pypi/pyversions/lambdarest.svg
+   :target: https://pypi.python.org/pypi/lambdarest
+
+
+
+
