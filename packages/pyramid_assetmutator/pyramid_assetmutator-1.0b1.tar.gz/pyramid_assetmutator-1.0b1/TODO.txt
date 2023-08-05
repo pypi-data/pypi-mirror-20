@@ -1,0 +1,4 @@
+- Use fnmatch module for `assign_assetmutator` stuff for easier source matching?
+- Update `assign_assetmutator` to be more flexible, e.g.
+    config.assign_assetmutator('srcext', 'cmd {src} -o {dest}', 'destext')
+- Rename `assetmutator.asset_paths` to `assetmutator.asset_specs` and utilize fnmatch module.

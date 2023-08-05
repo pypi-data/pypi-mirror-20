@@ -1,0 +1,123 @@
+Metadata-Version: 1.1
+Name: pyramid_assetmutator
+Version: 1.0b1
+Summary: Dynamic asset mutation for Pyramid. Easily adds support for popular asset metalanguages such as CoffeeScript, SASS, SCSS, LESS, Dart, TypeScript, etc.
+Home-page: http://pyramid-assetmutator.curia.solutions/
+Author: Seth Davis
+Author-email: seth@curiasolutions.com
+License: MIT
+Description: ================================================================================
+        Pyramid AssetMutator v1.0b1
+        ================================================================================
+        
+        .. image:: https://travis-ci.org/seedifferently/pyramid_assetmutator.svg?branch=master
+          :target: https://travis-ci.org/seedifferently/pyramid_assetmutator
+        
+        | Copyright: (c) 2017 Seth Davis
+        | http://pyramid-assetmutator.curia.solutions/
+        
+        
+        Synopsis
+        ================================================================================
+        
+        Pyramid AssetMutator provides simple and flexible asset mutation (also known as
+        compiling or piping) for your Pyramid_ applications.
+        
+        Inspired by other more powerful asset management packages, its goal is to
+        provide Pyramid developers with a basic and straightforward mechanism for
+        utilizing asset *compilation* (e.g. for CoffeeScript/Sass), *minification*
+        (e.g. with jsmin), and *optimization* (e.g. with pngcrush).
+        
+        As of version 0.3, it also adds experimental support for template language
+        parsing (e.g. you could use Pyramid helpers like ``request.route_url()`` within
+        your CoffeeScript files by using ``application.coffee.pt`` as the asset source
+        filename).
+        
+        .. _Pyramid: http://www.pylonsproject.org/
+        
+        
+        Installation
+        ================================================================================
+        
+        To install, simply::
+        
+            pip install pyramid_assetmutator
+        
+        * You'll need to have `Python`_ 2.6+ and `pip`_ installed.
+        
+        .. _Python: http://www.python.org
+        .. _pip: http://www.pip-installer.org
+        
+        
+        Documentation
+        ================================================================================
+        
+        You can read the documentation at: http://pyramid-assetmutator.curia.solutions/
+        
+        
+        Known Issues and Limitations
+        ================================================================================
+        
+        * Experimental support for pypy.
+        * Doesn't clean up after itself by default (e.g. mutated assets aren't removed
+          automatically when the default settings are used).
+        * Mutator "commands" must print to stdout (see the documentation for more info).
+        * Hopefully obvious, but you must actually have the specified source compiler
+          command installed and accessible from your working path in order for it to
+          function.
+        
+        
+        Disclaimers and Warnings
+        ================================================================================
+        
+        This is Beta software--use at your own risk!
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+        FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE
+        LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+        CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+        SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        
+        
+        Latest Changes
+        ================================================================================
+        
+        
+        v1.0b1 -- 2/22/2017
+        --------------------------------------------------------------------------------
+        
+        * Added an ``always_remutate`` setting which provides the ability to specify
+          assets that should *always* be remutated (even if a source file change was not
+          detected).
+        * Tweaked the output filename format for mutated files. The new format should be
+          significantly more resistant to edge-case naming collisions when utilizing a
+          ``remutate_check`` of ``exists``.
+        * Renamed the (default) ``mtime`` value for the ``remutate_check`` setting to
+          ``stat``. It now checks both the size and last modified time of the asset
+          source file.
+        * The ``asset_paths`` setting has been merged into the ``each_boot`` setting.
+          Now instead of receiving a boolean, ``each_boot`` must receive a list
+          specifying assets that should be checked/mutated when the application boots.
+        * Renamed the ``asset_prefix`` setting to ``mutated_file_prefix`` in an effort
+          to be more explicit.
+        
+Keywords: pyramid assets coffeescript sass scss less dart typescript css3
+Platform: Posix; MacOS X; Windows
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Framework :: Pyramid
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
