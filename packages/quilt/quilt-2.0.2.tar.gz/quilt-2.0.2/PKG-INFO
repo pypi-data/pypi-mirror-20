@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: quilt
+Version: 2.0.2
+Summary: Quilt is an open-source data frame registry
+Home-page: https://github.com/quiltdata/quilt
+Author: quiltdata
+Author-email: founders@quiltdata.io
+License: LICENSE
+Download-URL: https://github.com/quiltdata/quilt/releases/tag/v2.0.0-alpha
+Description: 
+            [Quilt](https://beta.quiltdata.com/) is a data package manager.
+            You can use data packages from the community, or publish packages for others to use.
+        
+            `quilt` is the command-line client that builds, retrieves, and stores
+            packages. `quilt` works in conjunction with a server-side registry,
+            not covered in this document. `quilt` currently pushes to and pulls from
+            the registry at [beta.quiltdata.com](https://beta.quiltdata.com/). In the near
+            future users will be able to browse packages in the registry.
+            
+Keywords: quilt quiltdata shareable data dataframe package platform pandas
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
