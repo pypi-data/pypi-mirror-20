@@ -1,0 +1,8 @@
+include README.md
+include README.data_import.txt
+include LICENSE
+include LICENSE.txt
+include NEWS.txt
+include database.sqlite
+recursive-include tigreBrowser *.js *.cgi *.css *.cfg
+recursive-include scripts *.*
