@@ -1,0 +1,6 @@
+include *.md LICENSE
+include runtests.py
+recursive-include pyopengl_example *.py
+recursive-include pyopengl_example *.obj
+recursive-include pyopengl_example *.mtl
+recursive-include pyopengl_example *.txt
