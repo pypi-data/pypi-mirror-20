@@ -1,0 +1,59 @@
+Metadata-Version: 1.1
+Name: revived
+Version: 0.1.1
+Summary: Redux-inspired library in python
+Home-page: https://github.com/RookieGameDevs/revived
+Author: Lorenzo Berni
+Author-email: lorenzo@rookiegamedevs.io
+License: BSD
+Description: =======
+        Revived
+        =======
+        
+        ---------------------------------------------------------------------
+        A predictable state container for python *heavily* inspired by Redux_
+        ---------------------------------------------------------------------
+        
+        While not being a *strict 1:1 port* of `Redux API`_, **Revived** is supposed to
+        do pretty much the same job in the most pythonic way possible.
+        
+        **NOTE**: I needed this piece of code to work with the latest python available
+        (3.6) and *I did not really care about checking for the previous versions*.
+        
+        Contents
+        --------
+        * Installation_
+        * Examples_
+        * Documentation_
+        
+        Installation
+        ------------
+        
+        **Revived** package is available on pypi: to install it use the following
+        command::
+        
+            pip install revived
+        
+        Examples
+        --------
+        
+        Usage examples are **coming soon**.
+        
+        Documentation
+        -------------
+        
+        More detailed documentation is **coming soon**.
+        
+        .. _Redux: http://redux.js.org/
+        .. _`Redux API`: Redux_
+Keywords: state store redux
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
