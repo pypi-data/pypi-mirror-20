@@ -1,0 +1,86 @@
+CHANGES
+=======
+
+1.0.0
+-----
+
+* Add Ocata (1.0.0) release notes
+* Fix RTD not rendering bullets of toctree
+* Add DPM Guest Image Tools
+* Updated from global requirements
+
+1.0.0.0rc2
+----------
+
+* DPM Nova image creation docs
+
+1.0.0rc1
+--------
+
+* Updated from global requirements
+* Enable DHCP and routing on singlenode devstack
+* Added content of Topology chapter
+* Addressed minor comments on 'overhauled docs' change
+* Use flat networks in devstack
+* Remove the nova-neutron singlenode local.conf
+* Updated installation section
+* Adding more testcases for driver.py missing functions
+* Introduce list of ignored target wwpn for boot options
+* Add nic information to partitions boot params
+* Add version number to the documentation footer
+* Add vm.launch testcase
+* Destroy flow fixed for partition none case
+* Overhauled the documentation
+* Attach HBA to partition
+* INSTALL_ZHMCCLIENT option added to local.conf samples
+* Adapt networking-dpms *mapping parameter
+* Abstracting the common conf parameters
+* Added sample conf with storage and network parmeters
+* Generalizing the parameters in sample conf
+* devstack local.conf: move neutron host section
+* Reflect networking-dpm conf change in local.conf
+* Remove config option [dpm].host
+* Use os-dpm
+* Changed name of cpc_uuid config option to cpc_object_id
+* Updated help text for DPM config options for Nova
+* rtd: revert release notes creation (partially)
+* rtd: fix release note creation
+* Docs: Add Release Notes
+* Docs: Add Feature Support Matrix
+* Replace CONF mocking with CONF.set_override
+* Docs: Fix RTD docs build process
+* Enable configfile autogeneration
+* "client" parameter is not used anywhere
+* Add link to RTD to ReadMe file
+* remove "cpc" and "instance" parameter
+* change Instance to PartitionInstance
+* Function for used Processor and Memory
+* fix for "list_instances" function in driver.py
+* DPM defect number updated in comments
+* Remove the dummy test module "test_nova_dpm"
+* Updated from global requirements
+* Refactor to remove the zhmcclient calls
+* Cut the dependency to zhmcclient internals
+* Use uuid for partition name
+* Fix an issue where no test coverage report is created
+* Install stable zhmcclient via requirements.txt
+* Fix NIC attachment
+* Update nova-neutron local.conf
+* Change from "cp-processors" to "ifl-processors"
+* Introduce client_proxy to improve testability with fakezhmcclient
+* Instance Destroy,poweron,poweroff,reboot
+* Implemented Partition start as part of spawn function
+* Testcase refactor and updates for vhba_vnic
+* Basic vnic & hba creation for instance
+* implemented following function in driver.py
+* Update code to python 34,35 compatible
+* Added more unit testcases for nova-dpm
+* Initial support for block storage
+* Fixing hostname vs cpcsubset_name
+* Adding specs infrastructure + ocata specs
+* local.conf for Singlnode with nova+neutron
+* Updated from global requirements
+* Devstack setup for nova-dpm
+* Driver code for CPCSubset listing feature
+* Initial Cookiecutter Commit
+* Added .gitreview
