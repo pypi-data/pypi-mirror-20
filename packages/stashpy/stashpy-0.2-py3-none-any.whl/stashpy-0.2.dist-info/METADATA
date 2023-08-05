@@ -1,0 +1,25 @@
+Metadata-Version: 2.0
+Name: stashpy
+Version: 0.2
+Summary: Python 3 alternative to Logstash
+Home-page: https://github.com/afroisalreadyinu/stashpy
+Author: Ulas Tuerkmen
+Author-email: ulas.tuerkmen@gmail.com
+License: UNKNOWN
+Keywords: logging elasticsearch kibana monitoring
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: parse (>=1.6)
+Requires-Dist: python-dateutil (>=2.5)
+Requires-Dist: pytz (>=2016)
+Requires-Dist: pyyaml (>=3.0)
+Requires-Dist: regex (>=2016)
+Requires-Dist: tornado (<4.3)
+
+UNKNOWN
+
+
