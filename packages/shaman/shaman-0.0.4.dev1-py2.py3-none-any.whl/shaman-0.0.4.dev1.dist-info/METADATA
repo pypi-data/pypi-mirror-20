@@ -1,0 +1,50 @@
+Metadata-Version: 2.0
+Name: shaman
+Version: 0.0.4.dev1
+Summary: Multiprocessing application to download and analyze a content of an html pages.
+Home-page: https://github.com/Landish145/shaman
+Author: eugtsa,azraev
+Author-email: eugtsa@gmail.com,azraev@gmail.com
+License: MIT
+Keywords: crawlers analyze development
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: argparse
+Requires-Dist: bson
+Requires-Dist: configparser
+Requires-Dist: grab
+Requires-Dist: kafka-python
+Requires-Dist: pyformance
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+
+This is the documentation for the Shaman. Multiprocessing application to combine different singular handlers against one message.
+
+The initial purpose was to create a tool, that:
+    - would make possible to download and analyze a content of an html pages.
+    - simple enough to add a new functionality in it.
+    - hast to be scalable (multiprocessing).
+Actual usage can be different from it. There are some spontaneous ideas:
+    - scanning a mongo collection and parsing documents in parallel
+    - parsing a lot of lines from multiple huge files, saving the results to any database (depending on the results)
+
+There are three parts in the shaman library:
+    * stages (actual processors, which do represent some functionality)
+    * consumer (worker, that run them all in a particular order)
+    * daemon (run as many as needed workers. Also used as a CLI unstrument.)
+    All stages are run in a particular order and use the same message object (inside one worker).
+
