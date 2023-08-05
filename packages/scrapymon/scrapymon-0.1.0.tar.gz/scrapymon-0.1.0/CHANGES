@@ -1,0 +1,21 @@
+# Changelog
+
+## Version 0.1.0 (2017-02-18)
+
+- Features
+
+    - Schedule spiders run
+    - Cancel pending or running jobs
+    - Delete project or a specific version
+    - Show logs of each job
+
+## Version 0.0.1 (2017-02-14)
+
+- Features
+
+    - Show all projects from a Scrapyd server
+    - Show all versions of each project
+    - Show all spiders in each project
+    - Show all pending, running and finished jobs from a Scrapyd server
+    - Http basic access authentication supported
+    - Served by [Gevent](https://github.com/gevent/gevent) for production use

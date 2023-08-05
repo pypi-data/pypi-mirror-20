@@ -1,0 +1,26 @@
+<div class="panel-heading clearfix" data-toggle="collapse" data-parent="#projects" href="#{{ project }}">
+
+    <a class="panel-title collapsed">{{ project }}
+
+        <span class="badge" title="{{ attrs['spiders']|length }} spiders" data-toggle="tooltip">{{ attrs['spiders']|length }}</span>
+
+        {% for version in attrs['versions'] %}
+            <span class="label label-primary" title="version {{ version }}" data-toggle="tooltip">{{ version }}</span>
+        {% endfor %}
+    </a>
+
+    <div class="btn-group pull-right">
+        <button class="btn btn-danger btn-xs" type="button" role="delete" id="/delete/{{ project }}">Delete Project</button>
+
+        <button data-toggle="dropdown" class="btn btn-danger btn-xs dropdown-toggle{% if not attrs['versions']|length %} disabled{% endif %}" type="button">
+            <span class="caret"></span></button>
+
+        <ul role="menu" class="dropdown-menu">
+            {% for version in attrs['versions'] %}
+                <li>
+                    <button class="btn btn-danger btn-xs" role="delete" id="/delete/{{ project }}/{{ version }}">Delete version {{ version }}</button>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
