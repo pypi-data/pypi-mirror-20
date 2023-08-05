@@ -1,0 +1,53 @@
+<systemRolesMap>
+    <assignments>
+        <immutable>false</immutable>
+        <logicalRoles>org.pentaho.scheduler.manage</logicalRoles>
+        <logicalRoles>org.pentaho.security.publish</logicalRoles>
+        <logicalRoles>org.pentaho.repository.create</logicalRoles>
+        <logicalRoles>org.pentaho.repository.execute</logicalRoles>
+        <roleName>Power User</roleName>
+    </assignments>
+    <assignments>
+        <immutable>true</immutable>
+        <logicalRoles>org.pentaho.repository.execute</logicalRoles>
+        <logicalRoles>
+            org.pentaho.platform.dataaccess.datasource.security.manage
+        </logicalRoles>
+        <logicalRoles>org.pentaho.repository.read</logicalRoles>
+        <logicalRoles>org.pentaho.repository.create</logicalRoles>
+        <logicalRoles>org.pentaho.scheduler.manage</logicalRoles>
+        <logicalRoles>org.pentaho.security.administerSecurity</logicalRoles>
+        <logicalRoles>org.pentaho.security.publish</logicalRoles>
+        <roleName>Administrator</roleName>
+    </assignments>
+    <localizedRoleNames>
+        <localizedName>Administer Security</localizedName>
+        <roleName>org.pentaho.security.administerSecurity</roleName>
+    </localizedRoleNames>
+    <localizedRoleNames>
+        <localizedName>Schedule Content</localizedName>
+        <roleName>org.pentaho.scheduler.manage</roleName>
+    </localizedRoleNames>
+    <localizedRoleNames>
+        <localizedName>Read Content</localizedName>
+        <roleName>org.pentaho.repository.read</roleName>
+    </localizedRoleNames>
+    <localizedRoleNames>
+        <localizedName>Publish Content</localizedName>
+        <roleName>org.pentaho.security.publish</roleName>
+    </localizedRoleNames>
+    <localizedRoleNames>
+        <localizedName>Create Content</localizedName>
+        <roleName>org.pentaho.repository.create</roleName>
+    </localizedRoleNames>
+    <localizedRoleNames>
+        <localizedName>Execute</localizedName>
+        <roleName>org.pentaho.repository.execute</roleName>
+    </localizedRoleNames>
+    <localizedRoleNames>
+        <localizedName>Manage Data Sources</localizedName>
+        <roleName>
+            org.pentaho.platform.dataaccess.datasource.security.manage
+        </roleName>
+    </localizedRoleNames>
+</systemRolesMap>
