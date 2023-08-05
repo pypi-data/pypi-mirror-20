@@ -1,0 +1,10 @@
+{% extends 'change_base.html' %}
+
+{% block submit_buttons_bottom %}
+    <div class="submit-row">
+        <a class="button" href="{% url 'admin:mailtrail_email_raw' pk %}">View Raw</a>
+        <a class="button" href="{% url 'admin:mailtrail_email_resend' pk %}">Resend Email</a>
+        <a class="button" href="{% url 'admin:mailtrail_email_forward' pk %}">Forward Email</a>
+    </div>
+    {{ block.super }}
+{% endblock %}
