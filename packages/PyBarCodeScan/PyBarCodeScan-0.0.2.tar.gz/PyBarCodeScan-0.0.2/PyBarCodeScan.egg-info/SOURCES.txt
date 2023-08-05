@@ -1,0 +1,16 @@
+MANIFEST.in
+setup.cfg
+setup.py
+PyBarCodeScan.egg-info/PKG-INFO
+PyBarCodeScan.egg-info/SOURCES.txt
+PyBarCodeScan.egg-info/dependency_links.txt
+PyBarCodeScan.egg-info/requires.txt
+PyBarCodeScan.egg-info/top_level.txt
+PyBarCodeScan.egg-info/zip-safe
+barcodescan/__init__.py
+barcodescan/cli.py
+barcodescan/playground.py
+barcodescan/read_from_scanner.py
+barcodescan/sse.py
+scripts/barcodescan_sse
+src/main/python/barcodescan/templates/index.html
