@@ -1,0 +1,68 @@
+Metadata-Version: 1.1
+Name: js.jquery-maskmoney
+Version: 3.0.2
+Summary: Fanstatic packaging of jQuery-maskMoney
+Home-page: https://github.com/Kotti/js.jquery_maskmoney
+Author: Andreas Kaiser
+Author-email: disko@binary-punks.com
+License: BSD
+Description: js.jquery_maskmoney
+        *******************
+        
+        Introduction
+        ============
+        
+        This library packages `jQuery-maskMoney`_ for `fanstatic`_.
+        
+        .. _`fanstatic`: http://fanstatic.org
+        .. _`jQuery-maskMoney`: http://plentz.org/maskmoney/
+        
+        This requires integration between your web framework and ``fanstatic``,
+        and making sure that the original resources (shipped in the ``resources``
+        directory in ``js.jquery_maskmoney``) are published to some URL.
+        
+        
+        How to use?
+        ===========
+        
+        
+        You can import ``jquery_maskmoney`` from ``js.jquery_maskmoney``
+        and ``need`` it where you want these resources to be included on a page::
+        
+          >>> from js.jquery_maskmoney import jquery_maskmoney
+          >>> jquery_maskmoney.need()
+        
+        
+        CHANGES
+        =======
+        
+        3.0.2 - 2017-02-23
+        ------------------
+        
+        - Upgrade to 3.0.2.
+        - Test against Python 3.3, 3.4, 3.5 and 3.6 with tox and on TravisCI.
+        - Add a script to update from npm automatically.
+        
+        1.4.1
+        -----
+        
+        -   Initial release.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
