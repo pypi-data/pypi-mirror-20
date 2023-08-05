@@ -1,0 +1,43 @@
+Metadata-Version: 1.1
+Name: buildout.wheel
+Version: 0.1.2.dev0
+Summary: Experimental Buildout extension to provude wheel support
+Home-page: https://pypi.python.org/pypi/buildout.wheel
+Author: Jim Fulton
+Author-email: jim@jimfulton.info
+License: MIT License
+Description: ========================================================
+        Experimental Buildout extension to provude wheel support
+        ========================================================
+        
+        To get wheel support in Buildout 2.8 or later, including the buildut
+        wheel extension::
+        
+          [buildout]
+          extensions = buildout.wheel
+          ...
+        
+        =======
+        Changes
+        =======
+        
+        0.1.2 (2017-02-13)
+        ==================
+        
+        Initial release
+        
+Keywords: development build
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Buildout
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
