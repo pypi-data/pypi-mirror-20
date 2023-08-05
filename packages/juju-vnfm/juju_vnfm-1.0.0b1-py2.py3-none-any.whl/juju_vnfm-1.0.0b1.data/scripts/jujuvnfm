@@ -1,0 +1,88 @@
+#!python
+
+
+from __future__ import print_function
+import sys
+import os.path
+from optparse import OptionParser
+import getpass
+import jujuvnfm.juju_vnfm as vnfm
+
+if sys.version_info < (3, 5, 2):
+    print('jujuvnfm: error: please use Python version 3.5.2 or higher', file=sys.stderr)
+    sys.exit(1)
+
+version = '0.0.1'
+
+
+def config_file_exists():
+    return os.path.isfile('/etc/openbaton/juju/conf.ini')
+
+
+def configure_etc_file():
+    if not config_file_exists():
+        print('jujuvnfm: error: Please create the file /etc/openbaton/juju/conf.ini and run jujuvnfm configure.',
+              file=sys.stderr)
+        sys.exit(1)
+    try:
+        with open('/etc/openbaton/juju/conf.ini', 'a') as conf_file:
+            print('Please provide the following properties [default values in square brackets]:\n')
+            log_path = input('Directory for the log file [/var/log/openbaton/]:') or '/var/log/openbaton/'
+            broker_ip = input('Rabbit MQ broker ip [localhost]:') or 'localhost'
+            username = input('Rabbit MQ user name [admin]:') or 'admin'
+            password = getpass.getpass(prompt='Rabbit MQ password:')
+            heartbeat = input('Heartbeat rate [60]:') or '60'
+            exchange = input('Rabbit MQ exchange name [openbaton-exchange]:') or 'openbaton-exchange'
+            exchange_durable = input('Rabbit MQ exchanges survive broker restart [true]:') or 'true'
+            endpoint_type = 'RABBIT'
+            allocate = input('Who handles resource allocation: true for NFVO; false for Juju [true]:') or 'true'
+
+            conf_file.seek(0, 0)
+            conf_file.truncate()
+            print('[vnfm]\nlog_path={}\nbroker_ip={}\nusername={}\npassword={}\nheartbeat={}\nexchange={}\n'
+                  'exchange_durable={}\nendpoint_type={}\nallocate={}'.format(
+                log_path, broker_ip, username, password, heartbeat, exchange, exchange_durable, endpoint_type,
+                allocate), file=conf_file)
+    except PermissionError:
+        print('jujuvnfm: error: Write permissions are needed for /etc/openbaton/juju/conf.ini', file=sys.stderr)
+        sys.exit(1)
+    except KeyboardInterrupt:
+        print('')
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    parser = OptionParser(usage='%prog [-d] [-t THREADS] [start|configure]', version='%prog {}'.format(version))
+    parser.add_option('-t', '--threads', dest='threads', type='int',
+                      help='number of threads started for the Juju-VNFM')
+    parser.add_option('-d', '--debug',
+                      action='store_true', dest='debug', default=False,
+                      help='enable debug mode')
+
+    (options, args) = parser.parse_args()
+
+    if len(args) > 1:
+        parser.error('pass either start or configure as arguments')
+    elif len(args) < 1:
+        parser.error('start or configure argument required')
+
+    if 'start' in args:
+        if not config_file_exists():
+            print(
+                'jujuvnfm: error: No configuration file found. Please create the file /etc/openbaton/juju/conf.ini and run jujuvnfm configure before starting.',
+                file=sys.stderr)
+            sys.exit(1)
+        number_of_threads = 5
+        debug_mode = False
+        if options.threads:
+            number_of_threads = options.threads
+        if options.debug:
+            debug_mode = options.debug
+        vnfm.start(debug_mode=debug_mode, number_of_threads=number_of_threads)
+    elif 'configure' in args:
+        if options.threads or options.debug:
+            parser.error('jujuvnfm configure takes no options')
+        configure_etc_file()
+    else:
+        parser.error('{} is not a valid argument: start or configure argument required'.format(args[0]))
+        sys.exit(1)
