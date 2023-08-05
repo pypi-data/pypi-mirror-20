@@ -1,0 +1,36 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Save Host{% endblock %}
+
+{% block content %}
+{% load bootstrap3 %}
+        <form action="{% url 'HostSave' %}" method="post" class="form">
+          {% csrf_token %}
+          {% bootstrap_field hostform.name %}
+          {% bootstrap_field hostform.description set_required=False %}
+          {% if request.GET.id %}
+          <input type="hidden" name="id" value="{{ request.GET.id }}">
+          {% endif %}
+          {% buttons %}
+          <button type="submit" class="btn btn-primary">Submit</button>
+          {% endbuttons %}
+        </form>
+{% if permissions %}
+       <br>
+       <h4>Permissions for this host</h4>
+       <div class="panel panel-default">
+         <table class="table">
+            <tr>
+              <th>Group</th>
+              <th>OS-User</th>
+            </tr>
+            {% for permission in permissions %}
+            <tr>
+              <td>{{ permission.group.name }}</td>
+              <td>{{ permission.osuser.name }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+{% endif %}
+{% endblock %}

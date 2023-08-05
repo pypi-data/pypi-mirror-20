@@ -1,0 +1,16 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Create new Permission{% endblock %}
+
+{% block content %}
+{% load bootstrap3 %}
+        <form action="{% url 'PermissionSave' %}" method="post" class="form">
+          {% csrf_token %}
+          {% bootstrap_field permissionform.host set_required=False %}
+          {% bootstrap_field permissionform.group set_required=False %}
+          {% bootstrap_field permissionform.osuser set_required=False %}
+          {% buttons %}
+          <button type="submit" class="btn btn-primary">Submit</button>
+          {% endbuttons %}
+        </form>
+{% endblock %}

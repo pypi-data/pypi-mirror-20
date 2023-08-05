@@ -1,0 +1,57 @@
+{% extends "sshkm/base.html" %}
+
+{% block title %}Groups{% endblock %}
+
+{% block content %}
+        <a class="btn btn-primary pull-right" href="{% url 'GroupDetail' %}">New</a>
+        <br><br>
+{% if groups %}
+        <form role="form" method="post" action="{% url 'GroupDelete' %}" name="deleteMultipleGroups">
+          {% csrf_token %}
+          <div class="panel panel-default">
+            <table class="table">
+              <tr>
+                <th><input type="checkbox" class="checkAll"></th>
+                <th>Name</th>
+                <th>&nbsp;</th>
+              </tr>
+              {% for group in groups %}
+              <tr>
+                <td><input type="checkbox" name="id_multiple" id="{{ group.id }}" value="{{ group.id }}"></td>
+                <td><a href="{% url 'GroupDetail' %}?id={{ group.id }}">{{ group.name }}</a></td>
+                <td align="right">
+                  <a href="#" onclick="
+                    BootstrapDialog.confirm(
+                      {
+                        title: 'please confirm', 
+                        message: 'Are you shure you want to delete the group {{ group.name }}',
+                        callback: function(result) {
+                          if(result) {
+                            window.location.href = '{% url 'GroupDelete' %}?id={{ group.id }}';
+                          }
+                        }
+                      }
+                    );
+                  "><span class="glyphicon glyphicon-trash" aria-hidden="true" title="delete"></span></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="btn btn-primary" onclick="
+            checkboxCheck(
+              function(){
+                document.deleteMultipleGroups.submit();
+              },
+              'id_multiple',
+              'please confirm',
+              'Are you shure you want to delete selected group(s)',
+              'no group(s) selected',
+              'Please select at least one group'
+            )
+          ">Delete</div>
+        </form>
+{% else %}
+        <p>No Groups are available.</p>
+{% endif %}
+{% endblock %}
