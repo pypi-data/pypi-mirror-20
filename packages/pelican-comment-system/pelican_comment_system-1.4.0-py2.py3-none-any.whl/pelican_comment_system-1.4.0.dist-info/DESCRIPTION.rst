@@ -1,0 +1,200 @@
+Pelican Comment System
+======================
+
+Pelican Comment System allows you to add static comments to your
+articles.
+
+Comments are stored in files in formats that can be processed by Pelican
+(e.g., Markdown, reStructuredText). Each comment resides in its own
+file.
+
+Features
+--------
+
+-  Static comments for each article
+-  Replies to comments
+-  Avatars and `Identicons <https://en.wikipedia.org/wiki/Identicon>`__
+-  Comment Atom feed for each article
+-  Easy styleable via themes
+-  Python 2 and 3 support
+
+See it in action here:
+`bernhard.scheirle.de <http://bernhard.scheirle.de/posts/2014/March/29/static-comments-via-email/>`__
+
++---------------------+-------------------------------+-------------------------------+
+| Author              | Website                       | Github                        |
++=====================+===============================+===============================+
+| Bernhard Scheirle   | http://bernhard.scheirle.de   | https://github.com/Scheirle   |
++---------------------+-------------------------------+-------------------------------+
+
+Instructions
+------------
+
+-  `Quickstart Guide <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/doc/quickstart.md>`__
+-  `Installation and basic usage <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/doc/installation.md>`__
+-  `Import existing comments <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/doc/import.md>`__
+-  `Avatars and identicons <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/doc/avatars.md>`__
+-  `Comment Atom feed <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/doc/feed.md>`__
+-  `[Developer] How to do a release <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/doc/how-to-release.md>`__
+
+PyPi
+------------
+The Pelican Comment System is now also in the Python Package Index and can easily installed via:
+
+::
+
+    pip install pelican_comment_system
+
+
+Requirements
+------------
+
+Pelican 3.4 or newer is required.
+
+To create identicons, the Python Image Library is needed. Therefore you
+either need PIL **or** Pillow (recommended).
+
+**Install Pillow via:**
+
+::
+
+    pip install Pillow
+
+If you don't want avatars or identicons, this plugin works fine without
+PIL/Pillow. You will, however, see a warning that identicons are
+deactivated (as expected).
+
+Change Log
+----------
+
+The change log can be found in the `CHANGELOG.rst <https://github.com/Scheirle/pelican_comment_system/tree/v1.4.0/CHANGELOG.rst>`__
+file.
+
+
+Change Log
+==========
+
+All notable changes to this project will be documented in this file.
+This project adheres to `Semantic Versioning <http://semver.org/>`__.
+
+1.4.0 – 2017-02-20
+------------------
+\
+
+Added
+~~~~~
+
+-  add ``setup.py`` to allow posting plugin to PyPI `PR
+   #862 <https://github.com/getpelican/pelican-plugins/pull/862>`__
+
+1.3.0 – 2017-01-10
+------------------
+\
+
+Added
+~~~~~
+
+-  add
+   `blogger\_comment\_export.py <import/blogger_comment_export.py>`__
+   script to export comments from Blogger XML export and `associated
+   documentation <docs/import.md>`__ `PR
+   #835 <https://github.com/getpelican/pelican-plugins/pull/835>`__
+
+1.2.2 – 2016-12-19
+------------------
+\
+
+Fixed
+~~~~~
+
+-  Correct jQuery expression in cancelReply method `PR
+   #820 <https://github.com/getpelican/pelican-plugins/pull/820>`__
+
+1.2.1 – 2016-09-22
+------------------
+\
+
+Fixed
+~~~~~
+
+-  Add support for the autoreload mode of pelican `PR
+   #782 <https://github.com/getpelican/pelican-plugins/pull/782>`__
+   `Fixes
+   pelican#1949 <https://github.com/getpelican/pelican/issues/1949>`__
+
+1.2.0 – 2016-05-23
+------------------
+\
+
+Fixed - Documentation
+~~~~~~~~~~~~~~~~~~~~~
+
+-  Correct template path `PR
+   #713 <https://github.com/getpelican/pelican-plugins/pull/713>`__
+
+Added - Documentation
+~~~~~~~~~~~~~~~~~~~~~
+
+-  Adds Quickstart guide + default theme `PR
+   #686 <https://github.com/getpelican/pelican-plugins/pull/686>`__
+
+Fixed
+~~~~~
+
+-  Fix mailto link: use '' instead of '' `PR
+   #720 <https://github.com/getpelican/pelican-plugins/pull/720>`__
+-  Fix comparison of offset-naive and offset-aware datetimes `PR
+   #722 <https://github.com/getpelican/pelican-plugins/pull/722>`__
+
+Added
+~~~~~
+
+-  Logs a warning if the parent of a comment can not be found `PR
+   #715 <https://github.com/getpelican/pelican-plugins/pull/715>`__
+
+1.1.0 – 2016-02-18
+------------------
+\
+
+Fixed – Documentation
+~~~~~~~~~~~~~~~~~~~~~
+
+-  Updated old URLs `PR
+   #677 <https://github.com/getpelican/pelican-plugins/pull/677>`__
+
+Changed
+~~~~~~~
+
+-  Main logic runs a bit earlier (allows other plugins to access
+   comments earlier) `PR
+   #677 <https://github.com/getpelican/pelican-plugins/pull/677>`__
+-  The writer to generate the feeds can now be exchanged (via a normal
+   pelican writer plugin) `PR
+   #677 <https://github.com/getpelican/pelican-plugins/pull/677>`__
+
+1.0.1 – 2015-10-04
+------------------
+\
+
+Fixed – Documentation
+~~~~~~~~~~~~~~~~~~~~~
+
+-  Add commas indicating tuple (``PELICAN_COMMENT_SYSTEM_AUTHORS``) `PR
+   #579 <https://github.com/getpelican/pelican-plugins/pull/579>`__
+
+1.0.0 – 2014-11-05
+------------------
+\
+
+Added
+~~~~~
+
+-  Basic static comments
+-  Atom Feeds
+-  Replies to comments
+-  Avatars and identicons
+
+This change log uses `Keep a CHANGELOG <http://keepachangelog.com/>`__
+as a template.
+
+
