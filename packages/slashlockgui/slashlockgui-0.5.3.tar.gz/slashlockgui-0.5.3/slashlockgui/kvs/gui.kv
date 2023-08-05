@@ -1,0 +1,89 @@
+#:import label kivy.uix.label
+#:import sla kivy.adapters.simplelistadapter
+
+
+<HorizontalContainer@RelativeLayout>
+    size_hint: (1, None)
+    height: sp(20)
+
+<Spacer@Widget>
+    size_hint: 1, None
+    height: sp(12)
+
+<PasswordInput@TextInput>
+    multiline: False
+    write_tab: False
+    password: True
+    color: (0, 0, 0, 1)
+    height: self.minimum_height
+    size_hint: (None, None)
+    background_normal: self.background_active
+    on_text_validate: app.set_passphrase()
+    width: self.parent.width - 20
+    pos: (10, 0)
+
+<BasicTextInput@PasswordInput>
+    password: False
+
+
+<HorizontalSeparator@Widget>
+    canvas:
+        Color:
+            rgba: (100/255, 100/255, 100/255, 0.2)
+        Rectangle:
+            size: (self.parent.width, 2)
+            pos: self.pos
+
+<LockButton@Button>
+    background_normal: ""
+    background_color: blue_back
+    size: (100, 50)
+    size_hint: (None, None)
+
+<BlueBlackButton>
+    background_normal: ""
+    background_disabled_normal: ""
+    background_color: blue_back
+    size: (self.texture_size[0] + dp(36), self.texture_size[1] + dp(16))
+    font_size: '14sp'
+    size_hint: (None, None)
+
+<WrappedLabel@Label>:
+    size_hint_y: None
+    text_size: self.width, None
+    height: self.texture_size[1]
+    on_size: self.height = self.texture_size[1]
+    color: (0, 0, 0, 1)
+    pos: (10, 0)
+
+<AppContainer>
+    orientation: "vertical"
+
+    canvas:
+        Color:
+            rgba: (255/255, 255/255, 255/255, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    ActionBar:
+        ActionView:
+            use_separator: True
+            background_color: blue_back
+            background_image: ""
+            ActionPrevious:
+                title: "Slashlock"
+                with_previous: False
+
+    ScreenManager:
+        id: screen_manager
+
+        SetPassphraseScreen:
+            id: set_passphrase_screen
+        DropScreen:
+            id: drop_screen
+        EncryptScreen:
+        ChooseDirectoryScreen:
+        FileNameScreen:
+        ProcessingScreen:
+        ResultScreen:
