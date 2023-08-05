@@ -1,0 +1,53 @@
+Metadata-Version: 2.0
+Name: vesta-integration-tests
+Version: 0.1.0
+Summary: Integration tests to check proper interaction between Vesta Services components.
+Home-page: https://github.com/osterrfr-crim/vesta_integration_tests
+Author: Fred Osterrath
+Author-email: osterrfr@crim.ca
+License: ISCL
+Keywords: vesta_integration_tests
+Platform: linux_x86_64
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: ISC License (ISCL)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: VestaRestPackage
+
+Integration tests to check proper interaction between Vesta Services components.
+
+Usage
+-----
+
+Beforehand, you need to configure these tests by defining a python configuration module as defined by the VestaRestPackage configuration handler as described `here <http://services.vesta.crim.ca/docs/vrp/latest/configuration.html#configuration>`_.
+
+Once that is done, you can launch one of the multiple sub tests from the
+following : 
+
+- vesta_integration_tests/mss_simple.py
+- vesta_integration_tests/mss_test.py
+- vesta_integration_tests/sg_test.py
+- vesta_integration_tests/global_test.py
+
+with a command similar to :
+
+.. code-block:: bash
+
+   python -m vesta_integration_tests.mss_simple
+
+
+
+
+History
+=======
+
+0.1.0
+---------------------
+
+* First structured release.
+
+
