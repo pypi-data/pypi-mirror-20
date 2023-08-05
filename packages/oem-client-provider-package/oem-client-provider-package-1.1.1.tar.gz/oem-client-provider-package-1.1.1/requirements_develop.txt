@@ -1,0 +1,7 @@
+-e ../oem-framework
+-e ../oem-core
+-e ../oem-client
+
+semantic_version>=2.5.0
+
+-e git://github.com/fuzeman/bencode.py.git#egg=bencode.py

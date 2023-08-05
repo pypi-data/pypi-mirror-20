@@ -1,0 +1,29 @@
+language: python
+python:
+- '2.6'
+- '2.7'
+- '3.2'
+- '3.3'
+- '3.4'
+- '3.5'
+install:
+- pip install -U setuptools
+- pip install tox-travis
+- if [[ $TRAVIS_PYTHON_VERSION == 3.2 ]]; then pip install "virtualenv<14.0.0"; fi
+script:
+- export CURRENT_BRANCH=$(if [ -n "$TRAVIS_TAG" ]; then echo "master"; else echo "$TRAVIS_BRANCH"; fi)
+- tox
+after_success: python setup.py sdist bdist_wheel
+deploy:
+  provider: releases
+  api_key:
+    secure: LGE/g4leXAhE5FqTL0vGDIo/atneOx9apfY3LKrc6JSYn6AoPrtdY5M8JiHDVSCkUp4L2XaY0BUCTvMPl1ERCEJ0y4Ijy3eq/2I2ljVqC5SFTIK9z1DwYUFEAvfVD4NEIbKHbZXhGu8mWHx8au9AXhJ9WIhc7NyHQRb2ExXcjvx+AmWARP1SazSpJNqDG2g+lGUpa25c40VgyATbzbVswJUJPxXKdFAZuURzMNqTZYMv3MWKZsdlDw8hYR/hxGl5ZLj2hoNNJOq113BfL0gpF0gjl/8EdSEHjm0Gl7lJSYjE4xK8FwZhSrFHrwnkRCy4QtddFtOak7aQ5/LQdwrs203a1C7WMYGDIVaJnWUJunAopmUnFMG2/FrWtH7EDBczmqVkJBqIRJNqxyqU/IteSIljKuavpc8sJLuUUB5DRTvvpiTGXdbSfK94W7ET/zUmsRazHwTT0SKDUl4CVJHR7dVdUNyh0C5Tb5hx7PYbj4tGdbV094EiuHup/HT8PvK4/BYMWZFiqspbqSAF05iQhiutCoR06cOyGEaxxojniLHenzVjlM8FXO6dUDRkJxHX2B9C4NN2OeDVhxjdbGzvqqkpaSJR+MRjpPLcpaytzqMZS2RWXxquH25t2RwkMlDYbCd3aFMOK96WLaA11ujrLzVV7ZZysf0CZOwArRbUoS4=
+  skip_cleanup: true
+  file_glob: true
+  file:
+  - "dist/oem-client-provider-package-*"
+  - "dist/oem_client_provider_package-*"
+  on:
+    repo: OpenEntityMap/oem-client-provider-package
+    condition: $TRAVIS_PYTHON_VERSION = "2.7"
+    tags: true
