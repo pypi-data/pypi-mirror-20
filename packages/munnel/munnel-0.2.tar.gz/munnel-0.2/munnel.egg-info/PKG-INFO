@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: munnel
+Version: 0.2
+Summary: Milter replacing RCTP TO addresses with configured ones
+Home-page: https://lab.nexedi.com/vpelletier/python-munnel
+Author: Nexedi
+Author-email: vincent@nexedi.com
+License: GPLv3
+Description: .. contents::
+        
+        Milter replacing RCTP TO addresses with configured ones
+        
+        Intended to muzzle a mail-sending application while only touching its mail
+        relay.
+        
+        "munnel" is a portmanteau, like milter: milter is a Mail fILTER, munnel is a
+        Mail fUNNEL. And it is a funnel, because wherever the mail tries to fall, it
+        will slide where configurations tells it to.
+        
+Keywords: smtp milter funnel
+Platform: any
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Operating System :: OS Independent
