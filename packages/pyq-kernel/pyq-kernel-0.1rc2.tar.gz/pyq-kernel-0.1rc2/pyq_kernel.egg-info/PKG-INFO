@@ -1,0 +1,28 @@
+Metadata-Version: 1.1
+Name: pyq-kernel
+Version: 0.1rc2
+Summary: PyQ kernel for Jupyter
+Home-page: http://pyq.enlnt.com
+Author: Enlightenment Research, LLC
+Author-email: pyq@enlnt.com
+License: UNKNOWN
+Description: .. _kernel_install:
+        
+        Installing the pyq kernel
+        =========================
+        
+        .. seealso::
+        
+           :ref:`Installing Jupyter <jupyter:install>`
+             The IPython kernel is the Python execution backend for Jupyter.
+        
+            pip install pyq-kernel
+            pyq -m pyq.kernel install --user
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Environment :: Web Environment
