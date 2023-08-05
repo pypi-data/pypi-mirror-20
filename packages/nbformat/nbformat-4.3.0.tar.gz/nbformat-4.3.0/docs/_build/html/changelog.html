@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Changes in nbformat &mdash; nbformat 4.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="nbformat 4.0 documentation" href="index.html" />
+    <link rel="prev" title="Python API for working with notebook files" href="api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="changes-in-nbformat">
+<span id="changelog"></span><h1>Changes in nbformat<a class="headerlink" href="#changes-in-nbformat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>4.3<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/jupyter/nbformat/milestone/7">4.3 on GitHub</a></p>
+<ul class="simple">
+<li>A new pluggable <code class="docutils literal"><span class="pre">SignatureStore</span></code> class allows specifying different ways to
+record the signatures of trusted notebooks. The default is still an SQLite
+database. See <a class="reference internal" href="api.html#pluggable-signature-store"><span class="std std-ref">Signature storage</span></a> for more information.</li>
+<li><a class="reference internal" href="api.html#nbformat.read" title="nbformat.read"><code class="xref py py-func docutils literal"><span class="pre">nbformat.read()</span></code></a> and <a class="reference internal" href="api.html#nbformat.write" title="nbformat.write"><code class="xref py py-func docutils literal"><span class="pre">nbformat.write()</span></code></a> accept file paths as bytes
+as well as unicode.</li>
+<li>Fix for calling <a class="reference internal" href="api.html#nbformat.validate" title="nbformat.validate"><code class="xref py py-func docutils literal"><span class="pre">nbformat.validate()</span></code></a> on an empty dictionary.</li>
+<li>Fix for running the tests where the locale makes ASCII the default encoding.</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>4.2<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>4.2.0<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/jupyter/nbformat/milestones/4.2">4.2 on GitHub</a></p>
+<ul class="simple">
+<li>Update nbformat spec version to 4.2, allowing JSON outputs to have any JSONable type,  not just <code class="docutils literal"><span class="pre">object</span></code>,
+and mime-types of the form <code class="docutils literal"><span class="pre">application/anything+json</span></code>.</li>
+<li>Define basics of <code class="docutils literal"><span class="pre">authors</span></code> in notebook metadata.
+<code class="docutils literal"><span class="pre">nb.metadata.authors</span></code> shall be a list of objects with the property <code class="docutils literal"><span class="pre">name</span></code>, a string of each author&#8217;s full name.</li>
+<li>Update use of traitlets API to require traitlets 4.1.</li>
+<li>Support trusting notebooks on stdin with <code class="docutils literal"><span class="pre">cat</span> <span class="pre">notebook</span> <span class="pre">|</span> <span class="pre">jupyter</span> <span class="pre">trust</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>4.1<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>4.1.0<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/jupyter/nbformat/milestones/4.1">4.1 on GitHub</a></p>
+<ul class="simple">
+<li>Update nbformat spec version to 4.1, adding support for attachments on markdown and raw cells.</li>
+<li>Catch errors opening trust database, falling back on <code class="docutils literal"><span class="pre">:memory:</span></code> if the database cannot be opened.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>4.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/jupyter/nbformat/milestones/4.0">4.0 on GitHub</a></p>
+<p>The first release of nbformat as its own package.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Changes in nbformat</a><ul>
+<li><a class="reference internal" href="#id1">4.3</a></li>
+<li><a class="reference internal" href="#id2">4.2</a><ul>
+<li><a class="reference internal" href="#id3">4.2.0</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">4.1</a><ul>
+<li><a class="reference internal" href="#id5">4.1.0</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">4.0</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api.html" title="previous chapter">Python API for working with notebook files</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/changelog.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Jupyter Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/changelog.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python API for working with notebook files &mdash; nbformat 4.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="nbformat 4.0 documentation" href="index.html" />
+    <link rel="next" title="Changes in nbformat" href="changelog.html" />
+    <link rel="prev" title="The Notebook file format" href="format_description.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nbformat">
+<span id="python-api-for-working-with-notebook-files"></span><h1>Python API for working with notebook files<a class="headerlink" href="#module-nbformat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reading-and-writing">
+<h2>Reading and writing<a class="headerlink" href="#reading-and-writing" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nbformat.read">
+<code class="descclassname">nbformat.</code><code class="descname">read</code><span class="sig-paren">(</span><em>fp</em>, <em>as_version</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a notebook from a file as a NotebookNode of the given version.</p>
+<p>The string can contain a notebook of any version.
+The notebook will be returned <cite>as_version</cite>, converting, if necessary.</p>
+<p>Notebook format errors will be logged.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fp</strong> (<em>file or str</em>) &#8211; A file-like object with a read method that returns unicode (use
+<code class="docutils literal"><span class="pre">io.open()</span></code> in Python 2), or a path to a file.</li>
+<li><strong>as_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; The version of the notebook format to return.
+The notebook will be converted, if necessary.
+Pass nbformat.NO_CONVERT to prevent conversion.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>nb</strong> &#8211; The notebook that was read.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nbformat.NotebookNode" title="nbformat.NotebookNode">NotebookNode</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nbformat.reads">
+<code class="descclassname">nbformat.</code><code class="descname">reads</code><span class="sig-paren">(</span><em>s</em>, <em>as_version</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a notebook from a string and return the NotebookNode object as the given version.</p>
+<p>The string can contain a notebook of any version.
+The notebook will be returned <cite>as_version</cite>, converting, if necessary.</p>
+<p>Notebook format errors will be logged.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>s</strong> (<em>unicode</em>) &#8211; The raw unicode string to read the notebook from.</li>
+<li><strong>as_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; The version of the notebook format to return.
+The notebook will be converted, if necessary.
+Pass nbformat.NO_CONVERT to prevent conversion.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>nb</strong> &#8211; The notebook that was read.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nbformat.NotebookNode" title="nbformat.NotebookNode">NotebookNode</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>The reading functions require you to pass the <em>as_version</em> parameter. Your
+code should specify the notebook format that it knows how to work with: for
+instance, if your code handles version 4 notebooks:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nb</span> <span class="o">=</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;path/to/notebook.ipynb&#39;</span><span class="p">,</span> <span class="n">as_version</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will automatically upgrade or downgrade notebooks in other versions of
+the notebook format to the structure your code knows about.</p>
+<dl class="function">
+<dt id="nbformat.write">
+<code class="descclassname">nbformat.</code><code class="descname">write</code><span class="sig-paren">(</span><em>nb</em>, <em>fp</em>, <em>version=nbformat.NO_CONVERT</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a notebook to a file in a given nbformat version.</p>
+<p>The file-like object must accept unicode input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nb</strong> (<a class="reference internal" href="#nbformat.NotebookNode" title="nbformat.NotebookNode"><em>NotebookNode</em></a>) &#8211; The notebook to write.</li>
+<li><strong>fp</strong> (<em>file or str</em>) &#8211; Any file-like object with a write method that accepts unicode, or
+a path to write a file.</li>
+<li><strong>version</strong> (<em>int, optional</em>) &#8211; The nbformat version to write.
+If nb is not this version, it will be converted.
+If unspecified, or specified as nbformat.NO_CONVERT,
+the notebook&#8217;s own version will be used and no conversion performed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nbformat.writes">
+<code class="descclassname">nbformat.</code><code class="descname">writes</code><span class="sig-paren">(</span><em>nb</em>, <em>version=nbformat.NO_CONVERT</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.writes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a notebook to a string in a given format in the given nbformat version.</p>
+<p>Any notebook format errors will be logged.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nb</strong> (<a class="reference internal" href="#nbformat.NotebookNode" title="nbformat.NotebookNode"><em>NotebookNode</em></a>) &#8211; The notebook to write.</li>
+<li><strong>version</strong> (<em>int, optional</em>) &#8211; The nbformat version to write.
+If unspecified, or specified as nbformat.NO_CONVERT,
+the notebook&#8217;s own version will be used and no conversion performed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>s</strong> &#8211; The notebook as a JSON string.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">unicode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="nbformat.NO_CONVERT">
+<code class="descclassname">nbformat.</code><code class="descname">NO_CONVERT</code><a class="headerlink" href="#nbformat.NO_CONVERT" title="Permalink to this definition">¶</a></dt>
+<dd><p>This special value can be passed to the reading and writing functions, to
+indicate that the notebook should be loaded/saved in the format it&#8217;s supplied.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="nbformat.current_nbformat">
+<code class="descclassname">nbformat.</code><code class="descname">current_nbformat</code><a class="headerlink" href="#nbformat.current_nbformat" title="Permalink to this definition">¶</a></dt>
+<dt id="nbformat.current_nbformat_minor">
+<code class="descclassname">nbformat.</code><code class="descname">current_nbformat_minor</code><a class="headerlink" href="#nbformat.current_nbformat_minor" title="Permalink to this definition">¶</a></dt>
+<dd><p>These integers represent the current notebook format version that the
+nbformat module knows about.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="notebooknode-objects">
+<h2>NotebookNode objects<a class="headerlink" href="#notebooknode-objects" title="Permalink to this headline">¶</a></h2>
+<p>The functions in this module work with <a class="reference internal" href="#nbformat.NotebookNode" title="nbformat.NotebookNode"><code class="xref py py-class docutils literal"><span class="pre">NotebookNode</span></code></a> objects, which are
+like dictionaries, but allow attribute access (<code class="docutils literal"><span class="pre">nb.cells</span></code>). The structure of
+these objects matches the notebook format described in <a class="reference internal" href="format_description.html"><span class="doc">The Notebook file format</span></a>.</p>
+<dl class="class">
+<dt id="nbformat.NotebookNode">
+<em class="property">class </em><code class="descclassname">nbformat.</code><code class="descname">NotebookNode</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.NotebookNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict-like node with attribute-access</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nbformat.from_dict">
+<code class="descclassname">nbformat.</code><code class="descname">from_dict</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert dict to dict-like NotebookNode</p>
+<p>Recursively converts any dict in the container to a NotebookNode.
+This does not check that the contents of the dictionary make a valid
+notebook or part of a notebook.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="other-functions">
+<h2>Other functions<a class="headerlink" href="#other-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nbformat.convert">
+<code class="descclassname">nbformat.</code><code class="descname">convert</code><span class="sig-paren">(</span><em>nb</em>, <em>to_version</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a notebook node object to a specific version.  Assumes that
+all the versions starting from 1 to the latest major X are implemented.
+In other words, there should never be a case where v1 v2 v3 v5 exist without
+a v4.  Also assumes that all conversions can be made in one step increments
+between major versions and ignores minor revisions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nb</strong> (<a class="reference internal" href="#nbformat.NotebookNode" title="nbformat.NotebookNode"><em>NotebookNode</em></a>) &#8211; </li>
+<li><strong>to_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Major revision to convert the notebook to.  Can either be an upgrade or
+a downgrade.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nbformat.validate">
+<code class="descclassname">nbformat.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>nbjson</em>, <em>ref=None</em>, <em>version=None</em>, <em>version_minor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given notebook JSON conforms to the current
+notebook format schema.</p>
+<p>Raises ValidationError if not valid.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nbformat.ValidationError">
+<em class="property">class </em><code class="descclassname">nbformat.</code><code class="descname">ValidationError</code><span class="sig-paren">(</span><em>message</em>, <em>validator=&lt;unset&gt;</em>, <em>path=()</em>, <em>cause=None</em>, <em>context=()</em>, <em>validator_value=&lt;unset&gt;</em>, <em>instance=&lt;unset&gt;</em>, <em>schema=&lt;unset&gt;</em>, <em>schema_path=()</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.ValidationError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-nbformat.sign">
+<span id="notebook-signatures"></span><h2>Notebook signatures<a class="headerlink" href="#module-nbformat.sign" title="Permalink to this headline">¶</a></h2>
+<p>This machinery is used by the notebook web application to record which notebooks
+are <em>trusted</em>, and may show dynamic output as soon as they&#8217;re loaded. See
+<a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/security.html#notebook-security" title="(in Jupyter Notebook v4.4)"><span>Security in notebook documents</span></a> for more information.</p>
+<dl class="class">
+<dt id="nbformat.sign.NotebookNotary">
+<em class="property">class </em><code class="descclassname">nbformat.sign.</code><code class="descname">NotebookNotary</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.NotebookNotary" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for computing and verifying notebook signatures.</p>
+<dl class="method">
+<dt id="nbformat.sign.NotebookNotary.sign">
+<code class="descname">sign</code><span class="sig-paren">(</span><em>nb</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.NotebookNotary.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sign a notebook, indicating that its output is trusted on this machine</p>
+<p>Stores hash algorithm and hmac digest in a local database of trusted notebooks.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.NotebookNotary.unsign">
+<code class="descname">unsign</code><span class="sig-paren">(</span><em>nb</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.NotebookNotary.unsign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that a notebook is untrusted</p>
+<p>by removing its signature from the trusted database, if present.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.NotebookNotary.check_signature">
+<code class="descname">check_signature</code><span class="sig-paren">(</span><em>nb</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.NotebookNotary.check_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check a notebook&#8217;s stored signature</p>
+<p>If a signature is stored in the notebook&#8217;s metadata,
+a new signature is computed and compared with the stored value.</p>
+<p>Returns True if the signature is found and matches, False otherwise.</p>
+<p>The following conditions must all be met for a notebook to be trusted:
+- a signature is stored in the form &#8216;scheme:hexdigest&#8217;
+- the stored scheme matches the requested scheme
+- the requested scheme is available from hashlib
+- the computed hash from notebook_signature matches the stored hash</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.NotebookNotary.mark_cells">
+<code class="descname">mark_cells</code><span class="sig-paren">(</span><em>nb</em>, <em>trusted</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.NotebookNotary.mark_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark cells as trusted if the notebook&#8217;s signature can be verified</p>
+<p>Sets <code class="docutils literal"><span class="pre">cell.metadata.trusted</span> <span class="pre">=</span> <span class="pre">True</span> <span class="pre">|</span> <span class="pre">False</span></code> on all code cells,
+depending on the <em>trusted</em> parameter. This will typically be the return
+value from <code class="docutils literal"><span class="pre">self.check_signature(nb)</span></code>.</p>
+<p>This function is the inverse of check_cells</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.NotebookNotary.check_cells">
+<code class="descname">check_cells</code><span class="sig-paren">(</span><em>nb</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.NotebookNotary.check_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether all code cells are trusted.</p>
+<p>A cell is trusted if the &#8216;trusted&#8217; field in its metadata is truthy, or
+if it has no potentially unsafe outputs.
+If there are no code cells, return True.</p>
+<p>This function is the inverse of mark_cells.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="signature-storage">
+<span id="pluggable-signature-store"></span><h3>Signature storage<a class="headerlink" href="#signature-storage" title="Permalink to this headline">¶</a></h3>
+<p>Signatures are stored using a pluggable <a class="reference internal" href="#nbformat.sign.SignatureStore" title="nbformat.sign.SignatureStore"><code class="xref py py-class docutils literal"><span class="pre">SignatureStore</span></code></a> subclass. To
+implement your own, override the methods below and configure
+<code class="docutils literal"><span class="pre">NotebookNotary.store_factory</span></code>.</p>
+<dl class="class">
+<dt id="nbformat.sign.SignatureStore">
+<em class="property">class </em><code class="descclassname">nbformat.sign.</code><code class="descname">SignatureStore</code><a class="headerlink" href="#nbformat.sign.SignatureStore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for a signature store.</p>
+<dl class="method">
+<dt id="nbformat.sign.SignatureStore.store_signature">
+<code class="descname">store_signature</code><span class="sig-paren">(</span><em>digest</em>, <em>algorithm</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.SignatureStore.store_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement in subclass to store a signature.</p>
+<p>Should not raise if the signature is already stored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.SignatureStore.remove_signature">
+<code class="descname">remove_signature</code><span class="sig-paren">(</span><em>digest</em>, <em>algorithm</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.SignatureStore.remove_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement in subclass to delete a signature.</p>
+<p>Should not raise if the signature is not stored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.SignatureStore.check_signature">
+<code class="descname">check_signature</code><span class="sig-paren">(</span><em>digest</em>, <em>algorithm</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.SignatureStore.check_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement in subclass to check if a signature is known.</p>
+<p>Return True for a known signature, False for unknown.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nbformat.sign.SignatureStore.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.SignatureStore.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close any open connections this store may use.</p>
+<p>If the store maintains any open connections (e.g. to a database),
+they should be closed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>By default, <a class="reference internal" href="#nbformat.sign.NotebookNotary" title="nbformat.sign.NotebookNotary"><code class="xref py py-class docutils literal"><span class="pre">NotebookNotary</span></code></a> will use an SQLite based store if SQLite
+bindings are available, and an in-memory store otherwise.</p>
+<dl class="class">
+<dt id="nbformat.sign.SQLiteSignatureStore">
+<em class="property">class </em><code class="descclassname">nbformat.sign.</code><code class="descname">SQLiteSignatureStore</code><span class="sig-paren">(</span><em>db_file</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#nbformat.sign.SQLiteSignatureStore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store signatures in an SQLite database.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nbformat.sign.MemorySignatureStore">
+<em class="property">class </em><code class="descclassname">nbformat.sign.</code><code class="descname">MemorySignatureStore</code><a class="headerlink" href="#nbformat.sign.MemorySignatureStore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-persistent storage of signatures in memory.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python API for working with notebook files</a><ul>
+<li><a class="reference internal" href="#reading-and-writing">Reading and writing</a></li>
+<li><a class="reference internal" href="#notebooknode-objects">NotebookNode objects</a></li>
+<li><a class="reference internal" href="#other-functions">Other functions</a></li>
+<li><a class="reference internal" href="#module-nbformat.sign">Notebook signatures</a><ul>
+<li><a class="reference internal" href="#signature-storage">Signature storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="format_description.html" title="previous chapter">The Notebook file format</a></li>
+      <li>Next: <a href="changelog.html" title="next chapter">Changes in nbformat</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Jupyter Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/api.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
