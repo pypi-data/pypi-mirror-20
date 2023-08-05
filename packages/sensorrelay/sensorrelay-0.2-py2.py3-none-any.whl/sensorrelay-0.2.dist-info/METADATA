@@ -1,0 +1,18 @@
+Metadata-Version: 2.0
+Name: sensorrelay
+Version: 0.2
+Summary: Python module for sending and receiving messages to/from a
+    WebSocket-based publish/subscribe architecture.
+Home-page: http://www.dis.cwi.nl
+Author: Thomas Röggla
+Author-email: t.roggla@cwi.nl
+License: BSD 2-clause
+Keywords: publish subscribe websocket
+Platform: UNKNOWN
+Requires-Dist: websocket-client (>=0.30.0)
+
+This module contains two classes, one for publishing new messages to custom
+channels in a WebSocket based publish/subscribe mechanism and one for receiving
+messages posted on said channels.
+
+
