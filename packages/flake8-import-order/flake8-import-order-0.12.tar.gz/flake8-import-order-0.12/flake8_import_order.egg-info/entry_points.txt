@@ -1,0 +1,14 @@
+[flake8.extension]
+I10 = flake8_import_order.flake8_linter:Linter
+
+[pylama.linter]
+import_order = flake8_import_order.pylama_linter:Linter
+
+[flake8_import_order.styles]
+pep8 = flake8_import_order.styles:PEP8
+appnexus = flake8_import_order.styles:AppNexus
+smarkets = flake8_import_order.styles:Smarkets
+edited = flake8_import_order.styles:Edited
+cryptography = flake8_import_order.styles:Cryptography
+google = flake8_import_order.styles:Google
+
