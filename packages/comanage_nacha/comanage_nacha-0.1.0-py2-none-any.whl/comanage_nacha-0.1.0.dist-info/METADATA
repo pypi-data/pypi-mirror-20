@@ -1,0 +1,45 @@
+Metadata-Version: 2.0
+Name: comanage-nacha
+Version: 0.1.0
+Summary: NACHA File Generation
+Home-page: https://github.com/DisruptiveLabs/comanage_nacha
+Author: DisruptiveLabs
+Author-email: team+nacha@comanage.com
+License: UNKNOWN
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: six
+Provides-Extra: tests
+Requires-Dist: pytest (>=2.8); extra == 'tests'
+Requires-Dist: pytest-cov; extra == 'tests'
+Requires-Dist: pytest-flake8; extra == 'tests'
+
+# comanage_nacha 
+[![Build Status](https://travis-ci.org/DisruptiveLabs/comanage_nacha.svg?branch=master)](https://travis-ci.org/DisruptiveLabs/comanage_nacha)
+[![Coverage Status](https://coveralls.io/repos/github/DisruptiveLabs/comanage_nacha/badge.svg?branch=master)](https://coveralls.io/github/DisruptiveLabs/comanage_nacha?branch=master)
+[![PyPI version](https://badge.fury.io/py/comanage_nacha.svg)](https://badge.fury.io/py/comanage_nacha)
+
+A simple NACHA parser/builder/verification tool
+
+```bash
+$ python setup.py test
+```
+
+For examples of usage, currently see the tests. Documentation forthcoming
+
+You can run tests in multiple versions of python using tox
+
