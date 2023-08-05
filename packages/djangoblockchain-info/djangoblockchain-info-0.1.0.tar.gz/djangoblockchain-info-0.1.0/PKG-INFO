@@ -1,0 +1,112 @@
+Metadata-Version: 1.1
+Name: djangoblockchain-info
+Version: 0.1.0
+Summary: django package to interact with blockchain.info api
+Home-page: https://github.com/b3h3rkz/djangoblockchain-info
+Author: Bernard Barje Parah
+Author-email: barjebernard@gmail.com
+License: MIT
+Description: =============================
+        djangoblockchain-info
+        =============================
+        
+        .. image:: https://badge.fury.io/py/djangoblockchain-info.svg
+            :target: https://badge.fury.io/py/djangoblockchain-info
+        
+        .. image:: https://travis-ci.org/b3h3rkz/djangoblockchain-info.svg?branch=master
+            :target: https://travis-ci.org/b3h3rkz/djangoblockchain-info
+        
+        .. image:: https://codecov.io/gh/b3h3rkz/djangoblockchain-info/branch/master/graph/badge.svg
+            :target: https://codecov.io/gh/b3h3rkz/djangoblockchain-info
+        
+        django package to interact with blockchain.info api
+        
+        Documentation
+        -------------
+        
+        The full documentation is at https://djangoblockchain-info.readthedocs.io.
+        
+        Quickstart
+        ----------
+        
+        Install djangoblockchain-info::
+        
+            pip install djangoblockchain-info
+        
+        Add it to your `INSTALLED_APPS`:
+        
+        .. code-block:: python
+        
+            INSTALLED_APPS = (
+                ...
+                'djangoblockchain_info.apps.DjangoblockchainInfoConfig',
+                ...
+            )
+        
+        Add djangoblockchain-info's URL patterns:
+        
+        .. code-block:: python
+        
+            from djangoblockchain_info import urls as djangoblockchain_info_urls
+        
+        
+            urlpatterns = [
+                ...
+                url(r'^', include(djangoblockchain_info_urls)),
+                ...
+            ]
+        
+        Features
+        --------
+        
+        * TODO
+        
+        Running Tests
+        -------------
+        
+        Does the code actually work?
+        
+        ::
+        
+            source <YOURVIRTUALENV>/bin/activate
+            (myenv) $ pip install tox
+            (myenv) $ tox
+        
+        Credits
+        -------
+        
+        Tools used in rendering this package:
+        
+        *  Cookiecutter_
+        *  `cookiecutter-djangopackage`_
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
+        
+        
+        
+        
+        History
+        -------
+        
+        0.1.0 (2017-02-18)
+        ++++++++++++++++++
+        
+        * First release on PyPI.
+        
+Keywords: djangoblockchain-info
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.9
+Classifier: Framework :: Django :: 1.10
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
