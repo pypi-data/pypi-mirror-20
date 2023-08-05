@@ -1,0 +1,73 @@
+<body>
+  <nav class="navbar navbar-default navbar-sherpa" role="banner">
+    <div class="container-fluid">
+      <div class="col-md-2 hidden-xs hidden-sm">
+        <a href="{{ base_url }}"><img src="{{ data_url }}images/logo_SIAF.png" class="logoSIAF" /></a>
+      </div>
+      <div class="col-md-7 col-xs-8">
+        <a href="/">
+          <div class="logoSHERPA">
+            <img src="{{ data_url }}images/logo_SHERPA_2.png" class="img-responsive"/>
+          </div>
+          <div class="textSHERPA">
+            <h1>Service H&eacute;berg&eacute; pour la R&eacute;daction de Profils d&#39;Archivage</h1>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-xs-4">
+        {{ right_header_component }}
+      </div>
+    </div>
+  </nav>
+  {% if breadcrumbs %}
+  <nav role="navigation" class="breadcrumbs_wrapper">
+    <div class="col-md-offset-2">
+      {{ breadcrumbs }}
+    </div>
+  </nav>
+  {% endif %}
+  <div id="{{page_id}}" class="container-fluid" role="main">
+    <aside id="aside-main-left" class="col-md-2 cwjs-aside">
+      {{ left_boxes }}
+      <div class="panel panel-default contextFreeBox facet_filterbox" id="facet_filterbox">
+        <div class="panel-heading">
+          <div class="panel-title">navigation</div>
+        </div>
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            {% for page in side_box.goTo_links %}
+            <li class="facetvalue"><a href='{{ page.url }}'> {{ page.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div class="col-md-10 page-content" id="pageContent">
+      {{ application_message }}
+      {{ contextual_components }}
+      {{ page_content }}
+    </div>
+  </div>
+  <div class="container-fluid">
+    <footer role="contentinfo" id="pagefooter">
+      <section class="links">
+        <div id="sherpa-resources">
+        <h3>Ressources</h3>
+        {% for resource in footer.resources %}
+          <a href='{{ resource.url }}'> {{ resource.label }}</a>
+        {% endfor %}
+        </div>
+        <div id="sherpa-navigation">
+        <h3>Navigation</h3>
+        {% for page in footer.navigation_Link %}
+          <a href='{{ page.url }}'> {{ page.label }}</a>
+        {% endfor %}
+        </div>
+      </section>
+      <div id="copyright">
+        <span>copyright</span> |
+        <span><a href="">contact</a></span>
+      </div>
+    </footer>
+  </div>
+</body>
