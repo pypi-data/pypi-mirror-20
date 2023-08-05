@@ -1,0 +1,98 @@
+Metadata-Version: 1.1
+Name: genome_update
+Version: 0.1.6.6
+Summary: A script for updating a local directory with genomes, from NCBI assembly files
+Home-page: https://github.com/Emisam/genome_update.git
+Author: Emil Samuelsson
+Author-email: Emil@Samuelsson.pp.se
+License: MIT
+Description: # genome_update
+        
+        genome_update is a package that downloads genomes from NCBI and saves information about them in a yaml file.
+        It can also use a local yaml file to update and download new genomes.
+        
+        ## Getting Started
+        
+        These instructions will provide information how to install and use the software.
+        
+        ### Prerequisites
+        
+        Python 3.5
+        Pandas
+        PyYaml
+        
+        
+        ### Installing
+        
+        To install Genome_update you can either download source code directly from github and build it your self, an easier alternative is to use pip.
+        
+        Installing by pip:
+        
+        ```
+        pip install genome_update
+        ```
+        Pip will also install all prerequisities. It is also recommended to update the prerequisities.
+        
+        Installing genome_update and upgrading prerequisities: 
+        
+        ```
+        pip install genome_update --upgrade
+        ```
+        
+        ### Usage
+        
+        Simply download all genomes from a specified genus:
+        ```
+        genome_update -g <Genus>
+        ```
+        
+        Download all genomes from a specific genus, but much faster:
+        ```
+        genome_update -g <Genus> -p <threads>
+        ```
+        
+        Download all genomes from a specific genus, but much faster, to a specific directory:
+        ```
+        genome_update -g <Genus> -p <threads> -o <directory>
+        ```
+        
+        Download all genomes from a specific species:
+        ```
+        genome_update -g <Genus> -s <species_taxid>
+        ```
+        
+        To update a local yaml file:
+        ```
+        genome_update -u -i <yamlfile>
+        ```
+        
+        To download missing genomes from a local yaml file:
+        ```
+        genome_update -d -i <yamlfile>
+        ```
+        
+        To download genomes from another domain than bacteria:
+        ```
+        genome_update -domain <domain> -g <Genus> 
+        ```
+        
+        
+        
+        ## Authors
+        
+        * **Emil Samuelsson** - *Initial work* - [Emisam](https://github.com/Emisam)
+        
+        
+        ## License
+        
+        This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+        
+        ## Acknowledgments
+        
+        * Would like to thank kblin for his amazing work with the ncbi_genome_download which provided lots of insipration when writing genome_update.
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
