@@ -1,0 +1,48 @@
+Metadata-Version: 1.1
+Name: django-belt
+Version: 1.0a1
+Summary: Simple package with some utilities for Django
+Home-page: https://github.com/marcosgabarda/django-belt
+Author: Marcos Gabarda
+Author-email: hey@marcosgabarda.com
+License: MIT License
+Description: ===========
+        Django Belt
+        ===========
+        
+        Simple package with some utilities for Django.
+        
+        Quick start
+        -----------
+        
+        **1** Install using pip::
+        
+            pip install django-belt
+        
+        **2** Add "gum" to your INSTALLED_APPS settings like this::
+        
+            INSTALLED_APPS += ('belt',)
+        
+        
+        
+        
+        
+        History
+        -------
+        
+        1.0.0 (2017-2-20)
+        +++++++++++++++++
+        
+        * First release on PyPI.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Utilities
