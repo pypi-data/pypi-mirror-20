@@ -1,0 +1,56 @@
+Metadata-Version: 1.1
+Name: evrm
+Version: 16
+Summary: GEEN MEDICIJN MAAR GIF !!
+Home-page: https://bitbucket.org/thatebart/evrm
+Author: Bart Thate
+Author-email: bthate@dds.nl
+License: MIT
+Description: 
+        
+        “After 17 to 27 months of treatment, both haloperidol- and olanzapine-treated monkeys had an equivalent and highly significant 8% to 11% decrease in fresh brain weight and volume when compared with the sham group.”
+        
+        CONCLUSIE
+        
+        | Omdat men het een medicijn noemt en niet een gif komt de patient in levensbedreigende omstandigheden terecht.
+        | 5% per jaar hoogst significant hersenweefselverlies zou toch duiden op schadelijkheid ? Dodelijkheid !
+        | Deze wetten kunnen niet en de BOPZ ook niet, het is niet een medicijn maar gif !!
+        | Voor de GGZ patient is aangifte doen niet mogelijk.
+        
+        LOGGEN
+        
+        | log <txt>
+        | log <txt> +5
+        | log <txt> -2
+        
+        Het find command om log terug te zoeken:
+        
+        | find log
+        | find log=wakker
+        | find email From=om.nl From Subject Date start=2013-01-01 end=2013-02-01
+        
+        Om over een periode te kunnen zoeken:
+        
+        | today log
+        | week log
+        | week log=wiet
+        | week log=wakker
+        
+        CONTACT
+        
+        | Bart Thate
+        | botfather on #dunkbots irc.freenode.net
+        | bthate@dds.nl, thatebart@gmail.com
+        
+        
+        | MADS is sourcecode released onder een MIT compatible license.
+        | MADS is een event logger.
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Topic :: Utilities
