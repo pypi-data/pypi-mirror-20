@@ -1,0 +1,4 @@
+include README.rst
+include requirements.txt
+recursive-include docs Makefile *.rst *.py *.bat
+recursive-include django_jsoneditor *.py *.json *.txt
