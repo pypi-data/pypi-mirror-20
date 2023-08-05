@@ -1,0 +1,37 @@
+Metadata-Version: 1.1
+Name: expvar
+Version: 0.1.0
+Summary: Store and retrieve TOTP secrets/tokens.
+Home-page: https://github.com/gmjosack/expvar
+Author: Gary M. Josack
+Author-email: gary@byoteki.com
+License: MIT
+Download-URL: https://github.com/gmjosack/expvar/archive/master.tar.gz
+Description: expvar
+        ======
+        
+        Description
+        ~~~~~~~~~~~
+        
+        Library for storing and exposing various metrics
+        
+        Installation
+        ~~~~~~~~~~~~
+        
+        ::
+        
+            pip install expvar
+        
+        Usage
+        ~~~~~
+        
+        In the ``expvar.stats`` package there is a Stats class that can be
+        instantiated as well as a global ``stats`` object that has already been
+        instantiated. For most use cases the global stats object will be
+        sufficient within an application.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
