@@ -1,0 +1,60 @@
+Metadata-Version: 2.0
+Name: krlio
+Version: 0.0.1
+Summary: The official python SDK for krl.io
+Home-page: https://github.com/dorthu/krlio-python
+Author: dorthu
+Author-email: dorthu2@gmail.com
+License: BSD 3-Clause License
+Keywords: krlio krl shortlink short link
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: beautifulsoup4
+Requires-Dist: enum34
+Requires-Dist: future
+Requires-Dist: requests
+
+krl.io python
+=============
+
+The *official* python library for `krl.io`_
+
+Installation
+------------
+::
+
+    pip install krlio
+
+Building from Source
+--------------------
+
+To build and install this package:
+
+- Clone us `on github`_
+- ``./setup.py install``
+
+Usage
+-----
+::
+
+    import krlio
+
+    url = krlio.get_link(shortcode)
+
+    shortlink = krlio.make_anon_link(url)
+
+.. _krl.io: http://krl.io
+.. _on github: https://github.com/dorthu/krlio-python
+
+
