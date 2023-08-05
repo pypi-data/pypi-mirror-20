@@ -1,0 +1,19 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -U setuptools
+script: true
+after_success: python setup.py sdist bdist_wheel
+deploy:
+  provider: releases
+  api_key:
+    secure: C04KBakkxp8BC84PNjJScHpn47WnW1XZcyKhI/0nZgXke4QBvLlAf/W/qe4LscFErZY53asWHZ58tBpQyCuaQrt6v2SfsEFNclUudeq+Ek6iFtbpu0iyIGHPMIXJysX6wrT5azHihWYV1McTJodAFCeeERRZwh8MxIpI7j5oMR//X9C0PMgvuE29D8DGJ+62U6+dqeURwjGIaLBtmryIQ6Y3UgNzBi5Q6kLL2dxvgeDsl0pjfBf44G6q3GfgwvmpI704GUndkp4VuZGN9infaSqKnY6ITdz5IfED0v4XmWjJGJ+yrV7oP+/o8K1SoFhapRiWtzQZkbzSm9j9vSPZsTXgHGKeD+IbJsIA6NtB9tdalGmqmdqeviBYhmpcEmY4yVYOfBQws2bJoETlxyhTGR12htDfcsXmgZRtk7Nw5L0CvXdOztlRiYckaaOaEHfovqPu5P6/1xgdSr1GTXrtUnLMVIxX+gUUFAQjeDytlerV0znv69WXaEGnA5ZS+o0WHc9VZVUKuvtpJNdPQehQ4s2XMmwbklQhAXpfYU2BrcOwrIWvGsKJyVJ7Z6A0x4t3x9wJGGl90HuW8P3mE70XBSVBBTk1nEUqIkeoQo+xavXZWOc9hshfQG5c+8+41gAoqw6ZoMhV04lqFsywzhW+Dpq61JfsylCOBvjK4g16gLM=
+  skip_cleanup: true
+  file_glob: true
+  file:
+  - "dist/oem-format-json-*"
+  - "dist/oem_format_json-*"
+  on:
+    repo: OpenEntityMap/oem-format-json
+    tags: true
