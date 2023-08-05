@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>WordFish Dataset Explorer</title>
+        <script type="text/javascript">
+	    document.write('<style type="text/css">.menu-tree-preloader { display:block; } .menu-tree { display:none; }</style>');
+        </script>
+        <link href="{{ url_for('static', filename='css/dataset_explorer.css') }}" rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    </head>
+<body>
+
+<h1>Collection Explorer:</h1>
+<h3>{{ collection_name }}</h3>
+<div class="menu-tree-container">
+<div class="menu-tree-preloader"><img src="http://preloaders.net/preloaders/382/Spin%20and%20pulsate.gif"></div>
+<div class="menu-tree">
+<ul>
+    {% for entity in entities %}
+        {% set entityid = entity["entity"]["id"].split('/') %}
+        <li>{{ entityid[-1] }}  
+            {% if "images" in entity["entity"] %}
+            <ul>
+                {% for image in entity["entity"]["images"] %}
+                    {% set imageid = image["original"].split('/') %}
+                <li><a href="{{ image["original"] }}">{{ imageid[-1] }}</a></li>
+                {% if 'metadata' in image %}
+                    {% set metaid = image["metadata"].split('/') %}
+                <li><a href="{{ image["metadata"] }}">{{ metaid[-1] }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% if metadata %}
+<li><a href="{{ metadata}}">metadata</a></li>
+{% endif %}
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{{ url_for('static', filename='js/dataset_explorer.js') }}"></script>
+</body>
+</html>
