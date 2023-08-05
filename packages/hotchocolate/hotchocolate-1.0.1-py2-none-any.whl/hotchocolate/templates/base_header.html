@@ -1,0 +1,17 @@
+<h1 id="brand"><a href="/">{{ site.name }}</a></h1>
+
+{% if site.subtitle %}
+<h2 id="subtitle">{{ site.subtitle }}</h2>
+{% endif %}
+
+{% if site.header_links %}
+<div id="aside_links">
+{% for link in site.header_links %}
+  <a href="{{ link }}">{{ site.header_links[link] }}</a>
+  {# TODO: Can I get VoiceOver to actually ignore this bullet!?!?! #}
+  {% if loop.index != site.header_links|count %}
+    <span aria-hidden="true">·</span>
+  {% endif %}
+{% endfor %}
+</div>
+{% endif %}
