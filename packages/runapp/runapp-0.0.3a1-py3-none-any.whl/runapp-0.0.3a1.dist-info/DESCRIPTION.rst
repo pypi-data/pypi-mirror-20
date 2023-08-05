@@ -1,0 +1,54 @@
+in yaml format
+
+Home-page: https://github.com/Kostanos/run
+Author: Kostya Kostyushko
+Author-email: kostanos@gmail.com
+License: MIT
+Description: runapp
+        ------
+        
+        Allows to build and/or run your application using simple config file
+        in yaml format
+        
+        Commonly used in deploys, dockers etc.
+        
+        
+        using
+        -----
+        run:
+        
+        .. code-block:: bash
+        
+            runapp [<atributes>]
+        
+        inside the folder with **run.yaml** configuration file
+        
+        see also **runapp --help**
+        
+        run.yaml example:
+        #################
+        
+        .. code-block:: yaml
+        
+            build:
+              commands:
+                - pip install -r ./configs/requirements.${ENV}.txt
+            run:
+              maxRepeats: 5
+              repeatDelay: 1
+              commands:
+                - gunicorn manage:app -c ./configs/gunicorn.${ENV}.py
+        
+Keywords: simple run build application configuration
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
