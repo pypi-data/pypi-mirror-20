@@ -1,0 +1,10 @@
+cloudpickle
+
+[:python_version <= "3.3"]
+pathlib2
+
+[:sys.platform == "darwin"]
+macfsevents
+
+[:sys.platform == "linux"]
+pyinotify
