@@ -1,0 +1,19 @@
+<HTML>
+    <head>
+    </head>
+    <body>
+        <form method="POST" action="{{ url_for('comment', topic=topic) }}">
+            <textarea id="text" name="text">
+            </textarea>
+            <input type="submit" />
+            {% for comment in comments %}
+                <div>
+                    <h4>Publié le {{ comment.date }}</h4>
+                    <p>
+                    {{ comment.text }}
+                    </p>
+                </div>
+            {% endfor %}
+        </form>
+    </body>
+</HTML>
