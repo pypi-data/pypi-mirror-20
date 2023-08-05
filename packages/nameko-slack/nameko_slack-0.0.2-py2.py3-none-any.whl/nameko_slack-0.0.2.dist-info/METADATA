@@ -1,0 +1,30 @@
+Metadata-Version: 2.0
+Name: nameko-slack
+Version: 0.0.2
+Summary: Nameko extension for interaction with Slack APIs
+Home-page: http://github.com/iky/nameko-slack
+Author: Ondrej Kohout
+Author-email: ondrej.kohout@gmail.com
+License: Apache License, Version 2.0
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Requires-Dist: nameko (>=2.4.4)
+Requires-Dist: slackclient (>=1.0.4)
+Provides-Extra: dev
+Requires-Dist: coverage (==4.2); extra == 'dev'
+Requires-Dist: flake8 (==3.2.1); extra == 'dev'
+Requires-Dist: pylint (==1.6.4); extra == 'dev'
+Requires-Dist: pytest (==3.0.5); extra == 'dev'
+
+UNKNOWN
+
+
