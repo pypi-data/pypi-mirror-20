@@ -1,0 +1,52 @@
+<ChooseDirectoryScreen>
+    name: "choose_directory_screen"
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+
+        StackLayout:
+            size_hint: 1, None
+            height: sum([i.height for i in self.children])
+
+            HorizontalContainer:
+                WrappedLabel:
+                    text: "Where do you want to save your file?"
+                    halign: "center"
+
+            HorizontalContainer:
+                height: sum([i.height for i in self.children])
+                on_size: self.height = sum([i.height for i in self.children])
+
+                WrappedLabel:
+                    id: save_directory_label
+                    text: app.save_directory
+                    halign: "center"
+                    pos: (0, 0)
+                    font_size: sp(18)
+                    padding: 5, 5
+
+            Spacer:
+            Spacer:
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "center"
+                size_hint: 1, None
+                height: choose_directory_button_container.height
+
+                BoxLayout:
+                    id: choose_directory_button_container
+                    orientation: "horizontal"
+                    height: change_directory_button.height
+                    size_hint: None, None
+                    width: change_directory_button.width + change_directory_continue_button.width + self.spacing
+                    spacing: 2
+
+                    BlueBlackButton:
+                        id: change_directory_button
+                        text: "Change directory"
+                        on_release: root.choose_directory(btn=self)
+                    BlueBlackButton:
+                        id: change_directory_continue_button
+                        text: "Continue"
+                        on_release: root.click_continue()
