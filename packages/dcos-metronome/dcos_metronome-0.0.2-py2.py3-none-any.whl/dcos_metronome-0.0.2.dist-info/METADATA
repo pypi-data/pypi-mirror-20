@@ -1,0 +1,26 @@
+Metadata-Version: 2.0
+Name: dcos-metronome
+Version: 0.0.2
+Summary: Metronome Client Library
+Home-page: https://github.com/tsukaby/dcos-metronome-python
+Author: Shuya Tsukamoto
+Author-email: shuya.tsukamoto@gmail.com
+License: MIT
+Platform: Posix; MacOS X; Windows
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: protobuf (>=3.2.0)
+Requires-Dist: requests (>=2.0.0)
+
+Python interface to the DC/OS Metronome REST API.
+
+
