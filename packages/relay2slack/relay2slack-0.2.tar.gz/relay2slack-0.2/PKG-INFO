@@ -1,0 +1,40 @@
+Metadata-Version: 1.1
+Name: relay2slack
+Version: 0.2
+Summary: relay2slack is a tool for capturing and forwarding incoming Slack webhook events
+Home-page: http://github.com/blaketmiller/relay2slack
+Author: Blake Miller
+Author-email: blakethomasmiller@gmail.com
+License: GNU GPL v2.0
+Description: relay2slack
+        ======
+        
+        relay2slack is a tool for capturing and forwarding incoming Slack webhook events.
+        
+        
+        Installation
+        ------------
+        To install relay2slack, simply:
+        
+        .. code-block:: bash
+        
+            $ pip install relay2slack
+        
+        To run relay2slack in the foreground:
+        
+        .. code-block:: bash
+        
+            $ relay2slack
+        
+        If you would like to daemonize relay2slack, refer to `docs/ <docs/>`_ for supported methods.
+        
+Keywords: slack webhook kapacitor proxy
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
