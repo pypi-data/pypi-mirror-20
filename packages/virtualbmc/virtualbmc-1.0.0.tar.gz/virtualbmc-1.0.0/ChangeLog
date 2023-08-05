@@ -1,0 +1,59 @@
+CHANGES
+=======
+
+1.0.0
+-----
+
+* Fix documentation title and README
+* Updated from global requirements
+* Document some usage with examples
+* Fix typo in help message
+* Delete support py33 and py34
+* Fix help string about adding a VBMC using IPv4
+* Adds power diag support to vbmc
+* Adds power_soft support to vbmc
+* Return proper errors on BMC action failures
+* Add support for a "global" configuration file
+* Fix Python3 test errors
+* Show real error when it fails to create a new VBMC
+* Show team and repo badges on README
+* Updated from global requirements
+* Updated from global requirements
+* Bump pyghmi version to 1.0.9
+
+0.1.0
+-----
+
+* Use upper-constraints for all tox targets
+* Remove unused releasenote setup
+* Set IPMI session timeout for the virtual BMCs
+* Use constraints for all the things
+* Bump pyghmi version to 1.0.3
+* Add unittests for the config.py module
+* Add unittests for the vbmc.py module
+* Raise an exception for domains already registered
+* Add "cover" to .gitignore
+* Add unittests for the manager.py module
+* "vbmc list" to sort the result by domain name
+* Add unittests for the cmd/vbmc.py module
+* Add unittests for the utils.py module
+* Restructure the repository according to OpenStack
+* Mask passwords before displaying them
+* Bump the version of the project to 0.0.4
+* Add support for SASL authentication with libvirt
+* Add support for parsing multiple values
+* Add --version parameter
+* Clarify the 'address' parameter
+* Bump the version of the project to 0.0.3
+* Fix "show" command
+* Bump the version of the project to 0.0.2
+* Add config.py module
+* Create utils.py module
+* Split VirtualBMCManager to its own file
+* Add better logs
+* Make the XML handling more resilient to failures
+* Check VM state prior to power it on/off
+* Add the "vbmc" utility
+* Add a SIGINT handler
+* Initial Commit with code
+* Initial commit
