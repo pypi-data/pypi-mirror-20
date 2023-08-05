@@ -1,0 +1,52 @@
+Metadata-Version: 2.0
+Name: movescount-sync
+Version: 1.0
+Summary: Fetch moves from movescount.com
+Home-page: https://github.com/brutasse/movescount-sync
+Author: Bruno Renié
+Author-email: UNKNOWN
+License: BSD
+Platform: any
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: requests
+
+Movescount-sync
+===============
+
+A CLI tool for batch-exporting GPS tracks from movescount.com.
+
+Supported formats:
+
+* GPX
+* KML
+* FIT
+* TCX
+* XLSX
+
+Installation
+------------
+
+::
+
+    pip install movescount-sync
+
+Usage
+-----
+
+::
+
+    movescount-sync
+
+Configuration is created during first run and persisted in
+``~/.config/movescount-sync``.
+
+Arguments:
+
+* ``--configure`` forces configuration wizard.
+* ``--recursive`` fetches entire event stream from movescount.com instead of
+  just the most recent events.
+* ``--debug`` shows HTTP debugging logs.
+
+
