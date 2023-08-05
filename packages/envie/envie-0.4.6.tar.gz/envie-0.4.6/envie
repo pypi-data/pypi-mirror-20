@@ -1,0 +1,552 @@
+#!/bin/bash
+#
+# VirtualEnv shell helpers: easier create, remove, list/find and activate.
+# Written by Radomir Stevanovic, Feb 2015 -- Feb 2017.
+# Source/docs: ``https://github.com/randomir/envie``.
+# Install via pip/PyPI: ``pip install envie``.
+
+
+# the defaults
+_ENVIE_SOURCE=$(readlink -f "${BASH_SOURCE[0]}")
+_ENVIE_DEFAULT_ENVNAME=env
+_ENVIE_DEFAULT_PYTHON=python
+_ENVIE_CONFIG_DIR="$HOME/.config/envie"
+_ENVIE_CONFIG_FILE="$_ENVIE_CONFIG_DIR/envierc"
+_ENVIE_USE_DB="0"
+_ENVIE_DB_PATH="$_ENVIE_CONFIG_DIR/locate.db"
+_ENVIE_INDEX_ROOT="$HOME"
+_ENVIE_CRON_INDEX="0"
+_ENVIE_CRON_PERIOD_MIN="15"
+_ENVIE_LS_INDEX="0"
+_ENVIE_FIND_LIMIT=0.4  # abort find search if takes longer, in seconds
+_ENVIE_LOCATE_LIMIT=4  # warn if index older than, in seconds
+_ENVIE_UUID="28d0b2c7bc5245d5b1278015abc3f0cd"
+
+# overwrite with values from config file
+[ -r "$_ENVIE_CONFIG_FILE" ] && source "$_ENVIE_CONFIG_FILE"
+
+# TODO: basic config options validity check (data types, ranges, etc.)
+
+function _envie_dump_config() {
+    cat <<-END
+		_ENVIE_DEFAULT_ENVNAME="$_ENVIE_DEFAULT_ENVNAME"
+		_ENVIE_DEFAULT_PYTHON="$_ENVIE_DEFAULT_PYTHON"
+		_ENVIE_CONFIG_DIR="$_ENVIE_CONFIG_DIR"
+		_ENVIE_USE_DB="$_ENVIE_USE_DB"
+		_ENVIE_DB_PATH="$_ENVIE_DB_PATH"
+		_ENVIE_INDEX_ROOT="$_ENVIE_INDEX_ROOT"
+		_ENVIE_CRON_INDEX="$_ENVIE_CRON_INDEX"
+		_ENVIE_CRON_PERIOD_MIN="$_ENVIE_CRON_PERIOD_MIN"
+		_ENVIE_LS_INDEX="$_ENVIE_LS_INDEX"
+		_ENVIE_FIND_LIMIT="$_ENVIE_FIND_LIMIT"
+		_ENVIE_LOCATE_LIMIT="$_ENVIE_LOCATE_LIMIT"
+		_ENVIE_UUID="$_ENVIE_UUID"
+	END
+}
+
+function _errmsg() {
+    echo "$@" >&2
+}
+
+# Creates a new environment in <path/to/env>, based on <python_exec>.
+# Usage: mkenv [<path/to/env>] [<python_exec>]
+function mkenv() {
+    local envpath="${1:-$_ENVIE_DEFAULT_ENVNAME}" output
+    if [ -d "$envpath" ]; then
+        _errmsg "Directory '$envpath' already exists."
+        return 1
+    fi
+    echo "Creating python environment in '$envpath'."
+
+    local pyexe="${2:-$_ENVIE_DEFAULT_PYTHON}" pypath
+    if ! pypath=$(which "$pyexe"); then
+        _errmsg "Python executable '$pyexe' not found, failing-back to: '$_ENVIE_DEFAULT_PYTHON'."
+        pypath=$(which "$_ENVIE_DEFAULT_PYTHON")
+    fi
+    local pyver=$("$pypath" --version 2>&1)
+    if [[ ! $pyver =~ Python ]]; then
+        _errmsg "Unrecognized Python version/executable: '$pypath'."
+        return 1
+    fi
+    echo "Using $pyver ($pypath)."
+
+    mkdir -p "$envpath"
+    cd "$envpath"
+    output=$(virtualenv --no-site-packages -p "$pypath" -v . 2>&1)
+    if [ $? -ne 0 ]; then
+        _errmsg "$output"
+    else
+        _activate .
+    fi
+    cd - >/dev/null
+}
+
+# Destroys the active environment.
+# Usage (while env active): rmenv
+function rmenv() {
+    local envpath="$VIRTUAL_ENV"
+    if [ ! "$envpath" ]; then
+        _errmsg "Active virtual environment not detected."
+        return 1
+    fi
+    deactivate
+    if _is_virtualenv "$envpath"; then
+        rm -rf "$envpath"
+    else
+        _errmsg "Invalid VirtualEnv path in VIRTUAL_ENV: '$envpath'."
+        return 1
+    fi
+}
+
+function _deactivate() {
+    [ "$VIRTUAL_ENV" ] && deactivate
+}
+
+function _activate() {
+    _deactivate
+    source "$1/bin/activate"
+}
+
+function _is_virtualenv() {
+    [ -e "$1/bin/activate_this.py" ] && [ -x "$1/bin/python" ]
+}
+
+# Lists all environments below the <start_dir>.
+# Usage: lsenv [<start_dir> [<avoid_subdir>]]
+function _lsenv_find() {
+    local dir="${1:-.}" avoid="${2:-}"
+    find "$dir" -path "$avoid" -prune -o \
+        -name .git -o -name .hg -o -name .svn -prune -o -path '*/bin/activate_this.py' \
+        -exec dirname '{}' \; 2>/dev/null | xargs -d'\n' -n1 -r dirname
+}
+
+# `lsenv` via `locate`
+# Compatible with: lsenv [<start_dir> [<avoid_subdir>]]
+function _lsenv_locate() {
+    local dir="${1:-.}" avoid="${2:-}"
+    local absdir=$(readlink -e "$dir")
+    [ "$absdir" = / ] && dir=/
+    if (( _ENVIE_LS_INDEX && $(_envie_db_age) > _ENVIE_LOCATE_LIMIT )); then
+        __envie_updatedb
+    fi
+    locate -d "$_ENVIE_DB_PATH" --existing "$absdir"'*/bin/activate_this.py' \
+        | sed -e 's#/bin/activate_this\.py$##' -e "s#^$absdir#$dir#"
+}
+
+# Run `lsenv` via both `find` and `locate` in parallel and:
+# - wait `$_ENVIE_FIND_LIMIT` seconds for `find` to finish
+# - if it finishes on time, take those results, as they are the most current and accurate
+# - if find takes longer, kill it and wait for `locate` results
+function _lsenv_locate_vs_find_race() {
+    set +m
+    local p_pid_find=$(_mkftemp) p_pid_locate=$(_mkftemp) p_pid_timer=$(_mkftemp)
+    local p_ret_find=$(_mkftemp) p_ret_locate=$(_mkftemp)
+    { __find_and_return "$@" & echo $! >"$p_pid_find"; } 2>/dev/null
+    { __locate_and_return "$@" & echo $! >"$p_pid_locate"; } 2>/dev/null
+    { __find_fast_bailout & echo $! >"$p_pid_timer"; } 2>/dev/null
+    wait
+    if [ -e "$p_ret_find" ]; then
+        cat "$p_ret_find"
+    elif [ -e "$p_ret_locate" ]; then
+        cat "$p_ret_locate"
+        local db_age=$(_envie_db_age)
+        if (( db_age > _ENVIE_LOCATE_LIMIT )); then
+            _errmsg "NOTE: results are based on a db from $(__humanized_age "$db_age") ago, and may not include all current virtualenvs."
+            _errmsg "Use 'lsenv -f' to force manual search, or run 'envie update' to update the database."
+        fi
+    fi
+    rm -f "$p_pid_find" "$p_pid_locate" "$p_pid_timer" "$p_ret_find" "$p_ret_locate"
+    set -m
+}
+function __find_and_return() {
+    _lsenv_find "$@" >"$p_ret_find"
+    __kill $(<"$p_pid_locate") $(<"$p_pid_timer")
+    rm -f "$p_ret_locate"
+}
+function __locate_and_return() {
+    _lsenv_locate "$@" >"$p_ret_locate"
+}
+function __find_fast_bailout() {
+    sleep "$_ENVIE_FIND_LIMIT"
+    __kill $(<"$p_pid_find")
+    rm -f "$p_ret_find"
+}
+function __kill() {
+    while [ "$#" -gt 0 ]; do
+        _kill_proc_tree "$1" &>/dev/null
+        shift
+    done
+}
+
+# Prints all descendant of a process `ppid`, level-wise, bottom-up.
+# Usage: _get_proc_descendants ppid
+function _get_proc_descendants() {
+    local pid ppid="$1"
+    local children=$(ps hopid --ppid "$ppid")
+    for pid in $children; do
+        echo "$pid"
+        _get_proc_descendants "$pid"
+    done
+}
+
+# Kills a complete process tree rooted at `pid`.
+# Usage: _kill_proc_tree pid
+function _kill_proc_tree() {
+    local pids=("$1" $(_get_proc_descendants "$1"))
+    kill -TERM "${pids[@]}"
+}
+
+
+# Make fastest temporary file: like mktemp, but tries
+# to create file in memory (/dev/shm) first.
+function _mkftemp() {
+    [ -d /dev/shm ] && mktemp --tmpdir=/dev/shm || mktemp
+}
+
+function lsenv() {
+    if [[ "$1" == "-f" ]]; then
+        shift
+        _lsenv_find "$@"
+    elif [[ "$1" == "-l" ]]; then
+        shift
+        _lsenv_locate "$@"
+    elif (( ! _ENVIE_USE_DB )); then
+        _lsenv_find "$@"
+    else
+        _lsenv_locate_vs_find_race "$@"
+    fi
+}
+
+# Finds the closest env by first looking down and then dir-by-dir up the tree.
+function lsupenv() {
+    local list len=0 dir=. prevdir quiet=0
+
+    if [[ "$1" == "-q" ]]; then
+        quiet=1
+        shift
+    fi
+
+    while [ "$len" -eq 0 ] && [ "$(readlink -e "$prevdir")" != / ]; do
+        if ((quiet)); then
+            list=$(lsenv "$dir" "$prevdir" 2>/dev/null)
+        else
+            list=$(lsenv "$dir" "$prevdir")
+        fi
+        [ "$list" ] && len=$(wc -l <<<"$list") || len=0
+        prevdir="$dir"
+        dir="$dir/.."
+    done
+    echo "$list"
+}
+
+function chenv() {
+    local IFS envlist env len=0 quiet=0
+
+    if [[ "$1" == "-q" ]]; then
+        quiet=1
+        shift
+    fi
+
+    envlist=$(lsupenv -q)
+    [ "$envlist" ] && len=$(wc -l <<<"$envlist")
+    if [ "$len" -eq 1 ]; then
+        _activate "$envlist"
+    elif [ "$len" -eq 0 ]; then
+        (( ! quiet )) && _errmsg "No environments found."
+        return 1
+    else
+        (( quiet )) && return 1
+        IFS=$'\n'
+        select env in $envlist; do
+            if [ "$env" ]; then
+                _activate "$env"
+                break
+            fi
+        done
+    fi
+}
+
+# cd to active env root, or fail if no env active
+function cdenv() {
+    if [ "$VIRTUAL_ENV" ]; then
+        cd "$VIRTUAL_ENV"
+    else
+        _errmsg "Virtual environment not active. Use 'chenv' to activate."
+        return 1
+    fi
+}
+
+
+# faster envie, using locate
+
+function _command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+function _envie_db_exists() {
+    [ -e "$_ENVIE_DB_PATH" ]
+}
+
+function _envie_db_age() {
+    echo $(( $(date +%s) - $(date -r "$_ENVIE_DB_PATH" +%s) ))
+}
+
+function __humanized_age() {
+    local age="$1"
+    if ((age < 60)); then
+        echo "$age second(s)"
+    elif ((age < 3600)); then
+        printf "~%.2g minute(s)\n" $(bc -l <<<"$age / 60")
+    elif ((age < 86400)); then
+        printf "~%.2g hour(s)\n" $(bc -l <<<"$age / 3600")
+    else
+        printf "~%.2g day(s)\n" $(bc -l <<<"$age / 86400")
+    fi
+}
+
+
+function _envie_locate_exists() {
+    if ! _command_exists locate || ! _command_exists updatedb; then
+        _errmsg "locate/updatedb not installed. Failing-back to find."
+        return 1
+    fi
+}
+
+function __envie_initdb() {
+    _envie_locate_exists || return 1
+    echo -n "Indexing environments in '$_ENVIE_INDEX_ROOT'..."
+    __envie_updatedb
+    echo "Done."
+}
+
+function __envie_updatedb() {
+    updatedb -l 0 -o "$_ENVIE_DB_PATH" -U "$_ENVIE_INDEX_ROOT" \
+        --prune-bind-mounts 0 \
+        --prunenames ".git .bzr .hg .svn" \
+        --prunepaths "/var/spool /media /home/.ecryptfs /var/lib/schroot" \
+        --prunefs "NFS nfs nfs4 rpc_pipefs afs binfmt_misc proc smbfs autofs \
+                   iso9660 ncpfs coda devpts ftpfs devfs mfs shfs sysfs cifs \
+                   lustre tmpfs usbfs udf fuse.glusterfs fuse.sshfs curlftpfs \
+                   ecryptfs fusesmb devtmpfs"
+}
+
+# Add to .bashrc
+function __envie_register() {
+    mkdir -p "$_ENVIE_CONFIG_DIR"
+    
+    local bashrc=~/.bashrc
+    [ ! -w "$bashrc" ] && _errmsg "$bashrc not writeable." && return 1
+
+    [ -z "$_ENVIE_SOURCE" ] && _errmsg "Envie source script not found." && return 2
+
+    if grep "$_ENVIE_UUID" "$bashrc" &>/dev/null; then
+        _errmsg "Envie already registered in $bashrc."
+        return
+    fi
+
+    cat >>"$bashrc" <<-END
+		# Load 'envie' (Python VirtualEnv helpers)  #$_ENVIE_UUID
+		[ -f "$_ENVIE_SOURCE" ] && source "$_ENVIE_SOURCE"  #$_ENVIE_UUID
+	END
+    echo "Envie added to $bashrc."
+}
+
+# Remove from .bashrc
+function __envie_unregister() {
+    local bashrc=~/.bashrc
+    [ ! -w "$bashrc" ] && _errmsg "$bashrc not writeable." && return 1
+
+    if ! cp -a "$bashrc" "$_ENVIE_CONFIG_DIR/.bashrc.backup"; then
+        _errmsg "Failed to backup $bashrc before modifying."
+        return 1
+    fi
+    if sed -e "/$_ENVIE_UUID/d" "$bashrc" -i; then
+        echo "Envie removed from $bashrc."
+    fi
+}
+
+function __envie_configure() {
+    local ans
+
+    read -p "Use locate/updatedb for faster search [Y/n]? " ans
+    case "$ans" in
+        N|n) _ENVIE_USE_DB=0;;
+        *)
+            if _envie_locate_exists; then
+                _ENVIE_USE_DB=1
+            else
+                _ENVIE_USE_DB=0
+            fi;;
+    esac
+
+    if (( _ENVIE_USE_DB )); then
+        read -p "Common ancestor dir of all environments to be indexed [$_ENVIE_INDEX_ROOT]: " ans
+        if [ "$ans" ]; then
+            if [ -d "$ans" ]; then
+                _ENVIE_INDEX_ROOT=$(readlink -f "$ans")
+            else
+                echo "Invalid dir $ans. Skipping."
+            fi
+        fi
+
+        read -p "Update index periodically (every ${_ENVIE_CRON_PERIOD_MIN}min) [Y/n]? " ans
+        case "$ans" in
+            N|n) _ENVIE_CRON_INDEX=0;;
+            *) _ENVIE_CRON_INDEX=1;;
+        esac
+
+        read -p "Refresh stale index before each search [Y/n]? " ans
+        case "$ans" in
+            N|n) _ENVIE_LS_INDEX=0;;
+            *) _ENVIE_LS_INDEX=1;;
+        esac
+    else
+        _ENVIE_CRON_INDEX=0
+        _ENVIE_LS_INDEX=0
+    fi
+
+    # save config
+    mkdir -p "$_ENVIE_CONFIG_DIR"
+    _envie_dump_config >"$_ENVIE_CONFIG_FILE" && echo "Config file written."
+
+    # add to cron
+    _envie_update_crontab && echo "Crontab updated."
+
+    # db (re-)index
+    (( _ENVIE_USE_DB )) && __envie_initdb
+}
+
+function _envie_update_crontab() {
+    if (( _ENVIE_USE_DB && _ENVIE_CRON_INDEX )); then
+        # add
+        (
+            crontab -l | grep -v "$_ENVIE_UUID"
+            echo "*/${_ENVIE_CRON_PERIOD_MIN} * * * * $_ENVIE_SOURCE update  #$_ENVIE_UUID"
+        ) 2>/dev/null | crontab -
+    else
+        # remove
+        crontab -l | grep -v "$_ENVIE_UUID" | crontab -
+    fi
+}
+
+# main -- handle direct call: ``envie <cmd> <args> | <script>``
+# AND act as an chenv alias
+function __envie_main() {
+    local cmd script;
+
+    if [ $# -gt 0 ]; then
+        if [ -f "$1" ]; then
+            cmd=python
+        else
+            cmd="$1"
+            shift
+        fi
+    fi
+
+    case "$cmd" in
+        reg|register)
+            __envie_register;;
+        unreg|unregister)
+            __envie_unregister;;
+        init|initdb)
+            __envie_initdb;;
+        update|updatedb)
+            __envie_updatedb;;
+        config|configure)
+            __envie_configure;;
+        exec|run)
+            # execute CMD
+            script="$1"
+            shift
+            if [[ $(type -t "$script") =~ alias|function|builtin|file ]]; then
+                # move closer to script for env detection
+                if [ -f "$script" ]; then
+                    script=$(readlink -f "$script")
+                    cd "$(dirname "$script")"
+                fi
+                chenv -q
+                exec "$script" "$@"
+            else
+                _errmsg "'$script' is not a valid command. See 'envie --help'."
+                return 1
+            fi
+            ;;
+        python)
+            # run Python SCRIPT in current shell,
+            # or just run Python in interactive mode if SCRIPT missing
+            script="$1"
+            shift
+            if [ ! "$script" ]; then
+                chenv -q
+                exec python
+            fi
+            if [ ! -f "$script" ]; then
+                _errmsg "'$script' is not a file. See 'envie --help'."
+                return 1
+            fi
+            # move closer to script for env detection
+            script=$(readlink -f "$script")
+            cd "$(dirname "$script")"
+            chenv -q
+            exec python "$script" "$@"
+            ;;
+        help|--help|*)
+            __envie_usage;;
+    esac
+}
+
+function __envie_usage() {
+    cat <<-END
+		Usage:
+		    envie {python SCRIPT | exec CMD | config | register | unregister | init | update}
+		    envie SCRIPT
+		
+		Commands:
+		    python SCRIPT run Python SCRIPT in the closest environment
+		    exec CMD      execute CMD in the closest environment. CMD can be a
+		                  script file, command, builtin, alias, or a function.
+		
+		    config        interactively configure envie
+		    register      add envie to .bashrc
+		    unregister    remove envie from .bashrc
+		    init          index virtualenvs below $HOME
+		    update        update index
+		    help          this help
+		
+		The second form is a shorthand for executing python scripts in the closest 
+		virtual environment, without the need for manual env activation. It's convenient
+		for hash bangs:
+		    #!/usr/bin/env envie
+		    # Python script here will be executed in the closest virtual env
+		
+		Examples:
+		    envie python              # run interactive Python shell in the closest env
+		    envie manage.py shell     # run Django shell in the project env (auto activate)
+		    envie exec /path/to/executable    # execute an executable in the closest env
+	END
+}
+
+
+# bash/readline completions
+function __envie_complete() {
+    local word="${COMP_WORDS[COMP_CWORD]}"
+    local prev="${COMP_WORDS[COMP_CWORD-1]}"
+    local cmds="python exec config register unregister init update help"
+
+    case "$prev" in
+        exec)
+            COMPREPLY=($(compgen -A alias -A builtin -A command -A file -A function -- $word))
+            ;;
+        python)
+            COMPREPLY=($(compgen -A file -- $word))
+            ;;
+        *)
+            COMPREPLY=($(compgen -W "$cmds" -A file -- $word))
+            ;;
+    esac
+}
+
+complete -F __envie_complete envie
+
+
+[ $# -gt 0 ] && __envie_main "$@"
