@@ -1,0 +1,8 @@
+# -*- snakemake -*-
+from lts_workflows_sm_scrnaseq import WORKFLOW
+
+configfile: "config.yaml"
+configfile: "config.fmt.yaml"
+
+include: WORKFLOW
+

@@ -1,0 +1,156 @@
+# -*- snakemake -*-
+import os
+from os.path import join, basename, dirname, splitext
+import re
+import sys
+import csv
+import shutil
+from snakemake.utils import update_config, set_temporary_output, set_protected_output, R
+from snakemake.logging import logger
+
+##############################
+# Default configuration settings
+##############################
+config_default = {
+    'workflow' : {
+        'use_multimapped': False,
+        'quantification': [], # add methods; currently supports rsem and rpkmforgenes
+    },
+    'ngs.settings' : {
+        'aligner' : 'star',
+        'db' : {
+            'transcripts' : [],
+        },
+        'rnaseq': {
+            ## FIXME: not needed if this workflow is only for genome indices
+            'ref_is_transcriptome': False,
+        },
+    }
+}
+
+# Method names
+RSEM = 'rsem'
+RPKMFORGENES = 'rpkmforgenes'
+
+update_config(config_default, config)
+config = config_default
+
+
+ref = config['ngs.settings']['db']['ref']
+# Application configuration; many of these depend on values in
+# previous section which is why we need to separate these inits
+
+config_default = {
+    'ngs.settings' : {
+        'annotation' : {
+            'transcript_annot_gtf' : join(dirname(splitext(config['ngs.settings']['db']['transcripts'][0])[0]), "-".join(basename(splitext(x)[0]) for x in config['ngs.settings']['db']['transcripts']) + ".gtf"),
+        },
+    },
+}
+
+update_config(config_default, config)
+config = config_default
+
+##############################
+# Include statements
+##############################
+RULES_PATH = "rules"
+include: join(RULES_PATH, 'bedtools/bedtools_bamtobed.rule')
+
+include: join(RULES_PATH, 'bamtools/bamtools_create_filter_script.rule')
+include: join(RULES_PATH, 'bamtools/bamtools_filter_script.rule')
+include: join(RULES_PATH, 'bamtools/bamtools_filter_unique.rule')
+
+include: join(RULES_PATH, 'ercc/ercc_download_metadata.rule')
+include: join(RULES_PATH, 'ercc/ercc_create_ref.rule')
+
+include: join(RULES_PATH, 'picard/picard_merge_sam.rule')
+
+include: join(RULES_PATH, 'rpkmforgenes/rpkmforgenes_from_bam.rule')
+
+include: join(RULES_PATH, 'rsem/rsem_prepare_reference.rule')
+include: join(RULES_PATH, 'rsem/rsem_calculate_expression.rule')
+
+include: join(RULES_PATH, 'rseqc/rseqc_qc.rule')
+
+include: join(RULES_PATH, 'samtools/samtools_sort.rule')
+include: join(RULES_PATH, 'samtools/samtools_sort_by_name.rule')
+include: join(RULES_PATH, 'samtools/samtools_index.rule')
+
+include: join(RULES_PATH, 'star/star_index.rule')
+include: join(RULES_PATH, 'star/star_align_log.rule')
+
+include: join(RULES_PATH, 'ucsc/ucsc_genepred_to_refFlat.rule')
+include: join(RULES_PATH, 'ucsc/ucsc_gtfToGenePred.rule')
+
+include: join(RULES_PATH, 'utils/dbutils_make_transcript_annot_gtf.rule')
+include: join(RULES_PATH, 'utils/dbutils_genbank_to_fasta.rule')
+include: join(RULES_PATH, 'utils/dbutils_fasta_to_genbank.rule')
+include: join(RULES_PATH, 'utils/gtf_to_bed12.rule')
+
+# Set rsem transcriptome quantification
+if RSEM in config['workflow']['quantification']:
+    config['ngs.settings']['rnaseq']['_transcriptome_quantification'] = not config['rsem']['index_is_transcriptome']
+
+##############################
+# Final preparation
+##############################
+if workflow._workdir is None and '-d' not in sys.argv and '--directory' not in sys.argv:
+    raise Exception("no workdir set, or set after include of 'workflow'; set workdir before include statement or via commandline!")
+if config['settings']['sampleinfo'] is None:
+    raise Exception("no sampleinfo file provided; you *must* provide a sampleinfo file in section config['settings']['sampleinfo']!")
+
+##############################
+# RSeQC
+##############################
+# Remove rules for which qc make no sense, like geneBody coverage
+if config['rseqc']['transcriptome_only']:
+    for r in ['rseqc_read_distribution', 'rseqc_geneBody_coverage', 'rseqc_junction_annotation']:
+        config['rseqc'][r] = False
+
+##############################
+# workflow targets
+##############################
+try:
+    sampleinfo = config['_sampleinfo']
+except:
+    raise
+runid_prefixes = sorted(set([config['settings']['runfmt'].format(**x) for x in sampleinfo if config['samples'] is None or x['SM'] in config['samples']]))
+sample_prefixes = sorted(set([config['settings']['samplefmt'].format(**x) for x in sampleinfo if config['samples'] is None or x['SM'] in config['samples']]))
+
+ALIGN_TARGETS = expand("{pfx}.Aligned.out.bam", pfx=runid_prefixes) +  expand("{pfx}.Log.final.out", pfx=runid_prefixes)
+RSEQC_TARGETS = expand("{pfx}.merge_rseqc/rseqc_qc.txt", pfx=sample_prefixes)
+RPKMFORGENES_TARGETS = expand("{pfx}.merge.rpkmforgenes", pfx=sample_prefixes)
+RSEM_TARGETS = expand("{pfx}.merge.tx.sortn.genes.results", pfx=sample_prefixes) + \
+               expand("{pfx}.merge.tx.sortn.isoforms.results", pfx=sample_prefixes) \
+               if RSEM in config['workflow']['quantification'] else []
+
+
+rule all:
+    """Run entire workflow"""
+    input: ALIGN_TARGETS + RSEQC_TARGETS + RPKMFORGENES_TARGETS + RSEM_TARGETS
+
+rule align:
+    """Generate the alignment targets"""
+    input: ALIGN_TARGETS
+
+rule rseqc:
+    """Generate RSeQC targets"""
+    input: RSEQC_TARGETS
+
+rule rpkmforgenes:
+    """Run rpkmforgenes"""
+    input: RPKMFORGENES_TARGETS
+
+rule rsem:
+    """Run rsem"""
+    input: RSEM_TARGETS
+
+
+##############################
+# Postamble
+##############################
+
+# Set temporary and protected outputs
+set_temporary_output(*[workflow.get_rule(x) for x in config['settings']['temporary_rules']])
+set_protected_output(*[workflow.get_rule(x) for x in config['settings']['protected_rules']])

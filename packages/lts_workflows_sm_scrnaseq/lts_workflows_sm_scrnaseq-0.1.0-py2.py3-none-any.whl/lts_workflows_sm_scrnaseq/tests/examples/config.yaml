@@ -1,0 +1,96 @@
+##################################################
+# Single cell RNA-seq analysis pipeline
+#
+# Configuration file example
+##################################################
+
+##############################
+# Samples
+#
+# Sample names must be defined in the 'SM' column of the sampleinfo
+# file. Providing a subset of samples here will restrict analyses to
+# theses samples only.
+##############################
+samples:
+  - s1
+  - s2
+
+##############################
+# workflow section
+##############################
+workflow:
+  use_multimapped: false
+  quantification:
+    - rsem
+    - rpkmforgenes
+
+##############################
+# settings section
+##############################
+settings:
+  sampleinfo: sampleinfo.csv
+  temporary_rules:
+    - picard_merge_sam
+  runfmt: "{SM}/{SM}_{PU}"
+  samplefmt: "{SM}/{SM}"
+
+
+##############################
+# ngs.settings
+##############################
+ngs.settings:
+  annotation:
+    sources:
+      - ../ref/ref-transcripts-tiny.gtf
+      - ../ref/pAcGFP1-N1.genbank
+      - ../ref/ERCC_spikes.gb
+  db:
+    # The reference is created in pytest tmpdir, which relative to
+    # workdir is the following
+    ref:
+      - ../ref/ref.fa
+      - ../ref/pAcGFP1-N1.fasta
+      - ../ref/ERCC_spikes.fasta
+    transcripts:
+      - ../ref/ref-transcripts-tiny.fa
+      - ../ref/pAcGFP1-N1.fasta
+      - ../ref/ERCC_spikes.fasta
+
+
+##############################
+# Application sections
+#
+# Every application (e.g. STAR, rsem) lives in its own configuration
+# namespace. Typically, an application also has subcommands,
+# represented by different rules, that have configuration options that
+# live in a suitably named namespace/subsection of the main
+# application configuration.
+#
+# To give an example, 'star' is the main namespace for
+# STAR. One top level key is 'ref' that should be a list of reference
+# sequences. This option is inherited from 'ngs.settings:db:ref'
+# and rarely needs to be set explicitely. In contrast, the
+# 'star_index' subsection corresponds to STAR indexing and has
+# configurable options that only apply to this particular command.
+#
+##############################
+
+
+star:
+  star_index:
+    # The test genome is small; 2000000 bases. --genomeSAindexNbases
+    # needs to be adjusted to (min(14, log2(GenomeLength)/2 - 1))
+    options: --genomeSAindexNbases 10
+
+rsem:
+  index: ../ref/rsem_index
+  calculate-expression:
+    options: --paired-end
+
+
+rseqc:
+  rseqc_qc:
+    rseqc_clipping_profile: false
+
+ercc:
+  ref: "../ref/ERCC_spikes.fa"

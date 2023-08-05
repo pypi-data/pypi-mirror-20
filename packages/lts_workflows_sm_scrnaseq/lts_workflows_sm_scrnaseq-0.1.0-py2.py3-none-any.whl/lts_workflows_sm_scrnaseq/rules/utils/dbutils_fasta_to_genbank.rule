@@ -1,0 +1,23 @@
+# -*- snakemake -*-
+include: "utils.settings"
+
+rule dbutils_fasta_to_genbank:
+    """Convert fasta file to genbank file.
+
+    NB: the genbank output prefix differs from that in
+    dbutils_genbank_to_fasta to avoid a circular dependency
+    """
+    input: fasta = "{prefix}.fasta"
+    output: genbank = "{prefix}.genbank"
+    run:
+        from Bio import SeqIO
+        from Bio.Alphabet import generic_dna
+        input_handle = open(input.fasta, 'rU')
+        output_handle = open(output.genbank, 'w')
+        sequences = SeqIO.parse(input_handle, "fasta", alphabet=generic_dna)
+        count = SeqIO.write(sequences, output_handle, "genbank")
+        output_handle.close()
+        input_handle.close()
+        logger.info("dbutils_fasta_to_genbank: converted {} records".format(count))
+
+
