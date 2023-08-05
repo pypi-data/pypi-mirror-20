@@ -1,0 +1,53 @@
+Metadata-Version: 2.0
+Name: rsanic
+Version: 0.1.1
+Summary: Micro framework built on top of sanic.py written in Python 3.
+Home-page: https://github.com/reformo/rsanic
+Author: Mehmet Korkmaz
+Author-email: mehmet@mkorkmaz.com
+License: https://opensource.org/licenses/MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Development Status :: 1 - Planning
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Internet
+Requires-Dist: jinja2 (==2.9.5)
+Requires-Dist: sanic (==0.3.1)
+Requires-Dist: sanic-session (==0.1.0)
+
+rsanic
+==========
+
+Micro framework built on top of sanic.py written in Python 3.
+
+Installing rsanic
+=====================
+
+.. code-block:: bash
+
+    pip3 install rsanic
+
+or
+
+.. code-block:: bash
+
+    git clone https://github.com/reformo/rsanic.git
+    cd rsanic
+    python3 setup.py
+
+Credits
+=======
+
+* `Mehmet Korkmaz <http://github.com/mkorkmaz>`_
+
+Change Log
+==========
+
+New in version 0.0.1
+--------------------
+* Introduced "rsanic" #WIP
+
+
