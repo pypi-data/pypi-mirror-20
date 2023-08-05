@@ -1,0 +1,26 @@
+Metadata-Version: 1.1
+Name: linked_list
+Version: 0.0.3
+Summary: Classes for linked lists and doubly linked lists
+Home-page: https://github.com/jakab922/linked_list
+Author: Daniel Papp
+Author-email: jakab922@gmail.com
+License: MIT
+Download-URL: https://github.com/jakab922/linked_list/tarball/0.0.3
+Description: Linked list package
+        -------------------
+        
+        This package currently supports linked lists and doubly linked lists. Push and pop operations are supported where appropriate.
+        
+        Sample usage:
+        
+            >>> import linked_list as ll
+            >>> lst = LL(data=1)
+            >>> pushback(lst, LL(data=2))
+            >>> print popfront(lst)[1] # Will print 1
+        
+Keywords: linked list data structure
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
