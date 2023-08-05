@@ -1,0 +1,154 @@
+# fedfind
+
+Fedora Finder finds Fedoras. It provides a CLI and Python module that find and providing identifying information about Fedora images and release trees. Try it out:
+
+    fedfind images --release 22
+    fedfind images --release 23 --milestone Alpha
+    fedfind images --release 23 --milestone Alpha --compose RC2
+    fedfind images --compose 20150820
+    fedfind images --release 5 --arch x86_64,ppc
+    fedfind images --release 15 --search desk
+
+Fedora has stable releases, archive releases, really old archive releases, 'milestone' releases (Alpha / Beta), release validation testing composes (TCs and RCs), unstable nightly composes, and post-release nightly composes, all in different places, with several different layouts. There is no canonical database of the locations and
+contents of all the various composes/releases. We in Fedora QA found we had several tools that needed to know where to find various images from various different types of releases, and little bits of knowledge about the locations and layouts of various releases/composes had been added to different tools. fedfind was written to consolidate all this esoteric knowledge in a single codebase with a consistent interface.
+
+fedfind lets you specify a release/compose using four values: 'release', 'milestone', 'compose', and 'respin'. It can then find the location for that compose, tell you whether it exists, and give you the locations of all the images that are part of the release and what each image actually contains.
+
+fedfind runs on Python versions 2.6 and later (including 3.x).
+
+## Installation and use
+
+fedfind is packaged in the official Fedora and EPEL repositories: to install on Fedora run `dnf install fedfind`, on RHEL / CentOS with EPEL enabled, run `yum install fedfind`. You may need to enable the *updates-testing* repository to get the latest version.
+
+You can browse the [fedfind source][1], and clone with `git clone https://www.happyassassin.net/cgit/fedfind`. Tarballs are available for [download][2].
+
+You can use the fedfind CLI from the tarball without installing it, as `./fedfind.py` from the root of the tarball (you will need `cached_property` and `six`, and `argparse` on Python 2.6). You can of course copy the Python module anywhere you like and use it in place. To install both CLI and module systemwide, run `python setup.py install`.
+
+## Bugs, pull requests etc.
+
+You can file bugs as 'tasks' against [fedfind][3] in the Fedora QA Phabricator. You can log in with a Fedora FAS account - enter your email address as *fasname@fedoraproject.org* and the FAS authentication system will be used. You can submit pull requests via the same Phabricator instance using the `arc diff` tool - see [this page][4] for how to install and use the `arc` tool. Just branch off master, make your changes, and submit the `arc diff` from your branch.
+
+## Release identification
+
+Correct usage of fedfind relies on understanding the 'release', 'milestone', 'compose', 'respin' versioning concept, so here is a quick primer. In this section we will write release, milestone, compose quads as (release, milestone, compose, respin) with '' indicating an omitted value, e.g. (22, Beta, TC3, '') or (22, '', '', '').
+
+* **Release** is usually a Fedora release number, e.g. 22, 15 or 1. The only non-integer value that is accepted is 'Rawhide', for Rawhide nightly composes. These do not, properly speaking, have a definite release number associated with them: Rawhide is a perpetually rolling tree. The canonical versioning for Rawhide nightly composes is (Rawhide, '', YYYYMMDD, N) (where N is the respin number). Note that [python-wikitcms][5] uses almost the same versioning concept as fedfind, but Wikitcms 'validation events' for Rawhide nightly composes **do** have a release number: this is a property of the *validation event*, not of the *compose*. Thus there may be a Wikitcms *validation event* (24, Rawhide, 20151012, 1) for the fedfind *compose* (Rawhide, '', 20151012, 1). fedfind and python-wikitcms both recognize this case and will attempt to convert each other's values for convenience.
+
+* **Milestone** indicates the milestone or the type of nightly compose. Valid milestones for current releases are *Alpha*, *Beta*, *Final*, *Branched*, and *PostRelease*. fedfind will accept *Rawhide* as a milestone and convert it to the release - so ('', Rawhide, YYYYMMDD, N) is not exactly *valid* but will be handled by the CLI and the `get_release` function and converted to (Rawhide, '', YYYYMMDD, N). Stable releases do not have a milestone; (23, Final, '', '') will be accepted by `get_release` and the CLI but is treated internally as (23, '', '', '').
+
+* **Compose** is the precise compose identifier (in cases where one is needed). For TCs and RCs it is e.g. 'RC1' or 'TC5', for nightly composes it is a date in YYYYMMDD format. Stable releases and milestone releases do not have a compose.
+
+* **Respin** is an integer that's bumped any time a compose which would otherwise have the same version is repeated. The concept is taken from Pungi. If we attempt to build two Rawhide nightly composes on 2016-03-01, for instance, in fedfind's versioning they are (Rawhide, '', 20160301, 0) and (Rawhide, '', 20160301, 1). The corresponding Pungi / productmd 'compose ID'-style versioning is Fedora-Rawhide-20160301.n.0 and Fedora-Rawhide-20160301.n.1.
+
+Some examples:
+
+* Stable release: (23, '', '', '')
+* Alpha release: (23, Alpha, '', '')
+* TC: (23, Alpha, TC1, '')
+* Branched nightly: (23, Branched, 20150915, 0)
+* Rawhide nightly: (Rawhide, '', 20150915, 1)
+* Post-release stable nightly: (22, PostRelease, 20150915, 2)
+
+The test suite contains a bunch of tests for `get_release()` which incidentally may function as further examples of accepted usage. The fedfind CLI and `get_release()` are designed to guess omitted values in many cases, primarily to aid unattended usage, so e.g. a script can simply specify ('', Branched, '', '') to run on the date's latest branched compose, without having to know what the current Branched release number is. More detailed information on various cases can be found in the `get_release()` function's docstring.
+
+### fedfind / Wikitcms vs. Pungi / productmd versioning
+
+The fedfind / Wikitcms versioning system was developed prior to the use of Pungi 4 for Fedora composes. The 'respin' concept from Pungi / productmd was then stuffed into the fedfind / Wikitcms versioning concept quite hastily to keep stuff working.
+
+At present the question of how to reconcile the two versioning systems and which to support to what extent in fedfind is not entirely settled; this is hard to do while the transition to Pungi 4 is in progress. At present there's some fairly ad hoc interchangeability, whatever has turned out to be needed for real-world use cases so far. For instance, non-Pungi 4 composes have a sloppily-faked up 'cid' attribute that at least will produce the correct release number when parsed like a 'compose ID', and `get_release()` can parse *some* compose IDs, compose URLs and compose labels and return appropriate Release instances.
+
+Pungi appears to have two version-ish concepts: 'compose ID' and 'label'. All Pungi composes have a 'compose ID'. Not all have a label - only 'production' composes do (not 'nightly' or 'test' composes).
+
+A compose ID looks like `Fedora-24-20160301.n.0` (nightly), or `Fedora-Rawhide-20160302.t.1` (test), or `Fedora-24-20160303.0` (production). The release number, date and type of compose are always indicated somehow. It's not entirely clear if the respin value is always present. There is no kind of 'milestone' indicator, though it may be that productmd expects the compose 'type' to be sufficient for the purposes fedfind uses 'milestone' - there is no 'post-release' compose 'type' for Pungi, but this may be added, perhaps, or it may be considered that there's no practical difference between 'Branched' and 'Postrelease' for versioning purposes and fedfind's distinction is unnecessary.
+
+A label looks like `Alpha-1.2`, or `Beta-13.16`. There's a list of supported milestones (including Fedora's Alpha and Beta, but not Final - productmd uses RC instead). The first number is a public release number (RHEL has numbered milestone releases, unlike Fedora); the second is the respin value, which is considered more of a private/internal property. The system around which the scheme was designed appears to be that multiple "Alpha 1" respins are produced and tested and the final one is released as the public "Alpha 1" - thus the 'respin' concept covers approximately the same ground as Fedora's "TC" and "RC" composes.
+
+It's clearly possible to construct various schemes for mapping between the two versioning systems, and fedfind will probably continue to develop this over time as it's decided how we will handle milestone releases with Pungi / productmd tooling. For now, you can instantiate fedfind RawhideNightly, BranchedNightly and Production instances by URL, compose ID or compose label with the `get_release()` function, and if you instantiate a Pungi 4-type compose with the fedfind versioning system, you can get its compose ID as its `cid` attribute and its label (if it has one) as its `label` attribute. Note several of these abilities rely on composes being properly registered with PDC, so if PDC has issues, fedfind may do too.
+
+Once the Fedora processes around Pungi 4 composes have settled in a bit, the fedfind versioning system might be de-emphasized internally in favour of Pungi / productmd-ish concepts like 'type' and 'respin', though I'll probably try to retain compatibility with the old system at the CLI level for a while.
+
+## CLI
+
+The `fedfind` CLI command gives you URLs for a release's images. For instance, `fedfind images -r 22` will print the URLs to all Fedora 22 images. You can filter the results in various ways. For more information, use `fedfind -h` and `fedfind images -h`.
+
+## Python module
+
+The Python module provides access to all fedfind's capabilities.
+
+### Example usage
+
+    import fedfind.release
+    
+    comp = fedfind.release.get_release(release=21)
+    print comp.location
+    for img in comp.all_images:
+        print(img['path'])
+
+### Module design and API
+
+The main part of fedfind is the `Release` class, in `fedfind.release`. The primary entry point is `fedfind.release.get_release()` - in almost all cases you would start by getting a release using that function, which takes the `release`, `milestone`, `compose`, `respin` values that identify a release as its arguments and returns an instance of a `Release` subclass. You may also pass `url` (which is expected to be the `/compose` directory of a Pungi 4 compose, or the top-level directory of a two-week Atomic nightly compose (`Postrelease` in fedfind naming), `cid` (a Pungi 4 compose ID), or `label` (a Pungi 4 compose label) as an alternative to release/milestone/compose/respin.
+
+Anyone who used fedfind 1.x may remember the `Image` class for describing images and the `Query` class for doing searches. Both of those have been removed from fedfind 2.x in favour of productmd-style metadata. All `Release` instances have a `metadata` dict which, if the release exists, will contain an `images` item which is itself a dict containing image metadata in the format of the productmd `images.json` file. For Pungi 4 releases this is read straight in from `images.json`; for pre-Pungi 4 releases fedfind synthesizes metadata in approximately the same format.
+
+You can also use the `all_images` convenience property; this is basically a flattened form of the images metadata with an extra property. It's a list of image dicts, with each image dict in the same basic form as a productmd image dict, but with a `variant` property added to indicate its variant (in the original productmd layout, the image dicts are grouped by variant and then by arch, which is kind of a pain to parse for many use cases) and a `payload` property added to indicate the image's 'payload' (which may be its `variant` where the variant is a flavor, but for ARM disk images and live images is a more specific indicator of the image's contents). This `payload` property is vital for uniquely identifying live and ARM images, but is not provided by productmd, so synthesizing it is one of fedfind's remaining vital functions. Note that the `payload` property is *not* added to the `metadata['images']` dict, by design - we want to leave that in its exact original form for Pungi 4 composes. If you need the `payload` property you must work with `all_images`.
+
+You're expected to roll your own queries as appropriate for your use case. The reason fedfind 1.x had a dedicated query interface was primarily to try and speed things up for nightly composes by avoiding Koji queries where possible and tailoring them where not; since fedfind no longer ever has to perform slow Koji queries to find images, the need for the `Query` class is no longer there, you can always just operate on the data in `metadata['images']` or `all_images`.
+
+All methods and functions in fedfind are documented directly: please do refer to the docstrings for information on their purposes. Attributes are documented with comments wherever their purpose is not immediately obvious.
+
+All methods, functions, attributes and properties not prefixed with a `_` are considered 'public'. Public method and function signatures and all public data types will only change in major releases. fedfind has no control over the form or content of the productmd metadata, so when and how that changes is out of our hands; I will make a best effort to keep the synthesized metadata for old composes broadly in line with whatever current Pungi produces, though it is not perfect now and likely never will be (it's kinda tailored to the information I actually need from it).
+
+#### Useful things fedfind can do
+
+fedfind can do some useful stuff that isn't just querying images for releases:
+
+* `Release.wait()` waits for the release to exist. This is useful when you want to fire up every night and do something when a nightly compose is finished.
+* `Release.check_expected()` sees if all 'expected' images for the release are present.
+* `Release.difference(otherrelease)` tells you what images are present in the release but not in `otherrelease`.
+* `Release.previous_release()` takes a cut at figuring out what the 'previous' release was, though this is difficult and may not always work or return what you expect.
+* `helpers.get_current_release()` tells you what the current Fedora release is.
+
+For now all these abilities remain in fedfind 2.x, though any or all of them may be removed at some point soon.
+
+## How it works (roughly)
+
+fedfind has a bunch of knowledge about where Fedora keeps various composes wired in. For Pungi 4 compose types, finding the compose is about all fedfind has to do; it reads all the information about what images are in the compose out from the metadata and exposes it.
+
+For non-Pungi 4 composes (basically old stable releases and the `PostRelease` two-week Atomic nightly composes), fedfind calls out to `rsync` to scrape an appropriate branch of the mirror tree for the release being queried, then derive a path relative to the top of the mirror tree from the result. It can then combine that with a known prefix to produce an HTTPS URL. It synthesizes productmd-style metadata for the compose by scraping the whole compose tree for image files and analyzing the paths, so fedfind consumers can interact with non-Pungi 4 composes in the same way as Pungi 4 ones (to the extent of the metadata synthesis implementation, some stuff just isn't covered).
+
+## Caveats
+
+### Speed and resource use
+
+fedfind is not the fastest thing on Earth. When used as a module it caches properties and image lists for the lifetime of the release instance, but it does no caching outside that: it goes out and hits the servers for every query. I would like to make it cache results to disk (and even ship with static map files), particularly for non-nightly releases which rarely change, but it's rather complex to do so - releases *do* change, at least when they move from current to archive (for stable release) and simply drop off the face of the Earth (all other releases), and it's rather tricky to handle that and I just didn't get enough round tuits yet.
+
+It shouldn't use too much bandwidth (though I haven't really measured), but obviously the server admins won't be happy with me if the servers get inundated with fedfind requests, so don't go *completely* crazy with it - if you want to do something script-y, please at least use the module and re-use release instances so the queries get cached.
+
+### Can't find what ain't there
+
+All releases other than stable releases disappear. fedfind can find stable releases all the way back to Fedora Core 1, but it is not going to find Fedora 14 Alpha, Fedora 19 Beta TC3, or nightlies from more than 2-3 weeks ago. This isn't a bug in fedfind - those images literally are not publicly available any more. Nightlies only stick around for a few weeks, TCs/RCs for a given milestone usually disappear once we've moved on another couple of milestones, and pre-releases (Alphas and Betas) usually disappear some time after the release in question goes stable. fedfind will only find what's actually there.
+
+Also note that fedfind is not designed to find even *notional* locations for old non-stable releases. Due to their ephemeral nature, the patterns it uses for nightly builds and TC/RC composes only reflect current practice, and will simply be updated any time that practice changes. It doesn't have a big store of knowledge of what exact naming conventions we used for old composes. If you do `comp = fedfind.release.Compose(12, 'Final', 'TC4')` and read out `comp.location` or something what you get is almost certainly *not* the location where Fedora 12 Final TC4 actually lived when it was around.
+
+### No secondary arches
+
+fedfind does not, for the present, handle secondary arches at all. It *will* find PPC images for releases where PPC was a primary arch, though.
+
+### TC/RC and milestone composes not currently covered
+
+As mentioned earlier, at present, fedfind is not handling TC/RC and milestone composes simply because we have not yet done any of these with Pungi 4 so I can't yet know where exactly to find them and how they will be named. Once I know that, fedfind will support them again.
+
+## Credits
+
+This is pretty much all my fault. Note that aside from its external deps, older versions of fedfind (up to 1.1.2) included a copy of the `cached_property` implementation maintained [here][6] by Daniel Greenfield. The bundled copy was dropped with version 1.1.3.
+
+## Licensing
+
+Fedora Finder is available under the GPL, version 3 or any later version. A copy is included as COPYING.
+
+[1]: https://www.happyassassin.net/cgit/fedfind
+[2]: https://www.happyassassin.net/fedfind/releases
+[3]: https://phab.qadevel.cloud.fedoraproject.org/project/view/17/
+[4]: https://phab.qadevel.cloud.fedoraproject.org/w/contributing/
+[5]: https://www.happyassassin.net/wikitcms
+[6]: https://github.com/pydanny
