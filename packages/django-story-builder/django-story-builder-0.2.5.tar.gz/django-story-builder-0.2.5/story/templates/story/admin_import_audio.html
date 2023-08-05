@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Import Scene Audio{% endblock title %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="/admin/">Home</a> &rsaquo;
+  <a href="/admin/story/">Story Builder</a> &rsaquo;
+  <a href="/admin/story/story/">Story</a> &rsaquo;
+  <a href="/admin/story/story/{{ instance.pk }}/">{{ instance }}</a> &rsaquo;
+  <span>Import Scene Audio</span>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <div class="module">
+    <h2>Import Audio</h2>
+    <p>WARNING: this will overwrite existing audio in this story</p>
+    <form method="post" action="." enctype="multipart/form-data">
+      {% for error in errors %}<code>{{ error|linebreaks }}</code><hr>{% endfor %}
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><button>Import</button></p>
+    </form>
+  </div>
+{% endblock content %}
