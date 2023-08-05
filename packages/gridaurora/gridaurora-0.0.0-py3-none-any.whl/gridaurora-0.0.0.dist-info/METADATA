@@ -1,0 +1,27 @@
+Metadata-Version: 2.0
+Name: gridaurora
+Version: 0.0.0
+Summary: Gridding for auroral and ionospheric modeling
+Home-page: https://github.com/scienceopen/gridaurora
+Author: Michael Hirsch, Ph.D.
+Author-email: UNKNOWN
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: astropy
+Requires-Dist: h5py
+Requires-Dist: matplotlib
+Requires-Dist: nose
+Requires-Dist: numpy
+Requires-Dist: pathvalidate
+Requires-Dist: python-dateutil
+Requires-Dist: pytz
+Requires-Dist: sciencedates
+Requires-Dist: scipy
+Requires-Dist: seaborn
+Requires-Dist: xarray
+Provides-Extra: lowtran
+Requires-Dist: lowtran; extra == 'lowtran'
+
+UNKNOWN
+
+
