@@ -1,0 +1,57 @@
+---
+- lang:
+    name: python
+    id: 1
+    ext: .py
+    line_comment: '#'
+
+- lang:
+    name: c/c++ 
+    id: 2
+    ext: '.c,.cpp,.h,.hpp,.hxx'
+    line_comment: //
+    block_comment_start: /*
+    block_comment_end: '*/' 
+
+- lang:
+    name: shell 
+    id: 3
+    ext: '.sh'
+    line_comment: '#'
+
+- lang:
+    name: dockerconfig 
+    id: 4
+    filename: Dockerfile
+    line_comment: '#'
+
+- lang:
+    name: config 
+    id: 5
+    ext: '.ini,.conf'
+    line_comment: '#'
+
+- lang:
+    name: html 
+    id: 6
+    ext: '.html,.htm'
+    line_comment: 
+    block_comment_start: '<!--' 
+    block_comment_end: '-->' 
+
+- lang:
+    name: js 
+    id: 7
+    ext: '.js'
+    line_comment: //
+    block_comment_start: /*
+    block_comment_end: '*/' 
+
+- lang:
+    name: css 
+    id: 8
+    ext: '.css'
+    line_comment: 
+    block_comment_start: /*
+    block_comment_end: '*/' 
+
