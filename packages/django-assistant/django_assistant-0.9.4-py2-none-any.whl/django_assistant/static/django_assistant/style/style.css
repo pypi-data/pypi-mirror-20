@@ -1,0 +1,82 @@
+ul li{
+    list-style:none;
+}
+.paddingLeftZero{
+    padding-left:0px;
+}
+.paddingRightZero{
+    padding-right:0px;
+}
+.api_list{
+    padding:0px;
+    margin:0;
+    margin-top:2%;
+}
+.api_item{
+    padding:0px;
+    margin:0;
+    margin-bottom:4%;
+    border-bottom:1px solid #ccc;
+    padding: 1% 0%;
+}
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.tab_belt{
+    padding:2% 1% 1% 1%;
+    width:100%;
+    box-shadow: 0px 2px 3px 0px #ccc;
+}
+.tab_belt li.active{
+    border-bottom: 3px solid #f90;
+}
+#id_inputs{
+    margin-top:1%;
+}
+#id_inputs ul li{
+    border:1px solid #ccc;
+    padding:1% 2%;
+}
+
+#id_inputs ul li.active{
+    background:#ddd;
+}
+.api_item button{
+    border:none;
+    background:none;
+    outline:none;
+}
+.api_result{
+    border: 1px solid #ccc;
+    width: 100%;
+    display:none;
+    height: 400px;
+    overflow-y:auto;
+    padding:1% 2%;
+}
+
+.api_status{
+    border-radius: 50%;
+    padding: 0px 7px;
+    margin-right: 4px;
+}
+.api_status_1{background:grey}
+.api_status_2{background:red}
+.api_status_3{background:orange}
+.api_status_4{background:#39a385}
+.api_status_5{background:black}
+.tab_belt .popover{
+    top: 82px;
+    width: 28%;
+} 
+.tab_belt .popover #api_status_form input{
+    margin-right: 4px !important;
+    vertical-align: top;
+} 
+.edit_api{
+    text-decoration:underline;
+    margin-top:3px;
+}
+
+
