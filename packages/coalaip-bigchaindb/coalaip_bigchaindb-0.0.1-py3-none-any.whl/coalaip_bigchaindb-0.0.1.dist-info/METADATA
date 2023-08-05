@@ -1,0 +1,125 @@
+Metadata-Version: 2.0
+Name: coalaip-bigchaindb
+Version: 0.0.1
+Summary: BigchainDB ledger plugin for COALA IP's Python reference implementation
+Home-page: https://github.com/bigchaindb/pycoalaip-bigchaindb
+Author: BigchainDB
+Author-email: dev@bigchaindb.com
+License: Apache Software License 2.0
+Keywords: coalaip,coalaip plugin,bigchaindb
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: bigchaindb-driver (~=0.2.0)
+Requires-Dist: coalaip (==0.0.1)
+Provides-Extra: dev
+Requires-Dist: Sphinx (>=1.4.4); extra == 'dev'
+Requires-Dist: bigchaindb (~=0.9.0); extra == 'dev'
+Requires-Dist: coverage (>=4.1); extra == 'dev'
+Requires-Dist: flake8 (>=2.6.0); extra == 'dev'
+Requires-Dist: ipdb; extra == 'dev'
+Requires-Dist: ipython; extra == 'dev'
+Requires-Dist: pytest (>=3.0.1); extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Requires-Dist: pytest-mock; extra == 'dev'
+Requires-Dist: sphinx-autobuild; extra == 'dev'
+Requires-Dist: sphinx-rtd-theme; extra == 'dev'
+Requires-Dist: sphinxcontrib-napoleon (>=0.4.4); extra == 'dev'
+Requires-Dist: tox (>=2.3.1); extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: Sphinx (>=1.4.4); extra == 'docs'
+Requires-Dist: sphinx-autobuild; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme; extra == 'docs'
+Requires-Dist: sphinxcontrib-napoleon (>=0.4.4); extra == 'docs'
+Provides-Extra: test
+Requires-Dist: bigchaindb (~=0.9.0); extra == 'test'
+Requires-Dist: coverage (>=4.1); extra == 'test'
+Requires-Dist: flake8 (>=2.6.0); extra == 'test'
+Requires-Dist: pytest (>=3.0.1); extra == 'test'
+Requires-Dist: pytest-cov; extra == 'test'
+Requires-Dist: pytest-mock; extra == 'test'
+Requires-Dist: tox (>=2.3.1); extra == 'test'
+
+====================
+pycoalaip-bigchaindb
+====================
+
+
+.. image:: https://img.shields.io/pypi/v/coalaip-bigchaindb.svg
+        :target: https://pypi.python.org/pypi/coalaip-bigchaindb
+
+.. image:: https://img.shields.io/travis/bigchaindb/pycoalaip-bigchaindb.svg
+        :target: https://travis-ci.org/bigchaindb/pycoalaip-bigchaindb
+
+.. image:: https://img.shields.io/codecov/c/github/bigchaindb/pycoalaip-bigchaindb/master.svg
+    :target: https://codecov.io/github/bigchaindb/pycoalaip-bigchaindb?branch=master
+
+.. image:: https://readthedocs.org/projects/pycoalaip-bigchaindb/badge/?version=latest
+        :target: https://pycoalaip-bigchaindb.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. image:: https://pyup.io/repos/github/bigchaindb/pycoalaip-bigchaindb/shield.svg
+     :target: https://pyup.io/repos/github/bigchaindb/pycoalaip-bigchaindb/
+     :alt: Updates
+
+
+BigchainDB ledger plugin for `COALA IP's Python reference implementation <https://github.com/bigchaindb/pycoalaip>`_.
+
+* Development Status: Alpha
+* Free software: Apache Software License 2.0
+* Documentation: https://pycoalaip-bigchaindb.readthedocs.io.
+
+
+Features
+--------
+
+* Support for creating new keypair for use with BigchainDB
+* Basic support for COALA IP entity creation
+
+Credits
+---------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+=======
+History
+=======
+
+0.0.1 (2016-02-17)
+------------------
+
+First alpha release on PyPI.
+
+* Upgraded to BigchainDB Server 0.9 (and along with it, bigchaindb-driver@v0.2)
+    * Users are now represented by public/private keypairs instead of
+      verifying/signing keypairs
+* Added support for querying ownership history of an entity
+* Added support for entity transfers (and retransfers)
+* Added ``is_same_user()``
+
+0.0.1.dev3 (2016-12-07)
+-----------------------
+
+* Implemented support for loading persisted Entities from BigchainDB
+* Upgraded to bigchaindb-driver@v0.1.2
+
+0.0.1.dev2 (2016-08-31)
+-----------------------
+
+* Fix packaging on PyPI
+
+0.0.1.dev1 (2016-08-31)
+-----------------------
+
+* Development (pre-alpha) release on PyPI.
+
+
