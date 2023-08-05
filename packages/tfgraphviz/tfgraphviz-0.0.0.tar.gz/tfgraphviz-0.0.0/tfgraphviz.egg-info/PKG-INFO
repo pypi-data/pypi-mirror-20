@@ -1,0 +1,58 @@
+Metadata-Version: 1.1
+Name: tfgraphviz
+Version: 0.0.0
+Summary: Simple graphviz wrapper to visualize a graph like TensorBoard
+Home-page: https://github.com/akimach/tfgraphviz
+Author: akimacho
+Author-email: kimura.akimasa@gmail.com
+License: MIT
+Description: 
+        tfgraphviz
+        ================
+        
+        Simple graphviz wrapper to visualize a graph like TensorBoard
+        
+        tfgraphviz is a module to create a TensorBoard-ish graph in the DOT language of the Graphviz. tfgraphviz provides a visualization of tensorflow graph on Jupyter Notebook without TensorBoard.
+        
+        Links
+        -----
+        
+        - GitHub: http://github.com/akimach/tfgraphviz
+        
+        Installation
+        ------------
+        
+        Use pip to install:
+        
+        .. code-block:: bash
+        
+            $ pip install tfgraphviz
+        
+        The only dependency is  Graphviz.
+        
+        Quickstart
+        ----------
+        
+        .. code-block:: bash
+        
+            import tensorflow as tf
+            import tfgraphviz as tfg
+            a = tf.constant(1, name="a")
+            b = tf.constant(2, name="b")
+            c = tf.add(a, b, name="add")
+            g = tfg.board(tf.get_default_graph())
+            g.view()
+        
+        License
+        -------
+        
+        This package is distributed under the MIT license.
+        
+Keywords: tensorflow tensor machine learning graphviz
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Scientific/Engineering :: Mathematics
