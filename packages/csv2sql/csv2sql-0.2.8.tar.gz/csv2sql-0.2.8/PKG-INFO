@@ -1,0 +1,67 @@
+Metadata-Version: 1.1
+Name: csv2sql
+Version: 0.2.8
+Summary: Convert CSV data into SQL.
+Home-page: https://github.com/ymoch/csv2sql
+Author: Yu Mochizuki
+Author-email: ymoch.dev@gmail.com
+License: UNKNOWN
+Description: =======
+        CSV2SQL
+        =======
+        
+        Convert CSV data into SQL.
+        
+        .. image:: https://travis-ci.org/ymoch/csv2sql.svg?branch=master
+            :target: https://travis-ci.org/ymoch/csv2sql
+        .. image:: https://coveralls.io/repos/github/ymoch/csv2sql/badge.svg?branch=master
+            :target: https://coveralls.io/github/ymoch/csv2sql?branch=master
+        
+        Features
+        ========
+        
+        - Automatic type inference.
+        - Customizable type deciding rules.
+        - Pipe usage.
+        
+        
+        Installation
+        ============
+        
+        Run ```pip install csv2sql```.
+        
+        
+        Execution
+        =========
+        
+        For basic usage, run the command below.
+        
+        .. code-block:: shell
+        
+            csv2sql all
+        
+        For details, run the command with the `-h` option.
+        
+        
+        Details
+        =======
+        
+        Customize Deciding Rules
+        ------------------------
+        
+        Under construction...
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: SQL
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Topic :: Utilities
