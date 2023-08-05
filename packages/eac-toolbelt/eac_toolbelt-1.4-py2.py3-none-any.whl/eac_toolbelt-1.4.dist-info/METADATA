@@ -1,0 +1,73 @@
+Metadata-Version: 2.0
+Name: eac-toolbelt
+Version: 1.4
+Summary: Database tool scripts.
+Home-page: https://bitbucket.org/estateagents/toolbelt
+Author: Nik Cubrilovic
+Author-email: nikcub@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: click (==6.7)
+Requires-Dist: dsnparse (==0.1.4)
+Requires-Dist: geojson (==1.3.4)
+Requires-Dist: packaging (==15.3)
+Requires-Dist: psycopg2 (==2.6.2)
+Requires-Dist: pymssql (==2.1.2)
+Requires-Dist: pyparsing (==2.1.10)
+Requires-Dist: python-dotenv (==0.6.3)
+Requires-Dist: requests (==2.13.0)
+Requires-Dist: shapely (==1.6b2)
+Requires-Dist: six (==1.10.0)
+Requires-Dist: delegator.py (==0.0.8)
+
+## Toolbelt
+
+### data and database utilities
+
+![toolbelt](http://www.gusgusdesigns.co.uk/ekmps/shops/gusgusdesigns/images/pretend-toy-carpenters-tool-belt-from-bigjigs-391-p.jpg)
+
+---
+
+This repository provides the source code to the `toolbelt` tool, which is a command line client
+written in Python that is used to administer systems administration tasks through a variety
+of utilities that have been combined together into a single tool.
+
+*Note: the initial components of this tool previously made up the `replicator`, `geocoder`, `shapeloader` and `load-gnaf` services*
+
+### Overview
+
+Run with `toolbelt` after install (it should be in your path)
+
+Available commands:
+
+* `loadshapes` - load directories of shapefiles into Postgresql with specific support for PSMA distributions (selecting subsets of data, based on bbox or states)
+* `loadgnaf` - loads a normalized version of GNAF into Postgresql using the PSV format or a raw dump
+* `initdb` - initializes a database from SQL scripts (for use with `db-schema`)
+* `initsearch` - intializes and builds indexes for Elastic Search based on a defined schema
+
+### Quickstart Install
+
+This project is distributed on PyPi - the Python package management environment. It can be installed across all
+platforms easily and usually with a single command (provided you don't require editing the source code)
+
+*Note: this tool will soon be provided as a standalone binary and installer for all platforms using the PyInstaller library*
+
+1. Setup on Mac OS X
+
+Start with Homebrew:
+
+```sh
+$ brew install python
+$ easy_install toolbelt
+```
+
+*Note: This will install toolbelt globally, the better option would be to install it into its own environment using `virtualenv`
+
+2. Setup with Windows
+
+Install [python for Windows](http://www.python.org/download/)
+
+Open a command prompt and run `easy_install toolbelt`
+
+
+
