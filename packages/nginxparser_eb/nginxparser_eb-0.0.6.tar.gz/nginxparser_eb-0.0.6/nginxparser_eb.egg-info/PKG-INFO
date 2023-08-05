@@ -1,0 +1,171 @@
+Metadata-Version: 1.1
+Name: nginxparser-eb
+Version: 0.0.6
+Summary: Nginx configuration Parser
+Home-page: https://github.com/EnigmaBridge/nginxparser
+Author: Fatih Erikli
+Author-email: fatiherikli@gmail.com
+License: The MIT License (MIT)
+
+Copyright (c) 2014 Fatih Erikli
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Description: Nginx Configuration Parser
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        An nginx configuration parser that uses Pyparsing.
+        
+        You can parse a nginx configuration file with ``load`` or ``loads``
+        method:
+        
+        .. code:: python
+        
+            >>> from nginxparser_eb import load
+            >>> load(open("/etc/nginx/sites-enabled/foo.conf"))
+        
+            [['server'], [
+                ['listen', '80'],
+                ['server_name', 'foo.com'],
+                ['root', '/home/ubuntu/sites/foo/']]]]
+        
+        
+        Same as other serialization modules also you can export configuration
+        with
+        
+        .. code:: python
+        
+            >>> from nginxparser_eb import load
+            >>> load(open("/etc/nginx/sites-enabled/foo.conf"))
+        
+            [['server'], [
+                ['listen', '80'],
+                ['server_name', 'foo.com'],
+                ['root', '/home/ubuntu/sites/foo/']]]]
+        
+        
+        Same as other serialization modules also you can export configuration
+        with
+        
+        .. code:: python
+        
+            >>> from nginxparser_eb import load
+            >>> load(open("/etc/nginx/sites-enabled/foo.conf"))
+        
+            [['server'], [
+                ['listen', '80'],
+                ['server_name', 'foo.com'],
+                ['root', '/home/ubuntu/sites/foo/']]]]
+        
+        
+        Same as other serialization modules also you can export configuration
+        with ``dump`` and ``dumps`` methods.
+        
+        .. code:: python
+        
+            >>> from nginxparser_eb import dumps
+            >>> dumps([['server'], [
+                        ['listen', '80'],
+                        ['server_name', 'foo.com'],
+                        ['root', '/home/ubuntu/sites/foo/']]])
+        
+            'server {
+                listen   80;
+                server_name foo.com;
+                root /home/ubuntu/sites/foo/;
+             }'
+        
+        
+        .. code:: python
+        
+            >>> from nginxparser_eb import dumps
+            >>> dumps([['server'], [
+                        ['listen', '80'],
+                        ['server_name', 'foo.com'],
+                        ['root', '/home/ubuntu/sites/foo/']]])
+        
+            'server {
+                listen   80;
+                server_name foo.com;
+                root /home/ubuntu/sites/foo/;
+             }'
+        
+        
+        .. code:: python
+        
+            >>> from nginxparser_eb import dumps
+            >>> dumps([['server'], [
+                        ['listen', '80'],
+                        ['server_name', 'foo.com'],
+                        ['root', '/home/ubuntu/sites/foo/']]])
+        
+            'server {
+                listen   80;
+                server_name foo.com;
+                root /home/ubuntu/sites/foo/;
+             }'
+        
+        
+        Installation
+        ------------
+        
+        The Nginx parser is now available via pip:
+        
+        ::
+        
+            pip install nginxparser_eb
+        
+        
+        
+        Troubleshooting
+        ---------------
+        
+        Exception like this may occur:
+        
+        ::
+        
+            ParseException: Expected {Group:({W:(ABCD...) [{Suppress:(<SPC><TAB><CR><LF>) !W:({};)}] Suppress:(";")}) | Forward: ...} (at char 0), (line:1, col:1)
+        
+        It may be caused by importing Cmd2 package which modifies pyparsing globals. In particular, the following code causes
+        the trouble:
+        
+        .. code:: python
+        
+            pyparsing.ParserElement.setDefaultWhitespaceChars(' \t')
+        
+        In this setting the pyparser parser stops parsing after a new line.
+        
+        From this reason, importing pyparsing modifies set white space chars back to
+        
+        .. code:: python
+        
+            pyparsing.ParserElement.setDefaultWhitespaceChars(" \n\t\r")
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Internet :: WWW/HTTP
