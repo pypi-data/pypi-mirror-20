@@ -1,0 +1,37 @@
+Metadata-Version: 2.0
+Name: hotchocolate
+Version: 1.0.0
+Summary: A Markdown-based static site generator
+Home-page: https://github.com/alexwlchan/hot-chocolate
+Author: Alex Chan
+Author-email: alex@alexwlchan.net
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Other Audience
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Dist: Jinja2 (<3,>=2.9.5)
+Requires-Dist: Markdown (<3,>=2.6.8)
+Requires-Dist: click (<7,>=6.7)
+Requires-Dist: csscompressor (>=0.9.4,<1)
+Requires-Dist: docker (<3,>=2.0.2)
+Requires-Dist: mincss (<0.12,>=0.11.2)
+Requires-Dist: pyScss (<2,>=1.3.5)
+Requires-Dist: python-dateutil (<3,>=2.6.0)
+Requires-Dist: unidecode (>=0.04.20,<0.05)
+
+hotchocolate
+============
+
+Hot Chocolate is a static site generator using Markdown files as input.
+
+.. image:: hotchocolate.jpg
+
+☕️
+
+
