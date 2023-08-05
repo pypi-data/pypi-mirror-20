@@ -1,0 +1,4 @@
+[console_scripts]
+tinnitus-include = tinnitus.pluggable:configure_include_paths
+tinnitusd = tinnitus.server:run_command
+
