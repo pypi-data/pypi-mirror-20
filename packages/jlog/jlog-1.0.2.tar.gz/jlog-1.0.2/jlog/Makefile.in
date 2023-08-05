@@ -1,0 +1,136 @@
+# vim:ts=2:sw=2:noet:
+.SUFFIXES: .lo
+
+CC=@CC@
+LN_S=@LN_S@
+CPPFLAGS=@CPPFLAGS@
+CFLAGS=@CFLAGS@
+LDFLAGS=@LDFLAGS@
+LD_LIBJLOG_VERSION=@LD_LIBJLOG_VERSION@
+AR=@AR@
+RANLIB=@RANLIB@
+LIBS=@LIBS@
+INSTALL=@INSTALL@
+SHLD=@SHLD@
+PERL=@PERL@
+SHCFLAGS=@SHCFLAGS@
+DOTSO=@DOTSO@
+JAVAC=@JAVAC@
+JAR=@JAR@
+
+MAJOR_VERSION=2
+MINOR_VERSION=0
+PATCH_VERSION=2
+VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(PATCH_VERSION)
+LIBSHORT=@LIBSHORT@
+LIBMAJOR=@LIBMAJOR@
+LIBLONG=@LIBLONG@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+sbindir=@sbindir@
+libdir=@libdir@
+includedir=@includedir@
+libexecdir=@libexecdir@
+datarootdir = @datarootdir@
+mandir=@mandir@
+mansubdir=@mansubdir@
+docdir=${prefix}/@docdir@
+sysconfdir=@sysconfdir@
+srcdir=@srcdir@
+top_srcdir=@top_srcdir@
+
+AOBJS= \
+	jlog.o jlog_hash.o jlog_io.o
+SOOBJS= \
+	jlog.lo jlog_hash.lo jlog_io.lo
+
+all:	libjlog.$(DOTSO) libjlog.a jlogctl jlogtail test
+
+.c.o:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
+
+.c.lo:
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(SHCFLAGS) -c $< -o $@
+
+test:	jthreadtest jtest
+
+perl/Makefile:	perl/Makefile.PL
+	cd perl && $(PERL) Makefile.PL
+
+jlogperl:	perl/Makefile
+	@cd perl && make
+
+jlogpython:
+	cd python && make
+
+jlogctl:	libjlog.a jlogctl.o getopt_long.o
+	$(CC) $(CFLAGS) -o jlogctl jlogctl.o getopt_long.o libjlog.a $(LDFLAGS) $(LIBS)
+
+jthreadtest:	libjlog.a jthreadtest.o getopt_long.o
+	$(CC) $(CFLAGS) -o jthreadtest jthreadtest.o getopt_long.o libjlog.a $(LDFLAGS) $(LIBS)
+
+jtest:	libjlog.a jtest.o
+	$(CC) $(CFLAGS) -o jtest jtest.o libjlog.a $(LDFLAGS) $(LIBS)
+
+jlogtail: libjlog.a jlogtail.o
+	$(CC) $(CFLAGS) -o jlogtail jlogtail.o libjlog.a $(LDFLAGS) $(LIBS)
+
+libjlog.$(DOTSO): $(SOOBJS)
+	$(SHLD) $(LD_LIBJLOG_VERSION) -o libjlog.$(DOTSO) $(SOOBJS) $(LDFLAGS) $(LIBS)
+
+libjlog.a:	$(AOBJS)
+	$(AR) cr libjlog.a $(AOBJS)
+	$(RANLIB) libjlog.a
+
+java-bits: java/jlog.jar java/libjlog.jnilib java/jlogTest.class
+
+java/jlog.jar:	java/jlog.java
+	mkdir -p java_tmp && \
+	$(JAVAC) -d java_tmp java/jlog.java && \
+	$(JAR) -cf $@ -C java_tmp com && \
+	rm -rf java_tmp
+
+java/jlogTest.class:	java/jlogTest.java java/jlog.jar
+	cd java && $(JAVAC) -cp jlog.jar jlogTest.java
+
+java/com_omniti_labs_jlog.lo:	java/com_omniti_labs_jlog.c
+	$(CC) -Wall -I. $(CPPFLAGS) $(CFLAGS) $(SHCFLAGS) -c $< -o $@
+
+java/libjlog.jnilib:	java/com_omniti_labs_jlog.lo $(SOOBJS)
+	$(SHLD) -o $@ java/com_omniti_labs_jlog.lo $(SOOBJS) $(LDFLAGS) $(LIBS)
+
+install:
+	$(srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
+	$(srcdir)/mkinstalldirs $(DESTDIR)$(libdir)
+	$(srcdir)/mkinstalldirs $(DESTDIR)$(includedir)
+	$(INSTALL) -m 0755 jlogctl $(DESTDIR)$(bindir)/jlogctl
+	$(INSTALL) -m 0755 jlogtail $(DESTDIR)$(bindir)/jlogtail
+	$(INSTALL) -m 0755 jlog_change_endian.pl $(DESTDIR)$(bindir)/jlog_change_endian
+	$(INSTALL) -m 0755 jlog_sanity_check.pl $(DESTDIR)$(bindir)/jlog_sanity_check
+	$(INSTALL) -m 0755 libjlog.a $(DESTDIR)$(libdir)/libjlog.a
+	$(INSTALL) -m 0755 libjlog.$(DOTSO) $(DESTDIR)$(libdir)/$(LIBLONG)
+	$(LN_S) -f $(LIBLONG) $(DESTDIR)$(libdir)/$(LIBSHORT)
+	$(LN_S) -f $(LIBLONG) $(DESTDIR)$(libdir)/$(LIBMAJOR)
+	$(INSTALL) -m 0644 jlog.h $(DESTDIR)$(includedir)/jlog.h
+	$(INSTALL) -m 0644 jlog_private.h $(DESTDIR)$(includedir)/jlog_private.h
+	$(INSTALL) -m 0644 jlog_io.h $(DESTDIR)$(includedir)/jlog_io.h
+	$(INSTALL) -m 0644 jlog_config.h $(DESTDIR)$(includedir)/jlog_config.h
+
+install-perl:
+	cd perl ; make install DESTDIR=$(DESTDIR) INSTALLDIRS=vendor
+
+install-python:
+	cd python && make install
+
+clean:
+	rm -f *.o *.lo *.$(DOTSO) *.a jthreadtest jtest jlogctl jlogtail
+	rm -f java/*.jar java/*.jnilib java/*.lo
+	-if test -f perl/Makefile ; then cd perl ; make clean ; fi
+	cd python && make clean
+
+distclean: 	clean
+	rm -f Makefile jlog_config.h perl/Makefile.PL
+
+.SUFFIXES: .c .o .lo
