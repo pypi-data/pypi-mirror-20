@@ -1,0 +1,77 @@
+Introduction
+============
+
+High level RF library for interacting with common devices.
+
+Requirements
+============
+
+-  Python 3
+-  Native GPIO library (see Installation)
+
+Installation
+============
+
+Clone this repo locally, then:
+
+.. code:: bash
+
+    pip install rfdevices
+
+Native GPIO Library
+-------------------
+
+For GPIO operations, this library uses
+`adafruit/Adafruit\_Python\_GPIO <https://github.com/adafruit/Adafruit_Python_GPIO>`__
+for compatibility with multiple SoC boards. As a result, you'll need to
+ensure you manually install your platform's GPIO library.
+
+If you have a Raspberry Pi:
+
+.. code:: bash
+
+    pip install RPi.GPIO
+
+See `RPi.GPIO on
+Sourceforge <https://sourceforge.net/p/raspberry-gpio-python/wiki/Home/>`__
+for more information.
+
+If you have a Beaglebone Black:
+
+.. code:: bash
+
+    pip install Adafruit_BBIO
+
+See
+`adafruit/adafruit-beaglebone-io-python <https://github.com/adafruit/adafruit-beaglebone-io-python>`__
+for more information.
+
+If you have an Intel (e.g. Galileo, Edison) board, follow the
+instructions at
+`intel-iot-devkit/mraa <https://github.com/intel-iot-devkit/mraa>`__.
+
+Usage
+=====
+
+After installing, the ``rfsend`` tool will be available in your
+``PATH``.
+
+Here's an example of sending a command to a UC7070T (Harbor Breeze) fan
+to toggle the light on/off:
+
+.. code:: bash
+
+    # GPIO pin 23 / fan dipswitch set to 1101
+    rpi-rftx -g 23 -t uc7070t -b 111010000001
+
+Credits
+=======
+
+This was originally forked from
+```milaq/rpi-rf`` <https://github.com/milaq/rpi-rf>`__.
+
+| Portions of the code are:
+| Copyright (c) 2016 Suat Özgür, Micha LaQua
+| Copyright (c) 2017 Milas Bowman
+
+
