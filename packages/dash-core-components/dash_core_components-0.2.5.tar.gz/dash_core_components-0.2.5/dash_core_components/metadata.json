@@ -1,0 +1,747 @@
+{
+  "src/components/Checklist.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "inputStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <input> radio element",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "inputClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the <input> radio element",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "labelStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <label> that wraps the radio input\n and the option's label",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "labelClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the <label> that wraps the radio input\n and the option's label",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "options": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "label": {
+              "name": "string",
+              "required": false
+            },
+            "value": {
+              "name": "string",
+              "required": false
+            },
+            "disabled": {
+              "name": "bool",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "An array of options",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "values": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "The currently selected value"
+      },
+      "fireEvent": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the radio item gets selected."
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the value changes."
+      }
+    }
+  },
+  "src/components/Dropdown.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "disabled": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If true, the option is disabled"
+      },
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "The id of the component"
+      },
+      "multi": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If true, the user can select multiple values"
+      },
+      "options": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "shape",
+            "value": {
+              "disabled": {
+                "name": "bool",
+                "required": false
+              },
+              "label": {
+                "name": "string",
+                "required": false
+              },
+              "value": {
+                "name": "string",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The value of the input"
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the input changes"
+      }
+    }
+  },
+  "src/components/Graph.react.js": {
+    "description": "",
+    "methods": [
+      {
+        "name": "plot",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "bindEvents",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "clickData": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Data from latest click event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "hoverData": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Data from latest hover event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "selectedData": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Data from latest select event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "zoomData": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Data from latest zoom event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "figure": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Plotly `figure` object. See schema:\nhttps://plot.ly/javascript/reference",
+        "defaultValue": {
+          "value": "{data: [], layout: {}}",
+          "computed": false
+        }
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Generic style overrides on the plot div"
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Function that updates the state tree."
+      },
+      "fireEvent": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Function that fires events"
+      },
+      "layout": {
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
+  },
+  "src/components/Input.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the input element"
+      },
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "The id of the component"
+      },
+      "placeholder": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The input's placeholder"
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The input's inline styles"
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "The value of the input"
+      },
+      "fireEvent": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the input changes."
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the value changes."
+      }
+    }
+  },
+  "src/components/RadioItems.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "inputStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <input> radio element",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "inputClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the <input> radio element",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "labelStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <label> that wraps the radio input\n and the option's label",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "labelClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the <label> that wraps the radio input\n and the option's label",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "options": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "label": {
+              "name": "string",
+              "required": false
+            },
+            "value": {
+              "name": "string",
+              "required": false
+            },
+            "disabled": {
+              "name": "bool",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "An array of options",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "value": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The currently selected value"
+      },
+      "fireEvent": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the radio item gets selected."
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the value changes."
+      }
+    }
+  },
+  "src/components/RangeSlider.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "allowCross": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "allowCross could be set as true to allow those handles to cross."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Additional CSS class for the root DOM node"
+      },
+      "count": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Determine how many ranges to render, and multiple handles\nwill be rendered (number + 1)."
+      },
+      "disabled": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If true, the handles can't be moved."
+      },
+      "dots": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "When the step value is greater than 1,\nyou can set the dots to true if you want to\nrender the slider with dots."
+      },
+      "included": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If the value is true, it means a continuous\nvalue is included. Otherwise, it is an independent value."
+      },
+      "marks": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "number": {
+              "name": "string",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "Marks on the slider.\nThe key determines the position,\nand the value determines what will show.\nIf you want to set the style of a specific mark point,\nthe value should be an object which\ncontains style and label properties."
+      },
+      "min": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Minimum allowed value of the slider"
+      },
+      "max": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Maximum allowed value of the slider"
+      },
+      "pushable": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "bool"
+            },
+            {
+              "name": "number"
+            }
+          ]
+        },
+        "required": false,
+        "description": "pushable could be set as true to allow pushing of\nsurrounding handles when moving an handle.\nWhen set to a number, the number will be the\nminimum ensured distance between handles."
+      },
+      "step": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Value by which increments or decrements are made"
+      },
+      "labels": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Key-values pairs describing the labels"
+      },
+      "value": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "The value of the input"
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Dash-assigned callback that gets fired when the input changes"
+      },
+      "vertical": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If true, the slider will be vertical"
+      }
+    }
+  },
+  "src/components/Slider.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Additional CSS class for the root DOM node"
+      },
+      "disabled": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If true, the handles can't be moved."
+      },
+      "dots": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "When the step value is greater than 1,\nyou can set the dots to true if you want to\nrender the slider with dots."
+      },
+      "included": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If the value is true, it means a continuous\nvalue is included. Otherwise, it is an independent value."
+      },
+      "marks": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "number": {
+              "name": "string",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "Marks on the slider.\nThe key determines the position,\nand the value determines what will show.\nIf you want to set the style of a specific mark point,\nthe value should be an object which\ncontains style and label properties."
+      },
+      "min": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Minimum allowed value of the slider"
+      },
+      "max": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Maximum allowed value of the slider"
+      },
+      "step": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Value by which increments or decrements are made"
+      },
+      "labels": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Key-values pairs describing the labels"
+      },
+      "value": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "The value of the input"
+      },
+      "valueChanged": {
+        "type": {
+          "name": "func"
+        },
+        "required": true,
+        "description": "Dash-assigned callback that gets fired when the input changes"
+      },
+      "vertical": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "If true, the slider will be vertical"
+      }
+    }
+  },
+  "src/components/SyntaxHighlighter.react.js": {
+    "description": "",
+    "methods": [],
+    "props": {
+      "language": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "the language to highlight code in."
+      },
+      "theme": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'light'",
+              "computed": false
+            },
+            {
+              "value": "'dark'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "theme: light or dark"
+      },
+      "customStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "prop that will be combined with the top level style on the pre tag, styles here will overwrite earlier styles."
+      },
+      "codeTagProps": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "props that will be spread into the <code> tag that is the direct parent of the highlighted code elements. Useful for styling/assigning classNames."
+      },
+      "useInlineStyles": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "if this prop is passed in as false, react syntax highlighter will not add style objects to elements, and will instead append classNames. You can then style the code block by using one of the CSS files provided by highlight.js."
+      },
+      "showLineNumbers": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "if this is enabled line numbers will be shown next to the code block."
+      },
+      "startingLineNumber": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "if showLineNumbers is enabled the line numbering will start from here."
+      },
+      "lineNumberContainerStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "the line numbers container default to appearing to the left with 10px of right padding. You can use this to override those styles."
+      },
+      "lineNumberStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "inline style to be passed to the span wrapping each number. Can be either an object or a function that recieves current line number as argument and returns style object."
+      },
+      "wrapLines": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "a boolean value that determines whether or not each line of code should be wrapped in a parent element. defaults to false, when false one can not take action on an element on the line level. You can see an example of what this enables here"
+      },
+      "lineStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "inline style to be passed to the span wrapping each line if wrapLines is true. Can be either an object or a function that recieves current line number as argument and returns style object."
+      }
+    }
+  }
+}
