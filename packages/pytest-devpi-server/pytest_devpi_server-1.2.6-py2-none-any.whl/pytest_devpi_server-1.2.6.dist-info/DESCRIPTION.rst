@@ -1,0 +1,146 @@
+# Py.test DevPi Server Fixture
+
+DevPi server fixture for ``py.test``. The server is session-scoped by default 
+and run in a subprocess and temp dir to cleanup when it's done. 
+
+After the server has started up it will create a single user with a password, 
+and an index for that user. It then activates that index and provides a
+handle to the ``devpi-client`` API so you can manipulate the server in your tests.
+
+## Installation
+
+Install using your favourite package manager:
+
+```bash
+    pip install pytest-devpi-server
+    #  or..
+    easy_install pytest-devpi-server
+```
+
+Enable the fixture explicitly in your tests or conftest.py (not required when using setuptools entry points):
+
+```python
+    pytest_plugins = ['pytest_devpi_server']
+```
+
+## Example 
+
+Here's a noddy test case showing the main functionality:
+
+```python
+    def test_devpi_server(devpi_server):
+        # This is the client API for the server that's bound directly to the 'devpi' command-line tool.
+        # Here we list the available indexes
+        print(devpi_server.api('use', '-l'))
+
+        # Create and use another index
+        devpi_server.api('index', '-c', 'myindex')
+        devpi_server.api('index', 'use', 'myindex')
+
+        # Upload a package 
+        import os
+        os.chdir('/path/to/my/setup/dot/py')
+        devpi_server.api('upload')
+
+        # Get some json data
+        import json
+        res = devpi_server.api('getjson', '/user/myindex')
+        assert json.loads(res)['result']['projects'] == ['my-package-name']
+
+```        
+
+## `DevpiServer` class
+
+Using this with the default `devpi_server` py.test fixture is good enough for a lot of 
+use-cases however you may wish to have more fine-grained control about the server configuration.
+
+To do this you can use the underlying server class directly - this is an implenentation of the
+`pytest-server-fixture` framework and as such acts as a context manager:
+
+```python
+    import json
+    from pytest_devpi_server import DevpiServer
+
+    def test_custom_server():
+        with DevPiServer(
+              # You can specify you own initial user and index
+              user='bob',
+              password='secret',
+              index='myindex',
+
+              # You can provide a zip file that contains the initial server database, 
+              # this is useful to pre-load any required packages for a test run
+              data='/path/to/data.zip'
+           ) as server:
+
+               assert not server.dead
+               res = server.api('getjson', '/bob/myindex')
+               assert 'pre-loaded-package' in json.loads(res)['result']['projects'] 
+
+        # Server should now be dead
+        assert server.dead   
+```
+
+
+## Changelog
+
+### 1.2.6 (2017-2-16)
+ * Updated devpi server server setup for devpi-server >= 2.0
+ * Improvements for random port picking
+ * HTTPD server now binds to 0.0.0.0 by default to aid Selenium-style testing
+ * Updated mongodb server args for mongodb >= 3.2
+ * Corrections for mongodb fixture config and improve startup logic
+ * Added module-scoped mongodb fixture
+ * Handling for older versions of path.py
+ * Fix for #40 where tests that chdir break pytest-profiling
+
+### 1.2.5 (2016-12-09)
+ * Improvements for server runner host and port generation, now supports random local IPs
+ * Bugfix for RethinkDB fixture config
+
+### 1.2.4 (2016-11-14)
+ * Bugfix for pymongo extra dependency
+ * Windows compatibility fix for pytest-virtualenv (Thanks to Jean-Christophe Fillion-Robin for PR)
+ * Fix symlink handling for pytest-shutil.cmdline.get_real_python_executable
+
+### 1.2.3 (2016-11-7)
+ * Improve resiliency of Mongo fixture startup checks
+
+### 1.2.2 (2016-10-27)
+ * Python 3 compatibility across most of the modules
+ * Fixed deprecated Path.py imports (Thanks to Bryan Moscon)
+ * Fixed deprecated multicall in pytest-profiling (Thanks to Paul van der Linden for PR)
+ * Added devpi-server fixture to create an index per test function
+ * Added missing licence file
+ * Split up httpd server fixture config so child classes can override loaded modules easier
+ * Added 'preserve_sys_path' argument to TestServer base class which exports the current python sys.path to subprocesses. 
+ * Updated httpd, redis and jenkins runtime args and paths to current Ubuntu spec
+ * Ignore errors when tearing down workspaces to avoid race conditions in 'shutil.rmtree' implementation
+
+### 1.2.1 (2016-3-1)
+ * Fixed pytest-verbose-parametrize for latest version of py.test
+
+### 1.2.0 (2016-2-19)
+ * New plugin: git repository fixture
+
+### 1.1.1 (2016-2-16)
+ * pytest-profiling improvement: escape illegal characters in .prof files (Thanks to Aarni Koskela for the PR)
+
+### 1.1.0 (2016-2-15)
+
+ * New plugin: devpi server fixture
+ * pytest-profiling improvement: overly-long .prof files are saved as the short hash of the test name (Thanks to Vladimir Lagunov for PR)
+ * Changed default behavior of workspace.run() to not use a subshell for security reasons
+ * Corrected virtualenv.run() method to handle arguments the same as the parent method workspace.run()
+ * Removed deprecated '--distribute' from virtualenv args
+
+### 1.0.1 (2015-12-23)
+
+ *  Packaging bugfix
+
+### 1.0.0 (2015-12-21)
+
+ *  Initial public release
+
+
+
