@@ -1,0 +1,15 @@
+``get_gh_event_processors``, "Get GitHub events processors", ``dict`` of ``str``: ``list`` of ``function``
+``get_gh_webhook_processors``, "Get GitHub webhook processors", ``dict`` of ``str``: ``list`` of ``function``
+``init_business``, "Init business layer of the extension", ``None``
+``init_blueprints``, "Init Flask blueprints (register them)", ``None``
+``init_container``, "Put whatever you need into DI container of the app", ``None``
+``init_filters``, "Init Jinja2 filters for views (register them)", ``None``
+``init_models``, "Init models (data) layer of the extension", ``array``
+``introduce``, "Introduce yourself (just name) for the list of extensions", ``str``
+``view_admin_extensions``, "Return view object of extension for the admin list", ``ExtensionView``
+``view_admin_index_tabs``, "Add/edit tabs for admin index page", ``dict`` of ``str``:``ViewTab``
+``view_core_search_tabs``, "Add/edit tabs for search results page", ``dict`` of ``str``:``ViewTab``
+``view_core_user_detail_tabs``, "Add/edit tabs for public user page", ``dict`` of ``str``:``ViewTab``
+``view_core_org_detail_tabs``, "Add/edit tabs for public organization page", ``dict`` of ``str``:``ViewTab``
+``view_core_repo_detail_tabs``, "Add/edit tabs for repository detail page", ``dict`` of ``str``:``ViewTab``
+``view_manage_dashboard_tabs``, "Add/edit tabs for user management zone dashboard", ``dict`` of ``str``: ```ViewTab``
