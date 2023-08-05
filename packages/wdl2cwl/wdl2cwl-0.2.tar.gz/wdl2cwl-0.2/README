@@ -1,0 +1,55 @@
+Converter from the Broad Institute's Workflow Definition
+Language (WDL) to the Common Workflow Language.
+
+Generates a directory with a set of CWL files which can be executed with a CWL implementation.
+
+Usage: `wdl2cwl workflow.wdl`
+
+## Notes on autoconverting
+
+Not every WDL workflow can be automatically mapped to CWL. Sometimes some additional tweaks after CWL generation are required:
+
+#### Secondary files
+
+If any of the input parameters include
+
+
+#### Runtime (WDL)
+docker [] -> DockerRequirement, only one image
+resources -> ResourceRequirement, megabytes -> mebibytes string
+
+If the output {...} section is omitted, then the workflow includes
+all outputs from all calls in its final output.
+
+На вході у ворклоф немає параметра, він передається імпліцитно через інпут файл
+
+sub - effectively replaced by inputs.path.basename
+
+secondaryFiles
+- .fai
+- ^.dict
+
+step level variables: if several variables with the same name declared - works in WDL, doesn't work in CWL
+
+resource and docker requirements: megabytes vs mebibytes
+
+read_X() functions:
+if an input parameter is read from a file by a function like read_tsv or read_csv, it must start with a backslash.
+wdl2cwl has to transform file inputs in plain strings to a CWL File object.
+wdl2cwl only recognizes a filepath in a .txt file if it starts with a backslash. Moreover, all strings starting with '/'
+will be treated as filepathes.
+
+## References:
+
+CWL spec
+https://github.com/common-workflow-language/common-workflow-language
+
+WDL spec
+https://github.com/broadinstitute/wdl
+
+Python WDL parser
+https://github.com/broadinstitute/pywdl
+
+cwl2wdl (convert the other way)
+https://github.com/adamstruck/cwl2wdl
+
