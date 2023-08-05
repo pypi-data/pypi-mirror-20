@@ -1,0 +1,6 @@
+include setup.cfg
+include setup*.py
+include MANIFEST.in
+include *.txt
+include Makefile
+recursive-include pvmpy *.pyx *.pxd *.pxi *.py *.c *.h *.ini *.md5 *.npy *.txt
