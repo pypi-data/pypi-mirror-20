@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scanner</title>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous"></script>
+    <script>
+        var targetContainer = document.getElementById("container");
+        var source = new EventSource("{{ url_for('sse.stream') }}");
+        source.addEventListener('{{event_type}}', function(event) {
+            var data = JSON.parse(event.data);
+            $('<div/>').text(data.message).appendTo($('.container'));
+        }, false);
+        source.addEventListener('error', function(event) {
+            $('<div/>').css("color", "red").text("connection error from Server").appendTo($('.container'));
+        }, false);
+  </script>
+
+
+    </script>
+</head>
+
+<body>
+    <h1>Scanner</h1>
+    <div class="container"></div>
+</body>
+
+</html>
