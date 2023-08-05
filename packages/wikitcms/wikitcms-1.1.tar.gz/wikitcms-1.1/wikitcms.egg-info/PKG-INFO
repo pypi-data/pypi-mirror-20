@@ -1,0 +1,26 @@
+Metadata-Version: 1.1
+Name: wikitcms
+Version: 1.1
+Summary: Fedora QA wiki test management library
+Home-page: https://www.happyassassin.net/wikitcms/
+Author: Adam Williamson
+Author-email: awilliam@redhat.com
+License: GPLv3+
+Description: # wikitcms
+        
+        wikitcms is a Python library for interacting with the Fedora wiki, as
+        Fedora QA uses it as a test management system.
+        
+        It uses the [mwclient](https://github.com/mwclient/mwclient) library
+        to access the Fedora MediaWiki instance. Its capabilities include
+        creating new release validation compose event pages, querying existing
+        pages for results in various formats, and more.
+        
+        Its API is still in development and should not yet be entirely relied
+        upon.
+        
+Keywords: fedora qa mediawiki validation
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
