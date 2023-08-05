@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>atomate.tools package &#8212; atomate 0.4.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.4.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">atomate 0.4.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="atomate-tools-package">
+<h1>atomate.tools package<a class="headerlink" href="#atomate-tools-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="atomate.tools.post_process.html">atomate.tools.post_process package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.post_process.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.post_process.html#module-atomate.tools.post_process.gibbs">atomate.tools.post_process.gibbs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.post_process.html#module-atomate.tools.post_process.plot_raman">atomate.tools.post_process.plot_raman module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.post_process.html#module-atomate.tools.post_process">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atomate.tools.tests.html">atomate.tools.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.tests.html#module-atomate.tools.tests.test_quasiharmonic_debye_approx">atomate.tools.tests.test_quasiharmonic_debye_approx module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomate.tools.tests.html#module-atomate.tools.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-atomate.tools.analysis">
+<span id="atomate-tools-analysis-module"></span><h2>atomate.tools.analysis module<a class="headerlink" href="#module-atomate.tools.analysis" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox">
+<em class="property">class </em><code class="descclassname">atomate.tools.analysis.</code><code class="descname">QuasiharmonicDebyeApprox</code><span class="sig-paren">(</span><em>energies</em>, <em>volumes</em>, <em>structure</em>, <em>t_min=300.0</em>, <em>t_step=100</em>, <em>t_max=300.0</em>, <em>eos=u'vinet'</em>, <em>pressure=0.0</em>, <em>poisson=0.25</em>, <em>use_mie_gruneisen=False</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Implements the quasiharmonic Debye approximation as described in papers:
+<a class="reference external" href="http://doi.org/10.1016/j.comphy.2003.12.001">http://doi.org/10.1016/j.comphy.2003.12.001</a> (2004) and
+<a class="reference external" href="http://doi.org/10.1103/PhysRevB.90.174107">http://doi.org/10.1103/PhysRevB.90.174107</a> (2014)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">energies (list): list of DFT energies in eV
+volumes (list): list of volumes in Ang^3
+structure (Structure):
+t_min (float): min temperature
+t_step (float): temperature step
+t_max (float): max temperature
+eos (str): equation of state used for fitting the energies and the volumes.</p>
+<blockquote>
+<div>options supported by pymatgen: &#8220;quadratic&#8221;, &#8220;murnaghan&#8221;, &#8220;birch&#8221;, &#8220;birch_murnaghan&#8221;,
+&#8220;pourier_tarantola&#8221;, &#8220;vinet&#8221;, &#8220;deltafactor&#8221;</div></blockquote>
+<p>pressure (float): in GPa, optional.
+poisson (float): poisson ratio.
+use_mie_gruneisen (bool): whether or not to use the mie-gruneisen formulation to compute</p>
+<blockquote class="last">
+<div>the gruneisen parameter. The default is slater-gamma formulation.</div></blockquote>
+</dd>
+</dl>
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>energies</em>, <em>volumes</em>, <em>structure</em>, <em>t_min=300.0</em>, <em>t_step=100</em>, <em>t_max=300.0</em>, <em>eos=u'vinet'</em>, <em>pressure=0.0</em>, <em>poisson=0.25</em>, <em>use_mie_gruneisen=False</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.debye_integral">
+<em class="property">static </em><code class="descname">debye_integral</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.debye_integral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Debye integral. Eq(5) in  doi.org/10.1016/j.comphy.2003.12.001</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>y (float): debye temperature/T, upper limit</dd>
+<dt>Returns:</dt>
+<dd>float: unitless</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.debye_temperature">
+<code class="descname">debye_temperature</code><span class="sig-paren">(</span><em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.debye_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the debye temperature.
+Eq(6) in doi.org/10.1016/j.comphy.2003.12.001. Thanks to Joey.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>volume (float): in Ang^3</dd>
+<dt>Returns:</dt>
+<dd>float: debye temperature in K</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.get_summary_dict">
+<code class="descname">get_summary_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.get_summary_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict with a summary of the computed properties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.gruneisen_parameter">
+<code class="descname">gruneisen_parameter</code><span class="sig-paren">(</span><em>temperature</em>, <em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.gruneisen_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Slater-gamma formulation(the default):</dt>
+<dd><dl class="first last docutils">
+<dt>gruneisen paramter = - d log(theta)/ d log(V)</dt>
+<dd>= - ( 1/6 + 0.5 d log(B)/ d log(V) )
+= - (1/6 + 0.5 V/B dB/dV), where dB/dV = d^2E/dV^2 + V * d^3E/dV^3</dd>
+</dl>
+</dd>
+<dt>Mie-gruneisen formulation:</dt>
+<dd><p class="first">Eq(31) in doi.org/10.1016/j.comphy.2003.12.001
+Eq(7) in MA Blanc0 ef al.lJoumal of Molecular Structure (Theochem) 368 (1996) 245-255
+Also se J.-P. Poirier, Introduction to the Physics of the Earth’s Interior, 2nd ed.</p>
+<blockquote class="last">
+<div>(Cambridge University Press, Cambridge, 2000) Eq(3.53)</div></blockquote>
+</dd>
+<dt>Args:</dt>
+<dd>temperature (float): temperature in K
+volume (float): in Ang^3</dd>
+<dt>Returns:</dt>
+<dd>float: unitless</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.optimize_gibbs_free_energy">
+<code class="descname">optimize_gibbs_free_energy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.optimize_gibbs_free_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the gibbs free energy as a function of V, T and P i.e G(V, T, P),
+minimize G(V, T, P) wrt V for each T and store the optimum values.</p>
+<p>Note: The data points for which the equation of state fitting fails are skipped.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.optimizer">
+<code class="descname">optimizer</code><span class="sig-paren">(</span><em>temperature</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate G(V, T, P) at the given temperature(and pressure) and minimize it wrt V.</p>
+<ol class="arabic simple">
+<li>Compute the  vibrational helmholtz free energy, A_vib.</li>
+<li>Compute the gibbs free energy as a function of volume, temperature and pressure, G(V,T,P).</li>
+<li>Preform an equation of state fit to get the functional form of gibbs free energy:G(V, T, P).</li>
+<li>Finally G(V, P, T) is minimized with respect to V.</li>
+</ol>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>temperature (float): temperature in K</dd>
+<dt>Returns:</dt>
+<dd>float, float: G_opt(V_opt, T, P) in eV and V_opt in Ang^3.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.thermal_conductivity">
+<code class="descname">thermal_conductivity</code><span class="sig-paren">(</span><em>temperature</em>, <em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.thermal_conductivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eq(17) in 10.1103/PhysRevB.90.174107</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>temperature (float): temperature in K
+volume (float): in Ang^3</dd>
+<dt>Returns:</dt>
+<dd>float: thermal conductivity in W/K/m</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.vibrational_free_energy">
+<code class="descname">vibrational_free_energy</code><span class="sig-paren">(</span><em>temperature</em>, <em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.vibrational_free_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vibrational Helmholtz free energy, A_vib(V, T).
+Eq(4) in doi.org/10.1016/j.comphy.2003.12.001</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>temperature (float): temperature in K
+volume (float)</dd>
+<dt>Returns:</dt>
+<dd>float: vibrational free energy in eV</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="atomate.tools.analysis.QuasiharmonicDebyeApprox.vibrational_internal_energy">
+<code class="descname">vibrational_internal_energy</code><span class="sig-paren">(</span><em>temperature</em>, <em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.QuasiharmonicDebyeApprox.vibrational_internal_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vibrational internal energy, U_vib(V, T).
+Eq(4) in doi.org/10.1016/j.comphy.2003.12.001</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>temperature (float): temperature in K
+volume (float): in Ang^3</dd>
+<dt>Returns:</dt>
+<dd>float: vibrational internal energy in eV</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="atomate.tools.analysis.get_phonopy_gibbs">
+<code class="descclassname">atomate.tools.analysis.</code><code class="descname">get_phonopy_gibbs</code><span class="sig-paren">(</span><em>energies</em>, <em>volumes</em>, <em>force_constants</em>, <em>structure</em>, <em>t_min</em>, <em>t_step</em>, <em>t_max</em>, <em>mesh</em>, <em>eos</em>, <em>pressure=0</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.get_phonopy_gibbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute QHA gibbs free energy using the phonopy interface.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">energies (list):
+volumes (list):
+force_constants (list):
+structure (Structure):
+t_min (float): min temperature
+t_step (float): temperature step
+t_max (float): max temperature
+mesh (list/tuple): reciprocal space density
+eos (str): equation of state used for fitting the energies and the volumes.</p>
+<blockquote>
+<div>options supported by phonopy: vinet, murnaghan, birch_murnaghan</div></blockquote>
+<p class="last">pressure (float): in GPa, optional.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>(numpy.ndarray, numpy.ndarray): Gibbs free energy, Temperature</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="atomate.tools.analysis.get_phonopy_qha">
+<code class="descclassname">atomate.tools.analysis.</code><code class="descname">get_phonopy_qha</code><span class="sig-paren">(</span><em>energies</em>, <em>volumes</em>, <em>force_constants</em>, <em>structure</em>, <em>t_min</em>, <em>t_step</em>, <em>t_max</em>, <em>mesh</em>, <em>eos</em>, <em>pressure=0</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.get_phonopy_qha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return phonopy QHA interface.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">energies (list):
+volumes (list):
+force_constants (list):
+structure (Structure):
+t_min (float): min temperature
+t_step (float): temperature step
+t_max (float): max temperature
+mesh (list/tuple): reciprocal space density
+eos (str): equation of state used for fitting the energies and the volumes.</p>
+<blockquote>
+<div>options supported by phonopy: vinet, murnaghan, birch_murnaghan</div></blockquote>
+<p class="last">pressure (float): in GPa, optional.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>PhonopyQHA</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="atomate.tools.analysis.get_phonopy_thermal_expansion">
+<code class="descclassname">atomate.tools.analysis.</code><code class="descname">get_phonopy_thermal_expansion</code><span class="sig-paren">(</span><em>energies</em>, <em>volumes</em>, <em>force_constants</em>, <em>structure</em>, <em>t_min</em>, <em>t_step</em>, <em>t_max</em>, <em>mesh</em>, <em>eos</em>, <em>pressure=0</em><span class="sig-paren">)</span><a class="headerlink" href="#atomate.tools.analysis.get_phonopy_thermal_expansion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute QHA thermal expansion coefficient using the phonopy interface.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">energies (list):
+volumes (list):
+force_constants (list):
+structure (Structure):
+t_min (float): min temperature
+t_step (float): temperature step
+t_max (float): max temperature
+mesh (list/tuple): reciprocal space density
+eos (str): equation of state used for fitting the energies and the volumes.</p>
+<blockquote>
+<div>options supported by phonopy: vinet, murnaghan, birch_murnaghan</div></blockquote>
+<p class="last">pressure (float): in GPa, optional.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>(numpy.ndarray, numpy.ndarray): thermal expansion coefficient, Temperature</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-atomate.tools">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-atomate.tools" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">atomate.tools package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-atomate.tools.analysis">atomate.tools.analysis module</a></li>
+<li><a class="reference internal" href="#module-atomate.tools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/atomate.tools.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">atomate 0.4.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015, Anubhav Jain.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.
+    </div>
+  </body>
+</html>
