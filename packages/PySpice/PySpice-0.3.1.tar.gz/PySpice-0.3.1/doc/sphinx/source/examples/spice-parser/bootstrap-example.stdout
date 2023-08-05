@@ -1,0 +1,28 @@
+[1;32m2017-02-22 18:59:24,097[0m - [1;34mPySpice.Spice.Netlist.Pin.__init__[0m - [1;31mWARNING[0m - Node in is a Python keyword
+[1;32m2017-02-22 18:59:24,097[0m - [1;34mPySpice.Spice.Netlist.Pin.__init__[0m - [1;31mWARNING[0m - Node in is a Python keyword
+.title STM AN1476: Low-Cost Power Supply For Home Appliances
+.include /home/fabrice/home/developpement/PySpice/examples/libraries/diode/standard-rectifier/1N4148.lib
+.include /home/fabrice/home/developpement/PySpice/examples/libraries/diode/zener/1N5919B-spice3.lib
+Vinput out in DC 0V AC SIN(0V 325.2691193458119V 50Hz 0s 0)
+Rload out 0 1k
+Cload out 0 220u
+XD1 0 1 1N4148
+D1 0 1 DIODE1 off
+XDz1 1 out d1n5919brl
+Cac 1 2 470n
+Rac 2 in 470 m=1 temp={25}
+
+[1;32m2017-02-22 18:59:24,098[0m - [1;34mPySpice.Spice.Netlist.Pin.__init__[0m - [1;31mWARNING[0m - Node in is a Python keyword
+[1;32m2017-02-22 18:59:24,098[0m - [1;34mPySpice.Spice.Netlist.Pin.__init__[0m - [1;31mWARNING[0m - Node in is a Python keyword
+.title STM AN1476: Low-Cost Power Supply For Home Appliances
+.include /home/fabrice/home/developpement/PySpice/examples/libraries/diode/standard-rectifier/1N4148.lib
+.include /home/fabrice/home/developpement/PySpice/examples/libraries/diode/zener/1N5919B-spice3.lib
+Vinput out in DC 0V AC SIN(0V 325.2691193458119V 50Hz 0s 0)
+Rload out 0 1k
+Cload out 0 220u
+XD1 0 1 1N4148
+D1 0 1 DIODE1 off
+XDz1 1 out d1n5919brl
+Cac 1 2 470n
+Rac 2 in 470 m=1 temp={25}
+
