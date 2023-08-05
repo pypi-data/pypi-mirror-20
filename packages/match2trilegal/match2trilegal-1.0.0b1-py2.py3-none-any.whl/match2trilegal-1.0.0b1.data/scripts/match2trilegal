@@ -1,0 +1,37 @@
+#!python
+import argparse
+import sys
+
+from match2trilegal import process_match_sfh, process_match_popbox
+
+
+def main(argv=None):
+    """Main function for the process_match_sfh.py script"""
+
+    parser = argparse.ArgumentParser(description="Convert MATCH SFH file to TRILEGAL SFR, Z file")
+
+    parser.add_argument('--zsun', type=float, default=0.01524,
+                        help='solar metallicity used in MATCH')
+
+    parser.add_argument('-z', '--zdisp', type=float, default=None,
+                        help='include a constant value of z-dispersion')
+
+    parser.add_argument('-p', '--popbox', action='store_true',
+                        help='convert population box (not match sfh)')
+
+    parser.add_argument('infile', type=str, help='match sfh file')
+
+    parser.add_argument('-o', '--outfile', type=str,
+                        help='output trilegal AMR file')
+
+    args = parser.parse_args(argv)
+    if args.popbox:
+        process_match_popbox(args.infile, outfile=args.outfile, zdisp=args.zdisp)
+    else:
+        process_match_sfh(args.infile, outfile=args.outfile, zdisp=args.zdisp)
+
+    return
+
+
+if __name__ == '__main__':
+    sys.exit(main())
