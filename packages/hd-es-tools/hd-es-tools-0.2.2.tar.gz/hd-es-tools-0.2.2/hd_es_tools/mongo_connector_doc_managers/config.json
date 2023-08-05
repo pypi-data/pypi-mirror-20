@@ -1,0 +1,157 @@
+{
+  "__comment__": "Configuration options starting with '__' are disabled",
+  "__comment__": "To enable them, remove the preceding '__'",
+  "mainAddress": "mongodb://root:1WKus_Mtft2Y@dds-2ze25b01e5acd8741.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-2389541",
+  "__oplogFile": "/var/log/mongo-connector/oplog.timestamp",
+  "noDump": false,
+  "noIncr": false,
+  "batchSize": 1000,
+  "verbosity": 0,
+  "continueOnError": false,
+  "logging": {
+    "type": "file",
+    "__filename": "/var/log/mongo-connector/mongo-connector.log",
+    "__format": "%(asctime)s [%(levelname)s] %(name)s:%(lineno)d - %(message)s",
+    "__rotationWhen": "D",
+    "__rotationInterval": 1,
+    "__rotationBackups": 10,
+    "__type": "syslog",
+    "__host": "localhost:514"
+  },
+  "__authentication": {
+    "__adminUsername": "username",
+    "__password": "password",
+    "__passwordFile": "mongo-connector.pwd"
+  },
+  "__comment__": "For more information about SSL with MongoDB, please see http://docs.mongodb.org/manual/tutorial/configure-ssl-clients/",
+  "__ssl": {
+    "__sslCertfile": "Path to certificate to identify the local connection against MongoDB",
+    "__sslKeyfile": "Path to the private key for sslCertfile. Not necessary if already included in sslCertfile.",
+    "__sslCACerts": "Path to concatenated set of certificate authority certificates to validate the other side of the connection",
+    "__sslCertificatePolicy": "Policy for validating SSL certificates provided from the other end of the connection. Possible values are 'required' (require and validate certificates), 'optional' (validate but don't require a certificate), and 'ignored' (ignore certificates)."
+  },
+  "__fields": [
+    "field1",
+    "field2",
+    "field3"
+  ],
+  "__fields": [
+    "_id",
+    "sid",
+    "uid",
+    "na",
+    "st",
+    "rt",
+    "cht",
+    "it",
+    "ct",
+    "ut",
+    "sf",
+    "ty",
+    "sys",
+    "de",
+    "cover"
+  ],
+  "__namespaces": {
+    "excluded.collection": false,
+    "excluded_wildcard.*": false,
+    "*.exclude_collection_from_every_database": false,
+    "included.collection1": true,
+    "included.collection2": {},
+    "included.collection4": {
+      "includeFields": [
+        "included_field",
+        "included.nested.field"
+      ]
+    },
+    "included.collection5": {
+      "rename": "included.new_collection5_name",
+      "includeFields": [
+        "included_field",
+        "included.nested.field"
+      ]
+    },
+    "included.collection6": {
+      "excludeFields": [
+        "excluded_field",
+        "excluded.nested.field"
+      ]
+    },
+    "included.collection7": {
+      "rename": "included.new_collection7_name",
+      "excludeFields": [
+        "excluded_field",
+        "excluded.nested.field"
+      ]
+    },
+    "included_wildcard1.*": true,
+    "included_wildcard2.*": true,
+    "renamed.collection1": "something.else1",
+    "renamed.collection2": {
+      "rename": "something.else2"
+    },
+    "renamed_wildcard.*": {
+      "rename": "new_name.*"
+    },
+    "gridfs.collection": {
+      "gridfs": true
+    },
+    "gridfs_wildcard.*": {
+      "gridfs": true
+    }
+  },
+  "namespaces": {
+    "db_hdfavorite.t_favorite_dir": {
+      "rename": "test_2_2.favorite_dir",
+      "includeFields": [
+        "_id",
+        "sid",
+        "uid",
+        "na",
+        "st",
+        "rt",
+        "cht",
+        "ct",
+        "ut",
+        "sf",
+        "ty",
+        "sys",
+        "de",
+        "cv"
+      ]
+    }
+  },
+  "docManagers": [
+    {
+      "docManager": "elastic5_doc_manager",
+      "targetURL": ["elastic:changeme@10.0.10.71:9200", "elastic:changeme@10.0.10.200:9200", "elastic:changeme@10.0.10.201:9200"],
+      "__bulkSize": -1,
+      "__uniqueKey": "_id",
+      "__autoCommitInterval": null,
+      "args": {
+        "autoSendInterval": 1,
+        "formatOptions": {
+          "formatterClassPath":"hd_es_tools.mongo_connector_doc_managers.formatters.DefaultDocumentFormatter",
+          "test_2_2.favorite_dir": {
+            "rename": {
+              "sid": "sid",
+              "uid": "uid",
+              "na": "title",
+              "st": "status",
+              "rt": "rate",
+              "cht": "chkTime",
+              "it": "isInTopic",
+              "ct": "ctime",
+              "ut": "luTime",
+              "sf": "snFix",
+              "ty": "type",
+              "sys": "sys",
+              "de": "desc",
+              "cv": "cover"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
