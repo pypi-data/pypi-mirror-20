@@ -1,0 +1,57 @@
+========================
+Changes for lovely.spice
+========================
+
+2017/02/14 0.1.2
+================
+
+ - added package description
+
+2016/02/29 0.1.1
+================
+
+ - added encoding to dump call used in renderer
+
+2016/02/29 0.1.1
+================
+
+ - added encoding to dump call used in renderer
+
+2015/12/17 0.1.0
+================
+
+ - ignore errors during cleanup
+
+ - BREAKING CHANGE
+   do not create subfolder in targetDir named like sourceDir
+
+ - loader must follow symlinks
+
+2015/12/16 0.0.5
+================
+
+ - added FileRenderer to support rendering of single templates by CLI
+
+2015/12/03 0.0.4
+================
+
+ - refactored renderer to support single template rendering with custom
+   context
+
+2015/11/26 0.0.3
+================
+
+ - included required versions.cfg in MANIFEST.in
+
+
+2015/11/26 0.0.2
+================
+
+ - added missing MANIFEST.in
+
+
+2015/11/26 0.0.1
+================
+
+ - initial release
+
