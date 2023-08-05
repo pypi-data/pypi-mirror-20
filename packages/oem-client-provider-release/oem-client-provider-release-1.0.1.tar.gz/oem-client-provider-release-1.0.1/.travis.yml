@@ -1,0 +1,19 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -U setuptools
+script: true
+after_success: python setup.py sdist bdist_wheel
+deploy:
+  provider: releases
+  api_key:
+    secure: zT4hMpsv3G65STKgbiVgzYRAfcx8mdZdBqBMlhHl52R5hy09gqs6ntON9gjche5Pkwn6Xw1L/zC2U+HT1TuM/BtIIf83S7vkMviLczeAKAckEQTstRAE8hae9eq3O2Bcl1NHMIOpNv4Pid7vk9Px7SW9WTw6ojPWSNH2aJ5rLfLtGJKMgMIiWZcii2Al33xQ+gnhK6dQ/odmdA2lQq8c5DdR8L9eSgJUl8jQH6sEQoqsiQ2UrCkOFwwXuHeJRvX5huzjf9nVGRX1JwmObrTlLNDKpwjbKNafT1sMOjXeUUeLQCsnOxyeLwwKbcOAkVXbur9OIklqNbzImVXUpLz8aIQhBTFZh2C5LvuxGXHlJaQHapAXijfzU0iFc6QyWAfTukhv1zcWz+4pyYSWFXiTm/6n5hZzaa4UDeBWxlHdw7pSo8cOP14Vkupud4ocSXwU7Hu7cBXhovtAuDlppfSILuDIPvy0saxOp5mPHyK+Nn2GpAK7naE0Vij9jkuCxS3PKj06y1u9o/M3HSccxOzFc9YXT4gL1ds2I3r1+TD31kjar9Yk/ZEaez3ZfqoTB6eAhAZv3cdQDGS5hy9AvfEJ5oTDnLQo6JGDNzy0MsQ78Z9DWJZD+yxxlLU+1R0AP9envW1nvtWx88icYXCPZFVFQCUnUNtzLn4ZQYuqbR+nehM=
+  skip_cleanup: true
+  file_glob: true
+  file:
+  - "dist/oem-client-provider-release-*"
+  - "dist/oem_client_provider_release-*"
+  on:
+    repo: OpenEntityMap/oem-client-provider-release
+    tags: true
