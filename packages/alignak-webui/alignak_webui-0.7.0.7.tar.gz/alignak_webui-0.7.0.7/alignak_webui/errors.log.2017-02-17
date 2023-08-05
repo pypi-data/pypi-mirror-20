@@ -1,0 +1,55 @@
+[2017-02-17 15:39:46,648] ERROR: [alignak_webui.webui] loading plugin hostdependencies, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:46,729] ERROR: [alignak_webui.webui] loading plugin userrestrictroles, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:46,798] ERROR: [alignak_webui.webui] loading plugin servicedependencies, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:46,798] ERROR: [alignak_webui.webui] loading plugin lookup, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:47,353] ERROR: [alignak_webui.webui] loading plugin hostdependencies, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:47,424] ERROR: [alignak_webui.webui] loading plugin userrestrictroles, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:47,481] ERROR: [alignak_webui.webui] loading plugin servicedependencies, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:47,481] ERROR: [alignak_webui.webui] loading plugin lookup, exception: __init__() takes at most 3 arguments (4 given)
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/webui.py", line 428, in load_plugins
+    plugin_instance = p_class(self.app, self, cfg_files)
+TypeError: __init__() takes at most 3 arguments (4 given)
+[2017-02-17 15:39:55,415] ERROR: [alignak_webui.backend.datamanager] configured backend is not available: Backend error code 1000: Backend connection error
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/backend/datamanager.py", line 181, in user_login
+    'user', {'max_results': 1, 'where': {'token': username}}
+  File "/home/alignak/alignak-webui/alignak_webui/backend/backend.py", line 215, in get
+    raise e
+BackendException: Backend error code 1000: Backend connection error
+[2017-02-17 15:39:55,434] ERROR: [alignak_webui.backend.datamanager] get_livesynthesis, exception: Backend error code 1000: Backend connection error
+Traceback (most recent call last):
+  File "/home/alignak/alignak-webui/alignak_webui/backend/datamanager.py", line 767, in get_livesynthesis
+    '?concatenation=1', params=None)
+  File "/home/alignak/alignak-webui/alignak_webui/backend/backend.py", line 215, in get
+    raise e
+BackendException: Backend error code 1000: Backend connection error
+[2017-02-17 15:39:55,434] ERROR: [alignak_webui.backend.datamanager] load, must be logged-in before loading
