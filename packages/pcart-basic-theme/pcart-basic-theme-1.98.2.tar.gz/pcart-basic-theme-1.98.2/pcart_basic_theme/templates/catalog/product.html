@@ -1,0 +1,29 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags %}
+
+{% block base_content %}
+<h1>{{product.page_title|default:product.title}}</h1>
+
+{% include "catalog/includes/images.html" %}
+
+<p>{{product.status}}</p>
+
+<div>
+    {% with product.variants.all as variants %}
+    {% if variants %}
+        <ul>
+            {% for variant in variants %}
+            <li>
+                <a href="{{variant.get_absolute_url}}">{{variant.title}}</a> <span>{{variant.price}}</span>
+                {% include "catalog/includes/buy_button.html" with product=variant quantity=4 %}
+            </li>
+            {% endfor %}
+        </ul>
+        <span>From {{product.min_variant_price}} to {{product.max_variant_price}}</span>
+    {% else %}
+        {% include "catalog/includes/buy_button.html" with quantity=4 %}
+        <span>{{product.price}}</span>
+    {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags pcart_catalog thumbnail %}
+
+{% block base_content %}
+<h1>{{variant.title|default:variant.product.page_title|default:variant.product.title}}</h1>
+<p>Model: <a href="{{variant.product.get_absolute_url}}">{{variant.product.title}}</a></p>
+
+{% include "catalog/includes/images.html" with product=variant.product %}
+
+<p>{{product.status}}</p>
+
+<div>
+Price: {{variant.price}}
+</div>
+{% include "catalog/includes/buy_button.html" with product=variant quantity=4 %}
+{% endblock %}
