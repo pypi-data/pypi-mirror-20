@@ -1,0 +1,5 @@
+graft hdmi2usb/firmware
+include hdmi2usb/_version.py
+include versioneer.py
+include README.md
+recursive-include udev *
