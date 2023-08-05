@@ -1,0 +1,83 @@
+Metadata-Version: 1.1
+Name: sebureem
+Version: 0.0.1
+Summary: A simple comment server
+Home-page: https://framagit.org/Erwhann-Rouge/sebureem
+Author: Guilhem "Erwhann-Rouge" MAS-PAITRAULT
+Author-email: guilhem.mas-paitrault@protonmail.com
+License: BSD-3-Clause/CECILL-B
+Description: ########
+        Sebureem
+        ########
+        
+        Sebureem is a small comment server written in Python 3 with the Flask
+        microframework and the Peewee ORM.
+        Comments are storred using the SQLite database.
+        
+        Sebureem is the Kotava word for "comments" or "group of comments".
+        
+        **Important : Sebureem is still in very early stage. It might not be secure and
+        a lot of rough edges are to be expected.**
+        
+        Installation
+        ============
+        
+        First run:
+        
+        ``pip install sebureem``
+        
+        Create database :
+        
+        ``sebureem database --init``
+        
+        Then run your sebureem instance with :
+        
+        ``sebureem serve``
+        
+        … or you can specify host and port :
+        
+        ``sebureem serve 0.0.0.0 8000``
+        
+        Usage
+        =====
+        
+        Just add an iframe containing the following code in your page::
+        
+            <iframe src="http://<server_url:port>/comments/<topic>" >
+                <p>Your browser doesn't support iframes. Comments can't be loaded.</p>
+            </iframe>
+        
+        where server_url and port are the address of your instance and topic is the name
+        of the discussion thread you want to add to your webpage.
+        
+        If the thread doesn't exist in the database it will be created with the first
+        comment.
+        
+        Roadmap
+        =======
+        
+        Planned features:
+        
+        * Angular/Ember/Aurelia web_app
+        * Avatar support (Python Cat Avatar Generator ?)
+        * Instance federation
+        
+        Contributions
+        =============
+        
+        Contributions are warmly welcome. See CONTRIBUTING.rst.
+        
+        License
+        =======
+        
+        Sebureem is licensed both under the BSD License and the Cecill-B License.
+        
+        
+Keywords: sebureem comments disqus
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Flask
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
