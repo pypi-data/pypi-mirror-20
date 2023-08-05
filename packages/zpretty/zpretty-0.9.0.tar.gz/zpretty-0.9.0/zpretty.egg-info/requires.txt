@@ -1,0 +1,15 @@
+setuptools
+beautifulsoup4
+
+[development]
+zest.releaser
+check-manifest
+pyroma
+
+[test]
+nose
+nose-selecttests
+rednose
+coverage
+unittest2
+flake8
