@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Filters &mdash; django-inline-media 1.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="django-inline-media 1.4.0 documentation" href="index.html"/>
+        <link rel="next" title="Settings" href="settings.html"/>
+        <link rel="prev" title="Tutorial" href="tutorial.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> django-inline-media
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">Demo projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#filter-render-inlines">Filter: render_inlines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filter-extract-inlines">Filter: extract_inlines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">django-inline-media</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Filters</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/templatetags.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="ref-templatetags"></span><div class="section" id="filters">
+<span id="index-0"></span><h1>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h1>
+<p>Django-inline-media comes with two filters and one tag:</p>
+<blockquote>
+<div><ul class="simple">
+<li>filter <code class="docutils literal"><span class="pre">render_inlines</span></code></li>
+<li>filter <code class="docutils literal"><span class="pre">extract_inlines</span></code></li>
+</ul>
+</div></blockquote>
+<p>Load the templatetag module to use them in your templates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">inlines</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="filter-render-inlines">
+<span id="index-1"></span><h2>Filter: render_inlines<a class="headerlink" href="#filter-render-inlines" title="Permalink to this headline">¶</a></h2>
+<p>Renders inlines in a text by passing them through inline templates.</p>
+<p>Syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="o">&lt;</span><span class="n">field</span><span class="o">&gt;|</span><span class="n">render_inlines</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>Inline Syntax (singular):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">inline</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;&lt;app_name&gt;.&lt;model_name&gt;&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&lt;id&gt;&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;&lt;cssclass&gt;&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>Inline Syntax (plural):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">inline</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;&lt;app_name&gt;.&lt;model_name&gt;&quot;</span> <span class="n">ids</span><span class="o">=</span><span class="s2">&quot;&lt;id&gt;, &lt;id&gt;, &lt;id&gt;&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>An inline template will be used to render the inline. Templates will be located in the following maner:</dt>
+<dd><code class="docutils literal"><span class="pre">inline_media/&lt;app_name&gt;_&lt;model_name&gt;.html</span></code></dd>
+<dt>The template will be passed the following context:</dt>
+<dd><ul class="first last simple">
+<li><strong>object</strong>: an object for the corresponding passed id,  or</li>
+<li><strong>object_list</strong>: a list of objects for the corresponding ids.</li>
+</ul>
+</dd>
+</dl>
+<p>It would be wise to anticipate both object_list and object unless you know for sure one or the other will only be present.</p>
+<p>Example usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="nb">object</span><span class="o">.</span><span class="n">body</span><span class="o">|</span><span class="n">render_inlines</span> <span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filter-extract-inlines">
+<span id="index-2"></span><h2>Filter: extract_inlines<a class="headerlink" href="#filter-extract-inlines" title="Permalink to this headline">¶</a></h2>
+<p>Extract inlines from a text.</p>
+<p>Syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="o">&lt;</span><span class="n">field</span><span class="o">&gt;|</span><span class="n">extract_inlines</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>Example usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>{% for inline in object.body|extract_inlines %}
+  {% ifequal inline.content_type &quot;inline_media.picture&quot; %}
+    {% include &quot;inline_media/inline_media_picture.html&quot; with object=inline.object class=inline.class %}
+  {% endifequal %}
+{% endfor %}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="settings.html" class="btn btn-neutral float-right" title="Settings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Daniel Rus Morales.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
