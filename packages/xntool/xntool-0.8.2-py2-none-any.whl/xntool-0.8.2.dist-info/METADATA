@@ -1,0 +1,138 @@
+Metadata-Version: 2.0
+Name: xntool
+Version: 0.8.2
+Summary: funny tools
+Home-page: https://github.com/yidao620c/xntool
+Author: Xiong Neng
+Author-email: yidao620@gmail.com
+License: MIT
+Keywords: xntool,qiuniu,excel,pdf,mysql
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: BSD
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: lxml (>=3.7.2)
+Requires-Dist: openpyxl (>=2.4.2)
+Requires-Dist: qiniu (>=7.1.1)
+Requires-Dist: requests (>=2.6.0)
+
+xn toolkit
+==========
+
+xntool has many convenient tools, use ``xntool --help`` to show more examples.
+
+
+install
+-------
+
+usage:
+
+.. code-block:: bash
+
+    pip install xntool
+
+
+Wiki
+----
+
+
+show honey words
+++++++++++++++++
+
+usage:
+
+.. code-block:: bash
+
+    xntool love
+
+
+tail like
++++++++++
+
+usage:
+
+.. code-block:: bash
+
+    xntool tail /var/log/web.log 'python'
+
+
+convert Windows' CRLF into Unix's LF
+++++++++++++++++++++++++++++++++++++
+
+usage:
+
+.. code-block:: bash
+
+    xntool dos2unix /var/log/web.log
+
+
+replace text in file
+++++++++++++++++++++
+
+usage:
+
+.. code-block:: bash
+
+    xntool replace data.txt python perl
+
+
+evaluate file's md5
++++++++++++++++++++
+usage:
+
+.. code-block:: bash
+
+    xntool md5 data.txt
+
+
+upload picture to qiniu
++++++++++++++++++++++++
+
+first login <http://www.qiniu.com/>, get your configuration and modify ``/usr/etc/xntool/xntool.conf`` :
+
+.. code-block:: bash
+
+    #  Access Key and Secret Key
+    ACCESS_KEY = 'xxxxxxxxxxxxxxxx'
+    SECRET_KEY = 'yyyyyyyyyyyyyyyy'
+    # your URL
+    URL_PRE = 'http://yidaospace.qiniudn.com/'
+    # your bucket name
+    BUCKET_NAME = 'yidaospace'
+
+
+usage:
+
+.. code-block:: bash
+
+    xntool qiniu /tmp/pics
+
+you can fetch the urls of uploaded pictures in ``url.txt``
+
+More
+++++
+
+for more, please use ``xntool --help`` ...
+
+Resources
++++++++++
+
+* `GitHub repository <https://github.com/yidao620c/xntool>`_
+* `Python User Guide <https://www.python.org/doc/>`_
+
+
