@@ -1,0 +1,11 @@
+numpy>=1.12
+keras
+deap>=1.0.2
+
+[tests]
+pytest
+pytest-cov
+pytest-pep8
+pytest-xdist
+python-coveralls
+coverage==3.7.1
