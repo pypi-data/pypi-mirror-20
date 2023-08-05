@@ -1,0 +1,23 @@
+Metadata-Version: 2.0
+Name: NucleoATAC
+Version: 0.3.4
+Summary: python package for calling nucleosomes with ATAC-Seq
+Home-page: https://github.com/GreenleafLab/NucleoATAC
+Author: Alicia Schep
+Author-email: aschep@stanford.edu
+License: MIT
+Keywords: ATAC-Seq sequencing bioinformatics
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Dist: cython (>=0.22)
+Requires-Dist: numpy (>=1.9.1)
+Requires-Dist: scipy (>=0.16.0)
+Requires-Dist: pysam (>=0.10.0)
+Requires-Dist: matplotlib
+
+UNKNOWN
+
+
