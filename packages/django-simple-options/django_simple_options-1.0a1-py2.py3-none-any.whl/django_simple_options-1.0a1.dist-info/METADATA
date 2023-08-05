@@ -1,0 +1,66 @@
+Metadata-Version: 2.0
+Name: django-simple-options
+Version: 1.0a1
+Summary: Simple app to add configuration options to a Django project
+Home-page: https://github.com/marcosgabarda/django-options
+Author: Marcos Gabarda
+Author-email: hey@marcosgabarda.com
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Utilities
+Requires-Dist: django (>=1.9)
+Requires-Dist: six (>=1.0)
+
+==============
+Django Options
+==============
+
+Simple app to add configuration options to a Django project.
+
+Quick start
+-----------
+
+**1** Install using pip::
+
+    $ pip install django-simple-options
+
+**2** Add "options" to your INSTALLED_APPS settings like this::
+
+    INSTALLED_APPS += ('options',)
+
+
+Settings options
+----------------
+
+Use ``CONFIGURATION_DEFAULT_OPTIONS`` to set the default options::
+
+    CONFIGURATION_DEFAULT_OPTIONS = {
+        "sold_out": {
+            "value": 0,
+            "type": INT,
+            "public_name": "Sets tickets as sold out"
+        },
+    }
+
+
+
+
+
+History
+-------
+
+1.0a1 (2017-2-20)
++++++++++++++++++
+
+* First release on PyPI.
+
+
