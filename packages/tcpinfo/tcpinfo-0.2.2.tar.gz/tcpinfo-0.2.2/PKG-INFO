@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: tcpinfo
+Version: 0.2.2
+Summary: TCPinfo is a Python3 extension written in C to collect information about TCP-sockets via Linux's inet_diag interface
+Home-page: https://git.scc.kit.edu/CPUnetLOG/TCPinfo/
+Author: Michael Koenig
+Author-email: michael.koenig2@student.kit.edu
+License: BSD
+Description: TCPinfo is a Python3 extension written in C to collect information about TCP-sockets via Linux's inet_diag interface
+Keywords: tcp,flow,log,analyze,network,traffic,linux,inet_diag,extension,module,kernel,socket
+Platform: Linux
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: C
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Internet
+Classifier: Topic :: System :: Logging
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: System :: Networking :: Monitoring
+Classifier: Topic :: System :: Operating System Kernels :: Linux
