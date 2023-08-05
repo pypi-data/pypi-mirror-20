@@ -1,0 +1,53 @@
+Metadata-Version: 1.1
+Name: asyncrawler
+Version: 0.2
+Summary: Asyncio based web crawling framework
+Home-page: http://github.com/richardpenman/asyncrawler
+Author: Richard Penman
+Author-email: richard@webscraping.com
+License: lgpl
+Description: Features
+        ========
+        
+        -  Asynchronous downloading using aiohttp
+        -  Downloads cached locally in sqlite
+        -  Continue an interrupted crawl
+        -  Proxies
+        -  Cookies
+        -  Handle redirects
+        -  Retry 5XX errors
+        
+        
+        Example
+        =======
+        
+        .. sourcecode:: python
+        
+            >>> import asyncrawler
+            ...
+        
+        
+        
+        Install
+        =======
+        
+        Install from pypi:
+        
+        .. sourcecode:: bash
+        
+            pip install asyncrawler
+        
+        Or checkout latest version from repository:
+        
+        .. sourcecode:: bash
+        
+            git clone https://github.com/richardpenman/asyncrawler
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP
