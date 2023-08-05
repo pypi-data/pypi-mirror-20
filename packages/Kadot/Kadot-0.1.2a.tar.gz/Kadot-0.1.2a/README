@@ -1,0 +1,21 @@
+.. figure:: https://github.com/the-new-sky/Kadot/raw/master/logo.png
+   :alt: Kadot
+
+   Kadot
+
+A clean natural language processing toolkit.
+--------------------------------------------
+
+Kadot just let you process a text easily.
+
+.. code:: python
+
+    >>> hello_world = Text("Hello, I'm Kadot : the clean text analyser.")
+    >>> hello_world.tokens
+
+    ['Hello', 'I', 'm', 'Kadot', 'the', 'clean', 'text', 'analyser']
+
+
+Check our GitHub_ to get more details.
+
+.. _GitHub: https://github.com/the-new-sky/Kadot

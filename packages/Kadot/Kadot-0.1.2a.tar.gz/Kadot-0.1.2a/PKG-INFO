@@ -1,0 +1,39 @@
+Metadata-Version: 1.1
+Name: Kadot
+Version: 0.1.2a
+Summary: Kadot, the clean natural language processing toolkit.
+Home-page: https://github.com/the-new-sky/Kadot
+Author: the_new_sky
+Author-email: lorisazerty gmail.com
+License: MIT
+Download-URL: https://github.com/the-new-sky/Kadot/archive/0.1.2.tar.gz
+Description: .. figure:: https://github.com/the-new-sky/Kadot/raw/master/logo.png
+           :alt: Kadot
+        
+           Kadot
+        
+        A clean natural language processing toolkit.
+        --------------------------------------------
+        
+        Kadot just let you process a text easily.
+        
+        .. code:: python
+        
+            >>> hello_world = Text("Hello, I'm Kadot : the clean text analyser.")
+            >>> hello_world.tokens
+        
+            ['Hello', 'I', 'm', 'Kadot', 'the', 'clean', 'text', 'analyser']
+        
+        
+        Check our GitHub_ to get more details.
+        
+        .. _GitHub: https://github.com/the-new-sky/Kadot
+Keywords: named entity recognition,natural language processing,text classification,text generation,tokenizer,word embeddings
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Text Processing :: General
