@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+{% load i18n leprikon_tags %}
+<!DOCTYPE document SYSTEM "rml.dtd">
+<document filename="{{ course.pdf_filename }}">
+
+    <docinit>
+        <registerFont fontName="DejaVuSans" fontFile="{% font 'leprikon/fonts/DejaVuSans.ttf' %}"/>
+        <registerFont fontName="DejaVuSans-Bold" fontFile="{% font 'leprikon/fonts/DejaVuSans-Bold.ttf' %}"/>
+    </docinit>
+
+    <template showBoundary="0">
+        <!--define a 'frame' into which the content will flow.-->
+        <pageTemplate id="main">
+             <frame id="first" x1="{{ course.final_journal_print_setup.x1 }}" y1="{{ course.final_journal_print_setup.y1 }}" width="{{ course.final_journal_print_setup.width }}" height="{{ course.final_journal_print_setup.height }}"/>
+        </pageTemplate>
+    </template>
+
+    <stylesheet>
+        <paraStyle name="title" fontName="DejaVuSans-Bold" fontSize="16" alignment="CENTER"/>
+        <paraStyle name="para" fontName="DejaVuSans" fontSize="12"/>
+        <paraStyle name="agreement" fontName="DejaVuSans" fontSize="10"/>
+        <blockTableStyle id="myBlockTableStyle">
+            <!-- Set fonts -->
+            <blockFont name="DejaVuSans" size="12"/>
+            <blockTextColor colorName="black"/>
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <lineStyle kind="GRID" colorName="silver"/>
+        </blockTableStyle>
+    </stylesheet>
+    <story>
+        {% for period in course.all_journal_periods %}
+        {% with period.journal_entries.count|add:2 as columns_count %}
+        <para style="title">{% trans 'Attendance' %} - {{ period.period.name }}</para>
+        <blockTable class="table-hover presence">
+            <tr>
+                <th>{% trans 'Name' context 'person' %}</th>
+                {% for entry in period.all_journal_entries %}
+                <th class="vertical">
+                    <para>
+                        {{ entry.date }}
+                    </para>
+                </th>
+                {% endfor %}
+                {% if not admin %}
+                <th class="vertical">
+                    <para>
+                        &nbsp;
+                    </para>
+                </th>
+                {% endif %}
+            </tr>
+            {% for pr in period.get_leader_presences %}
+            <tr>
+                <td>{{ pr.name }}</td>
+                {% for p in pr.presences %}
+                <td>{% if p %}&#x2717;{% endif %}</td>
+                {% endfor %}
+                <td>&nbsp;</td>
+            </tr>
+            {% endfor %}
+            {% for pr in period.get_alternate_presences %}
+            <tr>
+                <td>{{ pr.name }}</td>
+                {% for p in pr.presences %}
+                <td>{% if p %}&#x2717;{% endif %}</td>
+                {% endfor %}
+                <td>&nbsp;</td>
+            </tr>
+            {% endfor %}
+            {% for pr in period.get_participant_presences %}
+            <tr>
+                <td>{{ pr.name }}</td>
+                {% for p in pr.presences %}
+                <td>{% if p %}&#x2717;{% endif %}</td>
+                {% endfor %}
+                <td class="empty"></td>
+            </tr>
+            {% endfor %}
+        </blockTable>
+        {% endwith %}
+        {% endfor %}
+
+        {% for period in course.all_periods %}
+        <para style="title">{% trans 'Agenda' %} - {{ period.name }}</para>
+        <blockTable class="journal">
+            <tr>
+                <th>{% trans 'Date' %}</th>
+                <th>{% trans 'Time' %}</th>
+                <th>{% trans 'Number of hours' %}</th>
+                <th>{% trans 'Number of leaders' %}</th>
+                <th>{% trans 'Number of participants' %}</th>
+                <th>{% trans 'Session agenda' %}</th>
+            </tr>
+            {% for entry in period.all_journal_entries %}
+            <tr>
+                <td>{{ entry.date }}</td>
+                <td>{% if entry.duration %}{{ entry.start }}{% else %}{% trans 'canceled' %}{% endif %}</td>
+                <td>{% if entry.duration %}{{ entry.duration }}{% else %}{% trans 'canceled' %}{% endif %}</td>
+                <td>{{ entry.all_leader_entries|length }}</td>
+                <td>{{ entry.all_registrations|length }}</td>
+                <td>
+                    {{ entry.agenda | safe }}
+                </td>
+            </tr>
+            {% endfor %}
+        </blockTable>
+        {% endfor %}
+
+        <para style="title">
+            {% trans 'Risks' %}
+        </para>
+        <blockTable id="risks">
+            <tr>
+                <th>{% trans 'Place / Risk' %}</th>
+            </tr>
+            <tr>
+                <td class="placeholder">{{ course.risks | safe }}</td>
+            </tr>
+        </blockTable>
+
+        <para style="title">
+            {% trans 'Plan for the whole year course activity' %}
+        </para>
+        <blockTable id="plan">
+            <tr>
+                <td class="placeholder" colspan="2">{{ course.plan | safe }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'Signature' %}</th>
+            </tr>
+        </blockTable>
+
+        <para style="title">
+            {% trans 'Evaluation of the whole year course activity' %}
+        </para>
+        <blockTable id="evaluation">
+            <tr>
+                <td class="placeholder" colspan="2">{{ course.evaluation | safe }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'Signature' %}</th>
+            </tr>
+        </blockTable>
+
+        <spacer length="2mm"/>
+
+    </story>
+</document>

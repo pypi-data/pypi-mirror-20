@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+{% load i18n leprikon_tags %}
+<!DOCTYPE document SYSTEM "rml.dtd">
+<document filename="{{ course.pdf_filename }}">
+
+    <docinit>
+        <registerFont fontName="DejaVuSans" fontFile="{% font 'leprikon/fonts/DejaVuSans.ttf' %}"/>
+        <registerFont fontName="DejaVuSans-Bold" fontFile="{% font 'leprikon/fonts/DejaVuSans-Bold.ttf' %}"/>
+    </docinit>
+
+    <template showBoundary="0">
+        <!--define a 'frame' into which the content will flow.-->
+        <pageTemplate id="main">
+             <frame id="first" x1="{{ course.final_journal_print_setup.x1 }}" y1="{{ course.final_journal_print_setup.y1 }}" width="{{ course.final_journal_print_setup.width }}" height="{{ course.final_journal_print_setup.height }}"/>
+        </pageTemplate>
+    </template>
+
+    <stylesheet>
+        <paraStyle name="title" fontName="DejaVuSans-Bold" fontSize="16" alignment="CENTER"/>
+        <paraStyle name="para" fontName="DejaVuSans" fontSize="12"/>
+        <paraStyle name="agreement" fontName="DejaVuSans" fontSize="10"/>
+        <blockTableStyle id="myBlockTableStyle">
+            <!-- Set fonts -->
+            <blockFont name="DejaVuSans" size="12"/>
+            <blockTextColor colorName="black"/>
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <lineStyle kind="GRID" colorName="silver"/>
+        </blockTableStyle>
+    </stylesheet>
+    <story>
+        {% for period in course.all_journal_periods %}
+        <para style="title">{% trans 'Attendance' %} - {{ period.period.name }}</para>
+        <blockTable class="table-hover presence">
+            <tr>
+                <th>{% trans 'Name' context 'person' %}</th>
+                {% for entry in period.all_journal_entries %}
+                <th class="vertical">
+                    <para>
+                        {{ entry.date }}
+                    </para>
+                </th>
+                {% endfor %}
+            </tr>
+            {% for pr in period.get_leader_presences %}
+            <tr>
+                <td>{{ pr.name }}</td>
+                {% for p in pr.presences %}
+                <td>{% if p %}&#x2717;{% endif %}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            {% for pr in period.get_alternate_presences %}
+            <tr>
+                <td>{{ pr.name }}</td>
+                {% for p in pr.presences %}
+                <td>{% if p %}&#x2717;{% endif %}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            {% for pr in period.get_participant_presences %}
+            <tr>
+                <td>{{ pr.name }}</td>
+                {% for p in pr.presences %}
+                <td>{% if p %}&#x2717;{% endif %}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </blockTable>
+        {% endfor %}
+
+        <spacer length="2mm"/>
+
+    </story>
+</document>
