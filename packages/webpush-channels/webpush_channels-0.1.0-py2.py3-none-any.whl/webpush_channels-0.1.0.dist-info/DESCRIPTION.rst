@@ -1,0 +1,50 @@
+WebPush Channels Broadcast
+==========================
+
+|readthedocs| |travis| |master-coverage|
+
+.. |travis| image:: https://travis-ci.org/webpush-channels/webpush-channels.svg?branch=master
+    :target: https://travis-ci.org/webpush-channels/webpush-channels
+
+.. |readthedocs| image:: https://readthedocs.org/projects/webpush-channels-broadcasting/badge/?version=latest
+    :target: https://webpush-channels-broadcasting.readthedocs.io/en/latest/
+    :alt: Documentation Status
+
+.. |master-coverage| image::
+    https://coveralls.io/repos/webpush-channels/webpush-channels/badge.svg?branch=master
+    :alt: Coverage
+    :target: https://coveralls.io/r/webpush-channels/webpush-channels
+
+.. |pypi| image:: https://img.shields.io/pypi/v/webpush-channels.svg
+    :target: https://pypi.python.org/pypi/webpush-channels
+
+
+Broadcast push notifications to multiple WebPush subscriptions.
+
+- `Documentation <http://webpush-channels-broadcasting.readthedocs.io/en/latest/>`_
+
+
+Changelog
+=========
+
+This document describes changes between each past release.
+
+0.1.0 (2017-02-22)
+------------------
+
+Protocol is now version 0.1. See `API changelog`_.
+
+
+**Initial version**
+
+- Settings up the project based on kinto.core (#6)
+- Add the subscription management API (#10)
+- Add the channel registration management API (#12)
+- Add the channel notification management API (#16)
+- Handle empty payloads (#26)
+- Handle duplication of subscriptions (#27)
+
+
+.. _API changelog: https://webpush-channels-broadcasting/en/latest/api/
+
+
