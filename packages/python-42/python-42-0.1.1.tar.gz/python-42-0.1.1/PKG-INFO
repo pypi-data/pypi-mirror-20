@@ -1,0 +1,38 @@
+Metadata-Version: 1.0
+Name: python-42
+Version: 0.1.1
+Summary: Decorator that runs everything (in its way)
+Home-page: http://github.com/marcorosa/_42
+Author: Marco Rosa
+Author-email: marcor165@hotmail.it
+License: MIT
+Description: Description
+        -----------
+        
+        This decorator comes to the aid of developers in search of an answer.
+        Yet, sometimes the answer seems meaningless because the beings who
+        instructed it never actually knew what the Question was. So, in this case,
+        this decorator returns the answer to the Ultimate Question of Life, the
+        Universe and Everything.
+        
+        Installation
+        ------------
+        
+        ```bash
+        $ pip install python-42
+        ```
+        
+        Usage
+        -----------
+        
+        ```python
+        from _42 import _42
+        
+        @_42
+        def function(...):
+            """Whatever."""
+            ...
+        ```
+        
+Keywords: decorator
+Platform: UNKNOWN
