@@ -1,0 +1,10 @@
+setuptools
+gdata>=2.0.18
+plone.fieldsets
+plone.app.form
+plone.api
+
+[test]
+mocker
+plone.app.testing
+Products.PloneTestCase
