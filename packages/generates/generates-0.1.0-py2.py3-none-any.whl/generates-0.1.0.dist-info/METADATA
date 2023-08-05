@@ -1,0 +1,45 @@
+Metadata-Version: 2.0
+Name: generates
+Version: 0.1.0
+Summary: Micro library providing generates decorator
+Home-page: UNKNOWN
+Author: Tuomas Suutari
+Author-email: tuomas.suutari@anders.fi
+License: MIT
+Keywords: generates,context manager,generator
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+
+Generates
+=========
+
+Generates is a micro library providing ``generates`` decorator.
+
+The ``generates`` decorator can be used to easily create a function that
+returns a container like list or dict, but using generator syntax in the
+function body.  For example::
+
+  @generates(list)
+  def get_numbers(n):
+      for i in range(n):
+          yield i
+
+  assert get_numbers(5) == [0, 1, 2, 3, 4]
+
+  @generates(dict)
+  def get_map():
+      yield ('key1', 'value1')
+      yield ('key2', 'value2')
+
+  assert get_map() == {'key1': 'value1', 'key2': 'value2'}
+
+
