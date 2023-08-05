@@ -1,0 +1,6 @@
+[trac.plugins]
+github.browser = tracext.github:GitHubBrowser
+github.groups = tracext.github:GitHubGroupsProvider
+github.loginmodule = tracext.github:GitHubLoginModule [oauth]
+github.postcommithook = tracext.github:GitHubPostCommitHook
+
