@@ -1,0 +1,51 @@
+Metadata-Version: 1.1
+Name: django-reports-admin
+Version: 1.0.1
+Summary: A Django Admin add-on which adds functionality to export data in customized forms of output.
+Home-page: https://github.com/gadventures/django-reports-admin
+Author: G Adventures
+Author-email: software@gadventures.com
+License: MIT
+Description: # django-reports-admin
+        
+        A Django Admin add-on which adds functionality to export data in customized forms of output,
+        
+        ## Requirements
+        
+        Django Reports Admin requires Django 1.10 or later, and is written for Python 3.5 or later.
+        
+        ## Installation
+        
+            pip install django-reports-admin
+        
+        Then, amend your Django `settings.py` file:
+        
+            INSTALLED_APPS = (
+              ...
+              'reports',
+              ...
+            )
+        
+        Although enabled by default, you'll want to ensure
+        `django.contrib.contenttypes`` is within `INSTALLED_APPS`.
+        
+        ## Testing
+        
+        Tests are run using `pytest`, and the test suite can be executed using the
+        MakeFile
+        
+            make test
+        
+        
+        # 1.0.0
+        
+        * Initial release
+        
+Keywords: django reports admin
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
