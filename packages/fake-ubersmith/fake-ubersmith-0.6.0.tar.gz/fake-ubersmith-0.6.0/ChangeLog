@@ -1,0 +1,43 @@
+CHANGES
+=======
+
+0.6.0
+-----
+
+* Add a crash mode
+* Use Flask test client for unit testing
+* Fix app loading crash
+* Add the contact_id to the client
+* Add more unit tests
+* Fix casting issue with client_id and contact_id
+* Fix client.contact_add and client.add api calls
+* Remove useless api call recording (#15)
+
+0.5.0
+-----
+
+* Support contacts in api (#14)
+* Support uber.check_login api method
+* Fix response behavior
+* Support client.add api method
+* Major refactor and unit tests
+
+0.4.0
+-----
+
+* Add exclusion to docker-ignore
+* Introduce a container test
+
+0.3.0
+-----
+
+* Add pypi package publishing
+
+0.2.0
+-----
+
+* Add docker support (#1)
+* Fix incorrect usage of super that causes server to not start
+* Travis build works
+* Initial commit
+* Initial commit
