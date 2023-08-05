@@ -1,0 +1,5 @@
+[moksha.consumer]
+autocloudreporter.prod = autocloudreporter:AutocloudReporter
+autocloudreporter.stg = autocloudreporter:AutocloudStagingReporter
+autocloudreporter.test = autocloudreporter:AutocloudTestReporter
+
