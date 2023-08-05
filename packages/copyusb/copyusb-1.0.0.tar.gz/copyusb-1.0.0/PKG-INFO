@@ -1,0 +1,36 @@
+Metadata-Version: 1.1
+Name: copyusb
+Version: 1.0.0
+Summary: Copy connected USB media device to current script directory.
+Home-page: http://github.com/arsho/copyusb
+Author: Ahmedur Rahman Shovon
+Author-email: shovon.sylhet@gmail.com
+License: MIT
+Description: Copyusb
+        --------
+        Copy connected USB media device to current script directory.
+        The copy() method will return a list with the path where the USB drive being copied.
+        
+        DO NOT MISUSE IT FOR STEALING DATA.
+        
+        N.B.: Currently it only works in Linux machine. 
+        
+        Tested on Ubuntu 16.04 LTS. The current version can be used only with Python 3.
+        
+        To install::
+        
+            >>> pip3 install copyusb
+        
+        To use (with caution), simply do::
+        
+            >>> import copyusb
+            >>> copy_result_list = copyusb.copy()
+        
+        
+        
+Keywords: usb copy clone copier cloner drive
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: System :: Filesystems
