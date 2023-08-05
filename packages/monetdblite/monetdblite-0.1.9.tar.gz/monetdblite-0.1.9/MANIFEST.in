@@ -1,0 +1,5 @@
+recursive-include src *
+recursive-include dlls *
+include build-unix.sh
+include build-windows.sh
+include README.md
