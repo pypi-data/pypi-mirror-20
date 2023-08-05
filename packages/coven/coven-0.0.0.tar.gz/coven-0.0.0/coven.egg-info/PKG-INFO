@@ -1,0 +1,41 @@
+Metadata-Version: 1.1
+Name: coven
+Version: 0.0.0
+Summary: Coven is a code coverage tracing harness.
+Home-page: https://github.com/gwk/coven
+Author: George King
+Author-email: george.w.king@gmail.com
+License: CC0
+Description: writeup v0
+        Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
+        
+        
+        # Coven: Code Coverage Through Bytecode Witchcraft
+        
+        Coven is a test coverage harness for Python 3. It uses an extension to the CPython interpreter, pending integration (issue #24900) into Python 3.7. The patch also works on Python 3.6, and Coven is developed against 3.6.
+        
+        
+        # License
+        
+        Coven is dedicated to the public domain. It is written and maintained by George King.
+        
+        
+        # Usage
+        
+        `coven` acts as a drop-in replacement for `python3`. Mileage may vary.
+        
+        | coven script-to-test.py
+        
+        
+        # Issues
+        
+        Please file issues to the github repository: github.com/gwk/coven.
+        
+Keywords: testing
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Software Development :: Testing
