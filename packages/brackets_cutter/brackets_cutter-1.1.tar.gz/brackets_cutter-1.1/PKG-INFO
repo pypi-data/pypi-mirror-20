@@ -1,0 +1,26 @@
+Metadata-Version: 1.0
+Name: brackets_cutter
+Version: 1.1
+Summary: UNKNOWN
+Home-page: UNKNOWN
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: Описание
+        ===========
+        
+        Тестовый проект, решащющий следующую задачу:
+        
+        Написать код (с помощью регулярных выражений и без них)
+        для удаления из строки незакрытых скобок
+        вместе с их содержимым, если после них нет закрытых блоков:
+        'esdfd((esdf)(esdf' -> 'esdfd((esdf)'.
+        Написать тесты для этого кода.
+        
+        Использование:
+        
+            brackets_cutter [-h] [-r] string_to_cut
+        
+        Тесты в файле tests.py
+        Написал ещё и генератор тестов tests_generator.py т.к. самому лень выдумывать строки.
+Platform: UNKNOWN
