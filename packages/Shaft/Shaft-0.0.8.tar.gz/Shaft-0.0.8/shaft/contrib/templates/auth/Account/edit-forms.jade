@@ -1,0 +1,48 @@
+
+= html.include_js_file('contrib.js.imagepreview.js') | safe
+= html.include_js_file('contrib.auth.user.js') | safe
+= html.include_css_file('contrib.auth.user.css') | safe
+
+.row
+    .col-md-12
+        + widget.accordion(id='edit-account')
+
+            + widget.collapse()
+                + widget.collapse_header(accordion_id="edit-account", body_id="edit-account-name")
+                    = _("Edit Name")
+                + widget.collapse_body(id="edit-account-name")
+                    + forms.upload("auth.Account:update_info")
+                        +forms.input(label=_("Name"), name="name", value=current_user.name, data={"validation": "required"})
+                        .row
+                            .col-sm-4
+                                #profile-photo-preview.img-thumbnail
+
+                            .col-sm-8
+                                +forms.input(label=_("Select Image to upload"), id="profile-photo-input", type='file', name='file')
+
+                        + forms.button(_("Save Info"), type='submit', class='btn-primary')
+
+
+            + widget.collapse()
+                + widget.collapse_header(accordion_id="edit-account", body_id="edit-account-login")
+                    = _("Edit Login")
+                + widget.collapse_body(id="edit-account-login")
+                    + forms.post("auth.Account:update_login")
+                        + forms.input('email', label=_('New Login Email'), value=current_user.email, type='email', data={"validation": "email"})
+                        + forms.input('current_password', label="*" + _('Confirm your changes by entering  your current password'), type='password', data={"validation": "required"})
+                        + forms.button(_("Save Login"), type='submit', class='btn btn-primary')
+
+
+            + widget.collapse()
+                + widget.collapse_header(accordion_id="edit-account", body_id="edit-account-password")
+                    = _("Edit Password")
+                + widget.collapse_body(id="edit-account-password")
+                    + forms.post("auth.Account:update_password")
+                        + forms.input('password', label=_('New Password'), type='password', data={"validation": "email"})
+                        + forms.input('password_confirm', label=_('Confirm New Password'),  type='password', data={"validation": "email"})
+                        + forms.input('current_password', label="*" + _('Confirm your changes by entering  your current password'),  type='password', data={"validation": "required"})
+                        + forms.button(_("Save Password"), type='submit', class='btn btn-primary')
+
+
+
+

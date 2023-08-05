@@ -1,0 +1,27 @@
+.row
+    .col-md-12
+        + forms.post()
+            + widget.panel(login_title or 'Register')
+
+                + widget.panel_body()
+                        + forms.hidden("method", value="email")
+                        + forms.hidden("next", value=login_url_next)
+                        + forms.input('name', label='Name', data={"validation": "required"})
+                        + forms.input('email', label='Email', data={"validation": "email"})
+                        + forms.input('password', label='Password', type='password', data={"validation": "required" })
+                        + forms.input('password_confirm', label='Confirm Password', type='password', data={"validation": "required" })
+                        + forms.recaptcha()
+
+                + widget.panel_footer()
+                    + forms.button('Register', type='submit', class="btn-primary btn-block")
+
+
+
+
+
+
+
+
+
+
+

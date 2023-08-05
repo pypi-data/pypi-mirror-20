@@ -1,0 +1,25 @@
+
+
+.row
+    .col-md-6.col-md-offset-3
+        .row
+            .col-md-12.text-center.pb20.mb20
+                h3= _("Account Info")
+
+        .row
+            .col-md-3.mb20
+                if current_user.profile_image_url
+                    img(src=current_user.profile_image_url, class="img-thumbnail", height=120, width=120)
+
+            .col-md-9
+                table.table
+                    tbody
+                        tr
+                            td Login Email
+                            td= current_user.email
+                        tr
+                            td Name
+                            td= current_user.name
+
+
+            - include __USER_ACCOUNT_FORM__ with context
