@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+Copyright 2012–2016 California Institute of Technology. ALL RIGHTS
+RESERVED. U.S. Government Sponsorship acknowledged.
+-->
+<configure
+    xmlns='http://namespaces.zope.org/zope'
+    xmlns:genericsetup='http://namespaces.zope.org/genericsetup'>
+    <genericsetup:upgradeStep
+        source='1'
+        destination='2'
+        title='Vanity Contributors'
+        description='This step remove the Contributor role from Sites; we keep vanity pages elsewhere now (1→2)'
+        profile='edrnsite.vanity:default'
+        handler='edrnsite.vanity.upgrades.removeContributorRoleFromSites'
+        sortkey='1'
+    />
+    <genericsetup:upgradeStep
+        source='1'
+        destination='2'
+        title='Members Folder'
+        description='This step adds a vanity page folder and ensures people can add to it (1→2)'
+        profile='edrnsite.vanity:default'
+        handler='edrnsite.vanity.upgrades.addMembersFolder'
+        sortkey='1'
+    />
+    <genericsetup:upgradeStep
+        source='0'
+        destination='2'
+        title='Enable Vanity'
+        description='This step enables vanity pages (1→2)'
+        profile='edrnsite.vanity:default'
+        handler='edrnsite.vanity.upgrades.enableVanityPages'
+        sortkey='1'
+    />
+</configure>
