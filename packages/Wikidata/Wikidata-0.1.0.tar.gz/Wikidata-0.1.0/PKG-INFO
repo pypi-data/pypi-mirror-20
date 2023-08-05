@@ -1,0 +1,37 @@
+Metadata-Version: 1.2
+Name: Wikidata
+Version: 0.1.0
+Summary: Wikidata client library
+Home-page: https://github.com/dahlia/wikidata
+Author: Hong Minhee
+Author-email: hong.minhee@gmail.com
+License: GPLv3 or later
+Description: Wikidata_ client library for Python
+        ===================================
+        
+        This package provides easy APIs to use Wikidata_ for Python.
+        
+        >>> entity = client.get('Q494290')
+        >>> entity
+        <wikidata.entity.Entity Q494290 'Shin Jung-hyeon'>
+        >>> entity.description
+        m'South Korean rock guitarist and singer-songwriter'
+        
+        .. _Wikidata: https://www.wikidata.org/
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Database
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.3.0
