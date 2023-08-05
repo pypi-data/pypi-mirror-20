@@ -1,0 +1,54 @@
+Metadata-Version: 1.1
+Name: Flask-HAL-BBVA
+Version: 1.0.5
+Summary: Provides easy integration of the HAL specification for your REST Flask Applications.
+Home-page: https://github.com/BBVA/Flask-HAL
+Author: BBVALabs
+Author-email: UNKNOWN
+License: Public Domain
+Description: Flask-HAL
+        =========
+        
+        This is a fork of `<https://github.com/thisissoon/Flask-HAL>`_ that allows recursivity in the embedded api.
+        
+        Change Log
+        ----------
+        
+        1.0.3
+        ~~~~~
+        - Correctly deserialise embedded documents: #25
+        - Support python setup.py test syntax: #24
+        
+        1.0.2
+        ~~~~~
+        - Multiple links with the same relation will be put into an array
+        
+        1.0.1
+        ~~~~~
+        - ``self`` links now take into account ``SERVER_NAME`` configuration
+        
+        1.0.0
+        ~~~~~
+        - A list can be used in data for Embedded object
+        
+        2015.10.8
+        ~~~~~~~~~
+        - Initial release including the core feature set
+        
+Keywords: Flask,HAL,REST,Views
+Platform: UNKNOWN
+Classifier: Framework :: Flask
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: License :: Public Domain
