@@ -1,0 +1,136 @@
+Metadata-Version: 1.1
+Name: kube
+Version: 0.10.0
+Summary: Opinionated interface for the Kubernetes API
+Home-page: http://bitbucket.org/cobeio/kube
+Author: Floris Bruynooghe
+Author-email: flub@cobe.io
+License: LGPLv3
+Description: Opinionated Python interface for the Kubernetes API
+        ===================================================
+        
+        This package provides a Pythonic interface to use the Kubernetes_ API
+        from within Python code.  It is hand-crafted and opinionated in an
+        attempt to hide the edge cases and cumbersome parts of the raw API
+        which would be exposed by a client using the swagger_ definitions.
+        
+        .. _Kubernetes: http://kubernetes.io
+        .. _swagger: http://kubernetes.io/third_party/swagger-ui/
+        
+        This package is far from finished, the current major features are:
+        
+        - Major resources wrapped:
+        
+          - Nodes
+          - Namespaces
+          - Pods
+          - ReplicaSets/ReplicationControllers
+          - Services
+          - Secrets
+        
+        - Good labelling support
+        - Both blocking and non-blocking support for the WATCH API.
+        - Query, create and delete resources.
+        - Low-level API to use Kubernetes API more directly.
+        - Write tests without needing a real cluster
+        
+        We are working on these features:
+        
+        - Modifying ReplicaSets: i.e. changing number of replicas, changing selectors.
+        - Modifying resources in general.
+        - Creating new resource items.
+        - Deleting resource items.
+        
+        
+        Installation
+        ============
+        
+        ::
+        
+           pip install kube
+        
+        
+        Usage
+        =====
+        
+        To use the API one has to authenticate to the Kubernetes apiserver.
+        Currently only the recommended approach_ of using kubectl in proxy
+        mode is supported.  Simply run ``kubectl proxy`` on the localhost and
+        the connection will work.  When running in a cluster itself this can
+        be easily achieved by running the kubectl proxy in another container_
+        in the same pod.
+        
+        .. _approach: http://kubernetes.io/docs/user-guide/accessing-the-cluster/#directly-accessing-the-rest-api
+        .. _container: http://kubernetes.io/docs/user-guide/accessing-the-cluster/#accessing-the-api-from-a-pod
+        
+        The central object to work with the Kubernetes cluster is the
+        ``Cluster`` object::
+        
+           import kube
+        
+           cluster = kube.Cluster()
+           rs = cluster.replicasets.fetch('proxy', namespace='default')
+           pods = cluster.pods.filter(labels=rs.meta.labels,
+                                      filter={'metadata.namespace': 'default'})
+           for pod in pods:
+              assert pod.phase is pod.PodPhase.Running
+        
+        
+        Documentation
+        =============
+        
+        The kube library is fully documented at http://python-kube.readthedocs.io.
+        
+        
+        Contributing
+        ============
+        
+        The project is still in it's early stages, feel free to submit
+        suggestions, issues or pull requests to the project.
+        https://bitbucket.org/cobeio/kube  All feedback is welcome.
+        
+        
+        Development Dependencies
+        ------------------------
+        
+        When developing kube you will need some extra dependencies:
+        
+        - pytest
+        - pytest-cov
+        - pylint
+        - invoke
+        
+        
+        Testing Kube
+        ------------
+        
+        The tests can be run in two ways: Using a stubbed-out API server (default),
+        or against a real Kubernetes cluster.  The former runs very fast and will
+        not mess around with a real cluster.  The latter is a bit slower but can be
+        used to verify that the code behaves correctly against a real Kubernetes
+        cluster.  To reiterate, by default the tests will use the stubbed-out
+        apiserver.  To execute the tests against a real cluster, invoke them
+        with ``py.test --verify <kubectl-context>``.  There is no need to run a
+        ``kubectl proxy``, this is done automatically.  The tests will try not to
+        break your cluster or leave any artefacts around after the test run, however
+        we'd recommend that ``<kubectl-context>`` refers to a test cluster.
+        
+        
+        License
+        =======
+        
+        Kube is available under the LGPLv3_ which allows you to use it in your
+        own projects regardless of the license you choose, be it proprietary
+        or open source, while keeping kube itself free software.
+        
+        .. _LGPLv3: https://www.gnu.org/licenses/lgpl.html
+        
+Keywords: kubernetes k8s watch
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
