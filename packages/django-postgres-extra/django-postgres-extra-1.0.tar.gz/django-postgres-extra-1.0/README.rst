@@ -1,0 +1,165 @@
+django-postgres-extra
+---------------------
+
+.. image:: https://scrutinizer-ci.com/g/SectorLabs/django-postgres-extra/badges/quality-score.png
+    :target: https://scrutinizer-ci.com/g/SectorLabs/django-postgres-extra/
+
+.. image:: https://scrutinizer-ci.com/g/SectorLabs/django-postgres-extra/badges/coverage.png
+    :target: https://scrutinizer-ci.com/g/SectorLabs/django-postgres-extra/
+
+``django-postgres-extra`` aims to make all of PostgreSQL's awesome features available through the Django ORM. We do this by taking care of all the hassle. As opposed to the many small packages that are available to try to bring a single feature to Django with minimal effort. ``django-postgres-extra`` goes the extra mile, with well tested implementations, seamless migrations and much more.
+
+With seamless we mean that any features we add will work truly seamlessly. You should not have to manually modify your migrations to work with fields and objects provided by this package.
+
+This package requires Python 3.5 or newer and Django 1.10 or newer.
+
+Focus
+-----
+Currently, we are working on bringing the following features to Django:
+
+* https://www.postgresql.org/docs/9.1/static/hstore.html
+   * UNIQUE constraints
+   * All operators
+   * GiST and GIN indexes
+
+* https://www.postgresql.org/docs/9.1/static/ltree.html
+    * All operators
+    * All functions
+    * Unique indexes
+    * GiST and GIN indexes
+
+* https://www.postgresql.org/docs/9.5/static/sql-insert.html#SQL-ON-CONFLICT
+    * ``ON CONFLICT UPDATE``
+    * ``ON CONFLICT DO NOTHING``
+
+The current `TODO` list looks like this:
+
+* Add support for ``ON CONFLICT X``.
+* Add support for ``ltree``.
+
+
+Installation
+------------
+1. Install the package from PyPi:
+
+   .. code-block:: bash
+
+        $ pip install django-postgres-extra
+
+2. Add ``postgres_extra`` and ``django.contrib.postgres`` to your ``INSTALLED_APPS``:
+
+   .. code-block:: bash
+
+        INSTALLED_APPS = [
+            ....
+
+            'django.contrib.postgres',
+            'psqlextra'
+        ]
+
+3. Set the database engine to ``psqlextra.backend``:
+
+   .. code-block:: python
+
+        DATABASES = {
+            'default': {
+                ...
+                'ENGINE': 'psqlextra.backend'
+            }
+        }
+
+Usage
+-----
+
+* ``psqlextra.models.PostgresModel``
+    Inheriting your models from this gives you access to the ``PostgresManager``, which exposes:
+
+    * ``upsert``:
+
+        * Native, single query, concurrency safe upsert:
+
+            .. code-block:: python
+
+                from psqlextra.models import PostgresModel
+
+                class MyModel(PostgresModel):
+                    title = models.CharField(unique=True)
+
+                pk1 = MyModel.objects.upsert(title='beer')
+                pk2 = MyModel.objects.upsert(title='beer')
+
+                assert pk1 == pk2
+
+    * ``upsert_and_get``:
+
+        * Native, single query, concurrency safe upsert + select:
+
+            .. code-block:: python
+
+                from psqlextra.models import PostgresModel
+
+                class MyModel(PostgresModel):
+                    title = models.CharField(unique=True)
+
+                pk1 = MyModel.objects.upsert(title='beer')
+                obj2 = MyModel.objects.upsert_and_get(title='beer')
+
+                assert pk1 == obj2.pk
+
+    Upserts use PostgreSQL's ``ON CONFLICT`` clause. This instruct PostgreSQL to overwrite
+    an existing row when it encounters a conflict (duplicate key). This happens in a single
+    query. PostgreSQL guarentees concurrency safety for ``ON CONFLICT``.
+
+* ``psqlextra.fields.HStoreField``
+    Inherits from Django's ``HStoreField`` but adds support for constraints:
+
+    * ``uniqueness``:
+
+        * Enforce uniqueness for one or more key:
+
+            .. code-block:: python
+
+                from psqlextra.fields import HStoreField
+
+                class MyModel(models.Model):
+                    title = HStoreField(uniqueness=['en', 'ro'])
+
+        * Enforce uniqueness for one ore more keys **together** (similar to Django's ``unique_together``):
+
+            .. code-block:: python
+
+                from psqlextra.fields import HStoreField
+
+                class MyModel(models.Model):
+                    title = HStoreField(uniqueness=[('en', 'ro')])
+
+    * ``required``:
+
+        * Require one or more keys to be set:
+
+            .. code-block:: python
+
+                from psqlextra.fields import HStoreField
+
+                class MyModel(models.Model):
+                    title = HStoreField(required=['h1', 'h2'])
+
+
+FAQ - Frequently asked questions
+--------------------------------
+
+1. Why do I need to change the database back-end/engine?
+
+    We utilize PostgreSQL's `hstore` data type, which allows you to store key-value pairs in a column.  In order to create `UNIQUE` constraints on specific key, we need to create a special type of index. We could do this without a custom database back-end, but it would require everyone to manually write their migrations. By using a custom database back-end, we added support for this. When changing the `uniqueness` constraint on a `HStoreField`, our custom database back-end takes care of creating, updating and deleting these constraints/indexes in the database.
+
+2. I am already using a custom database back-end, can I still use yours?
+
+    Yes. You can set the ``POSTGRES_EXTRA_DB_BACKEND_BASE`` setting to your current back-end. This will instruct our custom database back-end to inherit from the database back-end you specified. **Warning**: this will only work if the base you specified indirectly inherits from the standard PostgreSQL database back-end.
+
+3. Does this package work with Python 2?
+
+    No. Only Python 3.5 or newer is supported. We're using type hints. These do not work well under older versions of Python.
+
+4. Does this package work with Django 1.X?
+
+    No. Only Django 1.10 or newer is supported.
