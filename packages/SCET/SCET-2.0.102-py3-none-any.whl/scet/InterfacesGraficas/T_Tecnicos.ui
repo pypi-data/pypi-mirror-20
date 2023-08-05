@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<interface>
+  <object class="pygubu.builder.widgets.scrollbarhelper" id="__ventana__">
+    <property name="scrolltype">both</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+      <property name="sticky">nesw</property>
+    </layout>
+    <child>
+      <object class="pygubu.builder.widgets.editabletreeview" id="__tabla__">
+        <property name="selectmode">browse</property>
+        <property name="show">headings</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">nesw</property>
+        </layout>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_1">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">True</property>
+            <property name="text" translatable="yes">idTecnicos</property>
+            <property name="tree_column">False</property>
+            <property name="visible">False</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Razón Social">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">100</property>
+            <property name="stretch">True</property>
+            <property name="text" translatable="yes">Razón Social</property>
+            <property name="tree_column">False</property>
+            <property name="visible">True</property>
+            <property name="width">250</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="C.I.">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">50</property>
+            <property name="stretch">True</property>
+            <property name="text" translatable="yes">C.I.</property>
+            <property name="tree_column">False</property>
+            <property name="visible">True</property>
+            <property name="width">100</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_2">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">True</property>
+            <property name="text" translatable="yes">idEmpresas</property>
+            <property name="tree_column">False</property>
+            <property name="visible">False</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_3">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">True</property>
+            <property name="text" translatable="yes">idEntidades</property>
+            <property name="tree_column">False</property>
+            <property name="visible">False</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

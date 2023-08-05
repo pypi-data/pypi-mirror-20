@@ -1,0 +1,30 @@
+Metadata-Version: 2.0
+Name: SCET
+Version: 2.0.102
+Summary: Sistema de Control de Entradas de Taller
+Home-page: https://bitbucket.org/WolfangT/scet
+Author: Wolfang Torres
+Author-email: Wolfang.torres@gmail.com
+License: MIT
+Platform: UNKNOWN
+Requires-Dist: pygubu
+Requires-Dist: pymysql
+Requires-Dist: python-sql
+Provides-Extra: PDF
+Requires-Dist: lxml; extra == 'PDF'
+Requires-Dist: weasyprint; extra == 'PDF'
+
+Sistema de Control de Entradas de Taller
+========================================
+
+Sistema sensillo para mantener el control de un taller, icluyendo los tecnicos, almasenes, empresas, herramientas, etc.
+
+Ventajas:
+
+ - Interfaz sensilla e intuitiva
+
+ - Genera reportes imprimibles
+
+#TODO
+
+

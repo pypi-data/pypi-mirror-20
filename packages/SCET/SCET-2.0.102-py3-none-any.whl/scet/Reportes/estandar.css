@@ -1,0 +1,333 @@
+@page {
+    size: letter;
+    margin: 0px;
+}
+
+* {
+    font-family: helvetica, sans-serif;
+    text-align: center;
+    vertical-align:middle;
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    -weasy-hyphens: auto;
+}
+
+body {
+    height: 100%;
+}
+
+.reporte {
+    width: 8.5in;
+    border-top:1px dotted;
+    padding: 18px;
+    height: 5.5in;
+}
+
+.contenedor {
+    min-height: 100%;
+    width: 100%;
+}
+
+.pie {
+    position: relative;
+    margin-top: -2.5cm;
+    height: 2.5cm;
+    clear: both;
+
+    border-top: 2px solid;
+    padding: 3px;
+}
+
+.pie > .acuerdo {
+}
+
+.pie > .acuerdo > .titulo {
+    font-weight: bold;
+    font-size: 0.75em;
+}
+
+.pie > .acuerdo > .clausulas {
+    text-align: center;
+    margin: auto;
+}
+
+.pie > .acuerdo > .clausulas > li {
+    font-size: 0.75em;
+}
+
+.pie > .metadatos {
+    font-size: 1em;
+    font-style: italic;
+}
+
+.cabeza {
+    margin-bottom: 18px;
+    height: 30%;
+    width: 100%;
+}
+
+.cabeza > .empresa {
+    height: 50%;
+    width: 100%;
+}
+
+.cabeza > .empresa > .logo {
+    display: inline-block;
+    height: 60%;
+    width: 45%;
+    padding: 3px;
+    margin: 0px 12px;
+}
+
+.cabeza > .empresa > .logo > .imagen {
+    width: 50%;
+    margin-right: 50%;
+    vertical-align: top;
+}
+
+.cabeza > .empresa > .informacion {
+    display: inline-block;
+    height: 60%;
+    width: 45%;
+    padding: 3px;
+    margin: 0px 12px;
+}
+
+.cabeza > .empresa > .informacion > .razon {
+    display: block;
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: left;
+}
+
+.cabeza > .empresa > .informacion > .rif {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+}
+
+.cabeza > .empresa > .informacion > .direccion {
+    display: block;
+    text-align: left;
+}
+
+.cabeza > .empresa > .contactos {
+    height: 40%;
+    width: 95%;
+    margin: 6px 18px;
+    padding: 3px;
+    background: #6e6e6e;
+    color: #ffffff;
+/*
+    border: 1px solid;
+    border-right-style: none;
+    border-left-style: none;
+*/
+}
+
+.cabeza > .empresa > .contactos > .contacto {
+    display: inline-block;
+    margin: 0px 12px;
+}
+
+.cabeza > .empresa > .contactos > .contacto > .tipo {
+    font-weight: bold;
+}
+
+.cabeza > .empresa > .contactos > .contacto > .valor {
+    font-weight: bold;
+}
+
+.cabeza > .estandar {
+    height: 40%;
+    width: 100%;
+/*
+    background: #6e6e6e;
+    color: #ffffff;
+*/
+    border-bottom: 2px solid;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+.cabeza > .estandar > .titulo {
+    font-size: 2em;
+    height: 50%;
+    width: 100%;
+}
+
+.cabeza > .estandar > .datos {
+    height: 50%;
+    width: 100%;
+}
+
+.cabeza > .estandar > .datos > .identificacion {
+    display: inline-block;
+    height: 100%;
+    width: 45%;
+    text-align: right;
+    margin: 0px 12px;
+}
+
+.cabeza > .estandar > .datos > .identificacion > .titulo {
+    font-weight: bold;
+}
+
+.cabeza > .estandar > .datos > .identificacion > .valor {
+}
+
+.cabeza > .estandar > .datos > .fecha {
+    display: inline-block;
+    height: 100%;
+    width: 45%;
+    text-align: left;
+    margin: 0px 12px;
+}
+
+.cabeza > .estandar > .datos > .fecha > .titulo {
+    font-weight: bold;
+}
+
+.cabeza > .estandar > .datos > .fecha > .valor {
+    font-weight: bold;
+}
+
+.cuerpo {
+    margin: 18px 18px;
+    padding-bottom: 2.5cm;
+}
+
+.cuerpo > .tecnico {
+    display: inline-block;
+    margin: 12px 0px 0px 0px;
+    width: 45%;
+}
+
+.cuerpo > .tecnico > .firma {
+    display: block;
+    margin: 12px 12px 0px 0px;
+    border-bottom: 1px solid;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.cuerpo > .cliente {
+    display: inline-block;
+    margin: 12px 0px 0px 0px;
+    width: 45%;
+}
+
+.cuerpo > .cliente > .firma {
+    display: block;
+    margin: 12px 12px 0px 0px;
+    border-bottom: 1px solid;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.cuerpo > .cliente > .informacion {
+    display: inline-block;
+    margin: 0px 6px;
+    height: 100%;
+    width: 45%;
+}
+
+.cuerpo > .cliente > .informacion > .razon {
+    display: block;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left;
+}
+
+.cuerpo > .cliente > .informacion > .rif {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+}
+
+.cuerpo > .cliente > .informacion > .direccion {
+    display: block;
+    text-align: left;
+}
+
+.cuerpo > .cliente > .contactos {
+    display: inline-block;
+    margin: 0px 6px;
+    height: 100%;
+    width: 45%;
+}
+
+.cuerpo > .cliente > .contactos > .contacto {
+    display: block;
+    text-align: left;
+}
+
+.cuerpo > .cliente > .contactos > .contacto > .tipo {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+}
+
+.cuerpo > .cliente > .contactos > .contacto > .valor {
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+.cuerpo > .equipos {
+    margin: 18px 0px;
+}
+
+.cuerpo > .equipos > table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+.cuerpo > .equipos > table > thead {
+    background: #6e6e6e;
+    color: #ffffff;
+}
+
+.cuerpo > .equipos > table > thead > tr {
+}
+
+.cuerpo > .equipos > table > thead > tr > th {
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: left;
+    padding: 3px;
+}
+
+.cuerpo > .equipos > table > tbody {
+}
+
+.cuerpo > .equipos > table > tbody > tr:nth-child(2n) {
+    background: #F1F1F1;
+}
+
+.cuerpo > .equipos > table > tbody > tr:nth-child(2n+1) {
+    background: #ffffff;
+}
+
+.cuerpo > .equipos > table > tbody > tr > td {
+    text-align: left;
+    padding: 3px;
+}
+
+.cuerpo > .equipos > table > tbody > tr > td > .descripcion {
+    text-align: center;
+    padding: 0px 3px 0px 3px;
+}
+
+.cuerpo > .equipos > table > tbody > tr > td > .descripcion > .tipo{
+    font-weight: bold;
+    padding: 0px 1px 0px 1px;
+}

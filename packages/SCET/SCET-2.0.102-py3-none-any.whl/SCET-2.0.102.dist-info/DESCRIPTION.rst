@@ -1,0 +1,14 @@
+Sistema de Control de Entradas de Taller
+========================================
+
+Sistema sensillo para mantener el control de un taller, icluyendo los tecnicos, almasenes, empresas, herramientas, etc.
+
+Ventajas:
+
+ - Interfaz sensilla e intuitiva
+
+ - Genera reportes imprimibles
+
+#TODO
+
+
