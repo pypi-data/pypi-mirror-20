@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: mutt-addressbook
+Version: 1.0.1
+Summary: An addressbook query for mutt
+Home-page: https://github.com/qsuscs/mutt-addressbook
+Author: Thomas Schneider
+Author-email: qsx+pypi@qsx.re
+License: ISC
+Description: ================
+        mutt-addressbook
+        ================
+        
+        This is a script to be used as Mutt’s `query_command`.  So far it can only
+        query LDAP directories, but it is intended to be capable of more once I’m done.
+        
+        Config
+        ------
+        Put at `./config.ini` or at `~/.mutt-addressbook.ini`.  Be inspired by
+        `config.sample.ini`.
+        
+Keywords: mutt ldap addressbook address book
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
