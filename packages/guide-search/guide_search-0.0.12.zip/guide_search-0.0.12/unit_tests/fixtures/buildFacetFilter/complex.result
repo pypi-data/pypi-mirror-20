@@ -1,0 +1,31 @@
+{"and": {
+		"filters": [
+            {"nested": {
+				"filter": {
+                    "bool": {
+                        "must": [
+                            {"term": {"facets.facet": "two"}}, 
+                            {"term": {"facets.foci": ["Two"]}}, 
+                            {"term": {"facets.foci": ["TWO"]}}
+                            ]
+                        }   
+                    },
+                    "path": "facets"
+                }
+            }, 
+            {"nested": {
+				"filter": {
+					"bool": {
+						"must": [
+                            {"term": {"facets.facet": "one"}}, 
+                            {"term": {"facets.foci": ["ONE"]}},
+                            {"term": {"facets.foci": ["Two"]}}
+                            ]
+                        }
+                    },
+                    "path": "facets"
+                }
+            }
+        ]
+	}
+}
