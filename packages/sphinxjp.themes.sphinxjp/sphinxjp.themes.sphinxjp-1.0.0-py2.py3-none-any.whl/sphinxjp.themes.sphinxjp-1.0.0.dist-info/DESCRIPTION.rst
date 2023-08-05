@@ -1,0 +1,118 @@
+A sphinx theme for sphinx-users.jp site.
+
+.. image:: https://img.shields.io/pypi/v/sphinxjp.themes.sphinxjp.svg
+   :target: https://pypi.python.org/pypi/sphinxjp.themes.sphinxjp
+   :alt: PyPI version
+
+.. image:: https://readthedocs.org/projects/sphinxjpthemessphinxjp/badge/?version=master
+   :target: http://sphinxjpthemessphinxjp.readthedocs.io/en/master/?badge=master
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/l/sphinxjp.themes.sphinxjp.svg
+   :target: https://github.com/sphinxjp/sphinxjp.themes.sphinxjp/blob/master/LICENSE.txt
+   :alt: LICENSE
+
+.. image:: https://img.shields.io/pypi/format/sphinxjp.themes.sphinxjp.svg
+   :target: https://pypi.python.org/pypi/sphinxjp.themes.sphinxjp
+   :alt: distribution format
+
+.. image:: https://img.shields.io/github/tag/sphinxjp/sphinxjp.themes.sphinxjp.svg
+   :target: https://github.com/sphinxjp/sphinxjp.themes.sphinxjp
+   :alt: Github tag
+
+.. image:: https://travis-ci.org/sphinxjp/sphinxjp.themes.sphinxjp.svg?branch=master
+   :target: https://travis-ci.org/sphinxjp/sphinxjp.themes.sphinxjp
+   :alt: CI status
+
+Output Sample
+==============
+:output: http://sphinxjpthemessphinxjp.rtfd.io/
+
+Features
+========
+* provide ``sphinxjp`` theme used on the sphinx-users.jp site
+  ( http://sphinx-users.jp/ ).
+
+Setup
+=====
+Make environment with pip install::
+
+    $ pip install sphinxjp.themes.sphinxjp
+
+
+Convert Usage
+==============
+setup conf.py with::
+
+    html_theme = 'sphinxjp'
+
+and run::
+
+    $ make html
+
+
+Requirements
+============
+* sphinx 1.2 or later
+
+
+License
+=======
+Licensed under the `MIT license <http://www.opensource.org/licenses/mit-license.php>`_ .
+See the LICENSE file for specific terms.
+
+
+AUTHORS
+========
+
+* Daigo3 <stain.witness AT gmail.com> sphinx-users.jp
+* Takayuki SHIMIZUKAWA <shimizukawa AT gmail.com> sphinx-users.jp
+
+
+History
+=======
+
+1.0.0 (unreleased)
+------------------
+* theme parameter: repository_url
+* doc: easy_install -> pip install
+* doc: remove a note for sphinxjp.themecore
+* doc: moved from pythonhosted.org to readthedocs
+* repository: moved from bitbucket to github
+* test: Drop py25,py26,py31, Add py35,py36
+
+0.3.1 (2014/2/12)
+------------------
+
+* fix: now come back search feature
+
+0.3.0 (2013/12/10)
+------------------
+* support Python-3.1, 3.2, 3.3.
+* support Sphinx-1.2 theme plugin feature. sphinxjp.themecore is no longer
+  needed (if you use Sphinx-1.1.3, you need sphinxjp.themecore).
+
+
+0.2.0 (2013/10/5)
+------------------
+* fix: <ul><li> list item in the <ol><li> rendering as numbered list, thank you @usaturn!
+* transplant many macro/header parts from sphinx basic theme.
+* separate layout.html into some sub templates:
+
+  * globalnavigation.html : top-right 3 icons
+  * globaltoc.html : global toctree for sidebar
+  * localtoc.html : local toctree for sidebar
+  * relations.html : next/pref link for sidebar
+  * searchbox.html : search box for sidebar
+  * sourcelink.html : source link for sidebar
+
+0.1.1 (2011/7/6)
+------------------
+* fix: namespace package declaration missing, thank you @togakushi!
+
+0.1.0 (2011/2/19)
+------------------
+* first release
+
+
+
