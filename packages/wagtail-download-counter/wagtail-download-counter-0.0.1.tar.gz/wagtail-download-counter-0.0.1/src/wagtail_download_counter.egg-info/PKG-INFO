@@ -1,0 +1,53 @@
+Metadata-Version: 1.1
+Name: wagtail-download-counter
+Version: 0.0.1
+Summary: A Wagtail add-on to to keep track of the number of downloads per file
+Home-page: https://www.fourdigits.nl/
+Author: Four Digits BV
+Author-email: info@fourdigits.nl
+License: BSD
+Description: .. image:: https://travis-ci.org/fourdigits/wagtail-download-counter.svg?branch=master
+            :target: https://travis-ci.org/fourdigits/wagtail-download-counter
+            :alt: Build status
+        
+        
+        ========================
+        Wagtail Download Counter
+        ========================
+        
+        Wagtail Download Counter is an add-on for `Wagtail CMS <https://github.com/torchbox/wagtail>`_ that keeps track of the number of times a document has been downloaded and shows the count in the Wagtail admin interface.
+        
+        Usage
+        =====
+        
+        In your settings file add the following:
+        
+        .. code-block:: python
+        
+            INSTALLED_APPS = [
+                ...
+                'downloadcounter',
+                ...
+            ]
+        
+        Make sure you add ``downloadcounter`` before ``wagtail.wagtaildocs`` in the installed apps.
+        
+        Run migrations and you're set.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.9
+Classifier: Topic :: Internet :: WWW/HTTP :: Site Management
