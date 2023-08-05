@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Templates &mdash; django-inline-media 1.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="django-inline-media 1.4.0 documentation" href="index.html"/>
+        <link rel="prev" title="Settings" href="settings.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> django-inline-media
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">Demo projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templatetags.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#template-customization">Template customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#your-own-inlinetypes">Your own InlineTypes</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">django-inline-media</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Templates</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/templates.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="ref-templates"></span><div class="section" id="templates">
+<span id="index-0"></span><h1>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h1>
+<p>List of template files coming with Django-inline-media.</p>
+<dl class="docutils">
+<dt><strong>inline_media/inline_media.picture.mini.html</strong></dt>
+<dd><dl class="first last docutils">
+<dt>Renders an <code class="docutils literal"><span class="pre">&lt;inline&gt;</span></code> picture with any of the followin CSS classes:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">inline_mini_left</span></code> or <code class="docutils literal"><span class="pre">inlin_mini_right</span></code>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><strong>inline_media/inline_media.picture.default.html</strong></dt>
+<dd><dl class="first last docutils">
+<dt>Renders an <code class="docutils literal"><span class="pre">&lt;inline&gt;</span></code> picture with any of the following CSS classes:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">inline_small_left</span></code> or <code class="docutils literal"><span class="pre">inlin_small_right</span></code></li>
+<li><code class="docutils literal"><span class="pre">inline_medium_left</span></code> or <code class="docutils literal"><span class="pre">inlin_medium_right</span></code></li>
+<li><code class="docutils literal"><span class="pre">inline_large_left</span></code> or <code class="docutils literal"><span class="pre">inlin_large_right</span></code></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><strong>inline_media/inline_media.picture.full.html</strong></dt>
+<dd>Renders an <code class="docutils literal"><span class="pre">&lt;inline&gt;</span></code> picture with any of the following CSS classes:
+* <code class="docutils literal"><span class="pre">inline_full_left</span></code>, <code class="docutils literal"><span class="pre">inline_full_center</span></code>, <code class="docutils literal"><span class="pre">inlin_full_right</span></code>.</dd>
+<dt><strong>inline_media/inline_media.pictureset.mini.html</strong></dt>
+<dd><dl class="first last docutils">
+<dt>Renders an <code class="docutils literal"><span class="pre">&lt;inline&gt;</span></code> pictureset with any of the followin CSS classes:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">inline_mini_left</span></code> or <code class="docutils literal"><span class="pre">inline_mini_right</span></code>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><strong>inline_media/inline_media.pictureset.default.html</strong></dt>
+<dd><dl class="first last docutils">
+<dt>Renders an <code class="docutils literal"><span class="pre">&lt;inline&gt;</span></code> pictureset with any of the following CSS classes:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">inline_small_left</span></code> or <code class="docutils literal"><span class="pre">inline_small_right</span></code></li>
+<li><code class="docutils literal"><span class="pre">inline_medium_left</span></code> or <code class="docutils literal"><span class="pre">inline_medium_right</span></code></li>
+<li><code class="docutils literal"><span class="pre">inline_large_left</span></code> or <code class="docutils literal"><span class="pre">inline_large_right</span></code></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><strong>inline_media/inline_media.pictureset.full.html</strong></dt>
+<dd><dl class="first last docutils">
+<dt>Renders an <code class="docutils literal"><span class="pre">&lt;inline&gt;</span></code> pictureset with any of the followin CSS classes:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">inline_full_left</span></code>, <code class="docutils literal"><span class="pre">inline_full_center</span></code>, <code class="docutils literal"><span class="pre">inline_full_right</span></code>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="section" id="template-customization">
+<span id="index-1"></span><h2>Template customization<a class="headerlink" href="#template-customization" title="Permalink to this headline">¶</a></h2>
+<p>Django-inline-media will try to use a template matching the following pattern:</p>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">inline_media/&lt;app-label&gt;.&lt;model&gt;.&lt;size&gt;.html</span></code>
+Being <code class="docutils literal"><span class="pre">&lt;size&gt;</span></code> one of the following:</p>
+<ul class="simple">
+<li>mini</li>
+<li>small</li>
+<li>medium</li>
+<li>large</li>
+<li>full</li>
+</ul>
+<p><strong>Note</strong>: Actual size values can be customize through the setting <code class="docutils literal"><span class="pre">INLINE_MEDIA_CUSTOM_SIZES</span></code>. See it the <a class="reference internal" href="settings.html"><span class="doc">Settings</span></a>.</p>
+</li>
+</ul>
+<p>When django-inline-media has to render an element with a CSS class like <code class="docutils literal"><span class="pre">inline_medium_left</span></code>, it will first look for the template:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">inline_media/&lt;app_label&gt;.&lt;model&gt;.medium.html</span></code></li>
+</ul>
+<p>And if it doesn&#8217;t exist it will use the default template:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">inline_media/&lt;app_label&gt;.&lt;model&gt;.default.html</span></code></li>
+</ul>
+</div>
+<div class="section" id="your-own-inlinetypes">
+<h2>Your own InlineTypes<a class="headerlink" href="#your-own-inlinetypes" title="Permalink to this headline">¶</a></h2>
+<p>If the django-inline-media models, Picture and PictureSet, are not suitable for your project or need another ones, just create your own and bind them to the app.</p>
+<p>Once you have your model (say <code class="docutils literal"><span class="pre">MyPicture</span></code>), declare it the setting <code class="docutils literal"><span class="pre">INLINE_MEDIA_TYPES</span></code>. Your model will then show up in the dropdown list of inline types at the bottom of your <code class="docutils literal"><span class="pre">TextFieldWithInlines</span></code> fields (like the <code class="docutils literal"><span class="pre">body</span></code> field in the Article model of the demo).</p>
+<p>Then create templates to render your own media content. Name your templates after the correspoding <code class="docutils literal"><span class="pre">app_label</span></code> for your model:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">inline_media/&lt;my_app_label&gt;.mypicture.&lt;size&gt;.html</span></code></li>
+<li><code class="docutils literal"><span class="pre">inline_media/&lt;my_app_label&gt;.mypicture.default.html</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="settings.html" class="btn btn-neutral" title="Settings" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Daniel Rus Morales.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

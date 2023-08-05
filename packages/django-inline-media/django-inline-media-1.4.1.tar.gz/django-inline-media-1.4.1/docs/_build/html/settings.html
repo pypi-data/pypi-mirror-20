@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Settings &mdash; django-inline-media 1.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="django-inline-media 1.4.0 documentation" href="index.html"/>
+        <link rel="next" title="Templates" href="templates.html"/>
+        <link rel="prev" title="Filters" href="templatetags.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> django-inline-media
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">Demo projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templatetags.html">Filters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#inline-media-types"><code class="docutils literal"><span class="pre">INLINE_MEDIA_TYPES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inline-media-custom-sizes"><code class="docutils literal"><span class="pre">INLINE_MEDIA_CUSTOM_SIZES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inline-media-textarea-attrs"><code class="docutils literal"><span class="pre">INLINE_MEDIA_TEXTAREA_ATTRS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inline-media-remove-tags"><code class="docutils literal"><span class="pre">INLINE_MEDIA_REMOVE_TAGS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin-images-path"><code class="docutils literal"><span class="pre">ADMIN_IMAGES_PATH</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">django-inline-media</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Settings</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/settings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="ref-settings"></span><div class="section" id="settings">
+<span id="index-0"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>Django-inline-media recognizes four setting:</p>
+<div class="section" id="inline-media-types">
+<span id="index-1"></span><h2><code class="docutils literal"><span class="pre">INLINE_MEDIA_TYPES</span></code><a class="headerlink" href="#inline-media-types" title="Permalink to this headline">¶</a></h2>
+<p><strong>Optional</strong></p>
+<p>Defines the inline media types available project wide.</p>
+<p>It defaults to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INLINE_MEDIA_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inline_media.picture&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;inline_media.pictureset&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inline-media-custom-sizes">
+<span id="index-2"></span><h2><code class="docutils literal"><span class="pre">INLINE_MEDIA_CUSTOM_SIZES</span></code><a class="headerlink" href="#inline-media-custom-sizes" title="Permalink to this headline">¶</a></h2>
+<p><strong>Optional</strong></p>
+<p>This setting defines custom size values for the available <code class="docutils literal"><span class="pre">INLINE_MEDIA_TYPES</span></code>. By default every inline type declared in <code class="docutils literal"><span class="pre">INLINE_MEDIA_TYPES</span></code> can be rendered in <strong>mini</strong>, <strong>small</strong>, <strong>medium</strong>, <strong>large</strong> and <strong>full</strong> size.</p>
+<p><code class="docutils literal"><span class="pre">INLINE_MEDIA_CUSTOM_SIZES</span></code> is a 2-level depth dictionary to define custom size values for each of the 5 size classes. Size classes can also be disabled.</p>
+<p>The first level contains inline types with <strong>app_label.model</strong> pairs as keys.  The second level contains class sizes as keys and values as geometries. When the value is just an <strong>int</strong>, it represents the <strong>width</strong> of the thumbnail. When the value is a <strong>tuple</strong> it represents the <strong>(width, height)</strong> of the thumbnail. The value can be <code class="docutils literal"><span class="pre">None</span></code>, what means the size won&#8217;t be available for that inline type.</p>
+<p>It defaults to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INLINE_MEDIA_CUSTOM_SIZES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;inline_media.picture&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;mini&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="s1">&#39;small&#39;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+        <span class="s1">&#39;medium&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="s1">&#39;large&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;inline_media.pictureset&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;mini&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;small&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span>
+        <span class="s1">&#39;medium&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+        <span class="s1">&#39;large&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span>
+        <span class="s1">&#39;full&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">380</span><span class="p">,</span> <span class="mi">280</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See that the &#8216;full&#8217; class size is not defined for the type <code class="docutils literal"><span class="pre">inline_media.picture</span></code>. That doesn&#8217;t disable it. By default the 5 class sizes are active for every inline type defined in <code class="docutils literal"><span class="pre">INLINE_MEDIA_TYPES</span></code>. The purpose of this setting is either to pass a custom size in the context to the template, or to disable a class size.</p>
+<p>To disable the &#8216;small&#8217; size for type <code class="docutils literal"><span class="pre">inline_media.pictureset</span></code> just set it to <code class="docutils literal"><span class="pre">None</span></code> in your settings module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INLINE_MEDIA_CUSTOM_SIZES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;inline_media.pictureset&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;small&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inline-media-textarea-attrs">
+<span id="index-3"></span><h2><code class="docutils literal"><span class="pre">INLINE_MEDIA_TEXTAREA_ATTRS</span></code><a class="headerlink" href="#inline-media-textarea-attrs" title="Permalink to this headline">¶</a></h2>
+<p><strong>Optional</strong></p>
+<p>This setting define attributes to apply to <code class="docutils literal"><span class="pre">TextareaWithInlines</span></code> widgets.</p>
+<p>To apply common attributes to all <code class="docutils literal"><span class="pre">TextareaWithInline</span></code> widgets use the <strong>default</strong> key, and define attributes and values in its dictionary (see the example below).</p>
+<p>You can also apply rendering attributes on a per <code class="docutils literal"><span class="pre">app_label.model</span></code> and <code class="docutils literal"><span class="pre">field</span></code> basis.</p>
+<p>In this example, every <code class="docutils literal"><span class="pre">TextFieldWithInlines</span></code> field will get the <code class="docutils literal"><span class="pre">style</span></code> attribute applied by default. Then, <code class="docutils literal"><span class="pre">abstract</span></code> and <code class="docutils literal"><span class="pre">body</span></code> fields of the <code class="docutils literal"><span class="pre">articles.article</span></code> model will get the attribute <code class="docutils literal"><span class="pre">rows</span></code> applied too. The <code class="docutils literal"><span class="pre">style</span></code> attribute defined in the <strong>default</strong> key can be overriden by simply defining it again for an <code class="docutils literal"><span class="pre">app_label.model/field</span></code> combination:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INLINE_MEDIA_TEXTAREA_ATTRS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="s1">&#39;font: 13px monospace&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;articles.article&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;abstract&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;rows&#39;</span><span class="p">:</span>  <span class="mi">5</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">20</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Defaults to <code class="docutils literal"><span class="pre">{}</span></code> so that no extra attributes are applied.</p>
+</div>
+<div class="section" id="inline-media-remove-tags">
+<span id="index-4"></span><h2><code class="docutils literal"><span class="pre">INLINE_MEDIA_REMOVE_TAGS</span></code><a class="headerlink" href="#inline-media-remove-tags" title="Permalink to this headline">¶</a></h2>
+<p><strong>Optional</strong></p>
+<p>This setting list all the tags that could be added by the parser &#8216;html.parser&#8217; used with BeautifulSoup4 to render the content of TextFieldWithInlines. &#8216;html.parser&#8217; is the only parser available under Python 3 at the moment.</p>
+<p>An example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INLINE_MEDIA_REMOVE_TAGS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;/br&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;/</span><span class="n">whatever</span><span class="o">&gt;</span><span class="s1">&#39;]</span>
+</pre></div>
+</div>
+<p>Defaults to <code class="docutils literal"><span class="pre">['&lt;/br&gt;']</span></code></p>
+</div>
+<div class="section" id="admin-images-path">
+<span id="index-5"></span><h2><code class="docutils literal"><span class="pre">ADMIN_IMAGES_PATH</span></code><a class="headerlink" href="#admin-images-path" title="Permalink to this headline">¶</a></h2>
+<p><strong>Optional</strong></p>
+<p>This setting establishes the path under which Django admin images may be found.</p>
+<p>An example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ADMIN_IMAGES_PATH</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">/admin/img/admin&quot;</span> <span class="o">%</span> <span class="n">STATIC_URL</span> <span class="c1"># Django 1.3</span>
+</pre></div>
+</div>
+<p>Defaults to <code class="docutils literal"><span class="pre">&quot;%s/admin/img&quot;</span> <span class="pre">%</span> <span class="pre">settings.STATIC_URL</span></code>, the Django 1.4 admin images path.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="templates.html" class="btn btn-neutral float-right" title="Templates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="templatetags.html" class="btn btn-neutral" title="Filters" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Daniel Rus Morales.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
