@@ -1,0 +1,28 @@
+{
+  "build_command": "git archive -o latest.zip HEAD",
+  "package_filename": "latest.zip",
+
+  "default_stage": "staging",
+  "stages": {
+    "staging": {
+      "host": "127.0.0.1",
+      "port": "8080"
+    },
+    "production": {
+      "host": "127.0.0.1",
+      "port": "8080"
+    }
+  },
+
+  "deploy_to": "/data/www/support.qq.com/",
+  "shared_paths": [
+    ".env",
+    "public/data",
+    "data",
+    "application/logs",
+    "application/cache"
+  ],
+
+  "pre_command": "cd $RELEASE && mkdir mkdir_by_pre_command",
+  "post_command": "cd $CURRENT && mkdir mkdir_by_post_command"
+}
