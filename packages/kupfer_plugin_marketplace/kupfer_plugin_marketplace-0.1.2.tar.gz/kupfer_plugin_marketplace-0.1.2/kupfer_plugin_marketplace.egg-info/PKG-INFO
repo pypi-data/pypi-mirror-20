@@ -1,0 +1,64 @@
+Metadata-Version: 1.1
+Name: kupfer-plugin-marketplace
+Version: 0.1.2
+Summary: Search and install 3th party plugins for kupfer
+Home-page: https://github.com/hugosenari/marketplace
+Author: Hugo Sena Ribeiro
+Author-email: hugosenari@gmail.com
+License: MIT license
+Description: ===============================
+        Marketplace
+        ===============================
+        
+        
+        .. image:: https://img.shields.io/pypi/v/kupfer_plugin_marketplace.svg
+                :target: https://pypi.python.org/pypi/kupfer_plugin_marketplace
+        
+        
+        
+        Search and install 3th party plugins for kupfer
+        
+        For your plugin be listed they need to be uploaded to pypi with kupfer keyword.
+        
+        Require Kupfer http://engla.github.io/kupfer/
+        
+        
+        * Free software: MIT license
+        
+        
+        Install
+        -------
+        
+        pip install kupfer_plugin_marketplace
+        
+        
+        Todo
+        ----
+        
+        * Add/make 'Install and Enable' option;
+        * Show installed plugins with 'installed' flag;
+        * Add 'Uninstall' Action;
+        * Add Update Action (current install does it);
+        
+        
+        Credits
+        -------
+        
+        This package was created with Cookiecutter_ and the `cookiecutter-kupfer-plugin-package`_ project template.
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`cookiecutter-kupfer-plugin-package`: https://github.com/hugosenari/cookiecutter-kupfer-plugin-package
+        
+        
+Keywords: kupfer marketplace
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
