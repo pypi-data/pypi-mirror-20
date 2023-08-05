@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+
+""" Viki daemon
+
+The automation framework
+
+Usage:
+    jobs
+    job/<jobName>
+    job/<jobName>/run
+
+Maintainer:
+    John Shanahan <shanahan.jrs@gmail.com>
+
+License:
+    Apache 2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+
+"""
+
+### Imports
+
+try:
+    from flask import Flask, request, jsonify, render_template
+    from src.jobs.jobs import Jobs
+    import os
+    import sqlite3
+    import logging
+except ImportError as error:
+    exit('ImportError: ' + str(error))
+
+
+### Setup
+debug = True
+
+# Classes / globals
+app = Flask(__name__)
+job = Jobs()
+
+home_directory = "/usr/local/viki"
+log_dir = "/usr/local/viki/logs"
+log_file = log_dir + "/" + "viki.log"
+log_level = logging.WARNING
+
+# Sqlite
+# sqlite_file = "/path/to/sqlite3/file"
+
+# sqlite_connection = sqlite3.connect(sqlite_file)
+# sqlite = sqlite_connection.cursor()
+
+### Routes
+
+@app.route("/")
+def root():
+    """ Home """
+    logging.info('--> Func:root')
+
+    ret = {"name":"viki", "version":"0.0.1"}
+
+    return render_template('home.html', data=ret)
+
+@app.route("/jobs")
+def jobs():
+    """ List all jobs """
+    logging.info('--> Func:jobs')
+
+    ret = jsonify(job.get_jobs())
+
+    return ret
+
+@app.route("/job/<string:job_name>", methods = ['GET', 'POST', 'PUT', 'DELETE'])
+def get_job(job_name):
+    """ Show single job details by name """
+    logging.info('--> Func:get_job')
+
+    ret = None
+
+    if request.method == 'GET':
+        # Retrieve a jobs details
+        ret = job.get_job_by_name(job_name)
+
+    if request.method == 'POST':
+        # Requires "application/json" mime type and valid JSON body
+        # containing description, and steps
+        job_config = str(request.get_json())
+        ret = job.create_job(job_name, job_config)
+
+    if request.method == 'PUT':
+        # Requires "application/json" mime type and valid JSON body
+        # containing field/s to be updated
+        ret = job.update_job(job_name)
+
+    if request.method == 'DELETE':
+        # Deletes a job from the repository
+        ret = job.delete_job(job_name)
+
+    if ret is None:
+        ret = {"success":0, "message":"Failed"}
+
+    return jsonify(ret)
+
+@app.route("/job/<string:job_name>/run", methods = ['POST'])
+def run_job(job_name):
+    """ Run specific job by name """
+    logging.info('--> Func:run_job')
+
+    return jsonify(job.run_job(job_name))
+
+@app.route("/the3laws")
+def the_three_laws():
+    """ The three laws of robotics """
+    return jsonify('A robot may not injure a human being or, through inaction, allow a human being to come to harm. ' +
+        'A robot must obey the orders given it by human beings except where such orders would conflict with the First Law. ' +
+        'A robot must protect its own existence as long as such protection does not conflict with the First or Second Laws.')
+
+### Main
+
+if __name__ == "__main__":
+
+    ### Pre
+    if not os.path.isdir(log_dir):
+        os.mkdir(log_dir)
+
+    logging.basicConfig(filename=log_file, level=log_level)
+
+    ### Start
+    if debug:
+        # Set debug options
+        app.debug = True
+        log_level = logging.DEBUG
+
+    app.run()
