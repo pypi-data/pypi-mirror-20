@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="pygubu.builder.widgets.scrollbarhelper" id="__ventana__">
+    <property name="scrolltype">both</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+      <property name="sticky">nesw</property>
+    </layout>
+    <child>
+      <object class="pygubu.builder.widgets.editabletreeview" id="__tabla__">
+        <property name="selectmode">browse</property>
+        <property name="show">headings</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">nesw</property>
+        </layout>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_1">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">idEntradas</property>
+            <property name="tree_column">false</property>
+            <property name="visible">false</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_2">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">idEntrada_Equipos</property>
+            <property name="tree_column">false</property>
+            <property name="visible">false</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_3">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">idEquipos</property>
+            <property name="tree_column">false</property>
+            <property name="visible">false</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_4">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">idObjetos</property>
+            <property name="tree_column">false</property>
+            <property name="visible">false</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_5">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">idClientes</property>
+            <property name="tree_column">false</property>
+            <property name="visible">false</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Column_6">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">idEntidades</property>
+            <property name="tree_column">false</property>
+            <property name="visible">false</property>
+            <property name="width">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Cliente">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">Cliente</property>
+            <property name="tree_column">false</property>
+            <property name="visible">true</property>
+            <property name="width">150</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Codigo">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">Codigo</property>
+            <property name="tree_column">false</property>
+            <property name="visible">true</property>
+            <property name="width">100</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Equipo">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">Equipo</property>
+            <property name="tree_column">false</property>
+            <property name="visible">true</property>
+            <property name="width">125</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Serial">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">Serial</property>
+            <property name="tree_column">false</property>
+            <property name="visible">true</property>
+            <property name="width">75</property>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Treeview.Column" id="Descripciòn">
+            <property name="column_anchor">w</property>
+            <property name="heading_anchor">w</property>
+            <property name="minwidth">20</property>
+            <property name="stretch">true</property>
+            <property name="text" translatable="yes">Descripciòn</property>
+            <property name="tree_column">false</property>
+            <property name="visible">true</property>
+            <property name="width">125</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

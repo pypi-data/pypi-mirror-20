@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="ttk.Frame" id="__ventana__">
+    <layout>
+      <property name="column">0</property>
+      <property name="pady">6</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+      <property name="sticky">nesw</property>
+      <rows>
+        <row id="1">
+          <property name="weight">1</property>
+        </row>
+      </rows>
+      <columns>
+        <column id="0">
+          <property name="weight">1</property>
+        </column>
+      </columns>
+    </layout>
+    <child>
+      <object class="ttk.Label" id="Label_7">
+        <property name="style">Subtitulo.TLabel</property>
+        <property name="text" translatable="yes">Objeto</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="Frame_2">
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">nesw</property>
+          <rows>
+            <row id="0">
+              <property name="weight">0</property>
+            </row>
+            <row id="1">
+              <property name="weight">0</property>
+            </row>
+            <row id="2">
+              <property name="weight">0</property>
+            </row>
+          </rows>
+          <columns>
+            <column id="1">
+              <property name="weight">1</property>
+            </column>
+          </columns>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="Label_9">
+            <property name="text" translatable="yes">Nombre</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">6</property>
+              <property name="pady">6</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">we</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Nombre">
+            <property name="textvariable">string:nombre</property>
+            <property name="validate">none</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="padx">6</property>
+              <property name="pady">6</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">nesw</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="Label_10">
+            <property name="text" translatable="yes">Referencia</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">6</property>
+              <property name="pady">6</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">we</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="referencia">
+            <property name="textvariable">string:referencia</property>
+            <property name="validate">none</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="padx">6</property>
+              <property name="pady">6</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="rowspan">1</property>
+              <property name="sticky">nesw</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

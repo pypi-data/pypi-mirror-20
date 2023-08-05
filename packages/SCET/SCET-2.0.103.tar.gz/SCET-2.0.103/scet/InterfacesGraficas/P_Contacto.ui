@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="ttk.Frame" id="__ventana__">
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+      <property name="sticky">nesw</property>
+      <rows>
+        <row id="0">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="1">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="2">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="3">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="4">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="5">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="6">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+        <row id="7">
+          <property name="pad">0</property>
+          <property name="weight">1</property>
+        </row>
+      </rows>
+      <columns>
+        <column id="0">
+          <property name="weight">0</property>
+        </column>
+        <column id="1">
+          <property name="weight">1</property>
+        </column>
+      </columns>
+    </layout>
+    <child>
+      <object class="ttk.Label" id="Label_1">
+        <property name="text" translatable="yes">Telefono Celular</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_2">
+        <property name="text" translatable="yes">Telefono Oficina</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_3">
+        <property name="text" translatable="yes">Telefono Casa</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_4">
+        <property name="text" translatable="yes">Correo Electronico 1</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_5">
+        <property name="text" translatable="yes">Correo Electronico 2</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_6">
+        <property name="text" translatable="yes">Facebook</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_7">
+        <property name="text" translatable="yes">Skype</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="Label_8">
+        <property name="text" translatable="yes">P.I.N.</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Telefono Celular">
+        <property name="textvariable">string:Telefono Celular</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="rowspan">1</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Telefono Oficina">
+        <property name="textvariable">string:Telefono Oficina</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Telefono Casa">
+        <property name="textvariable">string:Telefono Casa</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Correo Electronico 1">
+        <property name="textvariable">string:Correo Electronico 1</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Correo Electronico 2">
+        <property name="textvariable">string:Correo Electronico 2</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Facebook">
+        <property name="textvariable">string:Facebook</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="Skype">
+        <property name="textvariable">string:Skype</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="PIN">
+        <property name="textvariable">string:PIN</property>
+        <property name="validate">none</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="padx">6</property>
+          <property name="pady">6</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+          <property name="rowspan">1</property>
+          <property name="sticky">nesw</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
