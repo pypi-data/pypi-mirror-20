@@ -1,0 +1,37 @@
+/*body {
+	background-repeat: no-repeat;
+	background-size: 1224px 1584px;
+}*/
+.tff img {
+	position:absolute;
+	top:0;
+	left:0;
+}
+.tff a, .tff input, .tff textarea {
+	position: absolute;
+	background-color: transparent;
+}
+.tff input, .tff textarea {
+	border-color: orange;
+	font-color:orange; 
+	font-size: 1.2em;
+}
+.tff a {
+	border-bottom:3px solid blue;
+}
+.tff input[type="checkbox"]{
+	display:none;
+}
+.tff input[type="checkbox"] + label {
+	display: inline-block;
+	/*border: 1px solid #000;*/
+	position: absolute;
+}
+.tff input[type="checkbox"]:checked + label:after {
+	content: '✔';
+	display: inline-block;
+	font-size: 1.6em;
+}
+.dd {
+	text-align:right;
+}
