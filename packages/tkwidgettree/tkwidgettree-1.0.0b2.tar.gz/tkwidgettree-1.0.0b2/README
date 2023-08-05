@@ -1,0 +1,70 @@
+TkWidgetTree
+============
+
+Build trees of Tk widgets from a dict structure or use the FileParser class
+to load them from a JSON file.
+
+Details
+-------
+
+TkWidgetTree is a wrapper for the various Tk widgets (Frames, Buttons, Menu:s,
+etc.), it is most conveninetly invoked with the TkWidgetTree.from_dict(tree,
+root) static method, it builds a tree structure of TkWidgetTree objects from
+nested dicts with the input to the TkWidgetTree constructor.
+
+The parameters to the constructor are:
+
+name		- The Tk widget class to create or the name of the widget
+parent*		- The Tk widget that will be used as the parent
+		  (tk.Button(parent, ...)
+id*		- A tree-unique name for this widget, for when you want to
+		  find it for setting callbacks or fetching values (or whatever)
+options*	- A dict containing the options passed to the widget creation
+		  (tk.Button(parent, **options))
+pack*		- A dict containing the options to give to the pack method. This
+		  class only supports the pack arrangement method for the
+		  moment.
+children*	- A list of child TkWidgetTree:s. The widgets in this list will
+		  get this widget set as the parent when render()ing.
+
+[*] Optional
+
+You can then run the render() method on the root of your tree and they will
+be recursively created. Once you've rendred all the widgets, you can set up
+your callbacks by first finding your buttons/sliders whatnot by calling the
+find method and using the TkWidgetTree.widget parameter to further set up
+the widgets.
+
+...
+config={
+	'name': 'Frame',
+	'children': [
+		{
+			'id': 'mybutton',
+			'name': 'Button',
+			'options': { 'text': 'Hello World' },
+			'pack: { 'side': tk.LEFT }
+		}
+	]
+}
+
+tree = TkWidgetTree.from_dict(config)
+tree.render()
+
+button = tree.find('mybutton')
+
+button.widget.config(callback=do_stuff)
+
+tree.mainloop()
+...
+
+Loading from a file
+-------------------
+
+But keeping a chunky dict of your application in the source is still pretty
+clunky, so why not put the structure in a file instead? That's where the
+FileParser class comes in. It essentially reads a JSON-serialized version of
+the above structure, with one small twist; any Tk constants you might want to
+use are set as strings, with the key prefixed by an @-sign.
+
+... "pack": { "@side": "LEFT" } ...
