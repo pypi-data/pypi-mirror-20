@@ -1,0 +1,184 @@
+## Changelog
+
+### 1.6.1 - 2015-09-29
+
+*   [fedfind-1.6.1.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.6.1.tar.xz)
+
+1.  Rewrite `get_release()` and add tests for it (API and expected results do not change)
+2.  Fix `get_current_release()` for Python 3
+3.  Revise documentation somewhat
+
+### 1.6 - 2015-09-19
+
+*   [fedfind-1.6.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.6.tar.xz)
+
+1.  **API** Treat 'docker' as an `imagetype` (replacing 'filesystem') not a `loadout`
+2.  **NEW** Add `shortdesc` attribute for images (shorter description)
+3.  **NEW** Add `helpers.get_current_release()` using pkgdb API (better than rsync scrape)
+4.  **NEW** Add `PostRelease` class for post-release stable nightly composes
+5.  **API** Change `expected_images()`, `difference()` and `check_expected()` to use a 4-tuple with `imagesubtype` included
+6.  **API** Catch more 'cloud atomic' image variants properly
+7.  **NEW** Add `canned` imagetype, use it for the Cloud Atomic installer image
+8.  **API** For images with `subflavor`, `payload` is now `(flavor)_(subflavor)`, not `(flavor) (subflavor)`
+
+### 1.5.1 - 2015-09-02
+
+*   [fedfind-1.5.1.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.5.1.tar.xz)
+
+1.  **NEW** Add `size` attribute for images
+2.  Treat images with 'SRPMS' in their names as `source` imagetype (really old releases)
+3.  **NEW** Add `imagesubtype` attribute for images (Vagrant and disk images have various subtypes)
+
+### 1.5 - 2015-08-27
+
+*   [fedfind-1.5.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.5.tar.xz)
+
+1.  Return rsync retcodes properly in `rsync_helper()`
+2.  Have `url_exists()` only return `False` for rsync when 'not found' return code hit
+3.  Retry rsync commands when server is full
+4.  **NEW** Add `wait()` method for Releases to wait for the compose to exist
+5.  Sanity check URLs passes to `url_exists()`
+6.  Add pytext/tox test framework and tests
+7.  Make `expected_images` more accurate, add Cloud images
+
+### 1.4.2 - 2015-08-21
+
+*   [fedfind-1.4.2.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.4.2.tar.xz)
+
+1.  Python 3 fix (broke non-nightly image searching and a few other things on Py3...)
+
+### 1.4.1 - 2015-08-21
+
+*   [fedfind-1.4.1.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.4.1.tar.xz)
+
+1.  Fix a bug in `koji_done` caused by the query opt fixes in 1.4
+2.  Add Branched release guessing (so you can pass `-m Branched` and it will guess the release number). Will also guess today's date if you don't pass `-c`
+3.  Fix a bug in rsync calls which meant we were getting more data than we meant to
+
+### 1.4 - 2015-08-20
+
+*   [fedfind-1.4.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.4.tar.xz)
+
+1.  Drop the `multiprocessing` stuff from 1.3, use xmlrpclib `multicall` to batch Koji requests instead
+2.  Improve the Koji caching mechanism for partial matches
+3.  Fix wrong opt names in Koji query opts (some queries weren't actually doing what they meant to do at all)
+
+### 1.3 - 2015-08-20
+
+*   [fedfind-1.3.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.3.tar.xz)
+
+1.  Fix `-r NN` in the CLI (broken in 1.2)
+2.  Add `previous_release` property for Releases
+3.  Various improvements to image parsing (find more images and identify them more accurately)
+4.  Add `difference()` method for Releases (show images that are in this release but not the other)
+5.  Add `check_expected()` method for Releases (check if all 'important' images are present)
+6.  **API**: rename `find_task_url()` to `find_task_images()` and make it return all images (not just one)
+7.  Add `find_task_urls()` which actually returns URLs
+8.  Add a Koji query cache mechanism for `Nightly` instances
+9.  Add `koji_done()` and `pungi_done()` properties (for all Releases, but mostly useful for `Nightly`)
+10. Parallelize Koji queries using `multiprocessing`
+
+### 1.2 - 2015-07-23
+
+*   [fedfind-1.2.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.2.tar.xz)
+
+1.  Add a proper logging mechanism
+2.  Allow 'Rawhide' as a release value (but, unfortunately, broke `-r NN` in the CLI)
+
+### 1.1.5 - 2015-04-30
+
+*   [fedfind-1.1.5.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.1.5.tar.xz)
+
+1.  Add a `-g` parameter that prints the 'generic' URL for the given release
+2.  Allow `--milestone Branched` and `--milestone Rawhide` (they are never really necessary, but it's not unusual to pass them instinctively, and as we can handle them, better to do so than fail)
+
+### 1.1.4 - 2015-04-23
+
+*   [fedfind-1.1.4.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.1.4.tar.xz)
+
+1.  Drop shebangs from files that can't be executed, use 'env' in shebangs in files that can be executed, don't specify a python version in shebangs (as fedfind is python version-agnostic)
+
+### 1.1.3 - 2015-04-16
+
+*   [fedfind-1.1.3.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.1.3.tar.xz)
+
+1.  Drop bundled copy of cached-property, as it's now packaged for Fedora and EPEL (and available from pypi on other platforms)
+
+### 1.1.2 - 2015-03-10
+
+*   [fedfind-1.1.2.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.1.2.tar.xz)
+
+1.  Update milestone release mirror path: now uses _ not - as separator
+
+### 1.1.1 - 2015-02-26
+
+*   [fedfind-1.1.1.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.1.1.tar.xz)
+
+1.  Handle an argparse bug upstream which causes a crash instead of a nice usage message when invoked with no subcommand
+
+### 1.1.0 - 2015-02-26
+
+*   [fedfind-1.1.0.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.1.0.tar.xz)
+
+1.  Python 3 support
+2.  Cleaner approach to using dl.fedoraproject.org instead of download.fedoraproject.org URLs for some images (see 1.0.8)
+
+### 1.0.8 - 2015-02-25
+
+*   [fedfind-1.0.8.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.8.tar.xz)
+
+1.  Use dl.fedoraproject.org URLs, not download.fedoraproject.org, for TC/RC images
+
+### 1.0.7 - 2015-02-25
+
+*   [fedfind-1.0.7.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.7.tar.xz)
+
+1.  Fix a bug which broke finding nightly Koji images by type
+
+### 1.0.6 - 2015-02-18
+
+*   [fedfind-1.0.6.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.6.tar.xz)
+
+1.  Adjustments for the attempt to consolidate versioning across fedfind, python-wikitcms and relval using `release`, `milestone`, `compose` attributes to identify all images/events
+2.  Misc. bug fixes and doc cleanups
+3.  Add `version` attribute for `Image` objects
+
+### 1.0.5 - 2015-02-12
+
+*   [fedfind-1.0.5.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.5.tar.xz)
+
+1.  Some refinements and bug fixes in image detection
+2.  Provide a sort weight property for images
+3.  Use xmlrpclib instead of koji to improve portability
+
+### 1.0.4 - 2015-02-09
+
+*   [fedfind-1.0.4.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.4.tar.xz)
+
+1.  Bugfix to the EL 6 compatibility
+
+### 1.0.3 - 2015-02-09
+
+*   [fedfind-1.0.3.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.3.tar.xz)
+
+1.  A lot of pylint cleanups, including various bugfixes found along the way
+2.  Python 2.6 compatibility + subprocess32 usage made optional == EL 6 compatibility! Repo now has EL6 and EL7 builds. Note, requires EPEL (for koji package)
+
+### 1.0.2 - 2015-02-06
+
+*   [fedfind-1.0.2.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.2.tar.xz)
+
+1.  Multiple small bugfixes and cleanups (mainly to Koji querying)
+2.  Rejigged how the CLI command is implemented (doesn't change usage from the RPM, lets you run `./fedfind.py` directly from a git checkout if you like)
+
+### 1.0.1 - 2015-02-06
+
+*   [fedfind-1.0.1.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.1.tar.xz)
+
+1.  Add ppc to arch list
+
+### 1.0 - 2015-02-05
+
+*   [fedfind-1.0.tar.xz](https://www.happyassassin.net/fedfind/releases/fedfind-1.0.tar.xz)
+
+1.  Initial release of fedfind
