@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from sys import exit,argv
+from wadus import AwsInstances
+from wadus import AwsAmis
+from wadus import AwsBalancers
+
+help_text = '''NAME
+    wadus - A Cloud basic tool
+SYNOPSYS
+    wadus [aws|gce] list
+DESCRIPTION
+    wadus is a cloud basic tool. The default region is eu-west-1,
+    you can change the region using the AWS_DEFAULT_REGION environment variable.
+PARAMETERS
+    instances
+        list all running instances
+    amis
+        list all your AMIs
+    elbs
+        list all elastic load balancers
+AUTHOR
+    Jesús Sayar Celestino <https://github.com/jesus-sayar>
+COPYRIGHT
+    Copyright ©2017
+    Lic. GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+    This is free software: you are free to change and redistribute it. There is
+    NO WARRANTY, to the extent permitted by law.
+'''
+
+if len(argv) <= 2 or argv[1] == 'help':
+    print(help_text)
+    exit(0)
+
+if len(argv) == 3 and argv[1] == 'aws':
+    if argv[2] == 'instances':
+        aws_instances = AwsInstances()
+        aws_instances.list()
+    elif argv[2] == 'amis':
+        aws_amis = AwsAmis()
+        aws_amis.list()
+    elif argv[2] == 'elbs':
+        aws_balancers = AwsBalancers()
+        aws_balancers.list()
+    else:
+        print(help_text)
+        exit(0)
