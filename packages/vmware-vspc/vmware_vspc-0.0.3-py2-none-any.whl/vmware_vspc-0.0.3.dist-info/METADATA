@@ -1,0 +1,50 @@
+Metadata-Version: 2.0
+Name: vmware-vspc
+Version: 0.0.3
+Summary: Virtual Serial Port Concentrator for VMware instances.
+Home-page: http://www.openstack.org/
+Author: OpenStack
+Author-email: openstack-dev@lists.openstack.org
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Environment :: OpenStack
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: oslo.config (>=3.7.0)
+Requires-Dist: oslo.log (>=1.14.0)
+Requires-Dist: pbr (>=1.8)
+
+vmware-vspc
+===========
+
+Virtual Serial Port Concentrator for use in the vSphere environment. It collects
+serial console logs from VMs which have configured virtual serial port pointing
+to it.
+
+Usage
+=====
+
+Copy ``vspc.conf.sample`` as ``vspc.conf`` and edit as appropriate::
+
+    [DEFAULT]
+    debug = True
+    host = 0.0.0.0
+    port = 13370
+    cert = cert.pem
+    key = key.pem
+    uri = vmware-vspc
+    serial_log_dir = /opt/vmware/vspc
+
+Then start with::
+
+    $ vmware-vspc --config-file vspc.conf
+
+
+
