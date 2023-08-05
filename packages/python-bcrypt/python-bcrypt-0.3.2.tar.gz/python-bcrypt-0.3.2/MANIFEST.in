@@ -1,0 +1,11 @@
+include README.md
+include PKG-INFO
+include LICENSE
+include TODO
+include setup.py
+include bcrypt/__init__.py
+include bcrypt/bcrypt.c
+include bcrypt/bcrypt_python.c
+include bcrypt/blowfish.c
+include bcrypt/pybc_blf.h
+include test/test.py
