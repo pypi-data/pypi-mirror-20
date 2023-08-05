@@ -1,0 +1,25 @@
+<ResultScreen@Screen>
+    name: "result_screen"
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+
+        StackLayout:
+            size_hint: 1, None
+            height: sum([i.height for i in self.children])
+
+            WrappedLabel:
+                text: app.result_message
+                color: blue_back
+                halign: "center"
+                pos: (0, 0)
+                padding_x: 5
+
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "center"
+                size_hint: (1, 1)
+                BlueBlackButton:
+                    text: "Run again"
+                    on_release: app._reset()

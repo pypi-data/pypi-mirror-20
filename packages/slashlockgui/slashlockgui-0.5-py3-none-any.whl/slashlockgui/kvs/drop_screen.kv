@@ -1,0 +1,16 @@
+<DropScreen@Screen>
+    name: "drop_screen"
+
+    BoxLayout:
+        orientation: "vertical"
+        id: encrypt_layout
+
+        Label:
+            text: "Drag a file or folder here to encrypt or decrypt it."
+            color: blue_back
+            size_hint_y: 1
+            text_size: self.width, None
+            height: self.texture_size[1]
+            font_size: 16
+            padding_x: 10
+            halign: 'center'
