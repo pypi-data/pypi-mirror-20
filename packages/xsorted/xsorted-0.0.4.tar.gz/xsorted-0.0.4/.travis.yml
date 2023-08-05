@@ -1,0 +1,30 @@
+# Travis configuration file using the build matrix feature
+# Read more under http://docs.travis-ci.com/user/build-configuration/
+# THIS SCRIPT IS SUPPOSED TO BE AN EXAMPLE. MODIFY IT ACCORDING TO YOUR NEEDS!
+
+sudo: false
+language: python
+virtualenv:
+  system_site_packages: true
+env:
+  matrix:
+    - DISTRIB="ubuntu" PYTHON_VERSION="2.7" COVERAGE="true"
+    - DISTRIB="ubuntu" PYTHON_VERSION="3.4" COVERAGE="false"
+addons:
+  apt:
+    packages:
+      - git
+      - python-pip
+install:
+  - pip install -r requirements.txt -r test-requirements.txt
+  - pip install coveralls
+  - python setup.py develop
+before_script:
+  - git config --global user.email "moagstar@gmail.com"
+  - git config --global user.name "Daniel Bradburn"
+script:
+  coverage run --source=xsorted setup.py test
+after_success:
+  coveralls
+cache:
+  - apt
