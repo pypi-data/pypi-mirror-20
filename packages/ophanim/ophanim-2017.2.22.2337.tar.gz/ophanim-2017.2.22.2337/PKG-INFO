@@ -1,0 +1,53 @@
+Metadata-Version: 1.0
+Name: ophanim
+Version: 2017.2.22.2337
+Summary: monitoring and notifications for measurements such as Bitcoin value and internet connection security
+Home-page: https://github.com/wdbm/ophanim
+Author: Will Breaden Madden
+Author-email: wbm@protonmail.ch
+License: GPLv3
+Description: ophanim
+        =======
+        
+        .. figure:: ophanim.png
+           :alt: 
+        
+        monitoring and notifications for measurements such as Bitcoin value and
+        internet connection security
+        
+        introduction
+        ============
+        
+        Ophanim is a monitoring program that is designed to be run in the
+        background. It monitors measurements like Bitcoin price fluctuations and
+        internet connection security and sends alerts about these things in the
+        form of desktop notifications. Under consideration are Telegram report
+        messages.
+        
+        .. figure:: notifications.gif
+           :alt: 
+        
+        setup
+        =====
+        
+        .. code:: bash
+        
+            sudo pip install ophanim
+        
+        usage
+        =====
+        
+        .. code:: bash
+        
+            ophanim.py --help
+        
+        .. code:: bash
+        
+            ophanim.py
+        
+        links
+        =====
+        
+        -  https://github.com/wdbm/ucomsys
+        
+Platform: UNKNOWN
