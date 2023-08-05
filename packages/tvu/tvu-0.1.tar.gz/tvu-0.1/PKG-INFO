@@ -1,0 +1,25 @@
+Metadata-Version: 1.1
+Name: tvu
+Version: 0.1
+Summary: Library for typechecking/validation/unification of function arguments.
+Home-page: https://github.com/Paczesiowa/tvu
+Author: Bartek Ćwikłowski
+Author-email: paczesiowa@gmail.com
+License: UNLICENSE/Public Domain
+Download-URL: http://github.com/Paczesiowa/tvu/tarball/v0.1
+Description: This project provides function decorator, that
+        helps with type-checking and validation of arguments supplied to
+        a function, so a precise and helpful exception is thrown if arguments
+        don't fulfill the function contract. Unification allows focusing
+        on specific values inside function.
+        
+Keywords: typecheck,decorator
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: Public Domain
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
