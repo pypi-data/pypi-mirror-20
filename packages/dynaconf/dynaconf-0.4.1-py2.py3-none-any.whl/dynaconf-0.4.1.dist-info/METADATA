@@ -1,0 +1,37 @@
+Metadata-Version: 2.0
+Name: dynaconf
+Version: 0.4.1
+Summary: The dynamic configurator for your Python Project
+Home-page: https://github.com/rochacbruno/dynaconf
+Author: Bruno Rocha
+Author-email: rochacbruno@gmail.com
+License: MIT
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: six
+Provides-Extra: all
+Requires-Dist: redis; extra == 'all'
+Requires-Dist: PyYAML; extra == 'all'
+Requires-Dist: toml; extra == 'all'
+Provides-Extra: redis
+Requires-Dist: redis; extra == 'redis'
+Provides-Extra: toml
+Requires-Dist: toml; extra == 'toml'
+Provides-Extra: yaml
+Requires-Dist: PyYAML; extra == 'yaml'
+
+dynaconf is an OSM (Object Settings Mapper) it can
+read settings variables from a set of different data stores such as python
+settings files, environment variables, redis, memcached, ini files,
+json files, yaml files and you can customize dynaconf loaders to read
+from wherever you want
+
+
