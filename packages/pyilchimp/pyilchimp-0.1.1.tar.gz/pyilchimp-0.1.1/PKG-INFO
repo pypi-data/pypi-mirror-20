@@ -1,0 +1,79 @@
+Metadata-Version: 1.1
+Name: pyilchimp
+Version: 0.1.1
+Summary: Wrapper library for Mailchimp's 3.0 API
+Home-page: https://github.com/Antman261/pyilchimp
+Author: Anthony Manning-Franklin
+Author-email: anthony.manning.franklin@gmail.com.com
+License: MIT
+Description: pyilchimp
+        =========
+        
+        Python wrapper for Mailchimp’s 3.0+ API
+        
+        Installation
+        ------------
+        
+        Install via pip:
+        
+        ::
+        
+            pip install pyilchimp
+        
+        Usage
+        -----
+        
+        Basic example
+        ~~~~~~~~~~~~~
+        
+        First connect to an account:
+        
+        ::
+        
+            from pyilchimp.mailchimp_manager import MailchimpManager
+        
+            mc = MailchimpManager(api_key='1qaz2wsx3edc4rfv5tgb667yhn', server='us1')
+        
+        Now we can make requests:
+        
+        ::
+        
+            campaigns = mc.campaigns.all()
+        
+            recent_campaigns = mc.campaigns.all(filters={'sort_dir': 'DESC', 'count': 20})
+        
+        Managers and resources
+        ~~~~~~~~~~~~~~~~~~~~~~
+        
+        If you’ve ever used Django’s ORM, Pyilchimp is structured in a similar
+        way. Resources have managers which can find and return objects, such as
+        a CampaignManager finding and returning campaigns. The name of the
+        manager is the lower case pluralised form of each resource and provides
+        a ``.get()`` and ``.all()`` method. ``get()`` can return a single
+        instance when provided an id, while ``all()`` will return all objects
+        matching a provided filter, or the last 10 by default.
+        
+        Mailchimp actions
+        ~~~~~~~~~~~~~~~~~
+        
+        Mailchimp provides actions that do not fit into standard RESTful API
+        guidelines. Making use of these actions map to methods with the same
+        name for each resource.
+        
+        ::
+        
+            campaign = mc.campaigns.get('123123123c')
+            campaign.pause()
+        
+Keywords: API RESTful wrapper Mailchimp EDM
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.1
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
