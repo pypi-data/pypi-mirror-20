@@ -1,0 +1,55 @@
+# Travis configuration
+
+language: python
+
+matrix:
+    include:
+        - os: linux
+          python: 2.7
+          env:
+            - CXX=clang++ CC=clang
+
+        - os: linux
+          python: 2.7
+          env:
+            - CXX=g++ CC=gcc
+
+        - os: osx
+          language: generic
+
+sudo: false
+
+addons:
+    apt:
+        packages:
+            - pandoc
+            - texlive-base
+
+before_script:
+  # Install system requirements for OSX (pylibpcap and libdnet)
+  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then brew install --with-python libdnet; fi
+  - if [ ${TRAVIS_OS_NAME} == "osx" ]; then brew install https://raw.githubusercontent.com/secdev/scapy/master/.travis/pylibpcap.rb; fi
+
+install:
+  - pip install .
+  - pip install six
+  - pip install -r requirements-docs.txt
+
+script:
+  - python setup.py test
+  - python setup.py doc
+
+before_deploy:
+  # Build a wheel artifact
+  - python setup.py bdist_wheel
+
+deploy:
+    provider: releases
+    api_key:
+        secure: jph0ZzpFytrPyZKm71s7LwaXvQ2QkGMM1DgwiBu4p9E99vAKvpNdVOXvyp4BmMp7PEksUKtPYpyGWIQCoTY7ffJUf72VbXLxLfsNqpGMP62UteVt5ssleYvpzVqfTt26gqGvsMZB2EhP9zpH3AgYaGuJIB1L0/CM+5Ilf3u2j4I=
+    file: "dist/*.whl"
+    file_glob: true
+    skip_cleanup: true
+    on:
+        tags: true
+        repo: CoreSecurity/pysap
