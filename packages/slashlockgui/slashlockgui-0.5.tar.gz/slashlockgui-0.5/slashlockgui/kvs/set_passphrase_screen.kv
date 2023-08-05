@@ -1,0 +1,56 @@
+<SetPassphraseScreen@Screen>
+    name: "set_passphrase_screen"
+    passphrase: passphrase.__self__
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+
+        StackLayout:
+            size_hint: 1, None
+            height: sum([i.height for i in self.children])
+
+            Spacer:
+
+            RelativeLayout:
+                size_hint: 1, None
+                height: set_password_label_id.height
+
+                WrappedLabel:
+                    id: set_password_label_id
+                    text: "What password would you like to use for encryption or decryption?"
+
+            Spacer:
+
+            HorizontalContainer:
+                WrappedLabel:
+                    text: "Password:"
+
+            HorizontalContainer:
+                height: passphrase.height
+                PasswordInput:
+                    id: passphrase
+                    focus: True
+
+            Spacer:
+
+            HorizontalContainer:
+                WrappedLabel:
+                    text: "Confirm password:"
+
+            HorizontalContainer:
+                height: confirm_passphrase.height
+                PasswordInput:
+                    id: confirm_passphrase
+                    on_text: app._validate_passphrase()
+
+            Spacer:
+
+            HorizontalContainer:
+                height: password_continue_button.height
+                BlueBlackButton:
+                    id: password_continue_button
+                    disabled: True
+                    text: "Set Password"
+                    on_release: app.set_passphrase()
+                    pos: (self.parent.width - self.width - 10, 0)

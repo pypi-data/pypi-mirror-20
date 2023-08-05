@@ -1,0 +1,16 @@
+<EncryptScreen@Screen>
+    name: "encrypt_screen"
+    BoxLayout:
+        id: encrypt_box_layout
+        orientation: "vertical"
+        Label:
+            text: app.filename
+            color: (0, 0, 0, 1)
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size: (self.parent.width, 50)
+            size_hint: (1, 1)
+            LockButton:
+                text: "Lock"
+                on_release: root.choose_directory()
