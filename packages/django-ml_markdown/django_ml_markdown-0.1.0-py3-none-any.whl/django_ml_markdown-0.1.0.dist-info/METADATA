@@ -1,0 +1,94 @@
+Metadata-Version: 2.0
+Name: django-ml-markdown
+Version: 0.1.0
+Summary: A django app that parse markdown to html
+Home-page: https://github.com/maxlothaire/django-ml_markdown
+Author: Max Lothaire
+Author-email: maxlothaire@gmail.com
+License: BSD
+Keywords: django markdown ml_markdown
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Intended Audience :: Developers
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.10
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: bleach
+Requires-Dist: misaka
+Requires-Dist: pygments
+
+django-ml\_markdown
+===================
+
+This django app provides some features for handling markdown in yout
+django based website:
+
+-  template\_tags for parsing Markdown code to html and cleaning it
+-  A form field for editing markdown code and preview the html output
+
+Installation
+------------
+
+Dependencies
+~~~~~~~~~~~~
+
+This app use `misaka <https://github.com/FSX/misaka>`__, a binding for
+hoedown that use CFFI. You may need to install some package in order to
+build cffi
+
+On fedora (adapt for your on system or the version of python you xant to
+use)
+
+.. code:: bash
+
+    dnf install libffi-devel python3-devel
+    # on fedora, you may need to install this
+    dnf install redhat-rpm-config
+
+The actual installation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Just install it with pip
+
+.. code:: bash
+
+    pip install django-ml_markdown
+
+Usage
+-----
+
+settings.py
+~~~~~~~~~~~
+
+Add the path to the configuration class in INSTALLED\_APPS
+
+.. code:: python
+
+    INSTALLED_APP.append(
+        'ml_markdown.apps.MlMarkdownConfig'
+    )
+
+you can also inherit this class for custom settings. See the
+documentation for details.
+
+Use in templates
+~~~~~~~~~~~~~~~~
+
+You can use one of this filters in your templates:
+
+-  **to\_html**: parse markdown code to html without cleaning it.
+-  **clean**: clean html code with the white list provides as arguments
+   or in the class used for configuration
+-  **to\_cleaned\_html**: shortcut for\ ``| to_html | clean``
+
+Some over filter can be found in the documentation.
+
+
