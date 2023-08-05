@@ -1,0 +1,19 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -U setuptools
+script: true
+after_success: python setup.py sdist bdist_wheel
+deploy:
+  provider: releases
+  api_key:
+    secure: n0vGCr5xVRy18zwHjgxodWUv8vXropZ7HggH95X9PJOVom5jpDOU1ED/5lUgRjcGMB6PT5xVnoK3/7bYNgFyejFuR0y2TUaw9f+xlqwZo0WJSzL05iQ7YHYfkrlp/ffF0x3qyKSRnJUBM8P08DqMM3rEiI5vjmfs/nggNrVNNPaMa/EImU5T4qOg2/QPLVVdKyx5XQ4ibQntp0qjDg11OEKwatOhNQEzvNi4zn65tvfX7HSsOYqVDACRhraBWUrocaATRmOLSrZWsslO75K5wWJQAeASA0OAPO7580CboGOBSaQ6iD1PVlWaSkE0+rvcDhSDXgFV/pW8fxWobW76rW8/xwkLrwQFNLGDWMpyw0L2zCAlvg2CIX32jb/uK7mR8uo1rJhmh2iChci1KXaNCL8sjuLAu03IRJcm2HPJMZgurMdy8skiB9S73l/kHEGgo1YrN/YSJVVlj182xnzcpdY1omargqvpG6q8xLoFeKUqAcQQDGtfvgNANrh3+p3YbP9tk9W0d0yZyeeWujmuLXHw7pIw9fSTMCE3vdg+J3Au9A/ukimgVe2Pi2SIV9wlgsdR1vQCwTRs6mbJBADXHGl2sUqm6/LtxvbEt8NinRDD/pJ7ewawim8wMyg2c+cledkDeKIroCH5tFQ0y5hrVI6of1vpGiyFws/hfRCOuAU=
+  skip_cleanup: true
+  file_glob: true
+  file:
+  - "dist/oem-format-msgpack-*"
+  - "dist/oem_format_msgpack-*"
+  on:
+    repo: OpenEntityMap/oem-format-msgpack
+    tags: true
