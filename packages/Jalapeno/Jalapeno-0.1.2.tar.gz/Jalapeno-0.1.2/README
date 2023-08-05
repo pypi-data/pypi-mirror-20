@@ -1,0 +1,66 @@
+========
+Jalepeno
+========
+
+
+
+**Jalapeno** is a Python Static Site Generator based on Flask.
+
+`Jalapeno <https://jalo.io>`
+
+Installation
+============
+
+Run (with superuser priviliegies):
+
+	$pip3 install Jalapeno
+
+
+Usage
+=====
+
+Run
+---
+	$ Jaloc [parameters,]
+
+
+
+Generates/Freeze
+----------------
+
+	$ Jaloc -f
+
+	$ Jaloc freeze
+
+Shortcuts
+---------
+
+shortcuts will create your page source folder and build folder to deploy
+
+	$ Jaloc -s
+
+	$ Jaloc shortcuts
+
+Help
+----
+
+	$ Jaloc -h
+
+	$ Jaloc help
+	
+Other features doc included
+
+
+
+Author
+======
+
+* `ChenghaoQ <https://github.com/ChenghaoQ>`_ (Chenghao Qian <qch.jacob.jm@gmail.com>) 
+
+Collaborators
+-------------
+
+License
+=======
+
+Jalapeno is Licensed under GPL License.
