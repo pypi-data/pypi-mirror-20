@@ -1,0 +1,28 @@
+before_script:
+  - apt-get update -qy
+  - apt-get dist-upgrade -qy
+  - apt-get install -y git g++ gcc libapt-pkg-dev python-apt-dev python-pip
+  - pip install --upgrade pip
+  - pip install tox setuptools pbr
+  - pip install git+git://anonscm.debian.org/apt/python-apt.git@1.1.0_beta1
+
+py27:
+  stage: test
+  image: ubuntu:xenial
+  script:
+    - tox -e py27
+
+py35:
+  stage: test
+  image: ubuntu:xenial
+  script:
+    - apt-get install python3-pip -qy
+    - pip3 install --upgrade pip
+    - pip3 install git+git://anonscm.debian.org/apt/python-apt.git@1.1.0_beta1
+    - tox -e py35
+
+pep8:
+  image: ubuntu:xenial
+  stage: test
+  script:
+    - tox -e pep8
