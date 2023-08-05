@@ -1,0 +1,1036 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>opendaq.daq &#8212; openDAQ 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openDAQ 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for opendaq.daq</h1><div class="highlight"><pre>
+<span></span><span class="c1"># !/usr/bin/env python</span>
+
+<span class="c1"># Copyright 2016</span>
+<span class="c1"># Ingen10 Ingenieria SL</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of opendaq.</span>
+<span class="c1">#</span>
+<span class="c1"># opendaq is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># opendaq is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with opendaq.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">import</span> <span class="nn">array</span>
+<span class="kn">import</span> <span class="nn">serial</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">IntEnum</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">check_stream_crc</span><span class="p">,</span> <span class="n">mkcmd</span><span class="p">,</span> <span class="n">parse_command</span><span class="p">,</span> <span class="n">str2hex</span><span class="p">,</span> <span class="n">escape_bytes</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">LengthError</span><span class="p">,</span> <span class="n">CRCError</span>
+<span class="kn">from</span> <span class="nn">.experiment</span> <span class="k">import</span> <span class="n">Trigger</span><span class="p">,</span> <span class="n">ExpMode</span><span class="p">,</span> <span class="n">DAQStream</span><span class="p">,</span> <span class="n">DAQBurst</span><span class="p">,</span> <span class="n">DAQExternal</span>
+<span class="kn">from</span> <span class="nn">.simulator</span> <span class="k">import</span> <span class="n">DAQSimulator</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">DAQModel</span>
+
+<span class="n">BAUDS</span> <span class="o">=</span> <span class="mi">115200</span>
+<span class="n">MAX_CHANNELS</span> <span class="o">=</span> <span class="mi">4</span>
+
+
+<div class="viewcode-block" id="CMD"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.CMD">[docs]</a><span class="k">class</span> <span class="nc">CMD</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="n">AIN</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">AIN_CFG</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">PIO</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">AIN_ALL</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">PIO_DIR</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">PORT</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">PORT_DIR</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">PWM_INIT</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">PWM_STOP</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="n">PWM_DUTY</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">SET_DAC</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">CAPTURE_INIT</span> <span class="o">=</span> <span class="mi">14</span>
+    <span class="n">CAPTURE_STOP</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="n">GET_CAPTURE</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">WAIT_MS</span> <span class="o">=</span> <span class="mi">17</span>
+    <span class="n">LED_W</span> <span class="o">=</span> <span class="mi">18</span>
+    <span class="n">STREAM_CREATE</span> <span class="o">=</span> <span class="mi">19</span>
+    <span class="n">EXTERNAL_CREATE</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">BURST_CREATE</span> <span class="o">=</span> <span class="mi">21</span>
+    <span class="n">CHANNEL_CFG</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">SIGNAL_LOAD</span> <span class="o">=</span> <span class="mi">23</span>
+    <span class="n">SET_ANALOG</span> <span class="o">=</span> <span class="mi">24</span>
+    <span class="n">STREAM_DATA</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="n">SPISW_CONFIG</span> <span class="o">=</span> <span class="mi">26</span>
+    <span class="n">RESET</span> <span class="o">=</span> <span class="mi">27</span>
+    <span class="n">SPISW_SETUP</span> <span class="o">=</span> <span class="mi">28</span>
+    <span class="n">SPISW_TRANSFER</span> <span class="o">=</span> <span class="mi">29</span>
+    <span class="n">EEPROM_WRITE</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">EEPROM_READ</span> <span class="o">=</span> <span class="mi">31</span>
+    <span class="n">CHANNEL_SETUP</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">TRIGGER_SETUP</span> <span class="o">=</span> <span class="mi">33</span>
+    <span class="n">GET_TRIGGER_MODE</span> <span class="o">=</span> <span class="mi">34</span>
+    <span class="n">GET_STATE_CHANNEL</span> <span class="o">=</span> <span class="mi">35</span>
+    <span class="n">GET_CALIB</span> <span class="o">=</span> <span class="mi">36</span>
+    <span class="n">SET_CALIB</span> <span class="o">=</span> <span class="mi">37</span>
+    <span class="n">RESET_CALIB</span> <span class="o">=</span> <span class="mi">38</span>
+    <span class="n">ID_CONFIG</span> <span class="o">=</span> <span class="mi">39</span>
+    <span class="n">COUNTER_INIT</span> <span class="o">=</span> <span class="mi">41</span>
+    <span class="n">GET_COUNTER</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">CHANNEL_FLUSH</span> <span class="o">=</span> <span class="mi">45</span>
+    <span class="n">ENCODER_INIT</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">ENCODER_STOP</span> <span class="o">=</span> <span class="mi">51</span>
+    <span class="n">GET_ENCODER</span> <span class="o">=</span> <span class="mi">52</span>
+    <span class="n">ENABLE_CRC</span> <span class="o">=</span> <span class="mi">55</span>
+    <span class="n">CHANNEL_DESTROY</span> <span class="o">=</span> <span class="mi">57</span>
+    <span class="n">STREAM_START</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">STREAM_STOP</span> <span class="o">=</span> <span class="mi">80</span></div>
+
+
+<div class="viewcode-block" id="LedColor"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.LedColor">[docs]</a><span class="k">class</span> <span class="nc">LedColor</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Valid LED colors.&quot;&quot;&quot;</span>
+    <span class="n">OFF</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">GREEN</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">RED</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">ORANGE</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+
+<div class="viewcode-block" id="DAQ"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ">[docs]</a><span class="k">class</span> <span class="nc">DAQ</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class represents an OpenDAQ device.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Class constructor</span>
+<span class="sd">        :param port: Serial port.</span>
+<span class="sd">        :param debug: Turn on serial echoing to sdout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span> <span class="o">=</span> <span class="n">debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__simulate</span> <span class="o">=</span> <span class="p">(</span><span class="n">port</span> <span class="o">==</span> <span class="s1">&#39;sim&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__measuring</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__gain</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pinput</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ninput</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span> <span class="o">=</span> <span class="p">[]</span>     <span class="c1"># list of experiments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span> <span class="o">=</span> <span class="n">DAQModel</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">get_info</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hw_ver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">model_str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fw_ver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">fw_ver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">load_dac_calib</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__read_calib_slot</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">load_adc_calib</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__read_calib_slot</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_experiments</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DAQ.open"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Open the serial port.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__port</span> <span class="o">==</span> <span class="s1">&#39;sim&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">DAQSimulator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__port</span><span class="p">,</span> <span class="n">BAUDS</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;simavr&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__port</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__port</span><span class="p">,</span> <span class="n">BAUDS</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                     <span class="n">rtscts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dsrdtr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__port</span><span class="p">,</span> <span class="n">BAUDS</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">setRTS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.close"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Close the serial port.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DAQ.send_command"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.send_command">[docs]</a>    <span class="k">def</span> <span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">ret_fmt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build a command packet, send it to the openDAQ and process the</span>
+<span class="sd">        response.</span>
+
+<span class="sd">        :param command: Command string.</span>
+<span class="sd">        :param ret_fmt: Payload format of the response using python &#39;struct&#39;</span>
+<span class="sd">            format characters. I ret_fmt is None, no response is expected.</span>
+<span class="sd">        :returns: Command ID and arguments of the response.</span>
+<span class="sd">        :raises: LengthError: The legth of the response is not the expected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SENT:&quot;</span><span class="p">,</span> <span class="n">str2hex</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">ret_fmt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;!BB&#39;</span> <span class="o">+</span> <span class="n">ret_fmt</span>
+        <span class="n">ret_len</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">calcsize</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ret_len</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RECV:&quot;</span><span class="p">,</span> <span class="n">str2hex</span><span class="p">(</span><span class="n">ret</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">parse_command</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">ret_len</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.enable_crc"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.enable_crc">[docs]</a>    <span class="k">def</span> <span class="nf">enable_crc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">on</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Enable/Disable the cyclic redundancy check.</span>
+
+<span class="sd">        :param on: Enable/disable CRC checking (bool).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">ENABLE_CRC</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>
+                                       <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">on</span><span class="p">))),</span> <span class="s1">&#39;B&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__read_calib_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read a calibration slot.</span>
+
+<span class="sd">        :param slot_id: Number of the calibration slot.</span>
+<span class="sd">        :returns:</span>
+<span class="sd">            - Gain raw correction</span>
+<span class="sd">            - Offset raw correction</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">GET_CALIB</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">slot</span><span class="p">),</span> <span class="s1">&#39;Bhh&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">__write_calib_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot_id</span><span class="p">,</span> <span class="n">gain</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write a calibration slot.</span>
+
+<span class="sd">        :param slot_id: Number of the calibration slot.</span>
+<span class="sd">        :param gain: Gain raw correction (signed 16-bit integer).</span>
+<span class="sd">        :param offset: Offset raw correction (signed 16-bit integer).</span>
+<span class="sd">        :returns:</span>
+<span class="sd">            - Slot number</span>
+<span class="sd">            - Gain raw correction</span>
+<span class="sd">            - Offset raw correction</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SET_CALIB</span><span class="p">,</span> <span class="s1">&#39;Bhh&#39;</span><span class="p">,</span> <span class="n">slot_id</span><span class="p">,</span>
+                                       <span class="nb">int</span><span class="p">(</span><span class="n">gain</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">offset</span><span class="p">)),</span> <span class="s1">&#39;Bhh&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DAQ.get_dac_calib"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_dac_calib">[docs]</a>    <span class="k">def</span> <span class="nf">get_dac_calib</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the DAC calibration.</span>
+
+<span class="sd">        :returns: List of DAC calibration registers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">dac_calib</span><span class="p">)</span>  <span class="c1"># return a copy of the list</span></div>
+
+<div class="viewcode-block" id="DAQ.get_adc_calib"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_adc_calib">[docs]</a>    <span class="k">def</span> <span class="nf">get_adc_calib</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the ADC calibration.</span>
+
+<span class="sd">        :returns: List of ADC calibration registers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">adc_calib</span><span class="p">)</span>  <span class="c1"># return a copy of the list</span></div>
+
+<div class="viewcode-block" id="DAQ.set_dac_calib"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_dac_calib">[docs]</a>    <span class="k">def</span> <span class="nf">set_dac_calib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the DAC calibration.</span>
+
+<span class="sd">        :param regs: A list of CalibReg objects.</span>
+<span class="sd">        :raises: ValueError, IndexError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">write_dac_calib</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__write_calib_slot</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.set_adc_calib"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_adc_calib">[docs]</a>    <span class="k">def</span> <span class="nf">set_adc_calib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the ADC calibration.</span>
+
+<span class="sd">        :param regs: A list of CalibReg objects.</span>
+<span class="sd">        :raises: ValueError, IndexError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">write_adc_calib</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__write_calib_slot</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.set_id"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_id">[docs]</a>    <span class="k">def</span> <span class="nf">set_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Identify openDAQ device.</span>
+
+<span class="sd">        :param id: id number of the device [000:999]</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nb">id</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;id out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">ID_CONFIG</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">),</span> <span class="s1">&#39;BBI&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">serial_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">serial_str</span>
+
+<div class="viewcode-block" id="DAQ.get_info"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read device information.</span>
+
+<span class="sd">        :returns: [hardware_version, firmware_version, device_id]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">ID_CONFIG</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;BBI&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Hardware version: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;Firmware version: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;Serial number: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">model_str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">fw_ver</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">serial_str</span><span class="p">))</span>
+
+<div class="viewcode-block" id="DAQ.read_eeprom"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.read_eeprom">[docs]</a>    <span class="k">def</span> <span class="nf">read_eeprom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read a byte from the EEPROM.</span>
+
+<span class="sd">        :param val: value to write.</span>
+<span class="sd">        :param pos: position in memory.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">254</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pos out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">EEPROM_READ</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;BBB&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.write_eeprom"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.write_eeprom">[docs]</a>    <span class="k">def</span> <span class="nf">write_eeprom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write a byte in the EEPROM.</span>
+
+<span class="sd">        :param id: id number of the device [000:999].</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">254</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pos out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">EEPROM_WRITE</span><span class="p">,</span> <span class="s1">&#39;BBB&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">val</span><span class="p">),</span> <span class="s1">&#39;BBB&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.set_dac"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_dac">[docs]</a>    <span class="k">def</span> <span class="nf">set_dac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set DAC output (raw value).</span>
+<span class="sd">        Set the raw value of the DAC.</span>
+
+<span class="sd">        &quot;param raw: Raw ADC value.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SET_DAC</span><span class="p">,</span> <span class="s1">&#39;hB&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">raw</span><span class="p">)),</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;hB&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.set_analog"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_analog">[docs]</a>    <span class="k">def</span> <span class="nf">set_analog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volts</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set DAC output (volts).</span>
+<span class="sd">        Set the output voltage of the DAC.</span>
+
+<span class="sd">        :param volts: DAC output value in volts.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_dac</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">volts_to_raw</span><span class="p">(</span><span class="n">volts</span><span class="p">,</span> <span class="n">number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">number</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.read_adc"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.read_adc">[docs]</a>    <span class="k">def</span> <span class="nf">read_adc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read data from ADC and return the raw value.</span>
+
+<span class="sd">        :returns: Raw ADC value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">AIN</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;h&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.read_analog"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.read_analog">[docs]</a>    <span class="k">def</span> <span class="nf">read_analog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read data from ADC in volts.</span>
+
+<span class="sd">        :returns: Voltage value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">AIN</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;h&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">raw_to_volts</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__gain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pinput</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">__ninput</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.read_all"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.read_all">[docs]</a>    <span class="k">def</span> <span class="nf">read_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read data from all analog inputs</span>
+
+<span class="sd">        :param nsamples: Number of samples per data point [0-255] (default=20)</span>
+<span class="sd">        :param gain: Analog gain (default=1)</span>
+<span class="sd">        :returns: Values[0:7]: List of the analog reading on each input</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">fw_ver</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Warning</span><span class="p">(</span><span class="s2">&quot;Function not implemented in this FW. Try updating&quot;</span><span class="p">)</span>
+
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">AIN_ALL</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">,</span> <span class="n">gain</span><span class="p">),</span> <span class="s1">&#39;8h&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">raw_to_volts</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">gain</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span>
+                <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span></div>
+
+<div class="viewcode-block" id="DAQ.conf_adc"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.conf_adc">[docs]</a>    <span class="k">def</span> <span class="nf">conf_adc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pinput</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">ninput</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure the analog-to-digital converter.</span>
+
+<span class="sd">        Get the parameters for configure the analog-to-digital converter.</span>
+
+<span class="sd">        :param pinput: Positive input [1:8].</span>
+<span class="sd">        :param ninput: Negative input.</span>
+<span class="sd">        :param gain: Analog gain.</span>
+<span class="sd">        :param nsamples: Number of samples per data point [0-255).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_adc_settings</span><span class="p">(</span><span class="n">pinput</span><span class="p">,</span> <span class="n">ninput</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">gain</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nsamples</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;samples number out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__gain</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">gain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pinput</span> <span class="o">=</span> <span class="n">pinput</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ninput</span> <span class="o">=</span> <span class="n">ninput</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">AIN_CFG</span><span class="p">,</span> <span class="s1">&#39;BBBB&#39;</span><span class="p">,</span> <span class="n">pinput</span><span class="p">,</span> <span class="n">ninput</span><span class="p">,</span>
+                                <span class="nb">int</span><span class="p">(</span><span class="n">gain</span><span class="p">),</span> <span class="n">nsamples</span><span class="p">),</span> <span class="s1">&#39;hBBBB&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.set_led"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_led">[docs]</a>    <span class="k">def</span> <span class="nf">set_led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Choose LED status.</span>
+<span class="sd">        LED switch on (green, red or orange) or switch off.</span>
+
+<span class="sd">        :param color: LED color (use :class:`.LedColor`).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="ow">is</span> <span class="n">LedColor</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid color value&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">nleds</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid LED number&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">LED_W</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span>
+                                <span class="n">color</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;BB&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.set_pio"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_pio">[docs]</a>    <span class="k">def</span> <span class="nf">set_pio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write PIO output value.</span>
+<span class="sd">        Set the value of the PIO terminal (0: low, 1: high).</span>
+
+<span class="sd">        :param number: PIO number.</span>
+<span class="sd">        :param value: digital value (0: low, 1: high)</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_pio</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;digital value out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PIO</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span>
+                                <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">))),</span> <span class="s1">&#39;BB&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.read_pio"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.read_pio">[docs]</a>    <span class="k">def</span> <span class="nf">read_pio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read PIO input value (0: low, 1: high).</span>
+
+<span class="sd">        :param number: PIO number.</span>
+<span class="sd">        :returns: Read value.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_pio</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PIO</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;BB&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.set_pio_dir"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_pio_dir">[docs]</a>    <span class="k">def</span> <span class="nf">set_pio_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure PIO direction.</span>
+<span class="sd">        Set the direction of a specific PIO terminal (D1-D6).</span>
+
+<span class="sd">        :param number: PIO number.</span>
+<span class="sd">        :param output: PIO direction (0 input, 1 output).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_pio</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">output</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PIO direction out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PIO_DIR</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span>
+                                <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">output</span><span class="p">))),</span> <span class="s1">&#39;BB&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.set_port"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_port">[docs]</a>    <span class="k">def</span> <span class="nf">set_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write all PIO values.</span>
+<span class="sd">        Set the value of all Dx terminals.</span>
+
+<span class="sd">        :param value: Port output byte (bits: 0:low, 1:high).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_port</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PORT</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.read_port"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.read_port">[docs]</a>    <span class="k">def</span> <span class="nf">read_port</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read all PIO values.</span>
+
+<span class="sd">        :returns: Binary value of the port.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PORT</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.set_port_dir"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.set_port_dir">[docs]</a>    <span class="k">def</span> <span class="nf">set_port_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure all PIOs directions.</span>
+<span class="sd">        Set the direction of all D1-D6 terminals.</span>
+
+<span class="sd">        :param output: Port directions byte (bits: 0:input, 1:output).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_port</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PORT_DIR</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">output</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.spi_config"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.spi_config">[docs]</a>    <span class="k">def</span> <span class="nf">spi_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpol</span><span class="p">,</span> <span class="n">cpha</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Bit-Bang SPI configure (clock properties).</span>
+
+<span class="sd">        :param cpol: Clock polarity (clock pin state when inactive).</span>
+<span class="sd">        :param cpha: Clock phase (leading 0, or trailing 1 edges read).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">cpol</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">cpha</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid spisw_config values&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SPISW_CONFIG</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="n">cpol</span><span class="p">,</span> <span class="n">cpha</span><span class="p">),</span> <span class="s1">&#39;BB&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.spi_setup"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.spi_setup">[docs]</a>    <span class="k">def</span> <span class="nf">spi_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mosi</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">miso</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Bit-Bang SPI setup (PIO numbers to use).</span>
+
+<span class="sd">        :param nbytes: Number of bytes.</span>
+<span class="sd">        :param sck: Clock pin.</span>
+<span class="sd">        :param mosi: MOSI pin (master out / slave in).</span>
+<span class="sd">        :param miso: MISO pin (master in / slave out).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nbytes</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid number of bytes&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">sck</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">mosi</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">miso</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid spisw_setup values&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SPISW_SETUP</span><span class="p">,</span> <span class="s1">&#39;BBB&#39;</span><span class="p">,</span> <span class="n">sck</span><span class="p">,</span> <span class="n">mosi</span><span class="p">,</span> <span class="n">miso</span><span class="p">),</span> <span class="s1">&#39;BBB&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.spi_write"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.spi_write">[docs]</a>    <span class="k">def</span> <span class="nf">spi_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">word</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Bit-bang SPI transfer (send+receive) a byte or a word.</span>
+
+<span class="sd">        :param value: Data to send (byte/word to transmit).</span>
+<span class="sd">        :param word: send a 2-byte word, instead of a byte.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">65535</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Value out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SPISW_TRANSFER</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span> <span class="s1">&#39;H&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SPISW_TRANSFER</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DAQ.init_counter"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.init_counter">[docs]</a>    <span class="k">def</span> <span class="nf">init_counter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the edge counter and configure which edge increments the</span>
+<span class="sd">        count.</span>
+
+<span class="sd">        :param edge: high-to-low (False) or low-to-high (True).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">COUNTER_INIT</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">edge</span><span class="p">))),</span> <span class="s1">&#39;B&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.get_counter"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_counter">[docs]</a>    <span class="k">def</span> <span class="nf">get_counter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the counter value.</span>
+
+<span class="sd">        :param reset: reset the counter after perform reading (boolean).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">GET_COUNTER</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">reset</span><span class="p">))),</span> <span class="s1">&#39;I&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.init_capture"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.init_capture">[docs]</a>    <span class="k">def</span> <span class="nf">init_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start Capture Mode around a given period.</span>
+
+<span class="sd">        :param period: Estimated period of the wave (in microseconds).</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Period value out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">CAPTURE_INIT</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">),</span> <span class="s1">&#39;I&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.stop_capture"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.stop_capture">[docs]</a>    <span class="k">def</span> <span class="nf">stop_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop Capture mode.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">CAPTURE_STOP</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.get_capture"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_capture">[docs]</a>    <span class="k">def</span> <span class="nf">get_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get Capture reading for the period length.</span>
+
+<span class="sd">        :param mode: Period length (0: Low cycle, 1: High cycle,</span>
+<span class="sd">            2: Full period)</span>
+<span class="sd">        :returns:</span>
+<span class="sd">            - mode</span>
+<span class="sd">            - period: The period length in microseconds</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mode value out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">GET_CAPTURE</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="p">),</span> <span class="s1">&#39;BI&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.init_encoder"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.init_encoder">[docs]</a>    <span class="k">def</span> <span class="nf">init_encoder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start Encoder function.</span>
+
+<span class="sd">        :param resolution: Maximum number of ticks per round [0:65535].</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">resolution</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;resolution value out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">ENCODER_INIT</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="p">),</span> <span class="s1">&#39;I&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.get_encoder"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_encoder">[docs]</a>    <span class="k">def</span> <span class="nf">get_encoder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get current encoder relative position.</span>
+
+<span class="sd">        :returns: Position: The actual encoder value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">GET_ENCODER</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;I&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DAQ.stop_encoder"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.stop_encoder">[docs]</a>    <span class="k">def</span> <span class="nf">stop_encoder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop encoder&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">ENCODER_STOP</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.init_pwm"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.init_pwm">[docs]</a>    <span class="k">def</span> <span class="nf">init_pwm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duty</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start PWM output with a given period and duty cycle.</span>
+
+<span class="sd">        :param duty: High time of the signal [0:1023](0 always low, 1023 always</span>
+<span class="sd">            high).</span>
+<span class="sd">        :param period: Period of the signal (microseconds) [0:65535].</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">duty</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;duty value out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">65535</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;period value out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PWM_INIT</span><span class="p">,</span> <span class="s1">&#39;HH&#39;</span><span class="p">,</span> <span class="n">duty</span><span class="p">,</span> <span class="n">period</span><span class="p">),</span> <span class="s1">&#39;HH&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.stop_pwm"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.stop_pwm">[docs]</a>    <span class="k">def</span> <span class="nf">stop_pwm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop PWM&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">PWM_STOP</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__trigger_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change the trigger mode of the DataChannel.</span>
+
+<span class="sd">        :param number: Number of the DataChannel.</span>
+<span class="sd">        :param mode: Trigger mode (use :class:`.Trigger`).</span>
+<span class="sd">        :param value: Value of the trigger mode.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Trigger</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid trigger mode&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">mode</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value of digital trigger&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">TRIGGER_SETUP</span><span class="p">,</span> <span class="s1">&#39;BBH&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span> <span class="s1">&#39;BBH&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DAQ.trigger_mode"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.trigger_mode">[docs]</a>    <span class="k">def</span> <span class="nf">trigger_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the trigger mode of the DataChannel.</span>
+
+<span class="sd">        :param number: Number of the DataChannel.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">GET_TRIGGER_MODE</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;H&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Trigger</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DAQ.get_state_ch"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.get_state_ch">[docs]</a>    <span class="k">def</span> <span class="nf">get_state_ch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get state of the DataChannel.</span>
+
+<span class="sd">        :param number: Number of the DataChannel.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">GET_STATE_CHANNEL</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;H&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__conf_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">pinput</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ninput</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">nsamples</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure a channel for a generic stream experiment</span>
+<span class="sd">        (Stream/External/Burst).</span>
+
+<span class="sd">        :param number: Select a DataChannel number for this experiment</span>
+<span class="sd">        :param mode: Define data source or destination (use :class:`.ExpMode`).</span>
+<span class="sd">        :param pinput: Select Positive/SE analog input [1:8]</span>
+<span class="sd">        :param ninput: Select Negative analog input.</span>
+<span class="sd">        :param gain: Select PGA multiplier.</span>
+<span class="sd">        :param nsamples: Number of samples to calculate the mean for each point</span>
+<span class="sd">            [0:255].</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ExpMode</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid mode&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">ExpMode</span><span class="o">.</span><span class="n">ANALOG_IN</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">check_adc_settings</span><span class="p">(</span><span class="n">pinput</span><span class="p">,</span> <span class="n">ninput</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">gain</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nsamples</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;samples number out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span>
+            <span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">CHANNEL_CFG</span><span class="p">,</span> <span class="s1">&#39;BBBBBB&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">mode</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">pinput</span><span class="p">,</span>
+                  <span class="n">ninput</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">gain</span><span class="p">),</span> <span class="n">nsamples</span><span class="p">),</span> <span class="s1">&#39;BBBBBB&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setup_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">npoints</span><span class="p">,</span> <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure the experiment&#39;s number of points.</span>
+
+<span class="sd">        :param number: Select a DataChannel number for this experiment.</span>
+<span class="sd">        :param npoints: Total number of points for the experiment</span>
+<span class="sd">            [0:65536] (0 indicates continuous acquisition).</span>
+<span class="sd">        :param continuous: Indicates if the experiment is continuous</span>
+<span class="sd">            - False: run once</span>
+<span class="sd">            - True: continuous</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">npoints</span> <span class="o">&lt;</span> <span class="mi">65536</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;npoints out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">CHANNEL_SETUP</span><span class="p">,</span> <span class="s1">&#39;BHb&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span>
+                                       <span class="n">npoints</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="ow">not</span> <span class="n">continuous</span><span class="p">)),</span> <span class="s1">&#39;BHB&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DAQ.remove_experiment"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.remove_experiment">[docs]</a>    <span class="k">def</span> <span class="nf">remove_experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete a single experiment.</span>
+
+<span class="sd">        :param experiment: reference of the experiment to remove.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">nb</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid reference&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__destroy_channel</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="n">nb</span><span class="p">:</span>
+                <span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DAQ.clear_experiments"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.clear_experiments">[docs]</a>    <span class="k">def</span> <span class="nf">clear_experiments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete the whole experiment list.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__destroy_channel</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
+
+    <span class="k">def</span> <span class="nf">__used_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of assigned DataChannels.</span>
+
+<span class="sd">        :returns: list of assigned DataChannels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">number</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__first_available</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">MAX_CHANNELS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__used_channels</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">i</span>
+
+<div class="viewcode-block" id="DAQ.flush_channel"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.flush_channel">[docs]</a>    <span class="k">def</span> <span class="nf">flush_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Flush the channel.</span>
+
+<span class="sd">        :param number: Number of DataChannel to flush.</span>
+<span class="sd">        :returns: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">CHANNEL_FLUSH</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__destroy_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Command firmware to clear a Datachannel structure.</span>
+
+<span class="sd">        :param number: Number of DataChannel structure to clear [0:4] (0: reset</span>
+<span class="sd">            all DataChannels)</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">CHANNEL_DESTROY</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="DAQ.create_stream"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.create_stream">[docs]</a>    <span class="k">def</span> <span class="nf">create_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create Stream experiment.</span>
+
+<span class="sd">        See the :class:`.DAQStream` class constructor for more info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ExpMode</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid mode&quot;</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">DAQBurst</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LengthError</span><span class="p">(</span><span class="s2">&quot;Device is configured for a Burst experiment&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__used_channels</span><span class="p">())</span> <span class="o">==</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LengthError</span><span class="p">(</span><span class="s2">&quot;Maximum value of experiments has been reached&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">ExpMode</span><span class="o">.</span><span class="n">ANALOG_OUT</span><span class="p">:</span>
+            <span class="n">chan</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># DAC_OUTPUT is fixed at DataChannel 4</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="n">chan</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">is</span> <span class="n">DAQStream</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__first_available</span><span class="p">()</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;DataChannel 4 is being used&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">chan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__first_available</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DAQStream</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">chan</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__create_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send a command to the firmware to create a Stream experiment.</span>
+
+<span class="sd">        :param number: Assign a DataChannel number for this experiment [1:4].</span>
+<span class="sd">        :param period: Period of the stream experiment (ms) [1:65536].</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">65535</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid period&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">STREAM_CREATE</span><span class="p">,</span> <span class="s1">&#39;BH&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">period</span><span class="p">),</span> <span class="s1">&#39;BH&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DAQ.create_external"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.create_external">[docs]</a>    <span class="k">def</span> <span class="nf">create_external</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">clock_input</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create External experiment.</span>
+
+<span class="sd">        See the :class:`.DAQExternal` class constructor for more info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ExpMode</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid mode&quot;</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">DAQBurst</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LengthError</span><span class="p">(</span><span class="s2">&quot;Device is configured for a Burst experiment&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__used_channels</span><span class="p">())</span> <span class="o">==</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LengthError</span><span class="p">(</span><span class="s2">&quot;Maximum value of experiments has been reached&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="n">clock_input</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">is</span> <span class="n">DAQStream</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__first_available</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Clock_input is being used by another experiment&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DAQExternal</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">clock_input</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__create_external</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send a command to the firmware to create an External experiment.</span>
+
+<span class="sd">        :param number: Assign a DataChannel number for this experiment [1:4].</span>
+<span class="sd">        :param edge: New data on rising (1) or falling (0) edges [0:1].</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">MAX_CHANNELS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid DataChannel number&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid edge&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">EXTERNAL_CREATE</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">edge</span><span class="p">),</span> <span class="s1">&#39;BB&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DAQ.create_burst"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.create_burst">[docs]</a>    <span class="k">def</span> <span class="nf">create_burst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create Burst experiment.</span>
+
+<span class="sd">        See the :class:`.DAQBurst` class constructor for more info.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LengthError</span><span class="p">(</span><span class="s2">&quot;Only one experiment allowed when using burst&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DAQBurst</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__create_burst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send a command to the firmware to create a Burst experiment.</span>
+
+<span class="sd">        :param period: Period of the burst experiment (microseconds)</span>
+<span class="sd">            [100:65535]</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">100</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">65535</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid period&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">BURST_CREATE</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">period</span><span class="p">),</span> <span class="s1">&#39;H&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__load_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load an array of values in volts to preload DAC output.</span>
+
+<span class="sd">        :raises: LengthError: Invalid dada length.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LengthError</span><span class="p">(</span><span class="s2">&quot;Invalid data length&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_analog</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">volts_to_raw</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">SIGNAL_LOAD</span><span class="p">,</span> <span class="s1">&#39;h</span><span class="si">%d</span><span class="s1">h&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+                                       <span class="n">offset</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">),</span> <span class="s1">&#39;Bh&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DAQ.flush"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Flush internal buffers.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">flushInput</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">__read_stream_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">packet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;!HBBB&#39;</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="n">CMD</span><span class="o">.</span><span class="n">STREAM_DATA</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="n">escape_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mh">0x7d</span><span class="p">,</span> <span class="mh">0x7e</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;STRM:&quot;</span><span class="p">,</span> <span class="n">str2hex</span><span class="p">(</span><span class="n">packet</span><span class="p">),</span> <span class="n">str2hex</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">str2hex</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;!</span><span class="si">%d</span><span class="s1">h&#39;</span> <span class="o">%</span> <span class="p">((</span><span class="n">size</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">body</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+            <span class="k">return</span> <span class="n">ch</span><span class="p">,</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="n">CMD</span><span class="o">.</span><span class="n">STREAM_STOP</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;STRM:&quot;</span><span class="p">,</span> <span class="n">str2hex</span><span class="p">(</span><span class="n">packet</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">ch</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Invalid stream command: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__read_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generator that reads and parses a stream packet at a time.</span>
+
+<span class="sd">        :returns: (data, channel)</span>
+<span class="sd">            - channel: Assigned experiment number.</span>
+<span class="sd">            - data: Buffer for data points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># wait for a start byte</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x7e</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="c1"># read a packet</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">__read_stream_packet</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_measuring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;True if any experiment is going on.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__measuring</span>
+
+<div class="viewcode-block" id="DAQ.start"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start all available experiments.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="c1"># setup the openDAQ</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">DAQBurst</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__create_burst</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">s</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">DAQStream</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__create_stream</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__create_external</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">edge</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__setup_channel</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">npoints</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">continuous</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__conf_channel</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">pinput</span><span class="p">,</span>
+                                <span class="n">s</span><span class="o">.</span><span class="n">ninput</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">gain</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">nsamples</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__trigger_setup</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">trg_mode</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">trg_value</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span> <span class="o">==</span> <span class="n">ExpMode</span><span class="o">.</span><span class="n">ANALOG_OUT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__load_signal</span><span class="p">(</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">get_preload_data</span><span class="p">())</span>
+                <span class="k">break</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__measuring</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">STREAM_START</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__run</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DAQ.stop"><a class="viewcode-back" href="../../opendaq.html#opendaq.daq.DAQ.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop all running experiments and exit threads.</span>
+
+<span class="sd">        :param clear: If True, the experiment list will be cleared. The</span>
+<span class="sd">        experiments will no longer be available.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">mkcmd</span><span class="p">(</span><span class="n">CMD</span><span class="o">.</span><span class="n">STREAM_STOP</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1"># wait for thread to finish</span>
+
+            <span class="k">if</span> <span class="n">clear</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clear_experiments</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">__run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Thread loop.</span>
+
+<span class="sd">        Store the experiment data sent by the device after calling start().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">used</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__used_channels</span><span class="p">()</span>
+        <span class="n">stopped</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">ch</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__read_stream</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">stopped</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">stopped</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">used</span><span class="p">):</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exp</span><span class="p">[</span><span class="n">used</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">ch</span><span class="p">)]</span>
+                <span class="n">exp</span><span class="o">.</span><span class="n">add_points</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="o">.</span><span class="n">raw_to_volts</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">exp</span><span class="o">.</span><span class="n">get_params</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__measuring</span> <span class="o">=</span> <span class="kc">False</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openDAQ 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Ingen10 Ingenieria SL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

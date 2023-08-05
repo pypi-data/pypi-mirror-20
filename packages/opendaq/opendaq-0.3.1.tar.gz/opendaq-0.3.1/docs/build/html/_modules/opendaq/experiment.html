@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>opendaq.experiment &#8212; openDAQ 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openDAQ 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for opendaq.experiment</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="c1"># Copyright 2015</span>
+<span class="c1"># Ingen10 Ingenieria SL</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of opendaq.</span>
+<span class="c1">#</span>
+<span class="c1"># opendaq is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># opendaq is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with opendaq.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">IntEnum</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Lock</span>
+
+
+<div class="viewcode-block" id="ExpMode"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.ExpMode">[docs]</a><span class="k">class</span> <span class="nc">ExpMode</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Valid experiment modes.&quot;&quot;&quot;</span>
+    <span class="n">ANALOG_IN</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ANALOG_OUT</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">DIGITAL_IN</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">DIGITAL_OUT</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">COUNTER_IN</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">CAPTURE_IN</span> <span class="o">=</span> <span class="mi">5</span></div>
+
+
+<div class="viewcode-block" id="Trigger"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.Trigger">[docs]</a><span class="k">class</span> <span class="nc">Trigger</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Valid trigger modes.&quot;&quot;&quot;</span>
+    <span class="n">SW</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">DIN1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">DIN2</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">DIN3</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">DIN4</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">DIN5</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">DIN6</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">ABIG</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">ASML</span> <span class="o">=</span> <span class="mi">20</span></div>
+
+
+<div class="viewcode-block" id="DAQExperiment"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment">[docs]</a><span class="k">class</span> <span class="nc">DAQExperiment</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="DAQExperiment.analog_setup"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.analog_setup">[docs]</a>    <span class="k">def</span> <span class="nf">analog_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pinput</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ninput</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure a channel for a generic stream experiment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nsamples</span> <span class="o">&lt;</span> <span class="mi">255</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;samples number out of range&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pinput</span> <span class="o">=</span> <span class="n">pinput</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ninput</span> <span class="o">=</span> <span class="n">ninput</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gain</span> <span class="o">=</span> <span class="n">gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsamples</span> <span class="o">=</span> <span class="n">nsamples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal_offs</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.trigger_setup"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.trigger_setup">[docs]</a>    <span class="k">def</span> <span class="nf">trigger_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">Trigger</span><span class="o">.</span><span class="n">SW</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Channge the trigger mode of datachannel.</span>
+
+<span class="sd">        :param mode: Trigger mode (use :class:`.Trigger`).</span>
+<span class="sd">        :param value: Value of the trigger mode.</span>
+<span class="sd">        :raises: ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Trigger</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid trigger mode&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">mode</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid value of digital trigger&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trg_mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trg_value</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.get_params"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.get_params">[docs]</a>    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return gain, pinput and ninput.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinput</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ninput</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.get_mode"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.get_mode">[docs]</a>    <span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return mode.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.get_preload_data"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.get_preload_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_preload_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return preload_data and preload_offset. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">signal_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">signal_offs</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.load_signal"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.load_signal">[docs]</a>    <span class="k">def</span> <span class="nf">load_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid data length&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal_data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal_offs</span> <span class="o">=</span> <span class="n">offset</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.add_points"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.add_points">[docs]</a>    <span class="k">def</span> <span class="nf">add_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write a single point into the ring buffer.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_buffer</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DAQExperiment.read"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExperiment.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return all available points from the ring buffer.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring_buffer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">ret</span></div></div>
+
+
+<div class="viewcode-block" id="DAQStream"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQStream">[docs]</a><span class="k">class</span> <span class="nc">DAQStream</span><span class="p">(</span><span class="n">DAQExperiment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stream experiment.</span>
+
+<span class="sd">    :param mode: Define data source or destination (use :class:`.ExpMode`).</span>
+<span class="sd">    :param period: Period of the stream experiment (milliseconds) [1:65536]</span>
+<span class="sd">    :param npoints: Total number of points for the experiment</span>
+<span class="sd">            [0:65536] (0 indicates continuous acquisition).</span>
+<span class="sd">    :param continuous: Indicates if experiment is continuous (True) or</span>
+<span class="sd">        one-shot (False).</span>
+<span class="sd">    :param buffersize: Buffer size.</span>
+<span class="sd">    :raises: LengthError (too many experiments at the same time),</span>
+<span class="sd">        ValueError (values out of range)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span>
+                 <span class="n">npoints</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">buffersize</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid number&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">number</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Analog output must use DataChannel 4&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">65535</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid period&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">and</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">mode</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid mode&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">npoints</span> <span class="o">&lt;</span> <span class="mi">65536</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;npoints out of range&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">buffersize</span> <span class="o">&lt;=</span> <span class="mi">20000</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid buffer size&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npoints</span> <span class="o">=</span> <span class="n">npoints</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="n">continuous</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_buffer</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffersize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analog_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger_setup</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DAQExternal"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQExternal">[docs]</a><span class="k">class</span> <span class="nc">DAQExternal</span><span class="p">(</span><span class="n">DAQExperiment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;External experiment.</span>
+
+<span class="sd">    :param mode: Define data source or destination (use :class:`.ExpMode`).</span>
+<span class="sd">    :param clock_input: Digital input used as external clock</span>
+<span class="sd">    :param edge: New data on rising (1) or falling (0) edges [0:1]</span>
+<span class="sd">    :param npoints: Total number of points for the experiment [0:65536]</span>
+<span class="sd">    :param continuous: Indicates if the experiment is continuous</span>
+<span class="sd">        (False: run once, True: continuous).</span>
+<span class="sd">    :param buffersize: Buffer size</span>
+<span class="sd">    :raises: LengthError (too many experiments at the same time,</span>
+<span class="sd">        ValueError (values out of range)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">clock_input</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">npoints</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">buffersize</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">clock_input</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid clock_input&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid edge&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">and</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">mode</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid mode&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">npoints</span> <span class="o">&lt;</span> <span class="mi">65536</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;npoints out of range&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">buffersize</span> <span class="o">&lt;=</span> <span class="mi">20000</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid buffer size&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">clock_input</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Analog output must use DataChannel 4&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">clock_input</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span> <span class="o">=</span> <span class="n">edge</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npoints</span> <span class="o">=</span> <span class="n">npoints</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="n">continuous</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_buffer</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffersize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analog_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger_setup</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DAQBurst"><a class="viewcode-back" href="../../opendaq.html#opendaq.experiment.DAQBurst">[docs]</a><span class="k">class</span> <span class="nc">DAQBurst</span><span class="p">(</span><span class="n">DAQExperiment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Burst experiment.</span>
+
+<span class="sd">    :param mode: Define data source or destination (use :class:`.ExpMode`).</span>
+<span class="sd">    :param period: Period of the stream experiment (microseconds) [1:65536]</span>
+<span class="sd">    :param npoints: Total number of points for the experiment [0:65536]</span>
+<span class="sd">    :param continuous: Indicates if the experiment is continuous</span>
+<span class="sd">        (False: run once, True: continuous).</span>
+<span class="sd">    :param buffersize: Buffer size</span>
+<span class="sd">    :raises: LengthError (too many experiments at the same time), ValueError</span>
+<span class="sd">        (values out of range)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">buffersize</span><span class="o">=</span><span class="mi">4000</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">100</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">65535</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid period&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">npoints</span> <span class="o">&lt;</span> <span class="mi">65536</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;npoints out of range&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">and</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">mode</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid mode&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npoints</span> <span class="o">=</span> <span class="n">npoints</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="n">continuous</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_buffer</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffersize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex_ring_buffer</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analog_setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger_setup</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openDAQ 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Ingen10 Ingenieria SL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>
