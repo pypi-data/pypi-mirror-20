@@ -1,0 +1,255 @@
+#!/usr/bin/env python
+
+# Copyright 2015 Sauce Labs.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+
+# Sauce Labs REST API documentation:
+# http://saucelabs.com/docs/rest
+
+
+# command line interface to saucestorage
+
+import argparse
+import json
+import logging
+import os
+from os.path import abspath, basename, expanduser
+from saucestorage import SauceStorage
+import sys
+import time
+
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+LOG = logging.getLogger(__name__)
+
+def absolute_path_argument(path):
+    return abspath(expanduser(path))
+
+def json_dump(d):
+    print json.dumps(d, sort_keys=True, indent=4, separators=(',', ': '))
+
+def log_to_stderr(level=logging.INFO):
+    root = logging.getLogger()
+    root.setLevel(level)
+    handler = logging.StreamHandler()
+    handler.setFormatter(FORMATTER)
+    root.addHandler(handler)
+
+class SauceStorageTool(object):
+
+    def __init__(self):
+        """ parse args using subcommand pattern, like git """
+        self.executable = basename(sys.argv[0])
+        usage=("{executable} <command> <flags> args\n"
+               "\n"
+               "Commands:\n"
+               "    list\n"
+               "    put\n"
+               "    verify\n"
+               "    update\n"
+               "\n"
+               "For help with commands, use:\n"
+               "    {executable} <command> -h\n"
+               "\n"
+               "You must have your SAUCE_USERNAME and SAUCE_ACCESS_KEY "
+               "environment variables defined.")
+        parser = argparse.ArgumentParser(
+            description='List files or upload file to Sauce Labs storage API.',
+            usage=usage.format(executable=self.executable)
+        )
+        parser.add_argument('command', help='Subcommand to run')
+        args = parser.parse_args(sys.argv[1:2])
+        if not hasattr(args, 'command'):
+            parser.print_help()
+            sys.exit(1)
+        if args.command == 'list':
+            command = List(self)
+        elif args.command == 'put':
+            command = Put(self)
+        elif args.command == 'update':
+            command = Update(self)
+        elif args.command == 'verify':
+            command = Verify(self)
+        else:
+            raise Exception("Did not recognize command '{0}'".format(args.command))
+
+        command.execute()
+
+class SauceStorageCommand(object):
+    def __init__(self, parser):
+        parser.add_argument(
+            '-v', '--verbose',
+            dest='verbose',
+            action='store_true',
+            default=False,
+            required=False,
+            help='Extra logging'
+        )
+        parser.add_argument(
+            '-j', '--json',
+            dest='as_json',
+            action='store_true',
+            default=False,
+            required=False,
+            help='Print results as JSON'
+        )
+        parser.add_argument(
+            '-a', '--api_endpoint',
+            dest='api_endpoint',
+            default=None,
+            required=False,
+            help=argparse.SUPPRESS
+        )
+        self.args = parser.parse_args(sys.argv[2:])
+        if self.args.verbose:
+            level = logging.DEBUG
+        else:
+            level = logging.INFO
+        log_to_stderr(level)
+        self.storage = self.get_sauce_storage_client()
+
+    def get_sauce_storage_client(self):
+        for key in ['SAUCE_USERNAME', 'SAUCE_ACCESS_KEY']:
+            if key not in os.environ:
+                raise Exception("Missing {} environment variable".format(key))
+        args = [
+            os.environ['SAUCE_USERNAME'],
+            os.environ['SAUCE_ACCESS_KEY']
+        ]
+        if self.args.api_endpoint is not None:
+            args.append(self.args.api_endpoint)
+        return SauceStorage(*args)
+
+
+class Put(SauceStorageCommand):
+    def __init__(self, commander):
+        parser = argparse.ArgumentParser(
+            description='Put a file into storage using Sauce Labs Storage API.',
+            prog = commander.executable + ' put'
+        )
+        parser.add_argument(
+            '-n', '--name',
+            help='Store file with this filename',
+            default=None
+        )
+        parser.add_argument(
+            'file',
+            help='File to upload',
+            type=absolute_path_argument,
+            metavar='<path>'
+        )
+        super(Put, self).__init__(parser)
+
+    def execute(self):
+        result = self.storage.put(self.args.file,
+                                  remote_name=self.args.name)
+        LOG.debug(result)
+        if self.args.as_json:
+            json_dump(result)
+        else:
+            print "File '{0}' is now available as {1}".format(self.args.file,
+                                                              result['url'])
+
+class List(SauceStorageCommand):
+    TIME_FMT = "%b %d %Y %H:%M:%S"
+    LIST_FMT = '{:>10}  {:<20}  {:<50}'
+
+    def __init__(self, commander):
+        parser = argparse.ArgumentParser(
+            description='List files in storage using Sauce Labs Storage API.',
+            prog = commander.executable + ' list'
+        )
+        super(List, self).__init__(parser)
+
+    def execute(self):
+        files = self.storage.list()
+        files.sort(key=lambda f: f['name'])
+        LOG.debug(files)
+        if self.args.as_json:
+            json_dump(files)
+        else:
+            print self.LIST_FMT.format('Size', 'Modification time', 'Name')
+            print self.LIST_FMT.format('----', '-----------------', '----')
+            for f in files:
+                mtime = time.strftime(self.TIME_FMT, time.gmtime(f['mtime']))
+                print self.LIST_FMT.format(f['size'],
+                                           mtime,
+                                           f['name'])
+
+class Update(SauceStorageCommand):
+    def __init__(self, commander):
+        description = ("Very similar to `put`, but it's usually better. "
+                       "This will upload the file to Sauce Storage, but only if there "
+                       "isn't already a file there with the same name and content.")
+        parser = argparse.ArgumentParser(
+            description=description,
+            prog = commander.executable + ' update'
+        )
+        parser.add_argument(
+            '-n', '--name',
+            help='Store file with this filename',
+            default=None
+        )
+        parser.add_argument(
+            'file',
+            help='File to upload',
+            type=absolute_path_argument,
+            metavar='<path>'
+        )
+        super(Update, self).__init__(parser)
+
+    def execute(self):
+        result = self.storage.update(self.args.file,
+                                     remote_name=self.args.name)
+        LOG.debug(result)
+        if self.args.as_json:
+            json_dump(result)
+        else:
+            print "File '{0}' is now available as {1}".format(self.args.file,
+                                                              result['url'])
+
+
+class Verify(SauceStorageCommand):
+
+    def __init__(self, commander):
+        parser = argparse.ArgumentParser(
+            description='Verify that a file in Sauce Storage matches a local file.',
+            prog = commander.executable + ' verify'
+        )
+        parser.add_argument(
+            '-n', '--name',
+            help='Filename in storage to verify against',
+            default=None
+        )
+        parser.add_argument(
+            'file',
+            help='Local file to verify',
+            type=absolute_path_argument,
+            metavar='<path>'
+        )
+        super(Verify, self).__init__(parser)
+
+    def execute(self):
+        is_verified  = self.storage.is_verified(self.args.file,
+                                                remote_name=self.args.name)
+        LOG.debug([self.args, is_verified])
+        if self.args.as_json:
+            json_dump({'verified': is_verified})
+        else:
+            if is_verified:
+                print "Files match."
+            else:
+                print "Files do not match."
+
+if __name__ == '__main__':
+    SauceStorageTool()
