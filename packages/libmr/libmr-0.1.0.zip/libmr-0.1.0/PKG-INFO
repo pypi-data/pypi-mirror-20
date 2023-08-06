@@ -1,0 +1,24 @@
+Metadata-Version: 1.0
+Name: libmr
+Version: 0.1.0
+Summary: Python bindings for LibMR, the metarecognition library
+Home-page: http://www.metarecognition.com/ml-mr-2/
+Author: Terry Boult, Ethan Rudd, and Manuel Gunther
+Author-email: UNKNOWN
+License: http://www.metarecognition.com/libmr-license/
+Description: LIBMR
+        =====
+        
+        
+        libMR provides core MetaRecognition and  Weibull fitting functionality.
+        It is used to calculate w-scores used for multi-modal fusion.
+        This version uses object, that retain the "transforms" (including save/load) need to compute the actual w-scores.
+        It includes functions  for Prediction, CDF,  Inverse, FitHigh (larger is better), FitLow (smaller is better) and FitSVM.
+        
+        INSTALLATION
+        ++++++++++++
+        
+        pip install libmr
+        
+        
+Platform: UNKNOWN
