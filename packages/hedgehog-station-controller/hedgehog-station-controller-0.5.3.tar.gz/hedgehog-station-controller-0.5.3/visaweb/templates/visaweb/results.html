@@ -1,0 +1,27 @@
+<h1>{{ device.alias }}</h1>
+
+<div>
+    <label> {{ action.operation }} </label>
+    <label> {{ action.request }} </label>
+</div>
+
+<div>
+    <p> {{ action.response }} </p>
+</div>
+
+<div>
+    <h2>Visualizations</h2>
+    <ul>
+        <li><a href="{% url 'visaweb:spectrum' device.alias %}">Spectrum</a></li>
+        <li><a href="{% url 'visaweb:waterfall' device.alias %}">Waterfall</a></li>
+    </ul>
+</div>
+
+<div>
+    {% autoescape off %}{{ heatmap }}{% endautoescape %}
+</div>
+<div>
+    {% autoescape off %}{{ spectrum}}{% endautoescape %}
+</div>
+
+<a href="{% url 'visaweb:detail' device.alias %}">Configure again?</a>
