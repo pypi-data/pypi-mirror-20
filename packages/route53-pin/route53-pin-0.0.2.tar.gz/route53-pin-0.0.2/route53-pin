@@ -1,0 +1,62 @@
+#!/usr/bin/env python2.7
+import socket, argparse, requests, re, logging, boto3, sys
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--hostname', required=False,
+            help='The hostname to set the DNS to',
+            default=None)
+    parser.add_argument('--zone', required=False,
+            help='The DNS zone to update',
+            default=None)
+    parser.add_argument('--address', required=False,
+            help='The IP address to set',
+            default=None)
+    parser.add_argument('--ttl', required=False,
+            help='TTL to set for the A record',
+            type=int,
+            default=60)
+
+    args = parser.parse_args()
+
+    if not args.address:
+        args.address = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
+
+    if not args.hostname:
+        args.hostname = socket.gethostname()
+
+    if not args.zone:
+        ec2_hostname = requests.get('http://169.254.169.254/latest/meta-data/hostname').text
+
+        # The DNS zone that the instance belongs to
+        matches = re.match("[^\.]+\.(.*)", ec2_hostname)
+        args.zone = matches.group(1)
+
+    logging.info("Hostname is: %s" % args.hostname)
+    logging.info("Zone is: %s" % args.zone)
+    logging.info("Address is: %s" % args.address)
+
+    client = boto3.client('route53')
+    response = client.list_hosted_zones_by_name(DNSName=args.zone, MaxItems="1")
+    zone_id = response['HostedZones'][0]['Id']
+    logging.info("ZoneId is: %s" % zone_id)
+
+    response = client.change_resource_record_sets(
+        HostedZoneId=zone_id,
+        ChangeBatch={
+            'Changes': [{
+                'Action': 'UPSERT',
+                'ResourceRecordSet': {
+                    'Name': '%s.%s.' % (args.hostname, args.zone),
+                    'Type': 'A',
+                    'TTL': args.ttl,
+                    'ResourceRecords': [{
+                            'Value': args.address
+                    }]
+                }
+            }]
+        })
+
+    print response
