@@ -1,0 +1,79 @@
+---
+gene_types:
+  - all  # Special value returns all genes, this is hard-coded into gaet/gff.py module.
+  - tRNA
+  - rRNA
+  - tmRNA
+  - CDS
+  - repeat_region
+
+membership_groups:
+  - group: tRNA
+    products:
+      - regex: ^tRNA-Ala\([atgc]{3}\)(?:\s\(partial\))?$
+        name: ala_tRNA
+      - regex: ^tRNA-Arg\([atgc]{3}\)(?:\s\(partial\))?$
+        name: arg_tRNA
+      - regex: ^tRNA-Asn\([atgc]{3}\)(?:\s\(partial\))?$
+        name: asn_tRNA
+      - regex: ^tRNA-Asp\([atgc]{3}\)(?:\s\(partial\))?$
+        name: asp_tRNA
+      - regex: ^tRNA-Cys\([atgc]{3}\)(?:\s\(partial\))?$
+        name: cys_tRNA
+      - regex: ^tRNA-Gln\([atgc]{3}\)(?:\s\(partial\))?$
+        name: gln_tRNA
+      - regex: ^tRNA-Glu\([atgc]{3}\)(?:\s\(partial\))?$
+        name: glu_tRNA
+      - regex: ^tRNA-Gly\([atgc]{3}\)(?:\s\(partial\))?$
+        name: gly_tRNA
+      - regex: ^tRNA-His\([atgc]{3}\)(?:\s\(partial\))?$
+        name: his_tRNA
+      - regex: ^tRNA-Ile\([atgc]{3}\)(?:\s\(partial\))?$
+        name: ile_tRNA
+      - regex: ^tRNA-Leu\([atgc]{3}\)(?:\s\(partial\))?$
+        name: leu_tRNA
+      - regex: ^tRNA-Lys\([atgc]{3}\)(?:\s\(partial\))?$
+        name: lys_tRNA
+      - regex: ^tRNA-Met\([atgc]{3}\)(?:\s\(partial\))?$
+        name: met_tRNA
+      - regex: ^tRNA-Phe\([atgc]{3}\)(?:\s\(partial\))?$
+        name: phe_tRNA
+      - regex: ^tRNA-Pro\([atgc]{3}\)(?:\s\(partial\))?$
+        name: pro_tRNA
+      - regex: ^tRNA-Ser\([atgc]{3}\)(?:\s\(partial\))?$
+        name: ser_tRNA
+      - regex: ^tRNA-Thr\([atgc]{3}\)(?:\s\(partial\))?$
+        name: thr_tRNA
+      - regex: ^tRNA-Trp\([atgc]{3}\)(?:\s\(partial\))?$
+        name: trp_tRNA
+      - regex: ^tRNA-Tyr\([atgc]{3}\)(?:\s\(partial\))?$
+        name: tyr_tRNA
+      - regex: ^tRNA-Val\([atgc]{3}\)(?:\s\(partial\))?$
+        name: val_tRNA
+
+  - group: single_copy
+    products:
+      - regex: ^(large_|small_)?srp ribosomal RNA(?:\s\(partial\))?$
+        name: SRP_rRNA
+      - regex: ^rnasep(_a|_b)? ribosomal RNA(?:\s\(partial\))?$
+        name: RNaseP_rRNA
+
+  - group: bacteria_archea_rRNA
+    products:
+      - regex: ^5S ribosomal RNA(?:\s\(partial\))?$
+        name: 5S_rRNA
+      - regex: ^16S ribosomal RNA(?:\s\(partial\))?$
+        name: 16S_rRNA
+      - regex: ^23S ribosomal RNA(?:\s\(partial\))?$
+        name: 23S_rRNA
+
+  - group: eukarya_rRNA
+    products:
+      - regex: ^5S ribosomal RNA(?:\s\(partial\))?$
+        name: 5S_rRNA
+      - regex: ^5.8S ribosomal RNA(?:\s\(partial\))?$
+        name: 5.8S_rRNA
+      - regex: ^18S ribosomal RNA(?:\s\(partial\))?$
+        name: 18S_rRNA
+      - regex: ^28S ribosomal RNA(?:\s\(partial\))?$
+        name: 23S_rRNA

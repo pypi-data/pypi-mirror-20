@@ -1,0 +1,12 @@
+---
+gff_parsing_err: |
+  Error parsing the GFF file '{path}'. Please whether this GFF is valid.
+
+missing_file: |
+  File does not exist: '{path}'
+
+empty_gff_file: |
+  File appears to have no annotations: '{path}'
+
+no_fasta_entry: |
+  GFF file appears to have no FASTA entry: '{path}'
