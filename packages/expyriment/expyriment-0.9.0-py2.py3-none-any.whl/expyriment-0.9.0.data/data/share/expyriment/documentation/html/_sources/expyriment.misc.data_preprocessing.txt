@@ -1,0 +1,31 @@
+expyriment.misc.data_preprocessing
+==================================
+
+.. automodule:: expyriment.misc.data_preprocessing
+
+Attributes
+-----------
+
+
+Modules
+---------
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+
+Classes
+---------
+.. toctree::
+   :titlesonly:
+
+   expyriment.misc.data_preprocessing.Aggregator
+
+Functions
+-----------
+.. autofunction:: expyriment.misc.data_preprocessing.get_experiment_duration
+.. autofunction:: expyriment.misc.data_preprocessing.read_datafile
+.. autofunction:: expyriment.misc.data_preprocessing.write_concatenated_data
+.. autofunction:: expyriment.misc.data_preprocessing.write_csv_file
+
+

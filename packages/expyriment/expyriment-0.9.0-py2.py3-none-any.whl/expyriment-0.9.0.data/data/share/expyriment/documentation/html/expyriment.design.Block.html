@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>expyriment.design.Block &mdash; Expyriment 0.9.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Expyriment 0.9.0 documentation" href="index.html"/>
+        <link rel="up" title="expyriment.design" href="expyriment.design.html"/>
+        <link rel="next" title="expyriment.design.Experiment" href="expyriment.design.Experiment.html"/>
+        <link rel="prev" title="expyriment.design.randomize" href="expyriment.design.randomize.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Expyriment
+          
+
+          
+            
+            <img src="_static/xpy_button.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="expyriment.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="expyriment.control.html">expyriment.control</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="expyriment.design.html">expyriment.design</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="expyriment.design.defaults.html">expyriment.design.defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.design.extras.html">expyriment.design.extras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.design.permute.html">expyriment.design.permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.design.randomize.html">expyriment.design.randomize</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">expyriment.design.Block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.design.Experiment.html">expyriment.design.Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.design.Trial.html">expyriment.design.Trial</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.io.html">expyriment.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.misc.html">expyriment.misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.stimuli.html">expyriment.stimuli</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreviousVersions.html">Previous versions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Expyriment</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="expyriment.html">expyriment</a> &raquo;</li>
+      
+          <li><a href="expyriment.design.html">expyriment.design</a> &raquo;</li>
+      
+    <li>expyriment.design.Block</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="expyriment-design-block">
+<h1>expyriment.design.Block<a class="headerlink" href="#expyriment-design-block" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="expyriment.design.Block">
+<em class="property">class </em><code class="descclassname">expyriment.design.</code><code class="descname">Block</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class implementing an experimental block.</p>
+<dl class="method">
+<dt id="expyriment.design.Block.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a block.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str, optional</p>
+<blockquote class="last">
+<div><p>name of the block</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.add_trial">
+<code class="descname">add_trial</code><span class="sig-paren">(</span><em>trial</em>, <em>copies=1</em>, <em>random_position=False</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.add_trial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add trial to the block.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trial</strong> : design.Trial</p>
+<blockquote>
+<div><p>trial to add</p>
+</div></blockquote>
+<p><strong>copies</strong> : int, optional</p>
+<blockquote>
+<div><p>number of copies to add (default = 1)</p>
+</div></blockquote>
+<p><strong>random_position</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>True  = insert trials at random position;
+False = append trials at the end (default=False)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.add_trials_from_csv_file">
+<code class="descname">add_trials_from_csv_file</code><span class="sig-paren">(</span><em>filename</em>, <em>encoding=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.add_trials_from_csv_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a list of trials from csv-file and append the new trials to the
+block. Trials are defined as combinations of trial factors.</p>
+<p><strong>csv-file specifications</strong></p>
+<blockquote>
+<div>The first row of the csv-file specifies the factor names. Each
+following row describes one trial. Each row must have the same
+amount of columns.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : str</p>
+<blockquote>
+<div><p>name (fullpath) of the csv file (str)</p>
+</div></blockquote>
+<p><strong>encoding</strong> : str, optional</p>
+<blockquote class="last">
+<div><p>the encoding to be used when reading from the file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>All factors will be read in as text strings and not casted to
+numericals. Please do this manually if required.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.add_trials_full_factorial">
+<code class="descname">add_trials_full_factorial</code><span class="sig-paren">(</span><em>design_dict</em>, <em>copies=1</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.add_trials_full_factorial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add trials of all combinations of a full factorial design.</p>
+<blockquote>
+<div>Factors will be defined according the design_dict parameter.
+The design is specified by a dictionary. The keys of the dictionary
+indicate the factor names. Each value of the dictionary has to be
+a list of the factor levels.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>design_dict</strong> : dictionary</p>
+<blockquote>
+<div><p>keys: factor names, values: lists of factor levels</p>
+</div></blockquote>
+<p><strong>copies</strong> : int, optional</p>
+<blockquote class="last">
+<div><p>number of copies to add (default = 1)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.clear_factors">
+<code class="descname">clear_factors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.clear_factors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all factors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.clear_trials">
+<code class="descname">clear_trials</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.clear_trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all trials.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.compare">
+<code class="descname">compare</code><span class="sig-paren">(</span><em>block</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares this block with another block and returns <cite>True</cite> if all
+factors associated with both blocks are identical.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">identical: boolean</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal"><span class="pre">Trials.compare</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of the block.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.design_as_text">
+<code class="descname">design_as_text</code><a class="headerlink" href="#expyriment.design.Block.design_as_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for design_as_text.</p>
+<p>List of trial factors as csv table.</p>
+<p>The list considers only the defined trial factors and not the
+added stimuli.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.factor_dict">
+<code class="descname">factor_dict</code><a class="headerlink" href="#expyriment.design.Block.factor_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>The dictionary with all factors of the block.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.factor_names">
+<code class="descname">factor_names</code><a class="headerlink" href="#expyriment.design.Block.factor_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for factor_names.</p>
+<p>Factor keys.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.factors_as_text">
+<code class="descname">factors_as_text</code><a class="headerlink" href="#expyriment.design.Block.factors_as_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for factors_as_text.</p>
+<p>Return all factor names and values as string line.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.find_trial">
+<code class="descname">find_trial</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.find_trial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the positions of a trial.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>id</strong> : int</p>
+<blockquote>
+<div><p>trial id to look for</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pos</strong> : list</p>
+<blockquote class="last">
+<div><p>positions as a list or None if not in trial list.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.get_factor">
+<code class="descname">get_factor</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.get_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a factor of the block.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>factor name (str)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.get_random_trial">
+<code class="descname">get_random_trial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.get_random_trial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a randomly selected trial.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rnd</strong> : design.Trial</p>
+<blockquote class="last">
+<div><p>random Expyriment trial</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This function is useful for compiling training blocks.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.get_trial_factor_values">
+<code class="descname">get_trial_factor_values</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.get_trial_factor_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of the values of a certain factor for all trials.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>name of the factor</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.id">
+<code class="descname">id</code><a class="headerlink" href="#expyriment.design.Block.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for id.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.max_trial_repetitions">
+<code class="descname">max_trial_repetitions</code><a class="headerlink" href="#expyriment.design.Block.max_trial_repetitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for max_trial_repetitions.</p>
+<p>Returns the maximum number of immediate trial repetitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.n_trials">
+<code class="descname">n_trials</code><a class="headerlink" href="#expyriment.design.Block.n_trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for n_trials.</p>
+<p>Number of trials.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.name">
+<code class="descname">name</code><a class="headerlink" href="#expyriment.design.Block.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.order_trials">
+<code class="descname">order_trials</code><span class="sig-paren">(</span><em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.order_trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Order the trials.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>order</strong> : list</p>
+<blockquote class="last">
+<div><p>list with the new order of positions</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.read_design">
+<code class="descname">read_design</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.read_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a list of trials from a csv file and clears the old block
+design.</p>
+<p>The function considers only the trial factors and not the added
+stimuli. All factors will be read in as text strings and not casted to
+numericals. Please do this manually if required.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : str</p>
+<blockquote class="last">
+<div><p>name (fullpath) of the csv file (str)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.remove_trial">
+<code class="descname">remove_trial</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.remove_trial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a trial.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<blockquote class="last">
+<div><p>position of the trial</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.save_design">
+<code class="descname">save_design</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.save_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the list of trials to a csv file.</p>
+<p>The function considers only the defined trial factors and not the
+added stimuli.</p>
+<p>Parameters
+filename  &#8211; name (fullpath) of the csv file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.set_factor">
+<code class="descname">set_factor</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.set_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a factor for the block.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>factor name</p>
+</div></blockquote>
+<p><strong>value</strong> : str or numeric</p>
+<blockquote class="last">
+<div><p>factor value</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.shuffle_trials">
+<code class="descname">shuffle_trials</code><span class="sig-paren">(</span><em>method=0</em>, <em>max_repetitions=None</em>, <em>n_segments=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.shuffle_trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shuffle all trials.</p>
+<p>The function returns False if no randomization could be found that
+fulfills the max immediate trial repetition criterion. The different
+type of trials are only defined by the factors. Shuffle does not
+take into account the added stimuli.</p>
+<p>The following randomization methods are defined:</p>
+<blockquote>
+<div><p>0 = total randomization of trial order (default)</p>
+<p>1 = randomization within small miniblocks. Each miniblock
+contains one trial of each type (only defined by factors!);
+in other words, copies of one trial type are always in
+different miniblocks</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method</strong> : int, optional</p>
+<blockquote>
+<div><p>method of trial randomization (default=0)</p>
+</div></blockquote>
+<p><strong>max_repetitions</strong> : int, optional</p>
+<blockquote>
+<div><p>see documentation of <cite>randomize.shuffle_list</cite> (default = None)</p>
+</div></blockquote>
+<p><strong>n_segments</strong> : int, optional</p>
+<blockquote>
+<div><p>this parameter will be only considered for randomization method 0;
+see documentation of <cite>randomize.shuffle_list</cite> (default = None)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>succeeded</strong> : bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.sort_trials">
+<code class="descname">sort_trials</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.sort_trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort the trials according to their indices from low to high.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.summary">
+<code class="descname">summary</code><a class="headerlink" href="#expyriment.design.Block.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for summary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.design.Block.swap_trials">
+<code class="descname">swap_trials</code><span class="sig-paren">(</span><em>position1</em>, <em>position2</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.design.Block.swap_trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swap two trials.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position1</strong> : int</p>
+<blockquote>
+<div><p>position of first trial</p>
+</div></blockquote>
+<p><strong>position2</strong> : int</p>
+<blockquote class="last">
+<div><p>position of second trial</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.trial_factor_names">
+<code class="descname">trial_factor_names</code><a class="headerlink" href="#expyriment.design.Block.trial_factor_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for trial_factor_names.</p>
+<p>Get all factor names defined in trial list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.design.Block.trials">
+<code class="descname">trials</code><a class="headerlink" href="#expyriment.design.Block.trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for trials.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="expyriment.design.Experiment.html" class="btn btn-neutral float-right" title="expyriment.design.Experiment" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expyriment.design.randomize.html" class="btn btn-neutral" title="expyriment.design.randomize" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Florian Krause &amp; Oliver Lindemann.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

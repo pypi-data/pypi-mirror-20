@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>expyriment.stimuli.Video &mdash; Expyriment 0.9.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Expyriment 0.9.0 documentation" href="index.html"/>
+        <link rel="up" title="expyriment.stimuli" href="expyriment.stimuli.html"/>
+        <link rel="next" title="Changelog" href="Changelog.html"/>
+        <link rel="prev" title="expyriment.stimuli.Tone" href="expyriment.stimuli.Tone.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Expyriment
+          
+
+          
+            
+            <img src="_static/xpy_button.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="expyriment.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="expyriment.control.html">expyriment.control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.design.html">expyriment.design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.io.html">expyriment.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.misc.html">expyriment.misc</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="expyriment.stimuli.html">expyriment.stimuli</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.defaults.html">expyriment.stimuli.defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.extras.html">expyriment.stimuli.extras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Audio.html">expyriment.stimuli.Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.BlankScreen.html">expyriment.stimuli.BlankScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Canvas.html">expyriment.stimuli.Canvas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Circle.html">expyriment.stimuli.Circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Dot.html">expyriment.stimuli.Dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Ellipse.html">expyriment.stimuli.Ellipse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.FixCross.html">expyriment.stimuli.FixCross</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Frame.html">expyriment.stimuli.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Line.html">expyriment.stimuli.Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Picture.html">expyriment.stimuli.Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Rectangle.html">expyriment.stimuli.Rectangle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Shape.html">expyriment.stimuli.Shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextBox.html">expyriment.stimuli.TextBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextLine.html">expyriment.stimuli.TextLine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextScreen.html">expyriment.stimuli.TextScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Tone.html">expyriment.stimuli.Tone</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">expyriment.stimuli.Video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreviousVersions.html">Previous versions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Expyriment</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="expyriment.html">expyriment</a> &raquo;</li>
+      
+          <li><a href="expyriment.stimuli.html">expyriment.stimuli</a> &raquo;</li>
+      
+    <li>expyriment.stimuli.Video</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="expyriment-stimuli-video">
+<h1>expyriment.stimuli.Video<a class="headerlink" href="#expyriment-stimuli-video" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="expyriment.stimuli.Video">
+<em class="property">class </em><code class="descclassname">expyriment.stimuli.</code><code class="descname">Video</code><span class="sig-paren">(</span><em>filename</em>, <em>backend=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class implementing a general video stimulus.</p>
+<p>This class uses a background thread for playing the video!</p>
+<dl class="method">
+<dt id="expyriment.stimuli.Video.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>filename</em>, <em>backend=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a video stimulus.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : str</p>
+<blockquote>
+<div><p>filename (incl. path) of the video</p>
+</div></blockquote>
+<p><strong>backend</strong> : str, optional</p>
+<blockquote>
+<div><p>&#8216;mediadecoder&#8217; or &#8216;pygame&#8217;</p>
+</div></blockquote>
+<p><strong>position</strong> : (int, int), optional</p>
+<blockquote class="last">
+<div><p>position of the stimulus</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a deep copy of the stimulus.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.filename">
+<code class="descname">filename</code><a class="headerlink" href="#expyriment.stimuli.Video.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for filename.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>seconds</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance playback position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seconds</strong> : int</p>
+<blockquote class="last">
+<div><p>amount to advance (in seconds)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.frame">
+<code class="descname">frame</code><a class="headerlink" href="#expyriment.stimuli.Video.frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get the current available video frame.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.has_audio">
+<code class="descname">has_audio</code><a class="headerlink" href="#expyriment.stimuli.Video.has_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to check if video file has audio information.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.has_video">
+<code class="descname">has_video</code><a class="headerlink" href="#expyriment.stimuli.Video.has_video" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to check if video fifle has video information.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.id">
+<code class="descname">id</code><a class="headerlink" href="#expyriment.stimuli.Video.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for id.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.is_paused">
+<code class="descname">is_paused</code><a class="headerlink" href="#expyriment.stimuli.Video.is_paused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to check if video is paused.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.is_playing">
+<code class="descname">is_playing</code><a class="headerlink" href="#expyriment.stimuli.Video.is_playing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to check if video is playing.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.is_preloaded">
+<code class="descname">is_preloaded</code><a class="headerlink" href="#expyriment.stimuli.Video.is_preloaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for is_preloaded.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.length">
+<code class="descname">length</code><a class="headerlink" href="#expyriment.stimuli.Video.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get the length of the video.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.logging">
+<code class="descname">logging</code><a class="headerlink" href="#expyriment.stimuli.Video.logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for logging.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.new_frame_available">
+<code class="descname">new_frame_available</code><a class="headerlink" href="#expyriment.stimuli.Video.new_frame_available" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to check if new video frame is available to render.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.pause">
+<code class="descname">pause</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pause the video stimulus.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.play">
+<code class="descname">play</code><span class="sig-paren">(</span><em>loop=False</em>, <em>log_event_tag=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.play" title="Permalink to this definition">¶</a></dt>
+<dd><p>Play the video stimulus from the current position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>loop</strong> : bool, optional</p>
+<blockquote>
+<div><p>loop video playback (will be ignored when using play to unpause!)</p>
+</div></blockquote>
+<p><strong>log_event_tag</strong> : numeral or string, optional</p>
+<blockquote class="last">
+<div><p>if log_event_tag is defined and if logging is switched on for this
+stimulus (default), a summary of the inter-event-intervalls are
+appended at the end of the event file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.position">
+<code class="descname">position</code><a class="headerlink" href="#expyriment.stimuli.Video.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for position.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.preload">
+<code class="descname">preload</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.preload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preload stimulus to memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.present">
+<code class="descname">present</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Present current frame.</p>
+<p>This method waits for the next frame and presents it on the screen.
+When using OpenGL, the method blocks until this frame is actually being
+written to the screen.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.rewind">
+<code class="descname">rewind</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.rewind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewind to start of video stimulus.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.set_logging">
+<code class="descname">set_logging</code><span class="sig-paren">(</span><em>onoff</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.set_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set logging of this object on or off</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>onoff</strong> : bool</p>
+<blockquote class="last">
+<div><p>set logging on (True) or off (False)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>See also design.experiment.set_log_level fur further information about
+event logging.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.size">
+<code class="descname">size</code><a class="headerlink" href="#expyriment.stimuli.Video.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get the resolution of the video.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the video stimulus.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.Video.time">
+<code class="descname">time</code><a class="headerlink" href="#expyriment.stimuli.Video.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get the current playback time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.unload">
+<code class="descname">unload</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.unload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unload stimulus from memory.</p>
+<p>This removes the reference to the object in memory.
+It is up to the garbage collector to actually remove it from memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the screen.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.wait_end">
+<code class="descname">wait_end</code><span class="sig-paren">(</span><em>callback_function=None</em>, <em>process_control_events=True</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.wait_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until video has ended and constantly update screen.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>callback_function</strong> : function, optional</p>
+<blockquote>
+<div><p>function to repeatedly execute during waiting loop</p>
+</div></blockquote>
+<p><strong>process_control_events</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>process <code class="docutils literal"><span class="pre">io.Keyboard.process_control_keys()</span></code> and
+<code class="docutils literal"><span class="pre">io.Mouse.process_quit_event()</span></code> (default = True)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This will also by default process control events (quit and pause).
+Thus, keyboard events will be cleared from the cue and cannot be
+received by a Keyboard().check() anymore!
+If keybaord events should not be cleared, a loop has to be created
+manually like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">video</span><span class="o">.</span><span class="n">present</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">video</span><span class="o">.</span><span class="n">is_playing</span> <span class="ow">and</span> <span class="n">video</span><span class="o">.</span><span class="n">frame</span> <span class="o">&lt;</span> <span class="n">frame</span><span class="p">:</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">video</span><span class="o">.</span><span class="n">new_frame_available</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="o">...</span>
+    <span class="n">video</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="n">video</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.Video.wait_frame">
+<code class="descname">wait_frame</code><span class="sig-paren">(</span><em>frame</em>, <em>callback_function=None</em>, <em>process_control_events=True</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.Video.wait_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until certain frame was shown and constantly update screen.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>frame</strong> : int</p>
+<blockquote>
+<div><p>number of the frame to stop after</p>
+</div></blockquote>
+<p><strong>callback_function</strong> : function, optional</p>
+<blockquote>
+<div><p>function to repeatedly execute during waiting loop</p>
+</div></blockquote>
+<p><strong>process_control_events</strong> : bool, optional</p>
+<blockquote class="last">
+<div><p>process <code class="docutils literal"><span class="pre">io.Keyboard.process_control_keys()</span></code> and
+<code class="docutils literal"><span class="pre">io.Mouse.process_quit_event()</span></code> (default = True)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This will also by default process control events (quit and pause).
+Thus, keyboard events will be cleared from the cue and cannot be
+received by a Keyboard().check() anymore!
+If keybaord events should not be cleared, a loop has to be created
+manually like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">video</span><span class="o">.</span><span class="n">present</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">video</span><span class="o">.</span><span class="n">is_playing</span> <span class="ow">and</span> <span class="n">video</span><span class="o">.</span><span class="n">frame</span> <span class="o">&lt;</span> <span class="n">frame</span><span class="p">:</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">video</span><span class="o">.</span><span class="n">new_frame_available</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="o">...</span>
+    <span class="n">video</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="n">video</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expyriment.stimuli.Tone.html" class="btn btn-neutral" title="expyriment.stimuli.Tone" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Florian Krause &amp; Oliver Lindemann.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>expyriment.stimuli.extras.RandomDotKinematogram &mdash; Expyriment 0.9.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Expyriment 0.9.0 documentation" href="index.html"/>
+        <link rel="up" title="expyriment.stimuli.extras" href="expyriment.stimuli.extras.html"/>
+        <link rel="next" title="expyriment.stimuli.extras.StimulusCircle" href="expyriment.stimuli.extras.StimulusCircle.html"/>
+        <link rel="prev" title="expyriment.stimuli.extras.PolygonRectangle" href="expyriment.stimuli.extras.PolygonRectangle.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Expyriment
+          
+
+          
+            
+            <img src="_static/xpy_button.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="expyriment.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="expyriment.control.html">expyriment.control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.design.html">expyriment.design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.io.html">expyriment.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.misc.html">expyriment.misc</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="expyriment.stimuli.html">expyriment.stimuli</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.defaults.html">expyriment.stimuli.defaults</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="expyriment.stimuli.extras.html">expyriment.stimuli.extras</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.defaults.html">expyriment.stimuli.extras.defaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.DotCloud.html">expyriment.stimuli.extras.DotCloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.GaborPatch.html">expyriment.stimuli.extras.GaborPatch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.LcdSymbol.html">expyriment.stimuli.extras.LcdSymbol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.NoiseTone.html">expyriment.stimuli.extras.NoiseTone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonDot.html">expyriment.stimuli.extras.PolygonDot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonEllipse.html">expyriment.stimuli.extras.PolygonEllipse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonLine.html">expyriment.stimuli.extras.PolygonLine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonRectangle.html">expyriment.stimuli.extras.PolygonRectangle</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">expyriment.stimuli.extras.RandomDotKinematogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.StimulusCircle.html">expyriment.stimuli.extras.StimulusCircle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.StimulusCloud.html">expyriment.stimuli.extras.StimulusCloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.ThermometerDisplay.html">expyriment.stimuli.extras.ThermometerDisplay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.VisualMask.html">expyriment.stimuli.extras.VisualMask</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Audio.html">expyriment.stimuli.Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.BlankScreen.html">expyriment.stimuli.BlankScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Canvas.html">expyriment.stimuli.Canvas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Circle.html">expyriment.stimuli.Circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Dot.html">expyriment.stimuli.Dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Ellipse.html">expyriment.stimuli.Ellipse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.FixCross.html">expyriment.stimuli.FixCross</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Frame.html">expyriment.stimuli.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Line.html">expyriment.stimuli.Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Picture.html">expyriment.stimuli.Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Rectangle.html">expyriment.stimuli.Rectangle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Shape.html">expyriment.stimuli.Shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextBox.html">expyriment.stimuli.TextBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextLine.html">expyriment.stimuli.TextLine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextScreen.html">expyriment.stimuli.TextScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Tone.html">expyriment.stimuli.Tone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Video.html">expyriment.stimuli.Video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreviousVersions.html">Previous versions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Expyriment</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="expyriment.html">expyriment</a> &raquo;</li>
+      
+          <li><a href="expyriment.stimuli.html">expyriment.stimuli</a> &raquo;</li>
+      
+          <li><a href="expyriment.stimuli.extras.html">expyriment.stimuli.extras</a> &raquo;</li>
+      
+    <li>expyriment.stimuli.extras.RandomDotKinematogram</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="expyriment-stimuli-extras-randomdotkinematogram">
+<h1>expyriment.stimuli.extras.RandomDotKinematogram<a class="headerlink" href="#expyriment-stimuli-extras-randomdotkinematogram" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram">
+<em class="property">class </em><code class="descclassname">expyriment.stimuli.extras.</code><code class="descname">RandomDotKinematogram</code><span class="sig-paren">(</span><em>area_radius</em>, <em>n_dots</em>, <em>target_direction</em>, <em>target_dot_ratio</em>, <em>position=None</em>, <em>dot_speed=None</em>, <em>dot_lifetime=None</em>, <em>dot_radius=None</em>, <em>dot_colour=None</em>, <em>background_colour=None</em>, <em>north_up_clockwise=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random Dot Kinematogram</p>
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>area_radius</em>, <em>n_dots</em>, <em>target_direction</em>, <em>target_dot_ratio</em>, <em>position=None</em>, <em>dot_speed=None</em>, <em>dot_lifetime=None</em>, <em>dot_radius=None</em>, <em>dot_colour=None</em>, <em>background_colour=None</em>, <em>north_up_clockwise=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Random Dot Kinematogram</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a deep copy of the stimulus.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.id">
+<code class="descname">id</code><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for id.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.last_stimulus">
+<code class="descname">last_stimulus</code><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.last_stimulus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for the last plotted stimulus</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.logging">
+<code class="descname">logging</code><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for logging.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.make_frame">
+<code class="descname">make_frame</code><span class="sig-paren">(</span><em>background_stimulus=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.make_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make new frame. The function creates the current random dot kinematogram
+and returns it as Expyriment stimulus.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.n_dots">
+<code class="descname">n_dots</code><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.n_dots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for n_dots.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.present_and_wait_keyboard">
+<code class="descname">present_and_wait_keyboard</code><span class="sig-paren">(</span><em>background_stimulus=None</em>, <em>check_keys=None</em>, <em>change_parameter=(None</em>, <em>None)</em>, <em>duration=None</em>, <em>button_box=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.present_and_wait_keyboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Present the random dot kinematogram and wait for keyboard press.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><em>n_dots</em>, <em>target_direction</em>, <em>target_dot_ratio</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset and recreate dot pattern</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.reset_all_ages">
+<code class="descname">reset_all_ages</code><span class="sig-paren">(</span><em>randomize_ages=False</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.reset_all_ages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset all ages (born at current time) and randomize start age if required</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.set_logging">
+<code class="descname">set_logging</code><span class="sig-paren">(</span><em>onoff</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.set_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set logging of this object on or off</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.extras.RandomDotKinematogram.target_dot_ratio">
+<code class="descname">target_dot_ratio</code><a class="headerlink" href="#expyriment.stimuli.extras.RandomDotKinematogram.target_dot_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for target dot ratio</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="expyriment.stimuli.extras.StimulusCircle.html" class="btn btn-neutral float-right" title="expyriment.stimuli.extras.StimulusCircle" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expyriment.stimuli.extras.PolygonRectangle.html" class="btn btn-neutral" title="expyriment.stimuli.extras.PolygonRectangle" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Florian Krause &amp; Oliver Lindemann.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

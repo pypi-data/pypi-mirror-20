@@ -1,0 +1,28 @@
+expyriment.io.extras
+====================
+
+.. automodule:: expyriment.io.extras
+
+
+Modules
+---------
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   expyriment.io.extras.defaults
+
+Classes
+---------
+.. toctree::
+   :titlesonly:
+
+   expyriment.io.extras.CedrusResponseDevice
+   expyriment.io.extras.MidiIn
+   expyriment.io.extras.MidiOut
+   expyriment.io.extras.SimpleParallelPort
+   expyriment.io.extras.TbvNetworkInterface
+   expyriment.io.extras.TcpClient
+   expyriment.io.extras.TcpServer
+   expyriment.io.extras.TurbosatoriNetworkInterface
+

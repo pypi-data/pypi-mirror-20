@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>expyriment.stimuli.extras.defaults &mdash; Expyriment 0.9.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Expyriment 0.9.0 documentation" href="index.html"/>
+        <link rel="up" title="expyriment.stimuli.extras" href="expyriment.stimuli.extras.html"/>
+        <link rel="next" title="expyriment.stimuli.extras.DotCloud" href="expyriment.stimuli.extras.DotCloud.html"/>
+        <link rel="prev" title="expyriment.stimuli.extras" href="expyriment.stimuli.extras.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Expyriment
+          
+
+          
+            
+            <img src="_static/xpy_button.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="expyriment.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="expyriment.control.html">expyriment.control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.design.html">expyriment.design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.io.html">expyriment.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.misc.html">expyriment.misc</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="expyriment.stimuli.html">expyriment.stimuli</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.defaults.html">expyriment.stimuli.defaults</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="expyriment.stimuli.extras.html">expyriment.stimuli.extras</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">expyriment.stimuli.extras.defaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.DotCloud.html">expyriment.stimuli.extras.DotCloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.GaborPatch.html">expyriment.stimuli.extras.GaborPatch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.LcdSymbol.html">expyriment.stimuli.extras.LcdSymbol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.NoiseTone.html">expyriment.stimuli.extras.NoiseTone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonDot.html">expyriment.stimuli.extras.PolygonDot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonEllipse.html">expyriment.stimuli.extras.PolygonEllipse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonLine.html">expyriment.stimuli.extras.PolygonLine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.PolygonRectangle.html">expyriment.stimuli.extras.PolygonRectangle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.RandomDotKinematogram.html">expyriment.stimuli.extras.RandomDotKinematogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.StimulusCircle.html">expyriment.stimuli.extras.StimulusCircle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.StimulusCloud.html">expyriment.stimuli.extras.StimulusCloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.ThermometerDisplay.html">expyriment.stimuli.extras.ThermometerDisplay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyriment.stimuli.extras.VisualMask.html">expyriment.stimuli.extras.VisualMask</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Audio.html">expyriment.stimuli.Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.BlankScreen.html">expyriment.stimuli.BlankScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Canvas.html">expyriment.stimuli.Canvas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Circle.html">expyriment.stimuli.Circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Dot.html">expyriment.stimuli.Dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Ellipse.html">expyriment.stimuli.Ellipse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.FixCross.html">expyriment.stimuli.FixCross</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Frame.html">expyriment.stimuli.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Line.html">expyriment.stimuli.Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Picture.html">expyriment.stimuli.Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Rectangle.html">expyriment.stimuli.Rectangle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Shape.html">expyriment.stimuli.Shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextBox.html">expyriment.stimuli.TextBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextLine.html">expyriment.stimuli.TextLine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextScreen.html">expyriment.stimuli.TextScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Tone.html">expyriment.stimuli.Tone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Video.html">expyriment.stimuli.Video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreviousVersions.html">Previous versions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Expyriment</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="expyriment.html">expyriment</a> &raquo;</li>
+      
+          <li><a href="expyriment.stimuli.html">expyriment.stimuli</a> &raquo;</li>
+      
+          <li><a href="expyriment.stimuli.extras.html">expyriment.stimuli.extras</a> &raquo;</li>
+      
+    <li>expyriment.stimuli.extras.defaults</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-expyriment.stimuli.extras.defaults">
+<span id="expyriment-stimuli-extras-defaults"></span><h1>expyriment.stimuli.extras.defaults<a class="headerlink" href="#module-expyriment.stimuli.extras.defaults" title="Permalink to this headline">¶</a></h1>
+<p>Default settings for stimuli.extras.</p>
+<p>This module contains default values for all optional arguments in the init
+function of all classes in this package.</p>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_background_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_background_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_dot_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_dot_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_dot_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_flipping">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_flipping</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_flipping" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_radius">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_radius</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_rotation">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_rotation</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_scaling">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">dotcloud_scaling</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.dotcloud_scaling" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_lambda_">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_lambda_</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_lambda_" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 10</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_phase">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_phase</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 0.25</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_sigma">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_sigma</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_sigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 20</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_size">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_size</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 300</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_theta">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_theta</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 15</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_trim">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">gaborpatch_trim</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.gaborpatch_trim" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 0.005</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_background_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_background_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_flipping">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_flipping</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_flipping" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_gap">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_gap</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_gap" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 5</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_inactive_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_inactive_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_inactive_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_line_width">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_line_width</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_line_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 1</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_rotation">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_rotation</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_scaling">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_scaling</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_scaling" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_simple_lines">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_simple_lines</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_simple_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: False</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_size">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">lcdsymbol_size</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.lcdsymbol_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.noisetone_amplitude">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">noisetone_amplitude</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.noisetone_amplitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 0.5</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.noisetone_bitdepth">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">noisetone_bitdepth</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.noisetone_bitdepth" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 16</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.noisetone_samplerate">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">noisetone_samplerate</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.noisetone_samplerate" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 44100</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_anti_aliasing">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygondot_anti_aliasing</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_anti_aliasing" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 10</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygondot_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygondot_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_resolution_factor">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygondot_resolution_factor</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygondot_resolution_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 1</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_anti_aliasing">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonellipse_anti_aliasing</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_anti_aliasing" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 5</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonellipse_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_line_width">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonellipse_line_width</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_line_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 0</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonellipse_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_resolution_factor">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonellipse_resolution_factor</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonellipse_resolution_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 1</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonline_anti_aliasing">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonline_anti_aliasing</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonline_anti_aliasing" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 0</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonline_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonline_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonline_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonrectangle_anti_aliasing">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonrectangle_anti_aliasing</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonrectangle_anti_aliasing" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 0</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonrectangle_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonrectangle_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonrectangle_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonrectangle_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">polygonrectangle_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.polygonrectangle_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_background_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_background_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_dot_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_lifetime">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_dot_lifetime</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 400</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_radius">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_dot_radius</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 3</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_speed">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_dot_speed</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 100</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_north_up_clockwise">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_north_up_clockwise</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_north_up_clockwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: True</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">randomdotkinematogram_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.randomdotkinematogram_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscircle_background_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscircle_background_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscircle_background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_background_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscloud_background_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_flipping">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscloud_flipping</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_flipping" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscloud_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_rotation">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscloud_rotation</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_scaling">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscloud_scaling</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_scaling" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_size">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">stimuluscloud_size</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.stimuluscloud_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_active_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_active_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_active_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (150, 150, 150)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_frame_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_frame_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_frame_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (100, 100, 100)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_frame_line_width">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_frame_line_width</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_frame_line_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 20</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_gap">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_gap</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_gap" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 3</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_gap_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_gap_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_gap_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (255, 255, 255)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_goal">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_goal</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_goal" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_goal_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_goal_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_goal_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 255, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_inactive_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_inactive_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_inactive_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_nr_segments">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_nr_segments</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_nr_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 10</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_position">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_position</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (0, 0)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_size">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">thermometerdisplay_size</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.thermometerdisplay_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (128, 340)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_background_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">visualmask_background_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_dot_colour">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">visualmask_dot_colour</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_dot_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: None</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_dot_percentage">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">visualmask_dot_percentage</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_dot_percentage" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 50</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_dot_size">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">visualmask_dot_size</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_dot_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: (5, 5)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_smoothing">
+<code class="descclassname">expyriment.stimuli.extras.defaults.</code><code class="descname">visualmask_smoothing</code><a class="headerlink" href="#expyriment.stimuli.extras.defaults.expyriment.stimuli.extras.defaults.visualmask_smoothing" title="Permalink to this definition">¶</a></dt>
+<dd><p>default value: 3</p>
+</dd></dl>
+
+</div>
+<div class="section" id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="expyriment.stimuli.extras.DotCloud.html" class="btn btn-neutral float-right" title="expyriment.stimuli.extras.DotCloud" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expyriment.stimuli.extras.html" class="btn btn-neutral" title="expyriment.stimuli.extras" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Florian Krause &amp; Oliver Lindemann.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

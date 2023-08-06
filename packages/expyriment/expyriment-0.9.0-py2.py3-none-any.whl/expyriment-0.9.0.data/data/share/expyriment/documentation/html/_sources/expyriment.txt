@@ -1,0 +1,25 @@
+
+expyriment
+==========
+
+.. automodule:: expyriment
+
+
+Packages
+--------
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   expyriment.control
+   expyriment.design
+   expyriment.io
+   expyriment.misc
+   expyriment.stimuli
+
+Functions
+---------
+.. autofunction:: expyriment.get_version
+.. autofunction:: expyriment.show_documentation
+

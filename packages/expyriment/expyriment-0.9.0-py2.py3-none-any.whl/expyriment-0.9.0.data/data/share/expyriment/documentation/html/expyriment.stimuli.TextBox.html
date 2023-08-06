@@ -1,0 +1,1265 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>expyriment.stimuli.TextBox &mdash; Expyriment 0.9.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Expyriment 0.9.0 documentation" href="index.html"/>
+        <link rel="up" title="expyriment.stimuli" href="expyriment.stimuli.html"/>
+        <link rel="next" title="expyriment.stimuli.TextLine" href="expyriment.stimuli.TextLine.html"/>
+        <link rel="prev" title="expyriment.stimuli.Shape" href="expyriment.stimuli.Shape.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Expyriment
+          
+
+          
+            
+            <img src="_static/xpy_button.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced.html">Advanced</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="expyriment.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="expyriment.control.html">expyriment.control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.design.html">expyriment.design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.io.html">expyriment.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyriment.misc.html">expyriment.misc</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="expyriment.stimuli.html">expyriment.stimuli</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.defaults.html">expyriment.stimuli.defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.extras.html">expyriment.stimuli.extras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Audio.html">expyriment.stimuli.Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.BlankScreen.html">expyriment.stimuli.BlankScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Canvas.html">expyriment.stimuli.Canvas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Circle.html">expyriment.stimuli.Circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Dot.html">expyriment.stimuli.Dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Ellipse.html">expyriment.stimuli.Ellipse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.FixCross.html">expyriment.stimuli.FixCross</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Frame.html">expyriment.stimuli.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Line.html">expyriment.stimuli.Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Picture.html">expyriment.stimuli.Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Rectangle.html">expyriment.stimuli.Rectangle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Shape.html">expyriment.stimuli.Shape</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">expyriment.stimuli.TextBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextLine.html">expyriment.stimuli.TextLine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.TextScreen.html">expyriment.stimuli.TextScreen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Tone.html">expyriment.stimuli.Tone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyriment.stimuli.Video.html">expyriment.stimuli.Video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PreviousVersions.html">Previous versions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Expyriment</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="expyriment.html">expyriment</a> &raquo;</li>
+      
+          <li><a href="expyriment.stimuli.html">expyriment.stimuli</a> &raquo;</li>
+      
+    <li>expyriment.stimuli.TextBox</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="expyriment-stimuli-textbox">
+<h1>expyriment.stimuli.TextBox<a class="headerlink" href="#expyriment-stimuli-textbox" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="expyriment.stimuli.TextBox">
+<em class="property">class </em><code class="descclassname">expyriment.stimuli.</code><code class="descname">TextBox</code><span class="sig-paren">(</span><em>text</em>, <em>size</em>, <em>position=None</em>, <em>text_font=None</em>, <em>text_size=None</em>, <em>text_bold=None</em>, <em>text_italic=None</em>, <em>text_underline=None</em>, <em>text_justification=None</em>, <em>text_colour=None</em>, <em>background_colour=None</em>, <em>do_not_trim_words=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class implementing a text box with wrapped text.</p>
+<p>This wraps a given multiline string into a formatted mutliline text box,
+strips of leading and trailing lines and gets rid of additional
+whitespaces at beginning of lines (indentation).</p>
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>text</em>, <em>size</em>, <em>position=None</em>, <em>text_font=None</em>, <em>text_size=None</em>, <em>text_bold=None</em>, <em>text_italic=None</em>, <em>text_underline=None</em>, <em>text_justification=None</em>, <em>text_colour=None</em>, <em>background_colour=None</em>, <em>do_not_trim_words=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a text box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>text</strong> : str</p>
+<blockquote>
+<div><p>text to wrap</p>
+</div></blockquote>
+<p><strong>size</strong> : (int, int)</p>
+<blockquote>
+<div><p>size of the text box</p>
+</div></blockquote>
+<p><strong>position</strong> : (int, int), optional</p>
+<blockquote>
+<div><p>position of the stimulus</p>
+</div></blockquote>
+<p><strong>text_font</strong> : str, optional</p>
+<blockquote>
+<div><p>text font to use as a name or as a path to a font file</p>
+</div></blockquote>
+<p><strong>text_size</strong> : int, optional</p>
+<blockquote>
+<div><p>size of the text</p>
+</div></blockquote>
+<p><strong>text_bold</strong> : bool, optional</p>
+<blockquote>
+<div><p>font should be bold</p>
+</div></blockquote>
+<p><strong>text_italic</strong> : bool, optional</p>
+<blockquote>
+<div><p>font should be italic</p>
+</div></blockquote>
+<p><strong>text_underline</strong> : bool, optional</p>
+<blockquote>
+<div><p>font should get an underline</p>
+</div></blockquote>
+<p><strong>text_justification</strong> : int, optional</p>
+<blockquote>
+<div><p>text justification, 0 (left), 1 (center), 2 (right)</p>
+</div></blockquote>
+<p><strong>text_colour</strong> : (int, int, int), optional</p>
+<blockquote>
+<div><p>colour of the text</p>
+</div></blockquote>
+<p><strong>background_colour</strong> : (int, int, int), optional</p>
+<blockquote>
+<div><p>background colour</p>
+</div></blockquote>
+<p><strong>do_not_trim_words: bool, optional</strong></p>
+<blockquote class="last">
+<div><p>if True, words that exceed the width of the text box
+will be not be trimmed and an exception is raise instead.
+default: False</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>text_font can be both, a name or path to a font file!
+When text_font is a name, Expyriment will try to find a font that
+best matches the given name.
+If no matching font can be found, or if the given font file cannot be
+found, the Pygame system default will be used.
+In any case the value of the attribute text_font will always
+resemble the font that is actually in use!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.absolute_position">
+<code class="descname">absolute_position</code><a class="headerlink" href="#expyriment.stimuli.TextBox.absolute_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for absolute_position.</p>
+<p class="rubric">Notes</p>
+<p>The absolute position differs for instance from the (relative) position, if the
+stimulus is plotted ontop of another stimulus, which has not the position (0,0).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.add_noise">
+<code class="descname">add_noise</code><span class="sig-paren">(</span><em>grain_size</em>, <em>percentage</em>, <em>colour</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.add_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add visual noise on top of the stimulus.</p>
+<p>This function might take very long for large stimuli.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>grain_size</strong> : int</p>
+<blockquote>
+<div><p>size of the grains for the noise</p>
+</div></blockquote>
+<p><strong>percentage</strong> : int</p>
+<blockquote>
+<div><p>percentage of covered area</p>
+</div></blockquote>
+<p><strong>colour</strong> : (int, int, int)</p>
+<blockquote>
+<div><p>colour (RGB) of the noise</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.background_colour">
+<code class="descname">background_colour</code><a class="headerlink" href="#expyriment.stimuli.TextBox.background_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for background_colour.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.blur">
+<code class="descname">blur</code><span class="sig-paren">(</span><em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.blur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blur the stimulus.</p>
+<p>This blurs the stimulus, by scaling it down and up by the factor of
+&#8216;level&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>level</strong> : int</p>
+<blockquote>
+<div><p>level of bluring</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.clear_surface">
+<code class="descname">clear_surface</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.clear_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the stimulus surface.</p>
+<p>Surfaces are automatically created after any surface operation
+(presenting, plotting, rotating, scaling, flipping etc.) and preloading.
+If the stimulus was preloaded, this method unloads the stimulus.
+This method is functionally equivalent with unload(keep_surface=False).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.compress">
+<code class="descname">compress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.compress" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8220;Compress the stimulus.</p>
+<p>This will create a temporary file on the disk where the surface of the
+stimululs is written to.
+The surface will now be read from the disk to free memory.
+Compressed stimuli cannot do surface operations!
+Preloading comressed stimuli is possible and highly recommended.
+Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deep copy of the visual stimulus.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>copy</strong> : deep copy of self</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.decompress">
+<code class="descname">decompress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.decompress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decompress the stimulus.</p>
+<p>This will decompress the stimulus.
+The surface will now be read from memory again.
+Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Surface center distance.</p>
+<p>This method computes the distance between the surface center
+of this and another visual stimulus.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>other</strong> : stimulus</p>
+<blockquote>
+<div><p>the other visual stimulus</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dist</strong> : float</p>
+<blockquote class="last">
+<div><p>distance between surface centers</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.flip">
+<code class="descname">flip</code><span class="sig-paren">(</span><em>booleans</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.flip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flip the stimulus.</p>
+<p>This is a surface operation. After this, a surface will be present!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>booleans</strong> : (bool, bool)</p>
+<blockquote>
+<div><p>booleans to flip or not</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.format_block">
+<code class="descname">format_block</code><span class="sig-paren">(</span><em>block</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.format_block" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the given block of text.</p>
+<p>This function is trimming leading and trailing
+empty lines and any leading whitespace that is common to all lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>block</strong> : str</p>
+<blockquote class="last">
+<div><p>block of text to be formatted</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.get_pixel_array">
+<code class="descname">get_pixel_array</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.get_pixel_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a PixelArray representation of surface of the stimulus</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pixel_array: Pygame.PixelArray</p>
+<blockquote class="last">
+<div><p>a copy of the PixelArray is returned</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>see also set_surface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.get_surface_copy">
+<code class="descname">get_surface_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.get_surface_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the Pygame surface of the stimulus</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">surface: Pygame.surface</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>see also set_surface</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.has_surface">
+<code class="descname">has_surface</code><a class="headerlink" href="#expyriment.stimuli.TextBox.has_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for has_surface.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.id">
+<code class="descname">id</code><a class="headerlink" href="#expyriment.stimuli.TextBox.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for id.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.inside_stimulus">
+<code class="descname">inside_stimulus</code><span class="sig-paren">(</span><em>stimulus</em>, <em>mode='visible'</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.inside_stimulus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if stimulus is inside another stimulus.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimulus</strong> : expyriment stimulus</p>
+<blockquote>
+<div><p>the other stimulus</p>
+</div></blockquote>
+<p><strong>mode</strong> : mode (str), optional</p>
+<blockquote>
+<div><p>&#8220;visible&#8221;: based on non-transparent pixels or
+&#8220;rectangle&#8221;: based on pixels in pygame surface
+(default = visible&#8221;)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>out</strong> : bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.is_compressed">
+<code class="descname">is_compressed</code><a class="headerlink" href="#expyriment.stimuli.TextBox.is_compressed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for is_compressed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.is_preloaded">
+<code class="descname">is_preloaded</code><a class="headerlink" href="#expyriment.stimuli.TextBox.is_preloaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for is_preloaded.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.logging">
+<code class="descname">logging</code><a class="headerlink" href="#expyriment.stimuli.TextBox.logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for logging.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.move">
+<code class="descname">move</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the stimulus in 2D space.</p>
+<p>When using OpenGL, this can take longer then 1ms!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>offset</strong> : tuple (x,y)</p>
+<blockquote>
+<div><p>translation along x and y axis</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>see also reposition</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.overlapping_with_position">
+<code class="descname">overlapping_with_position</code><span class="sig-paren">(</span><em>position</em>, <em>mode='visible'</em>, <em>use_absolute_position=True</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.overlapping_with_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if stimulus is overlapping with a certain position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position</strong> : (int, int)</p>
+<blockquote>
+<div><p>position to check for overlapping</p>
+</div></blockquote>
+<p><strong>mode</strong> : mode (str), optional</p>
+<blockquote>
+<div><p>&#8220;visible&#8221;: based on non-transparent pixels or
+&#8220;rectangle&#8221;: based on pixels in pygame surface
+(default = visible&#8221;)</p>
+</div></blockquote>
+<p><strong>use_absolute_position</strong> : bool, optional</p>
+<blockquote>
+<div><p>use absolute_position of stimulus (default) instead of position</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>overlapping</strong> : bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+<p>CAUTION: Please note that if a stimulus is plotted on another smaller
+stimulus, such that it is not fully visible on screen, this method will
+still check overlapping of the full stimulus! Due to a current bug in
+Pygame, we can right now not change this.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.overlapping_with_stimulus">
+<code class="descname">overlapping_with_stimulus</code><span class="sig-paren">(</span><em>stimulus</em>, <em>mode='visible'</em>, <em>use_absolute_position=True</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.overlapping_with_stimulus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if stimulus is overlapping with another stimulus.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimulus</strong> : expyriment stimulus</p>
+<blockquote>
+<div><p>the other stimulus</p>
+</div></blockquote>
+<p><strong>mode</strong> : mode (str), optional</p>
+<blockquote>
+<div><p>&#8220;visible&#8221;: based on non-transparent pixels or
+&#8220;surface&#8221;: based on pixels in pygame surface
+(default = visible&#8221;)</p>
+</div></blockquote>
+<p><strong>use_absolute_position</strong> : bool, optional</p>
+<blockquote>
+<div><p>use absolute_position of stimuli (default) instead of position</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>overlapping</strong> : bool</p>
+<blockquote>
+<div><p>are stimuli overlapping or not</p>
+</div></blockquote>
+<p><strong>overlap</strong> : (int, int)</p>
+<blockquote class="last">
+<div><p>the overlap (x, y) in pixels. If mode is &#8216;surface&#8217;, the argument
+will always be None.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+<p>CAUTION: Please note that if a stimulus is plotted on another smaller
+stimulus, such that it is not fully visible on screen, this method will
+still check overlapping of the full stimulus! Due to a current bug in
+Pygame, we can right now not change this.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.picture">
+<code class="descname">picture</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.picture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the stimulus as Picture stimulus.</p>
+<p>This will create a temporary file on the hard disk where the image is
+saved to.</p>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>stimulus</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the stimulus on the surface of another stimulus.</p>
+<p>Use this to plot more than one stimulus and to present them at the
+same time afterwards by presenting the stimulus on which they were
+plotted on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimulus</strong> : expyriment stimulus</p>
+<blockquote>
+<div><p>stimulus to whose surface should be plotted</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.position">
+<code class="descname">position</code><a class="headerlink" href="#expyriment.stimuli.TextBox.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for position.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.preload">
+<code class="descname">preload</code><span class="sig-paren">(</span><em>inhibit_ogl_compress=False</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.preload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preload the stimulus to memory.</p>
+<p>This will prepare the stimulus for a fast presentation.
+In OpenGL mode this method creates an OpenGL texture based on the
+surface of the stimulus.
+When OpenGL is switched off, this method will create a surface if it
+doesn&#8217;t exists yet.
+If stimuli are not preloaded manually, this will happen
+automatically during presentation. However, stimulus presentation will
+take some time then!</p>
+<p>Always preload your stimuli when a timing acurate presentation is
+needed!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inhibit_ogl_compress</strong> : bool, optional</p>
+<blockquote>
+<div><p>inhibits OpenGL stimuli to be automatically compressed
+(default=False)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.present">
+<code class="descname">present</code><span class="sig-paren">(</span><em>clear=True</em>, <em>update=True</em>, <em>log_event_tag=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Present the stimulus on the screen.</p>
+<p>This clears and updates the screen automatically.
+When not preloaded, depending on the size of the stimulus, this method
+can take some time to compute!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>clear</strong> : bool, optional</p>
+<blockquote>
+<div><p>if True the screen will be cleared automatically
+(default = True)</p>
+</div></blockquote>
+<p><strong>update</strong> : bool, optional</p>
+<blockquote>
+<div><p>if False the screen will be not be updated automatically
+(default = True)</p>
+</div></blockquote>
+<p><strong>log_event_tag</strong> : numeral or string, optional</p>
+<blockquote>
+<div><p>if log_event_tag is defined and if logging is switched on for this
+stimulus (default), a summary of the inter-event-intervalls are
+appended at the end of the event file</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.render_textrect">
+<code class="descname">render_textrect</code><span class="sig-paren">(</span><em>string</em>, <em>font</em>, <em>rect</em>, <em>text_colour</em>, <em>background_colour</em>, <em>justification=0</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.render_textrect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a surface with reformatted string.</p>
+<blockquote>
+<div>The given text string is reformatted to fit within the given rect,
+word-wrapping as necessary. The text will be anti-aliased.
+Returns a surface.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>string</strong> : str</p>
+<blockquote>
+<div><p>text you wish to render, &#8216;</p>
+</div></blockquote>
+<p><strong>&#8216; begins a new line</strong></p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>font</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">pygame.Font object, optional</span><dd><p class="first last">Font object</p>
+</dd>
+<dt>rect</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">bool</span><dd><p class="first last">rectstyle giving the size of requested surface</p>
+</dd>
+<dt>text_colour</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">(int, int, int)</span><dd><p class="first last">text colour</p>
+</dd>
+<dt>background_colour</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">(int, int, int)</span><dd><p class="first last">background colour</p>
+</dd>
+<dt>justification</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span><dd><p class="first last">0 (Left), 1 (center), 2 (right) (int) (default = 0)</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.reposition">
+<code class="descname">reposition</code><span class="sig-paren">(</span><em>new_position</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.reposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move stimulus to a new position.</p>
+<p>When using OpenGL, this can take longer then 1ms!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_position</strong> : tuple (x,y)</p>
+<blockquote>
+<div><p>translation along x and y axis</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>see also move</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.rotate">
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>degree</em>, <em>filter=True</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate the stimulus.</p>
+<p>This is a surface operation. After this, a surface will be present!
+Rotating goes along with a quality loss. Thus, rotating an already
+rotated stimulus is not a good idea.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>degree</strong> : int</p>
+<blockquote>
+<div><p>degree to rotate counterclockwise</p>
+</div></blockquote>
+<p><strong>filter</strong> : bool, optional</p>
+<blockquote>
+<div><p>filter the surface content for better quality (default = True)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the stimulus as image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : str</p>
+<blockquote class="last">
+<div><p>name of the file to write (possible extensions are BMP, TGA, PNG,
+or JPEG with TGA being the default)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.scale">
+<code class="descname">scale</code><span class="sig-paren">(</span><em>factors</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale the stimulus.</p>
+<p>This is a surface operation. After this, a surface will be present!
+Negative scaling values will flip the stimulus.
+Scaling goes along with a quality loss. Thus, scaling an already
+scaled stimulus is not a good idea.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>factors</strong> : (int, int) or (float, float)</p>
+<blockquote>
+<div><p>tuple representing the x and y factors to scale or a single number.
+In the case of a single number x and y scaling will be the
+identical (i.e., proportional scaling)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.scale_to_fullscreen">
+<code class="descname">scale_to_fullscreen</code><span class="sig-paren">(</span><em>keep_aspect_ratio=True</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.scale_to_fullscreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale the stimulus to fullscreen.</p>
+<p>This is a surface operation. After this, a surface will be present!
+Scaling goes along with a quality loss. Thus, scaling an already
+scaled stimulus is not a good idea.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>keep_aspect_ratio</strong> : boolean, optional</p>
+<blockquote>
+<div><p>if this boolean is False, stimulus will be stretched so that it
+fills out the whole screen (default = False)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.scramble">
+<code class="descname">scramble</code><span class="sig-paren">(</span><em>grain_size</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.scramble" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scramble the stimulus.</p>
+<p>Attention: If the surface size is not a multiple of the grain size,
+you may loose some pixels on the edge.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>grain_size</strong> : int or (int, int)</p>
+<blockquote>
+<div><p>size of a grain (use tuple of integers for different width &amp; height)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.set_logging">
+<code class="descname">set_logging</code><span class="sig-paren">(</span><em>onoff</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.set_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set logging of this object on or off</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>onoff</strong> : bool</p>
+<blockquote class="last">
+<div><p>set logging on (True) or off (False)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>See also design.experiment.set_log_level fur further information about
+event logging.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.set_surface">
+<code class="descname">set_surface</code><span class="sig-paren">(</span><em>surface</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.set_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the surface of the stimulus</p>
+<p>This method overwrites the surface of the stimulus. It can also handle
+surfaces in form of pygame.PixelArray representations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>surface: pygame.Surface or pygame.PixelArray</strong></p>
+<blockquote>
+<div><p>a representation of the new surface</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">succeeded: boolean</p>
+<blockquote class="last">
+<div><p>setting surface was successful or not</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>CAUTION: This is an expert&#8217;s method.
+The method can be used together with get_surface() &amp; get_pixel_array()
+to apply low-level Pygame operations on stimuli. However, users should
+be aware of what they are doing, because the incorrect usage of this
+methods might affect the stability of the experiment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.size">
+<code class="descname">size</code><a class="headerlink" href="#expyriment.stimuli.TextBox.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for size.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.surface_size">
+<code class="descname">surface_size</code><a class="headerlink" href="#expyriment.stimuli.TextBox.surface_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for surface_size.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text">
+<code class="descname">text</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_bold">
+<code class="descname">text_bold</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_bold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_bold.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_colour">
+<code class="descname">text_colour</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_colour.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_font">
+<code class="descname">text_font</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_font" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_font.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_italic">
+<code class="descname">text_italic</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_italic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_italic.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_justification">
+<code class="descname">text_justification</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_justification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_justification.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_size">
+<code class="descname">text_size</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_size.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="expyriment.stimuli.TextBox.text_underline">
+<code class="descname">text_underline</code><a class="headerlink" href="#expyriment.stimuli.TextBox.text_underline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for text_underline.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="expyriment.stimuli.TextBox.unload">
+<code class="descname">unload</code><span class="sig-paren">(</span><em>keep_surface=False</em><span class="sig-paren">)</span><a class="headerlink" href="#expyriment.stimuli.TextBox.unload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unload the stimulus from memory.</p>
+<p>This will unload preloaded stimuli.
+In OpenGL mode, this method will remove the reference to the OpenGL
+texture and the surface (when &#8216;keep_surface&#8217; is False).
+When OpenGL is switched off, the reference to the surface will be
+removed (when &#8216;keep_surface&#8217; is False).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>keep_surface</strong> : bool, optional</p>
+<blockquote>
+<div><p>keep the surface after unload (default=False)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time</strong> : int</p>
+<blockquote class="last">
+<div><p>the time it took to execute this method</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal"><span class="pre">clear_surface.</span></code></p>
+</div>
+<p class="rubric">Notes</p>
+<p>Depending on the size of the stimulus, this method may take some time
+to compute!</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="expyriment.stimuli.TextLine.html" class="btn btn-neutral float-right" title="expyriment.stimuli.TextLine" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="expyriment.stimuli.Shape.html" class="btn btn-neutral" title="expyriment.stimuli.Shape" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Florian Krause &amp; Oliver Lindemann.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

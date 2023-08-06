@@ -1,0 +1,314 @@
+expyriment.stimuli.extras.defaults
+==================================
+
+.. automodule:: expyriment.stimuli.extras.defaults
+
+Attributes
+-----------
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_background_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_dot_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_flipping
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_radius
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_rotation
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.dotcloud_scaling
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_lambda_
+
+   default value: 10
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_phase
+
+   default value: 0.25
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_sigma
+
+   default value: 20
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_size
+
+   default value: 300
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_theta
+
+   default value: 15
+
+.. py:data:: expyriment.stimuli.extras.defaults.gaborpatch_trim
+
+   default value: 0.005
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_background_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_flipping
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_gap
+
+   default value: 5
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_inactive_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_line_width
+
+   default value: 1
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_rotation
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_scaling
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_simple_lines
+
+   default value: False
+
+.. py:data:: expyriment.stimuli.extras.defaults.lcdsymbol_size
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.noisetone_amplitude
+
+   default value: 0.5
+
+.. py:data:: expyriment.stimuli.extras.defaults.noisetone_bitdepth
+
+   default value: 16
+
+.. py:data:: expyriment.stimuli.extras.defaults.noisetone_samplerate
+
+   default value: 44100
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygondot_anti_aliasing
+
+   default value: 10
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygondot_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygondot_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygondot_resolution_factor
+
+   default value: 1
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonellipse_anti_aliasing
+
+   default value: 5
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonellipse_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonellipse_line_width
+
+   default value: 0
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonellipse_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonellipse_resolution_factor
+
+   default value: 1
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonline_anti_aliasing
+
+   default value: 0
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonline_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonrectangle_anti_aliasing
+
+   default value: 0
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonrectangle_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.polygonrectangle_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_background_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_lifetime
+
+   default value: 400
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_radius
+
+   default value: 3
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_dot_speed
+
+   default value: 100
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_north_up_clockwise
+
+   default value: True
+
+.. py:data:: expyriment.stimuli.extras.defaults.randomdotkinematogram_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscircle_background_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscloud_background_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscloud_flipping
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscloud_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscloud_rotation
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscloud_scaling
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.stimuluscloud_size
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_active_colour
+
+   default value: (150, 150, 150)
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_frame_colour
+
+   default value: (100, 100, 100)
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_frame_line_width
+
+   default value: 20
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_gap
+
+   default value: 3
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_gap_colour
+
+   default value: (255, 255, 255)
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_goal
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_goal_colour
+
+   default value: (0, 255, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_inactive_colour
+
+   default value: (0, 0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_nr_segments
+
+   default value: 10
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_position
+
+   default value: (0, 0)
+
+.. py:data:: expyriment.stimuli.extras.defaults.thermometerdisplay_size
+
+   default value: (128, 340)
+
+.. py:data:: expyriment.stimuli.extras.defaults.visualmask_background_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.visualmask_dot_colour
+
+   default value: None
+
+.. py:data:: expyriment.stimuli.extras.defaults.visualmask_dot_percentage
+
+   default value: 50
+
+.. py:data:: expyriment.stimuli.extras.defaults.visualmask_dot_size
+
+   default value: (5, 5)
+
+.. py:data:: expyriment.stimuli.extras.defaults.visualmask_smoothing
+
+   default value: 3
+
+
+
+Modules
+---------
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+
+Classes
+---------
+.. toctree::
+   :titlesonly:
+
+
+Functions
+-----------
+
+
