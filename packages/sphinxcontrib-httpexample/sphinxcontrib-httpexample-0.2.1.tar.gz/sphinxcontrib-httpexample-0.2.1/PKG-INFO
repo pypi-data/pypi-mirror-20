@@ -1,0 +1,59 @@
+Metadata-Version: 1.1
+Name: sphinxcontrib-httpexample
+Version: 0.2.1
+Summary: Adds example directive for sphinx-contrib httpdomain
+Home-page: https://github.com/datakurre/sphinxcontrib-httpexample
+Author: Asko Soukka
+Author-email: asko.soukka@iki.fi
+License: GPL version 2
+Description: sphinxcontrib-httpexample
+        =========================
+        
+        .. image:: https://secure.travis-ci.org/datakurre/sphinxcontrib-httpexample.png
+           :target: http://travis-ci.org/datakurre/sphinxcontrib-httpexample
+        
+        .. image:: https://readthedocs.org/projects/sphinxcontrib-httpexample/badge/?version=latest
+           :target: http://sphinxcontrib-httpexample.readthedocs.io/en/latest
+        
+        Changelog
+        =========
+        
+        0.2.1 (2017-03-05)
+        ------------------
+        
+        - Fix issue where Authorization-header was always requires
+          [datakurre]
+        - Fix raise proper exception when parsing bad requests
+          [datakurre]
+        - Fix issue where httpie-builder did not quote values with spaces
+          [datakurre]
+        - Fix link to python-requests' documentation
+          [datakurre]
+        
+        
+        0.2.0 (2017-03-05)
+        ------------------
+        
+        - Add support for GET requests
+          [datakurre]
+        
+        
+        0.1.0 (2017-03-05)
+        ------------------
+        
+        - First release
+          [datakurre]
+        
+Keywords: sphinx,extension,http,rest,documentation
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Sphinx :: Extension
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Documentation
+Classifier: Topic :: Utilities
