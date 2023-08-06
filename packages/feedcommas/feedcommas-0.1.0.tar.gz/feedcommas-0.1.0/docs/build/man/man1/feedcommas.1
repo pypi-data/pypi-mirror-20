@@ -1,0 +1,875 @@
+'\" t
+.\"     Title: feedcommas
+.\"    Author: Michał Góral
+.\" Generator: Asciidoctor 1.5.4
+.\"      Date: 2017-03-06
+.\"    Manual: Feed Commas Manual
+.\"    Source: Feed Commas 0.1.0-dirty
+.\"  Language: English
+.\"
+.TH "FEED\-COMMAS" "1" "2017-03-06" "Feed Commas 0.1.0\-dirty" "Feed Commas Manual"
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.ss \n[.ss] 0
+.nh
+.ad l
+.de URL
+\\$2 \(laURL: \\$1 \(ra\\$3
+..
+.if \n[.g] .mso www.tmac
+.LINKSTYLE blue R < >
+.SH "NAME"
+feedcommas \- user\-friendly console CommaFeed client.
+.SH "SYNOPSIS"
+.sp
+\fBfeedcommas\fP
+.SH "CONFIGURATION"
+.sp
+Feed Commas can be configured by setting several options in a standard
+.URL "https://en.wikipedia.org/wiki/INI_file" "ini\-style" " "
+configuration file. The file
+is searched in a filesystem in a way described by \c
+.URL "https://specifications.freedesktop.org/basedir\-spec/basedir\-spec\-latest.html" "XDG Base
+Directory Specification" . In practice it means that for most users it will be
+located in \f[CR]~/.config/feed\-commas/config.ini\fP. However, any of below files can
+be read if the none of the previous ones was found:
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP " 1." 4.2
+.\}
+\f[CR]$XDG_CONFIG_HOME/feed\-commas/config.ini\fP. If \f[CR]$XDG_CONFIG_HOME\fP is not set,
+it defaults to \f[CR]$HOME/.config\fP.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP " 2." 4.2
+.\}
+any of \f[CR]$XDG_DATA_DIRS/feed\-commas/config.ini\fP. \f[CR]$XDG_DATA_DIRS\fP is
+colon\-separated list of directories to check. If it is not set, it defaults
+to \f[CR]/etc/xdg\fP.
+.RE
+.sp
+If configuration file is not found, Feed Commas will create one with default
+parameters filled in a first suitable directory
+(\f[CR]$XDG_CONFIG_HOME/feed\-commas\fP).
+.sp
+Before Feed Commas terminates, previously read configuration file is saved back
+to a filesystem.
+.SS "Structure"
+.sp
+INI files are made up of sections, and so is the one Feed Commas uses. Below is
+example (but not complete) of file, which has \f[CR][server]\fP and \f[CR][keys]\fP sections.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+[server]
+address = https://commafeed.com
+workers = 2
+
+[keys]
+nav\-up = k
+nav\-down = j
+.fi
+.if n \{\
+.RE
+.\}
+.SS "Server"
+.sp
+\f[CR][server]\fP contains options for configuring access to CommaFeed server.
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 1. Available options for [server] section.TS
+allbox tab(:);
+lt lt lt.
+T{
+.sp
+Option
+T}:T{
+.sp
+Default value
+T}:T{
+.sp
+Description
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>address</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>https://commafeed.com</BOUNDARY>\fP
+T}:T{
+.sp
+Address of CommaFeed instance with which Feed Commas will communicate.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>username</BOUNDARY>\fP
+T}:T{
+.sp
+
+T}:T{
+.sp
+name used to login to CommaFeed instance.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>password</BOUNDARY>\fP
+T}:T{
+.sp
+
+T}:T{
+.sp
+Plain text password which will be used to login to CommaFeed. Due to security
+  reasons, \fB<BOUNDARY>it is not recommended leave passwords as plain text</BOUNDARY>\fP in any
+  configuration file. Use \fB<BOUNDARY>password-cmd</BOUNDARY>\fP instead, which will dynamically get
+  needed password.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>password-cmd</BOUNDARY>\fP
+T}:T{
+.sp
+
+T}:T{
+.sp
+A command used to get password to login to CommaFeed. It takes precedence over
+  \fB<BOUNDARY>password</BOUNDARY>\fP, even if the latter is set.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>workers</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>2</BOUNDARY>\fP
+T}:T{
+.sp
+Number of worker processes used to communicate with CommaFeed. If it is unset,
+  workers will be spawned in a number equal to available CPU cores.
+T}
+.TE
+.sp
+.SS "Keys"
+.sp
+\f[CR][keys]\fP contains key mappings used in Feed Commas.
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 2. Available options for [keys] section.TS
+allbox tab(:);
+lt lt lt.
+T{
+.sp
+Option
+T}:T{
+.sp
+Default value
+T}:T{
+.sp
+Description
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>nav-up</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[k]</BOUNDARY>\fP
+T}:T{
+.sp
+Navigates and scrolls up. It is used e.g. to navigate a menu and scroll
+  article list.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>nav-down</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[j]</BOUNDARY>\fP
+T}:T{
+.sp
+Navigates and scrolls down. It is used e.g. to navigate a menu and scroll
+  article list.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>nav-right</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[l]</BOUNDARY>\fP
+T}:T{
+.sp
+Navigates right. It is used e.g. to switch used panel from menu to article
+  list.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>nav-right</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[h]</BOUNDARY>\fP
+T}:T{
+.sp
+Navigates right. It is used e.g. to switch used panel from article list to
+  menu.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>toggle-read</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[r]</BOUNDARY>\fP
+T}:T{
+.sp
+Toggles between read and unread state for currently selected article.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>toggle-star</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[s]</BOUNDARY>\fP
+T}:T{
+.sp
+Stars or unstars currently selected article.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>show-all</BOUNDARY>\fP
+T}:T{
+.sp
+
+T}:T{
+.sp
+Shows both unread and read entries.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>show-unread</BOUNDARY>\fP
+T}:T{
+.sp
+
+T}:T{
+.sp
+Shows only unread entries.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>refresh</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[F5]</BOUNDARY>\fP
+T}:T{
+.sp
+Refreshes list of articles. Also clears a cache.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>sync</BOUNDARY>\fP
+T}:T{
+.sp
+
+T}:T{
+.sp
+Downloads all feeds and categories for offline read. Only works if cache if
+  \f[CR]<BOUNDARY>cache-time</BOUNDARY>\fP is enabled (i.e. is set to non-negative value).
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>open-browser</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[ctrl+\]]</BOUNDARY>\fP
+T}:T{
+.sp
+Opens selected article in a default web browser.  Refer to the documentation
+  of your Operating System how to configure one. Usually setting \f[CR]<BOUNDARY>$BROWSER</BOUNDARY>\fP
+  environment variable should be sufficient.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>quit</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>kbd:[q]</BOUNDARY>\fP
+T}:T{
+.sp
+Quits Feed Commas.
+T}
+.TE
+.sp
+.sp
+Key values can contain modifiers, but they heavily depend on what keycodes
+terminal sends. For example, terminals usually won\(cqt explicitly send
+kbd:[shift], but uppercase letters instead (so instead of mapping kbd:[shift+e],
+map kbd:[E]).
+.sp
+Any combination of kbd:[ctrl] and kbd:[alt] modifiers is available as \f[CR]c\-\fP and
+\f[CR]a\-\fP prefixes. Other keys are also available:
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 3. Special keys.TS
+allbox tab(:);
+lt lt.
+T{
+.sp
+Key on keyboard
+T}:T{
+.sp
+config.ini notation
+T}
+T{
+.sp
+kbd:[ctrl]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>c-</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[alt]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>a-</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[shift]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>s-</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[↑]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>up</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[↓]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>down</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[←]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>left</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[→]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>right</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[Enter]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>enter</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[Return]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>enter</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[Page Up]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>page up</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[Page Down]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>page down</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[F5]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>f5</BOUNDARY>\fP
+T}
+T{
+.sp
+\fB<BOUNDARY>Examples</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[ctrl+a]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>c-a</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[alt+a]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>a-a</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[ctrl+alt+←]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>c-a-left</BOUNDARY>\fP
+T}
+T{
+.sp
+kbd:[alt+Enter]
+T}:T{
+.sp
+\f[CR]<BOUNDARY>a-enter</BOUNDARY>\fP
+T}
+.TE
+.sp
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+.B Warning
+.ps -1
+.br
+.sp
+Non\-character keys should be written lower\-case! Instead of typing \f[CR]F5\fP,
+type \f[CR]f5\fP, \f[CR]page down\fP, \f[CR]enter\fP and so on.
+.sp .5v
+.RE
+.SS "Settings"
+.sp
+\f[CR][settings]\fP section contains options affecting various behaviours of
+Feed Commas.
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 4. Available options for [settings] section.TS
+allbox tab(:);
+lt lt lt.
+T{
+.sp
+Option
+T}:T{
+.sp
+Default value
+T}:T{
+.sp
+Description
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>mark-read-time</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>2</BOUNDARY>\fP
+T}:T{
+.sp
+Time (in seconds) after which currently selected article will be marked as
+  read. If set to 0, articles will be marked as read immediately. If set to
+  -1, articles won&#8217;t be automatically marked as read.
+  Usually it&#8217;s advised to be kept as positive integer, which will prevent
+  marking articles as unread when scrolling through an article list.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>show-read</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>false</BOUNDARY>\fP
+T}:T{
+.sp
+If set to \fI<BOUNDARY>true</BOUNDARY>\fP, all articles will be shown on the article list. If set to
+  \fI<BOUNDARY>false</BOUNDARY>\fP, only unread articles will be shown. Using
+  \f[CR]<BOUNDARY>toggle-read</BOUNDARY>\fP automatically changes this setting so after
+  application restart, the last state is used.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>supported-colors</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>256</BOUNDARY>\fP
+T}:T{
+.sp
+Number of colors supported by terminal. Most terminals nowdays support at
+  least 256 colors, so if things work for you, don&#8217;t change this setting.
+  Valid values: 1, 16, 88, 256
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>bright-bold</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>false</BOUNDARY>\fP
+T}:T{
+.sp
+Display bright colors as bold (some terminals work that way). Change it to
+  true if you don&#8217;t see a difference when using bright colors.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>html-filter</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>builtin</BOUNDARY>\fP
+T}:T{
+.sp
+.sp
+Method of filtering HTML in received entries so they\(cqre readable. Can be
+   either of the following:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\f[CR]builtin\fP \- simple (and inaccurate) builtin filtering method. Quite fast
+and doesn\(cqt need any additional dependencies.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\f[CR]none\fP or unset option \- filtering is disabled and HTML is printed exactly
+as received
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+any filter command \- external command, which accepts HTML on its stdin and
+converts it to a readable output on its stdout. Some text\-based browsers
+(\c
+.URL "http://lynx.browser.org/" "lynx" ","
+.URL "http://elinks.or.cz/" "elinks" ")"
+support such
+mode. Make sure to read a tip about commands if you
+want to use this option.
+.RE
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>cache-time</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>0</BOUNDARY>\fP
+T}:T{
+.sp
+Time (in minutes) for which each request to CommaFeed will be cached. If not
+  set or set to 0, caching is disabled.
+T}
+.TE
+.sp
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+.B Tip\fP html\-filter commands usage
+.ps -1
+.br
+.sp
+Both lynx and elinks work very well as \f[CR]html\-filter\fP. Keep in mind however that
+they can slow down obtaining entries a little because an external process must
+be started separately for each entry.
+.sp
+The best results are achieved when they are configured with a dump wide enough,
+so that Feed Commas can take care of line wrapping:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+html\-filter = elinks \-dump \-dump\-width 500
+html\-filter = lynx \-dump \-width 500 \-stdin
+.fi
+.if n \{\
+.RE
+.\}
+.sp .5v
+.RE
+.SS "Colors"
+.sp
+Different parts of Feed Commas can be colorized to your liking by setting
+different options in \f[CR][colors]\fP section. Default values are sensible, but the
+end\-result depends on terminal\(cqs color capabilities. Color can be empty, in
+which case
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 5. Available options for [settings] section.TS
+allbox tab(:);
+lt lt lt.
+T{
+.sp
+Option
+T}:T{
+.sp
+Default value
+T}:T{
+.sp
+Affected elements
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>article-title</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>yellow</BOUNDARY>\fP
+T}:T{
+.sp
+Color of article&#8217;s title.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>article-title-focus</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>light blue</BOUNDARY>\fP
+T}:T{
+.sp
+Color of currently selected article&#8217;s title.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>article-border-focus</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>light blue</BOUNDARY>\fP
+T}:T{
+.sp
+Color of currently selected article&#8217;s border.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>metadata</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>light gray</BOUNDARY>\fP
+T}:T{
+.sp
+Various meta data information: article&#8217;s publication date, article&#8217;s header,
+  various indicators on articles list, number of unread articles in menu etc.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>menu-focus-fg</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>white</BOUNDARY>\fP
+T}:T{
+.sp
+Foreground color of currently selected menu item.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>menu-focus-bg</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>light blue</BOUNDARY>\fP
+T}:T{
+.sp
+Background color of currently selected menu item.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>menu-selected</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>dark gray</BOUNDARY>\fP
+T}:T{
+.sp
+Color of currently active feed or category.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>menu-line</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>dark gray</BOUNDARY>\fP
+T}:T{
+.sp
+Color of line separating menu and article list.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>error-fg</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>white</BOUNDARY>\fP
+T}:T{
+.sp
+Foreground color of errors displayed in commandline.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>error-bg</BOUNDARY>\fP
+T}:T{
+.sp
+\f[CR]<BOUNDARY>dark red</BOUNDARY>\fP
+T}:T{
+.sp
+Background color of errors displayed in commandline.
+T}
+.TE
+.sp
+.sp
+Monochrome, 16\-, 88\- and 256\-color terminals are supported. As a color name you
+can use any of standard color values: \fIblack, dark red, dark green, brown,
+dark blue, dark magenta, dark cyan, light gray, dark gray, light
+red, light green, yellow, light blue, light magenta, light cyan,
+white\fP. For terminals which support that, you can also use other notations:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\f[CR]#fcc\fP: hex like HTML color;
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\f[CR]g40\fP: decimal value: 40% of gray
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\f[CR]g#cc\fP: hex value: 80% of gray
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\f[CR]h255\fP: color number 255
+.RE
+.sp
+For different terminals colors are configured in different ways, but most often
+they\(cqre defined in \f[CR]~/.Xresources\fP file. Consult your terminal\(cqs documentation
+for details.
+.sp
+Apart from color name, you can specify some text attributes, which should be
+placed after comma. These attributes include \fIbold, underline, blink\fP and
+\fIstandout\fP. Color value can be omitted, in which case a default foreground or
+background color for your terminal will be used.
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 6. Color setting examples.TS
+allbox tab(:);
+lt lt.
+T{
+.sp
+Setting
+T}:T{
+.sp
+Description
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>dark gray</BOUNDARY>\fP
+T}:T{
+.sp
+Set color to "dark gray" standard color.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>#f00,bold</BOUNDARY>\fP
+T}:T{
+.sp
+Set font to bold red.
+T}
+T{
+.sp
+\f[CR]<BOUNDARY>bold</BOUNDARY>\fP
+T}:T{
+.sp
+Set font to bold. Default color will be used (depending on which
+              option is set)
+T}
+.TE
+.sp
+.SH "AUTHOR(S)"
+.sp
+\fBMichał Góral\fP
+.RS 4
+Author(s).
+.RE
