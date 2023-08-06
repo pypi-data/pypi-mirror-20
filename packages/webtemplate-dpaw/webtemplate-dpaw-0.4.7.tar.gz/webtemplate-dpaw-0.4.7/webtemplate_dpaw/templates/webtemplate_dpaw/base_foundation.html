@@ -1,0 +1,85 @@
+{% load static from staticfiles %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>{{ page_title }}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="{{ page_description }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block polyfill_js %}
+        <script async src="//static.dpaw.wa.gov.au/static/libs/modernizr/2.8.3/modernizr.min.js"></script>
+        {% endblock %}
+        <!-- CSS styling blocks -->
+        {% block base_style %}
+        <link rel="stylesheet" type="text/css" href="//static.dpaw.wa.gov.au/static/libs/foundation/6.3.0/css/foundation-flex.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700">-->
+        {% endblock %}
+        {% block extra_style %}
+        <!--<link rel="stylesheet" href="{% static 'css/dpaw-custom.css' %}">-->
+        {% endblock %}
+        {% block favicon %}
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+        {% endblock %}
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser.
+        Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        {% block top_navbar %}
+        <div class="top-bar">
+            <div class="top-bar-title name">
+                {% block navbar_site_title %}
+                <h1><a href="/">{{ site_title }}</a></h1>
+                {% endblock %}
+            </div>
+            <div class="top-bar-left">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    {% block navbar_links %}
+                    {% if user.is_authenticated %}
+                    <li><a href="#">One</a></li>
+                    <li><a href="#">Two</a></li>
+                    <li><a href="#">Three</a></li>
+                    {% endif %}
+                    {% endblock %}<!-- /navbar_links -->
+                </ul>
+            </div><!-- /.top-bar-left -->
+
+            <div class="top-bar-right">
+                {% block navbar_auth %}
+                {% if user.is_authenticated %}
+                <ul class="dropdown menu">
+                    <li>
+                        <a href="#">{{ user.username }}</a>
+                        <ul class="menu vertical">
+                            {% block navbar_auth_menu_links %}{% endblock %}
+                            <li><a id="id_a_logout" href="{% url 'logout' %}">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="dropdown menu">
+                    <li><a id="id_a_login" href="{% url 'login' %}">Log in</a></li>
+                </ul>
+                {% endif %}
+                {% endblock %}<!-- /navbar_auth -->
+            </div><!-- /.top-bar-right -->
+        </div><!-- /.top-bar -->
+        {% endblock %}<!-- /top_navbar -->
+
+        {% block page_content %}{% endblock %}
+
+        {% block page_footer %}{% endblock %}
+
+        <!-- JavaScript blocks -->
+        {% block base_js %}
+        <script src="//static.dpaw.wa.gov.au/static/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="//static.dpaw.wa.gov.au/static/libs/foundation/6.3.0/js/foundation.min.js"></script>
+        {% endblock %}
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>
