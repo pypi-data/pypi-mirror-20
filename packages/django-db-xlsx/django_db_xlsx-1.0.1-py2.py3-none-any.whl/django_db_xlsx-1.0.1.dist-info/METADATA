@@ -1,0 +1,87 @@
+Metadata-Version: 2.0
+Name: django-db-xlsx
+Version: 1.0.1
+Summary: Import/export django models via xlsx
+Home-page: https://github.com/narfman0/django-db-xlsx
+Author: Jon Robison
+Author-email: narfman0@gmail.com
+License: MIT
+Keywords: django,database,xlsx
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.9
+Classifier: Framework :: Django :: 1.10
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: django
+Requires-Dist: openpyxl
+
+==============
+django-db-xlsx
+==============
+
+.. image:: https://badge.fury.io/py/django-db-xlsx.png
+    :target: https://badge.fury.io/py/django-db-xlsx
+
+.. image:: https://travis-ci.org/narfman0/django-db-xlsx.png?branch=master
+    :target: https://travis-ci.org/narfman0/django-db-xlsx
+
+Import/export django models from/to xlsx
+
+Quickstart
+----------
+
+Install django-db-xlsx::
+
+    pip install django-db-xlsx
+
+Invoke export::
+
+    from django_db_xlsx import dump_models
+    return dump_models()
+
+Invoke import (note: can import exported file)::
+
+    from django_db_xlsx import load_models
+    <load workbook from whatever, e.g. FileField in form>
+    load_models(wb)
+
+Optional setting for default models saved::
+
+    DJANGO_DB_XLSX_MODELS = [
+        ('auth', 'User'),
+    ]
+
+Features
+--------
+
+* Import models via xlsx
+* Export models via xlsx
+
+TODO
+----
+
+Beef up woefully lacking tests
+
+Running Tests
+-------------
+
+Does the code actually work?::
+
+    source <YOURVIRTUALENV>/bin/activate
+    (myenv) $ pip install tox
+    (myenv) $ tox
+
+License
+-------
+
+Copyright Jon Robison 2017, see LICENSE for details
+
+
