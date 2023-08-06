@@ -1,0 +1,85 @@
+CHANGES
+=======
+
+0.0.8
+-----
+
+* Safely get data text
+* Change logging of test to debug
+* Add a todo with an inproperly handled message
+* Use positive tests for Not talking to a bot handler
+* Handle Private channel messages correctly
+* Add debug line for talking to bot
+* Add traceback to errors caught by handler manager
+* Remove systemd from requirements.txt
+
+0.0.7
+-----
+
+* Convert default filter to a pair of handlers
+* Cleanup playbooks
+
+0.0.6
+-----
+
+* Move some logging to the handler manager
+* Get config out of handler_manager, fix logging, break correctly
+* Set log function in YasHandler class
+* Unify logging; don't subclass the configuration
+* Update Logger and Config access
+* Let handlers handle their own errors, yas just has a catchall
+* Install default config, handlers directory with pip install
+* Pass SLACK_APP_TOKEN to vagrant if defined
+* Reorg w/import import via modulename, systemd logging
+* Install systemd headers, use better command for pyenv version list
+* Handle pyenv better; set slack token if provided
+* Don't let exceptions in handlers kill the bot
+* Fix break position in handler methoud
+* Add pre test log
+* Add log of active handler
+
+0.0.5
+-----
+
+* Don't manage unused yas.env file, only configure systemd when available
+* Remove unused command call
+* Move xenial init from Vagrantfile to ansible playbook
+* Create handler_manager pluggable framework
+* Add yaml dep
+
+0.0.3
+-----
+
+* Remove unused python3.6 role
+* Replace environment variable configuration with yaml file configuration
+* Move listener to __init__ file
+
+0.0.2
+-----
+
+* Make message handling its own method for easier extension
+
+0.0.1
+-----
+
+* Convert README to rst
+
+0.0.4
+-----
+
+* Add missing " to pyenv role
+* Remove unused imports; move Exception definition
+* Add yas.env file installation to Ansible role
+* Add yas.env to .gitignore
+* Install systemd service if it is applicable
+* Rename example config file
+* Use https and pyenv managed pip with yas
+* Check for pythons before attempting installation
+* Replace python3.6 role with pyenv
+* Add yas role
+* Add python3.6 role
+* Add initial Vagrant config with rabbitmq role
+* Make original example handlers work again
+* Remove websocket delay
+* Implement simpler listener and modular handlers
+* Initial commit after split from facade
