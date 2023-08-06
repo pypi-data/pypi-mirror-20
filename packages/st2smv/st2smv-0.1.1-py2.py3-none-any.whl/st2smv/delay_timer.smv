@@ -1,0 +1,25 @@
+MODULE delay_timer(reading, default)
+-- A simple delay timer, which does not change value unless a
+-- particular reading has been active for a specified duration.  The
+-- duration is abstracted away.
+--
+-- `reading` is the (Boolean) input to the timer.
+--
+-- `default` is the initial value of the timer's output.
+--
+-- If `default` is FALSE, then it's a "delay-on timer"; if `default`
+-- is TRUE, then it's a "delay-off timer".
+
+-- `value` is the value returned by the delay timer.
+VAR value : boolean;
+INIT value = default;
+-- `duration_met` indicates whether or not the specified duration has
+-- been met; this is an abstraction for the actual behavior of the
+-- timer, which tracks the duration and compares it to a threshold.
+IVAR duration_met : boolean;
+
+-- These should amount to exhaustive conditions to assign
+-- `next(value)`.
+TRANS next(reading = default) -> next(value = reading);
+TRANS (next(reading != default) & duration_met) -> next(value = reading);
+TRANS (next(reading != default) & !duration_met) -> (next(value) = value);
