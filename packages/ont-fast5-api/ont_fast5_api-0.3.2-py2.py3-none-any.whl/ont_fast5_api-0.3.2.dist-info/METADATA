@@ -1,0 +1,43 @@
+Metadata-Version: 2.0
+Name: ont-fast5-api
+Version: 0.3.2
+Summary: Oxford Nanopore Technologies fast5 API software
+Home-page: https://github.com/nanoporetech/ont_fast5_api
+Author: Oxford Nanopore Technologies, Limited
+Author-email: UNKNOWN
+License: MPL 2.0
+Keywords: fast5 nanopore
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)
+Classifier: Natural Language :: English
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Dist: h5py
+Requires-Dist: numpy (>=1.8.1)
+
+ont_fast5_api Python Project
+====================================
+Oxford Nanopore Technologies fast5 API software.
+-------------------------------------
+
+This project provides classes and utility functions for working with read fast5
+files. It provides an abstraction layer between the underlying h5py library and
+the various concepts central to read fast5 files, such as "reads", "analyses",
+"analysis summaries", and "analysis datasets". Ideally all interaction with a
+read fast5 file should be possible via this API, without having to directly
+invoke the h5py library.
+
+
