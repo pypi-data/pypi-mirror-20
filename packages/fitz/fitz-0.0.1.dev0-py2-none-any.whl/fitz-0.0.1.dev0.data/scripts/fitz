@@ -1,0 +1,132 @@
+#!python
+"""
+Main execution script for fMRI analysis in the ecosystem.
+
+"""
+import os
+import sys
+import argparse
+import imp
+import fitz
+import os.path as op
+from nipype import config
+import subprocess
+
+print 'Fitz: Version %s' % fitz.version
+
+
+def main(arglist):
+    """Main function for handing off execution from the command line."""
+    args = parse_args(arglist)
+
+    # Call the function determined by the chosen subparser.
+    args.func(args)
+
+
+def run(args):
+    """Get and process specific information"""
+    project = fitz.gather_project_info()
+    exp = fitz.gather_experiment_info(args.experiment, args.model)
+
+    # Subject is always highest level of parameterization
+    subject_list = fitz.determine_subjects(args.subjects)
+    subj_source = fitz.tools.make_subject_source(subject_list)
+
+    # Get the full correct name for the experiment
+    if args.experiment is None:
+        exp_name = project["default_exp"]
+    else:
+        exp_name = args.experiment
+
+    exp_base = exp_name
+    if args.model is not None:
+        exp_name = "-".join([exp_base, args.model])
+
+    # Set roots of output storage
+    project['analysis_dir'] = op.join(project["analysis_dir"], exp_name)
+    project['working_dir'] = op.join(project["working_dir"], exp_name)
+
+    config.set("execution", "crashdump_dir", project["crash_dir"])
+    # nipype.config.set("logging", "filemanip_level", 'DEBUG')
+    # nipype.config.enable_debug_mode()
+    # nipype.logging.update_logging(nipype.config)
+
+    setup_dirs(project['analysis_dir'], exp_base, exp_name, subject_list)
+
+    stream_dir = os.path.join(os.environ['FITZ_DIR'], exp['workflow'],
+                              'workflows')
+    if not op.isdir(stream_dir):
+        raise IOError("Run `fitz install` to set up your stream of workflows,"
+                      "%s does not exist." % stream_dir)
+    sys.path.insert(0, stream_dir)
+    for wf_name in args.workflows:
+        try:
+            mod = imp.find_module(wf_name)
+            wf_module = imp.load_module("wf", *mod)
+        except (IOError, ImportError):
+            print "Could not find any workflows matching %s" % wf_name
+            raise
+
+        params = fitz.frontend.update_params(wf_module, exp)
+        workflow = wf_module.workflow(
+            project, params, args, subj_source)
+        fitz.run_workflow(workflow, wf_name, args)
+
+
+def setup_dirs(analysis_dir, exp_base, exp_name, subject_list):
+    """Create symlinks to the preproc directory for altmodels"""
+    if not op.exists(analysis_dir):
+        os.makedirs(analysis_dir)
+    if exp_base != exp_name:
+        for subj in subject_list:
+            subj_dir = op.join(analysis_dir, subj)
+            if not op.exists(subj_dir):
+                os.makedirs(subj_dir)
+            link_dir = op.join(analysis_dir, subj, "preproc")
+            if not op.exists(link_dir):
+                preproc_dir = op.join("../..", exp_base, subj, "preproc")
+                os.symlink(preproc_dir, link_dir)
+
+
+def install(args):
+    project = fitz.gather_project_info()
+    exp = fitz.gather_experiment_info(project['default_exp'])
+
+    cmd = ['git', 'clone', exp['workflow_src']]
+    workflow_base = os.path.splitext(os.path.basename(exp['workflow_src']))[0]
+    print workflow_base
+    print ' '.join(cmd)
+    if not os.path.isdir(workflow_base):
+        subprocess.check_call(cmd)
+    else:
+        print "Workflow %s already exists." % workflow_base
+
+    cmd = ['git', 'checkout', exp['workflow_version']]
+    print ' '.join(cmd)
+    try:
+        subprocess.check_call(cmd)
+    except:
+        print "Error checking out tag %s" % exp['workflow_version']
+        # raise
+
+
+def parse_args(arglist):
+    """Take an arglist and return an argparse Namespace."""
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers()
+    run_parser = fitz.tools.run_parser(subparsers)
+    run_parser.set_defaults(func=run)
+
+    setup_parser = subparsers.add_parser('setup', help='setup')
+    setup_parser.description = 'setup a new fitz directory'
+    setup_parser.set_defaults(func=fitz.tools.setup_project.main)
+
+    install_parser = subparsers.add_parser('install', help='install workflows')
+    install_parser.description = 'Install workflows requested by experiments'
+    install_parser.set_defaults(func=install)
+
+    return parser.parse_args(arglist)
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
