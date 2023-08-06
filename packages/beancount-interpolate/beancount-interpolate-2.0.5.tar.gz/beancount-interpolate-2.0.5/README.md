@@ -1,0 +1,288 @@
+# Interpolate
+
+Four plugins for double-entry accounting system Beancount to interpolate transactions by generating additional entries over time.
+
+They are:
+- `recur`: dublicates all entry postings over time
+- `split`: dublicates all entry postings over time at fraction of value
+- `depr`: generates new entries over time to depreciate source postings
+- `spread`: same as `depr` but for *Income* and *Expenses* postings
+
+These plugins are triggered by adding metadata or tags to source entries. It's safe to disable at any time. All plugins share the same parser that can set maximal period, custom starting date and minimal step by either number or keyword.
+
+You can use these to define recurring transactions, account for depreciation, smooth transactions over time and make graphs less zig-zag.
+
+> This `depr` is not yet compatible with any accounting standards. For tax-compatible yearly depreciation take a look at this [plugin](https://bitbucket.org/snippets/happyalu/EAMgj/beancount-automated-depreciation-plugin) by Alok Parlikar under MIT license. All contributions to improve `depr` are welcome.
+
+# Install
+
+```
+pip3 install beancount-interpolate --user
+```
+
+Or copy to path used for python. For example, `$HOME/.local/lib/python3.4/site-packages/beancount-interpolate/*` would do on Debian. If in doubt, look where `beancount` folder is and copy next to it.
+
+
+# Details
+
+## Spread
+
+### Problem
+
+Let's say John has only two activities
+
+1. 10 EUR daily food expenses
+2. 300 EUR net monthly salary (day 15 in next month)
+
+If we plot John's wealth, it would look like zig-zag and be negative between -150 EUR (right after salary) and -450 EUR (right before), that is big and unstable error for your current wealth. And there could be more incomes/expenses with various 'periods'. In most complicated case John would have multiple income/expense sources with various lenght periods that are unsynchronised, but John wants dashboard with graph of correct daily report on his wealth.
+
+Possible solutions:
+
+1. Do nothing and ackowledge the 0-300 EUR error. IMO Is ok only if error is relatively small.
+2. Do nothing and restrict yourself to do analysis at regular intervals when error is smallest (for example right after salary) and apply known corrections (for example, +150 EUR because it's already middle of month). IMO it is ok only if all periods are synchronised.
+3. Record 10 EUR income to cash daily. But that violates 'after fact' principle that IMO is more important and IMO that's too much effort and transaction spam.
+4. Record 10 EUR income to 'work token' assets daily but IMO that's still too much effort and transaction spam.
+5. Let plugin do No.4 for you. (This repository)
+
+### How to use
+
+Copy/paste default variables for plugin and edit for yourself.
+
+```beancount
+; Set defaults.
+plugin "beancount-interpolate.spread" "{
+    'account_income': 'Income',
+    'account_expenses': 'Expenses',
+    'account_assets': 'Assets:Current',
+    'account_liab': 'Liabilities:Current',
+    'aliases_after': ['spreadAfter', 'spread'],
+    'default_duration': 'Month',
+    'default_step': 'Day',
+    'default_method': 'SL',  # Straight Line
+    'min_value': 0.05,  # cannot be smaller than 0.01
+    'max_new_tx': 9999,
+    'suffix': ' (spread %d/%d)',
+    'tag': 'spreaded'
+}"
+```
+
+Add meta or tags to your transactions. All folllowing transactions does the same.
+
+```
+; Explicit.
+2016-06-15 * "The Company" "Simplest salary entry"
+    Income:TheCompany:NetSalary     -310.00 EUR
+        spreadAfter: "Month @ 2016-05-01"
+    Assets:MyBank:Checking           310.00 EUR
+
+; Transaction meta applies to all Income/Expense postings if they don't have their own.
+2016-06-15 * "The Company" "Simplest salary entry"
+    spreadAfter: "Month @ 2016-05-01"
+    Income:TheCompany:NetSalary     -310.00 EUR
+    Assets:MyBank:Checking           310.00 EUR
+
+; Use spreadBefore if that reads better in your case.
+2016-06-15 * "The Company" "Simplest salary entry"
+    spreadBefore: "Month @ 2016-05-31"
+    Income:TheCompany:NetSalary     -310.00 EUR
+    Assets:MyBank:Checking           310.00 EUR
+
+; Use default period.
+2016-06-15 * "The Company" "Simplest salary entry"
+    spreadAfter: "2016-05-01"
+    Income:TheCompany:NetSalary     -310.00 EUR
+    Assets:MyBank:Checking           310.00 EUR
+
+; Use date of transaction.
+2016-06-15 * "The Company" "Simplest salary entry"
+    spreadAfter: "Month"
+    Income:TheCompany:NetSalary     -310.00 EUR
+    Assets:MyBank:Checking           310.00 EUR
+
+; Use date of transaction and default period. Beware the different transaction date.
+2016-05-01 * "The Company" "Simplest salary entry" #spreadAfter
+    Income:TheCompany:NetSalary     -310.00 EUR
+    Assets:MyBank:Checking           310.00 EUR
+```
+
+### What happens
+
+First, plugin edits the original transaction like this:
+
+```
+2016-05-01 * "The Company" "Simplest salary entry (Generated by interpolate-spread)" #spread
+    Liabilities:Current:TheCompany:NetSalary       -310.00 EUR
+    Assets:MyBank:Checking                          310.00 EUR
+```
+
+Second, plugin inserts 30 or 31 transactions from 2016-05-01 to 2016-05-31 like this:
+
+```
+2016-05-xx * "The Company" "Simplest salary entry (Generated by interpolate-spread)" #spread
+    Income:TheCompany:NetSalary                     -10.00 EUR
+    Liabilities:Current:TheCompany:NetSalary         10.00 EUR
+```
+
+## Recur
+
+### Problem
+
+You want to make recurring entry every X days until forever (or some Y days have passed). Recur will duplicate tagged entry for you!
+
+### How to use
+
+```beancount
+plugin "beancount-interpolate.recur" "{
+    'aliases_after': ['recurAfter', 'recur'],
+    'default_duration': 'Infinite',
+    'default_step': 'Day',
+    'default_method': 'SL',
+    'min_value': 0.05,
+    'max_new_tx': 9999,
+    'suffix': ' (recur %d/%d)',
+    'tag': 'recurred'
+}"
+```
+
+
+## Split
+
+### Problem
+
+In fact, the argumentation is the same as in `spread`, but the only difference is that different usecases needs a bit different treatment. For example, our John want to set aside money for savings daily. To account for it nicely, `spread` won't do - we don't need any `Liabilities:Current:...` accounts generated for us. A simple duplication will do here.
+
+### How to use
+
+```beancount
+plugin "beancount-interpolate.split" "{
+    'aliases_after': ['splitAfter', 'split'],
+    'default_duration': 'Month',
+    'default_step': 'Day',
+    'default_method': 'SL',
+    'min_value': 0.05,
+    'max_new_tx': 9999,
+    'suffix': ' (split %d/%d)',
+    'tag': 'splitted'
+}"
+```
+
+Add meta or tags to your transactions. All folllowing transactions does the same.
+
+```
+; Explicit.
+2016-01-01 * "Me" "Set aside money for savings"
+    split: "Year"
+    Assets:MyBank:Checking          -365.00 EUR
+    Assets:MyBank:Savings            365.00 EUR
+
+; In fact, original date doesn't matter here, as original entry will be deleted.
+2016-06-15 * "Me" "Set aside money for savings"
+    splitAfter: "Year @ 2016-01-01"
+    Assets:MyBank:Checking          -365.00 EUR
+    Assets:MyBank:Savings            365.00 EUR
+
+
+; Use can also use tags.
+2016-01-01 * "Me" "Set aside money for savings" #split
+    Assets:MyBank:Checking          -365.00 EUR
+    Assets:MyBank:Savings            365.00 EUR
+```
+
+### What happens
+
+First, plugin deletes the original transaction.
+
+Second, plugin inserts transactions every day until today, included.
+
+```
+2016-01-01 * "Me" "Set aside money for savings (Generated by interpolate-split)" #split
+    Assets:MyBank:Checking            -1.00 EUR
+    Assets:MyBank:Savings              1.00 EUR
+
+2016-01-02 * "Me" "Set aside money for savings (Generated by interpolate-split)" #split
+    Assets:MyBank:Checking            -1.00 EUR
+    Assets:MyBank:Savings              1.00 EUR
+
+...
+```
+
+## Depreciate
+
+### Problem
+
+Depreciate technically is the same as spread but from other way around. But practically, you would like to have different settings for your short-term spreads and long-term depreciations.
+
+### How to use
+
+Copy/paste default variables for plugin and edit for yourself.
+
+```beancount
+; Set defaults.
+plugin "beancount-interpolate.spread" "{
+    'account_income': 'Income:Appreciation',
+    'account_expenses': 'Expenses:Depreciation',
+    'account_assets': 'Assets:Fixed',
+    'account_liab': 'Liabilities:Fixed',
+    'aliases_after': ['deprAfter', 'depr'],
+    'default_duration': 'Year',
+    'default_step': 'Day',
+    'min_value': 0.05,  # cannot be smaller than 0.01
+    'max_new_tx': 9999,
+    'suffix': ' (depr %d/%d)',
+    'tag': 'depred'
+}"
+```
+
+Add meta or tags to your transactions. All folllowing transactions does the same.
+
+```
+; Explicit.
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting"
+    Assets:Fixed:PC                  199.00 EUR
+        depr: "Year @ 2016-06-15"
+    Assets:MyBank:Checking          -199.00 EUR
+
+; Transaction meta applies to all Assets:Fixed postings if depr is entry-wide.
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting"
+    depr: "Year @ 2016-06-15"
+    Assets:Fixed:PC                  199.00 EUR
+    Assets:MyBank:Checking          -199.00 EUR
+
+
+; Use default period (Year).
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting"
+    depr: "Year"
+    Assets:Fixed:PC                  199.00 EUR
+    Assets:MyBank:Checking          -199.00 EUR
+
+; Use date of transaction.
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting"
+    depr: "Month"
+    Assets:Fixed:PC                  199.00 EUR
+    Assets:MyBank:Checking          -199.00 EUR
+
+; Use default period (Year) and default date (entry date).
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting"
+    depr: "empty string or some nonsense"
+    Assets:Fixed:PC                  199.00 EUR
+    Assets:MyBank:Checking          -199.00 EUR
+
+; Use default period (Year) and default date (entry date) using a tag.
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting" #depr
+    Assets:Fixed:PC                  199.00 EUR
+    Assets:MyBank:Checking          -199.00 EUR
+```
+
+### What happens
+
+Plugin inserts lots of transactions starting from given date until end (or today) like this:
+
+```
+2016-06-15 * "CornerStore" "Bought new Laptop to do beancounting (depr 1/365)" #depred
+    Assets:Fixed:PC                  -00.55 EUR
+    Expenses:Depreciation:PC          00.55 EUR
+
+2016-06-16 * "CornerStore" "Bought new Laptop to do beancounting (depr 2/365)" #depred
+    Assets:Fixed:PC                  -00.54 EUR
+    Expenses:Depreciation:PC          00.54 EUR
+```
