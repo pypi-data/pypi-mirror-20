@@ -1,0 +1,47 @@
+Metadata-Version: 2.0
+Name: graphql-subscriptions
+Version: 0.1.3
+Summary: A port of apollo-graphql subscriptions for python, using                 gevent websockets, promises, and redis
+Home-page: https://github.com/hballard/graphql-python-subscriptions
+Author: Heath Ballard
+Author-email: heath.ballard@gmail.com
+License: MIT
+Keywords: graphql websockets concurrent subscriptions
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Environment :: Web Environment
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: License :: OSI Approved :: MIT License
+Requires-Dist: Promises
+Requires-Dist: gevent-websocket
+Requires-Dist: redis
+
+graphql-python-subscriptions
+============================
+
+A port of apollographql subscriptions for python, using gevent
+websockets and redis
+
+This is a implementation of apollographql subscriptions-transport-ws and
+graphql-subscriptions in Python. It currently implements a pubsub using
+redis.py and uses gevent for concurrency. It also makes heavy use of
+syrusakbary/promise python implementation to mirror the logic in the
+apollo-graphql libraries.
+
+Meant to be used in conjunction with graphql-python / graphene server
+and apollo-graphql client.
+
+Very initial implementation. Currently only works with Python 2. No
+tests yet.
+
+Installation
+------------
+
+::
+
+    $ pip install graphql-subscriptions
+
+
