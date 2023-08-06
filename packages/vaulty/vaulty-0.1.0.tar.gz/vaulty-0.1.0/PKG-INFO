@@ -1,0 +1,30 @@
+Metadata-Version: 1.1
+Name: vaulty
+Version: 0.1.0
+Summary: Shell interface for browsing Hashicorp Vault 
+Home-page: https://github.com/crccheck/vaulty
+Author: Chris Chang
+Author-email: c@crccheck.com
+License: Apache License, Version 2.0
+Description: Vaulty
+        ======
+        
+        .. image:: https://travis-ci.org/crccheck/vaulty.svg?branch=master
+            :target: https://travis-ci.org/crccheck/vaulty
+        
+        A shell interface for browsing Hashicorp Vault
+        
+        Supports:
+        
+        * simple tab completion
+        * ``cat``
+        * ``cd``
+        * ``ls``
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
