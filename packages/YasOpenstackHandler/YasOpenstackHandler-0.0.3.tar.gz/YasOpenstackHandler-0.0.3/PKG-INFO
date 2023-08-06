@@ -1,0 +1,33 @@
+Metadata-Version: 1.1
+Name: YasOpenstackHandler
+Version: 0.0.3
+Summary: A simple interface to openstack with additional metadata
+Home-page: UNKNOWN
+Author: Brandon Schlueter
+Author-email: YasOpenstackHandler@schlueter.blue
+License: UNKNOWN
+Description: # Facade
+        ##### A simple interface to Openstack
+        ---
+        Facade provides a subset of the openstack api with configurable default values and additional metadata and associated functions.
+        
+        ## API endpoints
+        
+        - server/create
+        - server/delete
+        - server/list
+        - server/show
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: OpenStack
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5

@@ -1,0 +1,65 @@
+CHANGES
+=======
+
+0.0.3
+-----
+
+* Simplify Structure name semantically
+
+0.0.2
+-----
+
+* Add author and author_email
+
+0.0.1
+-----
+
+* Add TODO, don't explicitly inherit from object
+* define openstackHandler.matches
+* Remove errant :
+* Simplify match handling
+* Use re.search rather than match
+* Remove errant ,
+* Correct log use
+* Remove unpassed args to handler
+* Refer to client correctly
+* Replace || with or
+* Remove dup prop in configuration
+* Update configuration
+* Fix strings
+* Add missing comma
+* Update config file to be fully useful
+* Adjust facade interface for new version of yas
+* Default message to ''
+* return response fom handler
+* Don't set a security group
+* Raise a handlererror instead
+* Catch novaclient BadRequest
+* Add yaml configuration files
+* Replace env config with yaml
+* Replace example handler functions with openstack ones
+* Convert project to YasHandler
+* Remove unused makefile
+* Remove unused deps; add yas as dep
+* Remove unused api component
+* Remove extar
+* Whitespace change
+* Add example slackbot config
+* slack: make create,list, and delete work
+* Add mock handlers and some other stuff
+* Make the bot not respond to itself
+* Work towards slack bot
+* Some halfway updates to implement the openstack lib on the api
+* Create openstack passthrough lib
+* Make slackbot listen
+* Add initial slackbot
+* Add post method to Ping resource
+* Add /.eggs/ to git ignore
+* Add facade.bot.slack module
+* Simplify module path
+* Add /.eggs/ to git ignore
+* Add a Server resource with create and delete
+* Drop database deps
+* Bump novaclient api version with comment
+* Add server/list endpoint
+* Initial commit with ping endpoint
