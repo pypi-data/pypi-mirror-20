@@ -1,0 +1,35 @@
+Metadata-Version: 1.1
+Name: plato-clean
+Version: 0.4.1.dev2
+Summary: cleaner to clean plato project resources
+Home-page: UNKNOWN
+Author: Chenjie
+Author-email: chenjie7@le.com
+License: Apache License, Version 2.0
+Description: clean tool used to clean Plato project resources
+        
+        Install
+        
+        ```
+        pip install plato-clean
+        ```
+        
+        Run
+        
+        ```
+        /usr/bin/plato-clean --endpoint ENDPOINT --key ACCESS_KEY --secret ACCESS_SECRET
+        ```
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
