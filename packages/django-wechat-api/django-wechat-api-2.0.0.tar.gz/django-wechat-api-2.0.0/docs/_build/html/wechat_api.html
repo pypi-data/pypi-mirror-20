@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>wechat_api &mdash; django-wechat-api 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="django-wechat-api 2.0.0 documentation" href="index.html" />
+    <link rel="next" title="enterprise_api" href="enterprise_api.html" />
+    <link rel="prev" title="wechat" href="wechat.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="wechat-api">
+<span id="id1"></span><h1>wechat_api<a class="headerlink" href="#wechat-api" title="Permalink to this headline">¶</a></h1>
+<p>This django application is the API for wechat subscribe and service account.</p>
+<p>微信订阅号和服务号的接口是一样的．</p>
+<p>已实现的功能：</p>
+<ul class="simple">
+<li>接收用户发送的文本消息，通过图灵机器人回复</li>
+<li>接收用户发送的图片消息，通过微软的how-old回复年龄和性别</li>
+</ul>
+<p>待实现的功能：</p>
+<ul class="simple">
+<li>接收用户发送的其它类型的消息的回复</li>
+<li>接收用户发送的事件类型的消息并回复</li>
+<li>定制菜单</li>
+</ul>
+<p>不实现的功能：</p>
+<ul class="simple">
+<li>主动给用户推送消息</li>
+<li>其它高级功能</li>
+</ul>
+<p>Release:</p>
+<ul class="simple">
+<li>receive message format</li>
+<li>response message format</li>
+<li>response text message with tuling123.com</li>
+<li>response image message with how-old.net</li>
+</ul>
+<p>Todo:</p>
+<ul class="simple">
+<li>response message like voice, video/shortvideo, location, link</li>
+<li>receive event format</li>
+<li>response event</li>
+<li>customise menu</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">django-wechat-api</a></h1>
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=crazy-canux&repo=django-wechat-api&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wechat.html">wechat</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">wechat_api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enterprise_api.html">enterprise_api</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="wechat.html" title="previous chapter">wechat</a></li>
+      <li>Next: <a href="enterprise_api.html" title="next chapter">enterprise_api</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, <a href="http://canuxcheng.com">Canux CHENG</a>.
+      
+      |
+      <a href="_sources/wechat_api.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/crazy-canux/django-wechat-api" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
