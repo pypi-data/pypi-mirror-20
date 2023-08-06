@@ -1,0 +1,7 @@
+[console_scripts]
+vsphere-info = adles.scripts.vsphere_info:main
+cleanup-vms = adles.scripts.cleanup_vms:main
+adles = adles.scripts.adles_main:main
+clone-vms = adles.scripts.clone_vms:main
+vm-power = adles.scripts.vm_power:main
+
