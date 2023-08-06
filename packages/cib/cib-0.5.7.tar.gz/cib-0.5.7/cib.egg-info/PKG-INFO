@@ -1,0 +1,97 @@
+Metadata-Version: 1.1
+Name: cib
+Version: 0.5.7
+Summary: coala Package Manager
+Home-page: https://pypi.python.org/pypi/cib
+Author: Adrian Zatreanu
+Author-email: adrianzatreanu1@gmail.com
+License: AGPL-3.0
+Description: Bear Installation Tool
+        ======================
+        
+        coala features a Bear Installation Tool that helps installing bears one by one
+        or all of them. This tool is helpful as it also manages to install the bears'
+        external dependencies.
+        
+        Installation
+        ============
+        
+        To install the tool, simply run:
+        
+        ::
+        
+            $ pip3 install cib
+        
+        Usage
+        =====
+        
+        
+        To use the tool, you need to give it arguments.
+        
+        To install bears, simply run ``cib install`` followed by names of bears,
+        or by ``all``. Therefore:
+        
+        ::
+        
+            $ cib install all
+        
+        will install all the available bears, whereas
+        
+        ::
+        
+            $ cib install CPPCheckBear PEP8Bear
+        
+        will install the specified bears only.
+        ``cib uninstall`` works exactly the same way as ``cib install``.
+        
+        To see the full list of available bears, run
+        
+        ::
+        
+            $ cib list
+        
+        To upgrade the already installed bears, run
+        
+        ::
+        
+            $ cib upgrade all
+        
+        to upgrade all installed bears, or
+        
+        ::
+        
+            $ cib upgrade CPPCheckBear PEP8Bear
+        
+        to upgrade the specified bears. However, if they are not installed, they will
+        not be upgraded.
+        
+        To check whether a bear meets all its dependencies, use
+        
+        ::
+        
+            $ cib check-deps all
+        
+        This will ensure all the installed bears have met their dependencies.
+        
+        For more information, run
+        
+        ::
+        
+            $ cib help
+        
+Platform: any
+Classifier: Environment :: Console
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications :: Gnome
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Text Processing :: Linguistic
