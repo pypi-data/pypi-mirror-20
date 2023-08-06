@@ -1,0 +1,46 @@
+Metadata-Version: 2.0
+Name: PyPrintful
+Version: 1.0.0a2
+Summary: A Python3 wrapper for the Printful.com API.
+Home-page: https://github.com/559Labs/pyPrintful
+Author: 559 Labs
+Author-email: hello@559labs.com
+License: Apache
+Keywords: api python3 dtg ondemand printing
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.10
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == 'dev'
+Requires-Dist: twine; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+
+==========
+PyPrintful
+==========
+
+`PyPrintful <https://github.com/559labs/PyPrintful>`_ is a simple Python3-compatible interface to the `Printful API
+<http://api.printful.com/>`_.
+
+Quick Start
+-----------
+
+1. Install the package with: `pip3 install pyprintful`
+
+Documentation
+-------------
+
+Documentation is available at <http://pyprintful.readthedocs.io/>.
+
+
