@@ -1,0 +1,40 @@
+Metadata-Version: 1.1
+Name: FTPwalker
+Version: 0.4
+Summary: Optimally traversing extremely large FTP directory trees.
+Home-page: https://github.com/Bohdan-Khomtchouk/FTPwalker
+Author: Bohdan Khomtchouk and Kasra Vand
+Author-email: khomtchoukmed@gmail.com, kasraavand@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/Bohdan-Khomtchouk/FTPwalker/tarball/0.1
+Description: FTPwalker is a Python package for optimally traversing extremely large FTP directory trees.
+        
+        Here is an example of FTPwalker traversing the Uniprot_ bioinformatics database:
+        
+        .. code-block:: python
+        
+        	from FTPwalker.runwalker import ftpwalker
+        
+        	walker = ftpwalker("Uniprot", "ftp.uniprot.org")
+        	walker.check_state()
+        
+        
+        
+        This will create a dictionary formatted as a JSON file in the user’s home directory containing all the full paths as keys and the respective filenames as values. FTPwalker is designed with speed in mind by utilizing state-of-the-art high performance parallelism and concurrency algorithms to traverse FTP directory trees. The resultant hash table (i.e., dictionary) supports fast lookup for any file in any biological database.
+        
+        
+        Installation:
+        
+        For running the FTPwalker you need to have python3.x+ installed. Then you can use `pip` or `pip3` for installation. 
+        
+        .. code-block:: python
+            
+            # Install
+        	sudo pip3 install FTPwalker
+        
+        	# Upgrade
+        	sudo pip3 install FTPwalker --upgrade
+        
+        .. _Uniprot: http://uniprot.org
+Keywords: FTP,traverse,directory tree,optimized
+Platform: UNKNOWN
