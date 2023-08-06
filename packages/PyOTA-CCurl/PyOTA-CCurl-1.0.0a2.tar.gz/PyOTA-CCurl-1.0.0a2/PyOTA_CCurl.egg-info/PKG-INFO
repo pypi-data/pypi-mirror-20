@@ -1,0 +1,34 @@
+Metadata-Version: 1.1
+Name: PyOTA-CCurl
+Version: 1.0.0a2
+Summary: C Curl extension for PyOTA
+Home-page: https://github.com/todofixthis/pyota-ccurl
+Author: Phoenix Zerin
+Author-email: phx@phx.ph
+License: MIT
+Description: C Curl Extension for PyOTA
+        ==========================
+        .. DANGER::
+           ⚠️ **THIS VERSION IS EXPERIMENTAL AND HAS NOT BEEN VETTED FOR STABILITY/SECURITY YET; DO NOT USE IN PRODUCTION CODE!!!** ⚠️ 
+        
+        This is an extension for the crypto functionality in `PyOTA`_, the Python API
+        for IOTA.  When installed, it will significantly boost the performance of
+        PyOTA's crypto functionality.
+        
+        This extension is installed as an add-on to the ``pyota`` package::
+        
+           pip install pyota[ccurl]
+        
+        .. _PyOTA: https://pypi.python.org/pypi/PyOTA
+        
+Keywords: iota,tangle,iot,internet of things,api,library,cryptocurrency,balanced ternary
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
