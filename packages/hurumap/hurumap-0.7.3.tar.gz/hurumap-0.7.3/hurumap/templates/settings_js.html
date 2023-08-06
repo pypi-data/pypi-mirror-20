@@ -1,0 +1,24 @@
+{% load jsonify staticfiles %}
+
+<script type="text/javascript">
+{% block settings_javascript %}
+
+var SITE_NAME = '{{ HURUMAP.name }}';
+var SITE_URL = '{{ HURUMAP.url }}';
+var EMBED_URL = '{{ HURUMAP.embed_url|default:HURUMAP.url }}';
+var HURUMAP_COUNTRY_CODE = '{{ HURUMAP.country_code }}';
+var GOOGLE_GEOCODE_API_KEY = '{{ HURUMAP.google_geocode_api_key }}';
+var comparativeLevels = "{{ HURUMAP.comparative_levels|safe }}";
+
+var GEOMETRY_URLS = {
+  {% for level, path in HURUMAP.geometry_data.iteritems %}
+  '{{ level }}': '{% static path %}' {% if not forloop.last %},{% endif %}
+  {% endfor %}
+};
+
+// standard mapping of summary level code to summary level name
+var sumlevMap = {{ geo_data.geo_levels|jsonify|safe }};
+
+var releaseNames = {};
+{% endblock settings_javascript %}
+</script>

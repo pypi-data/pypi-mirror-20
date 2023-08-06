@@ -1,0 +1,37 @@
+{% extends '_base.html' %}{% load humanize partition staticfiles %}
+
+{% block content_container %}
+
+<div class="content-container clearfix">
+    <section>
+        <article class="clearfix wrapper">
+            <h1 class="title">Topics</h1>
+            <div class="snippet">
+                The Census is a big subject and there's a lot to learn, but you don't have to learn it all at once.<br>
+                Here's some help knowing the lay of the land.
+            </div>
+            <br clear="all">
+            <script type="text/javascript">
+                topics = JSON.parse("{{topics|safe}}".replace(/'/g, '"'));
+                for (k in topics) {
+                    document.write('<div class="column-half topics-topic">');
+                    document.write('<img src="'+ topics[k].icon +'" aria-hidden="true"/>');
+                    document.write('<div class="topic-name">'+ topics[k].topic +'</div>');
+                    document.write('<div class="topic-desc">'+ topics[k].desc +'</div>');
+                    document.write('<div class="categories">');
+                        document.write('<span>Categories include:</span>');
+                        document.write('<ul>');
+                            for (j in topics[k].profiles) {
+                            document.write('<li>'+ topics[k].profiles[j] +'</li>');
+                            }
+                        document.write('</ul>');
+                    document.write('</div>');
+                document.write('</div>');
+                }
+            </script>
+
+        </article>
+    </section>
+</div>
+
+{% endblock content_container %}

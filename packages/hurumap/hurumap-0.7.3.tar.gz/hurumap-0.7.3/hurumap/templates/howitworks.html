@@ -1,0 +1,64 @@
+{% extends '_base.html' %}{% load humanize partition staticfiles %}
+
+{% block content_container %}
+
+<div class="content-container clearfix">
+    <section>
+        <article class="clearfix wrapper">
+            <h1 class="title">Getting Started</h1>
+            <div class="snippet">
+                The Census is a big subject and there's a lot to learn, but you don't have to learn it all at once.<br>
+                Here's some help knowing the lay of the land.
+            </div>
+            <br clear="all">
+            <div class="filter-row" data-filter="one">
+                <span>What is the Census?</span>
+                <span class="end">-</span>
+            </div>
+            <div class="filter-row-desc filter-row-sub one-sub" style="display:inline-block;">
+              The Census isn't one thing. The U.S. Census Bureau has a number of data collection programs and even more data products based on them. Census Reporter focuses on just one of them, the American Community Survey, or ACS. Our About the Census page gets into the basics you should know about the other Census products.
+            </div>
+            <div class="filter-row" data-filter="two">
+                <span>OK then, what's in the ACS?</span>
+                <span class="end">+</span>
+            </div>
+            <div class="filter-row-desc filter-row-sub two-sub">
+               The ACS covers a good variety of general-interest topics about the US: not only basic demographics like age, sex, and race, but also a number of economic and social questions, and details about the actual homes where people live, like how many rooms are in a housing unit and how many units are in the building. Our guide to the structure of table codes includes a list of the main subject areas.
+            </div>
+            <div class="filter-row" data-filter="three">
+                <span>When is the ACS updated?</span>
+                <span class="end">+</span>
+            </div>
+            <div class="filter-row-desc filter-row-sub three-sub">
+                Every fall the Census Bureau releases new ACS estimates in three forms. The different releases are based on data collected over different periods of time. Collecting data over longer periods of time helps to reduce the margin of error for places with a smaller population.
+                <br>
+                The releases are staggered, with the 1-year release delivered first, usually in September, followed by the 3-year release, and finally, the 5-year release is usually delivered in early December.
+                <br>
+                Census Reporter always shows you the data for the release appropriate to the places you're looking at, so you generally don't have to worry about it too much. However, technically you shouldn't directly compare data from different releases, so be careful if you are gathering estimates from different profile pages.
+            </div>
+
+        </article>
+    </section>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+    //Toogle filters
+     function hide_categories(f) {
+        $('.' + f + '-sub').css('display', 'none')
+        $('[data-filter='+ f +'] .end').html('+')
+        $('[data-filter='+ f +']').click( function() { f = $(this).attr('data-filter'); $(this).unbind('click'); show_categories(f) });
+     }
+
+     function show_categories(f) {
+        $('.' + f + '-sub').css('display', 'inline-block')
+        $('[data-filter='+ f +'] .end').html('-')
+        $('[data-filter='+ f +']').click( function() { f = $(this).attr('data-filter');$(this).unbind('click'); hide_categories(f) });
+     }
+     $('.filter-row').click(function() {
+        f = $(this).attr('data-filter')
+        $(this).unbind('click');
+        show_categories(f);
+    });
+</script>
+
+{% endblock content_container %}
