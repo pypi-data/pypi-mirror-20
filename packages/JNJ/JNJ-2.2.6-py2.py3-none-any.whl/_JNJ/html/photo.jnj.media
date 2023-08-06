@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+# Copyright (C) 2011-2014 Mag. Christian Tanzer All rights reserved
+# Glasauergasse 32, A--1130 Wien, Austria. tanzer@swing.co.at
+# ****************************************************************************
+# This module is part of the package JNJ.
+#
+# This module is licensed under the terms of the BSD 3-Clause License
+# <http://www.c-tanzer.at/license/bsd_3c.html>.
+# ****************************************************************************
+#
+#++
+# Name
+#    html/photo.jnj.css
+#
+# Purpose
+#    CSS fragment for template html/photo.jnj
+#
+# Revision Dates
+#     2-Jan-2011 (CT) Creation
+#    ««revision-date»»···
+#--
+
+style_sheet = Style_Sheet \
+    ( Rule
+        ( ".photo-nav img"
+        , margin                     = TRBL (0, Px (2))
+        )
+    , Rule
+        ( ".photo"
+        , text_align                 = "center"
+        )
+    )
+
+### __END__ html/photo.jnj.css
