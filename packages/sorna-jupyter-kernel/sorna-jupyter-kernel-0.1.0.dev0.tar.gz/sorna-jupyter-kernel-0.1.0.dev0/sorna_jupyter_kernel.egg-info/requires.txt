@@ -1,0 +1,17 @@
+coloredlogs>=5.2
+async_timeout>=1.1
+aiohttp>=1.1
+namedlist
+requests
+requests_unixsocket
+simplejson
+uvloop>=0.7
+sorna-client>=0.9,<1.0
+
+[dev]
+pytest
+flake8
+pep8-naming
+
+[test]
+pytest
