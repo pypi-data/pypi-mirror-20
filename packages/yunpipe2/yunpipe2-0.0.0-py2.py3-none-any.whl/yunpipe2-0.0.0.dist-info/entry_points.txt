@@ -1,0 +1,6 @@
+[console_scripts]
+clean-up = yunpipe.pipeline.cleanup:main
+create-lambda-exec-role = yunpipe.pipeline.set_pipe:create_lambda_exec_role
+setup-pipe = yunpipe.scripts.setup_pipe:main
+wrap = yunpipe.scripts.wrap:main
+
