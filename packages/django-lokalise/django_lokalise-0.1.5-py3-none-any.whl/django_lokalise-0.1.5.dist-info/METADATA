@@ -1,0 +1,40 @@
+Metadata-Version: 2.0
+Name: django-lokalise
+Version: 0.1.5
+Summary: Lokalise (https://lokalise.co) module for Django
+Home-page: https://github.com/yarlson/django-lokalise
+Author: Yar Kravtsov
+Author-email: yarlson@gmail.com
+License: BSD
+Keywords: Localization,Internationalization,Lokalise
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Localization
+Classifier: Topic :: Software Development :: Internationalization
+Classifier: Operating System :: OS Independent
+Requires-Dist: django (>=1.8)
+Requires-Dist: requests
+Provides-Extra: tests
+Requires-Dist: mock; extra == 'tests'
+Requires-Dist: nose; extra == 'tests'
+Requires-Dist: coverage; extra == 'tests'
+Requires-Dist: yanc; extra == 'tests'
+Requires-Dist: preggy; extra == 'tests'
+Requires-Dist: tox; extra == 'tests'
+Requires-Dist: ipdb; extra == 'tests'
+Requires-Dist: coveralls; extra == 'tests'
+Requires-Dist: sphinx; extra == 'tests'
+Requires-Dist: django; extra == 'tests'
+Requires-Dist: requests; extra == 'tests'
+
+
+Lokalise (https://lokalise.co) module for Django
+
+
