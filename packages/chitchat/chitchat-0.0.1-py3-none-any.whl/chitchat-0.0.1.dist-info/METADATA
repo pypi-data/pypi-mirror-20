@@ -1,0 +1,34 @@
+Metadata-Version: 2.0
+Name: chitchat
+Version: 0.0.1
+Summary: Asynchronous IRC library.
+Home-page: https://gitlab.com/wmedlar/chitchat
+Author: Will Medlar
+Author-email: will.medlar@gmail.com
+License: MIT
+Keywords: async,irc
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+
+==========================
+Chitchat: Asynchronous IRC
+==========================
+
+**Warning:** Wildly alpha!
+
+Chitchat requires Python 3.6+, and will hopefully run on future versions of PyPy.
+
+Installation
+------------
+
+Install chitchat with:
+
+.. code-block:: bash
+
+    $ git clone git@gitlab.com:wmedlar/chitchat.git && pip install chitchat
+
+
