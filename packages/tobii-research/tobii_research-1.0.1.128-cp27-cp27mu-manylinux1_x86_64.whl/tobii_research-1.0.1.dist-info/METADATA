@@ -1,0 +1,31 @@
+Metadata-Version: 2.0
+Name: tobii-research
+Version: 1.0.1.128
+Summary: Tobii Pro Python SDK. Used for developing applications for the Tobii Pro line of eye trackers. You need at least one eye tracker to make use of this SDK.
+Home-page: http://developer.tobiipro.com/
+Author: Tobii AB
+Author-email: tobiiprosdk@tobii.com
+License: http://www.tobiipro.com/siteassets/tobii-pro/license-agreements/tobii-pro-sdk-license-agreement.pdf
+Keywords: tobii research eyetracking sdk tobiipro
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 2.7
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+
+Welcome to the Tobii Pro SDK
+============================
+
+You can find all help, examples and documentation on the Tobii Pro SDK webpage: http://developer.tobiipro.com
+
+We hope you will like it!
+
+Sincerely,
+The TobiiProSDK team
+
+
