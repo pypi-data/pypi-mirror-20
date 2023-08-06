@@ -1,0 +1,22 @@
+[console_scripts]
+pull_into_place = pull_into_place.main:main
+
+[pull_into_place.commands]
+01_setup_workspace = pull_into_place.commands.01_setup_workspace:main
+02_setup_model_fragments = pull_into_place.commands.02_setup_model_fragments:main
+03_build_models = pull_into_place.commands.03_build_models:main
+04_pick_models_to_design = pull_into_place.commands.04_pick_models_to_design:main [analysis]
+05_design_models = pull_into_place.commands.05_design_models:main
+06_manually_pick_designs_to_validate = pull_into_place.commands.06_manually_pick_designs_to_validate:main
+06_pick_designs_to_validate = pull_into_place.commands.06_pick_designs_to_validate:main [analysis]
+07_setup_design_fragments = pull_into_place.commands.07_setup_design_fragments:main
+08_validate_designs = pull_into_place.commands.08_validate_designs:main
+09_compare_best_designs = pull_into_place.commands.09_compare_best_designs:main [analysis]
+cache_models = pull_into_place.commands.cache_models:main [analysis]
+count_models = pull_into_place.commands.count_models:main [analysis]
+fetch_and_cache_models = pull_into_place.commands.fetch_and_cache_models:main [analysis]
+fetch_data = pull_into_place.commands.fetch_data:main
+make_web_logo = pull_into_place.commands.make_web_logo:main [analysis]
+plot_funnels = pull_into_place.commands.plot_funnels:main [analysis]
+push_data = pull_into_place.commands.push_data:main
+
