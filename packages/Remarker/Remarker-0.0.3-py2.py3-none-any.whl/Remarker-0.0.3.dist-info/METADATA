@@ -1,0 +1,58 @@
+Metadata-Version: 2.0
+Name: Remarker
+Version: 0.0.3
+Summary: A command line tool to generate Remark.js presentations from markdown files.
+Home-page: https://github.com/tylerdave/remarker
+Author: Dave Forgac
+Author-email: tylerdave@tylerdave.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: click
+Requires-Dist: jinja2
+
+===============================
+Remarker
+===============================
+
+.. image:: https://img.shields.io/travis/tylerdave/remarker.svg
+        :target: https://travis-ci.org/tylerdave/remarker
+
+.. image:: https://img.shields.io/pypi/v/remarker.svg
+        :target: https://pypi.python.org/pypi/remarker
+
+
+A command line tool for generating Remark.js presentations from markdown files.
+
+* Free software: MIT license
+* Documentation: (COMING SOON!) https://remarker.readthedocs.org.
+
+Usage
+-----
+
+See ``remarker --help``
+
+Usage Example
+-------------
+
+``remarker -o presentation.html slides.md``
+
+
+
+
+History
+-------
+
+Pre-release
+
+
