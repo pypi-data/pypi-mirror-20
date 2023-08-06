@@ -1,0 +1,750 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frozen-Flask &#8212; Frozen-Flask 0.13 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Frozen-Flask 0.13 documentation" href="#" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "text/css" rel="stylesheet" />
+
+  </head>
+  <body role="document">
+  
+  
+  <div class=indexwrapper>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Frozen-Flask 0.13 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-flask_frozen">
+<span id="frozen-flask"></span><h1>Frozen-Flask<a class="headerlink" href="#module-flask_frozen" title="Permalink to this headline">¶</a></h1>
+<p>Frozen-Flask freezes a <a class="reference external" href="http://flask.pocoo.org/">Flask</a> application into a set of static files.
+The result can be hosted without any server-side software other than a
+traditional web server.</p>
+<p><strong>Note:</strong> This project used to be called Flask-Static.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Install the extension with one of the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ easy_install Frozen-Flask
+</pre></div>
+</div>
+<p>or alternatively if you have pip installed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install Frozen-Flask
+</pre></div>
+</div>
+<p>or you can get the <a class="reference external" href="https://github.com/Frozen-Flask/Frozen-Flask">source code from github</a>.</p>
+</div>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h2>
+<p>This documentation assumes that you already have a working <a class="reference external" href="http://flask.pocoo.org/">Flask</a>
+application. You can run it and test it with the development server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">myapplication</span> <span class="k">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Frozen-Flask is only about deployment: instead of installing Python,
+a WGSI server and Flask on your server, you can use Frozen-Flask to <em>freeze</em>
+your application and only have static HTML files on your server.</p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Create a <a class="reference internal" href="#flask_frozen.Freezer" title="flask_frozen.Freezer"><code class="xref py py-class docutils literal"><span class="pre">Freezer</span></code></a> instance with your <code class="docutils literal"><span class="pre">app</span></code> object and call its
+<a class="reference internal" href="#flask_frozen.Freezer.freeze" title="flask_frozen.Freezer.freeze"><code class="xref py py-meth docutils literal"><span class="pre">freeze()</span></code></a> method. Put that in a <code class="docutils literal"><span class="pre">freeze.py</span></code> script
+(or call it whatever you like):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_frozen</span> <span class="k">import</span> <span class="n">Freezer</span>
+<span class="kn">from</span> <span class="nn">myapplication</span> <span class="k">import</span> <span class="n">app</span>
+
+<span class="n">freezer</span> <span class="o">=</span> <span class="n">Freezer</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">freezer</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will create a <code class="docutils literal"><span class="pre">build</span></code> directory next to your application’s <code class="docutils literal"><span class="pre">static</span></code>
+and <code class="docutils literal"><span class="pre">templates</span></code> directories, with your application’s content frozen into
+static files.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Frozen-Flask considers it “owns” its build directory.
+By default, it will <strong>silently overwrite</strong> files in that directory,
+and <strong>remove</strong> those it did not create.</p>
+<p class="last">The <a class="reference internal" href="#configuration">configuration</a> allows you to change the destination directory,
+or control what files are removed if at all.</p>
+</div>
+<p>This build will most likely be partial since Frozen-Flask can only guess so
+much about your application.</p>
+</div>
+<div class="section" id="finding-urls">
+<h2>Finding URLs<a class="headerlink" href="#finding-urls" title="Permalink to this headline">¶</a></h2>
+<p>Frozen-Flask works by simulating requests at the WSGI level and writing the
+responses to aptly named files. So it needs to find out which URLs exist
+in your application.</p>
+<p>The following URLs can be found automatically:</p>
+<ul class="simple">
+<li>Static files handled by Flask for your application or any of its
+<a class="reference external" href="http://flask.pocoo.org/docs/blueprints/">blueprints</a>.</li>
+<li>Views with no variable parts in the URL, if they accept the <code class="docutils literal"><span class="pre">GET</span></code> method.</li>
+<li><em>New in version 0.6:</em> Results of calls to <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">flask.url_for()</span></code></a> made by your
+application in the request for another URL.
+In other words, if you use <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">url_for()</span></code></a> to create links in your
+application, these links will be “followed”.</li>
+</ul>
+<p>This means that if your application has an index page at the URL <code class="docutils literal"><span class="pre">/</span></code>
+(without parameters) and every other page can be found from there by
+recursively following links built with <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">url_for()</span></code></a>, then
+Frozen-Flask can discover all URLs automatically and you’re done.</p>
+<p>Otherwise, you may need to write URL generators.</p>
+</div>
+<div class="section" id="url-generators">
+<h2>URL generators<a class="headerlink" href="#url-generators" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say that your application looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">products_list</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">products</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">Product</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/product_&lt;int:product_id&gt;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">product_details</span><span class="p">():</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Product</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">product_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;product.html&#39;</span><span class="p">,</span> <span class="n">product</span><span class="o">=</span><span class="n">product</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If, for some reason, some products pages are not linked from another page
+(or these links are not built by <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">url_for()</span></code></a>), Frozen-Flask will
+not find them.</p>
+<p>To tell Frozen-Flask about them, write an URL generator and put it after
+creating your <a class="reference internal" href="#flask_frozen.Freezer" title="flask_frozen.Freezer"><code class="xref py py-class docutils literal"><span class="pre">Freezer</span></code></a> instance and before calling
+<a class="reference internal" href="#flask_frozen.Freezer.freeze" title="flask_frozen.Freezer.freeze"><code class="xref py py-meth docutils literal"><span class="pre">freeze()</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>
+<span class="k">def</span> <span class="nf">product_details</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">Product</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="n">product</span><span class="o">.</span><span class="n">id</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Frozen-Flask will find the URL by calling <code class="docutils literal"><span class="pre">url_for(endpoint,</span> <span class="pre">**values)</span></code> where
+<code class="docutils literal"><span class="pre">endpoint</span></code> is the name of the generator function and <code class="docutils literal"><span class="pre">values</span></code> is each
+dict yielded by the function.</p>
+<p>You can specify a different endpoint by yielding a <code class="docutils literal"><span class="pre">(endpoint,</span> <span class="pre">values)</span></code>
+tuple instead of just <code class="docutils literal"><span class="pre">values</span></code>, or you can by-pass <code class="docutils literal"><span class="pre">url_for</span></code> and simply
+yield URLs as strings.</p>
+<p>Also, generator functions do not have to be <a class="reference external" href="http://docs.python.org/glossary.html#term-generator">Python generators</a> using <code class="docutils literal"><span class="pre">yield</span></code>,
+they can be any callable and return any iterable object.</p>
+<p>All of these are thus equivalent:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>
+<span class="k">def</span> <span class="nf">product_details</span><span class="p">():</span>  <span class="c1"># endpoint defaults to the function name</span>
+    <span class="c1"># `values` dicts</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">}</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}</span>
+
+<span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>
+<span class="k">def</span> <span class="nf">product_url_generator</span><span class="p">():</span>  <span class="c1"># Some other function name</span>
+    <span class="c1"># `(endpoint, values)` tuples</span>
+    <span class="k">yield</span> <span class="s1">&#39;product_details&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">}</span>
+    <span class="k">yield</span> <span class="s1">&#39;product_details&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}</span>
+
+<span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>
+<span class="k">def</span> <span class="nf">product_url_generator</span><span class="p">():</span>
+    <span class="c1"># URLs as strings</span>
+    <span class="k">yield</span> <span class="s1">&#39;/product_1/&#39;</span>
+    <span class="k">yield</span> <span class="s1">&#39;/product_2/&#39;</span>
+
+<span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>
+<span class="k">def</span> <span class="nf">product_url_generator</span><span class="p">():</span>
+    <span class="c1"># Return a list. (Any iterable type will do.)</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;/product_1/&#39;</span><span class="p">,</span>
+        <span class="c1"># Mixing forms works too.</span>
+        <span class="p">(</span><span class="s1">&#39;product_details&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}),</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Generating the same URL more than once is okay, Frozen-Flask will build it
+only once. Having different functions with the same name is generally a bad
+practice, but still work here as they are only used by their decorators.
+In practice you will probably have a module for your views and another one
+for the freezer and URL generators, so having the same name is not a problem.</p>
+</div>
+<div class="section" id="testing-url-generators">
+<h2>Testing URL generators<a class="headerlink" href="#testing-url-generators" title="Permalink to this headline">¶</a></h2>
+<p>The idea behind Frozen-Flask is that you can <a class="reference external" href="#context">use Flask directly</a> to develop and test your application. However, it is
+also useful to test your <em>URL generators</em> and see that nothing is missing,
+before deploying to a production server.</p>
+<p>You can open the newly generated static HTML files in a web browser, but
+links probably won’t work. The <code class="docutils literal"><span class="pre">FREEZER_RELATIVE_URLS</span></code> <a class="reference internal" href="#configuration">configuration</a>
+can fix this, but adds a visible <code class="docutils literal"><span class="pre">index.html</span></code> to the links.
+Alternatively, use the <a class="reference internal" href="#flask_frozen.Freezer.run" title="flask_frozen.Freezer.run"><code class="xref py py-meth docutils literal"><span class="pre">run()</span></code></a>
+method to start an HTTP server on the build result,
+so you can check that everything is fine before uploading:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">freezer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#flask_frozen.Freezer.run" title="flask_frozen.Freezer.run"><code class="xref py py-meth docutils literal"><span class="pre">Freezer.run()</span></code></a> will freeze your application before serving and when
+the reloader kicks in. But the reloader only watches Python files, not
+templates or static files. Because of that, you probably want to use
+<a class="reference internal" href="#flask_frozen.Freezer.run" title="flask_frozen.Freezer.run"><code class="xref py py-meth docutils literal"><span class="pre">Freezer.run()</span></code></a> only for testing the URL generators. For everything
+else use the usual <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.Flask.run" title="(in Flask v0.12-dev)"><code class="xref py py-meth docutils literal"><span class="pre">app.run()</span></code></a>.</p>
+<p><a class="reference external" href="http://packages.python.org/Flask-Script/">Flask-Script</a> may come in handy
+here.</p>
+</div>
+<div class="section" id="controlling-what-is-followed">
+<h2>Controlling What Is Followed<a class="headerlink" href="#controlling-what-is-followed" title="Permalink to this headline">¶</a></h2>
+<p>Frozen-Flask follows links automatically or with some help from URL generators.
+If you want to control what gets followed, then URL generators should be used
+with the Freezer&#8217;s <code class="docutils literal"><span class="pre">with_no_argument_rules</span></code> and <code class="docutils literal"><span class="pre">log_url_for</span></code> flags.
+Disabling these flags will force Frozen-Flask to use URL generators only. The
+combination of these three elements determines how much Frozen-Flask will
+follow.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Frozen-Flask can be configured using Flask’s <a class="reference external" href="http://flask.pocoo.org/docs/config/">configuration system</a>. The following configuration values
+are accepted:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">FREEZER_BASE_URL</span></code></dt>
+<dd>Full URL your application is supposed to be installed at. This affects
+the output of <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">flask.url_for()</span></code></a> for absolute URLs (with
+<code class="docutils literal"><span class="pre">_external=True</span></code>) or if your application is not at the root of its
+domain name.
+Defaults to <code class="docutils literal"><span class="pre">'http://localhost/'</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_RELATIVE_URLS</span></code></dt>
+<dd><p class="first">If set to <code class="docutils literal"><span class="pre">True</span></code>, Frozen-Flask will patch the Jinja environment so that
+<code class="docutils literal"><span class="pre">url_for()</span></code> returns relative URLs. Defaults to <code class="docutils literal"><span class="pre">False</span></code>.
+Python code is not affected unless you use <a class="reference internal" href="#flask_frozen.relative_url_for" title="flask_frozen.relative_url_for"><code class="xref py py-func docutils literal"><span class="pre">relative_url_for()</span></code></a>
+explicitly. This enables the frozen site to be browsed without a web server
+(opening the files directly in a browser) but appends a visible
+<code class="docutils literal"><span class="pre">index.html</span></code> to URLs that would otherwise end with <code class="docutils literal"><span class="pre">/</span></code>.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.10.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_DEFAULT_MIMETYPE</span></code></dt>
+<dd><p class="first">The MIME type that is assumed when it can not be determined from the
+filename extension. If you’re using the Apache web server, this should
+match the <code class="docutils literal"><span class="pre">DefaultType</span></code> value of Apache’s configuration.
+Defaults to <code class="docutils literal"><span class="pre">application/octet-stream</span></code>.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.7.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_IGNORE_MIMETYPE_WARNINGS</span></code></dt>
+<dd><p class="first">If set to <code class="docutils literal"><span class="pre">True</span></code>, Frozen-Flask won&#8217;t show warnings if the MIME type
+returned from the server doesn&#8217;t match the MIME type derived from the
+filename extension. Defaults to <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.8.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_DESTINATION</span></code></dt>
+<dd>Path to the directory where to put the generated static site. If relative,
+interpreted as relative to the application root, next to the <code class="docutils literal"><span class="pre">static</span></code> and
+<code class="docutils literal"><span class="pre">templates</span></code> directories. Defaults to <code class="docutils literal"><span class="pre">build</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_REMOVE_EXTRA_FILES</span></code></dt>
+<dd><p class="first">If set to <code class="docutils literal"><span class="pre">True</span></code> (the default),
+Frozen-Flask will remove files in the destination directory
+that were not built during the current freeze.
+This is intended to clean up files
+generated by a previous call to <a class="reference internal" href="#flask_frozen.Freezer.freeze" title="flask_frozen.Freezer.freeze"><code class="xref py py-meth docutils literal"><span class="pre">Freezer.freeze()</span></code></a>
+that are no longer needed.
+Setting this to <code class="docutils literal"><span class="pre">False</span></code> is equivalent to
+setting <code class="docutils literal"><span class="pre">FREEZER_DESTINATION_IGNORE</span></code> to <code class="docutils literal"><span class="pre">['*']</span></code>.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.5.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_DESTINATION_IGNORE</span></code></dt>
+<dd><p class="first">A list (defaults empty) of <code class="xref py py-mod docutils literal"><span class="pre">fnmatch</span></code> patterns.
+Files or directories in the destination that match any of the patterns
+are not removed,
+even if <code class="docutils literal"><span class="pre">FREEZER_REMOVE_EXTRA_FILES</span></code> is true.
+As in <code class="docutils literal"><span class="pre">.gitignore</span></code> files,
+patterns apply to the whole path if they contain a slash <code class="docutils literal"><span class="pre">/</span></code>,
+to each slash-separated part otherwise.
+For example, this could be set to <code class="docutils literal"><span class="pre">['.git*']</span></code>
+if the destination is a git repository.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.10.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_STATIC_IGNORE</span></code></dt>
+<dd><p class="first">A list (defaults empty) of <code class="xref py py-mod docutils literal"><span class="pre">fnmatch</span></code> patterns.
+Files served by send_static_file that match any of the patterns
+are not copied to the build directory.
+As in <code class="docutils literal"><span class="pre">.gitignore</span></code> files,
+patterns apply to the whole path if they contain a slash <code class="docutils literal"><span class="pre">/</span></code>,
+to each slash-separated part otherwise.
+For example, this could be set to <code class="docutils literal"><span class="pre">['*.scss']</span></code>
+to stop all SASS files from being frozen.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.12.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_IGNORE_404_NOT_FOUND</span></code></dt>
+<dd><p class="first">If set to <code class="docutils literal"><span class="pre">True</span></code> (defaults False), Frozen-Flask won&#8217;t stop freezing when
+404 error is returned by your application.
+In this case, a warning will be printed on stdout and the static page will
+be generated using your 404 error page handler or flask&#8217;s default one.
+This can be useful during development phase if you have already referenced
+pages which aren&#8217;t written yet.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.12.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal"><span class="pre">FREEZER_REDIRECT_POLICY</span></code></dt>
+<dd><p class="first">The policy for handling redirects. The default is <code class="docutils literal"><span class="pre">'follow'</span></code> which means
+that when a redirect response is encountered it will follow it to get the
+content from the redirected location. <code class="docutils literal"><span class="pre">'ignore'</span></code> will not stop freezing,
+but no content will appear in the redirected location. <code class="docutils literal"><span class="pre">'error'</span></code> will
+raise an exception if a redirect is encountered.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.13.</span></p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="filenames-and-mime-types">
+<span id="mime-types"></span><h2>Filenames and MIME types<a class="headerlink" href="#filenames-and-mime-types" title="Permalink to this headline">¶</a></h2>
+<p>For each generated URL, Frozen-Flask simulates a request and saves the content
+in a file in the <code class="docutils literal"><span class="pre">FREEZER_DESTINATION</span></code> directory. The filename is
+built from the URL. URLs with a trailing slash are interpreted as a directory
+name and the content is saved in <code class="docutils literal"><span class="pre">index.html</span></code>.</p>
+<p>Query strings are removed from URLs to build filenames. For example,
+<code class="docutils literal"><span class="pre">/lorem/?page=ipsum</span></code> is saved to <code class="docutils literal"><span class="pre">lorem/index.html</span></code>. URLs that are only
+different by their query strings are considered the same, and they should
+return the same response. Otherwise, the behavior is undefined.</p>
+<p>Additionally, the extension checks that the filename has an extension that
+matches the MIME type given in the <code class="docutils literal"><span class="pre">Content-Type</span></code> HTTP response header.
+In case of mismatch, the Content-Type that a static web server will send
+will probably not be the one you expect, so Frozen-Flask issues a warning.</p>
+<p>For example, the following views are both wrong:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/lipsum&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">lipsum</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;p&gt;Lorem ipsum, ...&lt;/p&gt;&#39;</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/style.css&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">compressed_css</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;/* ... */&#39;</span>
+</pre></div>
+</div>
+<p>as the default <code class="docutils literal"><span class="pre">Content-Type</span></code> in Flask is <code class="docutils literal"><span class="pre">text/html;</span> <span class="pre">charset=utf-8</span></code>, but
+the MIME types guessed by the Frozen-Flask as well as most web servers from the
+filenames are <code class="docutils literal"><span class="pre">application/octet-stream</span></code> and <code class="docutils literal"><span class="pre">text/css</span></code>.</p>
+<p>This can be fixed by adding a trailing slash to the URL or serving with the
+right <code class="docutils literal"><span class="pre">Content-Type</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Saved as `lipsum/index.html` matches the &#39;text/html&#39; MIME type.</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/lipsum/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">lipsum</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;p&gt;Lorem ipsum, ...&lt;/p&gt;&#39;</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/style.css&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">compressed_css</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;/* ... */&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/css; charset=utf-8&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Alternatively, these warnings can be disabled entirely in the <a class="reference internal" href="#configuration">configuration</a>.</p>
+</div>
+<div class="section" id="character-encodings">
+<h2>Character encodings<a class="headerlink" href="#character-encodings" title="Permalink to this headline">¶</a></h2>
+<p>Flask uses Unicode everywhere internally, and defaults to UTF-8 for I/O.
+It will send the right <code class="docutils literal"><span class="pre">Content-Type</span></code> header with both a MIME type and
+encoding (eg. <code class="docutils literal"><span class="pre">text/html;</span> <span class="pre">charset=utf-8</span></code>). Frozen-Flask will try to
+<a class="reference external" href="#mime-types">preserve MIME&nbsp;types</a> through file extensions, but it can not
+preserve the encoding meta-data. You may need to add the right
+<code class="docutils literal"><span class="pre">&lt;meta&gt;</span></code> tag to your HTML. (You should anyway).</p>
+<p>Flask also defaults to UTF-8 for URLs, so your web server will get URL-encoded
+UTF-8 HTTP requests. It’s up to you to make sure that it converts these to the
+native filesystem encoding. Frozen-Flask always writes Unicode filenames.</p>
+</div>
+<div class="section" id="api-reference">
+<span id="api"></span><h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="flask_frozen.Freezer">
+<em class="property">class </em><code class="descclassname">flask_frozen.</code><code class="descname">Freezer</code><span class="sig-paren">(</span><em>app=None</em>, <em>with_static_files=True</em>, <em>with_no_argument_rules=True</em>, <em>log_url_for=True</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app</strong> (<em>Flask instance</em>) &#8211; your application or None if you use <a class="reference internal" href="#flask_frozen.Freezer.init_app" title="flask_frozen.Freezer.init_app"><code class="xref py py-meth docutils literal"><span class="pre">init_app()</span></code></a></li>
+<li><strong>with_static_files</strong> (<em>boolean</em>) &#8211; Whether to automatically generate URLs
+for static files.</li>
+<li><strong>with_no_argument_rules</strong> (<em>boolean</em>) &#8211; Whether to automatically generate URLs
+for URL rules that take no arguments.</li>
+<li><strong>log_url_for</strong> (<em>boolean</em>) &#8211; <p>Whether to log calls your app makes to
+<a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">url_for()</span></code></a> and generate URLs from that.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.6.</span></p>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="flask_frozen.Freezer.all_urls">
+<code class="descname">all_urls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer.all_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run all generators and yield URLs relative to the app root.
+May be useful for testing URL generators.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This does not generate any page, so URLs that are normally
+generated from <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">url_for()</span></code></a> calls will not be included
+here.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_frozen.Freezer.freeze">
+<code class="descname">freeze</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer.freeze" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean the destination and build all URLs from generators.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_frozen.Freezer.init_app">
+<code class="descname">init_app</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer.init_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow to register an app after the Freezer initialization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> &#8211; your Flask application</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_frozen.Freezer.register_generator">
+<code class="descname">register_generator</code><span class="sig-paren">(</span><em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer.register_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a function as an URL generator.</p>
+<p>The function should return an iterable of URL paths or
+<code class="docutils literal"><span class="pre">(endpoint,</span> <span class="pre">values)</span></code> tuples to be used as
+<code class="docutils literal"><span class="pre">url_for(endpoint,</span> <span class="pre">**values)</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the function, so that it can be used as a decorator</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="flask_frozen.Freezer.root">
+<code class="descname">root</code><a class="headerlink" href="#flask_frozen.Freezer.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absolute path to the directory Frozen-Flask writes to,
+ie. resolved value for the <code class="docutils literal"><span class="pre">FREEZER_DESTINATION</span></code> <a class="reference internal" href="#configuration">configuration</a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_frozen.Freezer.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <a class="reference internal" href="#flask_frozen.Freezer.serve" title="flask_frozen.Freezer.serve"><code class="xref py py-meth docutils literal"><span class="pre">serve()</span></code></a> but calls <a class="reference internal" href="#flask_frozen.Freezer.freeze" title="flask_frozen.Freezer.freeze"><code class="xref py py-meth docutils literal"><span class="pre">freeze()</span></code></a> before serving.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_frozen.Freezer.serve">
+<code class="descname">serve</code><span class="sig-paren">(</span><em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.Freezer.serve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run an HTTP server on the result of the build.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> &#8211; passed to <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.Flask.run" title="(in Flask v0.12-dev)"><code class="xref py py-meth docutils literal"><span class="pre">flask.Flask.run()</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="flask_frozen.walk_directory">
+<code class="descclassname">flask_frozen.</code><code class="descname">walk_directory</code><span class="sig-paren">(</span><em>root</em>, <em>ignore=()</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.walk_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively walk the <cite>root</cite> directory and yield slash-separated paths
+relative to the root.</p>
+<p>Used to implement the URL generator for static files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ignore</strong> &#8211; A list of <code class="xref py py-mod docutils literal"><span class="pre">fnmatch</span></code> patterns.
+As in <code class="docutils literal"><span class="pre">.gitignore</span></code> files,
+patterns that contain a slash are matched against the whole path,
+others against individual slash-separated parts.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="flask_frozen.relative_url_for">
+<code class="descclassname">flask_frozen.</code><code class="descname">relative_url_for</code><span class="sig-paren">(</span><em>endpoint</em>, <em>**values</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_frozen.relative_url_for" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.url_for" title="(in Flask v0.12-dev)"><code class="xref py py-func docutils literal"><span class="pre">url_for()</span></code></a>, but returns relative URLs if possible.</p>
+<p>Absolute URLs (with <code class="docutils literal"><span class="pre">_external=True</span></code> or to a different subdomain) are
+unchanged, but eg. <code class="docutils literal"><span class="pre">/foo/bar</span></code> becomes <code class="docutils literal"><span class="pre">../bar</span></code>, depending on the
+current request context&#8217;s path. (This, of course, requires a Flask
+<a class="reference external" href="http://flask.pocoo.org/docs/reqcontext/#request-context" title="(in Flask v0.12-dev)"><span class="xref std std-ref">request context</span></a>.)</p>
+<p>URLs that would otherwise end with <code class="docutils literal"><span class="pre">/</span></code> get <code class="docutils literal"><span class="pre">index.html</span></code> appended,
+as Frozen-Flask does in filenames. Because of this behavior, this function
+should only be used with Frozen-Flask, not when running the application in
+<a class="reference external" href="http://flask.pocoo.org/docs/api/#flask.Flask.run" title="(in Flask v0.12-dev)"><code class="xref py py-meth docutils literal"><span class="pre">app.run()</span></code></a> or another WSGI sever.</p>
+<p>If the <code class="docutils literal"><span class="pre">FREEZER_RELATIVE_URLS</span></code> <a class="reference internal" href="#configuration">configuration</a> is True, Frozen-Flask
+will automatically patch the application&#8217;s Jinja environment so that
+<code class="docutils literal"><span class="pre">url_for</span></code> in templates is this function.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="version-0-13">
+<h3>Version 0.13<a class="headerlink" href="#version-0-13" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2016-09-30</p>
+<ul class="simple">
+<li>Add the <code class="docutils literal"><span class="pre">FREEZER_REDIRECT_POLICY</span></code> configuration</li>
+</ul>
+</div>
+<div class="section" id="version-0-12">
+<h3>Version 0.12<a class="headerlink" href="#version-0-12" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2015-11-05</p>
+<ul class="simple">
+<li>Add the <code class="docutils literal"><span class="pre">FREEZER_IGNORE_404_NOT_FOUND</span></code> configuration
+(Thanks to Thomas Sarboni.)</li>
+<li>Add the <code class="docutils literal"><span class="pre">FREEZER_STATIC_IGNORE</span></code> configuration
+(Thanks to Alex Guerra.)</li>
+<li>Fix <a class="reference external" href="https://github.com/Frozen-Flask/Frozen-Flask/issues/36">#36</a>:
+Support non-default app.config[&#8216;SERVER_NAME&#8217;].</li>
+</ul>
+</div>
+<div class="section" id="version-0-11">
+<h3>Version 0.11<a class="headerlink" href="#version-0-11" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2013-06-13.</p>
+<ul class="simple">
+<li>Add Python 3.3 support (requires Flask &gt;= 0.10 and Werkzeug &gt;= 0.9)</li>
+<li>Drop Python 2.5 support</li>
+<li>Fix <a class="reference external" href="https://github.com/Frozen-Flask/Frozen-Flask/issues/30">#30</a>:
+<a class="reference internal" href="#flask_frozen.relative_url_for" title="flask_frozen.relative_url_for"><code class="xref py py-func docutils literal"><span class="pre">relative_url_for()</span></code></a> with a query string or URL fragment.</li>
+</ul>
+</div>
+<div class="section" id="version-0-10">
+<h3>Version 0.10<a class="headerlink" href="#version-0-10" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2013-03-11.</p>
+<ul class="simple">
+<li>Add the <code class="docutils literal"><span class="pre">FREEZER_DESTINATION_IGNORE</span></code> configuration
+(Thanks to Jim Gray and Christopher Roach.)</li>
+<li>Add the <code class="docutils literal"><span class="pre">FREEZER_RELATIVE_URLS</span></code> configuration</li>
+<li>Add the <a class="reference internal" href="#flask_frozen.relative_url_for" title="flask_frozen.relative_url_for"><code class="xref py py-func docutils literal"><span class="pre">relative_url_for()</span></code></a> function.</li>
+</ul>
+</div>
+<div class="section" id="version-0-9">
+<h3>Version 0.9<a class="headerlink" href="#version-0-9" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2012-02-13.</p>
+<p>Add <a class="reference internal" href="#flask_frozen.Freezer.run" title="flask_frozen.Freezer.run"><code class="xref py py-meth docutils literal"><span class="pre">Freezer.run()</span></code></a>.</p>
+</div>
+<div class="section" id="version-0-8">
+<h3>Version 0.8<a class="headerlink" href="#version-0-8" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2012-01-17.</p>
+<ul class="simple">
+<li>Remove query strings from URLs to build a file names.
+(Should we add configuration to disable this?)</li>
+<li>Raise a warning instead of an exception for <a class="reference external" href="#mime-types">MIME&nbsp;type mismatches</a>, and give the option to disable them entirely in the
+configuration.</li>
+</ul>
+</div>
+<div class="section" id="version-0-7">
+<h3>Version 0.7<a class="headerlink" href="#version-0-7" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-10-20.</p>
+<ul class="simple">
+<li><strong>Backward incompatible change:</strong> Moved the <code class="docutils literal"><span class="pre">flaskext.frozen</span></code> package
+to <code class="docutils literal"><span class="pre">flask_frozen</span></code>. You should change your imports either to that or
+to <code class="docutils literal"><span class="pre">flask.ext.frozen</span></code> if you’re using Flask 0.8 or more recent.
+See <a class="reference external" href="http://flask.pocoo.org/docs/extensions/">Flask’s documentation</a>
+for details.</li>
+<li>Added FREEZER_DEFAULT_MIMETYPE</li>
+<li>Switch to tox for testing in multiple Python versions</li>
+</ul>
+</div>
+<div class="section" id="version-0-6-1">
+<h3>Version 0.6.1<a class="headerlink" href="#version-0-6-1" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-07-29.</p>
+<p>Re-release of 0.6 with the artwork included.</p>
+</div>
+<div class="section" id="version-0-6">
+<h3>Version 0.6<a class="headerlink" href="#version-0-6" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-07-29.</p>
+<ul class="simple">
+<li>Thanks to Glwadys Fayolle for the new logo!</li>
+<li><strong>Frozen-Flask now requires Flask 0.7 or later</strong>. Please use previous
+version of Frozen-Flask if you need previous versions of Flask.</li>
+<li>Support for Flask Blueprints</li>
+<li>Added the <code class="xref py py-obj docutils literal"><span class="pre">log_url_for</span></code> parameter to <a class="reference internal" href="#flask_frozen.Freezer" title="flask_frozen.Freezer"><code class="xref py py-class docutils literal"><span class="pre">Freezer</span></code></a>. This makes some
+URL generators unnecessary since more URLs are discovered automatically.</li>
+<li>Bug fixes.</li>
+</ul>
+</div>
+<div class="section" id="version-0-5">
+<h3>Version 0.5<a class="headerlink" href="#version-0-5" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-07-24.</p>
+<ul class="simple">
+<li>You can now construct a Freezer and add URL generators without an app, and
+register the app later with <a class="reference internal" href="#flask_frozen.Freezer.init_app" title="flask_frozen.Freezer.init_app"><code class="xref py py-meth docutils literal"><span class="pre">Freezer.init_app()</span></code></a>.</li>
+<li>The <code class="docutils literal"><span class="pre">FREEZER_DESTINATION</span></code> directory is created if it does not exist.</li>
+<li>New configuration: <code class="docutils literal"><span class="pre">FREEZER_REMOVE_EXTRA_FILES</span></code></li>
+<li>Warn if an URL generator seems to be missing. (ie. if no URL was generated
+for a given endpoint.)</li>
+<li>Write Unicode filenames instead of UTF-8. Non-ASCII filenames are often
+undefined territory anyway.</li>
+<li>Bug fixes.</li>
+</ul>
+</div>
+<div class="section" id="version-0-4">
+<h3>Version 0.4<a class="headerlink" href="#version-0-4" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-06-02.</p>
+<ul class="simple">
+<li>Bugfix: correctly unquote URLs to build filenames. Spaces and non-ASCII
+characters should be %-encoded in URLs but not in frozen filenames. (Web
+servers do the decoding.)</li>
+<li>Add a documentation section about character encodings.</li>
+</ul>
+</div>
+<div class="section" id="version-0-3">
+<h3>Version 0.3<a class="headerlink" href="#version-0-3" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-05-28.</p>
+<ul class="simple">
+<li>URL generators can omit the endpoint and just yield <code class="docutils literal"><span class="pre">values</span></code> dictionaries.
+In that case, the name of the generator function is used as the endpoint,
+just like with Flask views.</li>
+<li><a class="reference internal" href="#flask_frozen.Freezer.all_urls" title="flask_frozen.Freezer.all_urls"><code class="xref py py-meth docutils literal"><span class="pre">Freezer.all_urls()</span></code></a> and <a class="reference internal" href="#flask_frozen.walk_directory" title="flask_frozen.walk_directory"><code class="xref py py-func docutils literal"><span class="pre">walk_directory()</span></code></a> are now part of the
+public API.</li>
+</ul>
+</div>
+<div class="section" id="version-0-2">
+<h3>Version 0.2<a class="headerlink" href="#version-0-2" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-02-21.</p>
+<p>Renamed the project from Flask-Static to Frozen-Flask. While we’re at
+breaking API compatibility, <code class="xref py py-func docutils literal"><span class="pre">flaskext.static.StaticBuilder.build()</span></code>
+is now <code class="xref py py-func docutils literal"><span class="pre">flaskext.frozen.Freezer.freeze()</span></code> and the prefix for configuration
+keys is <code class="docutils literal"><span class="pre">FREEZER_</span></code> instead of <code class="docutils literal"><span class="pre">STATIC_BUILDER_</span></code>.
+Other names were left unchanged.</p>
+</div>
+<div class="section" id="version-0-1">
+<h3>Version 0.1<a class="headerlink" href="#version-0-1" title="Permalink to this headline">¶</a></h3>
+<p>Released on 2011-02-06.</p>
+<p>First properly tagged release.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Useful Links</h3>
+<ul>
+  <li><a href="http://flask.pocoo.org/">The Flask Website</a></li>
+  <li><a href="http://pypi.python.org/pypi/Frozen-Flask">
+    Frozen-Flask @ PyPI</a></li>
+  <li><a href="http://github.com/Frozen-Flask/Frozen-Flask">
+    Frozen-Flask @ github</a></li>
+  <li><a href="http://github.com/Frozen-Flask/Frozen-Flask/issues">
+    Issue Tracker</a></li>
+</ul>
+
+<a href="http://github.com/Frozen-Flask/Frozen-Flask"><img
+  style="position: fixed; top: 0; right: 0; border: 0;"
+  src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+  alt="Fork me on GitHub" /></a>
+
+<script type="text/javascript">
+(function() {
+  var d=document,t='script',p=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  p.type='text/javascript';p.async=true;p.src="http://pystil.org/pystil.js";s.parentNode.insertBefore(p,s);
+})();
+</script>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Frozen-Flask</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#context">Context</a></li>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#finding-urls">Finding URLs</a></li>
+<li><a class="reference internal" href="#url-generators">URL generators</a></li>
+<li><a class="reference internal" href="#testing-url-generators">Testing URL generators</a></li>
+<li><a class="reference internal" href="#controlling-what-is-followed">Controlling What Is Followed</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#filenames-and-mime-types">Filenames and MIME types</a></li>
+<li><a class="reference internal" href="#character-encodings">Character encodings</a></li>
+<li><a class="reference internal" href="#api-reference">API reference</a></li>
+<li><a class="reference internal" href="#changelog">Changelog</a><ul>
+<li><a class="reference internal" href="#version-0-13">Version 0.13</a></li>
+<li><a class="reference internal" href="#version-0-12">Version 0.12</a></li>
+<li><a class="reference internal" href="#version-0-11">Version 0.11</a></li>
+<li><a class="reference internal" href="#version-0-10">Version 0.10</a></li>
+<li><a class="reference internal" href="#version-0-9">Version 0.9</a></li>
+<li><a class="reference internal" href="#version-0-8">Version 0.8</a></li>
+<li><a class="reference internal" href="#version-0-7">Version 0.7</a></li>
+<li><a class="reference internal" href="#version-0-6-1">Version 0.6.1</a></li>
+<li><a class="reference internal" href="#version-0-6">Version 0.6</a></li>
+<li><a class="reference internal" href="#version-0-5">Version 0.5</a></li>
+<li><a class="reference internal" href="#version-0-4">Version 0.4</a></li>
+<li><a class="reference internal" href="#version-0-3">Version 0.3</a></li>
+<li><a class="reference internal" href="#version-0-2">Version 0.2</a></li>
+<li><a class="reference internal" href="#version-0-1">Version 0.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2010-2012, Simon Sapin.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </div>
+  
+  </body>
+</html>
