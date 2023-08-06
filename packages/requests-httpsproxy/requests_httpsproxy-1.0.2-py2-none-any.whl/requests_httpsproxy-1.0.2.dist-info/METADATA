@@ -1,0 +1,59 @@
+Metadata-Version: 2.0
+Name: requests-httpsproxy
+Version: 1.0.2
+Summary: allow http/https requests through https proxy
+Home-page: https://github.com/phuslu/requests_httpsproxy
+Author: Phus Lu
+Author-email: phuslu@hotmail.com
+License: MIT
+Keywords: requests https-proxy
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Internet :: WWW/HTTP
+Requires-Dist: pyOpenSSL (>=0.11)
+Requires-Dist: requests (>=2.13.0)
+Requires-Dist: tlslite-ng
+
+==============
+requests-httpsproxy
+==============
+allow http/https requests through https proxy
+
+Requirements
+------------
+* requests >= 2.13.0
+* PyOpenSSL >= 0.11
+* tlslite-ng
+
+Usage
+-----
+
+.. code:: python
+
+  import requests
+
+  import requests_httpsproxy
+  requests_httpsproxy.inject_into_requests()
+
+  https_proxy = 'https://localhost:8443'
+  print (requests.get('https://httpbin.org/ip', proxies={'http':https_proxy, 'https':https_proxy}).text)
+
+
+License
+-------
+MIT
+
+Related issues
+-------
+- https://github.com/kennethreitz/requests/issues/1182
+- https://github.com/kennethreitz/requests/issues/1622
+- https://github.com/kennethreitz/requests/issues/1903
+- https://github.com/kennethreitz/requests/issues/3468
+- https://github.com/kennethreitz/requests/issues/3806
+- https://github.com/kennethreitz/requests/issues/3882
+
+
