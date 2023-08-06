@@ -1,0 +1,62 @@
+#!{{executable}}
+"""
+AXSemantics Data Importer
+=========================
+
+Please use the Settings class below to customize behaviour and proceed
+at your own risk.
+
+This script will upload data found in an excel or json file to a given content project.
+
+Take care to include an 'name' and a 'uid' field in either your data or the
+MAPPING dict if you want to create the Objects.
+
+Required dependencies for excel files:
+    - pandas
+    - xlrd
+"""
+from axsemantics_cli import ImporterSettings, run_importer
+from axsemantics_cli.mapping_helpers import *
+
+
+class Settings(ImporterSettings):
+    # IMPORT_UNCONFIGURED: Boolean
+    #  - True: columns not defined in MAPPING will be camel-cased and imported
+    #  - False: only columns in MAPPING will be imported
+    IMPORT_UNCONFIGURED = True
+
+    # FORCE_MAPPING: Boolean
+    # only import if all keys were mapped in the mapping below.
+    FORCE_MAPPING = False
+
+    # MAPPING: dict
+    #  - {"column name": "datafield name"}: map a column name to a different data field name
+    #  - {"column name": [function, params]}: map a column name to a parsing method (returning a dict)
+    #    the mapping function will be passed the parameters 'field' and 'key' aswell as everything in
+    #    the params dict
+    # left is the name of your excel/json column, right is the configuration (renaming or split).
+    # remember: uid and name *must* be present in the output
+    MAPPING = {
+        'MPID': [int_uid, {}],
+        'Title English': 'name',
+        'Sizes': [splitlist, {'separator': '~'}],
+        'Specification': [splitdata, {'row_separator': '~',
+                                      'value_separator': ':'}]
+    }
+
+    # EXPORT: Boolean
+    #  - set this if you don't want to upload directly
+    #  - True: save things as json instead of creating them
+    #  - False: create things in API
+    EXPORT = False
+
+    # AXSEMANTICS_*: values to use with the axsemantics library
+    AXSEMANTICS_CONTENT_PROJECT = {{content_project}}
+    AXSEMANTICS_TOKEN = '{{authtoken}}'
+    # leave these two blank if you have a token, they will be ignored
+    AXSEMANTICS_USER = '{{username}}'
+    AXSEMANTICS_PASSWORD = '{{password}}'
+
+
+if __name__ == '__main__':
+    run_importer(Settings)
