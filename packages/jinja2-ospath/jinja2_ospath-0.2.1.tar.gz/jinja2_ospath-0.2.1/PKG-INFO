@@ -1,0 +1,49 @@
+Metadata-Version: 1.1
+Name: jinja2_ospath
+Version: 0.2.1
+Summary: A Jinja2 extension that introduces the filters basename and dirname.
+Home-page: https://github.com/Midnighter/jinja2_ospath
+Author: Moritz Emanuel Beber
+Author-email: midnighter@posteo.net
+License: 3-Clause BSD License
+Description: Jinja2 ``os.path`` Filters
+        ==========================
+        
+        A Jinja2 extension that introduces the template filters ``basename`` and
+        ``dirname``.
+        
+        Examples
+        --------
+        
+        .. code:: python
+        
+            my_path = "/some/absolute/path/with/file.txt"
+            {{ my_path | basename }}
+        
+        Will fill in ``file.txt``.
+        
+        .. code:: python
+        
+            my_path = "/some/absolute/path/with/file.txt"
+            {{ my_path | dirname }}
+        
+        Will fill in ``/some/absolute/path/with``.
+        
+        Copyright and Licensing
+        -----------------------
+        
+        -  Copyright 2017, `Moritz Emanuel Beber <mailto:midnighter@posteo.net>`__
+        -  Free software: `3-Clause BSD License <LICENSE>`__
+        
+Keywords: jinja2 extension os.path dirname basename
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
