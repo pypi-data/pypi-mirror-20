@@ -1,0 +1,70 @@
+namae
+========================================
+
+titlize/untitlize
+
+
+.. code-block:: python
+
+  from namae import titlize, untitlize
+
+  assert titlize("foo") == "Foo"
+  assert untitlize("Foo") == "foo"
+
+
+pascalcase/camelcase/snakecase/kebabcase
+
+.. code-block:: python
+
+  assert pascalcase("foo-bar") == "FooBar"
+  assert camelcase("foo-bar") == "fooBar"
+
+  assert snakecase("IpAddress") == "ip_address"
+  assert snakecase("IPAddress") == "ip_address"
+  assert kebabcase("IPAddress") == "ip-address"
+  assert lispcase("IPAddress") == "ip-address"
+
+normalize
+
+.. code-block:: python
+
+  from namae import normalize
+
+  # hyphen
+  assert normalize("foo-bar") == "foo_bar"
+
+  # invalid prefix
+  assert normalize("foo123") == "foo123"
+  assert normalize("123foo") == "n123foo"
+  assert normalize("+1") == "x1"
+  assert normalize("-1") == "x_1"
+
+  # python's keyword
+  assert normalize("while") == "while_"
+  assert normalize("def") == "def_"
+
+
+appendix
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+goname
+
+.. code-block:: python
+
+  from namae.go import goname
+
+  assert goname("foo-bar-boo") == 'FooBarBoo'
+  assert goname("foo_bar_boo") == 'FooBarBoo'
+
+  assert goname("api") == 'API'
+  assert goname("id") == 'ID'
+  assert goname("fooid") == 'Fooid'
+  assert goname("foo_id") == 'FooID'
+  assert goname("1times") == 'OneTimes'
+  assert goname("9times") == 'NineTimes'
+  assert goname("10times") == 'Num10Times'
+
+
+
+
+
