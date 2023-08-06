@@ -1,0 +1,131 @@
+<html>
+<body>
+<canvas id="canvas" width="200" height="200" style="border:1px solid #000000;"></canvas>
+<form name="form1" method="post">
+Name: <input type="text" name="name" id="input1" value=""> </br>
+<input name="Button1" type="button" value="connect" onclick="send(1)"/>
+<input name="Button2" type="button" value="disconnect" onclick="send(0)"/>
+<input name="Button3" type="button" value="add" onclick="add()"/>
+</form>
+<script language="javascript" type="text/javascript" src="KB.js"></script>
+<script language="javascript" type="text/javascript">
+
+function send(c)
+{
+	var xmlhttp = new XMLHttpRequest()
+	xmlhttp.open('POST', '/', false)
+	var s=JSON.stringify(KB)
+	xmlhttp.send("KB="+s+";c="+c)
+	if(xmlhttp.status == 200)
+	{
+		s=xmlhttp.responseText
+		KB=JSON.parse(s)
+		//alert(s)
+		build()
+	}
+}
+
+function add()
+{
+KB[document.form1.input1.value]={"x": 95, "y": 95, "s": 0, "n": []}
+build()
+}
+
+function click(e)
+{
+	var pos = getMousePos(canvas, e)
+	var i=find(pos.x, pos.y)
+	if (i!="")
+	{
+		if (KB[i].s==1)
+		{
+		context.fillStyle = "#FFF"
+		context.fillRect(KB[i].x, KB[i].y, 10, 10)
+		KB[i].s=0
+		}
+		else
+		{
+		context.fillStyle = "#000"
+		context.fillRect(KB[i].x, KB[i].y, 10, 10)
+		KB[i].s=1
+		}
+	}
+}
+
+function find(x,y)
+{
+	for (var i in KB)	
+	{
+		xi=KB[i].x
+		yi=KB[i].y
+		if  ((x>xi && x<xi+10) && (y>yi && y<yi+10))
+			return i
+	}
+	return ""
+}
+
+function mousemove(e)
+{
+	var pos = getMousePos(canvas, e)
+	var k=find(pos.x,pos.y)
+	document.form1.input1.value=k
+	
+	if (mdown==true && draged!="")
+	{
+		KB[draged].x=pos.x
+		KB[draged].y=pos.y
+		build()
+	}
+	
+}
+
+function mousedown(e)
+{
+	var pos = getMousePos(canvas, e)
+	draged=find(pos.x,pos.y)
+	mdown=true
+}
+
+function mouseup(e)
+{
+	draged=""
+	mdown=false
+}
+
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {x: evt.clientX - rect.left, y: evt.clientY - rect.top}
+}
+
+function build()
+{
+	context.beginPath()
+	context.clearRect(0, 0, canvas.width, canvas.height)
+	
+	for (var i in KB)
+	{
+		context.strokeRect(KB[i].x, KB[i].y, 10, 10)
+		context.fillText(i, KB[i].x+11, KB[i].y+7)  
+		for (var j=0;  j<KB[i].n.length;  j++)
+		{
+			k=KB[i].n[j]
+			context.moveTo(KB[i].x+5, KB[i].y+5)
+			context.lineTo(KB[k].x+5, KB[k].y+5)
+			context.stroke()
+		}
+	}	
+}
+
+var canvas = document.getElementById("canvas")
+var context = canvas.getContext("2d")
+canvas.addEventListener('mousemove', mousemove) 
+canvas.addEventListener('click', click) 
+var mdown=false
+var draged=""
+canvas.addEventListener('mousedown', mousedown) 
+canvas.addEventListener('mouseup', mouseup) 
+build()
+
+</script>
+</body>
+</html>
