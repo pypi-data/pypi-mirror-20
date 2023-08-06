@@ -1,0 +1,23 @@
+Metadata-Version: 2.0
+Name: TracPendingTicket
+Version: 1.2.0
+Summary:     Switch from 'pending' status to a configurable status when the
+    reporter responds to a ticket.
+    
+Home-page: https://trac-hacks.org/wiki/PendingTicketPlugin
+Author: Ryan J Ollos
+Author-email: ryan.j.ollos@gmail.com
+License: BSD
+Keywords: trac plugin pending ticket
+Platform: UNKNOWN
+Classifier: Framework :: Trac
+Requires-Dist: Trac
+
+A Trac plugin that will switch the ticket status from 'pending' to the value stored in:
+
+[ticket]
+pending_removal_status = new
+
+when the reporter responds to it.
+
+
