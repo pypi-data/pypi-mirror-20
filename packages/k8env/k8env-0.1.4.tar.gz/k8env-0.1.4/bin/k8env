@@ -1,0 +1,41 @@
+#!/bin/bash -i
+
+USAGE="k8env manages Kubernetes contexts.
+
+usage: k8env [--help] [OPTIONS] CONTEXT
+
+Options:
+
+    --list: List all available contexts.
+"
+
+function list_context() {
+    kubectl config view --output=json | python -c "import json; import sys; print(json.dumps(json.loads(sys.stdin.read()).get('contexts', {}), indent=4))"
+}
+
+if [ "$1" == "--list" ] || [ "$1" == "-l" ]; then
+    list_context;
+    exit;
+fi;
+
+if [ -z "$1" ] || [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+    echo "$USAGE";
+    exit;
+fi;
+
+KUBECONTEXT=$1
+
+if [ -z "$PREV_PS1" ]; then
+    PREV_PS1="$PS1";
+fi;
+NEW_PS1="(k8:$KUBECONTEXT)$PREV_PS1";
+
+echo "
+    alias kubectl='$(which kubectl) --context $KUBECONTEXT';
+    export PREV_PS1='$PREV_PS1';
+    export PS1='$NEW_PS1';
+" > ~/.k8env_init
+
+bash --init-file ~/.k8env_init -i
+
+rm ~/.k8env_init
