@@ -1,0 +1,22 @@
+Metadata-Version: 2.0
+Name: bay
+Version: 2.0.0
+Summary: UNKNOWN
+Home-page: UNKNOWN
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: attrs
+Requires-Dist: Click (>=6.6)
+Requires-Dist: PyYAML
+Requires-Dist: docker-py (>=1.6)
+Requires-Dist: dockerpty (==0.4.1)
+Requires-Dist: scandir
+Requires-Dist: requests (<2.11.0)
+Provides-Extra: spell
+Requires-Dist: pylev; extra == 'spell'
+
+UNKNOWN
+
+
