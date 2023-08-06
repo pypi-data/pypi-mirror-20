@@ -1,0 +1,21 @@
+<ul>{% for key, doclist in bysec.items() %}
+  <li>{{key}}{% for doc in doclist %}
+    <hr>
+    <dl>
+      <dt>Title</dt><dd>{{doc.title}}</dd>
+      <dt>Document ID</dt><dd>{{doc.slug}}</dd>
+      <dt>Document URL</dt><dd><a href="{{doc.published_url}}">URL</a></dd>
+      <dt>Github Repo URL</dt><dd><a href="{{doc.doc_repo}}">GitHub</a></dd>
+      <dt>Dashboard</dt><dd><a href="{{doc.dashboard}}">Dashboard</a></dd>
+      <!-- doesn't exist!
+      <dt>Last Modified</dt><dd>FIXME</dd>
+      -->
+      <dt>Authors</dt><dd>
+        <ul>{% for author in doc.authors %}
+	  <li>{{author}}</li>{% endfor %}
+	</ul></dd>
+      <dt>
+      <dt>Description</dt><dd>{{doc.description}}</dd>
+    </dl>{% endfor %}
+  </li>{% endfor %}
+</ul>
