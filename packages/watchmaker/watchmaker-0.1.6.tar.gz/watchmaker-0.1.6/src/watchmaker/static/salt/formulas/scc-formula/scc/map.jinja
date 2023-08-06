@@ -1,0 +1,33 @@
+{#-
+    Establish 'scc' dictionary. Cross-platform defaults are in the 'base' key.
+    Platform-specific defaults are selected by the 'os_family' grain, combined
+    with 'base', and merged with the pillar dictionary 'scc:lookup'.
+-#}
+
+{%- set version = salt.pillar.get('scc:lookup:version', '') -%}
+
+{%- set scc = salt['grains.filter_by']({
+    'base': {
+        'outputdir' : '',
+        'content' : [],
+        'pkg' : {},
+    },
+    'Windows' : {
+        'name' : 'scc',
+        'cwd' : 'C:\\Program Files (x86)\\SCAP Compliance Checker ' ~ version,
+        'cmd' : 'cscc.bat',
+        'cachedir' : opts['cachedir'] ~ '\\files\\base\\scc\\sccfiles',
+        'ossep' : '\\',
+        'version' : version,
+    },
+    'RedHat' : {
+        'name' : 'spawarscc',
+        'cwd' : '/opt/scc',
+        'cmd' : './cscc',
+        'cachedir' : opts['cachedir'] ~ '/files/base/scc/sccfiles',
+        'ossep' : '/',
+        'version' : '',
+    } },
+    grain='os_family',
+    merge=salt['pillar.get']('scc:lookup', {}),
+    base='base') %}
