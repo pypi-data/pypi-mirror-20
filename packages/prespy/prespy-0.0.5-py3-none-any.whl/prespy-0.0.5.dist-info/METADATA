@@ -1,0 +1,42 @@
+Metadata-Version: 2.0
+Name: prespy
+Version: 0.0.5
+Summary: Package for working with the Neurobehavioural Systems Presentation logfiles within python
+Home-page: https://github.com/gjcooper/prespy
+Author: Gavin Cooper
+Author-email: gjcooper@gmail.com
+License: GPL v2.0
+Keywords: Presentation,NBS,logfile
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: cycler (==0.10.0)
+Requires-Dist: matplotlib (==2.0.0)
+Requires-Dist: numpy (==1.12.0)
+Requires-Dist: pyparsing (==2.1.10)
+Requires-Dist: python-dateutil (==2.6.0)
+Requires-Dist: pytz (==2016.10)
+Requires-Dist: scipy (==0.18.1)
+Requires-Dist: six (==1.10.0)
+
+prespy
+======
+
+Details
+-------
+
+A currently rough collection of modules and scripts for working with the
+NBS Presentation data in various ways.
+
+Requirements
+------------
+
+The following are required by certain elements of the package and may
+need to be installed separately if you are using them.
+
+-  numpy (required by mri module and scla subpackage
+-  scipy (required by scla subpackage)
+-  matplotlib (required by scla subpackage)
+
+
