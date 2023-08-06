@@ -1,0 +1,72 @@
+﻿.. PySptools documentation master file, created by
+   sphinx-quickstart on Sun Sep 29 09:27:46 2013.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. meta::
+	:description: Python tools for hyperspectral imaging
+	:keywords: python, hyperspectral imaging, signal processing, library, software, endmembers, unmixing, pysptools, sam, sid, atgp, N-FINDR, NFINDR, spectroscopy, target detection, georessources, geoimaging, chemical imaging, pharmaceutical, pharma, minerals, spectral, remote sensing, hyperspectral drill core imaging
+
+Welcome to the PySptools Documentation
+**************************************
+
+Tools for hyperspectral imaging ::
+
+	Documentation at 2017-03-22. Version 0.14.1 coming soon.
+
+.. figure:: ./pic/pic_burner1.png
+   :scale: 100 %
+   :align: center
+   :alt: stacked abundance maps
+
+Hyperspectral imaging is used to **visualize chemistry**, the spatial relation between chemicals and the proportion of them. PySptools is a python module that implements spectral and hyperspectral algorithms. Specializations of the library are the endmembers extraction, unmixing process, supervised classification, target detection, noise reduction, convex hull removal and features extraction at spectrum level. The library is designed to be easy to use and almost all functionality has a plot function to save you time with the data analysis process. The actual sources of the algorithms are the Matlab Hyperspectral Toolbox of Isaac Gerg, the pwctools of M. A. Little, the Endmember Induction Algorithms toolbox (EIA), the HySime Matlab module of José Bioucas-Dias and José Nascimento and research papers. You can download PySptools from the PySptools
+Project Page hosted by Sourceforge.net or from the pypi packages repository.
+
+`My personal web site <http://ctherien.netlify.com/>`_ 
+
+What's New : version 0.14.1 (beta)
+==================================
+
+This is a clean up of the sklearn module, before adding more functionalities. Here a summary:
+
+* Improvements to HyperEstimatorCrossVal, no more warnings.
+* Move: classification.KMeans moved to sklearn.KMeans, all stay the same.
+* Remove: classification.SVC, it is replaced with sklearn.HyperSVC.
+* New: sklearn.HyperGradientBoostingClassifier.
+* New: sklearn.hyper_scale function, call preprocessing.scale at a hypercube.
+* New: sklearn.shape_to_XY function, shape and concatenate hypercubes and cmaps to output X and y.
+* New: an example using HyperRandomForestClassifier, see :download:`example with HyperRandomForestClassifier <../../examples/nbex_skl_snow_rforest.html>`.
+* New: a class method plot_feature_importances used by HyperRandomForestClassifier and HyperGradientBoostingClassifier.
+
+Issue: the class classification.Output don't seem to work with the latest Matplotlib version 2.0.0. Use previous version 1.5.3.
+
+Documentation
+=============
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction
+   installation
+   examples_front
+   abundance_maps
+   classification
+   noise
+   detection
+   distance
+   eea
+   material_count
+   sigproc
+   sklearn
+   spectro
+   util
+   glossary
+   links
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
