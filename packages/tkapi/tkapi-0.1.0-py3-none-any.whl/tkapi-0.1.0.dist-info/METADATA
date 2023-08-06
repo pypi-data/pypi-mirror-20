@@ -1,0 +1,38 @@
+Metadata-Version: 2.0
+Name: tkapi
+Version: 0.1.0
+Summary: An OpenSSL-based file encryption and decryption utility
+Home-page: https://github.com/openkamer/tkapi
+Author: Open Kamer
+Author-email: info@openkamer.org
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: requests (>=2.13.0)
+
+tkapi
+=====
+
+Python bindings for the Tweede Kamer OData API.
+
+Requires Python 3.3+
+
+WARNING: This is a work in progress.
+
+Tests
+-----
+
+Run all tests,
+
+::
+
+    $ python -m unittest discover
+
+xml viewers
+^^^^^^^^^^^
+
+-  http://xmlgrid.net/
+
+
