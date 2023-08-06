@@ -1,0 +1,46 @@
+Metadata-Version: 2.0
+Name: shipami
+Version: 0.0.1a6
+Summary: CLI tool to manage AWS AMI and Marketplace
+Home-page: http://github.com/wnkz/shipami
+Author: wnkz
+Author-email: wnkz@users.noreply.github.com
+License: MIT
+Download-URL: https://github.com/wnkz/shipami/archive/0.0.1-alpha.6.tar.gz
+Keywords: aws ec2 ami marketplace
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: boto3
+Requires-Dist: botocore
+Requires-Dist: click
+
+shipami
+=======
+
+|Version|
+
+CLI tool to manage AWS AMI and Marketplace
+
+
+.. |Version| image:: http://img.shields.io/pypi/v/shipami.svg?style=flat
+    :target: https://pypi.python.org/pypi/shipami/
+    :alt: Version
+
+Install
+-------
+
+.. code-block:: sh
+
+    $ pip install shipami
+
+
