@@ -1,0 +1,52 @@
+Metadata-Version: 1.1
+Name: ujsonDB
+Version: 0.1.0
+Summary: A lightweight and simple database using ujson.
+Home-page: https://github.com/netspool/ujsondb
+Author: Harrison Erd / Dainis Karakulko
+Author-email: dennis.karakulko@gmail.com
+License: three-clause BSD
+Description: 
+        ujsonDB
+        --------
+        
+        ujsonDB is lightweight, fast, and simple database based on Python's own
+        json module. And it's BSD licensed!
+        
+        ujsonDB is Fun
+        ```````````````
+        
+        ::
+        
+            >>> import ujsondb
+        
+            >>> db = jsondb.load('test.db', False)
+        
+            >>> db.set('key', 'value')
+        
+            >>> db.get('key')
+            'value'
+        
+            >>> db.dump()
+            True
+        
+        
+        And Easy to Install
+        ```````````````````
+        
+        ::
+        
+            $ pip install ujsondb
+        
+        Links
+        `````
+        
+        * `website <http://packages.python.org/ujsonDB/>`_
+        * `documentation <http://packages.python.org/ujsonDB/commands.html>`_
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Database
