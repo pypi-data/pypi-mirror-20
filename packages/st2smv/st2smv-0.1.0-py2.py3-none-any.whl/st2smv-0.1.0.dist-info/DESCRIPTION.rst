@@ -1,0 +1,63 @@
+Overview
+========
+
+``st2smv`` is a tool for converting programmable logic controller (PLC)
+code to a formal model, and checking whether the model satisfies various
+properties (e.g., temporal logic specifications). As its name implies,
+``st2smv`` can process PLC code written in a subset of the Structured
+Text (ST) programming language, and produces models in the SMV language.
+
+Basic Use
+=========
+
+Run the command
+
+.. code:: bash
+
+    st2smv --help
+
+to see a summary of how to use ``st2smv``.
+
+Structure of the Model
+======================
+
+In progress...
+
+Advanced Use
+============
+
+In progress...
+
+Installation
+============
+
+To install ``st2smv``, run the command
+
+.. code:: bash
+
+    pip install st2smv_directory
+
+where ``st2smv_directory`` is the location of this directory (i.e., the
+directory that contains the file ``setup.py``). In the future,
+``st2smv`` will be available from the Python Package Index (PyPI), so
+that it can be installed by running ``pip install st2smv`` from a
+computer with internet access.
+
+Dependencies
+------------
+
+``st2smv`` converts PLC code to a formal model, which then must be
+analyzed using a solver. The current version of ``st2smv`` produces
+models that can be analyzed using
+`SynthSMV <https://bitbucket.org/blakecraw/synthsmv>`__, which must be
+installed separately. `NuSMV <http://nusmv.fbk.eu>`__ (which SynthSMV is
+based on) can be used to check some, but not all, of the models that
+``st2smv`` produces.
+
+License
+=======
+
+`GPLv3+ <https://www.gnu.org/licenses/gpl.html>`__: The GNU General
+Public License, version 3, or (at your option) any later version.
+
+
