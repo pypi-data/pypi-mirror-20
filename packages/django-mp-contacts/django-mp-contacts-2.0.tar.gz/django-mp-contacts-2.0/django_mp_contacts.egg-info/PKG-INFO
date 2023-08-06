@@ -1,0 +1,56 @@
+Metadata-Version: 1.1
+Name: django-mp-contacts
+Version: 2.0
+Summary: Django contacts app
+Home-page: https://github.com/pmaigutyak/mp-contacts
+Author: Paul Maigutyak
+Author-email: pmaigutyak@gmail.com
+License: MIT
+Download-URL: https://github.com/pmaigutyak/mp-contacts/archive/2.0.tar.gz
+Description: # MP-Contacts
+        
+        Django contacts app.
+        
+        ### Installation
+        
+        Install with pip:
+        
+        ```sh
+        $ pip install django-mp-contacts
+        ```
+        
+        Add contacts to urls.py:
+        
+        ```
+        urlpatterns += i18n_patterns(
+            
+            url(r'^contacts/', include('contacts.urls', namespace='contacts')),
+            
+        )
+        ```
+        
+        Add contacts to settings.py:
+        ```
+        INSTALLED_APPS = [
+            'contacts',
+            'captcha',
+        ]
+        
+        NOCAPTCHA = True
+        RECAPTCHA_PUBLIC_KEY = '***************************************'
+        RECAPTCHA_PRIVATE_KEY = '*****************************************'
+        ```
+        
+        Run migrations:
+        ```
+        $ python manage.py migrate
+        ```
+        
+        ### Requirements
+        
+        App require this packages:
+        
+        * django-recaptcha
+        * django-widget-tweaks
+        
+Platform: UNKNOWN
