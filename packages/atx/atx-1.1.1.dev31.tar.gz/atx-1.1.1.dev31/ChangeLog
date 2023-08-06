@@ -1,0 +1,57 @@
+CHANGES
+=======
+
+* update requirements
+* fix last fix
+* update facebook wda deps
+* ignore remove tmp file error, instead give a warn, close #69
+* fix last update, some xiaomi machine fail to run uiautomator
+* update atx uiautomator
+* disable system encoding check
+* update wda version
+* update wda requirements
+* add dump_view api
+* use BytesIO instead of Image.load to make sure delete image file works
+* adb install doesn’t accept parameters like ‘adb install -rt some.apk’, but ‘adb install -r -t some.apk’ just works fine. fix NetEaseGame/AutomatorX#100 (#101)
+* fix screenshot error in py3, fix #98
+* add python -matx doctor
+* fix issue according to https://docs.python.org/2/library/subprocess.html#frequently-used-arguments
+* make cli support py3, close #95
+* remove all image_path relative code
+* update facebook-wda requirements
+* update report.info close #93
+* add testerhome ios api link
+* update doc
+* fix all the python3 needed
+* make it support python3
+* add attach and activity params to chromedriver
+* fix command line pipe error
+* add chromedriver extension
+* fix install command bad name
+* update api doc
+* fix report
+
+1.1.0
+-----
+
+* remove watcher, add keep_screen to doc
+* update facebook wda deps
+* add adb shell input method back to atx
+* update requirements
+* update wiki with encoding, prepare for python3
+* support auto find files with pattern: fight@auto.png
+* update assert_ui_exists code, fix ios display()
+* add ios support for assert_ui_exists
+* fix session error
+* do not add session when start
+* add type for iOS support
+* fix python -matx minicap install failed, because of minicap binary link gone
+* update readme, close #82
+* remove duplicate code
+* add webdriver screenshot support
+* quick horiable fix for android UIAutomator json rpc error
+* sync wda code, close #79
+* add assert_ui_exists api
+* comment record(cmd) because of unstable
+* change type error
+* try to take screenshot again, when the first screenshot failed
