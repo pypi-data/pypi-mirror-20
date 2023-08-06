@@ -1,0 +1,19 @@
+# ignore settings so we don't accidently commit an API key
+settings.cfg
+*.cache
+*.pyc
+.directory
+*.wpr
+*.wpu
+*.bak
+.tox
+build
+dist
+MANIFEST
+_build
+*.egg-info
+.coverage
+.orig
+.idea
+tests/__pycache__/
+weatheralerts/__pycache__/

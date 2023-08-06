@@ -1,0 +1,18 @@
+language: python
+python:
+- '2.7'
+- '3.5'
+- '3.6'
+- nightly
+install: pip install -r requirements.txt
+script: nosetests
+deploy:
+  provider: pypi
+  user: zebpalmer
+  password:
+    secure: GUSiAV94dpkdoBLRf5D5wGtqToX7O956eM5bbJFZ9PZT6UzihJEeUSxy+Hf7sikoBwo6iW6joe4f2vZlCyw4uzoqBNTP3ow80Rxm00D6weIxzY8nD/KIzVU7/zkujLOIjdHlKuiK2KQrKhL20wPyUhqqKh2p+YytrC/VXqHUEcEknzO53eOE5VzEsoOewGe7NKtKwbcbnuDiCEUf6nvFNqG/ySlpDvNuQcYOMreCQ8kFQCCdpNkDuICDJTL/m3E51ZoOR09xDoPpvKJTvKGZDTNvsjNKlBJcvg5CaC25DdhksfUJxm9LbS6kmpBSLrrJ2vGm29Wkd+pND6C1dx0ayQh20XUaleHc5lrxPZDDHCNhh+k1qSLPNvS6rNcwzhzWfsf+u2MZlwQ3LWUKzQrRT4N/e1rPCdjyX70XhvigWRR8aop1qtZQe5J9hfpjD+zflQHEymqA9UMxmhe6cXxmUjrqOzOjycCUtq+RRmcNW5wuUXZmA/I2E2NtFdfVxTT8FWaviZexs4JZ3DxOZtRduXV4vcdem1OOv1PLksDqDspurRZQjf0kOtM6eBo1xRIcJmpYDiGnPdfBlOyO4N2j7xWb+6Sn14Vs/e8rc1K71BzMJlIso46ftPInVLeTy77n0c93OiC222lDcT4a8NaEYReMOCRHYNOg38zOh8jMTqU=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: zebpalmer/WeatherAlerts
+    condition: $TOXENV == py27
