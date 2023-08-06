@@ -1,0 +1,1 @@
+kerviSocketAddress='192.168.50.78:9000';
