@@ -1,0 +1,33 @@
+Metadata-Version: 1.1
+Name: fbscraper
+Version: 1.0
+Summary: A cli script that scrapes images and videos from a Facebook profile
+Home-page: UNKNOWN
+Author: onyeabor
+Author-email: onyeabor@riseup.net
+License: MIT
+Description: # fbscraper
+        Scrape all images and videos from a facebook profile.
+        
+        Requirements:
+        - python3.4+
+        - A backend for `pyvirtualdisplay` such as `xvfb` or `xserver-xephyr` (sudo
+          apt-get install xvfb xserver-xephyr)
+        - Chrome webdriver
+          (https://sites.google.com/a/chromium.org/chromedriver/downloads)
+        
+        Setup:
+        
+        `sudo python3 setup.py install`
+        
+        
+        
+        
+Keywords: facebook scraper scraping
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Utilities
