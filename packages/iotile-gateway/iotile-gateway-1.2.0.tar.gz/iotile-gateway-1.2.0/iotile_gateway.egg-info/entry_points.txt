@@ -1,0 +1,6 @@
+[console_scripts]
+iotile-gateway = iotilegateway.main:main
+
+[iotile.gateway_agent]
+websockets = iotilegateway.ws_agent:WebSocketGatewayAgent
+
