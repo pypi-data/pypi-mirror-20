@@ -1,0 +1,22 @@
+#!/usr/bin/env python2
+
+import argparse
+
+from graaf import Processor
+from graaf.simple_md import SimpleMarkdown
+
+
+parser = argparse.ArgumentParser(prog='graaf',
+                                 description='Graaf static site generator.')
+parser.add_argument('--source', '-s', metavar='SRC', default='pages/',
+                    help='Root of source documents.')
+parser.add_argument('--dest', '-d', metavar='DEST', default='assets/',
+                    help='Directory to output generated files to.')
+parser.add_argument('--templates', '-t', metavar='TMPL', default='templates/',
+                    help='Directory to search for templates in.')
+
+
+args = parser.parse_args()
+
+cmd = Processor(args.source, args.dest, args.templates, [SimpleMarkdown()])
+cmd.run()
