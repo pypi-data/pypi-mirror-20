@@ -1,0 +1,79 @@
+Metadata-Version: 2.0
+Name: python-composite
+Version: 0.1.0
+Summary: Declarative work with nested documents (JSON, XML, etc)
+Home-page: UNKNOWN
+Author: Nickolas Fox <tarvitz@blacklibrary.ru>
+Author-email: tarvitz@blacklibrary.ru
+License: MIT license
+Download-URL: https://github.com/tarvitz/composite/archive/master.zip
+Platform: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Natural Language :: English
+Classifier: Topic :: Utilities
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: lxml
+Requires-Dist: six
+
+Python composite
+================
+
+.. image:: https://travis-ci.org/tarvitz/composite.svg?branch=master
+    :target: https://travis-ci.org/tarvitz/composite
+
+
+.. image:: https://coveralls.io/repos/github/tarvitz/composite/badge.svg?branch=master
+  :target: https://coveralls.io/github/tarvitz/composite?branch=master
+
+.. image:: https://badge.fury.io/py/python-composite.svg
+  :target: http://badge.fury.io/py/python-composite
+
+.. image:: https://readthedocs.org/projects/python-composite/badge/?version=latest
+  :target: http://python-composite.readthedocs.org/en/latest/?badge=latest
+  :alt: Documentation Status
+
+.. contents::
+  :local:
+  :depth: 1
+
+Declarative XML files parse, unparse with help of lxml library
+
+License
+-------
+MIT
+
+Dependencies
+------------
+- python-2.7
+- python-3.3+ (including 3.5)
+
+apps
+~~~~
+- six
+- lxml (further release would be optional)
+
+Tests
+-----
+- `tox <http://tox.testrun.org/>`_
+- ``python setup.py test``
+
+Documentation
+-------------
+You can find docs here
+`read the docs <http://python-composite.readthedocs.org/en/latest/?badge=latest>`_
+
+Example
+-------
+
+http://python-composite.readthedocs.org/en/latest/examples.html
+
