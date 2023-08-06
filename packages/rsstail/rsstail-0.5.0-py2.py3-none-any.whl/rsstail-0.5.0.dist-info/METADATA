@@ -1,0 +1,59 @@
+Metadata-Version: 2.0
+Name: rsstail
+Version: 0.5.0
+Summary: A command-line syndication feed monitor mimicking tail -f
+Home-page: https://github.com/gvalkov/rsstail.py
+Author: Georgi Valkov
+Author-email: georgi.t.valkov@gmail.com
+License: Revised BSD License
+Keywords: rss tail feed feedparser
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: Topic :: Utilities
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Development Status :: 5 - Production/Stable
+Requires-Dist: feedparser (>=5.2.1)
+Provides-Extra: devel
+Requires-Dist: sphinx (>=1.4.6); extra == 'devel'
+Requires-Dist: alabaster (>=0.7.3); extra == 'devel'
+Requires-Dist: bumpversion (>=0.5.3); extra == 'devel'
+Requires-Dist: check-manifest (>=0.35); extra == 'devel'
+Requires-Dist: readme-renderer (>=16.0); extra == 'devel'
+Requires-Dist: flake8; extra == 'devel'
+Requires-Dist: pep8-naming; extra == 'devel'
+Provides-Extra: test
+Requires-Dist: tox (>=2.6.0); extra == 'test'
+Requires-Dist: pytest (>=3.0.3); extra == 'test'
+Requires-Dist: scripttest (>=1.3); extra == 'test'
+Requires-Dist: pytest-cov (>=2.3.1); extra == 'test'
+
+*Rsstail*
+----------
+
+*Rsstail* is a command-line syndication feed monitor with behaviour
+similar to ``tail -f``. *Rsstail* (Python/feedparser_) is inspired by
+rsstail_ (C/libmrss_), but provides more customizable output
+formatting and additional features.
+
+Documentation:
+    http://python-rsstail.readthedocs.org/en/latest/
+
+Development:
+    https://github.com/gvalkov/rsstail.py
+
+Package:
+    http://pypi.python.org/pypi/rsstail
+
+.. _rsstail:    http://www.vanheusden.com/rsstail/
+.. _feedstail:  http://pypi.python.org/pypi/feedstail/
+.. _libmrss:    http://www.autistici.org/bakunin/libmrss/doc/
+.. _feedparser: https://pypi.python.org/pypi/feedparser
+
+
