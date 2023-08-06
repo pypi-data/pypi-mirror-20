@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: SAS-kernel
+Version: 2.1.0
+Summary: A SAS kernel for Jupyter
+Home-page: https://github.com/sassoftware/sas_kernel
+Author: Jared Dean
+Author-email: jared.dean@sas.com
+License: Apache Software License
+Description: A simple IPython/Jupyter kernel for SAS
+        
+        This requires IPython 3 or higher.
+        
+        To use it, install with ``pip install sas_kernel``, and then run one of:
+        
+        .. code:: shell
+        
+Platform: UNKNOWN
+Classifier: Framework :: IPython
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: System :: Shells
