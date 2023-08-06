@@ -1,0 +1,56 @@
+Metadata-Version: 2.0
+Name: clinner
+Version: 0.1.0
+Summary: Command Line Interface builder that helps creating an entry point for your application.
+Home-page: https://github.com/PeRDy/Clinner
+Author: José Antonio Perdiguero López
+Author-email: perdy.hh@gmail.com
+License: GPLv3
+Download-URL: https://github.com/PeRDy/Clinner
+Keywords: python command cli interface run script
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: colorama
+Requires-Dist: colorlog
+Requires-Dist: requests
+Provides-Extra: dev
+Requires-Dist: bumpversion; extra == 'dev'
+Requires-Dist: colorama; extra == 'dev'
+Requires-Dist: colorlog; extra == 'dev'
+Requires-Dist: coverage; extra == 'dev'
+Requires-Dist: nose; extra == 'dev'
+Requires-Dist: pip; extra == 'dev'
+Requires-Dist: pre-commit; extra == 'dev'
+Requires-Dist: prospector; extra == 'dev'
+Requires-Dist: requests; extra == 'dev'
+Requires-Dist: setuptools; extra == 'dev'
+Requires-Dist: tox; extra == 'dev'
+Requires-Dist: twine; extra == 'dev'
+Requires-Dist: wheel; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: colorama; extra == 'test'
+Requires-Dist: colorlog; extra == 'test'
+Requires-Dist: coverage; extra == 'test'
+Requires-Dist: nose; extra == 'test'
+Requires-Dist: prospector; extra == 'test'
+Requires-Dist: requests; extra == 'test'
+Requires-Dist: tox; extra == 'test'
+
+=======
+Clinner
+=======
+
+:Version: 0.1.0
+:Status: Production/Stable
+:Author: José Antonio Perdiguero López
+
+Command Line Interface builder that helps creating an entry point for your application.
+
+
