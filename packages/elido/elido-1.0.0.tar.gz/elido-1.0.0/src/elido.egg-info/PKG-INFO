@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: elido
+Version: 1.0.0
+Summary: Elido fixes an xargs annoyance that's bugged me for long: I frequently had to
+Home-page: https://github.com/psranga/libeli5/tree/master/elido
+Author: Ranganathan Sankaralingam
+Author-email: ranga@purplerails.com
+License: BSD
+Description: handling input lines containing spaces (e.g., filenames).
+        
+        The basic philosophy of Elido is that we create a command-line then execute it
+        directly: **WE DON'T USE THE SHELL TO EXECUTE THE COMMAND LINE**. I think this
+        is cleaner since it saves from having to think about multiple levels quoting.
+        
+Platform: Linux
+Platform: Mac OS-X
+Platform: Unix
