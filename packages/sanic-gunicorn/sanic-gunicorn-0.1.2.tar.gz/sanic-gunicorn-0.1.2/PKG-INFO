@@ -1,0 +1,38 @@
+Metadata-Version: 1.1
+Name: sanic-gunicorn
+Version: 0.1.2
+Summary: Gunicorn worker for Sanic
+Home-page: https://github.com/messense/sanic-gunicorn
+Author: messense
+Author-email: messense@icloud.com
+License: UNKNOWN
+Description: # sanic-gunicorn
+        
+        [Gunicorn](http://gunicorn.org/) worker for [Sanic](https://github.com/channelcat/sanic)
+        
+        ## Installation
+        
+        ```bash
+        $ pip install -U sanic-gunicorn
+        ```
+        
+        ## Usage
+        
+        ```bash
+        $ gunicorn --bind localhost:8000 --worker-class sanic_gunicorn.Worker your_app_module:app
+        ```
+        
+Keywords: sanic,gunicorn
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Web Environment
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
