@@ -1,0 +1,19 @@
+Metadata-Version: 2.0
+Name: delfick-logging
+Version: 0.1
+Summary: Opinionated logging helpers
+Home-page: http://github.com/delfick/delfick_logging
+Author: Stephen Moore
+Author-email: stephen@delfick.com
+License: MIT
+Platform: UNKNOWN
+Requires-Dist: rainbow-logging-handler (==2.2.2)
+Provides-Extra: tests
+Requires-Dist: boto; extra == 'tests'
+Requires-Dist: mock; extra == 'tests'
+Requires-Dist: nose; extra == 'tests'
+Requires-Dist: noseOfYeti (>=1.4.9); extra == 'tests'
+
+UNKNOWN
+
+
