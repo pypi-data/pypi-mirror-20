@@ -1,0 +1,32 @@
+Metadata-Version: 2.0
+Name: socialregexes
+Version: 0.1
+Summary: Identify social network user account from url
+Home-page: https://github.com/glefait/socialregexes
+Author: guillem lefait
+Author-email: guillem.lefait@gmail.com
+License: MIT
+Keywords: social-network user account spyder crawler parser
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
+# social-regexes
+Given input, returns identified social network with corresponding user id
+
+Usage :
+$ python socialregexes/socialregexes.py https://twitter.com/guillem_lefait not_an_url guillem.lefait@removemegmail.com https://github.com/glefait
+('twitter', 'guillem_lefait')
+None
+('email', 'guillem.lefait@removemegmail.com')
+('github', 'glefait')
+
+
