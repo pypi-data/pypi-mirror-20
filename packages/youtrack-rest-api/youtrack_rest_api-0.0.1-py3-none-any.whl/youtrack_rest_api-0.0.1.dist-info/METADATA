@@ -1,0 +1,39 @@
+Metadata-Version: 2.0
+Name: youtrack-rest-api
+Version: 0.0.1
+Summary: YouTrack JSON REST API Python 3 Client Library
+Home-page: https://github.com/DeKaN/youtrack-rest-api
+Author: DeKaN (dekanszn@gmail.com)
+Author-email: dekanszn@gmail.com
+License: Apache 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries
+Requires-Dist: requests (>=2.13.0)
+
+YouTrack JSON REST API client library
+======
+
+Current implementation is compatible with Python 3 and YouTrack 2017.1 or higher.  
+Authentication for old YouTrack versions will be realized later. 
+
+Requirements
+------
+Python 3.4+
+
+Examples
+------
+```python
+from youtrack import Connection, TokenAuth
+
+TOKEN = 'perm:XXXXXXXXXXX=.XXXXXXXXXXXXXXXXXX==.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+c = Connection('https://youtrack.gdsln.com/', TokenAuth(TOKEN))
+```
+
