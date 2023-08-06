@@ -1,0 +1,25 @@
+Metadata-Version: 2.0
+Name: diffios
+Version: 0.0.5
+Summary: Compare Cisco device configurations against a baseline.
+Home-page: https://github.com/robphoenix/diffios
+Author: Rob Phoenix
+Author-email: rob@robphoenix.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+
+
+diffios is a Python library which provides a way to compare Cisco IOS configurations
+against a baseline template, and generate an output detailing the differences
+between them.
+
+
