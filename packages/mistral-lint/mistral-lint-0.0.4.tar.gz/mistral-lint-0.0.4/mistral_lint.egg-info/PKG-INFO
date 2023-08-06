@@ -1,0 +1,47 @@
+Metadata-Version: 1.1
+Name: mistral-lint
+Version: 0.0.4
+Summary: Linter for Mistral Workflows
+Home-page: https://github.com/d0ugal/mistral-lint
+Author: Dougal Matthews
+Author-email: dougal@redhat.com
+License: Apache License, Version 2.0
+Description: Mint
+        ====
+        
+        Usage::
+        
+            $ pip install mistral-lint
+            $ mistral-lint path-to-files
+        
+        
+        Ideas
+        -----
+        
+        - Check that tasks exist (all those that are mentined in on-error, on-success
+          on-complete etc.).
+        - Check all tasks are called.
+        - Check all tasks have an on-error/on-success or on-complete
+        - Check zaqar format
+        - Interactive workflow with zaqar posting the continue code.
+        - Check sub-workflows are provided the queue name
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities
