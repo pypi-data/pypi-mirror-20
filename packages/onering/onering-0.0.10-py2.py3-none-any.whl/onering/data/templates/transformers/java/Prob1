@@ -1,0 +1,51 @@
+
+Problem 1 - How to let the template writer choose waht kind of getter/setter patterns they want to use
+
+Regardless of whether we are mutable or not, there are a couple of patterns on getters/setters that 
+must be flexible and not forced.   I can think of 3 generic patterns that solve most cases:
+
+// Here we know that every value in the dest can be set, so how do we go about the generation of
+// vars in here as opposed to in the code?
+
+{% declare_holder variables %}{%end_declara_holder %}
+
+{% for statement in transformer.statements %}
+    if statment is variable
+        srcvar = symtable.ensure_src_fp(statement.exprs[0].field_path)
+        destvar = symtable.ensure_dest_fp(statement.target.field_path)
+        invoke_setter(destvar, statement.target.field_path[-1], srcvar)
+    elif statement is literal:
+        destvar = symtable.ensure_dest_fp(statement.target.field_path)
+        invoke_setter(destvar, statement.target.field_path[-1], statement.exprs[0].literal_value)
+    else:   # A function
+        destvar = symtable.ensure_dest_fp(statement.target.field_path)
+        invoke_setter(destvar, statement.target.field_path[-1], render_func_stmt(statement.exprs[0]))
+{% endfor %}
+
+// This will go and ensure all variables are taken care of by making 
+// a second pass through the rendered AST - how?
+// If the template always konws about this, is this even required?
+// Why not have the caller of this template just call another "template" 
+// which specifies how var declarations happen and just "lift" them up to
+// the right scope
+{{ evaluate_holder variables }}
+
+# srcvar and destvar are generation are interesting, they assume two things:
+# 1. we will always create a source var etc - so these will have to be bubbled to the top of the func
+# 2. A sync way of ensuring getters etc, an alternative to srcvar, destvar above could be via callbacks on the ensure, eg:
+
+        {% var srcvar = symtable.ensure_src_fp(statement.exprs[0].field_path) %}
+            {% var destvar = symtable.ensure_dest_fp(statement.target.field_path) %}
+                invoke_setter(destvar, statement.target.field_path[-1], srcvar)
+            {% endvar %}
+        {% endvar %}
+
+The third option is simply have getters that "expressions" instead of statements, eg:
+
+ensure_dest_var(...).setFieldName(ensure_src_var(...))
+
+# Or even a combination of the two, but thepoint is we have so far 3 ways of ensuring a variable exists:
+
+1. As an expression,
+2. As a sequential list of variables 
+3. As a callback

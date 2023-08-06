@@ -1,0 +1,26 @@
+Metadata-Version: 2.0
+Name: onering
+Version: 0.0.10
+Summary: A toolchain for declaratively specifying transformations between schemas and instances of schemas to help track dependencies across schemas.
+Home-page: https://github.com/panyam/onering
+Author: Sri Panyam
+Author-email: sri.panyam@gmail.com
+License: UNKNOWN
+Keywords: languages,schemas,transformation,type system,types
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires: typelib
+Requires: Jinja2
+Requires: readline
+Requires: avro
+Requires: thriftpy
+Provides-Extra: docs
+Requires-Dist: Sphinx (>=1.1); extra == 'docs'
+
+Welcome to Onering.
+
+Please visit the [wiki](https://github.com/panyam/onering/wiki) for all the details.
+
+
