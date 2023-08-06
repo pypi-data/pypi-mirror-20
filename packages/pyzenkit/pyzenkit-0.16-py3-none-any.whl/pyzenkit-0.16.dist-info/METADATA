@@ -1,0 +1,38 @@
+Metadata-Version: 2.0
+Name: pyzenkit
+Version: 0.16
+Summary: Python 3 script and daemon toolkit
+Home-page: https://github.com/honzamach/pyzenkit
+Author: Jan Mach
+Author-email: email@jan-mach.cz
+License: MIT
+Keywords: library console script daemon
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Environment :: Console
+Requires-Dist: jsonschema
+Requires-Dist: pydgets
+
+PyZenKit
+================================================================================
+
+Collection of usefull tools and utilities for Python 3.
+
+.. warning::
+
+    This library is still work in progress.
+
+.. note::
+
+    For usage and examples please see the source code, for demonstration execute
+    the appropriate module with Python3 interpreter.
+
+Copyright
+--------------------------------------------------------------------------------
+
+Copyright (C) since 2016 Jan Mach <honza.mach.ml@gmail.com>
+Use of this package is governed by the MIT license, see LICENSE file.
+
+
