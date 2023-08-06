@@ -1,0 +1,21 @@
+{% load cms_tags i18n %}
+
+{% for plugin in instance.child_plugin_instances %}
+  {% if forloop.counter == page_number %}
+    {% render_plugin plugin %}
+  {% elif forloop.counter != page_number and request.toolbar.edit_mode %}
+    <div style="display:none;">{% render_plugin plugin %}</div>
+  {% endif %}
+{% endfor %}
+
+{% if page_count > 1 %}
+<nav aria-label="{% trans "Page navigation" %}">
+  <ul class="pagination">
+    {% for page in page_range %}
+    <li{% if page == page_number %} class="active"{% endif %}>
+      <a href="{{ request.path }}{% if page != 1 %}?{{ PAGE_GET_PARAMETER }}={{ page }}{% endif %}">{{ page }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
