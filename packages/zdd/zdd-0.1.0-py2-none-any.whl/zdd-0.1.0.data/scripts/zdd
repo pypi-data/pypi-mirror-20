@@ -1,0 +1,33 @@
+#!python
+import logging
+import traceback
+import sys
+from zdd import process_arguments, set_request_retries, do_zdd
+from zdd.common import setup_logging
+
+
+def main():
+    logger = logging.getLogger('zdd')
+    args = process_arguments()
+    set_request_retries()
+    setup_logging(logger, args.syslog_socket, args.log_format, args.log_level)
+
+    try:
+        if do_zdd(args):
+            sys.exit(0)
+        else:
+            sys.exit(1)
+    except Exception as e:
+        if hasattr(e, 'zdd_exit_status'):
+            if hasattr(e, 'error'):
+                logger.exception(str(e.error))
+            else:
+                logger.exception(traceback.print_exc())
+            sys.exit(e.zdd_exit_status)
+        else:
+            # For Unknown Exceptions
+            logger.exception(traceback.print_exc())
+            sys.exit(2)
+
+if __name__ == '__main__':
+    main()
