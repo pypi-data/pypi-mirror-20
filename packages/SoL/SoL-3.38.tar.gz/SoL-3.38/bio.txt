@@ -1,0 +1,49 @@
+Coltivo la passione per i computer ed in particolare per la programmazione fin
+da bambino, quando per sviare il tormento e poter proseguire con gli studi
+universitari un cugino mi ha messo in mano una delle prime calcolatrici
+programmabili dandomi degli spunti sul come risolvere piccoli problemi
+matematici scrivendo minuscoli programmini.
+
+Per mia fortuna sono sempre stato assecondato e incoraggiato ad imparare cose
+nuove e così nell'arco di pochi anni sono riuscito ad acquistare prima un
+Commodore 64 e poi un Olivetti M20: se i miei coetanei li vedevano come
+strumenti di gioco, a me intrigava di più capire come quei giochi fossero
+scritti, cosa che ho continuato ad approfondire alle superiori e poi,
+immediatamente dopo il diploma, come socio più giovane di una società di
+informatica dove sono entrato in contatto con il mondo del "software libero",
+che ha impresso una svolta fondamentale al mio approccio, consentendomi di
+studiare i "sorgenti" dei programmi anziché limitarmi a comprendere i manuali
+d'uso dei computer.
+
+Nei primi anni novanta alcuni amici sono ritornati dall'India con un paio di
+ingombranti tavoli da Carrom sotto braccio ed un flebile ricordo delle regole
+del gioco in testa, assicurandoci delle piacevolissime e interminabili serate
+in discussioni e competizioni casalinghe finché, nella seconda metà degli anni
+novanta, insieme a mio fratello Fausto abbiamo incrociato Elisa e Paolo, della
+Federazione Italiana Carrom, ed abbiamo così partecipato al nostro primo
+"torneo svizzero", con le regole di gioco "internazionali", molto più semplici
+delle nostre ma scritte dettagliatamente.
+
+È vedendo Elisa "impazzire" nel determinare manualmente i turni di gioco che
+comincio a ipotizzare di scrivere un programma che le faciliti il compito: nel
+1998 inizio a implementare quel che diventerà noto come "Scarry", una
+applicazione per Windows scritta in Delphi che permette di gestire singoli
+tornei di Carrom in maniera sufficientemente semplice da potersi concentrare
+sul gioco, anziché sugli accoppiamenti dei giocatori.
+
+Il programma comincia ad essere usato da alcuni club italiani ed a un certo
+punto ricevo alcune richieste dall'estero, ma per come è scritto non posso né
+rilasciarne i sorgenti, né in maniera soddisfacente tradurlo in altre
+lingue. Inoltre la sua installazione è alquanto macchinosa e fragile
+(caratteristica delle applicazioni Windows...) e nonostante i miei sforzi
+poche persone riescono a farlo funzionare correttamente sul proprio computer.
+
+Passano gli anni e grosso modo a settembre 2008 decido finalmente di
+riscrivere completamente il software, usando tecnologie migliori e soprattutto
+"libere" che mi consentano di rilasciarne tutti i sorgenti in completa
+serenità. Nasce così "SoL", scritto in Python e quindi utilizzabile anche su
+sistemi operativi veri, basato su un database SQL decisamente più solido del
+precedente, implementato come una applicazione web utilizzabile quindi sia in
+locale che da remoto, anche da più persone contemporaneamente. Il 9 dicembre
+2008 rilascio la versione 1.0, tradotta in italiano e in inglese, con tanto di
+manuali d'uso nelle due lingue!
