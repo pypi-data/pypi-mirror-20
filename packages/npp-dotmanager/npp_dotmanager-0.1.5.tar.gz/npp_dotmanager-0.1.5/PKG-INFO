@@ -1,0 +1,47 @@
+Metadata-Version: 1.1
+Name: npp_dotmanager
+Version: 0.1.5
+Summary: N+1th dotmanager manager with public and private repository and git support
+Home-page: https://github.com/sxnwlfkk/dotmanager
+Author: Saxon Wolfkok
+Author-email: saxonwolfkok@gmail.com
+License: GPL
+Description: # n++ dotfiles
+        npp_dotfiles makes it easy to use and manage your configuration files
+            while keeping them in one secure directory (like Dropbox or other hosts). You can
+            configure it to symlink your files to their destination directory with support to different
+            names in backup and working dirs. More, you can manage the config files, that you want to
+            share with others separate from your private ones. Uses git to automatically push and pull
+            repositories on backup.
+        A dotfiles syncer and symlinker, written in python, with Git syncing support.
+        
+        __Current stable version is 0.1.__
+        
+        ## Main features
+        
+        * Read from config file (~/.dotfiles)
+         * Specify another dotfile to use (one use)
+        * Distinguish between public and private repos
+        * Make symlinks for usage and for public repo
+        
+        ## Git syncer
+        
+        * Make a separate git syncer (maybe with inotify reminder)
+        * Separate syncing action for private and public repos
+        * Action to set up public repo (pull from github, then symlink with force from private dir
+        
+        ## Contents of config file (~/.dotfiles):
+        
+        * Private repo url
+        * Public repo url
+        * Absolute path to private repository dir
+        * All sections have two parts a general, and a private
+        * Section for main config files (.zshrc, .vimrc, oh-my-zsh.sh, etc.)
+        
+Keywords: configuration setuptools dotmanager linux unix
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: System :: Archiving :: Backup
+Classifier: License :: OSI Approved :: GPL
+Classifier: Programming Language :: Python :: 3
