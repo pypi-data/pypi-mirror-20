@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% if config.site_description %}<meta name="description" content="{{ config.site_description }}">{% endif %}
+        {% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
+        {% if page.canonical_url %}
+        <link rel="canonical" href="{{ page.canonical_url }}">
+        {% endif %}
+        <link rel="shortcut icon" href="{{ base_url }}/img/favicon.ico">
+        <meta name="twitter:card" content="summary" />
+        {% if config.extra.twitter %}
+        <meta name="twitter:site" content="{{ config.extra.twitter }}" />
+        {% endif %}
+        <meta name="twitter:title" content="{{ config.site_name }}" />
+        <meta property="og:title" content="{{ config.site_name }}" />
+        <meta property="og:url" content="{{ config.site_url }}" />
+        {% if config.site_description %}
+        <meta property="og:description" content="{{ config.site_description }}" />
+        <meta name="twitter:description" content="{{ config.site_description }}" />
+        {% endif %}
+        {% if config.extra.social_image %}
+        <meta property="og:image" content="{{ base_url }}{{ config.extra.social_image }}" />
+        <meta name="twitter:image" content="{{ base_url }}{{ config.extra.social_image }}" />
+        {% endif %}
+        <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+        <link href="{{ base_url }}/css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="{{ base_url }}/css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="{{ base_url }}/css/base.css" rel="stylesheet">
+        {% if page and page.meta.mindmap %}
+        <link rel="stylesheet" href="{{ base_url }}/css/mindmap.css">
+        {% endif %}
+        {% if page and page.meta.asciinema %}
+        <link rel="stylesheet" type="text/css" href="{{ base_url }}/css/asciinema-player.css" />
+        {% endif %}
+        <link rel="stylesheet" href="{{ base_url }}/css/highlight.css">
+        {%- for path in extra_css %}
+        <link href="{{ path }}" rel="stylesheet">
+        {%- endfor %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body{% if page and page.is_homepage %} class="homepage"{% endif %}>
+
+        {% include "nav.html" %}
+
+        <div class="container">
+            {% block content %}
+                {% if page.meta.hide_toc %}
+                    <div class="col-md-12" role="main">{% include "content.html" %}</div>
+                {% else %}
+                    <div class="col-md-3">{% include "toc.html" %}</div>
+                    <div class="col-md-9" role="main">{% include "content.html" %}</div>
+                {% endif %}
+            {% endblock %}
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            {% if config.copyright %}
+                <p>{{ config.copyright }}</p>
+            {% endif %}
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> - Last updated : {{ build_date_utc.strftime('%Y-%m-%d') }}</p>
+        </footer>
+
+        <script src="{{ base_url }}/js/jquery-1.12.3.min.js"></script>
+        <script src="{{ base_url }}/js/bootstrap-3.0.3.min.js"></script>
+        <script src="{{ base_url }}/js/highlight.pack.js"></script>
+        {% if page and page.meta.asciinema %}
+        <script src="{{ base_url }}/js/asciinema-player.js"></script>
+        {% endif %}
+        <script>var base_url = '{{ base_url }}';</script>
+{% if not config.extra.search is defined or config.extra.search == true %}
+        <script data-main="{{ base_url }}/mkdocs/js/search.js" src="{{ base_url }}/mkdocs/js/require.js"></script>
+{% endif %}
+        <script src="{{ base_url }}/js/base.js"></script>
+        {%- for path in extra_javascript %}
+        <script src="{{ path }}"></script>
+        {%- endfor %}
+{% if not config.extra.search is defined or config.extra.search == true %}
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endif %}
+    </body>
+</html>
