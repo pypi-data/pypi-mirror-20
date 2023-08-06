@@ -1,0 +1,120 @@
+language: python
+sudo: false
+cache: pip
+env:
+  global:
+    - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
+    - SEGFAULT_SIGNALS=all
+  matrix:
+    - TOXENV=check
+matrix:
+  include:
+    - python: 2.7
+      env:
+        - TOXENV=py27-tox22,report,coveralls,codecov
+    - python: 2.7
+      env:
+        - TOXENV=py27-tox23,report,coveralls,codecov
+    - python: 2.7
+      env:
+        - TOXENV=py27-tox24,report,coveralls,codecov
+    - python: 2.7
+      env:
+        - TOXENV=py27-tox25,report,coveralls,codecov
+    - python: 2.7
+      env:
+        - TOXENV=py27-tox26,report,coveralls,codecov
+    - python: 3.3
+      env:
+        - TOXENV=py33-tox22,report,coveralls,codecov
+    - python: 3.3
+      env:
+        - TOXENV=py33-tox23,report,coveralls,codecov
+    - python: 3.3
+      env:
+        - TOXENV=py33-tox24,report,coveralls,codecov
+    - python: 3.3
+      env:
+        - TOXENV=py33-tox25,report,coveralls,codecov
+    - python: 3.3
+      env:
+        - TOXENV=py33-tox26,report,coveralls,codecov
+    - python: 3.4
+      env:
+        - TOXENV=py34-tox22,report,coveralls,codecov
+    - python: 3.4
+      env:
+        - TOXENV=py34-tox23,report,coveralls,codecov
+    - python: 3.4
+      env:
+        - TOXENV=py34-tox24,report,coveralls,codecov
+    - python: 3.4
+      env:
+        - TOXENV=py34-tox25,report,coveralls,codecov
+    - python: 3.4
+      env:
+        - TOXENV=py34-tox26,report,coveralls,codecov
+    - python: 3.5
+      env:
+        - TOXENV=py35-tox22,report,coveralls,codecov
+    - python: 3.5
+      env:
+        - TOXENV=py35-tox23,report,coveralls,codecov
+    - python: 3.5
+      env:
+        - TOXENV=py35-tox24,report,coveralls,codecov
+    - python: 3.5
+      env:
+        - TOXENV=py35-tox25,report,coveralls,codecov
+    - python: 3.5
+      env:
+        - TOXENV=py35-tox26,report,coveralls,codecov
+    - python: 3.6
+      env:
+        - TOXENV=py36-tox22,report,coveralls,codecov
+    - python: 3.6
+      env:
+        - TOXENV=py36-tox23,report,coveralls,codecov
+    - python: 3.6
+      env:
+        - TOXENV=py36-tox24,report,coveralls,codecov
+    - python: 3.6
+      env:
+        - TOXENV=py36-tox25,report,coveralls,codecov
+    - python: 3.6
+      env:
+        - TOXENV=py36-tox26,report,coveralls,codecov
+    - python: pypy
+      env:
+        - TOXENV=pypy-tox22,report,coveralls,codecov
+    - python: pypy
+      env:
+        - TOXENV=pypy-tox23,report,coveralls,codecov
+    - python: pypy
+      env:
+        - TOXENV=pypy-tox24,report,coveralls,codecov
+    - python: pypy
+      env:
+        - TOXENV=pypy-tox25,report,coveralls,codecov
+    - python: pypy
+      env:
+        - TOXENV=pypy-tox26,report,coveralls,codecov
+before_install:
+  - python --version
+  - uname -a
+  - lsb_release -a
+install:
+  - pip install tox
+  - virtualenv --version
+  - easy_install --version
+  - pip --version
+  - tox --version
+script:
+  - tox -v
+after_failure:
+  - more .tox/log/* | cat
+  - more .tox/*/log/* | cat
+notifications:
+  email:
+    on_success: never
+    on_failure: always
