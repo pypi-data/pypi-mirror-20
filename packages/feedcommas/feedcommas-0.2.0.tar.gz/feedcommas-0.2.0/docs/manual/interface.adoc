@@ -1,0 +1,120 @@
+:docinfo1:
+
+[[interface]]
+== Interface
+
+=== First run
+
+----
+┌──────────────────────────────────────────────────────────────────────────────┐
+│Log in to CommaFeed                                                           │
+│                                                                              │
+│Name or email: █                                                              │
+│Password command:                                                             │
+│Password (plain text, optional):                                              │
+│                                                                              │
+│                                                                              │
+│                                                          < Ok     >< Cancel >│
+└──────────────────────────────────────────────────────────────────────────────┘
+----
+
+On the first run , Feed Commas will ask you to fill credentials needed to login
+to CommaFeed. Above screen will be displayed. You can navigate it using
+kbd:[Tab], kbd:[Shift+Tab], and arrow buttons: kbd:[↑], kbd:[↓], kbd:[←] and
+kbd:[→].
+
+You should enter either *plain text password* (which is discouraged) or
+*password command*, which should be a shell command returning a single line
+containing a password used to log in to your CommaFeed account.
+
+To accept entered credentials, either click `< Ok >` button or press
+kbd:[Enter]. To exit Feed Commas, click `< Cancel >` button or press kbd:[Esc].
+
+Correct credentials are saved to your configuration file (see <<config>> and
+<<cfg-server,server>> sections for details about that) and you are then
+presented Feed Commas main window.
+
+[[password-cmd-tip]]
+[TIP]
+.A note about passwords
+====
+Plain text password is saved into `password` field in your configuration.
+Password command is  saved into `password-cmd` field in your configuration and
+takes precedence over `password` if they're both set.
+
+If your password command returns several lines of text, you can use standard
+Unix tools to filter it, because `password-cmd` is called by a spawned child
+shell. For example:
+
+----
+pass commafeed | head -1
+----
+====
+
+
+=== Main window
+
+----
+ ▼ Menu                                                         Article list ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│All                    │┌────────────────────────────────────────────────────┐│
+│Starred                ││How to make `lynx` fast?    Tue Mar  7 10:52:00 2017││
+│Daily read             ││                                                    ││
+│  /r/commandline(1)    ││   Anyone care share their lynx config?             ││
+│  Lorem ipsum          ││   For some reason, lynx on my computer cannot open ││
+│  The Codist           ││websites instantly.                                 ││
+│  Andrzej's C++ blog   ││                                                    ││
+│  Ludic Linux          ││☐                          submitted by /u/blablabla││
+│Comics                 │└────────────────────────────────────────────────────┘│
+│  MonkeyUser           │┌────────────────────────────────────────────────────┐│
+│  Geek&Poke            ││Lorem ipsum                 Mon Mar  6 23:52:14 2017││
+│  xkcd                 ││                                                    ││
+│                       ││   Lorem ipsum dolor sit amet.                      ││
+│                       ││                                                    ││
+│                       ││★☑                                            author││
+│                       │└────────────────────────────────────────────────────┘│
+│:show-unread                                                                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+ ▲ Commandline / message display
+----
+
+Above is example view of Feed Commas, drawn to fit 80 characters wide terminal.
+Interface resizes dynamically, so on modern displays you'll encounter more free
+space.
+
+Its two main parts are menu with subscribed feeds and categories on the left,
+and article list on the right. Feed Commas starts with a focus on article list.
+To switch between menu and article list, use kbd:[h] and kbd:[l] by default (see
+<<navigation,navigation>> part of configuration). To scroll menu and article
+list, use by default kbd:[j] and kbd:[k].
+
+There's also a command line on the bottom of the screen. It's accessible after
+pressing kbd:[:] key. To close it, press kbd:[Esc] or delete the whole typed
+text. To show completion hints press kbd:[Tab] during typing a command.
+
+Command line is also shared for a display of messages from Feed Commas (like
+errors encountered when communicating with CommaFeed, synchronization progress
+etc.). If commandline is active (i.e. command is being typed in), messages are
+displayed aisde of it.
+
+[NOTE]
+.Configuration
+====
+Before you'll be able to actually use Feed Commas, you need to at least
+configure credentials used to log into CommaFeed. See <<config>> and
+<<cfg-server,server>> sections in particular for details.
+====
+
+
+=== Commands
+
+Most of commands are bound to some key by default, but not all of them. All of
+them, however, are available to by used in a Commandline. All commands, beside
+navigation ones (`nav-up`, `nav-down`, `nav-right` and `nav-left`) are
+available. For a complete list, see <<cfg-keys,keys>> subsection.
+
+You don't have to type the whole command. If only one command starts with a
+typed string, a correct command will be executed. No command is executed in case
+of ambiguity. For example, `:q` will work the same as `:quit`, but `:toggle`
+won't run anything because there are two possible commands: `toggle-read` and
+`toggle-star`.
