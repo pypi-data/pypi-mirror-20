@@ -1,0 +1,38 @@
+Metadata-Version: 2.0
+Name: actagm
+Version: 0.1.0
+Summary: A utility for agm.
+Home-page: https://github.com/Brian-Williams/actagm
+Author: Brian Williams
+Author-email: briancmwilliams@gmail.com
+License: UNKNOWN
+Keywords: automation
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: requests
+Provides-Extra: test
+Requires-Dist: flake8; extra == 'test'
+Requires-Dist: pytest (>=2.9.0); extra == 'test'
+
+# AGM library
+
+### Example usage
+```
+>>> from actagm.agm_helper import AgmHelper
+>>> ah = AgmHelper(<dns name or ip address>, <user>, <password>)
+>>> ah.login()
+>>> r = ah.get('/cluster')
+>>> print(r.json())
+```
+
+### Platform Dependant Requirements
+AgmHelper requires openssl version 1.0.1+ for TLSv1.2. We do not backport ssl so python 2.7.9+ or 3.4+ is required.
+
+
