@@ -1,0 +1,17 @@
+Metadata-Version: 2.0
+Name: sample-test-101
+Version: 1.2.0
+Summary: A sample Python project
+Home-page: https://github.com/pypa/sampleproject
+Author: The Python Packaging Authority
+Author-email: pypa-dev@googlegroups.com
+License: MIT
+Requires-Dist: peppercorn
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+
+A sample Python project
+
+
