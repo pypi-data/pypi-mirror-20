@@ -1,0 +1,2 @@
+- Loic Dachary <loic@dachary.org>
+- Sage Weil <sage@redhat.com>

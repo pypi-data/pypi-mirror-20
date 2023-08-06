@@ -1,0 +1,118 @@
+CHANGES
+=======
+
+1.0.10
+------
+
+* version 1.0.10
+* compare: remove --compare
+* doc: cosmetic alignment
+* doc: fix double shows
+* doc: add compare to the index
+* bump 1.0.10
+
+1.0.9
+-----
+
+* version 1.0.9
+* doc: add compare example to the quick start section
+* add compare subcommand
+* crush: fix typo in weights arguments
+* analyze: add colon after defaut in usage
+* analyze: display over/under used as %
+* bump 1.0.9
+
+1.0.8
+-----
+
+* version 1.0.8
+* doc: add CLI information and --help instructions
+* ceph: add documentation
+* analyze: add documentation
+* analyze: make --backward-compatibility the default
+* analyze: strip --order-matters
+* analyze: --type is better than --failure-domain
+* analyze: default replication count is 3
+* add the analyze subcommand
+* add the ceph subcommand
+* move logging after imports
+* keys may be string or unicode
+* Crush keeps the original crushmap
+* rename main.Crush in main.Main
+* missing newline in debug message
+* the choose type may be zero for devices
+* explicit keyword arguments for Crush constructor
+* tunable must be set before map() not before parse()
+* add the license where it matters
+* bump 1.0.8
+
+1.0.7
+-----
+
+* version 1.0.7
+* a child may reference an existing bucket or device
+* typo in URL
+* chooseleaf_descend_once is also a tunable
+* set_choose_local*_tries argument is positive
+* support and document default tunables & step set_* tunables
+* bump 1.0.7
+
+1.0.6
+-----
+
+* version 1.0.6
+* bump 1.0.6
+* version 1.0.5
+* update the quick start example
+* bucket children must be ordered
+* fix step choose* documentation
+* bump 1.0.5
+* add links to code and documentation
+* documentation updates
+* sync with the latest libcrush
+
+1.0.4
+-----
+
+* version 1.0.4
+* improve test coverage and error detection
+* increase parsing verbosity and improve readability
+* get rid of useless trackers
+* bump 1.0.4
+
+1.0.3
+-----
+
+* version 1.0.3
+* protect crush/__init__.py from import failure
+* make flake8 happy
+* make tests for mapping non random
+* fix Crush tests (trees)
+* API documentation
+* a rule is just a list of steps
+* the rule {min,max}_size is not required
+* allow multiple roots
+* remove duplicate ~weight~ comparison
+* implement crush.Crush API
+* update documentation instructions
+* typo in rpm dependencies
+* bump 1.0.3
+
+1.0.2
+-----
+
+* version 1.0.2
+* portability fixes
+* add package dependencies
+* bump 1.0.2
+
+1.0.1
+-----
+
+* version 1.0.1
+* ship all necessary files
+* implement crush map parser and map function
+* import libcrush sources into the module
+* dependencies for building the extension
+* skeleton C module for libcrush
+* initial commit
