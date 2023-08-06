@@ -1,0 +1,22 @@
+site_name: unrest Documentation
+repo_url: https://github.com/Kozea/unrest
+generate:
+- unrest.md:
+  - unrest:
+    - unrest.UnRest+:
+      - unrest.UnRest.__call__
+- rest.md:
+  - unrest.rest++
+- coercers.md:
+  - unrest.coercers++
+- flask_framework.md:
+  - unrest.flask_framework++
+
+pages:
+- Home: index.md << ../README.md
+- API Documentation:
+  - UnRest: unrest.md
+  - Rest entry points: rest.md
+  - Serialization/Deserialization: coercers.md
+- Frameworks:
+  - Flask: flask_framework.md
