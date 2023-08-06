@@ -1,0 +1,78 @@
+Metadata-Version: 1.1
+Name: concatPDF
+Version: 0.1.2
+Summary: Merge PDF files just like a build process.
+Home-page: https://ritchievink.com
+Author: Ritchie Vink
+Author-email: UNKNOWN
+License: MIT License
+Download-URL: https://github.com/ritchie46/concatPDF
+Description: concatPDF
+        =========
+        
+        |Build Status|
+        
+        Simply concat PDF files based on their file names and configuration
+        file.
+        
+        The order is first based on the globbing in the config.ini file and
+        second on the numerical order of the file names.
+        
+        File names not starting with a number are ignored.
+        
+        Valid names are:
+        
+        -  1.0\_my\_nr\_1pdf.pdf
+        -  4.pdf
+        -  3.13\_the\_third.PDF
+        -  1.1-i-will-be-second.pdf
+        
+        Concatenation order
+        -------------------
+        
+        Leading in determining the concatenation order is the ``config.ini``
+        file.
+        
+        Example config.ini
+        
+        ::
+        
+                [DIR]
+                build = ./build
+                source = ./source
+        
+                [ORDER]
+                1 = 1*
+                2 = appendix/*
+                3 = *
+        
+                [OUTPUT]
+                filename = output
+        
+        1. The configuration file above will first concatenate all pdf files
+           matching the '1' glob in the ``source/`` directory.
+        2. Secondly all files in the ``source/appendix/`` directory are appended
+           to the pdf.
+        3. And finally the remaining files in the ``source/`` directory are
+           added.
+        
+        Note that only pdf files will be added. So ``*`` can be safely used.
+        
+        Installation
+        ------------
+        
+        ``$ pip install git+https://github.com/ritchie46/concatPDF.git``
+        
+        Initialise a project
+        --------------------
+        
+        Go to you project directory and run:
+        
+        ``$ concatPDF``
+        
+        To start the build run ``make.py`` from your projects root directory.
+        
+        .. |Build Status| image:: https://travis-ci.org/ritchie46/concatPDF.svg?branch=master
+           :target: https://travis-ci.org/ritchie46/concatPDF
+        
+Platform: UNKNOWN
