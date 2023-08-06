@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+"""Expose command line interfaces of modules in package."""
+from discodop.cli import main
+main()
