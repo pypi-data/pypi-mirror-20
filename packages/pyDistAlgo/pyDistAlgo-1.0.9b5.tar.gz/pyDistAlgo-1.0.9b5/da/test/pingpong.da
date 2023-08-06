@@ -1,0 +1,26 @@
+class Ping(process):
+    def setup(pong): pass
+    def run():
+        send(('Ping',), to=pong)
+        await(received(('Pong',)))
+        output("Ponged.")
+
+class Pong(process):
+    def setup(): pass
+    def run():
+        await(some(received(('Ping',), from_=ping)))
+        output("Pinged.")
+        send(('Pong',), to=ping)
+        send(('done',), to='PingNode')
+        send(('Pong',), to='Pinger#PongNode')
+        output("Pingered")
+
+def main():
+    pong = new(Pong, args=(), at='PongNode')
+    ping = new(Ping, args=(pong,))
+    start(pong)
+    start(ping)
+    await(received(('done',)))
+    pinger = new(Ping, args=(pong,), num=['Pinger'], at='PongNode')
+    start(pinger)
+    output("pinger started.")
