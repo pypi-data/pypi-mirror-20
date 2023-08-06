@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Running mriqc &mdash; mriqc 0.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+    <link rel="top" title="mriqc 0.9 documentation" href="index.html"/>
+        <link rel="next" title="Image Quality Metrics (IQMs)" href="measures.html"/>
+        <link rel="prev" title="Installation" href="install.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mriqc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running mriqc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bare-metal-installation-python-2-3">&#8220;Bare-metal&#8221; installation (Python 2/3)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#containerized-versions">Containerized versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-mriqc-on-hpc-clusters">Running MRIQC on HPC clusters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#singularity-containers">Singularity containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requesting-resources">Requesting resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="measures.html">Image Quality Metrics (IQMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Run mriqc with docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classifier.html">The MRIQC classifier for T1w images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reports.html">Visual reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">The MRIQC workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mriqc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Running mriqc</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/running.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-mriqc">
+<span id="id1"></span><h1>Running mriqc<a class="headerlink" href="#running-mriqc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bare-metal-installation-python-2-3">
+<h2>&#8220;Bare-metal&#8221; installation (Python 2/3)<a class="headerlink" href="#bare-metal-installation-python-2-3" title="Permalink to this headline">¶</a></h2>
+<p>The software automatically finds the data the input folder if it follows the
+<abbr title="brain imaging data structure">BIDS</abbr> standard <a class="reference internal" href="#bids" id="id2">[BIDS]</a>.
+A fast and easy way to check that your dataset fulfills the
+<abbr title="brain imaging data structure">BIDS</abbr> standard is
+the <a class="reference external" href="http://incf.github.io/bids-validator/">BIDS validator</a>.</p>
+<p>Since <code class="docutils literal"><span class="pre">mriqc</span></code> follows the <a class="reference internal" href="#bidsapps" id="id3">[BIDSApps]</a> specification, the execution is
+split in two consecutive steps: a first level (or <code class="docutils literal"><span class="pre">participant</span></code>) followed
+by a second level (or <code class="docutils literal"><span class="pre">group</span></code> level).
+In the <code class="docutils literal"><span class="pre">participant</span></code> level, all individual images to be processed are run
+through the pipeline, and the <a class="reference internal" href="measures.html#measures"><span class="std std-ref">MRIQC measures</span></a> are extracted and
+the individual reports (see <a class="reference internal" href="reports.html#reports"><span class="std std-ref">The MRIQC Reports</span></a>) generated.
+In the <code class="docutils literal"><span class="pre">group</span></code> level, the <abbr title="image quality metrics">IQMs</abbr> extracted in
+first place are combined in a table and the group reports are generated.</p>
+<p>The first (<code class="docutils literal"><span class="pre">participant</span></code>) level is executed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc</span> <span class="n">bids</span><span class="o">-</span><span class="n">dataset</span><span class="o">/</span> <span class="n">out</span><span class="o">/</span> <span class="n">participant</span>
+</pre></div>
+</div>
+<p>Please note the keyword <code class="docutils literal"><span class="pre">participant</span></code> as fourth positional argument.
+It is possible to run <code class="docutils literal"><span class="pre">mriqc</span></code> on specific subjects using</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc</span> <span class="n">bids</span><span class="o">-</span><span class="n">dataset</span><span class="o">/</span> <span class="n">out</span><span class="o">/</span> <span class="n">participant</span> <span class="o">--</span><span class="n">participant_label</span> <span class="n">S001</span> <span class="n">S002</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">S001</span></code> and <code class="docutils literal"><span class="pre">S002</span></code> are subject identifiers, corresponding to the folders
+<code class="docutils literal"><span class="pre">sub-S001</span></code> and <code class="docutils literal"><span class="pre">sub-S002</span></code> in the <abbr title="brain imaging data structure">BIDS</abbr> tree.
+Here, it is also accepted to use the <code class="docutils literal"><span class="pre">sub-</span></code> prefix</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc</span> <span class="n">bids</span><span class="o">-</span><span class="n">dataset</span><span class="o">/</span> <span class="n">out</span><span class="o">/</span> <span class="n">participant</span> <span class="o">--</span><span class="n">participant_label</span> <span class="n">sub</span><span class="o">-</span><span class="n">S001</span> <span class="n">sub</span><span class="o">-</span><span class="n">S002</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the argument <code class="code docutils literal"><span class="pre">--participant_label</span></code> is not provided, then all
+subjects will be processed and the group level analysis will
+automatically be executed without need of running the command in item 3.</p>
+</div>
+<p>After running the <code class="docutils literal"><span class="pre">participant</span></code> level with the <code class="code docutils literal"><span class="pre">--participant_label</span></code> argument,
+the <code class="docutils literal"><span class="pre">group</span></code> level will not be automatically triggered.
+To run the group level analysis:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc</span> <span class="n">bids</span><span class="o">-</span><span class="n">dataset</span><span class="o">/</span> <span class="n">out</span><span class="o">/</span> <span class="n">group</span>
+</pre></div>
+</div>
+<p>Examples of the generated visual reports are found in <a class="reference external" href="http://mriqc.org">mriqc.org</a>.</p>
+<p>Depending on the input images, the resulting outputs will vary as described next.</p>
+</div>
+<div class="section" id="containerized-versions">
+<h2>Containerized versions<a class="headerlink" href="#containerized-versions" title="Permalink to this headline">¶</a></h2>
+<p>If you have Docker installed, the quickest way to get <code class="docutils literal"><span class="pre">mriqc</span></code> to work
+is following <a class="reference internal" href="docker.html#docker"><span class="std std-ref">the running with docker guide</span></a>.</p>
+</div>
+<div class="section" id="running-mriqc-on-hpc-clusters">
+<h2>Running MRIQC on HPC clusters<a class="headerlink" href="#running-mriqc-on-hpc-clusters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="singularity-containers">
+<h3>Singularity containers<a class="headerlink" href="#singularity-containers" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="requesting-resources">
+<h3>Requesting resources<a class="headerlink" href="#requesting-resources" title="Permalink to this headline">¶</a></h3>
+<div class="topic">
+<p class="topic-title first">References</p>
+<table class="docutils citation" frame="void" id="bids" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[BIDS]</a></td><td><a class="reference external" href="http://bids.neuroimaging.io/">Brain Imaging Data Structure</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="bidsapps" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[BIDSApps]</a></td><td><a class="reference external" href="http://bids-apps.neuroimaging.io/">BIDS-Apps: portable neuroimaging pipelines that understand BIDS
+datasets</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="measures.html" class="btn btn-neutral float-right" title="Image Quality Metrics (IQMs)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Oscar Esteban.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

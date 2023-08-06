@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Extensions to sklearn &mdash; mriqc 0.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+    <link rel="top" title="mriqc 0.9 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mriqc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running.html">Running mriqc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../measures.html">Image Quality Metrics (IQMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker.html">Run mriqc with docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classifier.html">The MRIQC classifier for T1w images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports.html">Visual reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflows.html">The MRIQC workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">mriqc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Extensions to sklearn</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/cv/sklearn_ext.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-mriqc.classifier.sklearn_extension"><span id="sklearn-ext"></span></span><div class="section" id="extensions-to-sklearn">
+<h1>Extensions to sklearn<a class="headerlink" href="#extensions-to-sklearn" title="Permalink to this headline">¶</a></h1>
+<p>Extends sklearn&#8217;s GridSearchCV to a model search object</p>
+<dl class="class">
+<dt id="mriqc.classifier.sklearn_extension.ModelAndGridSearchCV">
+<em class="property">class </em><code class="descclassname">mriqc.classifier.sklearn_extension.</code><code class="descname">ModelAndGridSearchCV</code><span class="sig-paren">(</span><em>param_grid</em>, <em>scoring=None</em>, <em>fit_params=None</em>, <em>n_jobs=1</em>, <em>iid=True</em>, <em>refit=True</em>, <em>cv=None</em>, <em>verbose=0</em>, <em>pre_dispatch=u'2*n_jobs'</em>, <em>error_score=u'raise'</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/sklearn_extension.html#ModelAndGridSearchCV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.sklearn_extension.ModelAndGridSearchCV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection._search.BaseSearchCV</span></code></p>
+<p>Adds model selection to the GridSearchCV</p>
+<dl class="method">
+<dt id="mriqc.classifier.sklearn_extension.ModelAndGridSearchCV.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>groups=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/sklearn_extension.html#ModelAndGridSearchCV.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.sklearn_extension.ModelAndGridSearchCV.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mriqc.classifier.sklearn_extension.ModelParameterGrid">
+<em class="property">class </em><code class="descclassname">mriqc.classifier.sklearn_extension.</code><code class="descname">ModelParameterGrid</code><span class="sig-paren">(</span><em>param_grid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/sklearn_extension.html#ModelParameterGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.sklearn_extension.ModelParameterGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">future.types.newobject.newobject</span></code></p>
+<p>Grid of models and parameters with a discrete number of values for each.
+Can be used to iterate over parameter value combinations with the
+Python built-in function iter.
+Read more in the <a class="reference internal" href="../search.html"><span class="std std-ref">User Guide</span></a>.
+Parameters
+&#8212;&#8212;&#8212;-
+param_grid : dict of string to sequence, or sequence of such</p>
+<blockquote>
+<div>The parameter grid to explore, as a dictionary mapping estimator
+parameters to sequences of allowed values.
+An empty dict signifies default parameters.
+A sequence of dicts signifies a sequence of grids to search, and is
+useful to avoid exploring parameter combinations that make no sense
+or have no effect. See the examples below.</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mriqc.classifier.model_selection</span> <span class="k">import</span> <span class="n">ModelParameterGrid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model1&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}],</span> <span class="s1">&#39;model2&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">ModelParameterGrid</span><span class="p">(</span><span class="n">param_grid</span><span class="p">))</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ModelParameterGrid</span><span class="p">(</span><span class="n">param_grid</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>   <span class="p">[{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]},</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ModelParameterGrid</span><span class="p">(</span><span class="n">param_grid</span><span class="p">))</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;model2&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}),</span>
+<span class="gp">... </span>                                         <span class="p">(</span><span class="s1">&#39;model1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+<span class="gp">... </span>                                         <span class="p">(</span><span class="s1">&#39;model1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}),</span>
+<span class="gp">... </span>                                         <span class="p">(</span><span class="s1">&#39;model1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+<span class="gp">... </span>                                         <span class="p">(</span><span class="s1">&#39;model1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModelParameterGrid</span><span class="p">(</span><span class="n">param_grid</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="s1">&#39;model1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><a class="reference internal" href="#mriqc.classifier.sklearn_extension.ModelAndGridSearchCV" title="mriqc.classifier.sklearn_extension.ModelAndGridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">ModelAndGridSearchCV</span></code></a>:</dt>
+<dd>Uses <a class="reference internal" href="#mriqc.classifier.sklearn_extension.ModelParameterGrid" title="mriqc.classifier.sklearn_extension.ModelParameterGrid"><code class="xref py py-class docutils literal"><span class="pre">ModelParameterGrid</span></code></a> to perform a full parallelized parameter
+search.</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="mriqc.classifier.sklearn_extension.RobustGridSearchCV">
+<em class="property">class </em><code class="descclassname">mriqc.classifier.sklearn_extension.</code><code class="descname">RobustGridSearchCV</code><span class="sig-paren">(</span><em>estimator</em>, <em>param_grid</em>, <em>scoring=None</em>, <em>fit_params=None</em>, <em>n_jobs=1</em>, <em>iid=True</em>, <em>refit=True</em>, <em>cv=None</em>, <em>verbose=0</em>, <em>pre_dispatch='2*n_jobs'</em>, <em>error_score='raise'</em>, <em>return_train_score=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/sklearn_extension.html#RobustGridSearchCV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.sklearn_extension.RobustGridSearchCV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection._search.GridSearchCV</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mriqc.classifier.sklearn_extension.nested_fit_and_score">
+<code class="descclassname">mriqc.classifier.sklearn_extension.</code><code class="descname">nested_fit_and_score</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y</em>, <em>scorer</em>, <em>train</em>, <em>test</em>, <em>verbose=1</em>, <em>parameters=None</em>, <em>fit_params=None</em>, <em>return_train_score=False</em>, <em>return_times=False</em>, <em>error_score=u'raise'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/sklearn_extension.html#nested_fit_and_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.sklearn_extension.nested_fit_and_score" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Oscar Esteban.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

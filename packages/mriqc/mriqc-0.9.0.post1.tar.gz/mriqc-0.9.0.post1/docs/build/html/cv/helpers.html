@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mriqc.classifier.cv – MRIQC Cross-validation Helpers &mdash; mriqc 0.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+    <link rel="top" title="mriqc 0.9 documentation" href="../index.html"/>
+        <link rel="up" title="The MRIQC classifier for T1w images" href="../classifier.html"/>
+        <link rel="next" title="Data handler module" href="data.html"/>
+        <link rel="prev" title="The MRIQC classifier for T1w images" href="../classifier.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mriqc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running.html">Running mriqc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../measures.html">Image Quality Metrics (IQMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker.html">Run mriqc with docker</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../classifier.html">The MRIQC classifier for T1w images</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal"><span class="pre">mriqc.classifier.cv</span></code> &#8211; MRIQC Cross-validation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data handler module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reports.html">Visual reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflows.html">The MRIQC workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">mriqc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../classifier.html">The MRIQC classifier for T1w images</a> &raquo;</li>
+      
+    <li><code class="docutils literal"><span class="pre">mriqc.classifier.cv</span></code> &#8211; MRIQC Cross-validation Helpers</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/cv/helpers.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-mriqc.classifier.cv"><span id="crossvalidation"></span></span><div class="section" id="mriqc-classifier-cv-mriqc-cross-validation-helpers">
+<h1><a class="reference internal" href="#module-mriqc.classifier.cv" title="mriqc.classifier.cv"><code class="xref py py-mod docutils literal"><span class="pre">mriqc.classifier.cv</span></code></a> &#8211; MRIQC Cross-validation Helpers<a class="headerlink" href="#mriqc-classifier-cv-mriqc-cross-validation-helpers" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mriqc.classifier.cv.CVHelper">
+<em class="property">class </em><code class="descclassname">mriqc.classifier.cv.</code><code class="descname">CVHelper</code><span class="sig-paren">(</span><em>X=None</em>, <em>Y=None</em>, <em>load_clf=None</em>, <em>param=None</em>, <em>n_jobs=-1</em>, <em>site_label=u'site'</em>, <em>rate_label=u'rater_1'</em>, <em>zscored=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mriqc.classifier.cv.CVHelperBase" title="mriqc.classifier.cv.CVHelperBase"><code class="xref py py-class docutils literal"><span class="pre">mriqc.classifier.cv.CVHelperBase</span></code></a></p>
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.CVHelper.Xtest">
+<code class="descname">Xtest</code><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.Xtest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.CVHelper.estimator">
+<code class="descname">estimator</code><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.estimator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>scoring=u'accuracy'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>filehandler</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>UnPickle the estimator, adding the feature names
+<a class="reference external" href="http://scikit-learn.org/stable/modules/model_persistence.html">http://scikit-learn.org/stable/modules/model_persistence.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>datapoints</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.predict_dataset">
+<code class="descname">predict_dataset</code><span class="sig-paren">(</span><em>data</em>, <em>out_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.predict_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.predict_dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filehandler</em>, <em>compress=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pickle the estimator, adding the feature names
+<a class="reference external" href="http://scikit-learn.org/stable/modules/model_persistence.html">http://scikit-learn.org/stable/modules/model_persistence.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelper.setXtest">
+<code class="descname">setXtest</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelper.setXtest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelper.setXtest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mriqc.classifier.cv.CVHelperBase">
+<em class="property">class </em><code class="descclassname">mriqc.classifier.cv.</code><code class="descname">CVHelperBase</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>param=None</em>, <em>n_jobs=-1</em>, <em>site_label=u'site'</em>, <em>rate_label=u'rater_1'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelperBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">future.types.newobject.newobject</span></code></p>
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelperBase.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelperBase.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.CVHelperBase.ftnames">
+<code class="descname">ftnames</code><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase.ftnames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelperBase.get_groups">
+<code class="descname">get_groups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelperBase.get_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase.get_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelperBase.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelperBase.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.CVHelperBase.predict_dataset">
+<code class="descname">predict_dataset</code><span class="sig-paren">(</span><em>data</em>, <em>out_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#CVHelperBase.predict_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase.predict_dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.CVHelperBase.rate_column">
+<code class="descname">rate_column</code><a class="headerlink" href="#mriqc.classifier.cv.CVHelperBase.rate_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mriqc.classifier.cv.NestedCVHelper">
+<em class="property">class </em><code class="descclassname">mriqc.classifier.cv.</code><code class="descname">NestedCVHelper</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>param=None</em>, <em>n_jobs=-1</em>, <em>site_label=u'site'</em>, <em>rate_label=u'rater_1'</em>, <em>task_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#NestedCVHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mriqc.classifier.cv.CVHelperBase" title="mriqc.classifier.cv.CVHelperBase"><code class="xref py py-class docutils literal"><span class="pre">mriqc.classifier.cv.CVHelperBase</span></code></a></p>
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.NestedCVHelper.best_clf">
+<code class="descname">best_clf</code><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.best_clf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.NestedCVHelper.best_model">
+<code class="descname">best_model</code><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.best_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.NestedCVHelper.cv_inner">
+<code class="descname">cv_inner</code><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.cv_inner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.NestedCVHelper.cv_outer">
+<code class="descname">cv_outer</code><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.cv_outer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mriqc.classifier.cv.NestedCVHelper.cv_scores_df">
+<code class="descname">cv_scores_df</code><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.cv_scores_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.NestedCVHelper.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#NestedCVHelper.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.NestedCVHelper.get_inner_cv_scores">
+<code class="descname">get_inner_cv_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#NestedCVHelper.get_inner_cv_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.get_inner_cv_scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mriqc.classifier.cv.NestedCVHelper.get_outer_cv_scores">
+<code class="descname">get_outer_cv_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mriqc/classifier/cv.html#NestedCVHelper.get_outer_cv_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mriqc.classifier.cv.NestedCVHelper.get_outer_cv_scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="data.html" class="btn btn-neutral float-right" title="Data handler module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../classifier.html" class="btn btn-neutral" title="The MRIQC classifier for T1w images" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Oscar Esteban.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

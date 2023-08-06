@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The MRIQC classifier for T1w images &mdash; mriqc 0.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+    <link rel="top" title="mriqc 0.9 documentation" href="index.html"/>
+        <link rel="next" title="mriqc.classifier.cv – MRIQC Cross-validation Helpers" href="cv/helpers.html"/>
+        <link rel="prev" title="Run mriqc with docker" href="docker.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mriqc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Running mriqc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="measures.html">Image Quality Metrics (IQMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Run mriqc with docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The MRIQC classifier for T1w images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cv/helpers.html"><code class="docutils literal"><span class="pre">mriqc.classifier.cv</span></code> &#8211; MRIQC Cross-validation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cv/data.html">Data handler module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reports.html">Visual reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">The MRIQC workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mriqc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>The MRIQC classifier for T1w images</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/classifier.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mriqc.classifier">
+<span id="the-mriqc-classifier-for-t1w-images"></span><h1>The MRIQC classifier for T1w images<a class="headerlink" href="#module-mriqc.classifier" title="Permalink to this headline">¶</a></h1>
+<p>MRIQC is shipped with a random-forests classifier, using the combination of the
+<a class="reference external" href="http://fcon_1000.projects.nitrc.org/indi/abide/">ABIDE</a> and
+<a class="reference external" href="https://openfmri.org/dataset/ds000030/">DS030</a> datasets as training sample.</p>
+<p>To predict the quality labels (0=&#8221;accept&#8221;, 1=&#8221;reject&#8221;) on a features table
+computed by <code class="docutils literal"><span class="pre">mriqc</span></code> with the default classifier, the command line
+is as follows:</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc_clf</span> <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">classifier</span> <span class="o">-</span><span class="n">X</span> <span class="n">aMRIQC</span><span class="o">.</span><span class="n">csv</span> <span class="o">-</span><span class="n">o</span> <span class="n">mypredictions</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>where <code class="docutils literal"><span class="pre">aMRIQC.csv</span></code> is the file generated by the <code class="docutils literal"><span class="pre">group</span></code> level run of
+<code class="docutils literal"><span class="pre">mriqc</span></code>.</p>
+<p>Custom classifiers can be fitted using the same <code class="docutils literal"><span class="pre">mriqc_clf</span></code> tool in fitting
+mode:</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc_clf</span> <span class="o">--</span><span class="n">train</span> <span class="n">aMRIQC_train</span><span class="o">.</span><span class="n">csv</span> <span class="n">labels</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="n">fit_clf</span><span class="o">.</span><span class="n">log</span> <span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">classifier</span> <span class="n">myclassifier</span><span class="o">.</span><span class="n">pklz</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>where <code class="docutils literal"><span class="pre">aMRIQC_train.csv</span></code> contains the IQMs calculated by <code class="docutils literal"><span class="pre">mriqc</span></code> and <code class="docutils literal"><span class="pre">labels.csv</span></code> contains
+the matching ratings assigned by an expert.
+The labels can be numerical (<code class="docutils literal"><span class="pre">-1``=</span> <span class="pre">exclude,</span> <span class="pre">``0``=</span> <span class="pre">doubtful,</span> <span class="pre">``1</span></code> = accept) or textual (&#8220;bad&#8221;, &#8220;fail&#8221; can be
+used for exclude; &#8220;may be&#8221; or &#8220;maybe&#8221; for doubtful and &#8220;ok&#8221;, &#8220;good&#8221; for accept).</p>
+<p>The trained classifier can be then used for prediction on unseen data with
+the command at the top, indicating now which classifier should be used:</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mriqc_clf</span> <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">classifier</span> <span class="n">myclassifier</span><span class="o">.</span><span class="n">pklz</span> <span class="o">-</span><span class="n">X</span> <span class="n">aMRIQC</span><span class="o">.</span><span class="n">csv</span> <span class="o">-</span><span class="n">o</span> <span class="n">mypredictions</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Predictions are stored as a CSV file, containing the BIDS identifiers as
+indexing columns and the predicted quality label under the <code class="docutils literal"><span class="pre">prediction</span></code> column.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cv/helpers.html"><code class="docutils literal"><span class="pre">mriqc.classifier.cv</span></code> &#8211; MRIQC Cross-validation Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cv/data.html">Data handler module</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cv/helpers.html" class="btn btn-neutral float-right" title="mriqc.classifier.cv – MRIQC Cross-validation Helpers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker.html" class="btn btn-neutral" title="Run mriqc with docker" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Oscar Esteban.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

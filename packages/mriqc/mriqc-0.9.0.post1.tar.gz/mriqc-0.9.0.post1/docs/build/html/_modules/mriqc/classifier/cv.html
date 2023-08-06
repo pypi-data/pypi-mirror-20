@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mriqc.classifier.cv &mdash; mriqc 0.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../../about.html"/>
+    <link rel="top" title="mriqc 0.9 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mriqc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../running.html">Running mriqc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../measures.html">Image Quality Metrics (IQMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docker.html">Run mriqc with docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classifier.html">The MRIQC classifier for T1w images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reports.html">Visual reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workflows.html">The MRIQC workflows</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mriqc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>mriqc.classifier.cv</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mriqc.classifier.cv</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># @Author: oesteban</span>
+<span class="c1"># @Date:   2015-11-19 16:44:27</span>
+<span class="c1"># @Last Modified by:   oesteban</span>
+<span class="c1"># @Last Modified time: 2017-03-07 19:39:20</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">============================================================</span>
+<span class="sd">:mod:`mriqc.classifier.cv` -- MRIQC Cross-validation Helpers</span>
+<span class="sd">============================================================</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">mriqc</span> <span class="kn">import</span> <span class="n">__version__</span><span class="p">,</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">read_iqms</span><span class="p">,</span> <span class="n">read_dataset</span><span class="p">,</span> <span class="n">zscore_dataset</span>
+<span class="kn">from</span> <span class="nn">.sklearn_extension</span> <span class="kn">import</span> <span class="n">ModelAndGridSearchCV</span><span class="p">,</span> <span class="n">RobustGridSearchCV</span><span class="p">,</span> <span class="n">nested_fit_and_score</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">is_classifier</span><span class="p">,</span> <span class="n">clone</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.scorer</span> <span class="kn">import</span> <span class="n">check_scoring</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">LeavePGroupsOut</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection._split</span> <span class="kn">import</span> <span class="n">check_cv</span>
+
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">object</span><span class="p">,</span> <span class="nb">str</span>
+
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;mriqc.classifier&#39;</span><span class="p">)</span>
+
+<span class="n">DEFAULT_TEST_PARAMETERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;svc_linear&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}],</span>
+<span class="p">}</span>
+
+<span class="n">EXCLUDE_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;size_x&#39;</span><span class="p">,</span> <span class="s1">&#39;size_y&#39;</span><span class="p">,</span> <span class="s1">&#39;size_z&#39;</span><span class="p">,</span> <span class="s1">&#39;spacing_x&#39;</span><span class="p">,</span> <span class="s1">&#39;spacing_y&#39;</span><span class="p">,</span> <span class="s1">&#39;spacing_z&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="CVHelperBase"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelperBase">[docs]</a><span class="k">class</span> <span class="nc">CVHelperBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">site_label</span><span class="o">=</span><span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="s1">&#39;rater_1&#39;</span><span class="p">):</span>
+        <span class="c1"># Initialize some values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="n">DEFAULT_TEST_PARAMETERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="n">param</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rate_column</span> <span class="o">=</span> <span class="n">rate_label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_site_column</span> <span class="o">=</span> <span class="n">site_label</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span> <span class="o">=</span> <span class="n">read_dataset</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="n">rate_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sites</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span><span class="p">[</span><span class="n">site_label</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ftnames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rate_column</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rate_column</span>
+
+<div class="viewcode-block" id="CVHelperBase.fit"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelperBase.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="CVHelperBase.predict_dataset"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelperBase.predict_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">predict_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="CVHelperBase.predict"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelperBase.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="CVHelperBase.get_groups"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelperBase.get_groups">[docs]</a>    <span class="k">def</span> <span class="nf">get_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span><span class="p">[[</span><span class="bp">self</span><span class="o">.</span><span class="n">_site_column</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+        <span class="n">group_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
+        <span class="n">groups_idx</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">groups_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">groups_idx</span></div>
+
+    <span class="k">def</span> <span class="nf">_generate_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zscored</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">indexable</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xtr_zs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">zscored</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">sample_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+        <span class="n">labels_y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="bp">self</span><span class="o">.</span><span class="n">_rate_column</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">indexable</span><span class="p">(</span><span class="n">sample_x</span><span class="p">,</span> <span class="n">labels_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_groups</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="NestedCVHelper"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.NestedCVHelper">[docs]</a><span class="k">class</span> <span class="nc">NestedCVHelper</span><span class="p">(</span><span class="n">CVHelperBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">site_label</span><span class="o">=</span><span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="s1">&#39;rater_1&#39;</span><span class="p">,</span>
+                 <span class="n">task_id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NestedCVHelper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+                                             <span class="n">site_label</span><span class="o">=</span><span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="s1">&#39;rater_1&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Xtr_zs</span> <span class="o">=</span> <span class="n">zscore_dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+                                      <span class="n">excl_columns</span><span class="o">=</span><span class="p">[</span><span class="n">rate_label</span><span class="p">]</span> <span class="o">+</span> <span class="n">EXCLUDE_COLUMNS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_models</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_best_clf</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv_inner</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;kfold&#39;</span><span class="p">,</span> <span class="s1">&#39;n_splits&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv_outer</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv_scores_df</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_task_id</span> <span class="o">=</span> <span class="n">task_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cv_scores_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv_scores_df</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cv_inner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv_inner</span>
+
+    <span class="nd">@cv_inner.setter</span>
+    <span class="k">def</span> <span class="nf">cv_inner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv_inner</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cv_outer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv_outer</span>
+
+    <span class="nd">@cv_outer.setter</span>
+    <span class="k">def</span> <span class="nf">cv_outer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv_outer</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">best_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_clf</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">best_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span>
+
+<div class="viewcode-block" id="NestedCVHelper.fit"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.NestedCVHelper.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Start fitting ...&#39;</span><span class="p">)</span>
+
+        <span class="n">gs_cv_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="s1">&#39;cv&#39;</span><span class="p">:</span> <span class="n">_cv_build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cv_inner</span><span class="p">),</span>
+                        <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+        <span class="n">zscore_cv_auc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">zscore_cv_acc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">split_id</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">dozs</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">]:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Generate </span><span class="si">%s</span><span class="s1">z-scored sample ...&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">dozs</span> <span class="k">else</span> <span class="s1">&#39;non &#39;</span><span class="p">)</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_sample</span><span class="p">(</span><span class="n">zscored</span><span class="o">=</span><span class="n">dozs</span><span class="p">)</span>
+
+            <span class="c1"># The inner CV loop is a grid search on clf_params</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating ModelAndGridSearchCV&#39;</span><span class="p">)</span>
+            <span class="n">inner_cv</span> <span class="o">=</span> <span class="n">ModelAndGridSearchCV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="o">**</span><span class="n">gs_cv_params</span><span class="p">)</span>
+
+            <span class="c1"># Some sklearn&#39;s validations</span>
+            <span class="n">scoring</span> <span class="o">=</span> <span class="n">check_scoring</span><span class="p">(</span><span class="n">inner_cv</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">)</span>
+            <span class="n">cv_outer</span> <span class="o">=</span> <span class="n">check_cv</span><span class="p">(</span><span class="n">_cv_build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cv_outer</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span>
+                                <span class="n">classifier</span><span class="o">=</span><span class="n">is_classifier</span><span class="p">(</span><span class="n">inner_cv</span><span class="p">))</span>
+
+            <span class="c1"># Outer CV loop</span>
+            <span class="n">outer_cv_scores</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">outer_cv_acc</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Starting nested cross-validation ...&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">cv_outer</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="p">)):</span>
+                <span class="c1"># Find the groups in the train set, in case inner CV is LOSO.</span>
+                <span class="n">fit_params</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_inner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;loso&#39;</span><span class="p">:</span>
+                    <span class="n">train_groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">groups</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">train</span><span class="p">]</span>
+                    <span class="n">fit_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;groups&#39;</span><span class="p">:</span> <span class="n">train_groups</span><span class="p">}</span>
+
+                <span class="n">result</span> <span class="o">=</span> <span class="n">nested_fit_and_score</span><span class="p">(</span>
+                    <span class="n">clone</span><span class="p">(</span><span class="n">inner_cv</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">fit_params</span><span class="o">=</span><span class="n">fit_params</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="c1"># Test group has no positive cases</span>
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">score</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="n">test_group</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">groups</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">test</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="c1"># &#39;clf_type&#39;: clf_str,</span>
+                    <span class="s1">&#39;zscored&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">dozs</span><span class="p">),</span>
+                    <span class="s1">&#39;outer_split_id&#39;</span><span class="p">:</span> <span class="n">split_id</span><span class="p">,</span>
+                    <span class="s1">&#39;left-out-sites&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="p">[</span><span class="n">test_group</span><span class="p">],</span>
+                    <span class="s1">&#39;best_model&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">best_model_</span><span class="p">,</span>
+                    <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span>
+                    <span class="s1">&#39;best_score&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span>
+                    <span class="s1">&#39;best_index&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">best_index_</span><span class="p">,</span>
+                    <span class="s1">&#39;cv_results&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">,</span>
+                    <span class="s1">&#39;cv_scores&#39;</span><span class="p">:</span> <span class="n">score</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;cv_accuracy&#39;</span><span class="p">:</span> <span class="n">score</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;cv_params&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;cv_auc_means&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;cv_splits&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;split</span><span class="si">%03d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;split</span><span class="si">%d</span><span class="s1">_test_score&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">]</span>
+                                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">n_splits_</span><span class="p">))}</span>
+                <span class="p">})</span>
+
+                <span class="c1"># Store the outer loop scores</span>
+                <span class="k">if</span> <span class="n">score</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">outer_cv_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">])</span>
+                <span class="n">outer_cv_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+                <span class="n">split_id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="c1"># LOG.info(</span>
+                <span class="c1">#     &#39;[%s-%szs] Outer CV: roc_auc=%f, accuracy=%f, &#39;</span>
+                <span class="c1">#     &#39;Inner CV: best roc_auc=%f, params=%s. &#39;,</span>
+                <span class="c1">#     clf.best_model_[0], &#39;n&#39; if not dozs else &#39;&#39;,</span>
+                <span class="c1">#     score[&#39;test&#39;][&#39;roc_auc&#39;] if score[&#39;test&#39;][&#39;roc_auc&#39;] is not None else -1.0,</span>
+                <span class="c1">#     score[&#39;test&#39;][&#39;accuracy&#39;],</span>
+                <span class="c1">#     clf.best_score_, clf.best_model_[1])</span>
+
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Outer CV loop finished, roc_auc=</span><span class="si">%f</span><span class="s1"> (+/-</span><span class="si">%f</span><span class="s1">), accuracy=</span><span class="si">%f</span><span class="s1"> (+/-</span><span class="si">%f</span><span class="s1">)&#39;</span><span class="p">,</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">outer_cv_scores</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">outer_cv_scores</span><span class="p">),</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">outer_cv_acc</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">outer_cv_acc</span><span class="p">))</span>
+
+            <span class="n">zscore_cv_auc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outer_cv_scores</span><span class="p">)</span>
+            <span class="n">zscore_cv_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outer_cv_acc</span><span class="p">)</span>
+
+
+        <span class="c1"># Select best performing model</span>
+        <span class="n">best_inner_loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;best_score&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">]</span>
+        <span class="n">best_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">best_inner_loops</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Inner CV [</span><span class="si">%d</span><span class="s1"> models compared] - best model </span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">zs, score=</span><span class="si">%f</span><span class="s1">, params=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                 <span class="nb">len</span><span class="p">(</span><span class="n">best_inner_loops</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;cv_params&#39;</span><span class="p">]),</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span><span class="p">[</span><span class="s1">&#39;best_model&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s1">&#39;n&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span><span class="p">[</span><span class="s1">&#39;zscored&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span><span class="p">[</span><span class="s1">&#39;best_score&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span><span class="p">[</span><span class="s1">&#39;best_params&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Write out evaluation result</span>
+        <span class="n">best_zs</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_model</span><span class="p">[</span><span class="s1">&#39;zscored&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;CV - estimated performance: roc_auc=</span><span class="si">%f</span><span class="s1"> (+/-</span><span class="si">%f</span><span class="s1">), accuracy=</span><span class="si">%f</span><span class="s1"> (+/-</span><span class="si">%f</span><span class="s1">)&#39;</span><span class="p">,</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">zscore_cv_auc</span><span class="p">[</span><span class="n">best_zs</span><span class="p">]),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">zscore_cv_auc</span><span class="p">[</span><span class="n">best_zs</span><span class="p">]),</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">zscore_cv_acc</span><span class="p">[</span><span class="n">best_zs</span><span class="p">]),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">zscore_cv_acc</span><span class="p">[</span><span class="n">best_zs</span><span class="p">]),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="NestedCVHelper.get_inner_cv_scores"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.NestedCVHelper.get_inner_cv_scores">[docs]</a>    <span class="k">def</span> <span class="nf">get_inner_cv_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Compose a dataframe object</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;split_id&#39;</span><span class="p">,</span> <span class="s1">&#39;zscored&#39;</span><span class="p">,</span> <span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_auc&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">]</span>
+        <span class="n">cvdict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">}</span>
+        <span class="n">cvdict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;cv_splits&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()})</span>
+
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cv_params&#39;</span><span class="p">]):</span>
+                <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;clf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;split_id&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;outer_split_id&#39;</span><span class="p">]]</span>
+                <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;zscored&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;zscored&#39;</span><span class="p">])]</span>
+                <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;mean_auc&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cv_auc_means&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cv_splits&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+                    <span class="n">cvdict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="c1"># massage columns</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_id</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;clf&#39;</span><span class="p">])</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;task_id&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv_scores_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cvdict</span><span class="p">)[</span><span class="n">columns</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv_scores_df</span></div>
+
+<div class="viewcode-block" id="NestedCVHelper.get_outer_cv_scores"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.NestedCVHelper.get_outer_cv_scores">[docs]</a>    <span class="k">def</span> <span class="nf">get_outer_cv_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Compose a dataframe object</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;split_id&#39;</span><span class="p">,</span> <span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="s1">&#39;zscored&#39;</span><span class="p">,</span> <span class="s1">&#39;auc&#39;</span><span class="p">,</span> <span class="s1">&#39;acc&#39;</span><span class="p">]</span>
+        <span class="n">cvdict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">:</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;zscored&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;zscored&#39;</span><span class="p">])]</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;split_id&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;outer_split_id&#39;</span><span class="p">]]</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;left-out-sites&#39;</span><span class="p">]]</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;auc&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cv_scores&#39;</span><span class="p">]]</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;cv_accuracy&#39;</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_id</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">cvdict</span><span class="p">[</span><span class="s1">&#39;split_id&#39;</span><span class="p">])</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;task_id&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cvdict</span><span class="p">)[</span><span class="n">columns</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="CVHelper"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper">[docs]</a><span class="k">class</span> <span class="nc">CVHelper</span><span class="p">(</span><span class="n">CVHelperBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">load_clf</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">site_label</span><span class="o">=</span><span class="s1">&#39;site&#39;</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="s1">&#39;rater_1&#39;</span><span class="p">,</span> <span class="n">zscored</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">X</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">Y</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="n">load_clf</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Either load_clf or X &amp; Y should be supplied&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zscored</span> <span class="o">=</span> <span class="n">zscored</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pickled</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rate_column</span> <span class="o">=</span> <span class="n">rate_label</span>
+
+        <span class="k">if</span> <span class="n">load_clf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">load_clf</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="p">,</span> <span class="s1">&#39;_ftnames&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">CVHelper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+                <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+                <span class="n">site_label</span><span class="o">=</span><span class="n">site_label</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="n">rate_label</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">zscored</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span> <span class="o">=</span> <span class="n">zscore_dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Xtrain</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+                                        <span class="n">excl_columns</span><span class="o">=</span><span class="p">[</span><span class="n">rate_label</span><span class="p">]</span> <span class="o">+</span> <span class="n">EXCLUDE_COLUMNS</span><span class="p">)</span>
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">estimator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Xtest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span>
+
+<div class="viewcode-block" id="CVHelper.setXtest"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.setXtest">[docs]</a>    <span class="k">def</span> <span class="nf">setXtest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">read_dataset</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">rate_label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_rate_column</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zscored</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span> <span class="o">=</span> <span class="n">zscore_dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span>
+                                         <span class="n">excl_columns</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_rate_column</span><span class="p">]</span> <span class="o">+</span> <span class="n">EXCLUDE_COLUMNS</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CVHelper.fit"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span> <span class="k">as</span> <span class="n">RFC</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pickled</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Classifier was loaded from file, cancelling fitting.&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Start fitting ...&#39;</span><span class="p">)</span>
+        <span class="n">estimator</span> <span class="o">=</span> <span class="n">RFC</span><span class="p">()</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">RobustGridSearchCV</span><span class="p">(</span>
+            <span class="n">estimator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;rfc&#39;</span><span class="p">],</span> <span class="n">error_score</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">scoring</span><span class="o">=</span><span class="n">check_scoring</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">),</span>
+            <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">LeavePGroupsOut</span><span class="p">(</span><span class="n">n_groups</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_sample</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">)</span>
+
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Model selection - best parameters (roc_auc=</span><span class="si">%f</span><span class="s1">) </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                 <span class="n">grid</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CVHelper.save"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pickle the estimator, adding the feature names</span>
+<span class="sd">        http://scikit-learn.org/stable/modules/model_persistence.html</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">sklearn.externals.joblib</span> <span class="kn">import</span> <span class="n">dump</span> <span class="k">as</span> <span class="n">savepkl</span>
+
+        <span class="c1"># Store ftnames</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="p">,</span> <span class="s1">&#39;_ftnames&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span><span class="p">)</span>
+        <span class="n">savepkl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="n">compress</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CVHelper.load"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filehandler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        UnPickle the estimator, adding the feature names</span>
+<span class="sd">        http://scikit-learn.org/stable/modules/model_persistence.html</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">sklearn.externals.joblib</span> <span class="kn">import</span> <span class="n">load</span> <span class="k">as</span> <span class="n">loadpkl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span> <span class="o">=</span> <span class="n">loadpkl</span><span class="p">(</span><span class="n">filehandler</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="p">,</span> <span class="s1">&#39;_ftnames&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pickled</span> <span class="o">=</span> <span class="bp">True</span></div>
+
+
+<div class="viewcode-block" id="CVHelper.predict"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datapoints</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">datapoints</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CVHelper.predict_dataset"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.predict_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">predict_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">_xeval</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bidts</span> <span class="o">=</span> <span class="n">read_iqms</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">sample_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_xeval</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">_xeval</span><span class="p">[</span><span class="n">bidts</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">pred</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sample_x</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">out_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">pred</span><span class="p">[</span><span class="n">bidts</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pred</span></div>
+
+<div class="viewcode-block" id="CVHelper.evaluate"><a class="viewcode-back" href="../../../cv/helpers.html#mriqc.classifier.cv.CVHelper.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">sklearn.model_selection._validation</span> <span class="kn">import</span> <span class="n">_score</span>
+
+        <span class="n">sample_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ftnames</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="p">,</span> <span class="n">sample_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Xtest</span><span class="o">.</span><span class="n">rate</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                      <span class="n">check_scoring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">))</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_cv_build</span><span class="p">(</span><span class="n">cv_scheme</span><span class="p">):</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Building CV scheme: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cv_scheme</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">cv_scheme</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">if</span> <span class="n">cv_scheme</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">cv_scheme</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;kfold&#39;</span><span class="p">:</span>
+        <span class="n">nsplits</span> <span class="o">=</span> <span class="n">cv_scheme</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;n_splits&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">nsplits</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cv_scheme</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">cv_scheme</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;loso&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">LeavePGroupsOut</span><span class="p">(</span><span class="n">n_groups</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Unknown CV scheme (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">cv_scheme</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Oscar Esteban.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
