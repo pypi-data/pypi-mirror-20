@@ -1,0 +1,22 @@
+Metadata-Version: 2.0
+Name: fakturuj-pyco
+Version: 1.3
+Summary: Generator faktur.
+Home-page: https://github.com/visgean/fakturuj_pyco
+Author: Visgean Skeloru
+Author-email: visgean@gmail.com
+License: MIT
+Keywords: fakturace fakturovani invoice
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: Czech
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: ares-util
+Requires-Dist: jinja2
+Requires-Dist: pdfkit
+Requires-Dist: python-dateutil
+
+Generuje faktury z jsonu, pyco.
+
+
