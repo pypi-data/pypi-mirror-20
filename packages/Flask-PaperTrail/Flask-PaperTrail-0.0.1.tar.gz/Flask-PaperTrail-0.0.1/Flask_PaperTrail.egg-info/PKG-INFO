@@ -1,0 +1,64 @@
+Metadata-Version: 1.1
+Name: Flask-PaperTrail
+Version: 0.0.1
+Summary: Adds PaperTrail logging to your Flask application
+Home-page: https://github.com/Gnouc/flask_papertrail
+Author: Cuong Manh Le
+Author-email: cuong.manhle.vn@gmail.com
+License: BSD
+Description: flask_papertrail
+        ====
+        
+        flask_papertrail -- Easily setup papertrail to your Flask application
+        
+        .. image:: https://travis-ci.org/Gnouc/flask_papertrail.svg?branch=master
+            :target: https://travis-ci.org/Gnouc/flask_papertrail
+        
+        Installation
+        ============
+        
+        .. code:: sh
+        
+            pip install Flask-PaperTrail
+        
+        Usage
+        =====
+        
+        .. code:: python
+        
+            from flask import Flask
+            from flask_papertrail import PaperTrail
+        
+            app = Flask(__name__)
+            Papertrail(app)
+        
+        Or using `init_app`:
+        
+        .. code:: python
+        
+            from flask import Flask
+            from flask_papertrail import PaperTrail
+        
+            app = Flask(__name__)
+            p = PaperTrail()
+            p.init_app(app)
+        
+        Author
+        ======
+        
+        Cuong Manh Le cuong.manhle.vn@gmail.com
+        
+        License
+        =======
+        
+        See `LICENSE <https://github.com/Gnouc/flask_papertrail/blob/master/LICENSE>`__
+        
+Keywords: flask,log
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
