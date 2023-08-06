@@ -1,0 +1,12 @@
+include *.rst
+include *.txt
+include *.ini
+recursive-include miniamf *.pyx
+recursive-include miniamf *.pxd
+graft doc
+graft tests
+prune doc/build
+prune doc/_build
+prune .tox
+global-exclude *.pyc
+global-exclude *.c
