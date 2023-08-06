@@ -1,0 +1,9 @@
+[Unit]
+Description=barcodescan_sse
+
+[Service]
+Type=simple
+ExecStart=/venv/bin/barcodescan_sse
+
+[Install]
+WantedBy=multi-user.target
