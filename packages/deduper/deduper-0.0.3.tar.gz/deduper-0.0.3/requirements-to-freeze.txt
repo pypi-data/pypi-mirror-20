@@ -1,0 +1,14 @@
+# Store the output of
+#   $ pip freeze
+# after
+#   $ pip install -r requirements-to-freeze.txt --upgrade
+#
+# Note: use this file for deployment (aka: to avoid problemZ)
+# @see http://www.kennethreitz.org/essays/a-better-pip-workflow
+
+
+dill==0.2.6
+pandas==0.19.2
+pyodbc==4.0.1
+setuptools-scm==1.15.0
+SQLAlchemy==1.1.5
