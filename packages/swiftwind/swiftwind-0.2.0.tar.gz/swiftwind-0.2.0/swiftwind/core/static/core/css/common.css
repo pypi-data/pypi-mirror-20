@@ -1,0 +1,39 @@
+/*Common*/
+.pos {
+    color: #5cb85c;
+}
+.neg {
+    color: #d9534f;
+}
+.form-group {
+    overflow: auto;
+}
+.panel-heading .form-group {
+    margin: 0;
+}
+
+/*Layout*/
+.content-header h1 {
+    display: inline-block;
+}
+.content-header .header-actions {
+    display: inline-block;
+    margin-left: 20px;
+}
+/*Recurring Cost UI*/
+.cost .radio {
+    /*Stop the side of the radio button being chopped off*/
+    margin-left: 1px;
+}
+
+/*In common with BattleCat*/
+
+form .money input {
+    width: 50%;
+    float: left;
+}
+form .money select {
+    width: 49%;
+    float: right;
+    margin-left: 1%;
+}

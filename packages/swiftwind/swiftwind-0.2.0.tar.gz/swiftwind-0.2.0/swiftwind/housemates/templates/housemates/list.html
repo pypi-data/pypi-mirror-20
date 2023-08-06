@@ -1,0 +1,42 @@
+{% extends 'swiftwind/base.html' %}
+{% load bootstrap3 %}
+
+{% block page_name %}Housemates{% endblock %}
+{% block page_description %}{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Email</th>
+                <th>Active</th>
+                <th>Last login</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for housemate in housemates %}
+                <tr>
+                    <td>{% firstof housemate.user.get_full_name '-' %}</td>
+                    <td>
+                        <a href="mailto:{{ housemate.user.email }}">{{ housemate.user.email }}</a>
+                    </td>
+                    <td>
+                        {% if housemate.user.is_active %}
+                            <i class="fa fa-check-circle text-success"></i>
+                        {% else %}
+                            <i class="fa fa-times-circle text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>{% firstof housemate.user.last_login 'Never' %}</td>
+                    <td>
+                        <a href="{% url 'housemates:update' housemate.uuid %}" class="btn btn-sm btn-default">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'housemates:create' %}" class="btn btn-primary btn-lg pull-right">Create Housemate</a>
+{% endblock %}
