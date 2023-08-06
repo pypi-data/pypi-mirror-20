@@ -1,0 +1,33 @@
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
+import { JobOperationComponent } from './job-op.component';
+
+describe('JobOperationComponent', () => {
+  let component: JobOperationComponent;
+  let fixture: ComponentFixture<JobOperationComponent>;
+
+  beforeEach(async(() => {
+    // Declare Mock services
+
+    TestBed.configureTestingModule({
+      declarations: [ JobOperationComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(JobOperationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+    expect(component.operations.length).toBe(3);
+    expect(component.operations[0].id).toBe(121);
+  });
+});

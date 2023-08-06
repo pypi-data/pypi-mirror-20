@@ -1,0 +1,124 @@
+<!--TRANSITION WITH REASON DIALOG -->
+<pl-pof-field-switching-job-transition-with-reason
+        *ngIf="transitionDialogShown()"
+        (confirm)="dialogConfirmed($event)"
+        (cancel)="dialogCanceled()"
+        [data]="transitionDialogData">
+
+</pl-pof-field-switching-job-transition-with-reason>
+
+<!-- Navigation Place Holder -->
+<div class="row" *ngIf="transitionDialogShown()">
+    <Button class="btn btn-default" style="opacity: 0">XX</Button>
+</div>
+
+<!--END HANDBACK DIALOG -->
+<div class="row" *ngIf="!transitionDialogShown()">
+    <div class="form-group col-xs-12">
+        <!-- Navigation -->
+        <Button class="btn btn-default" (click)="navToMyJobs()">My Jobs</Button>
+        <Button class="btn btn-default" (click)="navToSwitching()">
+            Operations
+        </Button>
+
+
+        <!--ACTIONS -->
+        <!--ACCEPT JOB or REJECT JOB -->
+        <Button class="btn btn-default pull-right"
+                *ngIf="job.fieldStatus.isDispatched"
+                (click)="acceptJob()">Accept
+        </Button>
+        <Button class="btn btn-default pull-right"
+                *ngIf="job.fieldStatus.isDispatched"
+                (click)="rejectJob()">Reject
+        </Button>
+
+        <!-- HAND BACK JOB or START JOB-->
+        <Button class="btn btn-default pull-right"
+                *ngIf="job.fieldStatus.isAccepted"
+                (click)="handBackJob()">Hand Back
+        </Button>
+        <Button class="btn btn-default pull-right"
+                *ngIf="isStartJobEnabled()"
+                (click)="startJob()">Start
+        </Button>
+
+        <!--STOP JOB -->
+        <Button class="btn btn-default pull-right"
+                *ngIf="job.fieldStatus.isActive"
+                (click)="stopJob()">Stop
+        </Button>
+    </div>
+</div>
+
+<!--BEGIN REJECT DIALOG -->
+<!--END REJECT DIALOG -->
+
+<style>
+    hr {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+</style>
+
+<!--Displayed form data -->
+<div class="row">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Control Engineer</h5>
+        <h3>{{job.activeControlEngineer}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Field State</h5>
+        <h3>{{job.fieldStatus.niceName}}</h3>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Name</h5>
+        <h3>{{job.jobName}}</h3>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Work Description</h5>
+        <h3>{{job.workSummary}}</h3>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Work Planned</h5>
+        <h3>{{job.workDetail}}</h3>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Planned Start Data</h5>
+        <h3>{{job.scheduledDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Planned End Date</h5>
+        <h3>{{job.PlannedEndDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Approved</h5>
+        <h3>{{job.approvedBy}}</h3>
+        <h3>{{job.approvedDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Completed</h5>
+        <h3>{{job.completedBy}}</h3>
+        <h3>{{job.completedDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+</div>

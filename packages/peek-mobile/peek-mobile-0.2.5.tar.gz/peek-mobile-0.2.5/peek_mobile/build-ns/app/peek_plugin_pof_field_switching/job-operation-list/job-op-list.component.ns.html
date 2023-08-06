@@ -1,0 +1,32 @@
+<StackLayout>
+
+    <GridLayout columns="*,*" rows="auto" width="*">
+        <Button col="0" text="My Jobs" (tap)="navToMyJobs()"></Button>
+        <Button col="1" [text]="backJobText()" (tap)="navToJob()"></Button>
+    </GridLayout>
+
+    <StackLayout class="m-l-10 m-r-10">
+
+        <GridLayout rows="auto" columns="3*, 4*">
+            <Label class="h2" col="0" text="Item"></Label>
+            <Label class="h2" col="1" text="State"></Label>
+        </GridLayout>
+
+
+        <ListView [items]="operations">
+            <template let-op="item">
+                <StackLayout (tap)="navToOperation(op)" [class.bg-primary]="op.currentState.isInstructed">
+                    <GridLayout rows="auto, auto, auto, auto, auto" columns="3*, 4*" [class.bg-primary]="op.currentState.isInstructed">
+                        <-- row -->
+                            <Label class="h3 peek-field-data-text" row="0" col="0" [text]="'#' + op.operationNumber"></Label>
+                            <Label class="h3 peek-field-data-text" row="0" col="1" [text]="op.currentState.niceName"></Label>
+                            <Label class="h3 peek-field-data-text" row="1" col="0" colSpan="2" textWrap="true" [text]="op.substationName" text></Label>
+                            <Label class="h3 peek-field-data-text" row="2" col="0" colSpan="2" textWrap="true" [text]="op.componentDescription"></Label>
+                            <Label class="h3 peek-field-data-text" row="3" col="0" colSpan="2" textWrap="true" [text]="op.action"></Label>
+
+                    </GridLayout>
+                </StackLayout>
+            </template>
+        </ListView>
+    </StackLayout>
+</StackLayout>

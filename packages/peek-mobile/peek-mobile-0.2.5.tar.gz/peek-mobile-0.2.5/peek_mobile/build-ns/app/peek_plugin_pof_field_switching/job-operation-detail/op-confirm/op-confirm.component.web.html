@@ -1,0 +1,31 @@
+<div [@dialogAnimation]="dialogAnimationState"
+     (@dialogAnimation.done)="animationDone($event)">
+
+    <div class="form-group">
+        <label for="operationDate">Operation Date / Time :</label>
+        <input id="operationDate" class="form-control"
+               [(ngModel)]="inputData.operationDate" ng2-datetime-picker
+               close-on-select="false"
+               date-format="DD-MMM-YYYY HH:mm"/>
+               
+    </div>
+    <div class="form-group">
+        <h5 class="text-muted">Request Further Instructions : 
+            <button class="btn btn-default btn-sm"
+                    (click)="inputData.requestFurtherInstructions=!inputData.requestFurtherInstructions"
+                    [class.btn-success]="inputData.requestFurtherInstructions"
+                    type="button">{{inputData.requestFurtherInstructions ? "Yes" : "No"}}
+            </button>
+        </h5>
+    </div>
+
+    <!--BEGIN HANDBACK DIALOG -->
+    <div>
+        <Button class="btn btn-default" (click)="webConfirmClicked()">
+            {{inputData.actionName}}
+        </Button>
+
+        <Button class="btn btn-default" (click)="cancelClicked(false)">Cancel
+        </Button>
+    </div>
+</div>
