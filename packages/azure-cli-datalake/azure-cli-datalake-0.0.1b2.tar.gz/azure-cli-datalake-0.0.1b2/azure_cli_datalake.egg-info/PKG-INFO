@@ -1,0 +1,44 @@
+Metadata-Version: 1.1
+Name: azure-cli-datalake
+Version: 0.0.1b2
+Summary: Microsoft Azure Command-Line Tools Data Lake Command Module
+Home-page: https://github.com/Azure/azure-cli
+Author: Microsoft Corporation
+Author-email: azpycli@microsoft.com
+License: MIT
+Description: Microsoft Azure CLI 'datalake' Command Module
+        =============================================
+        
+        This package is for the 'datalake' module.
+        i.e. 'az datalake'
+        
+        
+        
+        
+        .. :changelog:
+        
+        Release History
+        ===============
+        
+        0.0.1b2 (2017-03-13)
+        +++++++++++++++++++++
+        
+        * Fix: Add datalake package to setup.py (#2493)
+        
+        0.0.1b1 (2017-03-13)
+        +++++++++++++++++++++
+        
+        * Initial Preview Release for Azure Data Lake Store and Analytics commands
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
