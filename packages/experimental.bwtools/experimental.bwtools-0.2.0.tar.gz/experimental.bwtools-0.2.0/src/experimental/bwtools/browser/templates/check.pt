@@ -1,0 +1,6 @@
+<script id="bwtools-script"
+        defer="defer"
+        src="${here/portal_url}/++plone++experimental.bwtools/scripts/check.js"
+        type="text/javascript"
+        tal:condition="not:view/bwtools/is_bad_ip"
+></script>

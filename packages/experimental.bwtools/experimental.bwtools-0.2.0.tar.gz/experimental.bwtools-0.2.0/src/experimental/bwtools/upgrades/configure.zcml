@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="plone"
+    >
+
+  <include file="profiles.zcml" />
+
+  <gs:upgradeSteps
+      destination="1001"
+      profile="experimental.bwtools:default"
+      source="*"
+      >
+    <gs:upgradeStep
+        title="Reread the registry configuration"
+        description=""
+        handler=".to1001.reread_registry"
+        />
+
+  </gs:upgradeSteps>
+
+</configure>

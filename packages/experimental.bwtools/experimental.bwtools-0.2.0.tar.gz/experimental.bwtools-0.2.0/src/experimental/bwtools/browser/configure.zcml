@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="experimental.bwtools"
+    >
+
+  <!-- Publish static files -->
+  <plone:static
+      name="experimental.bwtools"
+      directory="static"
+      type="plone"
+      />
+
+  <browser:pages
+      for="*"
+      permission="zope2.View"
+      class=".bwtools.View"
+      layer="experimental.bwtools.interfaces.IExperimentalBwtoolsLayer"
+      >
+    <browser:page name="bwtools" />
+    <browser:page
+        name="bwtools-clear"
+        attribute="expire_and_redirect"
+        />
+    <browser:page
+        name="bwtools-show"
+        attribute="show_and_redirect"
+        />
+  </browser:pages>
+
+  <browser:viewlet
+      name="experimental.bwtools.check"
+      for="*"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      permission="zope2.View"
+      class=".bwtools.CheckViewlet"
+      template="templates/check.pt"
+      layer="experimental.bwtools.interfaces.IExperimentalBwtoolsLayer"
+      zcml:condition="not-installed ploneintranet"
+      />
+
+  <browser:viewlet
+      name="experimental.bwtools.check"
+      for="*"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+      permission="zope2.View"
+      class=".bwtools.CheckViewlet"
+      template="templates/check.pt"
+      layer="experimental.bwtools.interfaces.IExperimentalBwtoolsLayer"
+      zcml:condition="installed ploneintranet"
+      />
+
+</configure>
