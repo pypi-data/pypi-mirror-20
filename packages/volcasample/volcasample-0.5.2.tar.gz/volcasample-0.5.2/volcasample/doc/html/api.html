@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation details &mdash; Volcasample 0.5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Volcasample 0.5.0 documentation" href="index.html"/>
+        <link rel="prev" title="Commands" href="cli.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Volcasample
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Commands</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-volcasample.syro">Data structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#samplepacker-class">SamplePacker class</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Volcasample</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Implementation details</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="implementation-details">
+<h1>Implementation details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-volcasample.syro">
+<span id="data-structures"></span><h2>Data structures<a class="headerlink" href="#module-volcasample.syro" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="volcasample.syro.Endian">
+<em class="property">class </em><code class="descclassname">volcasample.syro.</code><code class="descname">Endian</code><a class="headerlink" href="#volcasample.syro.Endian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shadows the Endian enumeration in the Syro C library.</p>
+<dl class="attribute">
+<dt id="volcasample.syro.Endian.LittleEndian">
+<code class="descname">LittleEndian</code><em class="property"> = c_uint(0)</em><a class="headerlink" href="#volcasample.syro.Endian.LittleEndian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Endian.BigEndian">
+<code class="descname">BigEndian</code><em class="property"> = c_uint(1)</em><a class="headerlink" href="#volcasample.syro.Endian.BigEndian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="volcasample.syro.DataType">
+<em class="property">class </em><code class="descclassname">volcasample.syro.</code><code class="descname">DataType</code><a class="headerlink" href="#volcasample.syro.DataType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shadows the DataType enumeration in the Syro C library.</p>
+<dl class="attribute">
+<dt id="volcasample.syro.DataType.Sample_Liner">
+<code class="descname">Sample_Liner</code><em class="property"> = c_uint(0)</em><a class="headerlink" href="#volcasample.syro.DataType.Sample_Liner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.DataType.Sample_Compress">
+<code class="descname">Sample_Compress</code><em class="property"> = c_uint(1)</em><a class="headerlink" href="#volcasample.syro.DataType.Sample_Compress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.DataType.Sample_Erase">
+<code class="descname">Sample_Erase</code><em class="property"> = c_uint(2)</em><a class="headerlink" href="#volcasample.syro.DataType.Sample_Erase" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.DataType.Sample_All">
+<code class="descname">Sample_All</code><em class="property"> = c_uint(3)</em><a class="headerlink" href="#volcasample.syro.DataType.Sample_All" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.DataType.Sample_AllCompress">
+<code class="descname">Sample_AllCompress</code><em class="property"> = c_uint(4)</em><a class="headerlink" href="#volcasample.syro.DataType.Sample_AllCompress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.DataType.Pattern">
+<code class="descname">Pattern</code><em class="property"> = c_uint(5)</em><a class="headerlink" href="#volcasample.syro.DataType.Pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="volcasample.syro.Status">
+<em class="property">class </em><code class="descclassname">volcasample.syro.</code><code class="descname">Status</code><a class="headerlink" href="#volcasample.syro.Status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shadows the Status enumeration in the Syro C library.</p>
+<dl class="attribute">
+<dt id="volcasample.syro.Status.Success">
+<code class="descname">Success</code><em class="property"> = c_uint(0)</em><a class="headerlink" href="#volcasample.syro.Status.Success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.IllegalDataType">
+<code class="descname">IllegalDataType</code><em class="property"> = c_uint(1)</em><a class="headerlink" href="#volcasample.syro.Status.IllegalDataType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.IllegalData">
+<code class="descname">IllegalData</code><em class="property"> = c_uint(2)</em><a class="headerlink" href="#volcasample.syro.Status.IllegalData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.IllegalParameter">
+<code class="descname">IllegalParameter</code><em class="property"> = c_uint(3)</em><a class="headerlink" href="#volcasample.syro.Status.IllegalParameter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.OutOfRange_Number">
+<code class="descname">OutOfRange_Number</code><em class="property"> = c_uint(4)</em><a class="headerlink" href="#volcasample.syro.Status.OutOfRange_Number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.OutOfRange_Quality">
+<code class="descname">OutOfRange_Quality</code><em class="property"> = c_uint(5)</em><a class="headerlink" href="#volcasample.syro.Status.OutOfRange_Quality" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.NotEnoughMemory">
+<code class="descname">NotEnoughMemory</code><em class="property"> = c_uint(6)</em><a class="headerlink" href="#volcasample.syro.Status.NotEnoughMemory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.InvalidHandle">
+<code class="descname">InvalidHandle</code><em class="property"> = c_uint(7)</em><a class="headerlink" href="#volcasample.syro.Status.InvalidHandle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="volcasample.syro.Status.NoData">
+<code class="descname">NoData</code><em class="property"> = c_uint(8)</em><a class="headerlink" href="#volcasample.syro.Status.NoData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="samplepacker-class">
+<h2>SamplePacker class<a class="headerlink" href="#samplepacker-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="volcasample.syro.SamplePacker">
+<em class="property">class </em><code class="descclassname">volcasample.syro.</code><code class="descname">SamplePacker</code><a class="headerlink" href="#volcasample.syro.SamplePacker" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the methods needed to program a
+Volca Sample device.</p>
+<ol class="arabic simple">
+<li>Use <a class="reference internal" href="#volcasample.syro.SamplePacker.patch" title="volcasample.syro.SamplePacker.patch"><code class="xref py py-meth docutils literal"><span class="pre">volcasample.syro.SamplePacker.patch()</span></code></a> to populate
+patch data.</li>
+<li>Produce a data file from the patch with
+<a class="reference internal" href="#volcasample.syro.SamplePacker.build" title="volcasample.syro.SamplePacker.build"><code class="xref py py-meth docutils literal"><span class="pre">volcasample.syro.SamplePacker.build()</span></code></a>.</li>
+</ol>
+<dl class="staticmethod">
+<dt id="volcasample.syro.SamplePacker.patch">
+<em class="property">static </em><code class="descname">patch</code><span class="sig-paren">(</span><em>jobs</em><span class="sig-paren">)</span><a class="headerlink" href="#volcasample.syro.SamplePacker.patch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>jobs</strong> &#8211; <p>An OrderedDict of
+{int: (<a class="reference internal" href="#volcasample.syro.DataType" title="volcasample.syro.DataType"><code class="xref py py-class docutils literal"><span class="pre">volcasample.syro.DataType</span></code></a>, str)}.</p>
+<blockquote>
+<div><ul>
+<li>The keys are indexes of sample slots (0 - 99).</li>
+<li>Values are 2-tuples, such that:<blockquote>
+<div><ol class="arabic simple">
+<li>First element determines whether to load
+or delete the slot.</li>
+<li>Second element is a path to an audio sample
+file.</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An array containing patch data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[SyroData]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="volcasample.syro.SamplePacker.build">
+<em class="property">static </em><code class="descname">build</code><span class="sig-paren">(</span><em>patch</em>, <em>locn=None</em>, <em>output='volcasamples.wav'</em><span class="sig-paren">)</span><a class="headerlink" href="#volcasample.syro.SamplePacker.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a WAV file with patch data for a Volca device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>patch</strong> (<em></em><em>[</em><em>SyroData</em><em>]</em><em></em>) &#8211; An array containing patch data.</li>
+<li><strong>locn</strong> (<em>str</em>) &#8211; A path to a writeable directory.</li>
+<li><strong>output</strong> (<em>str</em>) &#8211; The name of the output file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A 2-tuple of (status, file path).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="volcasample.syro.SamplePacker.start">
+<em class="property">static </em><code class="descname">start</code><span class="sig-paren">(</span><em>handle</em>, <em>data</em>, <em>nEntries</em>, <em>lib=None</em><span class="sig-paren">)</span><a class="headerlink" href="#volcasample.syro.SamplePacker.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method wraps the SyroVolcaSample_Start function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>handle</strong> (<em>Handle</em>) &#8211; A fresh handle object.</li>
+<li><strong>data</strong> (<em></em><em>[</em><em>SyroData</em><em>]</em><em></em>) &#8211; An array containing patch data.</li>
+<li><strong>nEntries</strong> (<em>int</em>) &#8211; The number of elements in the array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Number of output frames.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="volcasample.syro.SamplePacker.get_samples">
+<em class="property">static </em><code class="descname">get_samples</code><span class="sig-paren">(</span><em>handle</em>, <em>nFrames</em>, <em>lib=None</em><span class="sig-paren">)</span><a class="headerlink" href="#volcasample.syro.SamplePacker.get_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method wraps the SyroVolcaSample_GetSample function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>handle</strong> (<em>Handle</em>) &#8211; A fresh handle object.</li>
+<li><strong>nFrames</strong> (<em>int</em>) &#8211; The number of sample frames to be returned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A sequence of stereo (2-tuple) samples.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">generator</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="volcasample.syro.SamplePacker.end">
+<em class="property">static </em><code class="descname">end</code><span class="sig-paren">(</span><em>handle</em>, <em>lib=None</em><span class="sig-paren">)</span><a class="headerlink" href="#volcasample.syro.SamplePacker.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method wraps the SyroVolcaSample_End function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handle</strong> (<em>Handle</em>) &#8211; A fresh handle object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Syro C library status.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#volcasample.syro.Status" title="volcasample.syro.Status">Status</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="cli.html" class="btn btn-neutral" title="Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 D. Haynes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
