@@ -1,0 +1,49 @@
+#!python
+
+"""QuickWeb
+
+Usage:
+    quickweb init <app_directory> <template_name> [--force]
+    quickweb run <app_directory>
+    quickweb deploy <app_directory> <target_url>
+    quickweb create <url> [<app_directory>] [--force]
+
+Examples:
+
+    quickweb init my-first-app bootstrap-starter
+    quickweb run my-first-app
+    quickweb deploy starter-template ssh://my_id@mywayos.rhcloud.com/~/git/myapp.git/
+    quickweb create https://getbootstrap.com/examples/starter-template/
+
+Options:
+  -h --help     Show this screen.
+"""
+import os
+import sys
+from os.path import join, dirname
+
+from docopt import docopt
+
+
+# Make sure we use the source directory for imports when running during development
+from quickweb import appmanager
+from quickweb.templatemanager import TemplateMaker
+
+
+def main():
+    arguments = docopt(__doc__, version='QuickWeb (latest)')
+
+    if arguments['create']:
+        TemplateMaker(arguments['<url>'], arguments['<app_directory>']).make(arguments['--force'])
+
+    if arguments['run']:
+        appmanager.run(arguments['<app_directory>'])
+
+    if arguments['deploy']:
+        appmanager.deploy(arguments['<app_directory>'], arguments['<target_url>'])
+
+    if arguments['init']:
+        appmanager.init(arguments['<app_directory>'], arguments['<template_name>'], arguments['--force'])
+
+if __name__ == '__main__':
+    main()
