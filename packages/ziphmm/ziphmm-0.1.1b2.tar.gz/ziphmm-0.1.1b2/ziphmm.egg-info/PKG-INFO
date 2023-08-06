@@ -1,0 +1,52 @@
+Metadata-Version: 1.1
+Name: ziphmm
+Version: 0.1.1b2
+Summary: An implementation of the ziphmm algorithm
+Home-page: https://github.com/birc-aeh/mini-ziphmm
+Author: Anders Egerup Halager
+Author-email: aeh@birc.au.dk
+License: MIT
+Description: ===========
+        mini-ziphmm
+        ===========
+        
+        .. |ci-status| image:: 	https://img.shields.io/travis/mailund/mini-ziphmm.svg
+            :target: https://travis-ci.org/mailund/mini-ziphmm
+            :alt: Build status
+        .. |coveralls| image:: https://img.shields.io/coveralls/mailund/mini-ziphmm.svg
+            :target: https://coveralls.io/github/mailund/mini-ziphmm
+            :alt: Coverage
+        .. |versions| image:: 	https://img.shields.io/pypi/v/ziphmm.svg
+            :target: https://pypi.python.org/pypi/ziphmm
+            :alt: Packgage version
+        .. |status| image:: https://img.shields.io/pypi/status/ziphmm.svg
+            :target: https://pypi.python.org/pypi/ziphmm
+            :alt: Package stability
+        
+        
+        This is a minimal reimplementation of zipHMM in python.
+        Also contains cython and weave implementations of standard hidden markov models
+        for comparison.
+        
+        Undocumented and no install procedure - check test.py for usage
+        
+        To run:
+        
+        ```bash
+        make
+        python test.py
+        ```
+        
+Keywords: hmm zip ziphmm
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
