@@ -1,0 +1,42 @@
+Metadata-Version: 1.1
+Name: ap
+Version: 0.1.4
+Summary: AP powers-up commands with AWS profile, assume-role and MFA functionality.
+Home-page: https://github.com/nathforge/ap
+Author: Nathan Reynolds
+Author-email: email@nreynolds.co.uk
+License: UNKNOWN
+Description: AP
+        ##
+        
+        AP powers-up commands with AWS profile, assume-role and MFA functionality.
+        
+        e.g::
+        
+            ap myCrossAccountProfile some command
+        
+        (Your command must support standard AWS environment variables: ``AWS_ACCESS_KEY_ID``, ``AWS_SECRET_ACCESS_KEY`` and ``AWS_SECURITY_TOKEN``.)
+        
+        
+        Installation
+        ------------
+        
+        ``pip install ap``
+        
+        
+        Help! It keeps asking for my MFA code
+        -------------------------------------
+        
+        ``ap`` asks for an MFA code every time if enabled on a cross-account role.
+        
+        Use ``--cached`` to store MFA for 60 minutes, e.g::
+        
+            ap --cached myCrossAccountProfile some command
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
