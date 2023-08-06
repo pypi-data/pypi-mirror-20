@@ -1,0 +1,191 @@
+Metadata-Version: 1.2
+Name: pybuilder
+Version: 0.11.10
+Summary: PyBuilder
+Home-page: http://pybuilder.github.io
+Author: Alexander Metzner, Maximilien Riehl, Michael Gruber, Udo Juettner, Marcel Wolf, Arcadiy Ivanov, Valentin Haenel
+Author-email: alexander.metzner@gmail.com, max@riehl.io, aelgru@gmail.com, udo.juettner@gmail.com, marcel.wolf@me.com, arcadiy@ivanov.biz, valentin@haenel.co
+License: Apache License
+Description: PyBuilder
+        =========
+        
+        `PyBuilder <http://pybuilder.github.io>`_
+        
+        `|Build Status| <http://travis-ci.org/pybuilder/pybuilder>`_ `|Windows
+        build status| <https://ci.appveyor.com/project/mriehl/pybuilder>`_
+        `|PyPI version| <https://warehouse.python.org/project/pybuilder/>`_
+        `|Coverage
+        Status| <https://coveralls.io/r/pybuilder/pybuilder?branch=master>`_
+        `|Ready in backlog| <https://waffle.io/pybuilder/pybuilder>`_ `|Open
+        bugs| <https://waffle.io/pybuilder/pybuilder>`_
+        
+        PyBuilder is a software build tool written in 100% pure Python, mainly
+        targeting Python applications.
+        
+        PyBuilder is based on the concept of dependency based programming, but
+        it also comes with a powerful plugin mechanism, allowing the
+        construction of build life cycles similar to those known from other
+        famous (Java) build tools.
+        
+        PyBuilder is running on the following versions of Python: 2.6, 2.7, 3.3,
+        3.4, 3.5 and PyPy.
+        
+        See the `Travis Build <https://travis-ci.org/pybuilder/pybuilder>`_ for
+        version specific output.
+        
+        Installing
+        ----------
+        
+        PyBuilder is available using pip:
+        
+        ::
+        
+            $ pip install pybuilder
+        
+        For development builds use:
+        
+        ::
+        
+            $ pip install --pre pybuilder 
+        
+        See the `Cheeseshop
+        page <https://warehouse.python.org/project/pybuilder/>`_ for more
+        information.
+        
+        Getting started
+        ---------------
+        
+        PyBuilder emphasizes simplicity. If you want to build a pure Python
+        project and use the recommended directory layout, all you have to do is
+        create a file build.py with the following content:
+        
+        ::
+        
+            from pybuilder.core import use_plugin
+        
+            use_plugin("python.core")
+            use_plugin("python.unittest")
+            use_plugin("python.coverage")
+            use_plugin("python.distutils")
+        
+            default_task = "publish"
+        
+        See the `PyBuilder homepage <http://pybuilder.github.com/>`_ for more
+        details.
+        
+        Plugins
+        -------
+        
+        PyBuilder provides a lot of plugins out of the box that utilize tools
+        and libraries commonly used in Python projects:
+        
+        -  `python.coverage <http://pybuilder.github.com/documentation/plugins.html#Measuringunittestcoverage>`_
+           - Uses the standard
+           `coverage <https://warehouse.python.org/project/coverage/>`_ module
+           to calculate unit test line coverage.
+        -  `python.distutils <http://pybuilder.github.com/documentation/plugins.html#BuildingaPythonpackage>`_
+           - Provides support to generate and use
+           `setup.py <https://warehouse.python.org/project/setuptools/>`_ files.
+        -  **python.django** - Provides support for developing
+           `Django <https://www.djangoproject.com/>`_ applications.
+        -  `python.frosted <http://pybuilder.github.io/documentation/plugins.html#Frostedplugin>`_
+           - Lint source files with
+           `frosted <https://github.com/timothycrosley/frosted>`_
+        -  `python.flake8 <http://pybuilder.github.io/documentation/plugins.html#Flake8plugin>`_
+           - Provides support for
+           `flake8 <https://warehouse.python.org/project/flake8/>`_
+        -  `python.pep8 <http://pybuilder.github.io/documentation/plugins.html#Pep8plugin>`_
+           - Provides support for
+           `pep8 <https://warehouse.python.org/project/pep8/>`_
+        -  `python.install\_dependencies <http://pybuilder.github.io/documentation/plugins.html#Installingdependencies>`_
+           - Installs the projects build and runtime dependencies using ``pip``
+        -  `python.pychecker <http://pybuilder.github.io/documentation/plugins.html#Pycheckerplugin>`_
+           - Provides support for
+           `pychecker <http://pychecker.sourceforge.net/>`_
+        -  `python.Pydev <http://pybuilder.github.io/documentation/plugins.html#ProjectfilesforEclipsePyDev>`_
+           - Generates project files to import projects into `Eclipse
+           PyDev <http://pydev.org/>`_
+        -  `python.PyCharm <http://pybuilder.github.io/documentation/plugins.html#ProjectfilesforJetbrainsPyCharm>`_
+           - Generates project files to import projects into `Jetbrains
+           PyCharm <http://www.jetbrains.com/pycharm/>`_
+        -  `python.pylint <http://pybuilder.github.io/documentation/plugins.html#Pylintplugin>`_
+           - Executes `pylint <https://bitbucket.org/logilab/pylint/>`_ on your
+           sources.
+        -  `python.pymetrics <http://pybuilder.github.io/documentation/plugins.html#Pymetricsplugin>`_
+           - Calculates several metrics using
+           `pymetrics <http://sourceforge.net/projects/pymetrics/>`_
+        -  `python.unittest <http://pybuilder.github.com/documentation/plugins.html#RunningPythonUnittests>`_
+           - Executes `unittest <http://docs.python.org/library/unittest.html>`_
+           test cases
+        -  `python.integrationtest <http://pybuilder.github.com/documentation/plugins.html#RunningPythonIntegrationTests>`_
+           - Executes python scripts as integrations tests
+        -  `python.pytddmon <http://pybuilder.github.io/documentation/plugins.html#Visualfeedbackfortests>`_
+           - Provides visual feedback about unit tests through
+           `pytddmon <http://pytddmon.org/>`_
+        -  `python.cram <http://pybuilder.github.io/documentation/plugins.html#RunningCramtests>`_
+           - Runs `cram <https://warehouse.python.org/project/cram/>`_ tests
+        -  `python.sphinx <http://pybuilder.github.io/documentation/plugins.html#Creatingdocumentationwithsphinx>`_
+           - Build your documentation with `sphinx <http://sphinx-doc.org/>`_
+        -  `python.sonarqube <http://pybuilder.github.io/documentation/plugins.html#SonarQubeintegration>`_
+           - Analyze your project with `SonarQube <http://www.sonarqube.org/>`_.
+        -  python.snakefood - Analyze your code dependencies with
+           `snakefood <https://bitbucket.org/blais/snakefood>`_.
+        
+        In addition, a few common plugins are provided:
+        
+        -  `copy\_resources <http://pybuilder.github.io/documentation/plugins.html#Copyingresourcesintoadistribution>`_
+           - Copies files.
+        -  `filter\_resources <http://pybuilder.github.io/documentation/plugins.html#Filteringfiles>`_
+           - Filters files by replacing tokens with configuration values.
+        -  `source\_distribution <http://pybuilder.github.io/documentation/plugins.html#Creatingasourcedistribution>`_
+           - Bundles a source distribution for shipping.
+        
+        External plugins: \*
+        `pybuilder\_aws\_plugin <https://github.com/immobilienscout24/pybuilder_aws_plugin>`_
+        - handle AWS functionality
+        
+        Release Notes
+        -------------
+        
+        The release notes can be found
+        `here <http://pybuilder.github.com/releasenotes/>`_. There will also be
+        a git tag with each release. Please note that we do not currently
+        promote tags to GitHub "releases".
+        
+        Development
+        -----------
+        
+        See `developing
+        PyBuilder <http://pybuilder.github.io/documentation/developing_pybuilder.html>`_
+        
+        .. |Build
+        Status| image:: https://secure.travis-ci.org/pybuilder/pybuilder.png?branch=master
+        .. |Windows build
+        status| image:: https://ci.appveyor.com/api/projects/status/e8fbgcyc7bdqbko3?svg=true
+        .. |PyPI version| image:: https://badge.fury.io/py/pybuilder.png
+        .. |Coverage
+        Status| image:: https://coveralls.io/repos/pybuilder/pybuilder/badge.png?branch=master
+        .. |Ready in
+        backlog| image:: https://badge.waffle.io/pybuilder/pybuilder.png?label=ready&title=Ready
+        .. |Open
+        bugs| image:: https://badge.waffle.io/pybuilder/pybuilder.png?label=bug&title=Open%20Bugs
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Software Development :: Testing
+Requires-Python: !=3.0,!=3.1,!=3.2,<3.7,>=2.6
