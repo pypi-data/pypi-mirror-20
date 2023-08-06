@@ -1,0 +1,34 @@
+<StackLayout class="m-10">
+    <GridLayout columns="2*, 3*, 2*" rows="auto" width="*">
+        <Label class="h3" col="0" text="Job"></Label>
+        <!--<Label class="h2" col="1" text="Name"></Label>-->
+        <Label class="h3" col="1" text="Scheduled"></Label>
+        <Label class="h3" col="2" text="Status"></Label>
+    </GridLayout>
+
+
+    <ListView [items]="jobs">
+        <template let-item="item" let-i="index" let-odd="odd" let-even="even">
+            <StackLayout  
+            [class.odd]="odd" [class.even]="even"
+                         [class.bg-primary]="item.fieldStatus.isActive"
+                         [class.bg-info]="item.fieldStatus.isAccepted"
+                         [class.bg-success]="item.fieldStatus.isDispatched"
+                         (tap)="jobClicked(item)" >
+                <GridLayout rows="2*,2*,*" columns="2*, 3*, 2*">
+                    <!-- Details -->
+                    <Label class="h3 peek-field-data-text" row="0" col="0"
+                           [text]="item.jobNumber"></Label>
+                    <Label class="h3 peek-field-data-text" row="0" col="1"
+                           [text]="item.scheduledDate | date:'HH:mm EE dd-MMM'"></Label>
+                    <Label class="h3 peek-field-data-text" row="0" col="2"
+                           [text]="item.fieldStatus.niceName"></Label>
+                    <!-- Description -->
+                    <Label class="h2 peek-field-data-text" row="1" col="0" colSpan="3"
+                           [text]="item.jobName" textWrap="true"></Label>
+                           
+                </GridLayout>
+            </StackLayout>
+        </template>
+    </ListView>
+</StackLayout>

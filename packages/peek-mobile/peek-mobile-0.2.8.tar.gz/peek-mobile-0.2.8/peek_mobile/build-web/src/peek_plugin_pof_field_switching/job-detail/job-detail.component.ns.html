@@ -1,0 +1,116 @@
+<StackLayout>
+
+    <!--TRANSITION WITH REASON DIALOG -->
+    <pl-pof-field-switching-job-transition-with-reason
+            *ngIf="transitionDialogShown()"
+            (confirm)="dialogConfirmed($event)"
+            (cancel)="dialogCanceled()"
+            [data]="transitionDialogData">
+
+    </pl-pof-field-switching-job-transition-with-reason>
+
+    <WrapLayout *ngIf="!transitionDialogShown()">
+
+        <Button col="0" text="My Jobs" (tap)="navToMyJobs()"></Button>
+        <Button col="1" text="Operations" (tap)="navToSwitching()"></Button>
+
+
+        <!--ACCEPT JOB or REJECT JOB -->
+        <Button text="Accept" *ngIf="job.fieldStatus.isDispatched"
+                (tap)="acceptJob()"></Button>
+        <Button text="Reject" *ngIf="job.fieldStatus.isDispatched"
+                (tap)="rejectJob()"></Button>
+
+        <!-- HAND BACK JOB or START JOB-->
+        <Button text="Hand Back" *ngIf="job.fieldStatus.isAccepted"
+                (tap)="handBackJob()"></Button>
+        <Button text="Start" *ngIf="isStartJobEnabled()"
+                (tap)="startJob()"></Button>
+
+        <!--STOP JOB -->
+        <Button text="Stop" *ngIf="job.fieldStatus.isActive"
+                (tap)="stopJob()"></Button>
+    </WrapLayout>
+
+    <ScrollView>
+        <StackLayout class="m-l-10 m-r-10">
+            <GridLayout rows="auto, auto" columns="*, *">
+                <!-- Column 1 -->
+                <Label row="0" col="0" class="h3" text="Control Engineer"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true"
+                       [text]="job.activeControlEngineer"></Label>
+                <!-- Column 2 -->
+                <Label row="0" col="1" class="h3" text="Field State"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text"
+                       [text]="job.fieldStatus.niceName"></Label>
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text=""></Label>
+
+            <!--<hr>-->
+            <GridLayout rows="auto, auto" columns="*">
+                <Label row="0" col="0" class="h3" text="Name"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true"
+                       [text]="job.jobName"></Label>
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text=""></Label>
+
+            <!--<hr>-->
+            <GridLayout rows="auto, auto" columns="*">
+                <Label row="0" col="0" class="h3" text="Work Description"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true"
+                       [text]="job.workSummary"></Label>
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text=""></Label>
+
+            <!--<hr>-->
+            <GridLayout rows="auto, auto" columns="*">
+                <Label row="0" col="0" class="h3" text="Work Planned"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true"
+                       [text]="job.workDetail"></Label>
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text=""></Label>
+
+            <!--<hr>-->
+            <GridLayout rows="auto, auto" columns="*, *">
+                <!-- Column 1 -->
+                <Label row="0" col="0" class="h3" text="Planned Start Data"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text"
+                       [text]="job.scheduledDate | date:'HH:mm dd-MMM'"></Label>
+                <!-- Column 2 -->
+                <Label row="0" col="1" class="h3" text="Planned End Date"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text"
+                       [text]="job.PlannedEndDate | date:'HH:mm dd-MMM'"></Label>
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text=""></Label>
+
+            <!--<hr>-->
+            <GridLayout rows="auto, auto, auto" columns="*, *">
+                <!-- Column 1 -->
+                <Label row="0" col="0" class="h3" text="Approved"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true"
+                       [text]="job.approvedBy"></Label>
+                <Label row="2" col="0" class="h2 peek-field-data-text"
+                       [text]="job.approvedDate | date:'HH:mm dd-MMM'"></Label>
+                <!-- Column 2 -->
+                <Label row="0" col="1" class="h3" text="Completed"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" textWrap="true"
+                       [text]="job.completedBy"></Label>
+                <Label row="2" col="1" class="h2 peek-field-data-text"
+                       [text]="job.completedDate | date:'HH:mm dd-MMM'"></Label>
+            </GridLayout>
+
+
+        </StackLayout>
+    </ScrollView>
+
+</StackLayout>

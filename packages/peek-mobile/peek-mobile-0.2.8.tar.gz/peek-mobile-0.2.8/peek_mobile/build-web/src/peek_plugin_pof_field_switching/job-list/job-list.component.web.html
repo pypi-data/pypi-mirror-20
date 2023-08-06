@@ -1,0 +1,30 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Scheduled Date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of jobs" (click)="jobClicked(item)">
+        <td
+        [class.bg-primary]="item.fieldStatus.isActive"
+        [class.bg-warning]="item.fieldStatus.isDispatched"
+        [class.bg-success]="item.fieldStatus.isAccepted">{{item.jobNumber}}</td>
+        <td
+        [class.bg-primary]="item.fieldStatus.isActive"
+        [class.bg-warning]="item.fieldStatus.isDispatched"
+        [class.bg-success]="item.fieldStatus.isAccepted">{{item.jobName}}</td>
+        <td
+        [class.bg-primary]="item.fieldStatus.isActive"
+        [class.bg-warning]="item.fieldStatus.isDispatched"
+        [class.bg-success]="item.fieldStatus.isAccepted">{{item.scheduledDate | date:'HH:mm EE dd-MMM'}}</td>
+        <td
+        [class.bg-primary]="item.fieldStatus.isActive"
+        [class.bg-warning]="item.fieldStatus.isDispatched"
+        [class.bg-success]="item.fieldStatus.isAccepted">{{item.fieldStatus.niceName}}</td>
+    </tr>
+    </tbody>
+</table>

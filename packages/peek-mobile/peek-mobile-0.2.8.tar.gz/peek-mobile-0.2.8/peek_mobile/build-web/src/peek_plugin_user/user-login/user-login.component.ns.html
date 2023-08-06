@@ -1,0 +1,36 @@
+<StackLayout class="p-10">
+    <GridLayout rows="50*, auto, auto" columns="*" class="form" horizontalAlignment="left">
+        <!-- ROW 1 -->
+        <StackLayout row="0" col="0" class="input-field" horizontalAlignment="stretch">
+            <!--<ScrollView>-->
+            <ListView [items]="users" [isEnabled]="!isAuthenticating" horizontalAlignment="stretch">
+                <template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <StackLayout [class.odd]="odd" [class.even]="even" (tap)="selectedUser.userId = item.userId" horizontalAlignment="stretch">
+                        <GridLayout rows="*" columns="2*, 4*" horizontalAlignment="stretch">
+                            <Label class="h2" row="0" col="0" [text]="item.userId"></Label>
+                            <Label class="h2" row="0" col="1" [text]="item.displayName"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                </template>
+            </ListView>
+            <!--</ScrollView>-->
+        </StackLayout>
+
+        <!-- ROW 2 -->
+        <StackLayout orientation="horizontal" [isEnabled]="!isAuthenticating" row="1" col="0" class="input-field">
+            <Label class="label h2" text="Password :"></Label>
+
+            <TextField #password secure="true" [isEnabled]="!isAuthenticating" class="input input-border h2" hint="Enter Password" autocorrect="false"
+                (textChange)="selectedUser.password = password.text" returnKeyType="done" (returnPress)="doLogin()">
+            </TextField>
+        </StackLayout>
+
+        <!-- ROW 3 -->
+        <StackLayout row="2" col="0" class="input-field">
+
+            <ActivityIndicator *ngIf="!isAuthenticating" [busy]="isAuthenticating"></ActivityIndicator>
+
+            <Button horizontalAlignment="stretch" [text]="loginText()" [isEnabled]="!isAuthenticating" class="submit-button" (tap)="doLogin()"></Button>
+        </StackLayout>
+    </GridLayout>
+</StackLayout>

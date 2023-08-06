@@ -1,0 +1,203 @@
+<StackLayout>
+    <!--CONFIRM DIALOG -->
+    <pl-pof-field-switching-op-confirm *ngIf="confirmDialogShown()" (confirm)="dialogConfirmed($event)" (cancel)="dialogCanceled()"
+        [data]="confirmDialogData">
+
+    </pl-pof-field-switching-op-confirm>
+
+    <!--NAV BUTTONS -->
+    <WrapLayout columns="*,*,*,*,*" rows="auto" *ngIf="!confirmDialogShown()">
+        <Button col="0" text="My Jobs" (tap)="navToMyJobs()"></Button>
+        <Button col="1" text="Job" (tap)="navToJob()"></Button>
+        <Button col="2" text="Operations" (tap)="navToOperations()"></Button>
+
+        <Button col="4" text="Confirm" *ngIf="confirmEnabled()" (tap)="confirmOp()"></Button>
+
+        <Button col="5" text="<" [isEnabled]="lastOperationEnabled()" (tap)="navToLastOperation()"></Button>
+        <Button col="6" text=">" [isEnabled]="nextOperationEnabled()" (tap)="navToNextOperation()"></Button>
+    </WrapLayout>
+
+
+    <ScrollView>
+        <StackLayout class="m-l-10 m-r-10">
+
+            <!-- =============================================================================== -->
+            <!-- BEGIN SHOWN AT THE TOP ALWAYS -->
+
+            <GridLayout rows="auto, auto" columns="*, *">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Item"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" [text]="'#' + op.operationNumber"></Label>
+
+                <!-- COL 1 -->
+                <Label row="0" col="1" class="h3" text="State"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" [text]="op.currentState.niceName"></Label>
+            </GridLayout>
+
+            <!-- END SHOWN AT THE TOP ALWAYS -->
+            <!-- =============================================================================== -->
+
+
+            <!-- =============================================================================== -->
+            <!-- BEGIN OPERATION ENABLED FIELDS -->
+
+            <!-- Operaton Location -->
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="!isPermit()"></Label>
+
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="!isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Location"></Label>
+                <button row="0" col="1" class="btn btn-default btn-sm pull-right" *ngIf="confirmEnabled()" (tap)="locationConfirmed=!locationConfirmed"
+                    [class.btn-active]="!locationConfirmed"
+                    [class.btn-primary]="locationConfirmed"
+                    [text]="locationConfirmed ? 'CONFIRMED' : 'unconfirmed'">
+            </button>
+                <Label row="1" col="0" colSpan="2" class="h2 peek-field-data-text" [text]="op.substationName" textWrap="true"></Label>
+
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="!isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="!isPermit()">
+                <!-- COL 0 -->
+
+                <Label row="0" col="0" class="h3" text="Circuit"></Label>
+                <button row="0" col="1" class="btn btn-default btn-sm pull-right" *ngIf="confirmEnabled()" (tap)="circuitConfirmed=!circuitConfirmed"
+                    [class.btn-active]="!circuitConfirmed"
+                    [class.btn-primary]="circuitConfirmed"
+                    [text]="circuitConfirmed ? 'CONFIRMED' : 'unconfirmed'">
+            </button>
+                <Label row="1" col="0" colSpan="2" class="h2 peek-field-data-text" [text]="op.componentDescription" textWrap="true"></Label>
+
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="!isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="!isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Action"></Label>
+                <button row="0" col="1" class="btn btn-default btn-sm pull-right" *ngIf="confirmEnabled()" (tap)="actionConfirmed=!actionConfirmed"
+                    [class.btn-active]="!actionConfirmed"
+                    [class.btn-primary]="actionConfirmed"
+                    [text]="actionConfirmed ? 'CONFIRMED' : 'unconfirmed'">
+            </button>
+                <Label row="1" col="0" colSpan="2" class="h2 peek-field-data-text" [text]="op.action" textWrap="true"></Label>
+
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="!isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="!isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Control Engineer"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true" [text]="op.controlEngineer"></Label>
+
+
+                <!-- COL 1 -->
+                <Label row="0" col="1" class="h3" text="Field Engineer"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" textWrap="true" [text]="op.fieldEngineer"></Label>
+
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="!isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="!isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Instruct"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" [text]="op.instructSystemDate | date:'HH:mm dd-MMM'"></Label>
+
+                <!-- COL 1 -->
+                <Label row="0" col="1" class="h3" text="Operated"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" [text]="op.confirmManualDate | date:'HH:mm dd-MMM'"></Label>
+
+            </GridLayout>
+
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="!isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="!isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Confirmed"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" [text]="op.confirmSystemDate | date:'HH:mm dd-MMM'"></Label>
+
+            </GridLayout>
+
+            <!-- END OPERATION ENABLED FIELDS -->
+            <!-- =============================================================================== -->
+
+            <!-- =============================================================================== -->
+            <!-- BEGIN PERMIT ENABLED FIELDS -->
+
+            <!-- Permit Summary -->
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="isPermit()"></Label>
+
+            <GridLayout rows="auto, auto" columns="5*, 3*" *ngIf="isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Permit Name"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text"  textWrap="true" 
+                [text]="op.permit.permitName"></Label>
+
+                <!-- COL 1 -->
+                <Label row="0" col="1" class="h3" text="Permit Number"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" [text]="op.permit.permitNumber"></Label>
+
+            </GridLayout>
+
+            <!-- Permit Summary -->
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*" *ngIf="isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Permit Summary"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true" [text]="op.permit.permitSummary"></Label>
+
+            </GridLayout>
+
+            <!-- Permit Detail -->
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*" *ngIf="isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Permit Detail"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true" [text]="op.permit.permitDetail"></Label>
+
+            </GridLayout>
+
+            <!-- Issued Details -->
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="isPermit()"></Label>
+            <GridLayout rows="auto, auto" columns="*, *" *ngIf="isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Issued By"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text"
+                [text]="op.permit.issuedBy"></Label>
+                <Label row="2" col="0" class="h2 peek-field-data-text" textWrap="true" [text]="op.permit.issuedDate | date:'HH:mm dd-MMM'"></Label>
+
+                <!-- COL 1 -->
+                <Label row="0" col="1" class="h3" text="Issued To"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" textWrap="true" [text]="op.permit.issuedTo"></Label>
+
+            </GridLayout>
+
+            <!-- Complete Details -->
+            <!-- Spacer -->
+            <Label class="h3" text="" *ngIf="isPermit()"></Label>
+            <GridLayout rows="auto, auto, auto" columns="*, *" *ngIf="isPermit()">
+                <!-- COL 0 -->
+                <Label row="0" col="0" class="h3" text="Completed By"></Label>
+                <Label row="1" col="0" class="h2 peek-field-data-text" textWrap="true" [text]="op.permit.completedBy"></Label>
+                <Label row="2" col="0" class="h2 peek-field-data-text" [text]="op.permit.completedDate | date:'HH:mm dd-MMM'"></Label>
+
+                <!-- COL 1 -->
+                <Label row="0" col="1" class="h3" text="Completed From"></Label>
+                <Label row="1" col="1" class="h2 peek-field-data-text" textWrap="true" [text]="op.permit.completedFrom"></Label>
+
+            </GridLayout>
+
+            <!-- END PERMIT ENABLED FIELDS -->
+            <!-- =============================================================================== -->
+
+        </StackLayout>
+    </ScrollView>
+</StackLayout>
