@@ -1,0 +1,7 @@
+exclude *
+recursive-include examples *.py
+recursive-include oem *.py
+recursive-include tests *
+include AUTHORS *requirements.txt .coveragerc .gitignore *.cfg *.in *.ini *.py *.rst *.yml
+exclude .travis.yml
+global-exclude develop-requirements.txt travis-requirements.txt vendor-requirements.txt *.iml *.pyc
