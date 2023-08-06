@@ -1,0 +1,22 @@
+Metadata-Version: 2.0
+Name: orcid2vivo
+Version: 0.10.0
+Summary: For retrieving data from the ORCID API and crosswalking to VIVO-ISF.
+Home-page: https://github.com/gwu-libraries/orcid2vivo
+Author: Justin Littman
+Author-email: justinlittman@gmail.com
+License: UNKNOWN
+Platform: POSIX
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Flask
+Requires-Dist: bibtexparser (>=0.6.1)
+Requires-Dist: flask (>=0.10.1)
+Requires-Dist: rdflib (>=4.2.0)
+Requires-Dist: requests (>=2.7.0)
+
+UNKNOWN
+
+
