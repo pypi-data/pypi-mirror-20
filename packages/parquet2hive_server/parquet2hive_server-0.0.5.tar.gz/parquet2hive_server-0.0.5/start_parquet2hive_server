@@ -1,0 +1,31 @@
+#! /usr/bin/python
+
+import argparse
+
+from flask import Flask
+from flask_restful import Api
+from parquet2hive_server.server import Parquet2HiveServer 
+from parquet2hive_server.settings import server_dns, server_port, debug
+
+app = Flask(__name__)
+api = Api(app)
+
+api.add_resource(Parquet2HiveServer, '/')
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Start parquet2hive server')
+
+    parser.add_argument('--debug', action='store_true', default=False,
+                        help='Run in debug mode and just print sql output') 
+
+    parser.add_argument('--port', metavar='N', type=int, default=server_port,
+                        help='Port to run server on')
+
+    args = parser.parse_args()
+
+    dns = server_dns
+    if not args.debug:
+        dns = '0.0.0.0'
+
+    app.run(host=dns, port=args.port, debug=args.debug)
+
