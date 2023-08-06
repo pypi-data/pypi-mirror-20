@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: pg-chameleon
+Version: 1.0a4
+Summary: MySQL to PostgreSQL replica
+Home-page: https://github.com/the4thdoctor/pg_chameleon/
+Author: Federico Campoli
+Author-email: the4thdoctor.gallifrey@gmail.com
+License: UNKNOWN
+Description: Pg_chameleon is a replication tool from MySQL to PostgreSQL developed in Python 2.7 and Python 3.3+
+        The system relies on the mysql-replication library to pull the changes from MySQL and covert them into a jsonb object. 
+        A plpgsql function decodes the jsonb and replays the changes into the PostgreSQL database.
+        
+        The tool requires an  initial replica setup which pulls the data from MySQL in read only mode. 
+        This is done by the tool running FLUSH TABLE WITH READ LOCK;  .
+        
+        The tool can pull the data from a cascading replica when the MySQL slave is configured with log-slave-updates.
+        
+Platform: linux
+Classifier: License :: OSI Approved :: BSD License
