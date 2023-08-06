@@ -1,0 +1,8 @@
+function list:
+
+    from wavAudio.io import wavread  # input: wav_path output:data,fs 
+    from wavAudio.io import wavwrite  # input: wav_path,fs,data
+    from wavAudio.save2Fig import savefig  # input: fig_path,data_list,log
+    from dirProcess.newDir import if_no_create_it  # input: file_path
+    from dirProcess.delDir import del_the_file  # input: file_path
+    from printOut.printMany import print_to_check  # input:data_list
