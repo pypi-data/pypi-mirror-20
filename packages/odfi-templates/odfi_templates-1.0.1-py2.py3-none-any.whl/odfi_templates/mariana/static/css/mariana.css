@@ -1,0 +1,23 @@
+body {
+	width: 100%;
+	margin: 40px;
+}
+
+.ui.sidebar {
+	background-color: lightgray;
+}
+
+.ui.menu.item {
+	margin-bottom: 2px !important;
+	padding-bottom: 2px !important;
+}
+
+/* Hide SVG per default, JS will display when ok */
+.odfi.svg {
+	visibility: hidden;
+}
+
+/* Hide Header Links */
+.headerlink {
+	display: none;
+}
