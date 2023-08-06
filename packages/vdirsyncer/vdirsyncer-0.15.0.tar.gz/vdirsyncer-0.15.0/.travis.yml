@@ -1,0 +1,215 @@
+{
+  "after_script": [
+    "make -e after-$BUILD"
+  ],
+  "branches": {
+    "only": [
+      "auto",
+      "master"
+    ]
+  },
+  "git": {
+    "submodules": false
+  },
+  "install": [
+    "\n. scripts/travis-install.sh;\npip install -U pip;\npip install wheel;\nmake -e install-dev;\nmake -e install-$BUILD;\n"
+  ],
+  "language": "python",
+  "matrix": {
+    "include": [
+      {
+        "env": "BUILD=style",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=devel ",
+        "python": "3.3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=release ",
+        "python": "3.3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=minimal ",
+        "python": "3.3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=devel ",
+        "python": "3.3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=release ",
+        "python": "3.3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=minimal ",
+        "python": "3.3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=devel ",
+        "python": "3.4"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=release ",
+        "python": "3.4"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=minimal ",
+        "python": "3.4"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=devel ",
+        "python": "3.4"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=release ",
+        "python": "3.4"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=minimal ",
+        "python": "3.4"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=devel ",
+        "python": "3.5"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=release ",
+        "python": "3.5"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=minimal ",
+        "python": "3.5"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=devel ",
+        "python": "3.5"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=release ",
+        "python": "3.5"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=minimal ",
+        "python": "3.5"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=owncloud REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=owncloud REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=owncloud REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=nextcloud REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=nextcloud REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=nextcloud REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=baikal REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=baikal REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=baikal REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=davical REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=davical REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=davical REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=icloud REQUIREMENTS=devel ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=icloud REQUIREMENTS=release ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=icloud REQUIREMENTS=minimal ",
+        "python": "3.6"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=devel ",
+        "python": "pypy3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=release ",
+        "python": "pypy3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=skip REQUIREMENTS=minimal ",
+        "python": "pypy3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=devel ",
+        "python": "pypy3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=release ",
+        "python": "pypy3"
+      },
+      {
+        "env": "BUILD=test DAV_SERVER=radicale REQUIREMENTS=minimal ",
+        "python": "pypy3"
+      },
+      {
+        "env": "BUILD=test",
+        "language": "generic",
+        "os": "osx"
+      }
+    ]
+  },
+  "script": [
+    "make -e $BUILD"
+  ],
+  "sudo": true
+}
