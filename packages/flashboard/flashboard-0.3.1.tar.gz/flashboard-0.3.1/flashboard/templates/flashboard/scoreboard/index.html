@@ -1,0 +1,28 @@
+{% extends "flashboard/scoreboard/base.html" %}
+{% load common %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="page-header">
+			<h1>Competitions</h1>
+		</div>
+
+		{% for row in application.competitions|at_a_time:4 %}
+			<div class="row">
+				{% for competition in row %}
+					{% if competition %}
+						<div class="col-md-3">
+							<h2>{{ competition.short_title|default:competition.title }}</h2>
+
+							<div class="list-group">
+								{% for season in competition.seasons.all %}
+									<a class="list-group-item" href="{% url 'scoreboard:season' competition=competition.slug season=season.slug %}">{{ season }}</a>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
