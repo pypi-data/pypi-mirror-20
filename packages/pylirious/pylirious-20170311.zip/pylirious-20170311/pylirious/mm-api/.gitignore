@@ -1,0 +1,60 @@
+# emacs-edited files
+*~
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+#*.so
+*.dylib
+#!/distrib/python_osx/_mmapi.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# compiled python
+*.pyc
+
+# visual studio solution generated files
+*.suo
+
+# build outputs
+build/swigosx
+build/python/*.*
+build/python_osx/*.*
+build/csharp_vs
+
+# document build
+python/doc/_build
+
+# distrib files
+distrib/**/*.obj
+distrib/**/*.ilk
+distrib/**/*.pdb
+distrib/**/*.exp
+distrib/**/*.exe.config
+
+
+# example projects
+csharp/CommandDemos/bin
+csharp/CommandDemos/obj
+csharp/mm/bin
+csharp/mm/obj
+csharp/LinkedMeshDemo/bin
+csharp/LinkedMeshDemo/obj
+csharp/**/*.user
+csharp/**/*.pdb
+
+cpp/**/Debug
+cpp/**/Release
+cpp/**/*.sdf
+cpp/**/*.suo
+
+
+# certain local files
+rms_*.bat
+

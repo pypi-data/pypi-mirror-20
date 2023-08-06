@@ -1,0 +1,15 @@
+[python - win]
+1) run build_python_VS2012.bat
+2) run make_package_python.bat
+
+[python - osx]
+1) run script install_swig_osx.sh . This will download PCRE and
+   SWIG, and configure/compile them
+2) run build_python_osx.sh
+3) run make_package_python.sh
+
+
+
+
+
+
