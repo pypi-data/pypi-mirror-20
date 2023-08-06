@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <!-- 没看懂这里的question.id,这个参数不是已经体现在poll:detail中了吗?
+             其实url这个语法所做的就是把正则表达式当做格式化字符串然后往里面填东西 -->
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    <ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
