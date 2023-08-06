@@ -1,0 +1,32 @@
+Metadata-Version: 2.0
+Name: sorna-jupyter-kernel
+Version: 0.1.0
+Summary: Sorna Jupyter Kernel Integration
+Home-page: https://github.com/lablup/sorna-jupyter-kernel
+Author: Lablup Inc.
+Author-email: joongi@lablup.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Environment :: No Input/Output (Daemon)
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development
+Requires-Python: >=3.6
+Requires-Dist: sorna-client (>=0.9,<1.0)
+Provides-Extra: dev
+Requires-Dist: flake8; extra == 'dev'
+Requires-Dist: pep8-naming; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest; extra == 'test'
+
+UNKNOWN
+
+
