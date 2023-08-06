@@ -1,0 +1,5 @@
+include *.md *.txt *.rst
+include _cffi_build *.h *.zip
+prune _cffi_build/libshaderc_combined.a
+prune _cffi_build/shaderc
+prune _cffi_build/shaderc_build
