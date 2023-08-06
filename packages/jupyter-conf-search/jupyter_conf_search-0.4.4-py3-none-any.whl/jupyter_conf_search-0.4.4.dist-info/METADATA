@@ -1,0 +1,38 @@
+Metadata-Version: 1.2
+Name: jupyter_conf_search
+Version: 0.4.4
+Summary: Utility for searching through jupyter configuration files, using jupyter's path definitions to find their locations dynamically.
+Home-page: https://michaelpacer.com
+License: UNKNOWN
+Author: michaelpacer
+Author-email: mpacer@berkeley.edu
+Requires-Python: >3
+Classifier: License :: OSI Approved :: MIT License
+
+In order to use this
+
+::
+
+    pip install jupyter_conf_search 
+
+Which is then executed as
+
+::
+
+    jupyter_conf_search "your_search_term"
+
+on the command line to search for "``your_search_term``".
+
+If you pass just
+
+::
+
+    jupyter_conf_search
+
+it will return the total list of configuration files that it found
+relative to the directory that you are running the command from (not
+just the directories, which you can find using ``jupyter --paths``
+beneath ``config:``).
+
+© Mike Pacer 2017-W09-3-1543
+
