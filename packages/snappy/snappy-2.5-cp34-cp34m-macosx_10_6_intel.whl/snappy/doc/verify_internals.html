@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Internals of verified computations &#8212; SnapPy 2.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Other components" href="other.html" />
+    <link rel="prev" title="Verified computations" href="verify.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="other.html" title="Other components"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="verify.html" title="Verified computations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 2.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="verify.html" accesskey="U">Verified computations</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="internals-of-verified-computations">
+<h1>Internals of verified computations<a class="headerlink" href="#internals-of-verified-computations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="naming">
+<h2>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">¶</a></h2>
+<p>The names of methods containing <code class="docutils literal"><span class="pre">check</span></code> will raise an exception if the desired property
+cannot be certified. There are different types of Exceptions to indicate how
+the certification failed. This type can be used by other methods to perform some
+action such as changing the triangulation or increasing precision or to give up.</p>
+<p>The user-facing methods have names starting with <code class="docutils literal"><span class="pre">verify</span></code> or <code class="docutils literal"><span class="pre">verified</span></code> and will fail more gracefully
+returning <code class="docutils literal"><span class="pre">False</span></code> or <code class="docutils literal"><span class="pre">None</span></code> in such a case.</p>
+</div>
+<div class="section" id="generating-certified-shape-intervals">
+<h2>Generating certified shape intervals<a class="headerlink" href="#generating-certified-shape-intervals" title="Permalink to this headline">¶</a></h2>
+<p>The recommeded way to obtain certified intervals for the shapes is via
+<code class="docutils literal"><span class="pre">manifold.tetrahedra_shapes(intervals=True)</span></code> as <a class="reference external" href="verify.html">described earlier</a>. Here we document the <code class="docutils literal"><span class="pre">CertifiedShapesEngine</span></code> used
+internally to generate these intervals. It is of interest for those
+users who want to understand the underlying interval math and
+experiment with the Newton interval method.</p>
+</div>
+<div class="section" id="verification-of-hyperbolicity">
+<h2>Verification of hyperbolicity<a class="headerlink" href="#verification-of-hyperbolicity" title="Permalink to this headline">¶</a></h2>
+<p>Methods containing <code class="docutils literal"><span class="pre">check</span></code> will raise an exception if the desired property
+cannot be certified. Methods containing <code class="docutils literal"><span class="pre">verify</span></code> or <code class="docutils literal"><span class="pre">verified</span></code> will fail
+more gracefully returning <code class="docutils literal"><span class="pre">False</span></code> or <code class="docutils literal"><span class="pre">None</span></code> in such a case.</p>
+</div>
+<div class="section" id="cusp-cross-sections">
+<h2>Cusp cross sections<a class="headerlink" href="#cusp-cross-sections" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="verified-canonical-cell-decompositions">
+<h2>Verified canonical cell decompositions<a class="headerlink" href="#verified-canonical-cell-decompositions" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="exact-computations-for-cusp-cross-sections">
+<h2>Exact computations for cusp cross sections<a class="headerlink" href="#exact-computations-for-cusp-cross-sections" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Internals of verified computations</a><ul>
+<li><a class="reference internal" href="#naming">Naming</a></li>
+<li><a class="reference internal" href="#generating-certified-shape-intervals">Generating certified shape intervals</a></li>
+<li><a class="reference internal" href="#verification-of-hyperbolicity">Verification of hyperbolicity</a></li>
+<li><a class="reference internal" href="#cusp-cross-sections">Cusp cross sections</a></li>
+<li><a class="reference internal" href="#verified-canonical-cell-decompositions">Verified canonical cell decompositions</a></li>
+<li><a class="reference internal" href="#exact-computations-for-cusp-cross-sections">Exact computations for cusp cross sections</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="verify.html"
+                        title="previous chapter">Verified computations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="other.html"
+                        title="next chapter">Other components</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/verify_internals.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="other.html" title="Other components"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="verify.html" title="Verified computations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 2.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="verify.html" >Verified computations</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2009-2017, by Marc Culler, Nathan Dunfield, Jeffrey Weeks and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

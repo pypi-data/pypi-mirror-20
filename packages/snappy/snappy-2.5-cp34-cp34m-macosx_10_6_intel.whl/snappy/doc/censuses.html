@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Census manifolds &#8212; SnapPy 2.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Censuses of Platonic manifolds" href="platonic_census.html" />
+    <link rel="prev" title="Additional Classes" href="additional_classes.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="platonic_census.html" title="Censuses of Platonic manifolds"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="additional_classes.html" title="Additional Classes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 2.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="snappy.html" accesskey="U">The snappy module and its classes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="census-manifolds">
+<h1>Census manifolds<a class="headerlink" href="#census-manifolds" title="Permalink to this headline">¶</a></h1>
+<p>Snappy comes with a large library of manifolds, which can be accessed
+individually through the Manifold and Triangulation constructors but
+can also be iterated through using the objects described on this
+page.</p>
+<p>SnapPy&#8217;s iterators support several flexible methods for accessing
+manifolds.  They can be sliced (i.e. restricted to subranges) either
+by index or by volume.  Calling the iterator with keyword arguments
+such as num_tets=1, betti=2 or num_cusps=3 returns an iterator which
+is filtered by the specified conditions.  In addition these iterators
+can determine whether they contain a given manifold.  They support
+python&#8217;s &#8220;A in B&#8221; syntax, and also provide an identify method which
+will return a copy of the census manifold which is isometric to the
+manifold passed as an argument.</p>
+<p>There are also:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="platonic_census.html">Censuses of Platonic manifolds</a></li>
+</ul>
+</div>
+<p>As instances of subclasses of ManifoldTable, the objects above
+support the following methods.</p>
+<p>Because of the large size of their datasets, the classes below
+can only iterate through slices by index, and do not provide
+the identification methods.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="additional_classes.html"
+                        title="previous chapter">Additional Classes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="platonic_census.html"
+                        title="next chapter">Censuses of Platonic manifolds</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/censuses.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="platonic_census.html" title="Censuses of Platonic manifolds"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="additional_classes.html" title="Additional Classes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 2.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="snappy.html" >The snappy module and its classes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2009-2017, by Marc Culler, Nathan Dunfield, Jeffrey Weeks and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
