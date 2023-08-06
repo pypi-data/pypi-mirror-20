@@ -1,0 +1,15 @@
+[options]
+module.file_ext=.js
+# import './*.css' のエラー対策
+module.file_ext=.css
+module.file_ext=.scss
+
+[libs]
+./flow-lib.js
+
+[ignore]
+.*/node_modules/styled-components/dangerfile.js
+.*/node_modules/styled-components/src/.*
+.*/node_modules/styled-components/lib/models/InlineStyle.js.flow
+.*/node_modules/styled-components/lib/models/StyleSheet.js.flow
+.*/node_modules/styled-components/lib/native/index.js.flow
