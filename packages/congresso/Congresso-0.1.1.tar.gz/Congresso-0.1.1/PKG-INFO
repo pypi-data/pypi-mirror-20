@@ -1,0 +1,34 @@
+Metadata-Version: 1.1
+Name: Congresso
+Version: 0.1.1
+Summary: Low Level Python Client of Brazilian Camara e Senado Federal API
+Home-page: UNKNOWN
+Author: jaotta
+Author-email: joao.carabetta@gmail.com
+License: BSD
+Description: ===============================
+        Congresso Em Numeros API Client
+        ===============================
+        
+        This is a Python Client for the legislative federal houses of Brazil.
+        
+        We intend to cover and maintain all the API endpoints from Camara dos Deputados and Senado Federal
+        
+        Description
+        ===========
+        
+        To use the Camara Client just ::
+        
+            import congresso as cn
+        
+            camara = cn.Camara()
+        Note
+        ====
+        
+        This project has been set up using PyScaffold 2.5.7. For details and usage
+        information on PyScaffold see http://pyscaffold.readthedocs.org/.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: BSD License
