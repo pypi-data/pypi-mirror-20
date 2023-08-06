@@ -1,0 +1,40 @@
+Metadata-Version: 1.1
+Name: wrf4g
+Version: 2.3.0
+Summary: WRF for Grid (WRF4G) is a framework for the execution and monitoring of the WRF Modelling System.
+Home-page: https://meteo.unican.es/trac/wiki/WRF4G2.0
+Author: Meteorology Group UC
+Author-email: josecarlos.blanco@unican.es
+License: European Union Public License 1.1
+Description: 
+        WRF4G can be installed in any Linux Computer. It provides the services needed to prepare, run and monitor experiments and it can manage many computing resources and use them at the same time to run different simulations of a WRF experiment.
+        
+        Although in the following examples we will use the same computer to manage the experiments and to run them, usually scientists use a computer to prepare and manage the experiments (where WRF4G has to be installed) and different computing resources to run them (PBS or SGE Clusters, HPC infrastructures, stand-alone servers). We call User Interface (UI) to the computer where WRF4G is installed and Computing Resources (CR) to the nodes where a WRF experiment can run. In the following experiments the Computer where the UI role is installed will act as CR.
+        
+        Required Software
+        
+        WRF4G needs the following software preinstalled both in the UI and the CR:
+        
+         * x86_64 Linux
+         * Python, version >= 2.6 and >= 3.3
+        
+        Platform Notes
+        
+        WRF4G has been run only in 64bits platforms. Currently has been tested under the following O.S.:
+        
+         * Ubuntu 10.04, 11.04 and 12.04 : No known issues.
+         * Centos 5 and 6: No known issues.
+         * Debian 6.0: No known issues.
+        
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Office/Business :: Scheduling
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
