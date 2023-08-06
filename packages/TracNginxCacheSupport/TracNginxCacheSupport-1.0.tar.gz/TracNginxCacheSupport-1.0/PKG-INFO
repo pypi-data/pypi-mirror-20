@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: TracNginxCacheSupport
+Version: 1.0
+Summary: Add support for Nginx caching to Trac
+Home-page: https://github.com/trac-hacks/TracNginxCacheSupport
+Author: Colin Snover
+Author-email: tracplugins@zetafleet.com
+License: 3-Clause BSD
+Description: A Trac plugin that sends X-Accel-Expires headers so Nginx < 0.8 can cache pages for unauthenticated users.
+Keywords: trac plugin nginx cache
+Platform: UNKNOWN
+Classifier: Framework :: Trac
