@@ -1,0 +1,41 @@
+Metadata-Version: 2.0
+Name: transunion
+Version: 0.1.0
+Summary: TransUnion Python API
+Home-page: UNKNOWN
+Author: Hang Xu
+Author-email: hang@parasail.com
+License: MIT
+Keywords: transunion transunion-python api
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Requires-Dist: args
+Requires-Dist: cached-property
+Requires-Dist: clint
+Requires-Dist: configparser
+Requires-Dist: cookies
+Requires-Dist: defusedxml
+Requires-Dist: dicttoxml
+Requires-Dist: enum34
+Requires-Dist: funcsigs
+Requires-Dist: mccabe
+Requires-Dist: mock
+Requires-Dist: pbr
+Requires-Dist: pkginfo
+Requires-Dist: pycodestyle
+Requires-Dist: requests
+Requires-Dist: requests-toolbelt
+Requires-Dist: responses
+Requires-Dist: setuptools
+Requires-Dist: six
+Requires-Dist: twine
+Requires-Dist: wheel
+Requires-Dist: xmltodict
+
+Python module for TransUnion Credit Report API
+
+
