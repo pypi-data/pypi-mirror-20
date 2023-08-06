@@ -1,0 +1,4 @@
+#!/bin/bash
+source /venv/bin/activate
+
+gunicorn barcodescan.sse:app --worker-class gevent --bind 0.0.0.0:8000
