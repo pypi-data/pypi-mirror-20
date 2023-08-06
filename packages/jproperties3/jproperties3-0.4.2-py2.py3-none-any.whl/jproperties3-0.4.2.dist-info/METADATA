@@ -1,0 +1,109 @@
+Metadata-Version: 2.0
+Name: jproperties3
+Version: 0.4.2
+Summary: Python library for Java .properties file parsing
+Home-page: https://github.com/translate/python-jproperties
+Author: Jerome Leclanche
+Author-email: jerome@leclan.ch
+License: UNKNOWN
+Download-URL: https://github.com/translate/python-jproperties/tarball/master
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Software Development :: Internationalization
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Java Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
+python-jproperties
+==================
+[![Build Status](https://travis-ci.org/translate/python-jproperties.svg)](https://travis-ci.org/translate/python-jproperties)
+
+A python library for parsing and handling Java .properties files.
+
+
+Installation
+------------
+```
+ $ pip install jproperties3
+```
+
+Test
+----
+
+```
+ $ python setup.py test
+```
+
+Build
+-----
+
+```
+ $ python setup.py build
+```
+
+Usage
+-----
+
+A Properties object is, on the outside, a simple key-value store.
+
+Initialize it as such:
+
+```python
+from jproperties import Properties
+
+p = Properties()
+
+# Or with default values:
+p2 = Properties({"foo": "bar"})
+print(p2["foo"])
+```
+
+The usual dictionary interfaces are available:
+
+```python
+p2["key"] = "value"
+for key in p2.keys():
+	print(key, p2[key])
+```
+
+Note that keys and values are all expected to be and be treated as strings.
+
+To serialize the object into the .properties format, turn it into a string:
+
+```python
+with open("out.properties", "w") as f:
+	f.write(str(p2))
+```
+
+To read an existing properties file, create the instance using the `stream`
+keyword parameter
+
+```python
+with open("out.properties", "r") as f:
+	p = Properties(stream=f)
+```
+
+Note that comments and blank lines are loaded into the Properties object's
+nodes when using load(), and will be serialized in str().
+
+If comments and blank lines are unimportant and you want to get rid of them,
+you can create a new Properties object from an existing one's keys:
+
+```python
+p3 = Properties(p2.keys())
+```
+
+
+### License
+
+This project is licensed under the MIT license. The full license text is
+available in the LICENSE file.
+
+
