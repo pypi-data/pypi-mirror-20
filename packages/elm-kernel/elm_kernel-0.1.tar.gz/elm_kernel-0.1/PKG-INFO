@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: elm_kernel
+Version: 0.1
+Summary: Jupyter kernel for executing Elm code
+Home-page: https://github.com/abingham/jupyter-elm-kernel
+Author: Austin Bingham
+Author-email: austin@sixty-north.com
+License: UNKNOWN
+Description: This only vaguely works right now. I'm still figuring it all out. Any help would be great.
+        
+        # Usage
+        
+        1. Copy kernel.json to something like ~/Library/Jupyter/kernels/elm/kernel.json.
+        2. Run `jupyter notebook` and select the Elm kernel for a new notebook.
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
