@@ -1,0 +1,118 @@
+Metadata-Version: 2.0
+Name: itebooks
+Version: 0.2.0
+Summary: Python wrapper for it-ebooks-api.
+Home-page: https://github.com/aksbuzz/pyebooks
+Author: Akshay
+Author-email: akshayjr69@gmail.com
+License: Copyright (c) 2017, Akshay.
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Description: pyebooks : A python wrapper around http://it-ebooks-api.info/ API
+        ===================================================================
+        
+        **What is it?**
+        ****************
+        
+        pyebooks is a Python wrapper for the it-ebooks API.
+        
+        It allows quick and easy comsumption of it-ebooks API from your Python application.
+        
+        pyebooks reqires Python 3.
+        
+        	
+        **Install**
+        ***********
+        
+        You can install pyebooks using:
+        
+        .. code ::
+        
+        	$ pip3 install pyebooks
+        
+        Build from source
+        
+        .. code ::
+        	
+        	$ git clone https://github.com/aksbuzz/pyebooks.git
+        
+        	$ cd pyebooks
+        
+        	$ make
+        
+        
+        **Usage**
+        *********
+        
+        *API Key*
+        ^^^^^^^^^
+        For access to the eBook API you would need a API Key.
+        
+        You can get the API Key from here http://api.eBook.in/
+        
+        *Using the module*
+        ^^^^^^^^^^^^^^^^^^
+        
+        
+        
+        .. code :: python
+            
+            >>> eBook = pyebooks.Ebook()
+        
+            >>> '''
+            	Search the books
+            	'''
+        
+            >>> search_ = eBook.search("php mysql")
+        
+            >>> print(search_.error)
+            >>> print(search_.time)
+            >>> print(search_.total)
+            >>> print(search_.page)
+        
+            >>> print(search_.books)
+        
+            >>> '''
+          	This will return a list of dictionary with following details:
+        
+          		ID, 
+          		Title, 
+          		SubTitle (optional), 
+          		Description, 
+          		Image
+           	'''
+         Get book detail
+            
+        
+            >>> book_ = eBook.book_detail(869476162)
+        
+            >>> print(book_.download)
+        
+        **Examples**
+        ************
+        
+        You can find example usage in the examples folder.
+        
+        **Contribution**
+        ****************
+        
+        Contributions are welcome!.
+        
+        **Documentation**
+        *****************
+        
+        Documentation at http://it-ebooks-api.info/
+        
+        **Todo**
+        ********
+        
+        - Add Python 2 support
+        - Add detailed documentation
+Platform: UNKNOWN
