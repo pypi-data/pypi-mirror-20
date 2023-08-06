@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Volcasample package documentation &mdash; Volcasample 0.5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Volcasample 0.5.0 documentation" href="#"/>
+        <link rel="next" title="Quickstart Guide" href="quickstart.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Volcasample
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Implementation details</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">Volcasample</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Volcasample package documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="volcasample-package-documentation">
+<h1>Volcasample package documentation<a class="headerlink" href="#volcasample-package-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#create-a-project-for-your-samples">Create a project for your samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#populate-the-project-with-your-sound-files">Populate the project with your sound files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#check-how-big-those-files-are">Check how big those files are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#check-how-those-files-sound">Check how those files sound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#define-which-files-to-send">Define which files to send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#create-a-patch-for-the-volca-device">Create a patch for the Volca device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#module-volcasample.cli">Command Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Implementation details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-volcasample.syro">Data structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#samplepacker-class">SamplePacker class</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="volcasample">
+<h2>Volcasample<a class="headerlink" href="#volcasample" title="Permalink to this headline">¶</a></h2>
+<p>This is a Python wrapping of the <a class="reference external" href="http://korginc.github.io/volcasample/index.html">Korg Volca Sample library</a>.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>You risk data loss.</p>
+<p>This software will delete the factory defaults from your Volca Sample.</p>
+<p class="last">Please make sure you know how to restore the <a class="reference external" href="http://www.korg.com/us/support/download/software/0/370/1476/">Volca Factory Sample set</a>
+before you run the program.</p>
+</div>
+</div>
+</div>
+<div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Wraps the public interface of the Korg Volca Library so you can call
+it from your Python code.</li>
+<li>Creates and maintains project spaces so you can store and rate your
+samples.</li>
+<li>Provides a neat command line interface (CLI) for writing a set of
+samples to your Volca.</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>The installation process builds the Korg source code which is included
+in this package. Therefore the <cite>gcc</cite> build tools must be present.</p>
+<p>Installation has been tested on Ubuntu 16.04 and MacOSX 10.11.</p>
+<ol class="arabic">
+<li><p class="first">Create a virtual environment for volcasample:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python3 -m venv ~/py3-vs
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install the latest version in full with pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ~/py3-vs/bin/pip install volcasample[audio]
+</pre></div>
+</div>
+</li>
+</ol>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="Quickstart Guide" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 D. Haynes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
