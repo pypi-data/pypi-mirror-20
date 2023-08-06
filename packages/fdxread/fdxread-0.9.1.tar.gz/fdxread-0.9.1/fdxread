@@ -1,0 +1,106 @@
+#!/usr/bin/env python
+# .- coding: utf-8 -.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Copyright (C) 2016-2017 Lasse Karstensen
+#
+"""
+Garmin GND10 protocol decoder.
+"""
+from __future__ import print_function
+
+import argparse
+import doctest
+import logging
+import unittest
+
+from datetime import datetime
+from os.path import isfile, exists
+from pprint import pprint
+from sys import argv, stdout
+
+import libfdx
+
+__version__ = libfdx.__version__
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="fdxread v%s - Nexus FDX parser (incl. Garmin GND10)" % __version__,
+        epilog="fdxread is used to read FDX protocol data from Garmin GND10 units.")
+
+    parser.add_argument("input", help="Serial port or file to read from.\nExamples: /dev/ttyACM0, COM3, ./file.dump",
+                        metavar="inputfile")
+    parser.add_argument("--format", help="Output mode, default nmea0183. (json, signalk, nmea0183, none, raw)",
+                        default="nmea0183", metavar="fmt")
+    parser.add_argument("--seek", help="Seek this many bytes into file before starting (for files)",
+                        metavar="n", default=0, type=int)
+    parser.add_argument("--pace", help="Pace reading to n messages per second (for files)",
+                        metavar="n", default=0, type=float)
+    parser.add_argument("--send-psilfdx", help="Send initial mode change command to port (for NX2 server) (experimental)",
+                        action="store_true")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Verbose output")
+
+
+    if len(argv) == 1:
+        parser.print_help()
+        exit()
+    args = parser.parse_args()
+
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
+    args.format = args.format.lower()
+    if args.format == "nmea0183":
+        fmter = libfdx.format_NMEA0183(joinlines=True)
+    elif args.format == "json":
+        fmter = libfdx.format_json(devmode=False)
+    elif args.format == "raw":
+        fmter = libfdx.format_json(devmode=True)
+    elif args.format == "signalk":
+        fmter = libfdx.format_signalk_delta()
+    elif args.format == "none":
+        fmter = None
+    else:
+        parser.print_help()
+        exit()
+
+    if int(args.pace) == 0:
+        args.pace = None
+
+    if exists(args.input):
+        if args.input.startswith("/dev"):
+            reader = libfdx.GND10interface(args.input, send_modechange=args.send_psilfdx)
+        else:
+            reader = libfdx.HEXinterface(args.input, seek=args.seek, frequency=args.pace)
+    else:
+        print("ERROR: Don't know how to read or open %s" % args.input)
+        exit(1)
+
+    for buf in reader.recvmsg():
+        if buf is None:
+            logging.debug("empty decoded frame")
+            continue
+        assert type(buf) == dict
+
+        if fmter:
+            output = fmter.handle(buf)
+            if output:
+                print(output)
+                stdout.flush()
+
+if __name__ == "__main__":
+    main()
