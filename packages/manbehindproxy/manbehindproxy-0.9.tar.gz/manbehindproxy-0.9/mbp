@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import requests, subprocess, threading
+from bs4 import BeautifulSoup
+process = subprocess.Popen(['/bin/bash'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+HTTP, HTTPS, lastHTTP, lastHTTPS = "", "", "", ""
+
+TIME_INTERVAL = 5
+
+def change_proxy():
+  threading.Timer(60.0*TIME_INTERVAL, change_proxy).start()
+  r = requests.get('http://free-proxy-list.net/anonymous-proxy.html')
+  soup = BeautifulSoup(r.text, 'html.parser')
+  td = soup.find_all('td')
+  global HTTP, HTTPS, lastHTTP, lastHTTPS
+
+  for index in range(0, len(td), 8):
+    if td[index+6].string == 'no' and td[index+4].string == 'elite proxy' and lastHTTP != td[index].string+':'+td[index+1].string:
+      HTTP = td[index].string+':'+td[index+1].string
+    elif td[index+6].string == 'yes' and td[index+4].string == 'elite proxy' and lastHTTPS != td[index].string+':'+td[index+1].string:
+      HTTPS = td[index].string+':'+td[index+1].string
+    if HTTP != lastHTTP and HTTPS != lastHTTPS:
+      lastHTTP, lastHTTPS = HTTP, HTTPS
+      break
+  
+  print 'Proxy changed...', HTTP, HTTPS
+
+def run_command(command):
+  process = subprocess.Popen(['/bin/bash'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+  process.stdin.write('export http_proxy=http://'+HTTP+'\n')
+  process.stdin.write('export https_proxy=https://'+HTTPS+'\n')
+  process.stdin.write(command+'\n')
+  output, err = process.communicate()
+  print output
+
+if __name__ == "__main__":
+  change_proxy()
+  while True:
+    command = raw_input('$ ')
+    run_command(command)
+
