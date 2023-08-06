@@ -1,0 +1,24 @@
+Metadata-Version: 2.0
+Name: harvest-invoice
+Version: 0.0.1
+Summary: Generate invoice using harvest API
+Home-page: http://github.com/storborg/funniest
+Author: Aldiantoro Nugroho
+Author-email: kriwil@gmail.com
+License: Apache 2
+Keywords: harvest invoice
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Text Processing :: Linguistic
+Requires-Dist: click (<7,>=6)
+Requires-Dist: requests (>=2,<3)
+
+harvest-invoice
+---------------
+
+Generate your harvest invoice from command line interface.
+
+
+
