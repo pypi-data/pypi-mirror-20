@@ -1,0 +1,32 @@
+Metadata-Version: 2.0
+Name: xatk
+Version: 0.2.1
+Summary: keyboard-driven window switcher for X11
+Home-page: http://github.com/vlevit/xatk/
+Author: Vyacheslav Levit
+Author-email: dev@vlevit.org
+License: GPL
+Keywords: X11 keyboard windows
+Platform: linux
+Platform: freebsd
+Platform: openbsd
+Platform: netbsd
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: X11 Applications
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Desktop Environment :: Window Managers
+Requires-Dist: python-xlib (>=0.15rc1)
+
+xatk
+====
+
+xatk is a keyboard-driven window switcher for X11.
+
+Learn more on `xatk's Read the Docs page
+<http://xatk.readthedocs.org/en/latest/>`__.
+
+
