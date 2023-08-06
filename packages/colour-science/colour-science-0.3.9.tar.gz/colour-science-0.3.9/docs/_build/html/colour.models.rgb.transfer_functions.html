@@ -1,0 +1,2338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions Package &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="colour-models-rgb-transfer-functions-package">
+<h1>colour.models.rgb.transfer_functions Package<a class="headerlink" href="#colour-models-rgb-transfer-functions-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sub-modules">
+<h2>Sub-Modules<a class="headerlink" href="#sub-modules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.aces.html">colour.models.rgb.transfer_functions.aces Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.aces.html#academy-color-encoding-system-log-encodings">Academy Color Encoding System - Log Encodings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.alexa_log_c.html">colour.models.rgb.transfer_functions.alexa_log_c Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.alexa_log_c.html#alexa-log-c-log-encoding">ALEXA Log C Log Encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.bt_1886.html">colour.models.rgb.transfer_functions.bt_1886 Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.bt_1886.html#itu-r-bt-1886">ITU-R BT.1886</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.bt_2020.html">colour.models.rgb.transfer_functions.bt_2020 Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.bt_2020.html#itu-r-bt-2020">ITU-R BT.2020</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.bt_709.html">colour.models.rgb.transfer_functions.bt_709 Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.bt_709.html#itu-r-bt-709-6">ITU-R BT.709-6</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.canon_log.html">colour.models.rgb.transfer_functions.canon_log Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.canon_log.html#canon-log-encodings">Canon Log Encodings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.cineon.html">colour.models.rgb.transfer_functions.cineon Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.cineon.html#kodak-cineon-encoding">Kodak Cineon Encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.dci_p3.html">colour.models.rgb.transfer_functions.dci_p3 Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.dci_p3.html#dci-p3-colourspace">DCI-P3 Colourspace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.gamma.html">colour.models.rgb.transfer_functions.gamma Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.gamma.html#gamma-colour-component-transfer-function">Gamma Colour Component Transfer Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.linear.html">colour.models.rgb.transfer_functions.linear Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.linear.html#linear-colour-component-transfer-function">Linear Colour Component Transfer Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.panalog.html">colour.models.rgb.transfer_functions.panalog Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.panalog.html#panalog-encoding">Panalog Encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.panasonic_vlog.html">colour.models.rgb.transfer_functions.panasonic_vlog Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.panasonic_vlog.html#panasonic-v-log-log-encoding">Panasonic V-Log Log Encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.pivoted_log.html">colour.models.rgb.transfer_functions.pivoted_log Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.pivoted_log.html#pivoted-log-encoding">Pivoted Log Encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.red_log.html">colour.models.rgb.transfer_functions.red_log Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.red_log.html#red-log-encodings">RED Log Encodings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.rimm_romm_rgb.html">colour.models.rgb.transfer_functions.rimm_romm_rgb Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.rimm_romm_rgb.html#rimm-romm-and-erimm-encodings">RIMM, ROMM and ERIMM Encodings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.sony_slog.html">colour.models.rgb.transfer_functions.sony_slog Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.sony_slog.html#sony-s-log-encodings">Sony S-Log Encodings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.srgb.html">colour.models.rgb.transfer_functions.srgb Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.srgb.html#srgb-colourspace">sRGB Colourspace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.st_2084.html">colour.models.rgb.transfer_functions.st_2084 Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.st_2084.html#smpte-st-2084-2014">SMPTE ST 2084:2014</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.models.rgb.transfer_functions.viper_log.html">colour.models.rgb.transfer_functions.viper_log Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.models.rgb.transfer_functions.viper_log.html#viper-log-encodings">Viper Log Encodings</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-colour.models.rgb.transfer_functions">
+<span id="module-contents"></span><h2>Module Contents<a class="headerlink" href="#module-colour.models.rgb.transfer_functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_ACESproxy">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_ACESproxy</code><span class="sig-paren">(</span><em>lin_AP1</em>, <em>bit_depth=u'10 Bit'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_encoding_ACESproxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_ACESproxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACESproxy</em> colourspace log encoding curve / opto-electronic
+transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lin_AP1</strong> (<em>numeric or array_like</em>) &#8211; <em>lin_AP1</em> value.</li>
+<li><strong>bit_depth</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong>,
+<em>ACESproxy</em> bit depth.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>ACESproxy</em> non-linear value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ACESproxy</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>
+<span class="go">426</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_ACESproxy">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ACESproxy</code><span class="sig-paren">(</span><em>ACESproxy</em>, <em>bit_depth=u'10 Bit'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_decoding_ACESproxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_ACESproxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACESproxy</em> colourspace log decoding curve / electro-optical
+transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ACESproxy</strong> (<em>numeric or array_like</em>) &#8211; <em>ACESproxy</em> non-linear value.</li>
+<li><strong>bit_depth</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong>,
+<em>ACESproxy</em> bit depth.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>lin_AP1</em> value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ACESproxy</span><span class="p">(</span><span class="mi">426</span><span class="p">)</span>  
+<span class="go">0.1792444...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_ACEScc">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_ACEScc</code><span class="sig-paren">(</span><em>lin_AP1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_encoding_ACEScc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_ACEScc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScc</em> colourspace log encoding / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lin_AP1</strong> (<em>numeric or array_like</em>) &#8211; <em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>ACEScc</em> non-linear value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ACEScc</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4135884...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_ACEScc">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ACEScc</code><span class="sig-paren">(</span><em>ACEScc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_decoding_ACEScc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_ACEScc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScc</em> colourspace log decoding / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ACEScc</strong> (<em>numeric or array_like</em>) &#8211; <em>ACEScc</em> non-linear value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ACEScc</span><span class="p">(</span><span class="mf">0.413588402492442</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_ACEScct">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_ACEScct</code><span class="sig-paren">(</span><em>lin_AP1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_encoding_ACEScct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_ACEScct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScct</em> colourspace log encoding / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lin_AP1</strong> (<em>numeric or array_like</em>) &#8211; <em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>ACEScct</em> non-linear value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ACEScct</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4135884...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_ACEScct">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ACEScct</code><span class="sig-paren">(</span><em>ACEScct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_decoding_ACEScct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_ACEScct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScct</em> colourspace log decoding / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ACEScct</strong> (<em>numeric or array_like</em>) &#8211; <em>ACEScct</em> non-linear value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ACEScct</span><span class="p">(</span><span class="mf">0.413588402492442</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_ALEXALogC">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_ALEXALogC</code><span class="sig-paren">(</span><em>x</em>, <em>firmware=u'SUP 3.x'</em>, <em>method=u'Linear Scene Exposure Factor'</em>, <em>EI=800</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/alexa_log_c.html#log_encoding_ALEXALogC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_ALEXALogC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ALEXA Log C</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>firmware</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;SUP 3.x&#8217;, &#8216;SUP 2.x&#8217;}</strong>,
+Alexa firmware version.</li>
+<li><strong>method</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;Linear Scene Exposure Factor&#8217;, &#8216;Normalised Sensor Signal&#8217;}</strong>,
+Conversion method.</li>
+<li><strong>EI</strong> (<em>int,  optional</em>) &#8211; Ei.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>ALEXA Log C</em> encoded data <span class="math">\(t\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ALEXALogC</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.3910068...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_ALEXALogC">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ALEXALogC</code><span class="sig-paren">(</span><em>t</em>, <em>firmware=u'SUP 3.x'</em>, <em>method=u'Linear Scene Exposure Factor'</em>, <em>EI=800</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/alexa_log_c.html#log_decoding_ALEXALogC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_ALEXALogC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ALEXA Log C</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>t</strong> (<em>numeric or array_like</em>) &#8211; <em>ALEXA Log C</em> encoded data <span class="math">\(t\)</span>.</li>
+<li><strong>firmware</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;SUP 3.x&#8217;, &#8216;SUP 2.x&#8217;}</strong>,
+Alexa firmware version.</li>
+<li><strong>method</strong> (<em>unicode,  optional</em>) &#8211; <strong>{&#8216;Linear Scene Exposure Factor&#8217;, &#8216;Normalised Sensor Signal&#8217;}</strong>,
+Conversion method.</li>
+<li><strong>EI</strong> (<em>int,  optional</em>) &#8211; Ei.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ALEXALogC</span><span class="p">(</span><span class="mf">0.391006832034084</span><span class="p">)</span>  
+<span class="go">0.18...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_BT709">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_BT709</code><span class="sig-paren">(</span><em>L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_709.html#oetf_BT709"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_BT709" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.709-6</em> opto-electronic transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>L</strong> (<em>numeric or array_like</em>) &#8211; <em>Luminance</em> <span class="math">\(L\)</span> of the image.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Corresponding electrical signal <span class="math">\(V\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_BT709</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4090077...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_BT709">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_BT709</code><span class="sig-paren">(</span><em>V</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_709.html#eotf_BT709"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_BT709" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.709-6</em> electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>V</strong> (<em>numeric or array_like</em>) &#8211; Electrical signal <span class="math">\(V\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Corresponding <em>luminance</em> <span class="math">\(L\)</span> of the image.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><em>Recommendation ITU-R BT.709-6</em> doesn&#8217;t specify an electro-optical
+transfer function. This definition is used for symmetry in unit tests and
+other computations but should not be used as an <em>EOTF</em>.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_BT709</span><span class="p">(</span><span class="mf">0.409007728864150</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_BT1886">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_BT1886</code><span class="sig-paren">(</span><em>L</em>, <em>L_B=64</em>, <em>L_W=940</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_1886.html#oetf_BT1886"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_BT1886" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.1886</em> opto-electrical transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>L</strong> (<em>numeric or array_like</em>) &#8211; Screen luminance in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>L_B</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for black.</li>
+<li><strong>L_W</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for white.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Input video signal level (normalized, black at <span class="math">\(V = 0\)</span>, to white
+at <span class="math">\(V = 1\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><em>Recommendation ITU-R BT.1886</em> doesn&#8217;t specify an opto-electrical
+transfer function. This definition is used for symmetry in unit tests and
+other computations but should not be used as an <em>OETF</em>.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_BT1886</span><span class="p">(</span><span class="mf">277.98159179331145</span><span class="p">)</span>  
+<span class="go">0.4090077...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_BT1886">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_BT1886</code><span class="sig-paren">(</span><em>V</em>, <em>L_B=64</em>, <em>L_W=940</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_1886.html#eotf_BT1886"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_BT1886" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.1886</em> electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>V</strong> (<em>numeric or array_like</em>) &#8211; Input video signal level (normalized, black at <span class="math">\(V = 0\)</span>, to white
+at <span class="math">\(V = 1\)</span>. For content mastered per
+<em>Recommendation ITU-R BT.709</em>, 10-bit digital code values <span class="math">\(D\)</span> map
+into values of <span class="math">\(V\)</span> per the following equation:
+<span class="math">\(V = (D–64)/876\)</span></li>
+<li><strong>L_B</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for black.</li>
+<li><strong>L_W</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for white.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Screen luminance in <span class="math">\(cd/m^2\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_BT1886</span><span class="p">(</span><span class="mf">0.409007728864150</span><span class="p">)</span>  
+<span class="go">277.9815917...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_BT2020">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_BT2020</code><span class="sig-paren">(</span><em>E</em>, <em>is_12_bits_system=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_2020.html#oetf_BT2020"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_BT2020" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.2020</em> opto-electrical transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>E</strong> (<em>numeric or array_like</em>) &#8211; Voltage <span class="math">\(E\)</span> normalized by the reference white level and
+proportional to the implicit light intensity that would be detected
+with a reference camera colour channel R, G, B.</li>
+<li><strong>is_12_bits_system</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; <em>BT.709</em> <em>alpha</em> and <em>beta</em> constants are used if system is not 12-bit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Resulting non-linear signal <span class="math">\(E'\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_BT2020</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4090077...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_BT2020">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_BT2020</code><span class="sig-paren">(</span><em>E_p</em>, <em>is_12_bits_system=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_2020.html#eotf_BT2020"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_BT2020" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.2020</em> electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>E_p</strong> (<em>numeric or array_like</em>) &#8211; Non-linear signal <span class="math">\(E'\)</span>.</li>
+<li><strong>is_12_bits_system</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; <em>BT.709</em> <em>alpha</em> and <em>beta</em> constants are used if system is not 12-bit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Resulting voltage <span class="math">\(E\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_BT2020</span><span class="p">(</span><span class="mf">0.705515089922121</span><span class="p">)</span>  
+<span class="go">0.4999999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_CanonLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_CanonLog</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/canon_log.html#log_encoding_CanonLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_CanonLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Canon Log</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Canon Log</em> non-linear <em>IRE</em> data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Output <em>Canon Log</em> non-linear <em>IRE</em> data should be converted to code
+value <em>CV</em> as follows: <cite>CV = IRE * (940 - 64) + 64</cite>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_CanonLog</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  
+<span class="go">32.7953896...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_CanonLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_CanonLog</code><span class="sig-paren">(</span><em>clog_ire</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/canon_log.html#log_decoding_CanonLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_CanonLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Canon Log</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clog_ire</strong> (<em>numeric or array_like</em>) &#8211; <em>Canon Log</em> non-linear <em>IRE</em> data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>Canon Log</em> non-linear <em>IRE</em> data should be converted from code
+value <em>CV</em> to <em>IRE</em> as follows: <cite>IRE = (CV - 64) / (940 - 64)</cite>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_CanonLog</span><span class="p">(</span><span class="mf">32.795389693580908</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>  
+<span class="go">0.19999999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_CanonLog2">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_CanonLog2</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/canon_log.html#log_encoding_CanonLog2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_CanonLog2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Canon Log 2</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Canon Log 2</em> non-linear <em>IRE</em> data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Output <em>Canon Log 2</em> non-linear <em>IRE</em> data should be converted to code
+value <em>CV</em> as follows: <cite>CV = IRE * (940 - 64) + 64</cite>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_CanonLog2</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  
+<span class="go">39.2025745...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_CanonLog2">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_CanonLog2</code><span class="sig-paren">(</span><em>clog2_ire</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/canon_log.html#log_decoding_CanonLog2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_CanonLog2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Canon Log 2</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clog2_ire</strong> (<em>numeric or array_like</em>) &#8211; <em>Canon Log 2</em> non-linear <em>IRE</em> data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>Canon Log 2</em> non-linear <em>IRE</em> data should be converted from code
+value <em>CV</em> to <em>IRE</em> as follows: <cite>IRE = (CV - 64) / (940 - 64)</cite>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_CanonLog2</span><span class="p">(</span><span class="mf">39.202574539700947</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>  
+<span class="go">0.2000000...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_CanonLog3">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_CanonLog3</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/canon_log.html#log_encoding_CanonLog3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_CanonLog3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Canon Log 3</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Canon Log 3</em> non-linear <em>IRE</em> data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Output <em>Canon Log 3</em> non-linear <em>IRE</em> data should be converted to code
+value <em>CV</em> as follows: <cite>CV = IRE * (940 - 64) + 64</cite>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_CanonLog3</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  
+<span class="go">32.7953567...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_CanonLog3">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_CanonLog3</code><span class="sig-paren">(</span><em>clog3_ire</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/canon_log.html#log_decoding_CanonLog3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_CanonLog3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Canon Log 3</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clog3_ire</strong> (<em>numeric or array_like</em>) &#8211; <em>Canon Log 3</em> non-linear <em>IRE</em> data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>Canon Log 3</em> non-linear <em>IRE</em> data should be converted from code
+value <em>CV</em> to <em>IRE</em> as follows: <cite>IRE = (CV - 64) / (940 - 64)</cite>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_CanonLog3</span><span class="p">(</span><span class="mf">32.795356721989336</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>  
+<span class="go">0.2000000...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_Cineon">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_Cineon</code><span class="sig-paren">(</span><em>x</em>, <em>black_offset=0.0107977516232771</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/cineon.html#log_encoding_Cineon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_Cineon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Cineon</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_Cineon</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4573196...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_Cineon">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_Cineon</code><span class="sig-paren">(</span><em>y</em>, <em>black_offset=0.0107977516232771</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/cineon.html#log_decoding_Cineon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_Cineon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Cineon</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_Cineon</span><span class="p">(</span><span class="mf">0.457319613085418</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_DCIP3">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_DCIP3</code><span class="sig-paren">(</span><em>XYZ</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/dci_p3.html#oetf_DCIP3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_DCIP3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>DCI-P3</em> colourspace opto-electronic transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>XYZ</strong> (<em>numeric or array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Non-linear <em>CIE XYZ&#8217;</em> tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_DCIP3</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">461.9922059...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_DCIP3">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_DCIP3</code><span class="sig-paren">(</span><em>XYZ_p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/dci_p3.html#eotf_DCIP3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_DCIP3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>DCI-P3</em> colourspace electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>XYZ_p</strong> (<em>numeric or array_like</em>) &#8211; Non-linear <em>CIE XYZ&#8217;</em> tristimulus values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_DCIP3</span><span class="p">(</span><span class="mf">461.99220597484737</span><span class="p">)</span>  
+<span class="go">0.18...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.gamma_function">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">gamma_function</code><span class="sig-paren">(</span><em>a</em>, <em>exponent=1</em>, <em>negative_number_handling=u'indeterminate'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/gamma.html#gamma_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.gamma_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines a typical gamma encoding / decoding function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Array to encode / decode.</li>
+<li><strong>exponent</strong> (<em>numeric or array_like, optional</em>) &#8211; Encoding / decoding exponent.</li>
+<li><strong>negative_number_handling</strong> (<em>unicode, optional</em>) &#8211; <p><strong>{&#8216;Indeterminate&#8217;, &#8216;Mirror&#8217;, &#8216;Preserve&#8217;, &#8216;Clamp&#8217;}</strong>,
+Defines the behaviour for <cite>a</cite> negative numbers and / or the definition
+return value:</p>
+<ul>
+<li><em>Indeterminate</em>: The behaviour will be indeterminate and
+definition return value might contain <em>nans</em>.</li>
+<li><em>Mirror</em>: The definition return value will be mirrored around
+abscissa and ordinate axis, i.e. Blackmagic Design: Davinci Resolve
+behaviour.</li>
+<li><em>Preserve</em>: The definition will preserve any negative number in
+<cite>a</cite>, i.e. The Foundry Nuke behaviour.</li>
+<li><em>Clamp</em>: The definition will clamp any negative number in <cite>a</cite> to 0.</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Encoded / decoded array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">numeric or ndarray</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> &#8211;
+If the negative number handling method is not defined.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_function</span><span class="p">(</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>  
+<span class="go">0.0229932...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_function</span><span class="p">(</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>  
+<span class="go">0.0323999...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_function</span><span class="p">(</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_function</span><span class="p">(</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s1">&#39;Mirror&#39;</span><span class="p">)</span>  
+<span class="go">-0.0229932...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_function</span><span class="p">(</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s1">&#39;Preserve&#39;</span><span class="p">)</span>  
+<span class="go">-0.1...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_function</span><span class="p">(</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s1">&#39;Clamp&#39;</span><span class="p">)</span>  
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.linear_function">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">linear_function</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/linear.html#linear_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.linear_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines a typical linear encoding / decoding function, essentially a
+pass-through function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Array to encode / decode.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Encoded / decoded array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_function</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>
+<span class="go">0.18</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_Panalog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_Panalog</code><span class="sig-paren">(</span><em>x</em>, <em>black_offset=0.04077184461038074</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/panalog.html#log_encoding_Panalog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_Panalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Panalog</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These are estimations known to be close enough, the actual log encoding
+curves are not published.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_Panalog</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.3745767...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_Panalog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_Panalog</code><span class="sig-paren">(</span><em>y</em>, <em>black_offset=0.04077184461038074</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/panalog.html#log_decoding_Panalog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_Panalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Panalog</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These are estimations known to be close enough, the actual log encoding
+curves are not published.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_Panalog</span><span class="p">(</span><span class="mf">0.374576791382298</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_VLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_VLog</code><span class="sig-paren">(</span><em>L_in</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/panasonic_vlog.html#log_encoding_VLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_VLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Panasonic V-Log</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>L_in</strong> (<em>numeric or array_like</em>) &#8211; Linear reflection data :math`L_{in}`.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Non-linear data <span class="math">\(V_{out}\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_VLog</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4233114...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_VLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_VLog</code><span class="sig-paren">(</span><em>V_out</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/panasonic_vlog.html#log_decoding_VLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_VLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Panasonic V-Log</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>V_out</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(V_{out}\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear reflection data :math`L_{in}`.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_VLog</span><span class="p">(</span><span class="mf">0.423311448760136</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_PivotedLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_PivotedLog</code><span class="sig-paren">(</span><em>x</em>, <em>log_reference=445</em>, <em>linear_reference=0.18</em>, <em>negative_gamma=0.6</em>, <em>density_per_code_value=0.002</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/pivoted_log.html#log_encoding_PivotedLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_PivotedLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Josh Pines</em> style <em>Pivoted Log</em> log encoding curve /
+opto-electronic transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>log_reference</strong> (<em>numeric or array_like</em>) &#8211; Log reference.</li>
+<li><strong>linear_reference</strong> (<em>numeric or array_like</em>) &#8211; Linear reference.</li>
+<li><strong>negative_gamma</strong> (<em>numeric or array_like</em>) &#8211; Negative gamma.</li>
+<li><strong>density_per_code_value</strong> (<em>numeric or array_like</em>) &#8211; Density per code value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_PivotedLog</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4349951...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_PivotedLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_PivotedLog</code><span class="sig-paren">(</span><em>y</em>, <em>log_reference=445</em>, <em>linear_reference=0.18</em>, <em>negative_gamma=0.6</em>, <em>density_per_code_value=0.002</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/pivoted_log.html#log_decoding_PivotedLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_PivotedLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Josh Pines</em> style <em>Pivoted Log</em> log decoding curve /
+electro-optical transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</li>
+<li><strong>log_reference</strong> (<em>numeric or array_like</em>) &#8211; Log reference.</li>
+<li><strong>linear_reference</strong> (<em>numeric or array_like</em>) &#8211; Linear reference.</li>
+<li><strong>negative_gamma</strong> (<em>numeric or array_like</em>) &#8211; Negative gamma.</li>
+<li><strong>density_per_code_value</strong> (<em>numeric or array_like</em>) &#8211; Density per code value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_PivotedLog</span><span class="p">(</span><span class="mf">0.434995112414467</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_REDLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_REDLog</code><span class="sig-paren">(</span><em>x</em>, <em>black_offset=0.009955040995908344</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_encoding_REDLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_REDLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>REDLog</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_REDLog</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.6376218...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_REDLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_REDLog</code><span class="sig-paren">(</span><em>y</em>, <em>black_offset=0.009955040995908344</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_decoding_REDLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_REDLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>REDLog</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_REDLog</span><span class="p">(</span><span class="mf">0.637621845988175</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_REDLogFilm">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_REDLogFilm</code><span class="sig-paren">(</span><em>x</em>, <em>black_offset=0.0107977516232771</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_encoding_REDLogFilm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_REDLogFilm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>REDLogFilm</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_REDLogFilm</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4573196...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_REDLogFilm">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_REDLogFilm</code><span class="sig-paren">(</span><em>y</em>, <em>black_offset=0.0107977516232771</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_decoding_REDLogFilm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_REDLogFilm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>REDLogFilm</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</li>
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211; Black offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_REDLogFilm</span><span class="p">(</span><span class="mf">0.457319613085418</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_Log3G10">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_Log3G10</code><span class="sig-paren">(</span><em>x</em>, <em>legacy_curve=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_encoding_Log3G10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_Log3G10" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Log3G10</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</li>
+<li><strong>legacy_curve</strong> (<em>bool, optional</em>) &#8211; Whether to use the v1 <em>Log3G10</em> log encoding curve. Default is <cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul>
+<li><p class="first">The v1 <em>Log3G10</em> log encoding curve is the one used in <em>REDCINE-X beta
+42</em>. <em>Resolve 12.5.2</em> also uses the v1 curve. <em>RED</em> is planning to use
+v2 <em>Log3G10</em> log encoding curve in the release version of the
+<em>RED SDK</em>.
+Use the <cite>legacy_curve=True</cite> argument to switch to the v1 curve for
+compatibility with the current (as of September 21, 2016) <em>RED SDK</em>.</p>
+</li>
+<li><p class="first">The intent of the v1 <em>Log3G10</em> log encoding curve is that zero maps to
+zero, 0.18 maps to 1/3, and 10 stops above 0.18 maps to 1.0.
+The name indicates this in a similar way to the naming conventions of
+<em>Sony HyperGamma</em> curves.</p>
+<p>The constants used in the functions do not in fact quite hit these
+values, but rather than use corrected constants, the functions here
+use the official <em>RED</em> values, in order to match the output of the
+<em>RED SDK</em>.</p>
+<p>For those interested, solving for constants which exactly hit 1/3
+and 1.0 yields the following values:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="mi">25</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">4093.0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">B</span> <span class="o">*</span> <span class="mf">184.32</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the function takes the form:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Log3G10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">B</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly for <em>Log3G12</em>, the values which hit exactly 1/3 and 1.0
+are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="mi">25</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">16381.0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">B</span> <span class="o">*</span> <span class="mf">737.28</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_Log3G10</span><span class="p">(</span><span class="mf">0.18</span><span class="p">,</span> <span class="n">legacy_curve</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  
+<span class="go">0.3333336...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_Log3G10</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>  
+<span class="go">0.0915514...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_Log3G10">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_Log3G10</code><span class="sig-paren">(</span><em>y</em>, <em>legacy_curve=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_decoding_Log3G10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_Log3G10" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Log3G10</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</li>
+<li><strong>legacy_curve</strong> (<em>bool, optional</em>) &#8211; Whether to use the v1 <em>Log3G10</em> log encoding curve. Default is <cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(x\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_Log3G10</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">legacy_curve</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  
+<span class="go">0.1799994...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_Log3G10</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  
+<span class="go">184.3223476...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_Log3G12">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_Log3G12</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_encoding_Log3G12"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_Log3G12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Log3G12</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Non-linear data <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_Log3G12</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.3333326...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_Log3G12">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_Log3G12</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/red_log.html#log_decoding_Log3G12"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_Log3G12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Log3G12</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_Log3G12</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>  
+<span class="go">0.1800015...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_ROMMRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_ROMMRGB</code><span class="sig-paren">(</span><em>X</em>, <em>I_max=255</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/rimm_romm_rgb.html#oetf_ROMMRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_ROMMRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ROMM RGB</em> encoding opto-electronic transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(X_{ROMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(X'_{ROMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_ROMMRGB</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">98.3564133...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_ROMMRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_ROMMRGB</code><span class="sig-paren">(</span><em>X_p</em>, <em>I_max=255</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/rimm_romm_rgb.html#eotf_ROMMRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_ROMMRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ROMM RGB</em> encoding electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X_p</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(X'_{ROMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(X_{ROMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_ROMMRGB</span><span class="p">(</span><span class="mf">98.356413311540095</span><span class="p">)</span> 
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_ProPhotoRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_ProPhotoRGB</code><span class="sig-paren">(</span><em>X</em>, <em>I_max=255</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_ProPhotoRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ROMM RGB</em> encoding opto-electronic transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(X_{ROMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(X'_{ROMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_ROMMRGB</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">98.3564133...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_ProPhotoRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_ProPhotoRGB</code><span class="sig-paren">(</span><em>X_p</em>, <em>I_max=255</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_ProPhotoRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ROMM RGB</em> encoding electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X_p</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(X'_{ROMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(X_{ROMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_ROMMRGB</span><span class="p">(</span><span class="mf">98.356413311540095</span><span class="p">)</span> 
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_RIMMRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_RIMMRGB</code><span class="sig-paren">(</span><em>X</em>, <em>I_max=255</em>, <em>E_clip=2.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/rimm_romm_rgb.html#oetf_RIMMRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_RIMMRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>RIMM RGB</em> encoding opto-electronic transfer function
+(OETF / OECF).</p>
+<p><em>RIMM RGB</em> encoding non-linearity is based on that specified by
+<em>Recommendation ITU-R BT.709-6</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(X_{RIMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211; Maximum exposure level.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(X'_{RIMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_RIMMRGB</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">74.3768017...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_RIMMRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_RIMMRGB</code><span class="sig-paren">(</span><em>X_p</em>, <em>I_max=255</em>, <em>E_clip=2.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/rimm_romm_rgb.html#eotf_RIMMRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_RIMMRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>RIMM RGB</em> encoding electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X_p</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(X'_{RIMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211; Maximum exposure level.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(X_{RIMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_RIMMRGB</span><span class="p">(</span><span class="mf">74.37680178131521</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_ERIMMRGB</code><span class="sig-paren">(</span><em>X</em>, <em>I_max=255</em>, <em>E_min=0.001</em>, <em>E_clip=316.2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/rimm_romm_rgb.html#log_encoding_ERIMMRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ERIMM RGB</em> log encoding curve / opto-electronic transfer
+function (OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>numeric or array_like</em>) &#8211; Linear data <span class="math">\(X_{ERIMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_min</strong> (<em>numeric, optional</em>) &#8211; Minimum exposure limit.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211; Maximum exposure limit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Non-linear data <span class="math">\(X'_{ERIMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ERIMMRGB</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">104.5633593...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ERIMMRGB</code><span class="sig-paren">(</span><em>X_p</em>, <em>I_max=255</em>, <em>E_min=0.001</em>, <em>E_clip=316.2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/rimm_romm_rgb.html#log_decoding_ERIMMRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ERIMM RGB</em> log decoding curve / electro-optical transfer
+function (EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X_p</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(X'_{ERIMM}\)</span>.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211; Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_min</strong> (<em>numeric, optional</em>) &#8211; Minimum exposure limit.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211; Maximum exposure limit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Linear data <span class="math">\(X_{ERIMM}\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ERIMMRGB</span><span class="p">(</span><span class="mf">104.56335932049294</span><span class="p">)</span> 
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_SLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_SLog</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/sony_slog.html#log_encoding_SLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_SLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Sony S-Log</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<em>numeric or array_like</em>) &#8211; Input light level <span class="math">\(t\)</span> to a camera.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Camera output code <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_SLog</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.3599878...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_SLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_SLog</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/sony_slog.html#log_decoding_SLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_SLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Sony S-Log</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Camera output code <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Input light level <span class="math">\(t\)</span> to a camera.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_SLog</span><span class="p">(</span><span class="mf">0.359987846422154</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_SLog2">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_SLog2</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/sony_slog.html#log_encoding_SLog2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_SLog2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Sony S-Log2</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<em>numeric or array_like</em>) &#8211; Input light level <span class="math">\(t\)</span> to a camera.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Camera output code <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_SLog2</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.3849708...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_SLog2">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_SLog2</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/sony_slog.html#log_decoding_SLog2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_SLog2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Sony S-Log2</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Camera output code <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Input light level <span class="math">\(t\)</span> to a camera.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_SLog2</span><span class="p">(</span><span class="mf">0.384970815928670</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_SLog3">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_SLog3</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/sony_slog.html#log_encoding_SLog3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_SLog3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Sony S-Log3</em> log encoding curve / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<em>numeric or array_like</em>) &#8211; Input light level <span class="math">\(t\)</span> to a camera.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Camera output code <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_SLog3</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4105571...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_SLog3">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_SLog3</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/sony_slog.html#log_decoding_SLog3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_SLog3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Sony S-Log3</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Camera output code <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Input light level <span class="math">\(t\)</span> to a camera.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_SLog3</span><span class="p">(</span><span class="mf">0.410557184750733</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_sRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_sRGB</code><span class="sig-paren">(</span><em>L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/srgb.html#oetf_sRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_sRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>sRGB</em> colourspace opto-electronic transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>L</strong> (<em>numeric or array_like</em>) &#8211; <em>Luminance</em> <span class="math">\(L\)</span> of the image.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Corresponding electrical signal <span class="math">\(V\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_sRGB</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4613561...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_sRGB">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_sRGB</code><span class="sig-paren">(</span><em>V</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/srgb.html#eotf_sRGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_sRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>sRGB</em> colourspace electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>V</strong> (<em>numeric or array_like</em>) &#8211; Electrical signal <span class="math">\(V\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Corresponding <em>luminance</em> <span class="math">\(L\)</span> of the image.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_sRGB</span><span class="p">(</span><span class="mf">0.461356129500442</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf_ST2084">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf_ST2084</code><span class="sig-paren">(</span><em>C</em>, <em>L_p=10000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/st_2084.html#oetf_ST2084"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf_ST2084" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>SMPTE ST 2084:2014</em> optimised perceptual opto-electronic transfer
+function (OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>C</strong> (<em>numeric or array_like</em>) &#8211; Target optical output <span class="math">\(C\)</span> in <span class="math">\(cd/m^2\)</span> of the ideal
+reference display.</li>
+<li><strong>L_p</strong> (<em>numeric, optional</em>) &#8211; Display peak luminance <span class="math">\(cd/m^2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Color value abbreviated as <span class="math">\(N\)</span>, normalized to the range [0, 1],
+that is directly proportional to the encoded signal representation,
+and which is not directly proportional to the optical output of a
+display device.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_ST2084</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.0794209...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf_ST2084">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf_ST2084</code><span class="sig-paren">(</span><em>N</em>, <em>L_p=10000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/st_2084.html#eotf_ST2084"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf_ST2084" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>SMPTE ST 2084:2014</em> optimised perceptual electro-optical transfer
+function (EOTF / EOCF).</p>
+<p>This perceptual quantizer (PQ) has been modeled by Dolby Laboratories
+using <em>Barten (1999)</em> contrast sensitivity function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>N</strong> (<em>numeric or array_like</em>) &#8211; Color value abbreviated as <span class="math">\(N\)</span>, normalized to the range [0, 1],
+that is directly proportional to the encoded signal representation,
+and which is not directly proportional to the optical output of a
+display device.</li>
+<li><strong>L_p</strong> (<em>numeric, optional</em>) &#8211; Display peak luminance <span class="math">\(cd/m^2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Target optical output <span class="math">\(C\)</span> in <span class="math">\(cd/m^2\)</span> of the ideal
+reference display.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_ST2084</span><span class="p">(</span><span class="mf">0.079420969944927</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_ViperLog">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ViperLog</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/viper_log.html#log_decoding_ViperLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_ViperLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>Viper Log</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ViperLog</span><span class="p">(</span><span class="mf">0.636008067010413</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_ViperLog</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/viper_log.html#log_decoding_ViperLog"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Defines the <em>Viper Log</em> log decoding curve / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>numeric or array_like</em>) &#8211; Non-linear data <span class="math">\(y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Linear data <span class="math">\(x\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ViperLog</span><span class="p">(</span><span class="mf">0.636008067010413</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.LOG_ENCODING_CURVES">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">LOG_ENCODING_CURVES</code><em class="property"> = CaseInsensitiveMapping({'ACEScc': &lt;function log_encoding_ACEScc at 0x10e6ff398&gt;, 'ACEScct': &lt;function log_encoding_ACEScct at 0x10e6ff488&gt;, 'Log3G12': &lt;function log_encoding_Log3G12 at 0x10e714c80&gt;, 'Log3G10': &lt;function log_encoding_Log3G10 at 0x10e714b90&gt;, 'ACESproxy': &lt;function log_encoding_ACESproxy at 0x10e6ff2a8&gt;, 'Canon Log': &lt;function log_encoding_CanonLog at 0x10e714050&gt;, 'REDLogFilm': &lt;function log_encoding_REDLogFilm at 0x10e714aa0&gt;, 'S-Log3': &lt;function log_encoding_SLog3 at 0x10e71e578&gt;, 'Cineon': &lt;function log_encoding_Cineon at 0x10e714320&gt;, 'Panalog': &lt;function log_encoding_Panalog at 0x10e714668&gt;, 'ERIMM RGB': &lt;function log_encoding_ERIMMRGB at 0x10e71e0c8&gt;, 'PLog': &lt;function log_encoding_PivotedLog at 0x10e714848&gt;, 'Canon Log 2': &lt;function log_encoding_CanonLog2 at 0x10e714140&gt;, 'S-Log': &lt;function log_encoding_SLog at 0x10e71e398&gt;, 'ALEXA Log C': &lt;function log_encoding_ALEXALogC at 0x10e709a28&gt;, 'S-Log2': &lt;function log_encoding_SLog2 at 0x10e71e488&gt;, 'REDLog': &lt;function log_encoding_REDLog at 0x10e7149b0&gt;, 'V-Log': &lt;function log_encoding_VLog at 0x10e714758&gt;, 'ViperLog': &lt;function log_encoding_ViperLog at 0x10e71e8c0&gt;, 'Canon Log 3': &lt;function log_encoding_CanonLog3 at 0x10e714230&gt;})</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.LOG_ENCODING_CURVES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported <em>log</em> encoding curves.</p>
+<dl class="docutils">
+<dt>LOG_ENCODING_CURVES <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Cineon&#8217;, &#8216;Panalog&#8217;, &#8216;ViperLog&#8217;, &#8216;PLog&#8217;, &#8216;Canon Log&#8217;, &#8216;Canon Log 2&#8217;,
+&#8216;Canon Log 3&#8217;, &#8216;ACEScc&#8217;, &#8216;ACEScct&#8217;, &#8216;ACESproxy&#8217;, &#8216;ALEXA Log C&#8217;, &#8216;REDLog&#8217;,
+&#8216;REDLogFilm&#8217;, &#8216;Log3G10&#8217;, &#8216;Log3G12&#8217;, &#8216;ERIMM RGB, &#8216;S-Log&#8217;, &#8216;S-Log2&#8217;,
+&#8216;S-Log3&#8217;, &#8216;V-Log&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.LOG_DECODING_CURVES">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">LOG_DECODING_CURVES</code><em class="property"> = CaseInsensitiveMapping({'ACEScc': &lt;function log_decoding_ACEScc at 0x10e6ff410&gt;, 'ACEScct': &lt;function log_decoding_ACEScct at 0x10e6ff500&gt;, 'Log3G12': &lt;function log_decoding_Log3G12 at 0x10e714cf8&gt;, 'Log3G10': &lt;function log_decoding_Log3G10 at 0x10e714c08&gt;, 'ACESproxy': &lt;function log_decoding_ACESproxy at 0x10e6ff320&gt;, 'Canon Log': &lt;function log_decoding_CanonLog at 0x10e7140c8&gt;, 'REDLogFilm': &lt;function log_decoding_REDLogFilm at 0x10e714b18&gt;, 'S-Log3': &lt;function log_decoding_SLog3 at 0x10e71e5f0&gt;, 'Cineon': &lt;function log_decoding_Cineon at 0x10e714398&gt;, 'Panalog': &lt;function log_decoding_Panalog at 0x10e7146e0&gt;, 'ERIMM RGB': &lt;function log_decoding_ERIMMRGB at 0x10e71e140&gt;, 'PLog': &lt;function log_decoding_PivotedLog at 0x10e7148c0&gt;, 'Canon Log 2': &lt;function log_decoding_CanonLog2 at 0x10e7141b8&gt;, 'S-Log': &lt;function log_decoding_SLog at 0x10e71e410&gt;, 'ALEXA Log C': &lt;function log_decoding_ALEXALogC at 0x10e709aa0&gt;, 'S-Log2': &lt;function log_decoding_SLog2 at 0x10e71e500&gt;, 'REDLog': &lt;function log_decoding_REDLog at 0x10e714a28&gt;, 'V-Log': &lt;function log_decoding_VLog at 0x10e7147d0&gt;, 'ViperLog': &lt;function log_decoding_ViperLog at 0x10e71e938&gt;, 'Canon Log 3': &lt;function log_decoding_CanonLog3 at 0x10e7142a8&gt;})</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.LOG_DECODING_CURVES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported <em>log</em> decoding curves.</p>
+<dl class="docutils">
+<dt>LOG_DECODING_CURVES <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Cineon&#8217;, &#8216;Panalog&#8217;, &#8216;ViperLog&#8217;, &#8216;PLog&#8217;, &#8216;Canon Log&#8217;, &#8216;Canon Log 2&#8217;,
+&#8216;Canon Log 3&#8217;, &#8216;ACEScc&#8217;, &#8216;ACEScct&#8217;, &#8216;ACESproxy&#8217;, &#8216;ALEXA Log C&#8217;, &#8216;REDLog&#8217;,
+&#8216;REDLogFilm&#8217;, &#8216;Log3G10&#8217;, &#8216;Log3G12&#8217;, &#8216;ERIMM RGB, &#8216;S-Log&#8217;, &#8216;S-Log2&#8217;,
+&#8216;S-Log3&#8217;, &#8216;V-Log&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_encoding_curve">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_encoding_curve</code><span class="sig-paren">(</span><em>value</em>, <em>curve='Cineon'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions.html#log_encoding_curve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_encoding_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes linear-light values to <span class="math">\(R'G'B'\)</span> video component signal
+value using given <em>log</em> curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>numeric or array_like</em>) &#8211; Value.</li>
+<li><strong>curve</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;Cineon&#8217;, &#8216;Panalog&#8217;, &#8216;ViperLog&#8217;, &#8216;PLog&#8217;, &#8216;Canon Log&#8217;, &#8216;Canon Log 2&#8217;,
+&#8216;Canon Log 3&#8217;, &#8216;ACEScc&#8217;, &#8216;ACEScct&#8217;, &#8216;ACESproxy&#8217;, &#8216;ALEXA Log C&#8217;,
+&#8216;REDLog&#8217;, &#8216;REDLogFilm&#8217;, &#8216;Log3G10&#8217;, &#8216;Log3G12&#8217;, &#8216;ERIMM RGB, &#8216;S-Log&#8217;,
+&#8216;S-Log2&#8217;, &#8216;S-Log3&#8217;, &#8216;V-Log&#8217;}</strong>, Computation curve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_Cineon" title="colour.models.rgb.transfer_functions.log_encoding_Cineon"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_Cineon()</span></code></a>, <a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_Panalog" title="colour.models.rgb.transfer_functions.log_encoding_Panalog"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_Panalog()</span></code></a>,
+<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_REDLog" title="colour.models.rgb.transfer_functions.log_encoding_REDLog"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_REDLog()</span></code></a>, <a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_REDLogFilm" title="colour.models.rgb.transfer_functions.log_encoding_REDLogFilm"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_REDLogFilm()</span></code></a>},
+Black offset.</li>
+<li><strong>log_reference</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_encoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_PivotedLog()</span></code></a>},
+Log reference.</li>
+<li><strong>linear_reference</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_encoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_PivotedLog()</span></code></a>},
+Linear reference.</li>
+<li><strong>negative_gamma</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_encoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_PivotedLog()</span></code></a>},
+Negative gamma.</li>
+<li><strong>density_per_code_value</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_encoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_PivotedLog()</span></code></a>},
+Density per code value.</li>
+<li><strong>bit_depth</strong> (<em>unicode, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ACESproxy" title="colour.models.rgb.transfer_functions.log_encoding_ACESproxy"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ACESproxy()</span></code></a>},
+<strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong>,
+<em>ACESproxy</em> bit depth.</li>
+<li><strong>firmware</strong> (<em>unicode, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ALEXALogC" title="colour.models.rgb.transfer_functions.log_encoding_ALEXALogC"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ALEXALogC()</span></code></a>},
+<strong>{&#8216;SUP 3.x&#8217;, &#8216;SUP 2.x&#8217;}</strong>,
+Alexa firmware version.</li>
+<li><strong>method</strong> (<em>unicode, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ALEXALogC" title="colour.models.rgb.transfer_functions.log_encoding_ALEXALogC"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ALEXALogC()</span></code></a>},
+<strong>{&#8216;Linear Scene Exposure Factor&#8217;, &#8216;Normalised Sensor Signal&#8217;}</strong>,
+Conversion method.</li>
+<li><strong>EI</strong> (<em>int,  optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ALEXALogC" title="colour.models.rgb.transfer_functions.log_encoding_ALEXALogC"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ALEXALogC()</span></code></a>},
+Ei.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB" title="colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ERIMMRGB()</span></code></a>},
+Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_min</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB" title="colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ERIMMRGB()</span></code></a>},
+Minimum exposure limit.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB" title="colour.models.rgb.transfer_functions.log_encoding_ERIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ERIMMRGB()</span></code></a>},
+Maximum exposure limit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Log</em> value.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_curve</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4573196...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_curve</span><span class="p">(</span><span class="mf">0.18</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;ACEScc&#39;</span><span class="p">)</span>  
+<span class="go">0.4135884...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_curve</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">0.18</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;PLog&#39;</span><span class="p">,</span> <span class="n">log_reference</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="go">0.3910068...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_curve</span><span class="p">(</span><span class="mf">0.18</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;S-Log&#39;</span><span class="p">)</span>  
+<span class="go">0.3599878...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.log_decoding_curve">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">log_decoding_curve</code><span class="sig-paren">(</span><em>value</em>, <em>curve='Cineon'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions.html#log_decoding_curve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.log_decoding_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decodes <span class="math">\(R'G'B'\)</span> video component signal value to linear-light values
+using given <em>log</em> curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>numeric or array_like</em>) &#8211; Value.</li>
+<li><strong>curve</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;Cineon&#8217;, &#8216;Panalog&#8217;, &#8216;ViperLog&#8217;, &#8216;PLog&#8217;, &#8216;Canon Log&#8217;, &#8216;Canon Log 2&#8217;,
+&#8216;Canon Log 3&#8217;, &#8216;ACEScc&#8217;, &#8216;ACEScct&#8217;, &#8216;ACESproxy&#8217;, &#8216;ALEXA Log C&#8217;,
+&#8216;REDLog&#8217;, &#8216;REDLogFilm&#8217;, &#8216;Log3G10&#8217;, &#8216;Log3G12&#8217;, &#8216;ERIMM RGB, &#8216;S-Log&#8217;,
+&#8216;S-Log2&#8217;, &#8216;S-Log3&#8217;, &#8216;V-Log&#8217;}</strong>, Computation curve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>black_offset</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_Cineon" title="colour.models.rgb.transfer_functions.log_decoding_Cineon"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_Cineon()</span></code></a>, <a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_Panalog" title="colour.models.rgb.transfer_functions.log_decoding_Panalog"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_Panalog()</span></code></a>,
+<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_REDLog" title="colour.models.rgb.transfer_functions.log_decoding_REDLog"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_REDLog()</span></code></a>, <a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_REDLogFilm" title="colour.models.rgb.transfer_functions.log_decoding_REDLogFilm"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_REDLogFilm()</span></code></a>},
+Black offset.</li>
+<li><strong>log_reference</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_decoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_PivotedLog()</span></code></a>},
+Log reference.</li>
+<li><strong>linear_reference</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_decoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_PivotedLog()</span></code></a>},
+Linear reference.</li>
+<li><strong>negative_gamma</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_decoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_PivotedLog()</span></code></a>},
+Negative gamma.</li>
+<li><strong>density_per_code_value</strong> (<em>numeric or array_like</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_PivotedLog" title="colour.models.rgb.transfer_functions.log_decoding_PivotedLog"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_PivotedLog()</span></code></a>},
+Density per code value.</li>
+<li><strong>bit_depth</strong> (<em>unicode, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ACESproxy" title="colour.models.rgb.transfer_functions.log_decoding_ACESproxy"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ACESproxy()</span></code></a>},
+<strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong>,
+<em>ACESproxy</em> bit depth.</li>
+<li><strong>firmware</strong> (<em>unicode, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ALEXALogC" title="colour.models.rgb.transfer_functions.log_decoding_ALEXALogC"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ALEXALogC()</span></code></a>},
+<strong>{&#8216;SUP 3.x&#8217;, &#8216;SUP 2.x&#8217;}</strong>,
+Alexa firmware version.</li>
+<li><strong>method</strong> (<em>unicode, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ALEXALogC" title="colour.models.rgb.transfer_functions.log_decoding_ALEXALogC"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ALEXALogC()</span></code></a>},
+<strong>{&#8216;Linear Scene Exposure Factor&#8217;, &#8216;Normalised Sensor Signal&#8217;}</strong>,
+Conversion method.</li>
+<li><strong>EI</strong> (<em>int,  optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ALEXALogC" title="colour.models.rgb.transfer_functions.log_decoding_ALEXALogC"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ALEXALogC()</span></code></a>},
+Ei.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB" title="colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ERIMMRGB()</span></code></a>},
+Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_min</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB" title="colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ERIMMRGB()</span></code></a>},
+Minimum exposure limit.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB" title="colour.models.rgb.transfer_functions.log_decoding_ERIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ERIMMRGB()</span></code></a>},
+Maximum exposure limit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Log</em> value.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_curve</span><span class="p">(</span><span class="mf">0.457319613085418</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_curve</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">0.413588402492442</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;ACEScc&#39;</span><span class="p">)</span>
+<span class="go">0.1...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_curve</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">0.391006842619746</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;PLog&#39;</span><span class="p">,</span> <span class="n">log_reference</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="go">0.1...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_curve</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">0.359987846422154</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;S-Log&#39;</span><span class="p">)</span>
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.OETFS">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">OETFS</code><em class="property"> = CaseInsensitiveMapping({'DCI-P3': &lt;function oetf_DCIP3 at 0x10e714410&gt;, 'RIMM RGB': &lt;function oetf_RIMMRGB at 0x10e714f50&gt;, 'BT.1886': &lt;function oetf_BT1886 at 0x10e709c80&gt;, 'BT.2020': &lt;function oetf_BT2020 at 0x10e709ed8&gt;, 'ROMM RGB': &lt;function oetf_ROMMRGB at 0x10e714e60&gt;, 'sRGB': &lt;function oetf_sRGB at 0x10e71e2a8&gt;, 'ST 2084': &lt;function oetf_ST2084 at 0x10e71e7d0&gt;, 'BT.709': &lt;function oetf_BT709 at 0x10e709b90&gt;, 'ProPhoto RGB': &lt;function oetf_ROMMRGB at 0x10e714e60&gt;})</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.OETFS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported opto-electrical transfer functions (OETF / OECF).</p>
+<dl class="docutils">
+<dt>OETFS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;sRGB&#8217;, &#8216;BT.1886&#8217;, &#8216;BT.2020&#8217;, &#8216;BT.709&#8217;, &#8216;DCI-P3&#8217;, &#8216;ROMM RGB&#8217;,
+&#8216;ProPhoto RGB&#8217;, &#8216;RIMM RGB&#8217;, &#8216;ST 2084&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.EOTFS">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">EOTFS</code><em class="property"> = CaseInsensitiveMapping({'DCI-P3': &lt;function eotf_DCIP3 at 0x10e714488&gt;, 'RIMM RGB': &lt;function eotf_RIMMRGB at 0x10e71e050&gt;, 'BT.1886': &lt;function eotf_BT1886 at 0x10e709cf8&gt;, 'BT.2020': &lt;function eotf_BT2020 at 0x10e709f50&gt;, 'ROMM RGB': &lt;function eotf_ROMMRGB at 0x10e714ed8&gt;, 'sRGB': &lt;function eotf_sRGB at 0x10e71e320&gt;, 'ST 2084': &lt;function eotf_ST2084 at 0x10e71e848&gt;, 'BT.709': &lt;function eotf_BT709 at 0x10e709c08&gt;, 'ProPhoto RGB': &lt;function eotf_ROMMRGB at 0x10e714ed8&gt;})</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.EOTFS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported electro-optical transfer functions (EOTF / EOCF).</p>
+<dl class="docutils">
+<dt>EOTFS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;sRGB&#8217;, &#8216;BT.1886&#8217;, &#8216;BT.2020&#8217;, &#8216;BT.709&#8217;, &#8216;DCI-P3&#8217;, &#8216;ROMM RGB&#8217;,
+&#8216;ProPhoto RGB&#8217;, &#8216;RIMM RGB&#8217;, &#8216;ST 2084&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.oetf">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">oetf</code><span class="sig-paren">(</span><em>value</em>, <em>function='sRGB'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions.html#oetf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.oetf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes estimated tristimulus values in a scene to <span class="math">\(R'G'B'\)</span> video
+component signal value using given opto-electronic transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>numeric or array_like</em>) &#8211; Value.</li>
+<li><strong>function</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;sRGB&#8217;, &#8216;BT.1886&#8217;, &#8216;BT.2020&#8217;, &#8216;BT.709&#8217;, &#8216;DCI-P3&#8217;, &#8216;ROMM RGB&#8217;,
+&#8216;ProPhoto RGB&#8217;, &#8216;RIMM RGB&#8217;, &#8216;ST 2084&#8217;}</strong>,
+Computation function.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>L_B</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_BT1886" title="colour.models.rgb.transfer_functions.oetf_BT1886"><code class="xref py py-func docutils literal"><span class="pre">oetf_BT1886()</span></code></a>},
+Screen luminance for black.</li>
+<li><strong>L_W</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_BT1886" title="colour.models.rgb.transfer_functions.oetf_BT1886"><code class="xref py py-func docutils literal"><span class="pre">oetf_BT1886()</span></code></a>},
+Screen luminance for white.</li>
+<li><strong>is_12_bits_system</strong> (<em>bool</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_BT2020" title="colour.models.rgb.transfer_functions.oetf_BT2020"><code class="xref py py-func docutils literal"><span class="pre">oetf_BT2020()</span></code></a>},
+<em>BT.709</em> <em>alpha</em> and <em>beta</em> constants are used if system is not 12-bit.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_ROMMRGB" title="colour.models.rgb.transfer_functions.oetf_ROMMRGB"><code class="xref py py-func docutils literal"><span class="pre">oetf_ROMMRGB()</span></code></a>, <a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_RIMMRGB" title="colour.models.rgb.transfer_functions.oetf_RIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">oetf_RIMMRGB()</span></code></a>},
+Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_RIMMRGB" title="colour.models.rgb.transfer_functions.oetf_RIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">oetf_RIMMRGB()</span></code></a>},
+Maximum exposure level.</li>
+<li><strong>L_p</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.oetf_ST2084" title="colour.models.rgb.transfer_functions.oetf_ST2084"><code class="xref py py-func docutils literal"><span class="pre">oetf_ST2084()</span></code></a>},
+Display peak luminance <span class="math">\(cd/m^2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><span class="math">\(R'G'B'\)</span> video component signal value.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4613561...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oetf</span><span class="p">(</span><span class="mf">0.18</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="s1">&#39;BT.2020&#39;</span><span class="p">)</span>  
+<span class="go">0.4090077...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oetf</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">0.18</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="s1">&#39;ST 2084&#39;</span><span class="p">,</span> <span class="n">L_p</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="go">0.1820115...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.eotf">
+<code class="descclassname">colour.models.rgb.transfer_functions.</code><code class="descname">eotf</code><span class="sig-paren">(</span><em>value</em>, <em>function='sRGB'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions.html#eotf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.eotf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decodes <span class="math">\(R'G'B'\)</span> video component signal value to tristimulus values
+at the display using given electro-optical transfer function (EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>numeric or array_like</em>) &#8211; Value.</li>
+<li><strong>function</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;sRGB&#8217;, &#8216;BT.1886&#8217;, &#8216;BT.2020&#8217;, &#8216;BT.709&#8217;, &#8216;DCI-P3&#8217;, &#8216;ROMM RGB&#8217;,
+&#8216;ProPhoto RGB&#8217;, &#8216;RIMM RGB&#8217;, &#8216;ST 2084&#8217;}</strong>,
+Computation function.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>L_B</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_BT1886" title="colour.models.rgb.transfer_functions.eotf_BT1886"><code class="xref py py-func docutils literal"><span class="pre">eotf_BT1886()</span></code></a>},
+Screen luminance for black.</li>
+<li><strong>L_W</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_BT1886" title="colour.models.rgb.transfer_functions.eotf_BT1886"><code class="xref py py-func docutils literal"><span class="pre">eotf_BT1886()</span></code></a>},
+Screen luminance for white.</li>
+<li><strong>is_12_bits_system</strong> (<em>bool</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_BT2020" title="colour.models.rgb.transfer_functions.eotf_BT2020"><code class="xref py py-func docutils literal"><span class="pre">eotf_BT2020()</span></code></a>},
+<em>BT.709</em> <em>alpha</em> and <em>beta</em> constants are used if system is not 12-bit.</li>
+<li><strong>I_max</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_ROMMRGB" title="colour.models.rgb.transfer_functions.eotf_ROMMRGB"><code class="xref py py-func docutils literal"><span class="pre">eotf_ROMMRGB()</span></code></a>, <a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_RIMMRGB" title="colour.models.rgb.transfer_functions.eotf_RIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">eotf_RIMMRGB()</span></code></a>},
+Maximum code value: 255, 4095 and 650535 for respectively 8-bit,
+12-bit and 16-bit per channel.</li>
+<li><strong>E_clip</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_RIMMRGB" title="colour.models.rgb.transfer_functions.eotf_RIMMRGB"><code class="xref py py-func docutils literal"><span class="pre">eotf_RIMMRGB()</span></code></a>},
+Maximum exposure level.</li>
+<li><strong>L_p</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.models.rgb.transfer_functions.eotf_ST2084" title="colour.models.rgb.transfer_functions.eotf_ST2084"><code class="xref py py-func docutils literal"><span class="pre">eotf_ST2084()</span></code></a>},
+Display peak luminance <span class="math">\(cd/m^2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Tristimulus values at the display.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf</span><span class="p">(</span><span class="mf">0.461356129500442</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eotf</span><span class="p">(</span><span class="mf">0.409007728864150</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">function</span><span class="o">=</span><span class="s1">&#39;BT.2020&#39;</span><span class="p">)</span>  
+<span class="go">0.1...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eotf</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">0.182011532850008</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="s1">&#39;ST 2084&#39;</span><span class="p">,</span> <span class="n">L_p</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="go">0.1...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.transfer_functions Package</a><ul>
+<li><a class="reference internal" href="#sub-modules">Sub-Modules</a></li>
+<li><a class="reference internal" href="#module-colour.models.rgb.transfer_functions">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.transfer_functions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.transfer_functions.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

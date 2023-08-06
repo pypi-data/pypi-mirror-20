@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.recovery.smits1999 &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.recovery.smits1999</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Smits (1999) - Reflectance Recovery</span>
+<span class="sd">===================================</span>
+
+<span class="sd">Defines objects for reflectance recovery using *Smits (1999)* method.</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`Smits (1999) - Reflectance Recovery Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/recovery/smits1999.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Smits, B. (1999). An RGB-to-Spectrum Conversion for Reflectances.</span>
+<span class="sd">        Journal of Graphics Tools, 4(4), 11–22.</span>
+<span class="sd">        doi:10.1080/10867651.1999.10487511</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.colorimetry</span> <span class="kn">import</span> <span class="n">ILLUMINANTS</span><span class="p">,</span> <span class="n">zeros_spd</span>
+<span class="kn">from</span> <span class="nn">colour.models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">XYZ_to_RGB</span><span class="p">,</span>
+    <span class="n">normalised_primary_matrix</span><span class="p">,</span>
+    <span class="n">sRGB_COLOURSPACE</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">colour.recovery</span> <span class="kn">import</span> <span class="n">SMITS_1999_SPDS</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SMITS1999_PRIMARIES&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;SMITS1999_WHITEPOINT&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;SMITS1999_XYZ_TO_RGB_MATRIX&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;XYZ_to_RGB_Smits1999&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RGB_to_spectral_Smits1999&#39;</span><span class="p">]</span>
+
+<span class="n">SMITS1999_PRIMARIES</span> <span class="o">=</span> <span class="n">sRGB_COLOURSPACE</span><span class="o">.</span><span class="n">primaries</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Current *Smits (1999)* method implementation colourspace primaries.</span>
+
+<span class="sd">SMITS1999_PRIMARIES : ndarray, (3, 2)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">SMITS1999_WHITEPOINT</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ILLUMINANTS</span><span class="p">[</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">][</span><span class="s1">&#39;E&#39;</span><span class="p">])</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Current *Smits (1999)* method implementation colourspace whitepoint.</span>
+
+<span class="sd">SMITS1999_WHITEPOINT : ndarray</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">SMITS1999_XYZ_TO_RGB_MATRIX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
+    <span class="n">normalised_primary_matrix</span><span class="p">(</span><span class="n">SMITS1999_PRIMARIES</span><span class="p">,</span> <span class="n">SMITS1999_WHITEPOINT</span><span class="p">))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Current *Smits (1999)* method implementation *RGB* colourspace to</span>
+<span class="sd">*CIE XYZ* tristimulus values matrix.</span>
+
+<span class="sd">SMITS1999_XYZ_TO_RGB_MATRIX : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="XYZ_to_RGB_Smits1999"><a class="viewcode-back" href="../../../colour.recovery.smits1999.html#colour.XYZ_to_RGB_Smits1999">[docs]</a><span class="k">def</span> <span class="nf">XYZ_to_RGB_Smits1999</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">chromatic_adaptation_transform</span><span class="o">=</span><span class="s1">&#39;Bradford&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convenient object to convert from *CIE XYZ* tristimulus values to *RGB*</span>
+<span class="sd">    colourspace in conditions required by the current *Smits (1999)* method</span>
+<span class="sd">    implementation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    XYZ : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values.</span>
+<span class="sd">    chromatic_adaptation_transform : unicode, optional</span>
+<span class="sd">        **{&#39;CAT02&#39;, &#39;XYZ Scaling&#39;, &#39;Von Kries&#39;, &#39;Bradford&#39;, &#39;Sharp&#39;,</span>
+<span class="sd">        &#39;Fairchild&#39;, &#39;CMCCAT97&#39;, &#39;CMCCAT2000&#39;, &#39;CAT02_BRILL_CAT&#39;, &#39;Bianco&#39;,</span>
+<span class="sd">        &#39;Bianco PC&#39;}**,</span>
+<span class="sd">        *Chromatic adaptation* method.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *RGB* colour array.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *CIE XYZ* tristimulus values are in domain [0, 1].</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; XYZ = np.array([0.07049534, 0.10080000, 0.09558313])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_RGB_Smits1999(XYZ)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 0.0214496...,  0.1315460...,  0.0928760...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">XYZ_to_RGB</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span>
+                      <span class="n">SMITS1999_WHITEPOINT</span><span class="p">,</span>
+                      <span class="n">SMITS1999_WHITEPOINT</span><span class="p">,</span>
+                      <span class="n">SMITS1999_XYZ_TO_RGB_MATRIX</span><span class="p">,</span>
+                      <span class="n">chromatic_adaptation_transform</span><span class="p">,</span>
+                      <span class="n">encoding_cctf</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RGB_to_spectral_Smits1999"><a class="viewcode-back" href="../../../colour.recovery.smits1999.html#colour.RGB_to_spectral_Smits1999">[docs]</a><span class="k">def</span> <span class="nf">RGB_to_spectral_Smits1999</span><span class="p">(</span><span class="n">RGB</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Recovers the spectral power distribution of given *RGB* colourspace array</span>
+<span class="sd">    using *Smits (1999)* method.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like, (3,)</span>
+<span class="sd">        *RGB* colourspace array.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SpectralPowerDistribution</span>
+<span class="sd">        Recovered spectral power distribution.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.array([0.02144962, 0.13154603, 0.09287601])</span>
+<span class="sd">    &gt;&gt;&gt; print(RGB_to_spectral_Smits1999(RGB))  # doctest: +ELLIPSIS</span>
+<span class="sd">    SpectralPowerDistribution(&#39;0 Constant&#39;, (380.0, 720.0, 37.7777777...))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">white_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;white&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">cyan_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;cyan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">magenta_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;magenta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">yellow_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;yellow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">red_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">green_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;green&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">blue_spd</span> <span class="o">=</span> <span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+
+    <span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>
+    <span class="n">spd</span> <span class="o">=</span> <span class="n">zeros_spd</span><span class="p">(</span><span class="n">SMITS_1999_SPDS</span><span class="p">[</span><span class="s1">&#39;white&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">R</span> <span class="o">&lt;=</span> <span class="n">G</span> <span class="ow">and</span> <span class="n">R</span> <span class="o">&lt;=</span> <span class="n">B</span><span class="p">:</span>
+        <span class="n">spd</span> <span class="o">+=</span> <span class="n">white_spd</span> <span class="o">*</span> <span class="n">R</span>
+        <span class="k">if</span> <span class="n">G</span> <span class="o">&lt;=</span> <span class="n">B</span><span class="p">:</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">cyan_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">G</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">blue_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">cyan_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">green_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">G</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">G</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="ow">and</span> <span class="n">G</span> <span class="o">&lt;=</span> <span class="n">B</span><span class="p">:</span>
+        <span class="n">spd</span> <span class="o">+=</span> <span class="n">white_spd</span> <span class="o">*</span> <span class="n">G</span>
+        <span class="k">if</span> <span class="n">R</span> <span class="o">&lt;=</span> <span class="n">B</span><span class="p">:</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">magenta_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">blue_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">magenta_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">red_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">spd</span> <span class="o">+=</span> <span class="n">white_spd</span> <span class="o">*</span> <span class="n">B</span>
+        <span class="k">if</span> <span class="n">R</span> <span class="o">&lt;=</span> <span class="n">G</span><span class="p">:</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">yellow_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">green_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">G</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">yellow_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">G</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+            <span class="n">spd</span> <span class="o">+=</span> <span class="n">red_spd</span> <span class="o">*</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">spd</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.common Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.common">
+<span id="colour-models-common-module"></span><h1>colour.models.common Module<a class="headerlink" href="#module-colour.models.common" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common-colour-models-utilities">
+<h2>Common Colour Models Utilities<a class="headerlink" href="#common-colour-models-utilities" title="Permalink to this headline">¶</a></h2>
+<p>Defines various colour models common utilities.</p>
+<dl class="data">
+<dt id="colour.models.common.COLOURSPACE_MODELS_LABELS">
+<code class="descclassname">colour.models.common.</code><code class="descname">COLOURSPACE_MODELS_LABELS</code><em class="property"> = {u'CIE LCHab': (u'CH', u'ab', u'$L^*$'), u'Hunter Lab': (u'$a^*$', u'$b^*$', u'$L^*$'), u'CIE Lab': (u'$a^*$', u'$b^*$', u'$L^*$'), u'CIE UVW': (u'U', u'V', u'W'), u'CIE Luv': (u'$u^\\prime$', u'$v^\\prime$', u'$L^*$'), u'Hunter Rdab': (u'$a$', u'$b$', u'$Rd$'), u'CIE Luv uv': (u'$u^\\prime$', u'$v^\\prime$'), u'CIE xyY': (u'x', u'y', u'Y'), u'CIE XYZ': (u'X', u'Y', u'Z'), u'CIE UCS': (u'U', u'V', u'W'), u'IPT': (u'P', u'T', u'I'), u'CIE LCHuv': (u'CH', u'uv', u'$L^*$'), u'CIE UCS uv': (u'$u$', u'$v$')}</em><a class="headerlink" href="#colour.models.common.COLOURSPACE_MODELS_LABELS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Colourspace models labels mapping.</p>
+<dl class="docutils">
+<dt>COLOURSPACE_MODELS_LABELS <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><strong>{&#8216;CIE XYZ&#8217;, &#8216;CIE xyY&#8217;, &#8216;CIE Lab&#8217;, &#8216;CIE LCHab, &#8216;CIE Luv&#8217;, &#8216;CIE Luv uv&#8217;,
+&#8216;CIE LCHuv&#8217;, &#8216;CIE UCS&#8217;, &#8216;CIE UCS uv&#8217;, &#8216;CIE UVW&#8217;, &#8216;IPT&#8217;, &#8216;Hunter Lab&#8217;,
+&#8216;Hunter Rdab&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.common.XYZ_to_colourspace_model">
+<code class="descclassname">colour.models.common.</code><code class="descname">XYZ_to_colourspace_model</code><span class="sig-paren">(</span><em>XYZ</em>, <em>illuminant</em>, <em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/common.html#XYZ_to_colourspace_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.common.XYZ_to_colourspace_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE XYZ</em> tristimulus values to given colourspace model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</li>
+<li><strong>illuminant</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values <em>illuminant</em> <em>xy</em> chromaticity
+coordinates.</li>
+<li><strong>model</strong> (<em>unicode</em>) &#8211; <strong>{&#8216;CIE XYZ&#8217;, &#8216;CIE xyY&#8217;, &#8216;CIE xy&#8217;, &#8216;CIE Lab&#8217;, &#8216;CIE LCHab&#8217;, &#8216;CIE Luv&#8217;,
+&#8216;CIE Luv uv&#8217;, &#8216;CIE LCHuv&#8217;, &#8216;CIE UCS&#8217;, &#8216;CIE UCS uv&#8217;, &#8216;CIE UVW&#8217;, &#8216;IPT&#8217;,
+&#8216;Hunter Lab&#8217;, &#8216;Hunter Rdab&#8217;}</strong>,
+Colourspace model to convert the <em>CIE XYZ</em> tristimulus values to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Colourspace model values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.34570</span><span class="p">,</span> <span class="mf">0.35850</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE XYZ&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.0704953...,  0.1008    ,  0.0955831...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE xyY&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.2641477...,  0.3777000...,  0.1008    ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE xy&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.2641477...,  0.3777000...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE Lab&#39;</span><span class="p">)</span>
+<span class="go">array([ 37.9856291..., -23.6290768...,  -4.4174661...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE LCHab&#39;</span><span class="p">)</span>
+<span class="go">array([  37.9856291...,   24.0384542...,  190.5892337...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE Luv&#39;</span><span class="p">)</span>
+<span class="go">array([ 37.9856291..., -28.8021959...,  -1.3580070...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE Luv uv&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.1508531...,  0.4853297...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE LCHuv&#39;</span><span class="p">)</span>
+<span class="go">array([  37.9856291...,   28.8341927...,  182.6994640...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE UCS uv&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.1508531...,  0.32355314...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;CIE UVW&#39;</span><span class="p">)</span>
+<span class="go">array([-28.0579733...,  -0.8819449...,  37.0041149...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;IPT&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.3657112..., -0.1111479...,  0.0159474...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;Hunter Lab&#39;</span><span class="p">)</span>
+<span class="go">array([ 31.7490157..., -15.1351736...,  -2.7709606...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_colourspace_model</span><span class="p">(</span>  
+<span class="gp">... </span><span class="n">XYZ</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s1">&#39;Hunter Rdab&#39;</span><span class="p">)</span>
+<span class="go">array([ 10.08..., -18.7019271...,  -3.4239649...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.common Module</a><ul>
+<li><a class="reference internal" href="#common-colour-models-utilities">Common Colour Models Utilities</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.common.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.common.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

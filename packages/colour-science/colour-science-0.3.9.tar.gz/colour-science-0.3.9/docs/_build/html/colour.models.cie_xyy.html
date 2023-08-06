@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.cie_xyy Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.cie_xyy">
+<span id="colour-models-cie-xyy-module"></span><h1>colour.models.cie_xyy Module<a class="headerlink" href="#module-colour.models.cie_xyy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cie-xyy-colourspace">
+<h2>CIE xyY Colourspace<a class="headerlink" href="#cie-xyy-colourspace" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>CIE xyY</em> colourspace transformations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.cie_xyy.XYZ_to_xyY" title="colour.models.cie_xyy.XYZ_to_xyY"><code class="xref py py-func docutils literal"><span class="pre">XYZ_to_xyY()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_xyy.xyY_to_XYZ" title="colour.models.cie_xyy.xyY_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">xyY_to_XYZ()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_xyy.xy_to_xyY" title="colour.models.cie_xyy.xy_to_xyY"><code class="xref py py-func docutils literal"><span class="pre">xy_to_xyY()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_xyy.xyY_to_xy" title="colour.models.cie_xyy.xyY_to_xy"><code class="xref py py-func docutils literal"><span class="pre">xyY_to_xy()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_xyy.xy_to_XYZ" title="colour.models.cie_xyy.xy_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">xy_to_XYZ()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_xyy.XYZ_to_xy" title="colour.models.cie_xyy.XYZ_to_xy"><code class="xref py py-func docutils literal"><span class="pre">XYZ_to_xy()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/cie_xyy.ipynb">CIE xyY Colourspace Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Wikipedia. (n.d.). CIE 1931 color space. Retrieved February 24, 2014,
+from <a class="reference external" href="http://en.wikipedia.org/wiki/CIE_1931_color_space">http://en.wikipedia.org/wiki/CIE_1931_color_space</a></td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.models.cie_xyy.XYZ_to_xyY">
+<code class="descclassname">colour.models.cie_xyy.</code><code class="descname">XYZ_to_xyY</code><span class="sig-paren">(</span><em>XYZ</em>, <em>illuminant=array([ 0.3457</em>, <em>0.3585])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_xyy.html#XYZ_to_xyY"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_xyy.XYZ_to_xyY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE XYZ</em> tristimulus values to <em>CIE xyY</em> colourspace and
+reference <em>illuminant</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</li>
+<li><strong>illuminant</strong> (<em>array_like, optional</em>) &#8211; Reference <em>illuminant</em> chromaticity coordinates.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIE xyY</em> colourspace array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values are in domain [0, 1].</li>
+<li>Output <em>CIE xyY</em> colourspace array is in range [0, 1].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Lindbloom, B. (2003). XYZ to xyY. Retrieved February 24, 2014,
+from <a class="reference external" href="http://www.brucelindbloom.com/Eqn_XYZ_to_xyY.html">http://www.brucelindbloom.com/Eqn_XYZ_to_xyY.html</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_xyY</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...,  0.1008    ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_xyy.xyY_to_XYZ">
+<code class="descclassname">colour.models.cie_xyy.</code><code class="descname">xyY_to_XYZ</code><span class="sig-paren">(</span><em>xyY</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_xyy.html#xyY_to_XYZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_xyy.xyY_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE xyY</em> colourspace to <em>CIE XYZ</em> tristimulus values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>xyY</strong> (<em>array_like</em>) &#8211; <em>CIE xyY</em> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE xyY</em> colourspace array is in domain [0, 1].</li>
+<li>Output <em>CIE XYZ</em> tristimulus values are in range [0, 1].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Lindbloom, B. (2009). xyY to XYZ. Retrieved February 24, 2014,
+from <a class="reference external" href="http://www.brucelindbloom.com/Eqn_xyY_to_XYZ.html">http://www.brucelindbloom.com/Eqn_xyY_to_XYZ.html</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xyY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyY_to_XYZ</span><span class="p">(</span><span class="n">xyY</span><span class="p">)</span>  
+<span class="go">array([ 0.0704953...,  0.1008    ,  0.0955831...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_xyy.xy_to_xyY">
+<code class="descclassname">colour.models.cie_xyy.</code><code class="descname">xy_to_xyY</code><span class="sig-paren">(</span><em>xy</em>, <em>Y=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_xyy.html#xy_to_xyY"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_xyy.xy_to_xyY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>xy</em> chromaticity coordinates to <em>CIE xyY</em> colourspace by
+extending the array last dimension with <span class="math">\(Y\)</span> Luminance.</p>
+<p><cite>xy</cite> argument with last dimension being equal to 3 will be assumed to be a
+<em>CIE xyY</em> colourspace array argument and will be returned directly by the
+definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xy</strong> (<em>array_like</em>) &#8211; <em>xy</em> chromaticity coordinates or <em>CIE xyY</em> colourspace array.</li>
+<li><strong>Y</strong> (<em>numeric, optional</em>) &#8211; Optional <span class="math">\(Y\)</span> Luminance value used to construct the <em>CIE xyY</em>
+colourspace array, otherwise the <span class="math">\(Y\)</span> Luminance will be set to 1.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIE xyY</em> colourspace array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.models.cie_xyy.xyY_to_xy" title="colour.models.cie_xyy.xyY_to_xy"><code class="xref py py-func docutils literal"><span class="pre">xyY_to_xy()</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>This definition is a convenient object provided to implement support of
+illuminant argument <em>luminance</em> value in various <a class="reference internal" href="colour.models.html#module-colour.models" title="colour.models"><code class="xref py py-mod docutils literal"><span class="pre">colour.models</span></code></a>
+package objects such as <a class="reference internal" href="colour.models.html#colour.models.Lab_to_XYZ" title="colour.models.Lab_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">colour.models.Lab_to_XYZ()</span></code></a> or
+<a class="reference internal" href="colour.models.html#colour.models.Luv_to_XYZ" title="colour.models.Luv_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">colour.models.Luv_to_XYZ()</span></code></a>.</li>
+<li>Input <em>xy</em> chromaticity coordinates are in domain [0, 1].</li>
+<li>Output <em>CIE xyY</em> colourspace array is in range [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy_to_xyY</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...,  1.        ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy_to_xyY</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...,  0.1008...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy_to_xyY</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  
+<span class="go">array([   0.2641477...,    0.3777000...,  100.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_xyy.xyY_to_xy">
+<code class="descclassname">colour.models.cie_xyy.</code><code class="descname">xyY_to_xy</code><span class="sig-paren">(</span><em>xyY</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_xyy.html#xyY_to_xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_xyy.xyY_to_xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE xyY</em> colourspace to <em>xy</em> chromaticity coordinates.</p>
+<p><cite>xyY</cite> argument with last dimension being equal to 2 will be assumed to be a
+<em>xy</em> chromaticity coordinates argument and will be returned directly by the
+definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>xyY</strong> (<em>array_like</em>) &#8211; <em>CIE xyY</em> colourspace array or <em>xy</em> chromaticity coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>xy</em> chromaticity coordinates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.models.cie_xyy.xy_to_xyY" title="colour.models.cie_xyy.xy_to_xyY"><code class="xref py py-func docutils literal"><span class="pre">xy_to_xyY()</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE xyY</em> colourspace array is in domain [0, 1].</li>
+<li>Output <em>xy</em> chromaticity coordinates are in range [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xyY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyY_to_xy</span><span class="p">(</span><span class="n">xyY</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyY_to_xy</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_xyy.xy_to_XYZ">
+<code class="descclassname">colour.models.cie_xyy.</code><code class="descname">xy_to_XYZ</code><span class="sig-paren">(</span><em>xy</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_xyy.html#xy_to_XYZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_xyy.xy_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>CIE XYZ</em> tristimulus values from given <em>xy</em> chromaticity
+coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>xy</strong> (<em>array_like</em>) &#8211; <em>xy</em> chromaticity coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>xy</em> chromaticity coordinates are in domain [0, 1].</li>
+<li>Output <em>CIE XYZ</em> tristimulus values are in range [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26414772</span><span class="p">,</span> <span class="mf">0.37770001</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy_to_XYZ</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>  
+<span class="go">array([ 0.6993585...,  1.        ,  0.9482453...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_xyy.XYZ_to_xy">
+<code class="descclassname">colour.models.cie_xyy.</code><code class="descname">XYZ_to_xy</code><span class="sig-paren">(</span><em>XYZ</em>, <em>illuminant=array([ 0.3457</em>, <em>0.3585])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_xyy.html#XYZ_to_xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_xyy.XYZ_to_xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>xy</em> chromaticity coordinates from given <em>CIE XYZ</em> tristimulus
+values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</li>
+<li><strong>illuminant</strong> (<em>array_like, optional</em>) &#8211; Reference <em>illuminant</em> chromaticity coordinates.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>xy</em> chromaticity coordinates.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values are in domain [0, 1].</li>
+<li>Output <em>xy</em> chromaticity coordinates are in range [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_xy</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.cie_xyy Module</a><ul>
+<li><a class="reference internal" href="#cie-xyy-colourspace">CIE xyY Colourspace</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.cie_xyy.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.cie_xyy.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

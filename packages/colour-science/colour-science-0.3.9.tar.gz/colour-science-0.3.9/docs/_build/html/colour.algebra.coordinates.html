@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.algebra.coordinates Package &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="colour-algebra-coordinates-package">
+<h1>colour.algebra.coordinates Package<a class="headerlink" href="#colour-algebra-coordinates-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sub-modules">
+<h2>Sub-Modules<a class="headerlink" href="#sub-modules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.coordinates.transformations.html">colour.algebra.coordinates.transformations Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.coordinates.transformations.html#coordinates-system-transformations">Coordinates System Transformations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-colour.algebra.coordinates">
+<span id="module-contents"></span><h2>Module Contents<a class="headerlink" href="#module-colour.algebra.coordinates" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="colour.algebra.coordinates.cartesian_to_spherical">
+<code class="descclassname">colour.algebra.coordinates.</code><code class="descname">cartesian_to_spherical</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cartesian_to_spherical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.coordinates.cartesian_to_spherical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cartesian coordinates array <span class="math">\(xyz\)</span> to Spherical
+coordinates array <span class="math">\(\rho\theta\phi\)</span> (radial distance, inclination or
+elevation and azimuth).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cartesian coordinates array <span class="math">\(xyz\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Spherical coordinates array <span class="math">\(\rho\theta\phi\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.coordinates.spherical_to_cartesian" title="colour.algebra.coordinates.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_polar" title="colour.algebra.coordinates.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.polar_to_cartesian" title="colour.algebra.coordinates.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_cylindrical" title="colour.algebra.coordinates.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cylindrical_to_cartesian" title="colour.algebra.coordinates.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartesian_to_spherical</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 6.7823299...,  1.0857465...,  0.3217505...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.coordinates.spherical_to_cartesian">
+<code class="descclassname">colour.algebra.coordinates.</code><code class="descname">spherical_to_cartesian</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#spherical_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.coordinates.spherical_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Spherical coordinates array <span class="math">\(\rho\theta\phi\)</span>
+(radial distance, inclination or elevation and azimuth) to Cartesian
+coordinates array <span class="math">\(xyz\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Spherical coordinates array <span class="math">\(\rho\theta\phi\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cartesian coordinates array <span class="math">\(xyz\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_spherical" title="colour.algebra.coordinates.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_polar" title="colour.algebra.coordinates.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.polar_to_cartesian" title="colour.algebra.coordinates.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_cylindrical" title="colour.algebra.coordinates.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cylindrical_to_cartesian" title="colour.algebra.coordinates.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.78232998</span><span class="p">,</span> <span class="mf">1.08574654</span><span class="p">,</span> <span class="mf">0.32175055</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spherical_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.        ,  0.9999999...,  6.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.coordinates.cartesian_to_polar">
+<code class="descclassname">colour.algebra.coordinates.</code><code class="descname">cartesian_to_polar</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cartesian_to_polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.coordinates.cartesian_to_polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cartesian coordinates array <span class="math">\(xy\)</span> to Polar
+coordinates array <span class="math">\(\rho\phi\)</span> (radial coordinate, angular
+coordinate).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cartesian coordinates array <span class="math">\(xy\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Polar coordinates array <span class="math">\(\rho\phi\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_spherical" title="colour.algebra.coordinates.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.spherical_to_cartesian" title="colour.algebra.coordinates.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.polar_to_cartesian" title="colour.algebra.coordinates.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_cylindrical" title="colour.algebra.coordinates.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cylindrical_to_cartesian" title="colour.algebra.coordinates.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartesian_to_polar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.1622776...,  0.3217505...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.coordinates.polar_to_cartesian">
+<code class="descclassname">colour.algebra.coordinates.</code><code class="descname">polar_to_cartesian</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#polar_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.coordinates.polar_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Polar coordinates array <span class="math">\(\rho\phi\)</span> (radial
+coordinate, angular coordinate) to Cartesian coordinates array <span class="math">\(xy\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Polar coordinates array <span class="math">\(\rho\phi\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cartesian coordinates array <span class="math">\(xy\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_spherical" title="colour.algebra.coordinates.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.spherical_to_cartesian" title="colour.algebra.coordinates.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_polar" title="colour.algebra.coordinates.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_cylindrical" title="colour.algebra.coordinates.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cylindrical_to_cartesian" title="colour.algebra.coordinates.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.16227766</span><span class="p">,</span> <span class="mf">0.32175055</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">polar_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.        ,  0.9999999...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.coordinates.cartesian_to_cylindrical">
+<code class="descclassname">colour.algebra.coordinates.</code><code class="descname">cartesian_to_cylindrical</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cartesian_to_cylindrical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.coordinates.cartesian_to_cylindrical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cartesian coordinates array <span class="math">\(xyz\)</span> to Cylindrical
+coordinates array <span class="math">\(\rho\phi z\)</span> (azimuth, radial distance and
+height).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cartesian coordinates array <span class="math">\(xyz\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cylindrical coordinates array <span class="math">\(\rho\phi z\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_spherical" title="colour.algebra.coordinates.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.spherical_to_cartesian" title="colour.algebra.coordinates.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_polar" title="colour.algebra.coordinates.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.polar_to_cartesian" title="colour.algebra.coordinates.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cylindrical_to_cartesian" title="colour.algebra.coordinates.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartesian_to_cylindrical</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.1622776...,  0.3217505...,  6.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.coordinates.cylindrical_to_cartesian">
+<code class="descclassname">colour.algebra.coordinates.</code><code class="descname">cylindrical_to_cartesian</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cylindrical_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.coordinates.cylindrical_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cylindrical coordinates array <span class="math">\(\rho\phi z\)</span>
+(azimuth, radial distance and height) to Cartesian coordinates array
+<span class="math">\(xyz\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cylindrical coordinates array <span class="math">\(\rho\phi z\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cartesian coordinates array <span class="math">\(xyz\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_spherical" title="colour.algebra.coordinates.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.spherical_to_cartesian" title="colour.algebra.coordinates.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_polar" title="colour.algebra.coordinates.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.polar_to_cartesian" title="colour.algebra.coordinates.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.coordinates.cartesian_to_cylindrical" title="colour.algebra.coordinates.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.16227766</span><span class="p">,</span> <span class="mf">0.32175055</span><span class="p">,</span> <span class="mf">6.00000000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cylindrical_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.        ,  0.9999999...,  6.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.algebra.coordinates Package</a><ul>
+<li><a class="reference internal" href="#sub-modules">Sub-Modules</a></li>
+<li><a class="reference internal" href="#module-colour.algebra.coordinates">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.algebra.coordinates.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.algebra.coordinates.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

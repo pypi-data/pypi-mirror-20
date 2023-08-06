@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.models Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.plotting.models">
+<span id="colour-plotting-models-module"></span><h1>colour.plotting.models Module<a class="headerlink" href="#module-colour.plotting.models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="colour-models-plotting">
+<h2>Colour Models Plotting<a class="headerlink" href="#colour-models-plotting" title="Permalink to this headline">¶</a></h2>
+<p>Defines the colour models plotting objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.plotting.models.RGB_colourspaces_CIE_1931_chromaticity_diagram_plot" title="colour.plotting.models.RGB_colourspaces_CIE_1931_chromaticity_diagram_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_colourspaces_CIE_1931_chromaticity_diagram_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot" title="colour.plotting.models.RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot" title="colour.plotting.models.RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot" title="colour.plotting.models.RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot" title="colour.plotting.models.RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot" title="colour.plotting.models.RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.single_cctf_plot" title="colour.plotting.models.single_cctf_plot"><code class="xref py py-func docutils literal"><span class="pre">single_cctf_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.models.multi_cctf_plot" title="colour.plotting.models.multi_cctf_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_cctf_plot()</span></code></a></li>
+</ul>
+<dl class="function">
+<dt id="colour.plotting.models.RGB_colourspaces_CIE_1931_chromaticity_diagram_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">RGB_colourspaces_CIE_1931_chromaticity_diagram_plot</code><span class="sig-paren">(</span><em>colourspaces=None</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#RGB_colourspaces_CIE_1931_chromaticity_diagram_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.RGB_colourspaces_CIE_1931_chromaticity_diagram_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspaces in <em>CIE 1931 Chromaticity Diagram</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colourspaces</strong> (<em>array_like, optional</em>) &#8211; <em>RGB</em> colourspaces to plot.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for diagram bounds.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>show_diagram_colours</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">CIE_1931_chromaticity_diagram_plot()</span></code>},
+Whether to display the chromaticity diagram background colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_colourspaces_CIE_1931_chromaticity_diagram_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot</code><span class="sig-paren">(</span><em>colourspaces=None</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspaces in <em>CIE 1960 UCS Chromaticity Diagram</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colourspaces</strong> (<em>array_like, optional</em>) &#8211; <em>RGB</em> colourspaces to plot.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for diagram bounds.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>show_diagram_colours</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">CIE_1960_UCS_chromaticity_diagram_plot()</span></code>},
+Whether to display the chromaticity diagram background colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot</code><span class="sig-paren">(</span><em>colourspaces=None</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspaces in <em>CIE 1976 UCS Chromaticity Diagram</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colourspaces</strong> (<em>array_like, optional</em>) &#8211; <em>RGB</em> colourspaces to plot.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for diagram bounds.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>show_diagram_colours</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">CIE_1976_UCS_chromaticity_diagram_plot()</span></code>},
+Whether to display the chromaticity diagram background colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot</code><span class="sig-paren">(</span><em>RGB</em>, <em>colourspace</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspace array in <em>CIE 1931 Chromaticity Diagram</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>RGB</em> colourspace array.</li>
+<li><strong>colourspace</strong> (<em>unicode</em>) &#8211; <em>RGB</em> colourspace of the <em>RGB</em> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>show_diagram_colours</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">CIE_1931_chromaticity_diagram_plot()</span></code>},
+Whether to display the chromaticity diagram background colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;Rec. 709&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot</code><span class="sig-paren">(</span><em>RGB</em>, <em>colourspace</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspace array in <em>CIE 1960 UCS Chromaticity Diagram</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>RGB</em> colourspace array.</li>
+<li><strong>colourspace</strong> (<em>unicode</em>) &#8211; <em>RGB</em> colourspace of the <em>RGB</em> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>show_diagram_colours</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">CIE_1960_UCS_chromaticity_diagram_plot()</span></code>},
+Whether to display the chromaticity diagram background colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;Rec. 709&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot</code><span class="sig-paren">(</span><em>RGB</em>, <em>colourspace</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspace array in <em>CIE 1976 UCS Chromaticity Diagram</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>RGB</em> colourspace array.</li>
+<li><strong>colourspace</strong> (<em>unicode</em>) &#8211; <em>RGB</em> colourspace of the <em>RGB</em> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>show_diagram_colours</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">CIE_1976_UCS_chromaticity_diagram_plot()</span></code>},
+Whether to display the chromaticity diagram background colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;Rec. 709&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.single_cctf_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">single_cctf_plot</code><span class="sig-paren">(</span><em>colourspace='Rec. 709'</em>, <em>decoding_cctf=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#single_cctf_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.single_cctf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colourspace colour component transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colourspace</strong> (<em>unicode, optional</em>) &#8211; <em>RGB</em> Colourspace colour component transfer function to plot.</li>
+<li><strong>decoding_cctf</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Plot decoding colour component transfer function instead.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_cctf_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.models.multi_cctf_plot">
+<code class="descclassname">colour.plotting.models.</code><code class="descname">multi_cctf_plot</code><span class="sig-paren">(</span><em>colourspaces=None</em>, <em>decoding_cctf=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/models.html#multi_cctf_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.models.multi_cctf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colourspaces colour component transfer functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colourspaces</strong> (<em>array_like, optional</em>) &#8211; Colourspaces colour component transfer function to plot.</li>
+<li><strong>decoding_cctf</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Plot decoding colour component transfer function instead.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multi_cctf_plot</span><span class="p">([</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;sRGB&#39;</span><span class="p">])</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.plotting.models Module</a><ul>
+<li><a class="reference internal" href="#colour-models-plotting">Colour Models Plotting</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.plotting.models.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.plotting.models.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

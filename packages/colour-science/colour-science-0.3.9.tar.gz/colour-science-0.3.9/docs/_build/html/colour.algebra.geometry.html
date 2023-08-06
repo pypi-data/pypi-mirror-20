@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.algebra.geometry Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.algebra.geometry">
+<span id="colour-algebra-geometry-module"></span><h1>colour.algebra.geometry Module<a class="headerlink" href="#module-colour.algebra.geometry" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="geometry">
+<h2>Geometry<a class="headerlink" href="#geometry" title="Permalink to this headline">¶</a></h2>
+<p>Defines objects related to geometrical computations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.algebra.geometry.normalise_vector" title="colour.algebra.geometry.normalise_vector"><code class="xref py py-func docutils literal"><span class="pre">normalise_vector()</span></code></a></li>
+<li><a class="reference internal" href="#colour.algebra.geometry.euclidean_distance" title="colour.algebra.geometry.euclidean_distance"><code class="xref py py-func docutils literal"><span class="pre">euclidean_distance()</span></code></a></li>
+<li><a class="reference internal" href="#colour.algebra.geometry.extend_line_segment" title="colour.algebra.geometry.extend_line_segment"><code class="xref py py-func docutils literal"><span class="pre">extend_line_segment()</span></code></a></li>
+<li><a class="reference internal" href="#colour.algebra.geometry.intersect_line_segments" title="colour.algebra.geometry.intersect_line_segments"><code class="xref py py-func docutils literal"><span class="pre">intersect_line_segments()</span></code></a></li>
+</ul>
+<dl class="function">
+<dt id="colour.algebra.geometry.normalise_vector">
+<code class="descclassname">colour.algebra.geometry.</code><code class="descname">normalise_vector</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#normalise_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.geometry.normalise_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalises given vector <span class="math">\(a\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Vector <span class="math">\(a\)</span> to normalise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Normalised vector <span class="math">\(a\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalise_vector</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 0.4525410...,  0.6470802...,  0.6135908...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.geometry.euclidean_distance">
+<code class="descclassname">colour.algebra.geometry.</code><code class="descname">euclidean_distance</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#euclidean_distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.geometry.euclidean_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the euclidean distance between point arrays <span class="math">\(a\)</span> and
+<span class="math">\(b\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(b\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Euclidean distance.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.00000000</span><span class="p">,</span> <span class="mf">21.57210357</span><span class="p">,</span> <span class="mf">272.22819350</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.00000000</span><span class="p">,</span> <span class="mf">426.67945353</span><span class="p">,</span> <span class="mf">72.39590835</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">euclidean_distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">451.7133019...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.geometry.extend_line_segment">
+<code class="descclassname">colour.algebra.geometry.</code><code class="descname">extend_line_segment</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>distance=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#extend_line_segment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.geometry.extend_line_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends the line segment defined by point arrays <span class="math">\(a\)</span> and <span class="math">\(b\)</span> by
+given distance and return the new end point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(b\)</span>.</li>
+<li><strong>distance</strong> (<em>numeric, optional</em>) &#8211; Distance to extend the line segment.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">New end point.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Saeedn. (n.d.). Extend a line segment a specific distance.
+Retrieved January 16, 2016, from <a class="reference external" href="http://stackoverflow.com/questions/7740507/extend-a-line-segment-a-specific-distance">http://stackoverflow.com/questions/7740507/extend-a-line-segment-a-specific-distance</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input line segment points coordinates are 2d coordinates.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.95694934</span><span class="p">,</span> <span class="mf">0.13720932</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.28382835</span><span class="p">,</span> <span class="mf">0.60608318</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extend_line_segment</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">array([-0.5367248...,  1.1776534...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.algebra.geometry.LineSegmentsIntersections_Specification">
+<em class="property">class </em><code class="descclassname">colour.algebra.geometry.</code><code class="descname">LineSegmentsIntersections_Specification</code><a class="reference internal" href="_modules/colour/algebra/geometry.html#LineSegmentsIntersections_Specification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.geometry.LineSegmentsIntersections_Specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.algebra.geometry.LineSegmentsIntersections_Specification" title="colour.algebra.geometry.LineSegmentsIntersections_Specification"><code class="xref py py-class docutils literal"><span class="pre">colour.algebra.geometry.LineSegmentsIntersections_Specification</span></code></a></p>
+<p>Defines the specification for intersection of line segments <span class="math">\(l_1\)</span> and
+<span class="math">\(l_2\)</span> returned by <a class="reference internal" href="#colour.algebra.geometry.intersect_line_segments" title="colour.algebra.geometry.intersect_line_segments"><code class="xref py py-func docutils literal"><span class="pre">intersect_line_segments()</span></code></a> definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>xy</strong> (<em>array_like</em>) &#8211; Array of <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span> line segments intersections
+coordinates. Non existing segments intersections coordinates are set
+with <cite>np.nan</cite>.</li>
+<li><strong>intersect</strong> (<em>array_like</em>) &#8211; Array of <em>bool</em> indicating if line segments <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span>
+intersect.</li>
+<li><strong>parallel</strong> (<em>array_like</em>) &#8211; Array of <em>bool</em> indicating if line segments <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span>
+are parallel.</li>
+<li><strong>coincident</strong> (<em>array_like</em>) &#8211; Array of <em>bool</em> indicating if line segments <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span>
+are coincident.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.geometry.intersect_line_segments">
+<code class="descclassname">colour.algebra.geometry.</code><code class="descname">intersect_line_segments</code><span class="sig-paren">(</span><em>l_1</em>, <em>l_2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#intersect_line_segments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.geometry.intersect_line_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes <span class="math">\(l_1\)</span> line segments intersections with <span class="math">\(l_2\)</span> line
+segments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l_1</strong> (<em>array_like</em>) &#8211; <span class="math">\(l_1\)</span> line segments array, each row is a line segment such as
+(<span class="math">\(x_1\)</span>, <span class="math">\(y_1\)</span>, <span class="math">\(x_2\)</span>, <span class="math">\(y_2\)</span>) where
+(<span class="math">\(x_1\)</span>, <span class="math">\(y_1\)</span>) and (<span class="math">\(x_2\)</span>, <span class="math">\(y_2\)</span>) are
+respectively the start and end points of <span class="math">\(l_1\)</span> line segments.</li>
+<li><strong>l_2</strong> (<em>array_like</em>) &#8211; <span class="math">\(l_2\)</span> line segments array, each row is a line segment such as
+(<span class="math">\(x_3\)</span>, <span class="math">\(y_3\)</span>, <span class="math">\(x_4\)</span>, <span class="math">\(y_4\)</span>) where
+(<span class="math">\(x_3\)</span>, <span class="math">\(y_3\)</span>) and (<span class="math">\(x_4\)</span>, <span class="math">\(y_4\)</span>) are
+respectively the start and end points of <span class="math">\(l_2\)</span> line segments.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Line segments intersections specification.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="colour.algebra.html#colour.algebra.LineSegmentsIntersections_Specification" title="colour.algebra.LineSegmentsIntersections_Specification">LineSegmentsIntersections_Specification</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Bourke, P. (n.d.). Intersection point of two line segments in 2
+dimensions. Retrieved January 15, 2016, from
+<a class="reference external" href="http://paulbourke.net/geometry/pointlineplane/">http://paulbourke.net/geometry/pointlineplane/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Erdem, U. M. (n.d.). Fast Line Segment Intersection. Retrieved
+January 15, 2016, from
+<a class="reference external" href="http://www.mathworks.com/matlabcentral/fileexchange/27205-fast-line-segment-intersection">http://www.mathworks.com/matlabcentral/fileexchange/27205-fast-line-segment-intersection</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input line segments points coordinates are 2d coordinates.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">0.15416284</span><span class="p">,</span> <span class="mf">0.7400497</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.26331502</span><span class="p">,</span> <span class="mf">0.53373939</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mf">0.01457496</span><span class="p">,</span> <span class="mf">0.91874701</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.90071485</span><span class="p">,</span> <span class="mf">0.03342143</span><span class="p">]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">0.95694934</span><span class="p">,</span> <span class="mf">0.13720932</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.28382835</span><span class="p">,</span> <span class="mf">0.60608318</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mf">0.94422514</span><span class="p">,</span> <span class="mf">0.85273554</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.00225923</span><span class="p">,</span> <span class="mf">0.52122603</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mf">0.55203763</span><span class="p">,</span> <span class="mf">0.48537741</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.76813415</span><span class="p">,</span> <span class="mf">0.16071675</span><span class="p">]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">intersect_line_segments</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span> <span class="n">l_2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">xy</span>  
+<span class="go">array([[[        nan,         nan],</span>
+<span class="go">        [ 0.2279184...,  0.6006430...],</span>
+<span class="go">        [        nan,         nan]],</span>
+
+<span class="go">       [[ 0.4281451...,  0.5055568...],</span>
+<span class="go">        [ 0.3056055...,  0.6279838...],</span>
+<span class="go">        [ 0.7578749...,  0.1761301...]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">intersect</span>
+<span class="go">array([[False,  True, False],</span>
+<span class="go">       [ True,  True,  True]], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">parallel</span>
+<span class="go">array([[False, False, False],</span>
+<span class="go">       [False, False, False]], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">coincident</span>
+<span class="go">array([[False, False, False],</span>
+<span class="go">       [False, False, False]], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.algebra.geometry Module</a><ul>
+<li><a class="reference internal" href="#geometry">Geometry</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.algebra.geometry.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.algebra.geometry.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

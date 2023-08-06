@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.cie_luv Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.cie_luv">
+<span id="colour-models-cie-luv-module"></span><h1>colour.models.cie_luv Module<a class="headerlink" href="#module-colour.models.cie_luv" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cie-luv-colourspace">
+<h2>CIE Luv Colourspace<a class="headerlink" href="#cie-luv-colourspace" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>CIE Luv</em> colourspace transformations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.cie_luv.XYZ_to_Luv" title="colour.models.cie_luv.XYZ_to_Luv"><code class="xref py py-func docutils literal"><span class="pre">XYZ_to_Luv()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_luv.Luv_to_XYZ" title="colour.models.cie_luv.Luv_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">Luv_to_XYZ()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_luv.Luv_to_uv" title="colour.models.cie_luv.Luv_to_uv"><code class="xref py py-func docutils literal"><span class="pre">Luv_to_uv()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_luv.Luv_uv_to_xy" title="colour.models.cie_luv.Luv_uv_to_xy"><code class="xref py py-func docutils literal"><span class="pre">Luv_uv_to_xy()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_luv.Luv_to_LCHuv" title="colour.models.cie_luv.Luv_to_LCHuv"><code class="xref py py-func docutils literal"><span class="pre">Luv_to_LCHuv()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.cie_luv.LCHuv_to_Luv" title="colour.models.cie_luv.LCHuv_to_Luv"><code class="xref py py-func docutils literal"><span class="pre">LCHuv_to_Luv()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/cie_luv.ipynb">CIE Luv Colourspace Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>CIE TC 1-48. (2004). CIE 1976 uniform colour spaces. In CIE 015:2004
+Colorimetry, 3rd Edition (p. 24). ISBN:978-3-901-90633-6</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>CIE TC 1-48. (2004). CIE 1976 uniform chromaticity scale diagram (UCS
+diagram). In CIE 015:2004 Colorimetry, 3rd Edition (p. 24).
+ISBN:978-3-901-90633-6</td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.models.cie_luv.XYZ_to_Luv">
+<code class="descclassname">colour.models.cie_luv.</code><code class="descname">XYZ_to_Luv</code><span class="sig-paren">(</span><em>XYZ</em>, <em>illuminant=array([ 0.3457</em>, <em>0.3585])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_luv.html#XYZ_to_Luv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_luv.XYZ_to_Luv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE XYZ</em> tristimulus values to <em>CIE Luv</em> colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</li>
+<li><strong>illuminant</strong> (<em>array_like, optional</em>) &#8211; Reference <em>illuminant</em> <em>xy</em> chromaticity coordinates or <em>CIE xyY</em>
+colourspace array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIE Luv</em> colourspace array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values are in domain [0, 1].</li>
+<li>Input <em>illuminant</em> <em>xy</em> chromaticity coordinates or <em>CIE xyY</em>
+colourspace array are in domain [0, <span class="math">\(\infty\)</span>].</li>
+<li>Output <span class="math">\(L^*\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>  
+<span class="go">array([ 37.9856291..., -28.8021959...,  -1.3580070...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_luv.Luv_to_XYZ">
+<code class="descclassname">colour.models.cie_luv.</code><code class="descname">Luv_to_XYZ</code><span class="sig-paren">(</span><em>Luv</em>, <em>illuminant=array([ 0.3457</em>, <em>0.3585])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_luv.html#Luv_to_XYZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_luv.Luv_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE Luv</em> colourspace to <em>CIE XYZ</em> tristimulus values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Luv</strong> (<em>array_like</em>) &#8211; <em>CIE Luv</em> colourspace array.</li>
+<li><strong>illuminant</strong> (<em>array_like, optional</em>) &#8211; Reference <em>illuminant</em> <em>xy</em> chromaticity coordinates or <em>CIE xyY</em>
+colourspace array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIE XYZ</em> tristimulus values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <span class="math">\(L^*\)</span> is in domain [0, 100].</li>
+<li>Input <em>illuminant</em> <em>xy</em> chromaticity coordinates or <em>CIE xyY</em>
+colourspace array are in domain [0, <span class="math">\(\infty\)</span>].</li>
+<li>Output <em>CIE XYZ</em> tristimulus values are in range [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Luv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.9856291</span> <span class="p">,</span> <span class="o">-</span><span class="mf">28.80219593</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.35800706</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Luv_to_XYZ</span><span class="p">(</span><span class="n">Luv</span><span class="p">)</span>  
+<span class="go">array([ 0.0704953...,  0.1008    ,  0.0955831...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_luv.Luv_to_uv">
+<code class="descclassname">colour.models.cie_luv.</code><code class="descname">Luv_to_uv</code><span class="sig-paren">(</span><em>Luv</em>, <em>illuminant=array([ 0.3457</em>, <em>0.3585])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_luv.html#Luv_to_uv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_luv.Luv_to_uv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <span class="math">\(uv^p\)</span> chromaticity coordinates from given <em>CIE Luv</em>
+colourspace array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Luv</strong> (<em>array_like</em>) &#8211; <em>CIE Luv</em> colourspace array.</li>
+<li><strong>illuminant</strong> (<em>array_like, optional</em>) &#8211; Reference <em>illuminant</em> <em>xy</em> chromaticity coordinates or <em>CIE xyY</em>
+colourspace array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><span class="math">\(uv^p\)</span> chromaticity coordinates.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <span class="math">\(L^*\)</span> is in domain [0, 100].</li>
+<li>Input <em>illuminant</em> <em>xy</em> chromaticity coordinates or <em>CIE xyY</em>
+colourspace array are in domain [0, <span class="math">\(\infty\)</span>].</li>
+<li>Output <span class="math">\(uv^p\)</span> chromaticity coordinates are in range [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Luv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.9856291</span> <span class="p">,</span> <span class="o">-</span><span class="mf">28.80219593</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.35800706</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">Luv</span><span class="p">)</span>  
+<span class="go">array([ 0.1508531...,  0.4853297...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_luv.Luv_uv_to_xy">
+<code class="descclassname">colour.models.cie_luv.</code><code class="descname">Luv_uv_to_xy</code><span class="sig-paren">(</span><em>uv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_luv.html#Luv_uv_to_xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_luv.Luv_uv_to_xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>xy</em> chromaticity coordinates from given <em>CIE Luv</em> colourspace
+<span class="math">\(uv^p\)</span> chromaticity coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uv</strong> (<em>array_like</em>) &#8211; <em>CIE Luv u&#8221;v&#8221;</em> chromaticity coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>xy</em> chromaticity coordinates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <span class="math">\(uv^p\)</span> chromaticity coordinates are in domain [0, 1].</li>
+<li>Output <em>xy</em> is in range [0, 1].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Wikipedia. (n.d.). The reverse transformation. Retrieved from
+<a class="reference external" href="http://en.wikipedia.org/wiki/CIELUV#The_reverse_transformation">http://en.wikipedia.org/wiki/CIELUV#The_reverse_transformation</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.150853098829857</span><span class="p">,</span> <span class="mf">0.485329708543180</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Luv_uv_to_xy</span><span class="p">(</span><span class="n">uv</span><span class="p">)</span>  
+<span class="go">array([ 0.2641477...,  0.3777000...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_luv.Luv_to_LCHuv">
+<code class="descclassname">colour.models.cie_luv.</code><code class="descname">Luv_to_LCHuv</code><span class="sig-paren">(</span><em>Luv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_luv.html#Luv_to_LCHuv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_luv.Luv_to_LCHuv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE Luv</em> colourspace to <em>CIE LCHuv</em> colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Luv</strong> (<em>array_like</em>) &#8211; <em>CIE Luv</em> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE LCHuv</em> colourspace array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input / output <span class="math">\(L^*\)</span> is in domain / range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Luv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.9856291</span> <span class="p">,</span> <span class="o">-</span><span class="mf">28.80219593</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.35800706</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Luv_to_LCHuv</span><span class="p">(</span><span class="n">Luv</span><span class="p">)</span>  
+<span class="go">array([  37.9856291...,   28.8341927...,  182.6994640...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.cie_luv.LCHuv_to_Luv">
+<code class="descclassname">colour.models.cie_luv.</code><code class="descname">LCHuv_to_Luv</code><span class="sig-paren">(</span><em>LCHuv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/cie_luv.html#LCHuv_to_Luv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.cie_luv.LCHuv_to_Luv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE LCHuv</em> colourspace to <em>CIE Luv</em> colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>LCHuv</strong> (<em>array_like</em>) &#8211; <em>CIE LCHuv</em> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE Luv</em> colourspace array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input / output <span class="math">\(L^*\)</span> is in domain / range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LCHuv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.98562910</span><span class="p">,</span> <span class="mf">28.83419279</span><span class="p">,</span> <span class="mf">182.69946404</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LCHuv_to_Luv</span><span class="p">(</span><span class="n">LCHuv</span><span class="p">)</span>  
+<span class="go">array([ 37.9856291..., -28.8021959...,  -1.3580070...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.cie_luv Module</a><ul>
+<li><a class="reference internal" href="#cie-luv-colourspace">CIE Luv Colourspace</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.cie_luv.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.cie_luv.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.gamma &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../../index.html" />
+    <link rel="up" title="colour.models.rgb.transfer_functions" href="../transfer_functions.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.transfer_functions.gamma</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Gamma Colour Component Transfer Function</span>
+<span class="sd">========================================</span>
+
+<span class="sd">Defines gamma encoding / decoding colour component transfer function related</span>
+<span class="sd">objects:</span>
+
+<span class="sd">- :func:`gamma_function`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`RGB Colourspaces Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/rgb.ipynb&gt;`_</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">as_numeric</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gamma_function&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="gamma_function"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.gamma.html#colour.gamma_function">[docs]</a><span class="k">def</span> <span class="nf">gamma_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span>
+                   <span class="n">exponent</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">negative_number_handling</span><span class="o">=</span><span class="s1">&#39;indeterminate&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines a typical gamma encoding / decoding function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : numeric or array_like</span>
+<span class="sd">        Array to encode / decode.</span>
+<span class="sd">    exponent : numeric or array_like, optional</span>
+<span class="sd">        Encoding / decoding exponent.</span>
+<span class="sd">    negative_number_handling : unicode, optional</span>
+<span class="sd">        **{&#39;Indeterminate&#39;, &#39;Mirror&#39;, &#39;Preserve&#39;, &#39;Clamp&#39;}**,</span>
+<span class="sd">        Defines the behaviour for `a` negative numbers and / or the definition</span>
+<span class="sd">        return value:</span>
+
+<span class="sd">        -   *Indeterminate*: The behaviour will be indeterminate and</span>
+<span class="sd">            definition return value might contain *nans*.</span>
+<span class="sd">        -   *Mirror*: The definition return value will be mirrored around</span>
+<span class="sd">            abscissa and ordinate axis, i.e. Blackmagic Design: Davinci Resolve</span>
+<span class="sd">            behaviour.</span>
+<span class="sd">        -   *Preserve*: The definition will preserve any negative number in</span>
+<span class="sd">            `a`, i.e. The Foundry Nuke behaviour.</span>
+<span class="sd">        -   *Clamp*: The definition will clamp any negative number in `a` to 0.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Encoded / decoded array.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the negative number handling method is not defined.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; gamma_function(0.18, 2.2)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.0229932...</span>
+<span class="sd">    &gt;&gt;&gt; gamma_function(-0.18, 2.0)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.0323999...</span>
+<span class="sd">    &gt;&gt;&gt; gamma_function(-0.18, 2.2)</span>
+<span class="sd">    nan</span>
+<span class="sd">    &gt;&gt;&gt; gamma_function(-0.18, 2.2, &#39;Mirror&#39;)  # doctest: +ELLIPSIS</span>
+<span class="sd">    -0.0229932...</span>
+<span class="sd">    &gt;&gt;&gt; gamma_function(-0.18, 2.2, &#39;Preserve&#39;)  # doctest: +ELLIPSIS</span>
+<span class="sd">    -0.1...</span>
+<span class="sd">    &gt;&gt;&gt; gamma_function(-0.18, 2.2, &#39;Clamp&#39;)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span>
+
+    <span class="n">negative_number_handling</span> <span class="o">=</span> <span class="n">negative_number_handling</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">negative_number_handling</span> <span class="o">==</span> <span class="s1">&#39;indeterminate&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">a</span> <span class="o">**</span> <span class="n">exponent</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">negative_number_handling</span> <span class="o">==</span> <span class="s1">&#39;mirror&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">**</span> <span class="n">exponent</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">negative_number_handling</span> <span class="o">==</span> <span class="s1">&#39;preserve&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span> <span class="o">**</span> <span class="n">exponent</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">negative_number_handling</span> <span class="o">==</span> <span class="s1">&#39;clamp&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a</span> <span class="o">**</span> <span class="n">exponent</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;Undefined negative number handling method: &quot;{0}&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">negative_number_handling</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../transfer_functions.html">colour.models.rgb.transfer_functions</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

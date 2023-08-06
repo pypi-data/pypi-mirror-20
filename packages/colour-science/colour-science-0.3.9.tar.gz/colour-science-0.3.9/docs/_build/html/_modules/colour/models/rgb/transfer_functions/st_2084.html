@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.st_2084 &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../../index.html" />
+    <link rel="up" title="colour.models.rgb.transfer_functions" href="../transfer_functions.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.transfer_functions.st_2084</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">SMPTE ST 2084:2014</span>
+<span class="sd">==================</span>
+
+<span class="sd">Defines *SMPTE ST 2084:2014* opto-electrical transfer function (OETF / OECF)</span>
+<span class="sd">and electro-optical transfer function (EOTF / EOCF):</span>
+
+<span class="sd">-   :func:`eotf_ST2084`</span>
+<span class="sd">-   :func:`oetf_ST2084`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`RGB Colourspaces Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/rgb.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Society of Motion Picture and Television Engineers. (2014). SMPTE</span>
+<span class="sd">        ST 2084:2014 - Dynamic Range Electro-Optical Transfer Function of</span>
+<span class="sd">        Mastering Reference Displays. doi:10.5594/SMPTE.ST2084.2014</span>
+<span class="sd">.. [2]  Miller, S., &amp; Dolby Laboratories. (2014). A Perceptual EOTF for</span>
+<span class="sd">        Extended Dynamic Range Imagery, 1–17. Retrieved from</span>
+<span class="sd">        https://www.smpte.org/sites/default/files/\</span>
+<span class="sd">2014-05-06-EOTF-Miller-1-2-handout.pdf</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">Structure</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ST2084_CONSTANTS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;oetf_ST2084&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;eotf_ST2084&#39;</span><span class="p">]</span>
+
+<span class="n">ST2084_CONSTANTS</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span><span class="n">m_1</span><span class="o">=</span><span class="mi">2610</span> <span class="o">/</span> <span class="mi">4096</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span>
+                             <span class="n">m_2</span><span class="o">=</span><span class="mi">2523</span> <span class="o">/</span> <span class="mi">4096</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span>
+                             <span class="n">c_1</span><span class="o">=</span><span class="mi">3424</span> <span class="o">/</span> <span class="mi">4096</span><span class="p">,</span>
+                             <span class="n">c_2</span><span class="o">=</span><span class="mi">2413</span> <span class="o">/</span> <span class="mi">4096</span> <span class="o">*</span> <span class="mi">32</span><span class="p">,</span>
+                             <span class="n">c_3</span><span class="o">=</span><span class="mi">2392</span> <span class="o">/</span> <span class="mi">4096</span> <span class="o">*</span> <span class="mi">32</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">*SMPTE ST 2084:2014* opto-electrical transfer function (OETF / OECF) and</span>
+<span class="sd">electro-optical transfer function (EOTF / EOCF) constants.</span>
+
+<span class="sd">ST2084_CONSTANTS : Structure</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="oetf_ST2084"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.st_2084.html#colour.oetf_ST2084">[docs]</a><span class="k">def</span> <span class="nf">oetf_ST2084</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">L_p</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines *SMPTE ST 2084:2014* optimised perceptual opto-electronic transfer</span>
+<span class="sd">    function (OETF / OECF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    C : numeric or array_like</span>
+<span class="sd">        Target optical output :math:`C` in :math:`cd/m^2` of the ideal</span>
+<span class="sd">        reference display.</span>
+<span class="sd">    L_p : numeric, optional</span>
+<span class="sd">        Display peak luminance :math:`cd/m^2`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Color value abbreviated as :math:`N`, normalized to the range [0, 1],</span>
+<span class="sd">        that is directly proportional to the encoded signal representation,</span>
+<span class="sd">        and which is not directly proportional to the optical output of a</span>
+<span class="sd">        display device.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; oetf_ST2084(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.0794209...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+    <span class="n">Y_p</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">/</span> <span class="n">L_p</span><span class="p">)</span> <span class="o">**</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">m_1</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="p">((</span><span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">c_1</span> <span class="o">+</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">c_2</span> <span class="o">*</span> <span class="n">Y_p</span><span class="p">)</span> <span class="o">/</span>
+         <span class="p">(</span><span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">c_3</span> <span class="o">*</span> <span class="n">Y_p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">**</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">m_2</span>
+
+    <span class="k">return</span> <span class="n">N</span></div>
+
+
+<div class="viewcode-block" id="eotf_ST2084"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.st_2084.html#colour.eotf_ST2084">[docs]</a><span class="k">def</span> <span class="nf">eotf_ST2084</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">L_p</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines *SMPTE ST 2084:2014* optimised perceptual electro-optical transfer</span>
+<span class="sd">    function (EOTF / EOCF).</span>
+
+<span class="sd">    This perceptual quantizer (PQ) has been modeled by Dolby Laboratories</span>
+<span class="sd">    using *Barten (1999)* contrast sensitivity function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    N : numeric or array_like</span>
+<span class="sd">        Color value abbreviated as :math:`N`, normalized to the range [0, 1],</span>
+<span class="sd">        that is directly proportional to the encoded signal representation,</span>
+<span class="sd">        and which is not directly proportional to the optical output of a</span>
+<span class="sd">        display device.</span>
+<span class="sd">    L_p : numeric, optional</span>
+<span class="sd">        Display peak luminance :math:`cd/m^2`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">          Target optical output :math:`C` in :math:`cd/m^2` of the ideal</span>
+<span class="sd">          reference display.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; eotf_ST2084(0.079420969944927)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="n">m_1_d</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">m_1</span>
+    <span class="n">m_2_d</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">m_2</span>
+
+    <span class="n">V_p</span> <span class="o">=</span> <span class="n">N</span> <span class="o">**</span> <span class="n">m_2_d</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">V_p</span> <span class="o">-</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">c_1</span>
+    <span class="c1"># Preventing *nan*.</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">c_2</span> <span class="o">-</span> <span class="n">ST2084_CONSTANTS</span><span class="o">.</span><span class="n">c_3</span> <span class="o">*</span> <span class="n">V_p</span><span class="p">))</span> <span class="o">**</span> <span class="n">m_1_d</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">L_p</span> <span class="o">*</span> <span class="n">L</span>
+
+    <span class="k">return</span> <span class="n">C</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../transfer_functions.html">colour.models.rgb.transfer_functions</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.utilities.verbose &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.utilities.verbose</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Verbose</span>
+<span class="sd">=======</span>
+
+<span class="sd">Defines verbose related objects.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">TextWrapper</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">filterwarnings</span><span class="p">,</span> <span class="n">warn</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ColourWarning&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;message_box&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;warning&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;filter_warnings&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ColourWarning"><a class="viewcode-back" href="../../../colour.utilities.verbose.html#colour.ColourWarning">[docs]</a><span class="k">class</span> <span class="nc">ColourWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the base class of *Colour* warnings. It is a subclass of `Warning`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="message_box"><a class="viewcode-back" href="../../../colour.utilities.verbose.html#colour.message_box">[docs]</a><span class="k">def</span> <span class="nf">message_box</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">79</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints a message inside a box.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    message : unicode</span>
+<span class="sd">        Message to print.</span>
+<span class="sd">    width : int, optional</span>
+<span class="sd">        Message box width.</span>
+<span class="sd">    padding : unicode</span>
+<span class="sd">        Padding on each sides of the message.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        Definition success.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; message = (&#39;Lorem ipsum dolor sit amet, consectetur adipiscing elit, &#39;</span>
+<span class="sd">    ...     &#39;sed do eiusmod tempor incididunt ut labore et dolore magna &#39;</span>
+<span class="sd">    ...     &#39;aliqua.&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; message_box(message, width=75)</span>
+<span class="sd">    ===========================================================================</span>
+<span class="sd">    *                                                                         *</span>
+<span class="sd">    *   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do       *</span>
+<span class="sd">    *   eiusmod tempor incididunt ut labore et dolore magna aliqua.           *</span>
+<span class="sd">    *                                                                         *</span>
+<span class="sd">    ===========================================================================</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; message_box(message, width=60)</span>
+<span class="sd">    ============================================================</span>
+<span class="sd">    *                                                          *</span>
+<span class="sd">    *   Lorem ipsum dolor sit amet, consectetur adipiscing     *</span>
+<span class="sd">    *   elit, sed do eiusmod tempor incididunt ut labore et    *</span>
+<span class="sd">    *   dolore magna aliqua.                                   *</span>
+<span class="sd">    *                                                          *</span>
+<span class="sd">    ============================================================</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; message_box(message, width=75, padding=16)</span>
+<span class="sd">    ===========================================================================</span>
+<span class="sd">    *                                                                         *</span>
+<span class="sd">    *                Lorem ipsum dolor sit amet, consectetur                  *</span>
+<span class="sd">    *                adipiscing elit, sed do eiusmod tempor                   *</span>
+<span class="sd">    *                incididunt ut labore et dolore magna                     *</span>
+<span class="sd">    *                aliqua.                                                  *</span>
+<span class="sd">    *                                                                         *</span>
+<span class="sd">    ===========================================================================</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ideal_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="n">padding</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Formats and pads inner text for the message box.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="s1">&#39;*{0}{1}{2}{0}*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">padding</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">padding</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">TextWrapper</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">ideal_width</span><span class="p">,</span> <span class="n">break_long_words</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">replace_whitespace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">wrapper</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)]</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">lines</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">expandtabs</span><span class="p">()))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">True</span></div>
+
+
+<div class="viewcode-block" id="warning"><a class="viewcode-back" href="../../../colour.utilities.verbose.html#colour.warning">[docs]</a><span class="k">def</span> <span class="nf">warning</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Issues a warning.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \*args : list, optional</span>
+<span class="sd">        Arguments.</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        Keywords arguments.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        Definition success.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; warning(&#39;This is a warning!&#39;)  # doctest: +SKIP</span>
+<span class="sd">    /Users/.../colour/utilities/verbose.py:132: UserWarning: This is a warning!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ColourWarning</span>
+    <span class="n">warn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">True</span></div>
+
+
+<div class="viewcode-block" id="filter_warnings"><a class="viewcode-back" href="../../../colour.utilities.verbose.html#colour.filter_warnings">[docs]</a><span class="k">def</span> <span class="nf">filter_warnings</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colour_warnings_only</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filters *Colour* and also optionally overall Python warnings.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    state : bool, optional</span>
+<span class="sd">        Warnings filter state.</span>
+<span class="sd">    colour_warnings_only : bool, optional</span>
+<span class="sd">        Whether to only filter *Colour* warnings or also overall Python</span>
+<span class="sd">        warnings.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        Definition success.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    # Filtering *Colour* only warnings:</span>
+<span class="sd">    &gt;&gt;&gt; filter_warnings()</span>
+<span class="sd">    True</span>
+
+<span class="sd">    # Filtering *Colour* and also Python warnings:</span>
+<span class="sd">    &gt;&gt;&gt; filter_warnings(colour_warnings_only=False)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">filterwarnings</span><span class="p">(</span>
+        <span class="s1">&#39;ignore&#39;</span> <span class="k">if</span> <span class="n">state</span> <span class="k">else</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">ColourWarning</span> <span class="k">if</span> <span class="n">colour_warnings_only</span> <span class="k">else</span> <span class="ne">Warning</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">True</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.adaptation.cmccat2000 &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.adaptation.cmccat2000</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">CMCCAT2000 Chromatic Adaptation Model</span>
+<span class="sd">=====================================</span>
+
+<span class="sd">Defines *CMCCAT2000* chromatic adaptation model objects:</span>
+
+<span class="sd">-   :class:`CMCCAT2000_InductionFactors`</span>
+<span class="sd">-   :class:`CMCCAT2000_VIEWING_CONDITIONS`</span>
+<span class="sd">-   :func:`chromatic_adaptation_forward_CMCCAT2000`</span>
+<span class="sd">-   :func:`chromatic_adaptation_reverse_CMCCAT2000`</span>
+<span class="sd">-   :func:`chromatic_adaptation_CMCCAT2000`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`CMCCAT2000 Chromatic Adaptation Model Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/adaptation/cmccat2000.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Li, C., Luo, M. R., Rigg, B., &amp; Hunt, R. W. G. (2002). CMC 2000</span>
+<span class="sd">        chromatic adaptation transform: CMCCAT2000. Color Research &amp; …, 27(1),</span>
+<span class="sd">        49–58. doi:10.1002/col.10005</span>
+<span class="sd">.. [2]  Westland, S., Ripamonti, C., &amp; Cheung, V. (2012). CMCCAT2000. In</span>
+<span class="sd">        Computational Colour Science Using MATLAB (2nd ed., pp. 83–86).</span>
+<span class="sd">        ISBN:978-0-470-66569-5</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">from</span> <span class="nn">colour.adaptation</span> <span class="kn">import</span> <span class="n">CMCCAT2000_CAT</span>
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">CaseInsensitiveMapping</span><span class="p">,</span> <span class="n">dot_vector</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CMCCAT2000_INVERSE_CAT&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CMCCAT2000_InductionFactors&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;CMCCAT2000_VIEWING_CONDITIONS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;chromatic_adaptation_forward_CMCCAT2000&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;chromatic_adaptation_reverse_CMCCAT2000&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;chromatic_adaptation_CMCCAT2000&#39;</span><span class="p">]</span>
+
+<span class="n">CMCCAT2000_INVERSE_CAT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Inverse *CMCCAT2000* chromatic adaptation transform.</span>
+
+<span class="sd">CMCCAT2000_INVERSE_CAT : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="CMCCAT2000_InductionFactors"><a class="viewcode-back" href="../../../colour.adaptation.cmccat2000.html#colour.CMCCAT2000_InductionFactors">[docs]</a><span class="k">class</span> <span class="nc">CMCCAT2000_InductionFactors</span><span class="p">(</span>
+    <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;CMCCAT2000_InductionFactors&#39;</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,))):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    *CMCCAT2000* chromatic adaptation model induction factors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    F : numeric or array_like</span>
+<span class="sd">        :math:`F` surround condition.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<span class="n">CMCCAT2000_VIEWING_CONDITIONS</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;Average&#39;</span><span class="p">:</span> <span class="n">CMCCAT2000_InductionFactors</span><span class="p">(</span><span class="mf">1.</span><span class="p">),</span>
+     <span class="s1">&#39;Dim&#39;</span><span class="p">:</span> <span class="n">CMCCAT2000_InductionFactors</span><span class="p">(</span><span class="mf">0.8</span><span class="p">),</span>
+     <span class="s1">&#39;Dark&#39;</span><span class="p">:</span> <span class="n">CMCCAT2000_InductionFactors</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)})</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Reference *CMCCAT2000* chromatic adaptation model viewing conditions.</span>
+
+<span class="sd">CMCCAT2000_VIEWING_CONDITIONS : CaseInsensitiveMapping</span>
+<span class="sd">    (&#39;Average&#39;, &#39;Dim&#39;, &#39;Dark&#39;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="chromatic_adaptation_forward_CMCCAT2000"><a class="viewcode-back" href="../../../colour.adaptation.cmccat2000.html#colour.chromatic_adaptation_forward_CMCCAT2000">[docs]</a><span class="k">def</span> <span class="nf">chromatic_adaptation_forward_CMCCAT2000</span><span class="p">(</span>
+        <span class="n">XYZ</span><span class="p">,</span>
+        <span class="n">XYZ_w</span><span class="p">,</span>
+        <span class="n">XYZ_wr</span><span class="p">,</span>
+        <span class="n">L_A1</span><span class="p">,</span>
+        <span class="n">L_A2</span><span class="p">,</span>
+        <span class="n">surround</span><span class="o">=</span><span class="n">CMCCAT2000_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adapts given stimulus *CIE XYZ* tristimulus values from test viewing</span>
+<span class="sd">    conditions to reference viewing conditions using *CMCCAT2000* forward</span>
+<span class="sd">    chromatic adaptation model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    XYZ : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values of the stimulus to adapt.</span>
+<span class="sd">    XYZ_w : array_like</span>
+<span class="sd">        Test viewing condition *CIE XYZ* tristimulus values of the whitepoint.</span>
+<span class="sd">    XYZ_wr : array_like</span>
+<span class="sd">        Reference viewing condition *CIE XYZ* tristimulus values of the</span>
+<span class="sd">        whitepoint.</span>
+<span class="sd">    L_A1 : numeric or array_like</span>
+<span class="sd">        Luminance of test adapting field :math:`L_{A1}` in :math:`cd/m^2`.</span>
+<span class="sd">    L_A2 : numeric or array_like</span>
+<span class="sd">        Luminance of reference adapting field :math:`L_{A2}` in :math:`cd/m^2`.</span>
+<span class="sd">    surround : CMCCAT2000_InductionFactors, optional</span>
+<span class="sd">        Surround viewing conditions induction factors.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *CIE XYZ_c* tristimulus values of the stimulus corresponding colour.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The input domain and output range of that definition are non standard!</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *CIE XYZ*, *CIE XYZ_w* and *CIE XYZ_wr* tristimulus values are in</span>
+<span class="sd">        domain [0, 100].</span>
+<span class="sd">    -   Output *CIE XYZ_c* tristimulus values are in range [0, 100].</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; XYZ = np.array([22.48, 22.74, 8.54])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_w = np.array([111.15, 100.00, 35.20])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_wr = np.array([94.81, 100.00, 107.30])</span>
+<span class="sd">    &gt;&gt;&gt; L_A1 = 200</span>
+<span class="sd">    &gt;&gt;&gt; L_A2 = 200</span>
+<span class="sd">    &gt;&gt;&gt; chromatic_adaptation_forward_CMCCAT2000(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     XYZ, XYZ_w, XYZ_wr, L_A1, L_A2)</span>
+<span class="sd">    array([ 19.5269832...,  23.0683396...,  24.9717522...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>
+    <span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">XYZ_w</span><span class="p">)</span>
+    <span class="n">XYZ_wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">XYZ_wr</span><span class="p">)</span>
+    <span class="n">L_A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L_A1</span><span class="p">)</span>
+    <span class="n">L_A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L_A2</span><span class="p">)</span>
+
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">,</span> <span class="n">XYZ</span><span class="p">)</span>
+    <span class="n">RGB_w</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">)</span>
+    <span class="n">RGB_wr</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">)</span>
+
+    <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">surround</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span>
+         <span class="p">(</span><span class="mf">0.08</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_A1</span> <span class="o">+</span> <span class="n">L_A2</span><span class="p">))</span> <span class="o">+</span>
+          <span class="mf">0.76</span> <span class="o">-</span> <span class="mf">0.45</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_A1</span> <span class="o">-</span> <span class="n">L_A2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">L_A1</span> <span class="o">+</span> <span class="n">L_A2</span><span class="p">)))</span>
+
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">D</span> <span class="o">*</span> <span class="n">XYZ_w</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">XYZ_wr</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">RGB_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">RGB</span> <span class="o">*</span>
+             <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">RGB_wr</span> <span class="o">/</span> <span class="n">RGB_w</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">D</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]))</span>
+    <span class="n">XYZ_c</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_INVERSE_CAT</span><span class="p">,</span> <span class="n">RGB_c</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">XYZ_c</span></div>
+
+
+<div class="viewcode-block" id="chromatic_adaptation_reverse_CMCCAT2000"><a class="viewcode-back" href="../../../colour.adaptation.cmccat2000.html#colour.chromatic_adaptation_reverse_CMCCAT2000">[docs]</a><span class="k">def</span> <span class="nf">chromatic_adaptation_reverse_CMCCAT2000</span><span class="p">(</span>
+        <span class="n">XYZ_c</span><span class="p">,</span>
+        <span class="n">XYZ_w</span><span class="p">,</span>
+        <span class="n">XYZ_wr</span><span class="p">,</span>
+        <span class="n">L_A1</span><span class="p">,</span>
+        <span class="n">L_A2</span><span class="p">,</span>
+        <span class="n">surround</span><span class="o">=</span><span class="n">CMCCAT2000_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adapts given stimulus corresponding colour *CIE XYZ* tristimulus values</span>
+<span class="sd">    from reference viewing conditions to test viewing conditions using</span>
+<span class="sd">    *CMCCAT2000* reverse chromatic adaptation model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    XYZ_c : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values of the stimulus to adapt.</span>
+<span class="sd">    XYZ_w : array_like</span>
+<span class="sd">        Test viewing condition *CIE XYZ* tristimulus values of the whitepoint.</span>
+<span class="sd">    XYZ_wr : array_like</span>
+<span class="sd">        Reference viewing condition *CIE XYZ* tristimulus values of the</span>
+<span class="sd">        whitepoint.</span>
+<span class="sd">    L_A1 : numeric or array_like</span>
+<span class="sd">        Luminance of test adapting field :math:`L_{A1}` in :math:`cd/m^2`.</span>
+<span class="sd">    L_A2 : numeric or array_like</span>
+<span class="sd">        Luminance of reference adapting field :math:`L_{A2}` in :math:`cd/m^2`.</span>
+<span class="sd">    surround : CMCCAT2000_InductionFactors, optional</span>
+<span class="sd">        Surround viewing conditions induction factors.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *CIE XYZ_c* tristimulus values of the adapted stimulus.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The input domain and output range of that definition are non standard!</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *CIE XYZ_c*, *CIE XYZ_w* and *CIE XYZ_wr* tristimulus values</span>
+<span class="sd">        are in domain [0, 100].</span>
+<span class="sd">    -   Output *CIE XYZ* tristimulus values are in range [0, 100].</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_c = np.array([19.53, 23.07, 24.97])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_w = np.array([111.15, 100.00, 35.20])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_wr = np.array([94.81, 100.00, 107.30])</span>
+<span class="sd">    &gt;&gt;&gt; L_A1 = 200</span>
+<span class="sd">    &gt;&gt;&gt; L_A2 = 200</span>
+<span class="sd">    &gt;&gt;&gt; chromatic_adaptation_reverse_CMCCAT2000(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     XYZ_c, XYZ_w, XYZ_wr, L_A1, L_A2)</span>
+<span class="sd">    array([ 22.4839876...,  22.7419485...,   8.5393392...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">XYZ_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">XYZ_c</span><span class="p">)</span>
+    <span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">XYZ_w</span><span class="p">)</span>
+    <span class="n">XYZ_wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">XYZ_wr</span><span class="p">)</span>
+    <span class="n">L_A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L_A1</span><span class="p">)</span>
+    <span class="n">L_A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L_A2</span><span class="p">)</span>
+
+    <span class="n">RGB_c</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">,</span> <span class="n">XYZ_c</span><span class="p">)</span>
+    <span class="n">RGB_w</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">)</span>
+    <span class="n">RGB_wr</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_CAT</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">)</span>
+
+    <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">surround</span><span class="o">.</span><span class="n">F</span> <span class="o">*</span>
+         <span class="p">(</span><span class="mf">0.08</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_A1</span> <span class="o">+</span> <span class="n">L_A2</span><span class="p">))</span> <span class="o">+</span>
+          <span class="mf">0.76</span> <span class="o">-</span> <span class="mf">0.45</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_A1</span> <span class="o">-</span> <span class="n">L_A2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">L_A1</span> <span class="o">+</span> <span class="n">L_A2</span><span class="p">)))</span>
+
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">D</span> <span class="o">*</span> <span class="n">XYZ_w</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">XYZ_wr</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">RGB</span> <span class="o">=</span> <span class="p">(</span><span class="n">RGB_c</span> <span class="o">/</span>
+           <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">RGB_wr</span> <span class="o">/</span> <span class="n">RGB_w</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">D</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]))</span>
+    <span class="n">XYZ</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">CMCCAT2000_INVERSE_CAT</span><span class="p">,</span> <span class="n">RGB</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">XYZ</span></div>
+
+
+<div class="viewcode-block" id="chromatic_adaptation_CMCCAT2000"><a class="viewcode-back" href="../../../colour.adaptation.cmccat2000.html#colour.chromatic_adaptation_CMCCAT2000">[docs]</a><span class="k">def</span> <span class="nf">chromatic_adaptation_CMCCAT2000</span><span class="p">(</span>
+        <span class="n">XYZ</span><span class="p">,</span>
+        <span class="n">XYZ_w</span><span class="p">,</span>
+        <span class="n">XYZ_wr</span><span class="p">,</span>
+        <span class="n">L_A1</span><span class="p">,</span>
+        <span class="n">L_A2</span><span class="p">,</span>
+        <span class="n">surround</span><span class="o">=</span><span class="n">CMCCAT2000_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">],</span>
+        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Forward&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adapts given stimulus *CIE XYZ* tristimulus values using given viewing</span>
+<span class="sd">    conditions.</span>
+
+<span class="sd">    This definition is a convenient wrapper around</span>
+<span class="sd">    :func:`chromatic_adaptation_forward_CMCCAT2000` and</span>
+<span class="sd">    :func:`chromatic_adaptation_reverse_CMCCAT2000`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    XYZ : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values of the stimulus to adapt.</span>
+<span class="sd">    XYZ_w : array_like</span>
+<span class="sd">        Source viewing condition *CIE XYZ* tristimulus values of the</span>
+<span class="sd">        whitepoint.</span>
+<span class="sd">    XYZ_wr : array_like</span>
+<span class="sd">        Target viewing condition *CIE XYZ* tristimulus values of the</span>
+<span class="sd">        whitepoint.</span>
+<span class="sd">    L_A1 : numeric or array_like</span>
+<span class="sd">        Luminance of test adapting field :math:`L_{A1}` in :math:`cd/m^2`.</span>
+<span class="sd">    L_A2 : numeric or array_like</span>
+<span class="sd">        Luminance of reference adapting field :math:`L_{A2}` in :math:`cd/m^2`.</span>
+<span class="sd">    surround : CMCCAT2000_InductionFactors, optional</span>
+<span class="sd">        Surround viewing conditions induction factors.</span>
+<span class="sd">    method : unicode, optional</span>
+<span class="sd">        **{&#39;Forward&#39;, &#39;Reverse&#39;}**,</span>
+<span class="sd">        Chromatic adaptation method.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Adapted stimulus *CIE XYZ* tristimulus values.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The input domain and output range of that definition are non standard!</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *CIE XYZ*, *CIE XYZ_w* and *CIE XYZ_wr* tristimulus values are in</span>
+<span class="sd">        domain [0, 100].</span>
+<span class="sd">    -   Output *CIE XYZ* tristimulus values are in range [0, 100].</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; XYZ = np.array([22.48, 22.74, 8.54])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_w = np.array([111.15, 100.00, 35.20])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_wr = np.array([94.81, 100.00, 107.30])</span>
+<span class="sd">    &gt;&gt;&gt; L_A1 = 200</span>
+<span class="sd">    &gt;&gt;&gt; L_A2 = 200</span>
+<span class="sd">    &gt;&gt;&gt; chromatic_adaptation_CMCCAT2000(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     XYZ, XYZ_w, XYZ_wr, L_A1, L_A2, method=&#39;Forward&#39;)</span>
+<span class="sd">    array([ 19.5269832...,  23.0683396...,  24.9717522...])</span>
+
+<span class="sd">    Using the *CMCCAT2000* reverse model:</span>
+
+<span class="sd">    &gt;&gt;&gt; XYZ = np.array([19.52698326, 23.06833960, 24.97175229])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_w = np.array([111.15, 100.00, 35.20])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_wr = np.array([94.81, 100.00, 107.30])</span>
+<span class="sd">    &gt;&gt;&gt; L_A1 = 200</span>
+<span class="sd">    &gt;&gt;&gt; L_A2 = 200</span>
+<span class="sd">    &gt;&gt;&gt; chromatic_adaptation_CMCCAT2000(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     XYZ, XYZ_w, XYZ_wr, L_A1, L_A2, method=&#39;Reverse&#39;)</span>
+<span class="sd">    array([ 22.48,  22.74,   8.54])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">chromatic_adaptation_forward_CMCCAT2000</span><span class="p">(</span>
+            <span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">,</span> <span class="n">L_A1</span><span class="p">,</span> <span class="n">L_A2</span><span class="p">,</span> <span class="n">surround</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">chromatic_adaptation_reverse_CMCCAT2000</span><span class="p">(</span>
+            <span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">,</span> <span class="n">L_A1</span><span class="p">,</span> <span class="n">L_A2</span><span class="p">,</span> <span class="n">surround</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

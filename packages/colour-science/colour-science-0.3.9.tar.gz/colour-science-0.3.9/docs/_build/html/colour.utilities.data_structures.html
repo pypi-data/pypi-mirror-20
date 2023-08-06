@@ -1,0 +1,969 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.utilities.data_structures Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.utilities.data_structures">
+<span id="colour-utilities-data-structures-module"></span><h1>colour.utilities.data_structures Module<a class="headerlink" href="#module-colour.utilities.data_structures" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data-structures">
+<h2>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<p>Defines various data structures classes:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping" title="colour.utilities.data_structures.ArbitraryPrecisionMapping"><code class="xref py py-class docutils literal"><span class="pre">ArbitraryPrecisionMapping</span></code></a>: A mutable mapping / <em>dict</em> like object
+where numeric keys are stored with an arbitrary precision.</li>
+<li><a class="reference internal" href="#colour.utilities.data_structures.Structure" title="colour.utilities.data_structures.Structure"><code class="xref py py-class docutils literal"><span class="pre">Structure</span></code></a>: An object similar to C/C++ structured type.</li>
+<li><a class="reference internal" href="#colour.utilities.data_structures.Lookup" title="colour.utilities.data_structures.Lookup"><code class="xref py py-class docutils literal"><span class="pre">Lookup</span></code></a>: A <em>dict</em> sub-class acting as a lookup to retrieve keys by
+values.</li>
+<li><a class="reference internal" href="#colour.utilities.data_structures.CaseInsensitiveMapping" title="colour.utilities.data_structures.CaseInsensitiveMapping"><code class="xref py py-class docutils literal"><span class="pre">CaseInsensitiveMapping</span></code></a>: A case insensitive mapping allowing values
+retrieving from keys while ignoring the key case.</li>
+</ul>
+<dl class="class">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping">
+<em class="property">class </em><code class="descclassname">colour.utilities.data_structures.</code><code class="descname">ArbitraryPrecisionMapping</code><span class="sig-paren">(</span><em>data=None</em>, <em>key_decimals=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">_abcoll.MutableMapping</span></code></p>
+<p>Implements a mutable mapping / <em>dict</em> like object where numeric keys are
+stored with an arbitrary precision.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict, optional</em>) &#8211; <em>dict</em> of data to store into the mapping at initialisation.</li>
+<li><strong>key_decimals</strong> (<em>int, optional</em>) &#8211; Decimals count the keys will be rounded at</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Key / Value pairs to store into the mapping at initialisation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.key_decimals">
+<code class="descname">key_decimals</code><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.key_decimals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__delitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.__len__">
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.1999999998</span><span class="p">:</span> <span class="s1">&#39;Nemo&#39;</span><span class="p">,</span> <span class="mf">0.2000000000</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apm1</span> <span class="o">=</span> <span class="n">ArbitraryPrecisionMapping</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">key_decimals</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">apm1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  
+<span class="go">(0.1999999998, 0.2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apm2</span> <span class="o">=</span> <span class="n">ArbitraryPrecisionMapping</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">key_decimals</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">apm2</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  
+<span class="go">(0.2,)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__contains__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns if the mapping contains given item (rounded if numeric).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item (rounded if numeric) name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is item in mapping.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__contains__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__delitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deletes the item (rounded if numeric) with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item (rounded if numeric) name.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__delitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__getitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the value of given item (rounded if numeric).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item (rounded if numeric) name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__getitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__iter__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Iterates over the items (rounded if numeric) names in the mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Item names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__len__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the items count.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Items count.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)">int</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>item</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__setitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sets given item (rounded if numeric) with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__setitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.utilities.data_structures.ArbitraryPrecisionMapping.data">
+<code class="descname">data</code><a class="headerlink" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.data</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping" title="colour.utilities.data_structures.ArbitraryPrecisionMapping"><code class="xref py py-class docutils literal"><span class="pre">ArbitraryPrecisionMapping</span></code></a> data structure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.data" title="colour.utilities.data_structures.ArbitraryPrecisionMapping.data"><code class="xref py py-attr docutils literal"><span class="pre">ArbitraryPrecisionMapping.data</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">key_decimals</code></dt>
+<dd><p>Property for <strong>self._key_decimals</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self._key_decimals.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.data_structures.Structure">
+<em class="property">class </em><code class="descclassname">colour.utilities.data_structures.</code><code class="descname">Structure</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<p>Defines an object similar to C/C++ structured type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> (<em>list, optional</em>) &#8211;
+Arguments.</li>
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Key / Value pairs.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.utilities.data_structures.Structure.__getattr__">
+<code class="descname">__getattr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__getattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Structure.__getattr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.Structure.__setattr__">
+<code class="descname">__setattr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__setattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Structure.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.Structure.__delattr__">
+<code class="descname">__delattr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__delattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Structure.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.Structure.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Structure.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Mansencal, T. (n.d.). Structure. Retrieved from
+<a class="reference external" href="https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py">https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">first_name</span>  
+<span class="go">&#39;Doe&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">[&#39;first_name&#39;, &#39;gender&#39;, &#39;last_name&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span>  
+<span class="go">&#39;male&#39;</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__delattr__</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__delattr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deletes both key and sibling attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__delattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.Structure.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.data_structures.Structure.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes both key and sibling attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__delattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__getattr__</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__getattr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns given attribute value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<em>unicode</em>) &#8211; Attribute name.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__getattr__()</span></code> method.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Attribute value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#AttributeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> &#8211;
+If the attribute is not defined.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__setattr__</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__setattr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sets both key and sibling attribute with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__setattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.Structure.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.data_structures.Structure.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets both key and sibling attribute with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__setattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Updates both keys and sibling attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> (<em>list, optional</em>) &#8211;
+Arguments.</li>
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Keywords arguments.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict.update" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">dict.update()</span></code></a> method.</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.data_structures.Lookup">
+<em class="property">class </em><code class="descclassname">colour.utilities.data_structures.</code><code class="descname">Lookup</code><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<p>Extends <em>dict</em> type to provide a lookup by value(s).</p>
+<dl class="method">
+<dt id="colour.utilities.data_structures.Lookup.first_key_from_value">
+<code class="descname">first_key_from_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.first_key_from_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Lookup.first_key_from_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.Lookup.keys_from_value">
+<code class="descname">keys_from_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.keys_from_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.Lookup.keys_from_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Mansencal, T. (n.d.). Lookup. Retrieved from
+<a class="reference external" href="https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py">https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span> <span class="o">=</span> <span class="n">Lookup</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">first_key_from_value</span><span class="p">(</span><span class="s1">&#39;Doe&#39;</span><span class="p">)</span>
+<span class="go">&#39;first_name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">persons</span> <span class="o">=</span> <span class="n">Lookup</span><span class="p">(</span><span class="n">John</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">Jane</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">Luke</span><span class="o">=</span><span class="s1">&#39;Skywalker&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">persons</span><span class="o">.</span><span class="n">keys_from_value</span><span class="p">(</span><span class="s1">&#39;Doe&#39;</span><span class="p">))</span>
+<span class="go">[&#39;Jane&#39;, &#39;John&#39;]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">first_key_from_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.first_key_from_value"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Gets the first key with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Key.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">keys_from_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.keys_from_value"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Gets the keys with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Keys.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping">
+<em class="property">class </em><code class="descclassname">colour.utilities.data_structures.</code><code class="descname">CaseInsensitiveMapping</code><span class="sig-paren">(</span><em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">_abcoll.MutableMapping</span></code></p>
+<p>Implements a case-insensitive mutable mapping / <em>dict</em> object.</p>
+<p>Allows values retrieving from keys while ignoring the key case.
+The keys are expected to be unicode or string-like objects supporting the
+<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str.lower" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">str.lower()</span></code></a> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; <em>dict</em> of data to store into the mapping at initialisation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Key / Value pairs to store into the mapping at initialisation.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__delitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__len__">
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__ne__">
+<code class="descname">__ne__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__ne__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.lower_items">
+<code class="descname">lower_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.lower_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.lower_items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The keys are expected to be unicode or string-like objects.</p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Reitz, K. (n.d.). CaseInsensitiveDict. Retrieved from
+<a class="reference external" href="https://github.com/kennethreitz/requests/blob/v1.2.3/requests/structures.py#L37">https://github.com/kennethreitz/requests/blob/v1.2.3/requests/structures.py#L37</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">methods</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">({</span><span class="s1">&#39;McCamy&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Hernandez&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">methods</span><span class="p">[</span><span class="s1">&#39;mccamy&#39;</span><span class="p">]</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__contains__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns if the mapping contains given item.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is item in mapping.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__contains__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__delitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deletes the item with given name.</p>
+<p>The item is deleted from the mapping using its lower name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item name.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__delitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__eq__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the equality with given object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> &#8211; Object item.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Equality.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__eq__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__getitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the value of given item.</p>
+<p>The item value is retrieved using its lower name in the mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__getitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__iter__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Iterates over the items names in the mapping.</p>
+<p>The item names returned are the original input ones.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Item names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__len__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the items count.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Items count.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)">int</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__ne__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the inequality with given object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> &#8211; Object item.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Inequality.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__ne__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__repr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the mapping representation with the original item names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Mapping representation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__repr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>item</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__setitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sets given item with given value.</p>
+<p>The item is stored as lower in the mapping while the original name and
+its value are stored together as the value in a <em>tuple</em>:</p>
+<p>{&#8220;item.lower()&#8221;: (&#8220;item&#8221;, value)}</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__setitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.copy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns a copy of the mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Mapping copy.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.utilities.html#colour.utilities.CaseInsensitiveMapping" title="colour.utilities.CaseInsensitiveMapping">CaseInsensitiveMapping</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#colour.utilities.data_structures.CaseInsensitiveMapping" title="colour.utilities.data_structures.CaseInsensitiveMapping"><code class="xref py py-class docutils literal"><span class="pre">CaseInsensitiveMapping</span></code></a> class copy returned is a simple
+<em>copy</em> not a <em>deepcopy</em>.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.utilities.data_structures.CaseInsensitiveMapping.data">
+<code class="descname">data</code><a class="headerlink" href="#colour.utilities.data_structures.CaseInsensitiveMapping.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.data</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping" title="colour.utilities.data_structures.ArbitraryPrecisionMapping"><code class="xref py py-class docutils literal"><span class="pre">ArbitraryPrecisionMapping</span></code></a> data structure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.data_structures.ArbitraryPrecisionMapping.data" title="colour.utilities.data_structures.ArbitraryPrecisionMapping.data"><code class="xref py py-attr docutils literal"><span class="pre">ArbitraryPrecisionMapping.data</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">lower_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.lower_items"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Iterates over the lower items names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Lower item names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.utilities.data_structures Module</a><ul>
+<li><a class="reference internal" href="#data-structures">Data Structures</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.utilities.data_structures.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.utilities.data_structures.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

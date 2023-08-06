@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.characterisation.dataset.cameras.dslr.spectral_sensitivities Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.characterisation.dataset.cameras.dslr.spectral_sensitivities">
+<span id="colour-characterisation-dataset-cameras-dslr-spectral-sensitivities-module"></span><h1>colour.characterisation.dataset.cameras.dslr.spectral_sensitivities Module<a class="headerlink" href="#module-colour.characterisation.dataset.cameras.dslr.spectral_sensitivities" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dslr-cameras-spectral-sensitivities">
+<h2>DSLR Cameras Spectral Sensitivities<a class="headerlink" href="#dslr-cameras-spectral-sensitivities" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>DSLR</em> cameras <em>RGB</em> spectral sensitivities.</p>
+<p>Each <em>DSLR</em> camera data is in the form of a <em>dict</em> of
+<a class="reference internal" href="colour.characterisation.cameras.html#colour.characterisation.cameras.RGB_SpectralSensitivities" title="colour.characterisation.cameras.RGB_SpectralSensitivities"><code class="xref py py-class docutils literal"><span class="pre">colour.characterisation.cameras.RGB_SpectralSensitivities</span></code></a> classes as
+follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>{&#39;name&#39;: RGB_SpectralSensitivities,
+...,
+&#39;name&#39;: RGB_SpectralSensitivities}
+</pre></div>
+</div>
+<p>The following <em>DSLR</em> cameras are available:</p>
+<ul class="simple">
+<li>Nikon 5100 (NPL)</li>
+<li>Sigma SDMerill (NPL)</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/characterisation/cameras.ipynb">Cameras Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Darrodi, M. M., Finlayson, G., Goodman, T., &amp; Mackiewicz, M. (2015).
+Reference data set for camera spectral sensitivity estimation.
+Journal of the Optical Society of America A, 32(3), 381.
+doi:10.1364/JOSAA.32.000381</td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.characterisation.dataset.cameras.dslr.spectral_sensitivities.DSL_CAMERAS_RGB_SPECTRAL_SENSITIVITIES">
+<code class="descclassname">colour.characterisation.dataset.cameras.dslr.spectral_sensitivities.</code><code class="descname">DSL_CAMERAS_RGB_SPECTRAL_SENSITIVITIES</code><em class="property"> = CaseInsensitiveMapping({u'Nikon 5100 (NPL)': RGB_SpectralSensitivities(     'Nikon 5100 (NPL)',     {u'x_bar': {380.0: 0.00156384299336578,                 385.0: 0.00189691771384825,                 390.0: 0.0,                 395.0: 0.0,                 400.0: 0.0,                 405.0: 0.000717767033009733,                 410.0: 0.0029239746656333,                 415.0: 0.0129362680171374,                 420.0: 0.0495978648156652,                 425.0: 0.076072504359704,                 430.0: 0.076588927082744,                 435.0: 0.0683338195603601,                 440.0: 0.0613181618964656,                 445.0: 0.0547331445778976,                 450.0: 0.0488620474370232,                 455.0: 0.042845919742574,                 460.0: 0.040228453326915,                 465.0: 0.0434079599226324,                 470.0: 0.0476202143117743,                 475.0: 0.0507718848055939,                 480.0: 0.052803295972255,                 485.0: 0.0525712202549509,                 490.0: 0.0478946390284595,                 495.0: 0.0482399417048386,                 500.0: 0.0502292408971803,                 505.0: 0.0550764973500143,                 510.0: 0.0637021190117862,                 515.0: 0.08038951305896,                 520.0: 0.100387503998312,                 525.0: 0.118613149023134,                 530.0: 0.12360875120338,                 535.0: 0.103062499327877,                 540.0: 0.0763410836067272,                 545.0: 0.052780863646409,                 550.0: 0.0411887383105865,                 555.0: 0.0390438535193105,                 560.0: 0.0425442944008912,                 565.0: 0.0602131324106802,                 570.0: 0.111796217050668,                 575.0: 0.269670597032762,                 580.0: 0.564503379906391,                 585.0: 0.853601269472614,                 590.0: 0.981032421815062,                 595.0: 1.0,                 600.0: 0.96307105371259,                 605.0: 0.905520618980431,                 610.0: 0.834278416526453,                 615.0: 0.767987337625103,                 620.0: 0.70366798041158,                 625.0: 0.639164844761237,                 630.0: 0.570812921737763,                 635.0: 0.495817961931588,                 640.0: 0.438339134523681,                 645.0: 0.388969922604069,                 650.0: 0.342956212054847,                 655.0: 0.29278541836294,                 660.0: 0.237707180731193,                 665.0: 0.164913868031785,                 670.0: 0.0912877170637715,                 675.0: 0.0420561504728359,                 680.0: 0.0205826787767838,                 685.0: 0.0102868059636961,                 690.0: 0.00540759846247262,                 695.0: 0.00272409261591003,                 700.0: 0.00127834798711079,                 705.0: 0.000781231183741323,                 710.0: 0.0004798142194027,                 715.0: 0.000491333564285711,                 720.0: 0.000174148977963402,                 725.0: 0.00012017462571764,                 730.0: 0.0,                 735.0: 6.12e-05,                 740.0: 0.0,                 745.0: 0.0,                 750.0: 0.000310997549460165,                 755.0: 0.0,                 760.0: 0.0,                 765.0: 0.0,                 770.0: 8.56e-05,                 775.0: 0.000138313728652475,                 780.0: 3.62e-05},      u'y_bar': {380.0: 0.000115,                 385.0: 0.00152114360178015,                 390.0: 0.000574304991835587,                 395.0: 0.0,                 400.0: 0.0,                 405.0: 0.00119722386224553,                 410.0: 0.00133571498448177,                 415.0: 0.0131943169605281,                 420.0: 0.0649710245124954,                 425.0: 0.115103087188289,                 430.0: 0.137065825470872,                 435.0: 0.152428525840306,                 440.0: 0.168640054507453,                 445.0: 0.183299346050496,                 450.0: 0.196032634562296,                 455.0: 0.217336532783613,                 460.0: 0.25424357380995,                 465.0: 0.308648119306499,                 470.0: 0.37346871184252,                 475.0: 0.429158061398937,                 480.0: 0.459654324321374,                 485.0: 0.471064354463943,                 490.0: 0.488856164445248,                 495.0: 0.537151781040876,                 500.0: 0.616491186958839,                 505.0: 0.707006387599689,                 510.0: 0.800964246013663,                 515.0: 0.881372566862673,                 520.0: 0.938877921198385,                 525.0: 0.984465595765236,                 530.0: 1.0,                 535.0: 0.990840265571297,                 540.0: 0.961546264629221,                 545.0: 0.928143883468773,                 550.0: 0.889102315920765,                 555.0: 0.834942229241612,                 560.0: 0.776318075001875,                 565.0: 0.707314245320565,                 570.0: 0.63579620249171,                 575.0: 0.565515284503804,                 580.0: 0.492755172535225,                 585.0: 0.424756541590758,                 590.0: 0.351789312260783,                 595.0: 0.278178498795418,                 600.0: 0.211673532499619,                 605.0: 0.15671644549433,                 610.0: 0.118039620730502,                 615.0: 0.0888524953423144,                 620.0: 0.0701018440485367,                 625.0: 0.0569089947089322,                 630.0: 0.0472987910189584,                 635.0: 0.0411958900255658,                 640.0: 0.0352520708499122,                 645.0: 0.0306931314453245,                 650.0: 0.0268039629568395,                 655.0: 0.0235243011987152,                 660.0: 0.0203463325247466,                 665.0: 0.0154584832534088,                 670.0: 0.00944075104617159,                 675.0: 0.00508102204063506,                 680.0: 0.00291019166901752,                 685.0: 0.00162657557793382,                 690.0: 0.000922515691396278,                 695.0: 0.000497433499690269,                 700.0: 0.000412159402631657,                 705.0: 0.000316926341046663,                 710.0: 0.000256214969602511,                 715.0: 0.0,                 720.0: 0.000243535188653412,                 725.0: 6.02e-05,                 730.0: 0.0,                 735.0: 0.0,                 740.0: 0.0,                 745.0: 1.71e-05,                 750.0: 5.21e-05,                 755.0: 8.85e-05,                 760.0: 0.0,                 765.0: 0.0,                 770.0: 0.000138,                 775.0: 0.000178650172705941,                 780.0: 4.25e-05},      u'z_bar': {380.0: 0.00180956039402336,                 385.0: 0.000489828145441504,                 390.0: 0.000879430691769965,                 395.0: 0.0,                 400.0: 0.00153246068848051,                 405.0: 0.00569805602282062,                 410.0: 0.0166082876987415,                 415.0: 0.0787912055921459,                 420.0: 0.361713503649949,                 425.0: 0.659704621065123,                 430.0: 0.755343600103595,                 435.0: 0.810453127073807,                 440.0: 0.87494523362473,                 445.0: 0.926712739911787,                 450.0: 0.963140880259899,                 455.0: 0.980650481335103,                 460.0: 1.0,                 465.0: 0.996404674887111,                 470.0: 0.988969886500843,                 475.0: 0.95660139953158,                 480.0: 0.904958869869808,                 485.0: 0.839409277103516,                 490.0: 0.751462595789634,                 495.0: 0.660102020322608,                 500.0: 0.567068791936138,                 505.0: 0.479350947826039,                 510.0: 0.394062738703513,                 515.0: 0.314270618794496,                 520.0: 0.24981663439426,                 525.0: 0.201823519247181,                 530.0: 0.161633950851776,                 535.0: 0.135161431473334,                 540.0: 0.109988757160433,                 545.0: 0.0863943540778938,                 550.0: 0.0652531305921984,                 555.0: 0.0478559534522756,                 560.0: 0.0341393230386094,                 565.0: 0.0240199097685193,                 570.0: 0.0197679359847675,                 575.0: 0.0163484478107301,                 580.0: 0.0138173393702026,                 585.0: 0.0119529464796671,                 590.0: 0.0100090939582009,                 595.0: 0.00758776308929658,                 600.0: 0.0064558446352165,                 605.0: 0.00522978285684488,                 610.0: 0.00365998459503787,                 615.0: 0.00395538505488667,                 620.0: 0.00396835221654468,                 625.0: 0.00349138004486037,                 630.0: 0.00404302103181797,                 635.0: 0.00418929985295813,                 640.0: 0.00554676856500058,                 645.0: 0.00546423323547744,                 650.0: 0.00597382847392099,                 655.0: 0.00630906774763779,                 660.0: 0.00610412697742268,                 665.0: 0.00483655792375416,                 670.0: 0.00302664794586985,                 675.0: 0.00172169700987675,                 680.0: 0.000780651286578176,                 685.0: 0.000569630708481841,                 690.0: 0.000275232961339382,                 695.0: 0.000296721378570686,                 700.0: 0.000249511923042029,                 705.0: 8.5e-05,                 710.0: 0.000419168950927706,                 715.0: 0.000153317434441399,                 720.0: 1.83e-05,                 725.0: 0.0,                 730.0: 0.000338693819452049,                 735.0: 0.0,                 740.0: 0.0,                 745.0: 0.000165278287340102,                 750.0: 0.000177552622145371,                 755.0: 0.0,                 760.0: 2.43e-05,                 765.0: 6.18e-05,                 770.0: 0.000262607031835065,                 775.0: 0.000280505370041919,                 780.0: 0.0}},     {u'x': u'red', u'y': u'green', u'z': u'blue'},     'Nikon 5100 (NPL)',     {u'x': u'R', u'y': u'G', u'z': u'B'}), u'Sigma SDMerill (NPL)': RGB_SpectralSensitivities(     'Sigma SDMerill (NPL)',     {u'x_bar': {400.0: 0.005621074406087,                 410.0: 0.00650335624511722,                 420.0: 0.0740791128914004,                 430.0: 0.0430229594629288,                 440.0: 0.0345095256224701,                 450.0: 0.0188915672343435,                 460.0: 0.007311076996802,                 470.0: 0.0454991512309602,                 480.0: 0.0567675292111168,                 490.0: 0.134195920659178,                 500.0: 0.164752689978376,                 510.0: 0.217126419786392,                 520.0: 0.306483438358244,                 530.0: 0.349845796148885,                 540.0: 0.443742581332593,                 550.0: 0.444888605281263,                 560.0: 0.478975756747026,                 570.0: 0.509502914810739,                 580.0: 0.592629093785305,                 590.0: 0.673833275606976,                 600.0: 0.714037714881065,                 610.0: 0.860007613114951,                 620.0: 0.898103028495652,                 630.0: 1.0,                 640.0: 0.994942133112452,                 650.0: 0.92085127736138,                 660.0: 0.181433116314253,                 670.0: 0.0063097879537275,                 680.0: 0.00528874383171553},      u'y_bar': {400.0: 0.00632809751263117,                 410.0: 0.00976180459591275,                 420.0: 0.0252717700826105,                 430.0: 0.0837511858531122,                 440.0: 0.14370381974361,                 450.0: 0.183611689308822,                 460.0: 0.40909478009953,                 470.0: 0.515955640861764,                 480.0: 0.601206646627055,                 490.0: 0.670316799801363,                 500.0: 0.752587471534758,                 510.0: 0.843813843689442,                 520.0: 0.901517245588127,                 530.0: 0.919750306687677,                 540.0: 0.967994290521578,                 550.0: 0.957252310640411,                 560.0: 0.952047918600474,                 570.0: 0.976280144583998,                 580.0: 0.972586243889558,                 590.0: 1.0,                 600.0: 0.969484527577774,                 610.0: 0.954413191248507,                 620.0: 0.933354358909213,                 630.0: 0.925714068336362,                 640.0: 0.884864395415034,                 650.0: 0.761651847416157,                 660.0: 0.140524370571505,                 670.0: 0.00414367215817646,                 680.0: 0.00183198958165669},      u'z_bar': {400.0: 0.162159424133079,                 410.0: 0.285498378046286,                 420.0: 0.396904310609021,                 430.0: 0.508310243171756,                 440.0: 0.622118472469488,                 450.0: 0.737421362457695,                 460.0: 0.94538036670138,                 470.0: 0.964414947702804,                 480.0: 1.0,                 490.0: 0.985980211884525,                 500.0: 0.98340266357529,                 510.0: 0.969692195670726,                 520.0: 0.942808174020798,                 530.0: 0.896642799180709,                 540.0: 0.884445902200419,                 550.0: 0.867918990715971,                 560.0: 0.833756795849084,                 570.0: 0.83204140240573,                 580.0: 0.800549563847782,                 590.0: 0.782895124746465,                 600.0: 0.739469530071918,                 610.0: 0.667186401749857,                 620.0: 0.620436278068167,                 630.0: 0.611160878769567,                 640.0: 0.551735561957106,                 650.0: 0.465388317445164,                 660.0: 0.0796190783672069,                 670.0: 0.000592444461072368,                 680.0: 0.00468563680483141}},     {u'x': u'red', u'y': u'green', u'z': u'blue'},     'Sigma SDMerill (NPL)',     {u'x': u'R', u'y': u'G', u'z': u'B'})})</em><a class="headerlink" href="#colour.characterisation.dataset.cameras.dslr.spectral_sensitivities.DSL_CAMERAS_RGB_SPECTRAL_SENSITIVITIES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DSLR</em> cameras <em>RGB</em> spectral sensitivities.</p>
+<dl class="docutils">
+<dt>DSL_CAMERAS_RGB_SPECTRAL_SENSITIVITIES <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{Nikon 5100 (NPL), Sigma SDMerill (NPL)}</strong></dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.characterisation.dataset.cameras.dslr.spectral_sensitivities Module</a><ul>
+<li><a class="reference internal" href="#dslr-cameras-spectral-sensitivities">DSLR Cameras Spectral Sensitivities</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.characterisation.dataset.cameras.dslr.spectral_sensitivities.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.characterisation.dataset.cameras.dslr.spectral_sensitivities.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

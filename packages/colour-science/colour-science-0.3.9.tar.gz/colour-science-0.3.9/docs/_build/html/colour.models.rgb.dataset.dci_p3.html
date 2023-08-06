@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.dataset.dci_p3 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.dataset.dci_p3">
+<span id="colour-models-rgb-dataset-dci-p3-module"></span><h1>colour.models.rgb.dataset.dci_p3 Module<a class="headerlink" href="#module-colour.models.rgb.dataset.dci_p3" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dci-p3-dci-p3-colourspaces">
+<h2>DCI-P3 &amp; DCI-P3+ Colourspaces<a class="headerlink" href="#dci-p3-dci-p3-colourspaces" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>DCI-P3</em> and <em>DCI-P3+</em> colourspaces:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_COLOURSPACE" title="colour.models.rgb.dataset.dci_p3.DCI_P3_COLOURSPACE"><code class="xref py py-attr docutils literal"><span class="pre">DCI_P3_COLOURSPACE</span></code></a>.</li>
+<li><code class="xref py py-attr docutils literal"><span class="pre">DCI_P3_p_COLOURSPACE</span></code>.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/rgb.ipynb">RGB Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Hewlett-Packard Development Company. (2009). Understanding the HP
+DreamColor LP2480zx DCI-P3 Emulation Color Space. Retrieved from
+<a class="reference external" href="http://www.hp.com/united-states/campaigns/workstations/pdfs/lp2480zx-dci--p3-emulation.pdf">http://www.hp.com/united-states/campaigns/workstations/pdfs/lp2480zx-dci&#8211;p3-emulation.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Digital Cinema Initiatives. (2007). Digital Cinema System
+Specification - Version 1.1. Retrieved from
+<a class="reference external" href="http://www.dcimovies.com/archives/spec_v1_1/DCI_DCinema_System_Spec_v1_1.pdf">http://www.dcimovies.com/archives/spec_v1_1/DCI_DCinema_System_Spec_v1_1.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Canon. (2014). EOS C500 Firmware Update. Retrieved August 27, 2016,
+from <a class="reference external" href="https://www.usa.canon.com/internet/portal/us/home/explore/product-showcases/cameras-and-lenses/cinema-eos-firmware/c500">https://www.usa.canon.com/internet/portal/us/home/explore/product-showcases/cameras-and-lenses/cinema-eos-firmware/c500</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_PRIMARIES">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_PRIMARIES</code><em class="property"> = array([[ 0.68 ,  0.32 ],        [ 0.265,  0.69 ],        [ 0.15 ,  0.06 ]])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_PRIMARIES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3</em> colourspace primaries.</p>
+<p>DCI_P3_PRIMARIES : ndarray, (3, 2)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_P_PRIMARIES">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_P_PRIMARIES</code><em class="property"> = array([[ 0.74,  0.27],        [ 0.22,  0.78],        [ 0.09, -0.09]])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_P_PRIMARIES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3+</em> colourspace primaries.</p>
+<p>DCI_P3_P_PRIMARIES : ndarray, (3, 2)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_ILLUMINANT">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_ILLUMINANT</code><em class="property"> = u'DCI-P3'</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3</em> colourspace whitepoint name as illuminant.</p>
+<p>DCI_P3_ILLUMINANT : unicode</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">DCI-P3 illuminant has no associated spectral power distribution. DCI has no
+official reference spectral measurement for this whitepoint. The closest
+matching spectral power distribution is Kinoton 75P projector.</p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_WHITEPOINT">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_WHITEPOINT</code><em class="property"> = array([ 0.314,  0.351])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_WHITEPOINT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3</em> colourspace whitepoint.</p>
+<p>DCI_P3_WHITEPOINT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_TO_XYZ_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_TO_XYZ_MATRIX</code><em class="property"> = array([[  4.45169816e-01,   2.77134409e-01,   1.72282670e-01],        [  2.09491678e-01,   7.21595254e-01,   6.89130679e-02],        [ -3.63410132e-17,   4.70605601e-02,   9.07355394e-01]])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_TO_XYZ_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3</em> colourspace to <em>CIE XYZ</em> tristimulus values matrix.</p>
+<p>DCI_P3_TO_XYZ_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.XYZ_TO_DCI_P3_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">XYZ_TO_DCI_P3_MATRIX</code><em class="property"> = array([[ 2.72539403, -1.01800301, -0.4401632 ],        [-0.79516803,  1.68973205,  0.02264719],        [ 0.04124189, -0.08763902,  1.10092938]])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.XYZ_TO_DCI_P3_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE XYZ</em> tristimulus values to <em>DCI-P3</em> colourspace matrix.</p>
+<p>XYZ_TO_DCI_P3_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_P_TO_XYZ_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_P_TO_XYZ_MATRIX</code><em class="property"> = array([[ 0.55907356,  0.24893595,  0.08657739],        [ 0.2039863 ,  0.88259109, -0.08657739],        [-0.00755505,  0.        ,  0.961971  ]])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_P_TO_XYZ_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3+</em> colourspace to <em>CIE XYZ</em> tristimulus values matrix.</p>
+<p>DCI_P3_P_TO_XYZ_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.XYZ_TO_DCI_P3_P_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">XYZ_TO_DCI_P3_P_MATRIX</code><em class="property"> = array([[ 1.99040349, -0.56139586, -0.22966194],        [-0.45849279,  1.262346  ,  0.15487549],        [ 0.01563207, -0.00440904,  1.03772867]])</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.XYZ_TO_DCI_P3_P_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE XYZ</em> tristimulus values to <em>DCI-P3+</em> colourspace matrix.</p>
+<p>XYZ_TO_DCI_P3_P_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_COLOURSPACE">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_COLOURSPACE</code><em class="property"> = &lt;colour.models.rgb.rgb_colourspace.RGB_Colourspace object&gt;</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_COLOURSPACE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3</em> colourspace.</p>
+<p>DCI_P3_COLOURSPACE : RGB_Colourspace</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.dci_p3.DCI_P3_P_COLOURSPACE">
+<code class="descclassname">colour.models.rgb.dataset.dci_p3.</code><code class="descname">DCI_P3_P_COLOURSPACE</code><em class="property"> = &lt;colour.models.rgb.rgb_colourspace.RGB_Colourspace object&gt;</em><a class="headerlink" href="#colour.models.rgb.dataset.dci_p3.DCI_P3_P_COLOURSPACE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DCI-P3+</em> colourspace.</p>
+<p>DCI_P3_P_COLOURSPACE : RGB_Colourspace</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.dataset.dci_p3 Module</a><ul>
+<li><a class="reference internal" href="#dci-p3-dci-p3-colourspaces">DCI-P3 &amp; DCI-P3+ Colourspaces</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.dataset.dci_p3.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.dataset.dci_p3.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

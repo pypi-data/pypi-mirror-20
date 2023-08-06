@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.common Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.plotting.common">
+<span id="colour-plotting-common-module"></span><h1>colour.plotting.common Module<a class="headerlink" href="#module-colour.plotting.common" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common-plotting">
+<h2>Common Plotting<a class="headerlink" href="#common-plotting" title="Permalink to this headline">¶</a></h2>
+<p>Defines the common plotting objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.plotting.common.colour_plotting_defaults" title="colour.plotting.common.colour_plotting_defaults"><code class="xref py py-func docutils literal"><span class="pre">colour_plotting_defaults()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.colour_cycle" title="colour.plotting.common.colour_cycle"><code class="xref py py-func docutils literal"><span class="pre">colour_cycle()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.canvas" title="colour.plotting.common.canvas"><code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.camera" title="colour.plotting.common.camera"><code class="xref py py-func docutils literal"><span class="pre">camera()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.decorate" title="colour.plotting.common.decorate"><code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.boundaries" title="colour.plotting.common.boundaries"><code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.display" title="colour.plotting.common.display"><code class="xref py py-func docutils literal"><span class="pre">display()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.label_rectangles" title="colour.plotting.common.label_rectangles"><code class="xref py py-func docutils literal"><span class="pre">label_rectangles()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.equal_axes3d" title="colour.plotting.common.equal_axes3d"><code class="xref py py-func docutils literal"><span class="pre">equal_axes3d()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.colour_parameters_plot" title="colour.plotting.common.colour_parameters_plot"><code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.single_colour_plot" title="colour.plotting.common.single_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">single_colour_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.common.image_plot" title="colour.plotting.common.image_plot"><code class="xref py py-func docutils literal"><span class="pre">image_plot()</span></code></a></li>
+</ul>
+<dl class="data">
+<dt id="colour.plotting.common.PLOTTING_RESOURCES_DIRECTORY">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">PLOTTING_RESOURCES_DIRECTORY</code><em class="property"> = '/Users/kelsolaar/Documents/Development/colour-science/colour/colour/plotting/resources'</em><a class="headerlink" href="#colour.plotting.common.PLOTTING_RESOURCES_DIRECTORY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resources directory.</p>
+<p>RESOURCES_DIRECTORY : unicode</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_FIGURE_ASPECT_RATIO">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_FIGURE_ASPECT_RATIO</code><em class="property"> = 0.6180339887498949</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_FIGURE_ASPECT_RATIO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default figure aspect ratio (Golden Number).</p>
+<p>DEFAULT_FIGURE_ASPECT_RATIO : float</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_FIGURE_WIDTH">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_FIGURE_WIDTH</code><em class="property"> = 18</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_FIGURE_WIDTH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default figure width.</p>
+<p>DEFAULT_FIGURE_WIDTH : integer</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_FIGURE_HEIGHT">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_FIGURE_HEIGHT</code><em class="property"> = 11.124611797498108</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_FIGURE_HEIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default figure height.</p>
+<p>DEFAULT_FIGURE_HEIGHT : integer</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_FIGURE_SIZE">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_FIGURE_SIZE</code><em class="property"> = (18, 11.124611797498108)</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_FIGURE_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default figure size.</p>
+<p>DEFAULT_FIGURE_SIZE : tuple</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_FONT_SIZE">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_FONT_SIZE</code><em class="property"> = 12</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_FONT_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default figure font size.</p>
+<p>DEFAULT_FONT_SIZE : numeric</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_COLOUR_CYCLE">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_COLOUR_CYCLE</code><em class="property"> = ('r', 'g', 'b', 'c', 'm', 'y', 'k')</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_COLOUR_CYCLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default colour cycle for plots.</p>
+<p>DEFAULT_COLOUR_CYCLE : tuple
+<strong>{&#8216;r&#8217;, &#8216;g&#8217;, &#8216;b&#8217;, &#8216;c&#8217;, &#8216;m&#8217;, &#8216;y&#8217;, &#8216;k&#8217;}</strong></p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_HATCH_PATTERNS">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_HATCH_PATTERNS</code><em class="property"> = ('\\\\', 'o', 'x', '.', '*', '//')</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_HATCH_PATTERNS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default hatch patterns for bar plots.</p>
+<p>DEFAULT_HATCH_PATTERNS : tuple
+{&#8216;\&#8217;, &#8216;o&#8217;, &#8216;x&#8217;, &#8216;.&#8217;, &#8216;*&#8217;, &#8216;//&#8217;}</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_PARAMETERS">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_PARAMETERS</code><em class="property"> = {'font.size': 12, 'figure.figsize': (18, 11.124611797498108), 'ytick.labelsize': 12, 'xtick.labelsize': 12, 'axes.titlesize': 15.0, 'legend.fontsize': 10.8, 'axes.labelsize': 15.0, 'axes.color_cycle': ('r', 'g', 'b', 'c', 'm', 'y', 'k')}</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_PARAMETERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default plotting parameters.</p>
+<p>DEFAULT_PARAMETERS : dict</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.plotting.common.DEFAULT_PLOTTING_ILLUMINANT">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_PLOTTING_ILLUMINANT</code><em class="property"> = array([ 0.3127,  0.329 ])</em><a class="headerlink" href="#colour.plotting.common.DEFAULT_PLOTTING_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default plotting illuminant: <em>CIE Illuminant D Series</em> <em>D65</em>.</p>
+<p>DEFAULT_PLOTTING_ILLUMINANT : ndarray</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.DEFAULT_PLOTTING_ENCODING_CCTF">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">DEFAULT_PLOTTING_ENCODING_CCTF</code><span class="sig-paren">(</span><em>L</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.plotting.common.DEFAULT_PLOTTING_ENCODING_CCTF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default plotting encoding colour component transfer function / opto-electronic
+transfer function: <em>sRGB</em>.</p>
+<p>DEFAULT_PLOTTING_ENCODING_CCTF : object</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.colour_plotting_defaults">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">colour_plotting_defaults</code><span class="sig-paren">(</span><em>parameters=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#colour_plotting_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.colour_plotting_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables <em>Colour</em> default plotting parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> (<em>dict, optional</em>) &#8211; Parameters to use for plotting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Definition success.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.plotting.common.ColourParameter">
+<em class="property">class </em><code class="descclassname">colour.plotting.common.</code><code class="descname">ColourParameter</code><a class="reference internal" href="_modules/colour/plotting/common.html#ColourParameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.ColourParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.plotting.common.ColourParameter" title="colour.plotting.common.ColourParameter"><code class="xref py py-class docutils literal"><span class="pre">colour.plotting.common.ColourParameter</span></code></a></p>
+<p>Defines a data structure for plotting a colour polygon in various spectral
+figures.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>unicode, optional</em>) &#8211; Colour name.</li>
+<li><strong>RGB</strong> (<em>array_like, optional</em>) &#8211; RGB Colour.</li>
+<li><strong>x</strong> (<em>numeric, optional</em>) &#8211; X data.</li>
+<li><strong>y0</strong> (<em>numeric, optional</em>) &#8211; Y0 data.</li>
+<li><strong>y1</strong> (<em>numeric, optional</em>) &#8211; Y1 data.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.colour_cycle">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">colour_cycle</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#colour_cycle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.colour_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a colour cycle iterator using given colour map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>colour_cycle_map</strong> (<em>unicode, optional</em>) &#8211;
+Matplotlib colourmap name.</li>
+<li><strong>colour_cycle_count</strong> (<em>int, optional</em>) &#8211;
+Colours count to pick in the colourmap.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Colour cycle iterator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">cycle</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.canvas">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">canvas</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#canvas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.canvas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the figure size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><strong>figure_size</strong> (<em>array_like, optional</em>) &#8211;
+Array defining figure <cite>width</cite> and <cite>height</cite> such as
+<cite>figure_size = (width, height)</cite>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Current figure.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Figure</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.camera">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">camera</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.camera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the camera settings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>camera_aspect</strong> (<em>unicode, optional</em>) &#8211;
+Matplotlib axes aspect. Default is <cite>equal</cite>.</li>
+<li><strong>elevation</strong> (<em>numeric, optional</em>) &#8211;
+Camera elevation.</li>
+<li><strong>azimuth</strong> (<em>numeric, optional</em>) &#8211;
+Camera azimuth.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current axes.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Axes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.decorate">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">decorate</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#decorate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.decorate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the figure decorations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>title</strong> (<em>unicode, optional</em>) &#8211;
+Figure title.</li>
+<li><strong>x_label</strong> (<em>unicode, optional</em>) &#8211;
+<em>X</em> axis label.</li>
+<li><strong>y_label</strong> (<em>unicode, optional</em>) &#8211;
+<em>Y</em> axis label.</li>
+<li><strong>legend</strong> (<em>bool, optional</em>) &#8211;
+Whether to display the legend. Default is <cite>False</cite>.</li>
+<li><strong>legend_columns</strong> (<em>int, optional</em>) &#8211;
+Number of columns in the legend. Default is <cite>1</cite>.</li>
+<li><strong>legend_location</strong> (<em>unicode, optional</em>) &#8211;
+Matplotlib legend location. Default is <cite>upper right</cite>.</li>
+<li><strong>x_ticker</strong> (<em>bool, optional</em>) &#8211;
+Whether to display the <em>X</em> axis ticker. Default is <cite>True</cite>.</li>
+<li><strong>y_ticker</strong> (<em>bool, optional</em>) &#8211;
+Whether to display the <em>Y</em> axis ticker. Default is <cite>True</cite>.</li>
+<li><strong>x_ticker_locator</strong> (<em>Locator, optional</em>) &#8211;
+Locator type for the <em>X</em> axis ticker.</li>
+<li><strong>y_ticker_locator</strong> (<em>Locator, optional</em>) &#8211;
+Locator type for the <em>Y</em> axis ticker.</li>
+<li><strong>grid</strong> (<em>bool, optional</em>) &#8211;
+Whether to display the grid. Default is <cite>False</cite>.</li>
+<li><strong>grid_which</strong> (<em>unicode, optional</em>) &#8211;
+Controls whether major tick grids, minor tick grids, or both are
+affected. Default is <cite>both</cite>.</li>
+<li><strong>grid_axis</strong> (<em>unicode, optional</em>) &#8211;
+Controls which set of grid-lines are drawn. Default is <cite>both</cite>.</li>
+<li><strong>x_axis_line</strong> (<em>bool, optional</em>) &#8211;
+Whether to draw the <em>X</em> axis line. Default is <cite>False</cite>.</li>
+<li><strong>y_axis_line</strong> (<em>bool, optional</em>) &#8211;
+Whether to draw the <em>Y</em> axis line. Default is <cite>False</cite>.</li>
+<li><strong>aspect</strong> (<em>unicode, optional</em>) &#8211;
+Matplotlib axes aspect.</li>
+<li><strong>no_axes</strong> (<em>bool, optional</em>) &#8211;
+Whether to turn off the axes. Default is <cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current axes.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Axes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.boundaries">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">boundaries</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#boundaries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.boundaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the plot boundaries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>bounding_box</strong> (<em>array_like, optional</em>) &#8211;
+Array defining current axes limits such
+<cite>bounding_box = (x min, x max, y min, y max)</cite>.</li>
+<li><strong>x_tighten</strong> (<em>bool, optional</em>) &#8211;
+Whether to tighten the <em>X</em> axis limit. Default is <cite>False</cite>.</li>
+<li><strong>y_tighten</strong> (<em>bool, optional</em>) &#8211;
+Whether to tighten the <em>Y</em> axis limit. Default is <cite>False</cite>.</li>
+<li><strong>limits</strong> (<em>array_like, optional</em>) &#8211;
+Array defining current axes limits such as
+<cite>limits = (x limit min, x limit max, y limit min, y limit max)</cite>.
+<cite>limits</cite> argument values are added to the <cite>margins</cite> argument values to
+define the final bounding box for the current axes.</li>
+<li><strong>margins</strong> (<em>array_like, optional</em>) &#8211;
+Array defining current axes margins such as
+<cite>margins = (x margin min, x margin max, y margin min, y margin max)</cite>.
+<cite>margins</cite> argument values are added to the <cite>limits</cite> argument values to
+define the final bounding box for the current axes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current axes.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Axes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.display">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">display</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the figure display.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>standalone</strong> (<em>bool, optional</em>) &#8211;
+Whether to show the figure.</li>
+<li><strong>filename</strong> (<em>unicode, optional</em>) &#8211;
+Figure will be saved using given <cite>filename</cite> argument.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.label_rectangles">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">label_rectangles</code><span class="sig-paren">(</span><em>rectangles</em>, <em>rotation='vertical'</em>, <em>text_size=10</em>, <em>offset=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#label_rectangles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.label_rectangles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add labels above given rectangles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rectangles</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Rectangles to used to set the labels value and position.</li>
+<li><strong>rotation</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;horizontal&#8217;, &#8216;vertical&#8217;}</strong>,
+Labels orientation.</li>
+<li><strong>text_size</strong> (<em>numeric, optional</em>) &#8211; Labels text size.</li>
+<li><strong>offset</strong> (<em>array_like, optional</em>) &#8211; Labels offset as percentages of the largest rectangle dimensions.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Definition success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.equal_axes3d">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">equal_axes3d</code><span class="sig-paren">(</span><em>axes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#equal_axes3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.equal_axes3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets equal aspect ratio to given 3d axes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>axes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Axis to set the equal aspect ratio.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Definition success.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.get_RGB_colourspace">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">get_RGB_colourspace</code><span class="sig-paren">(</span><em>colourspace</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#get_RGB_colourspace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.get_RGB_colourspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>RGB</em> colourspace with given name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>colourspace</strong> (<em>unicode</em>) &#8211; <em>RGB</em> colourspace name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>RGB</em> colourspace.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.models.html#colour.models.RGB_Colourspace" title="colour.models.RGB_Colourspace">RGB_Colourspace</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> &#8211;
+If the given <em>RGB</em> colourspace is not found in the factory <em>RGB</em>
+colourspaces.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.get_cmfs">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">get_cmfs</code><span class="sig-paren">(</span><em>cmfs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#get_cmfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.get_cmfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the colour matching functions with given name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmfs</strong> (<em>unicode</em>) &#8211; Colour matching functions name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Colour matching functions.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">RGB_ColourMatchingFunctions or XYZ_ColourMatchingFunctions</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> &#8211;
+If the given colour matching functions is not found in the factory
+colour matching functions.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.get_illuminant">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">get_illuminant</code><span class="sig-paren">(</span><em>illuminant</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#get_illuminant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.get_illuminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the illuminant with given name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>illuminant</strong> (<em>unicode</em>) &#8211; Illuminant name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Illuminant.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> &#8211;
+If the given illuminant is not found in the factory illuminants.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.colour_parameters_plot">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">colour_parameters_plot</code><span class="sig-paren">(</span><em>colour_parameters</em>, <em>y0_plot=True</em>, <em>y1_plot=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#colour_parameters_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.colour_parameters_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colour colour parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colour_parameters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) &#8211; ColourParameter sequence.</li>
+<li><strong>y0_plot</strong> (<em>bool, optional</em>) &#8211; Whether to plot <em>y0</em> line.</li>
+<li><strong>y1_plot</strong> (<em>bool, optional</em>) &#8211; Whether to plot <em>y1</em> line.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.boundaries" title="colour.plotting.common.boundaries"><code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.canvas" title="colour.plotting.common.canvas"><code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.decorate" title="colour.plotting.common.decorate"><code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code></a>,
+<a class="reference internal" href="#colour.plotting.common.display" title="colour.plotting.common.display"><code class="xref py py-func docutils literal"><span class="pre">display()</span></code></a>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cp1</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="o">=</span><span class="mi">390</span><span class="p">,</span> <span class="n">RGB</span><span class="o">=</span><span class="p">[</span><span class="mf">0.03009021</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.12300545</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp2</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="o">=</span><span class="mi">391</span><span class="p">,</span> <span class="n">RGB</span><span class="o">=</span><span class="p">[</span><span class="mf">0.03434063</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.13328537</span><span class="p">],</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp3</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="o">=</span><span class="mi">392</span><span class="p">,</span> <span class="n">RGB</span><span class="o">=</span><span class="p">[</span><span class="mf">0.03826312</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.14276247</span><span class="p">],</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp4</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="o">=</span><span class="mi">393</span><span class="p">,</span> <span class="n">RGB</span><span class="o">=</span><span class="p">[</span><span class="mf">0.04191844</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15158707</span><span class="p">],</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp5</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="o">=</span><span class="mi">394</span><span class="p">,</span> <span class="n">RGB</span><span class="o">=</span><span class="p">[</span><span class="mf">0.04535085</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15986838</span><span class="p">],</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="o">=-.</span><span class="mi">25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">colour_parameters_plot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">cp1</span><span class="p">,</span> <span class="n">cp2</span><span class="p">,</span> <span class="n">cp3</span><span class="p">,</span> <span class="n">cp3</span><span class="p">,</span> <span class="n">cp4</span><span class="p">,</span> <span class="n">cp5</span><span class="p">])</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.single_colour_plot">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">single_colour_plot</code><span class="sig-paren">(</span><em>colour_parameter</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#single_colour_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.single_colour_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>colour_parameter</strong> (<a class="reference internal" href="#colour.plotting.common.ColourParameter" title="colour.plotting.common.ColourParameter"><em>ColourParameter</em></a>) &#8211; ColourParameter.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.boundaries" title="colour.plotting.common.boundaries"><code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.canvas" title="colour.plotting.common.canvas"><code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.decorate" title="colour.plotting.common.decorate"><code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code></a>,
+<a class="reference internal" href="#colour.plotting.common.display" title="colour.plotting.common.display"><code class="xref py py-func docutils literal"><span class="pre">display()</span></code></a>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>width</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Colour polygon width.</li>
+<li><strong>height</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Colour polygon height.</li>
+<li><strong>spacing</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Colour polygons spacing.</li>
+<li><strong>across</strong> (<em>int, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Colour polygons count per row.</li>
+<li><strong>text_display</strong> (<em>bool, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Display colour text.</li>
+<li><strong>text_size</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Colour text size.</li>
+<li><strong>text_offset</strong> (<em>numeric, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.multi_colour_plot" title="colour.plotting.common.multi_colour_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_colour_plot()</span></code></a>},
+Colour text offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.32315746</span><span class="p">,</span> <span class="mf">0.32983556</span><span class="p">,</span> <span class="mf">0.33640183</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single_colour_plot</span><span class="p">(</span><span class="n">ColourParameter</span><span class="p">(</span><span class="n">RGB</span><span class="p">))</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.multi_colour_plot">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">multi_colour_plot</code><span class="sig-paren">(</span><em>colour_parameters</em>, <em>width=1</em>, <em>height=1</em>, <em>spacing=0</em>, <em>across=3</em>, <em>text_display=True</em>, <em>text_size='large'</em>, <em>text_offset=0.075</em>, <em>background_colour=(1.0</em>, <em>1.0</em>, <em>1.0)</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#multi_colour_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.multi_colour_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colours.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colour_parameters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) &#8211; ColourParameter sequence.</li>
+<li><strong>width</strong> (<em>numeric, optional</em>) &#8211; Colour polygon width.</li>
+<li><strong>height</strong> (<em>numeric, optional</em>) &#8211; Colour polygon height.</li>
+<li><strong>spacing</strong> (<em>numeric, optional</em>) &#8211; Colour polygons spacing.</li>
+<li><strong>across</strong> (<em>int, optional</em>) &#8211; Colour polygons count per row.</li>
+<li><strong>text_display</strong> (<em>bool, optional</em>) &#8211; Display colour text.</li>
+<li><strong>text_size</strong> (<em>numeric, optional</em>) &#8211; Colour text size.</li>
+<li><strong>text_offset</strong> (<em>numeric, optional</em>) &#8211; Colour text offset.</li>
+<li><strong>background_colour</strong> (<em>array_like or unicode, optional</em>) &#8211; Background colour.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.boundaries" title="colour.plotting.common.boundaries"><code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.canvas" title="colour.plotting.common.canvas"><code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.decorate" title="colour.plotting.common.decorate"><code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code></a>,
+<a class="reference internal" href="#colour.plotting.common.display" title="colour.plotting.common.display"><code class="xref py py-func docutils literal"><span class="pre">display()</span></code></a>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cp1</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span><span class="n">RGB</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45293517</span><span class="p">,</span> <span class="mf">0.31732158</span><span class="p">,</span> <span class="mf">0.26414773</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp2</span> <span class="o">=</span> <span class="n">ColourParameter</span><span class="p">(</span><span class="n">RGB</span><span class="o">=</span><span class="p">(</span><span class="mf">0.77875824</span><span class="p">,</span> <span class="mf">0.57726450</span><span class="p">,</span> <span class="mf">0.50453169</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multi_colour_plot</span><span class="p">([</span><span class="n">cp1</span><span class="p">,</span> <span class="n">cp2</span><span class="p">])</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.common.image_plot">
+<code class="descclassname">colour.plotting.common.</code><code class="descname">image_plot</code><span class="sig-paren">(</span><em>image</em>, <em>label=None</em>, <em>label_size=15</em>, <em>label_colour=None</em>, <em>label_alpha=0.85</em>, <em>interpolation='nearest'</em>, <em>colour_map=&lt;Mock name='mock.cm.Greys_r' id='4736040912'&gt;</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/common.html#image_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.common.image_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<em>array_like</em>) &#8211; Image to plot.</li>
+<li><strong>label</strong> (<em>unicode, optional</em>) &#8211; Image label.</li>
+<li><strong>label_size</strong> (<em>int, optional</em>) &#8211; Image label font size.</li>
+<li><strong>label_colour</strong> (<em>array_like or unicode, optional</em>) &#8211; Image label colour.</li>
+<li><strong>label_alpha</strong> (<em>numeric, optional</em>) &#8211; Image label alpha.</li>
+<li><strong>interpolation</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;nearest&#8217;, None, &#8216;none&#8217;, &#8216;bilinear&#8217;, &#8216;bicubic&#8217;, &#8216;spline16&#8217;,
+&#8216;spline36&#8217;, &#8216;hanning&#8217;, &#8216;hamming&#8217;, &#8216;hermite&#8217;, &#8216;kaiser&#8217;, &#8216;quadric&#8217;,
+&#8216;catrom&#8217;, &#8216;gaussian&#8217;, &#8216;bessel&#8217;, &#8216;mitchell&#8217;, &#8216;sinc&#8217;, &#8216;lanczos&#8217;}</strong>
+Image display interpolation.</li>
+<li><strong>colour_map</strong> (<em>unicode, optional</em>) &#8211; Colour map used to display single channel images.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.common.boundaries" title="colour.plotting.common.boundaries"><code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.canvas" title="colour.plotting.common.canvas"><code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code></a>, <a class="reference internal" href="#colour.plotting.common.decorate" title="colour.plotting.common.decorate"><code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code></a>,
+<a class="reference internal" href="#colour.plotting.common.display" title="colour.plotting.common.display"><code class="xref py py-func docutils literal"><span class="pre">display()</span></code></a>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colour</span> <span class="kn">import</span> <span class="n">read_image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;resources&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;CIE_1931_Chromaticity_Diagram&#39;</span>
+<span class="gp">... </span>    <span class="s1">&#39;_CIE_1931_2_Degree_Standard_Observer.png&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">read_image</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_plot</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.plotting.common Module</a><ul>
+<li><a class="reference internal" href="#common-plotting">Common Plotting</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.plotting.common.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.plotting.common.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

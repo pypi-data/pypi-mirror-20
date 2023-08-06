@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.algebra.coordinates.transformations &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.algebra.coordinates.transformations</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Coordinates System Transformations</span>
+<span class="sd">==================================</span>
+
+<span class="sd">Defines objects to apply transformations on coordinates systems.</span>
+
+<span class="sd">The following transformations are available:</span>
+
+<span class="sd">-   :func:`cartesian_to_spherical`: Cartesian to Spherical transformation.</span>
+<span class="sd">-   :func:`spherical_to_cartesian`: Spherical to Cartesian transformation.</span>
+<span class="sd">-   :func:`cartesian_to_polar`: Cartesian to Polar transformation.</span>
+<span class="sd">-   :func:`polar_to_cartesian`: Polar to Cartesian transformation.</span>
+<span class="sd">-   :func:`cartesian_to_cylindrical`: Cartesian to Cylindrical transformation.</span>
+<span class="sd">-   :func:`cylindrical_to_cartesian`: Cylindrical to Cartesian transformation.</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Wikipedia. (n.d.). List of common coordinate transformations.</span>
+<span class="sd">        Retrieved from http://en.wikipedia.org/wiki/\</span>
+<span class="sd">List_of_common_coordinate_transformations</span>
+<span class="sd">.. [2]  Wikipedia. (n.d.). ISO 31-11. misc. Retrieved from</span>
+<span class="sd">        https://en.wikipedia.org/wiki/ISO_31-11</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">tsplit</span><span class="p">,</span> <span class="n">tstack</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cartesian_to_spherical&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;spherical_to_cartesian&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;cartesian_to_polar&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;polar_to_cartesian&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;cartesian_to_cylindrical&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;cylindrical_to_cartesian&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="cartesian_to_spherical"><a class="viewcode-back" href="../../../../colour.algebra.coordinates.transformations.html#colour.cartesian_to_spherical">[docs]</a><span class="k">def</span> <span class="nf">cartesian_to_spherical</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms given Cartesian coordinates array :math:`xyz` to Spherical</span>
+<span class="sd">    coordinates array :math:`\\rho\\theta\phi` (radial distance, inclination or</span>
+<span class="sd">    elevation and azimuth).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        Cartesian coordinates array :math:`xyz` to transform.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Spherical coordinates array :math:`\\rho\\theta\phi`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    spherical_to_cartesian, cartesian_to_polar, polar_to_cartesian,</span>
+<span class="sd">    cartesian_to_cylindrical, cylindrical_to_cartesian</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([3, 1, 6])</span>
+<span class="sd">    &gt;&gt;&gt; cartesian_to_spherical(a)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 6.7823299...,  1.0857465...,  0.3217505...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="n">rtp</span> <span class="o">=</span> <span class="n">tstack</span><span class="p">((</span><span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">rtp</span></div>
+
+
+<div class="viewcode-block" id="spherical_to_cartesian"><a class="viewcode-back" href="../../../../colour.algebra.coordinates.transformations.html#colour.spherical_to_cartesian">[docs]</a><span class="k">def</span> <span class="nf">spherical_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms given Spherical coordinates array :math:`\\rho\\theta\phi`</span>
+<span class="sd">    (radial distance, inclination or elevation and azimuth) to Cartesian</span>
+<span class="sd">    coordinates array :math:`xyz`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        Spherical coordinates array :math:`\\rho\\theta\phi` to transform.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Cartesian coordinates array :math:`xyz`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    cartesian_to_spherical, cartesian_to_polar, polar_to_cartesian,</span>
+<span class="sd">    cartesian_to_cylindrical, cylindrical_to_cartesian</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([6.78232998, 1.08574654, 0.32175055])</span>
+<span class="sd">    &gt;&gt;&gt; spherical_to_cartesian(a)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 3.        ,  0.9999999...,  6.        ])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="n">xyz</span> <span class="o">=</span> <span class="n">tstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">xyz</span></div>
+
+
+<div class="viewcode-block" id="cartesian_to_polar"><a class="viewcode-back" href="../../../../colour.algebra.coordinates.transformations.html#colour.cartesian_to_polar">[docs]</a><span class="k">def</span> <span class="nf">cartesian_to_polar</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms given Cartesian coordinates array :math:`xy` to Polar</span>
+<span class="sd">    coordinates array :math:`\\rho\phi` (radial coordinate, angular</span>
+<span class="sd">    coordinate).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        Cartesian coordinates array :math:`xy` to transform.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Polar coordinates array :math:`\\rho\phi`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    cartesian_to_spherical, spherical_to_cartesian, polar_to_cartesian,</span>
+<span class="sd">    cartesian_to_cylindrical, cylindrical_to_cartesian</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([3, 1])</span>
+<span class="sd">    &gt;&gt;&gt; cartesian_to_polar(a)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 3.1622776...,  0.3217505...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tstack</span><span class="p">((</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="polar_to_cartesian"><a class="viewcode-back" href="../../../../colour.algebra.coordinates.transformations.html#colour.polar_to_cartesian">[docs]</a><span class="k">def</span> <span class="nf">polar_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms given Polar coordinates array :math:`\\rho\phi` (radial</span>
+<span class="sd">    coordinate, angular coordinate) to Cartesian coordinates array :math:`xy`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        Polar coordinates array :math:`\\rho\phi` to transform.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Cartesian coordinates array :math:`xy`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    cartesian_to_spherical, spherical_to_cartesian, cartesian_to_polar,</span>
+<span class="sd">    cartesian_to_cylindrical, cylindrical_to_cartesian</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([3.16227766, 0.32175055])</span>
+<span class="sd">    &gt;&gt;&gt; polar_to_cartesian(a)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 3.        ,  0.9999999...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rho</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="cartesian_to_cylindrical"><a class="viewcode-back" href="../../../../colour.algebra.coordinates.transformations.html#colour.cartesian_to_cylindrical">[docs]</a><span class="k">def</span> <span class="nf">cartesian_to_cylindrical</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms given Cartesian coordinates array :math:`xyz` to Cylindrical</span>
+<span class="sd">    coordinates array :math:`\\rho\phi z` (azimuth, radial distance and</span>
+<span class="sd">    height).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        Cartesian coordinates array :math:`xyz` to transform.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Cylindrical coordinates array :math:`\\rho\phi z`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    cartesian_to_spherical, spherical_to_cartesian, cartesian_to_polar,</span>
+<span class="sd">    polar_to_cartesian, cylindrical_to_cartesian</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([3, 1, 6])</span>
+<span class="sd">    &gt;&gt;&gt; cartesian_to_cylindrical(a)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 3.1622776...,  0.3217505...,  6.        ])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">rho</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">cartesian_to_polar</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">tstack</span><span class="p">((</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="cylindrical_to_cartesian"><a class="viewcode-back" href="../../../../colour.algebra.coordinates.transformations.html#colour.cylindrical_to_cartesian">[docs]</a><span class="k">def</span> <span class="nf">cylindrical_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms given Cylindrical coordinates array :math:`\\rho\phi z`</span>
+<span class="sd">    (azimuth, radial distance and height) to Cartesian coordinates array</span>
+<span class="sd">    :math:`xyz`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : array_like</span>
+<span class="sd">        Cylindrical coordinates array :math:`\\rho\phi z` to transform.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Cartesian coordinates array :math:`xyz`.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    cartesian_to_spherical, spherical_to_cartesian, cartesian_to_polar,</span>
+<span class="sd">    polar_to_cartesian, cartesian_to_cylindrical</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = np.array([3.16227766, 0.32175055, 6.00000000])</span>
+<span class="sd">    &gt;&gt;&gt; cylindrical_to_cartesian(a)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 3.        ,  0.9999999...,  6.        ])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">polar_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">tstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

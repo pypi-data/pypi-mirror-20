@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.ictcp &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.ictcp</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:math:`IC_TC_P` Colour Encoding</span>
+<span class="sd">===============================</span>
+
+<span class="sd">Defines the :math:`IC_TC_P` colour encoding related transformations:</span>
+
+<span class="sd">-   :func:`RGB_to_ICTCP`</span>
+<span class="sd">-   :func:`ICTCP_to_RGB`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`ICTCP Colourspace Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/ictcp.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Dolby. (2016). WHAT IS ICTCP? - INTRODUCTION. Retrieved from</span>
+<span class="sd">        https://www.dolby.com/us/en/technologies/dolby-vision/\</span>
+<span class="sd">ICtCp-white-paper.pdf</span>
+<span class="sd">.. [2]  Lu, T., Pu, F., Yin, P., Chen, T., Husak, W., Pytlarz, J., … Su, G.-M.</span>
+<span class="sd">        (2016). ICTCP Colour Space and Its Compression Performance for High</span>
+<span class="sd">        Dynamic Range and Wide Colour Gamut Video Distribution. ZTE</span>
+<span class="sd">        Communications, 14(1), 32–38. doi:10.3969/j.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.models.rgb.transfer_functions</span> <span class="kn">import</span> <span class="n">oetf_ST2084</span><span class="p">,</span> <span class="n">eotf_ST2084</span>
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">dot_vector</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ICTCP_RGB_TO_LMS_MATRIX&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ICTCP_LMS_TO_RGB_MATRIX&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ICTCP_LMS_P_TO_ICTCP_MATRIX&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ICTCP_ICTCP_TO_LMS_P_MATRIX&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RGB_to_ICTCP&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;ICTCP_to_RGB&#39;</span><span class="p">]</span>
+
+<span class="n">ICTCP_RGB_TO_LMS_MATRIX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1688</span><span class="p">,</span> <span class="mi">2146</span><span class="p">,</span> <span class="mi">262</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">683</span><span class="p">,</span> <span class="mi">2951</span><span class="p">,</span> <span class="mi">462</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">309</span><span class="p">,</span> <span class="mi">3688</span><span class="p">]])</span> <span class="o">/</span> <span class="mi">4096</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">*Rec. 2020* colourspace to normalised cone responses matrix.</span>
+
+<span class="sd">ICTCP_RGB_TO_LMS_MATRIX : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">ICTCP_LMS_TO_RGB_MATRIX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">ICTCP_RGB_TO_LMS_MATRIX</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:math:`IC_TC_P` colourspace normalised cone responses to *Rec. 2020*</span>
+<span class="sd">colourspace matrix.</span>
+
+<span class="sd">ICTCP_LMS_TO_RGB_MATRIX : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">ICTCP_LMS_P_TO_ICTCP_MATRIX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">6610</span><span class="p">,</span> <span class="o">-</span><span class="mi">13613</span><span class="p">,</span> <span class="mi">7003</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">17933</span><span class="p">,</span> <span class="o">-</span><span class="mi">17390</span><span class="p">,</span> <span class="o">-</span><span class="mi">543</span><span class="p">]])</span> <span class="o">/</span> <span class="mi">4096</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:math:`LMS_p` *SMPTE ST 2084:2014* encoded normalised cone responses to</span>
+<span class="sd">:math:`IC_TC_P` colour encoding matrix.</span>
+
+<span class="sd">ICTCP_LMS_P_TO_ICTCP_MATRIX : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">ICTCP_ICTCP_TO_LMS_P_MATRIX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">ICTCP_LMS_P_TO_ICTCP_MATRIX</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:math:`IC_TC_P` colour encoding to :math:`LMS_p` *SMPTE ST 2084:2014* encoded</span>
+<span class="sd">normalised cone responses matrix.</span>
+
+<span class="sd">ICTCP_ICTCP_TO_LMS_P_MATRIX : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="RGB_to_ICTCP"><a class="viewcode-back" href="../../../../colour.models.rgb.ictcp.html#colour.RGB_to_ICTCP">[docs]</a><span class="k">def</span> <span class="nf">RGB_to_ICTCP</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span> <span class="n">L_p</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts from *Rec. 2020* colourspace to :math:`IC_TC_P` colour encoding.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like</span>
+<span class="sd">        *Rec. 2020* colourspace array.</span>
+<span class="sd">    L_p : numeric, optional</span>
+<span class="sd">        Display peak luminance :math:`cd/m^2` for *SMPTE ST 2084:2014*</span>
+<span class="sd">        non-linear encoding.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        :math:`IC_TC_P` colour encoding array.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.array([0.35181454, 0.26934757, 0.21288023])</span>
+<span class="sd">    &gt;&gt;&gt; RGB_to_ICTCP(RGB)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 0.0955407..., -0.0089063...,  0.0138928...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">LMS</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">ICTCP_RGB_TO_LMS_MATRIX</span><span class="p">,</span> <span class="n">RGB</span><span class="p">)</span>
+    <span class="n">LMS_p</span> <span class="o">=</span> <span class="n">oetf_ST2084</span><span class="p">(</span><span class="n">LMS</span><span class="p">,</span> <span class="n">L_p</span><span class="p">)</span>
+    <span class="n">ICTCP</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">ICTCP_LMS_P_TO_ICTCP_MATRIX</span><span class="p">,</span> <span class="n">LMS_p</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ICTCP</span></div>
+
+
+<div class="viewcode-block" id="ICTCP_to_RGB"><a class="viewcode-back" href="../../../../colour.models.rgb.ictcp.html#colour.ICTCP_to_RGB">[docs]</a><span class="k">def</span> <span class="nf">ICTCP_to_RGB</span><span class="p">(</span><span class="n">ICTCP</span><span class="p">,</span> <span class="n">L_p</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts from :math:`IC_TC_P` colour encoding to *Rec. 2020* colourspace.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ICTCP : array_like</span>
+<span class="sd">        :math:`IC_TC_P` colour encoding array.</span>
+<span class="sd">    L_p : numeric, optional</span>
+<span class="sd">        Display peak luminance :math:`cd/m^2` for *SMPTE ST 2084:2014*</span>
+<span class="sd">        non-linear encoding.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *Rec. 2020* colourspace array.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; ICTCP = np.array([0.09554079, -0.00890639, 0.01389286])</span>
+<span class="sd">    &gt;&gt;&gt; ICTCP_to_RGB(ICTCP)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 0.3518145...,  0.2693475...,  0.2128802...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">LMS_p</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">ICTCP_ICTCP_TO_LMS_P_MATRIX</span><span class="p">,</span> <span class="n">ICTCP</span><span class="p">)</span>
+    <span class="n">LMS</span> <span class="o">=</span> <span class="n">eotf_ST2084</span><span class="p">(</span><span class="n">LMS_p</span><span class="p">,</span> <span class="n">L_p</span><span class="p">)</span>
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">ICTCP_LMS_TO_RGB_MATRIX</span><span class="p">,</span> <span class="n">LMS</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">RGB</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

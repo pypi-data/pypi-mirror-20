@@ -1,0 +1,1079 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.algebra Package &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="colour-algebra-package">
+<h1>colour.algebra Package<a class="headerlink" href="#colour-algebra-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sub-packages">
+<h2>Sub-Packages<a class="headerlink" href="#sub-packages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.coordinates.html">colour.algebra.coordinates Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.coordinates.html#sub-modules">Sub-Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="colour.algebra.coordinates.transformations.html">colour.algebra.coordinates.transformations Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="colour.algebra.coordinates.transformations.html#coordinates-system-transformations">Coordinates System Transformations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.coordinates.html#module-colour.algebra.coordinates">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sub-modules">
+<h2>Sub-Modules<a class="headerlink" href="#sub-modules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.extrapolation.html">colour.algebra.extrapolation Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.extrapolation.html#extrapolation">Extrapolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.geometry.html">colour.algebra.geometry Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.geometry.html#geometry">Geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.interpolation.html">colour.algebra.interpolation Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.interpolation.html#interpolation">Interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.matrix.html">colour.algebra.matrix Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.matrix.html#matrix-helpers">Matrix Helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.algebra.random.html">colour.algebra.random Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.algebra.random.html#random-numbers-utilities">Random Numbers Utilities</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-colour.algebra">
+<span id="module-contents"></span><h2>Module Contents<a class="headerlink" href="#module-colour.algebra" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="colour.algebra.cartesian_to_spherical">
+<code class="descclassname">colour.algebra.</code><code class="descname">cartesian_to_spherical</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cartesian_to_spherical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.cartesian_to_spherical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cartesian coordinates array <span class="math">\(xyz\)</span> to Spherical
+coordinates array <span class="math">\(\rho\theta\phi\)</span> (radial distance, inclination or
+elevation and azimuth).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cartesian coordinates array <span class="math">\(xyz\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Spherical coordinates array <span class="math">\(\rho\theta\phi\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.spherical_to_cartesian" title="colour.algebra.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_polar" title="colour.algebra.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.polar_to_cartesian" title="colour.algebra.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_cylindrical" title="colour.algebra.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.cylindrical_to_cartesian" title="colour.algebra.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartesian_to_spherical</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 6.7823299...,  1.0857465...,  0.3217505...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.spherical_to_cartesian">
+<code class="descclassname">colour.algebra.</code><code class="descname">spherical_to_cartesian</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#spherical_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.spherical_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Spherical coordinates array <span class="math">\(\rho\theta\phi\)</span>
+(radial distance, inclination or elevation and azimuth) to Cartesian
+coordinates array <span class="math">\(xyz\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Spherical coordinates array <span class="math">\(\rho\theta\phi\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cartesian coordinates array <span class="math">\(xyz\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.cartesian_to_spherical" title="colour.algebra.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_polar" title="colour.algebra.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.polar_to_cartesian" title="colour.algebra.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_cylindrical" title="colour.algebra.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.cylindrical_to_cartesian" title="colour.algebra.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.78232998</span><span class="p">,</span> <span class="mf">1.08574654</span><span class="p">,</span> <span class="mf">0.32175055</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spherical_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.        ,  0.9999999...,  6.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.cartesian_to_polar">
+<code class="descclassname">colour.algebra.</code><code class="descname">cartesian_to_polar</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cartesian_to_polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.cartesian_to_polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cartesian coordinates array <span class="math">\(xy\)</span> to Polar
+coordinates array <span class="math">\(\rho\phi\)</span> (radial coordinate, angular
+coordinate).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cartesian coordinates array <span class="math">\(xy\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Polar coordinates array <span class="math">\(\rho\phi\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.cartesian_to_spherical" title="colour.algebra.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.spherical_to_cartesian" title="colour.algebra.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.polar_to_cartesian" title="colour.algebra.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_cylindrical" title="colour.algebra.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.cylindrical_to_cartesian" title="colour.algebra.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartesian_to_polar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.1622776...,  0.3217505...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.polar_to_cartesian">
+<code class="descclassname">colour.algebra.</code><code class="descname">polar_to_cartesian</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#polar_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.polar_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Polar coordinates array <span class="math">\(\rho\phi\)</span> (radial
+coordinate, angular coordinate) to Cartesian coordinates array <span class="math">\(xy\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Polar coordinates array <span class="math">\(\rho\phi\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cartesian coordinates array <span class="math">\(xy\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.cartesian_to_spherical" title="colour.algebra.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.spherical_to_cartesian" title="colour.algebra.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_polar" title="colour.algebra.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_cylindrical" title="colour.algebra.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a>, <a class="reference internal" href="#colour.algebra.cylindrical_to_cartesian" title="colour.algebra.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.16227766</span><span class="p">,</span> <span class="mf">0.32175055</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">polar_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.        ,  0.9999999...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.cartesian_to_cylindrical">
+<code class="descclassname">colour.algebra.</code><code class="descname">cartesian_to_cylindrical</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cartesian_to_cylindrical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.cartesian_to_cylindrical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cartesian coordinates array <span class="math">\(xyz\)</span> to Cylindrical
+coordinates array <span class="math">\(\rho\phi z\)</span> (azimuth, radial distance and
+height).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cartesian coordinates array <span class="math">\(xyz\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cylindrical coordinates array <span class="math">\(\rho\phi z\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.cartesian_to_spherical" title="colour.algebra.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.spherical_to_cartesian" title="colour.algebra.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_polar" title="colour.algebra.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.polar_to_cartesian" title="colour.algebra.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cylindrical_to_cartesian" title="colour.algebra.cylindrical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">cylindrical_to_cartesian()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartesian_to_cylindrical</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.1622776...,  0.3217505...,  6.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.cylindrical_to_cartesian">
+<code class="descclassname">colour.algebra.</code><code class="descname">cylindrical_to_cartesian</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/coordinates/transformations.html#cylindrical_to_cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.cylindrical_to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms given Cylindrical coordinates array <span class="math">\(\rho\phi z\)</span>
+(azimuth, radial distance and height) to Cartesian coordinates array
+<span class="math">\(xyz\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Cylindrical coordinates array <span class="math">\(\rho\phi z\)</span> to transform.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cartesian coordinates array <span class="math">\(xyz\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.cartesian_to_spherical" title="colour.algebra.cartesian_to_spherical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_spherical()</span></code></a>, <a class="reference internal" href="#colour.algebra.spherical_to_cartesian" title="colour.algebra.spherical_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">spherical_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_polar" title="colour.algebra.cartesian_to_polar"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_polar()</span></code></a>, <a class="reference internal" href="#colour.algebra.polar_to_cartesian" title="colour.algebra.polar_to_cartesian"><code class="xref py py-func docutils literal"><span class="pre">polar_to_cartesian()</span></code></a>, <a class="reference internal" href="#colour.algebra.cartesian_to_cylindrical" title="colour.algebra.cartesian_to_cylindrical"><code class="xref py py-func docutils literal"><span class="pre">cartesian_to_cylindrical()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.16227766</span><span class="p">,</span> <span class="mf">0.32175055</span><span class="p">,</span> <span class="mf">6.00000000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cylindrical_to_cartesian</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 3.        ,  0.9999999...,  6.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.algebra.Extrapolator">
+<em class="property">class </em><code class="descclassname">colour.algebra.</code><code class="descname">Extrapolator</code><span class="sig-paren">(</span><em>interpolator=None</em>, <em>method=u'Linear'</em>, <em>left=None</em>, <em>right=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/extrapolation.html#Extrapolator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.Extrapolator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Extrapolates the 1-D function of given interpolator.</p>
+<p>The <a class="reference internal" href="#colour.algebra.Extrapolator" title="colour.algebra.Extrapolator"><code class="xref py py-class docutils literal"><span class="pre">Extrapolator</span></code></a> class acts as a wrapper around a given <em>Colour</em>
+or <em>scipy</em> interpolator class instance with compatible signature.
+Two extrapolation methods are available:</p>
+<ul class="simple">
+<li><em>Linear</em>: Linearly extrapolates given points using the slope defined by
+the interpolator boundaries (xi[0], xi[1]) if x &lt; xi[0] and
+(xi[-1], xi[-2]) if x &gt; xi[-1].</li>
+<li><em>Constant</em>: Extrapolates given points by assigning the interpolator
+boundaries values xi[0] if x &lt; xi[0] and xi[-1] if x &gt; xi[-1].</li>
+</ul>
+<p>Specifying the <em>left</em> and <em>right</em> arguments takes precedence on the chosen
+extrapolation method and will assign the respective <em>left</em> and <em>right</em>
+values to the given points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>interpolator</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Interpolator object.</li>
+<li><strong>method</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;Linear&#8217;, &#8216;Constant&#8217;}</strong>,
+Extrapolation method.</li>
+<li><strong>left</strong> (<em>numeric, optional</em>) &#8211; Value to return for x &lt; xi[0].</li>
+<li><strong>right</strong> (<em>numeric, optional</em>) &#8211; Value to return for x &gt; xi[-1].</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.algebra.Extrapolator.__class__">
+<code class="descname">__class__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.algebra.Extrapolator.__class__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Notes</p>
+<p>The interpolator must define <em>x</em> and <em>y</em> attributes.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>sastanin. (n.d.). How to make scipy.interpolate give an
+extrapolated result beyond the input range? Retrieved August 08,
+2014, from <a class="reference external" href="http://stackoverflow.com/a/2745496/931625">http://stackoverflow.com/a/2745496/931625</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Extrapolating a single numeric variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colour.algebra</span> <span class="kn">import</span> <span class="n">LinearInterpolator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interpolator</span> <span class="o">=</span> <span class="n">LinearInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span> <span class="o">=</span> <span class="n">Extrapolator</span><span class="p">(</span><span class="n">interpolator</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">-1.0</span>
+</pre></div>
+</div>
+<p>Extrapolating an <em>array_like</em> variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span> <span class="p">,</span> <span class="mi">8</span><span class="p">]))</span>
+<span class="go">array([ 4.,  5.,  6.])</span>
+</pre></div>
+</div>
+<p>Using the <em>Constant</em> extrapolation method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interpolator</span> <span class="o">=</span> <span class="n">LinearInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span> <span class="o">=</span> <span class="n">Extrapolator</span><span class="p">(</span><span class="n">interpolator</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Constant&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
+<span class="go">array([ 1.,  1.,  3.,  3.])</span>
+</pre></div>
+</div>
+<p>Using defined <em>left</em> boundary and <em>Constant</em> extrapolation method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interpolator</span> <span class="o">=</span> <span class="n">LinearInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span> <span class="o">=</span> <span class="n">Extrapolator</span><span class="p">(</span><span class="n">interpolator</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Constant&#39;</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extrapolator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
+<span class="go">array([ 0.,  0.,  3.,  3.])</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="colour.algebra.Extrapolator.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/extrapolation.html#Extrapolator.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.Extrapolator.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the Extrapolator at given point(s).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Point(s) to evaluate the Extrapolator at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Extrapolated points value(s).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.Extrapolator.interpolator">
+<code class="descname">interpolator</code><a class="headerlink" href="#colour.algebra.Extrapolator.interpolator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self._interpolator</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self._interpolator</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.Extrapolator.left">
+<code class="descname">left</code><a class="headerlink" href="#colour.algebra.Extrapolator.left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self._left</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self._left</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numeric</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.Extrapolator.method">
+<code class="descname">method</code><a class="headerlink" href="#colour.algebra.Extrapolator.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self._method</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self._method</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.Extrapolator.right">
+<code class="descname">right</code><a class="headerlink" href="#colour.algebra.Extrapolator.right" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self._right</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self._right</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numeric</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.normalise_vector">
+<code class="descclassname">colour.algebra.</code><code class="descname">normalise_vector</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#normalise_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.normalise_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalises given vector <span class="math">\(a\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Vector <span class="math">\(a\)</span> to normalise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Normalised vector <span class="math">\(a\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalise_vector</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 0.4525410...,  0.6470802...,  0.6135908...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.euclidean_distance">
+<code class="descclassname">colour.algebra.</code><code class="descname">euclidean_distance</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#euclidean_distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.euclidean_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the euclidean distance between point arrays <span class="math">\(a\)</span> and
+<span class="math">\(b\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(b\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Euclidean distance.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.00000000</span><span class="p">,</span> <span class="mf">21.57210357</span><span class="p">,</span> <span class="mf">272.22819350</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.00000000</span><span class="p">,</span> <span class="mf">426.67945353</span><span class="p">,</span> <span class="mf">72.39590835</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">euclidean_distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">451.7133019...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.extend_line_segment">
+<code class="descclassname">colour.algebra.</code><code class="descname">extend_line_segment</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>distance=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#extend_line_segment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.extend_line_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends the line segment defined by point arrays <span class="math">\(a\)</span> and <span class="math">\(b\)</span> by
+given distance and return the new end point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>array_like</em>) &#8211; Point array <span class="math">\(b\)</span>.</li>
+<li><strong>distance</strong> (<em>numeric, optional</em>) &#8211; Distance to extend the line segment.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">New end point.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Saeedn. (n.d.). Extend a line segment a specific distance.
+Retrieved January 16, 2016, from <a class="reference external" href="http://stackoverflow.com/questions/7740507/extend-a-line-segment-a-specific-distance">http://stackoverflow.com/questions/7740507/extend-a-line-segment-a-specific-distance</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input line segment points coordinates are 2d coordinates.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.95694934</span><span class="p">,</span> <span class="mf">0.13720932</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.28382835</span><span class="p">,</span> <span class="mf">0.60608318</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extend_line_segment</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">array([-0.5367248...,  1.1776534...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.algebra.LineSegmentsIntersections_Specification">
+<em class="property">class </em><code class="descclassname">colour.algebra.</code><code class="descname">LineSegmentsIntersections_Specification</code><a class="reference internal" href="_modules/colour/algebra/geometry.html#LineSegmentsIntersections_Specification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.LineSegmentsIntersections_Specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="colour.algebra.geometry.html#colour.algebra.geometry.LineSegmentsIntersections_Specification" title="colour.algebra.geometry.LineSegmentsIntersections_Specification"><code class="xref py py-class docutils literal"><span class="pre">colour.algebra.geometry.LineSegmentsIntersections_Specification</span></code></a></p>
+<p>Defines the specification for intersection of line segments <span class="math">\(l_1\)</span> and
+<span class="math">\(l_2\)</span> returned by <a class="reference internal" href="#colour.algebra.intersect_line_segments" title="colour.algebra.intersect_line_segments"><code class="xref py py-func docutils literal"><span class="pre">intersect_line_segments()</span></code></a> definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>xy</strong> (<em>array_like</em>) &#8211; Array of <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span> line segments intersections
+coordinates. Non existing segments intersections coordinates are set
+with <cite>np.nan</cite>.</li>
+<li><strong>intersect</strong> (<em>array_like</em>) &#8211; Array of <em>bool</em> indicating if line segments <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span>
+intersect.</li>
+<li><strong>parallel</strong> (<em>array_like</em>) &#8211; Array of <em>bool</em> indicating if line segments <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span>
+are parallel.</li>
+<li><strong>coincident</strong> (<em>array_like</em>) &#8211; Array of <em>bool</em> indicating if line segments <span class="math">\(l_1\)</span> and <span class="math">\(l_2\)</span>
+are coincident.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.intersect_line_segments">
+<code class="descclassname">colour.algebra.</code><code class="descname">intersect_line_segments</code><span class="sig-paren">(</span><em>l_1</em>, <em>l_2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/geometry.html#intersect_line_segments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.intersect_line_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes <span class="math">\(l_1\)</span> line segments intersections with <span class="math">\(l_2\)</span> line
+segments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l_1</strong> (<em>array_like</em>) &#8211; <span class="math">\(l_1\)</span> line segments array, each row is a line segment such as
+(<span class="math">\(x_1\)</span>, <span class="math">\(y_1\)</span>, <span class="math">\(x_2\)</span>, <span class="math">\(y_2\)</span>) where
+(<span class="math">\(x_1\)</span>, <span class="math">\(y_1\)</span>) and (<span class="math">\(x_2\)</span>, <span class="math">\(y_2\)</span>) are
+respectively the start and end points of <span class="math">\(l_1\)</span> line segments.</li>
+<li><strong>l_2</strong> (<em>array_like</em>) &#8211; <span class="math">\(l_2\)</span> line segments array, each row is a line segment such as
+(<span class="math">\(x_3\)</span>, <span class="math">\(y_3\)</span>, <span class="math">\(x_4\)</span>, <span class="math">\(y_4\)</span>) where
+(<span class="math">\(x_3\)</span>, <span class="math">\(y_3\)</span>) and (<span class="math">\(x_4\)</span>, <span class="math">\(y_4\)</span>) are
+respectively the start and end points of <span class="math">\(l_2\)</span> line segments.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Line segments intersections specification.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#colour.algebra.LineSegmentsIntersections_Specification" title="colour.algebra.LineSegmentsIntersections_Specification">LineSegmentsIntersections_Specification</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Bourke, P. (n.d.). Intersection point of two line segments in 2
+dimensions. Retrieved January 15, 2016, from
+<a class="reference external" href="http://paulbourke.net/geometry/pointlineplane/">http://paulbourke.net/geometry/pointlineplane/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Erdem, U. M. (n.d.). Fast Line Segment Intersection. Retrieved
+January 15, 2016, from
+<a class="reference external" href="http://www.mathworks.com/matlabcentral/fileexchange/27205-fast-line-segment-intersection">http://www.mathworks.com/matlabcentral/fileexchange/27205-fast-line-segment-intersection</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input line segments points coordinates are 2d coordinates.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">0.15416284</span><span class="p">,</span> <span class="mf">0.7400497</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.26331502</span><span class="p">,</span> <span class="mf">0.53373939</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mf">0.01457496</span><span class="p">,</span> <span class="mf">0.91874701</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.90071485</span><span class="p">,</span> <span class="mf">0.03342143</span><span class="p">]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">0.95694934</span><span class="p">,</span> <span class="mf">0.13720932</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.28382835</span><span class="p">,</span> <span class="mf">0.60608318</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mf">0.94422514</span><span class="p">,</span> <span class="mf">0.85273554</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.00225923</span><span class="p">,</span> <span class="mf">0.52122603</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mf">0.55203763</span><span class="p">,</span> <span class="mf">0.48537741</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.76813415</span><span class="p">,</span> <span class="mf">0.16071675</span><span class="p">]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">intersect_line_segments</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span> <span class="n">l_2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">xy</span>  
+<span class="go">array([[[        nan,         nan],</span>
+<span class="go">        [ 0.2279184...,  0.6006430...],</span>
+<span class="go">        [        nan,         nan]],</span>
+
+<span class="go">       [[ 0.4281451...,  0.5055568...],</span>
+<span class="go">        [ 0.3056055...,  0.6279838...],</span>
+<span class="go">        [ 0.7578749...,  0.1761301...]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">intersect</span>
+<span class="go">array([[False,  True, False],</span>
+<span class="go">       [ True,  True,  True]], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">parallel</span>
+<span class="go">array([[False, False, False],</span>
+<span class="go">       [False, False, False]], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">coincident</span>
+<span class="go">array([[False, False, False],</span>
+<span class="go">       [False, False, False]], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.algebra.LinearInterpolator">
+<em class="property">class </em><code class="descclassname">colour.algebra.</code><code class="descname">LinearInterpolator</code><span class="sig-paren">(</span><em>x=None</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#LinearInterpolator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.LinearInterpolator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Linearly interpolates a 1-D function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>ndarray</em>) &#8211; Independent <span class="math">\(x\)</span> variable values corresponding with <span class="math">\(y\)</span>
+variable.</li>
+<li><strong>y</strong> (<em>ndarray</em>) &#8211; Dependent and already known <span class="math">\(y\)</span> variable values to
+interpolate.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.algebra.LinearInterpolator.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#LinearInterpolator.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.LinearInterpolator.__call__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Notes</p>
+<p>This class is a wrapper around <em>numpy.interp</em> definition.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.SpragueInterpolator" title="colour.algebra.SpragueInterpolator"><code class="xref py py-class docutils literal"><span class="pre">SpragueInterpolator</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Interpolating a single numeric variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.9200</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">9.3700</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">10.8135</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">4.5100</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">69.5900</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">27.8007</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">86.0500</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">LinearInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests ellipsis for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  
+<span class="go">7.64...</span>
+</pre></div>
+</div>
+<p>Interpolating an <em>array_like</em> variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+<span class="go">array([ 6.7825,  8.5075])</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#LinearInterpolator.__call__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Evaluates the interpolating polynomial at given point(s).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Point(s) to evaluate the interpolant at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpolated value(s).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.LinearInterpolator.x">
+<code class="descname">x</code><a class="headerlink" href="#colour.algebra.LinearInterpolator.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.__x</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.__x</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.LinearInterpolator.y">
+<code class="descname">y</code><a class="headerlink" href="#colour.algebra.LinearInterpolator.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.__y</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.__y</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.algebra.SpragueInterpolator">
+<em class="property">class </em><code class="descclassname">colour.algebra.</code><code class="descname">SpragueInterpolator</code><span class="sig-paren">(</span><em>x=None</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#SpragueInterpolator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.SpragueInterpolator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Constructs a fifth-order polynomial that passes through <span class="math">\(y\)</span> dependent
+variable.</p>
+<p><em>Sprague (1880)</em> method is recommended by the <em>CIE</em> for interpolating
+functions having a uniformly spaced independent variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Independent <span class="math">\(x\)</span> variable values corresponding with <span class="math">\(y\)</span>
+variable.</li>
+<li><strong>y</strong> (<em>array_like</em>) &#8211; Dependent and already known <span class="math">\(y\)</span> variable values to
+interpolate.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.algebra.SpragueInterpolator.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#SpragueInterpolator.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.SpragueInterpolator.__call__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.algebra.LinearInterpolator" title="colour.algebra.LinearInterpolator"><code class="xref py py-class docutils literal"><span class="pre">LinearInterpolator</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The minimum number <span class="math">\(k\)</span> of data points required along the
+interpolation axis is <span class="math">\(k=6\)</span>.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>CIE TC 1-38. (2005). 9.2.4 Method of interpolation for uniformly
+spaced independent variable. In CIE 167:2005 Recommended Practice
+for Tabulating Spectral Data for Use in Colour Computations
+(pp. 1–27). ISBN:978-3-901-90641-1</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Westland, S., Ripamonti, C., &amp; Cheung, V. (2012). Interpolation
+Methods. In Computational Colour Science Using MATLAB
+(2nd ed., pp. 29–37). ISBN:978-0-470-66569-5</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Interpolating a single numeric variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.9200</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">9.3700</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">10.8135</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">4.5100</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">69.5900</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">27.8007</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">86.0500</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">SpragueInterpolator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  
+<span class="go">7.2185025...</span>
+</pre></div>
+</div>
+<p>Interpolating an <em>array_like</em> variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>  
+<span class="go">array([ 6.7295161...,  7.8140625...])</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="colour.algebra.SpragueInterpolator.SPRAGUE_C_COEFFICIENTS">
+<code class="descname">SPRAGUE_C_COEFFICIENTS</code><em class="property"> = array([[  884, -1960,  3033, -2648,  1080,  -180],        [  508,  -540,   488,  -367,   144,   -24],        [  -24,   144,  -367,   488,  -540,   508],        [ -180,  1080, -2648,  3033, -1960,   884]])</em><a class="headerlink" href="#colour.algebra.SpragueInterpolator.SPRAGUE_C_COEFFICIENTS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#SpragueInterpolator.__call__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Evaluates the interpolating polynomial at given point(s).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Point(s) to evaluate the interpolant at.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Interpolated value(s).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.SpragueInterpolator.x">
+<code class="descname">x</code><a class="headerlink" href="#colour.algebra.SpragueInterpolator.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.__x</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.__x</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.algebra.SpragueInterpolator.y">
+<code class="descname">y</code><a class="headerlink" href="#colour.algebra.SpragueInterpolator.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.__y</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.__y</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.lagrange_coefficients">
+<code class="descclassname">colour.algebra.</code><code class="descname">lagrange_coefficients</code><span class="sig-paren">(</span><em>r</em>, <em>n=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/interpolation.html#lagrange_coefficients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.lagrange_coefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the <em>Lagrange Coefficients</em> at given point <span class="math">\(r\)</span> for degree
+<span class="math">\(n\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> (<em>numeric</em>) &#8211; Point to get the <em>Lagrange Coefficients</em> at.</li>
+<li><strong>n</strong> (<em>int, optional</em>) &#8211; Degree of the <em>Lagrange Coefficients</em> being calculated.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>Fairman, H. S. (1985). The calculation of weight factors for
+tristimulus integration. Color Research &amp; Application, 10(4),
+199–203. doi:10.1002/col.5080100407</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>Wikipedia. (n.d.). Lagrange polynomial - Definition. Retrieved
+January 20, 2016, from
+<a class="reference external" href="https://en.wikipedia.org/wiki/Lagrange_polynomial#Definition">https://en.wikipedia.org/wiki/Lagrange_polynomial#Definition</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lagrange_coefficients</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="go">array([ 0.8265,  0.2755, -0.1305,  0.0285])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.is_identity">
+<code class="descclassname">colour.algebra.</code><code class="descname">is_identity</code><span class="sig-paren">(</span><em>a</em>, <em>n=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/matrix.html#is_identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.is_identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if <span class="math">\(a\)</span> array is an identity matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like, (N)</em>) &#8211; Variable <span class="math">\(a\)</span> to test.</li>
+<li><strong>n</strong> (<em>int, optional</em>) &#8211; Matrix dimension.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Is identity matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_identity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_identity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.algebra.random_triplet_generator">
+<code class="descclassname">colour.algebra.</code><code class="descname">random_triplet_generator</code><span class="sig-paren">(</span><em>size, limits=array([[0, 1],        [0, 1],        [0, 1]]), random_state=&lt;mtrand.RandomState object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/algebra/random.html#random_triplet_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.algebra.random_triplet_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator yielding random triplets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>size</strong> (<em>integer</em>) &#8211; Generator size.</li>
+<li><strong>limits</strong> (<em>array_like, (3, 2)</em>) &#8211; Random values limits on each triplet axis.</li>
+<li><strong>random_state</strong> (<em>RandomState</em>) &#8211; Mersenne Twister pseudo-random number generator.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Random triplets generator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">generator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>The doctest is assuming that <code class="xref py py-func docutils literal"><span class="pre">np.random.RandomState()</span></code> definition
+will return the same sequence no matter which <em>OS</em> or <em>Python</em>
+version is used. There is however no formal promise about the <em>prng</em>
+sequence reproducibility of either <em>Python</em> or <em>Numpy</em>
+implementations: Laurent. (2012). Reproducibility of python
+pseudo-random numbers across systems and versions? Retrieved January
+20, 2015, from <a class="reference external" href="http://stackoverflow.com/questions/8786084/reproducibility-of-python-pseudo-random-numbers-across-systems-and-versions">http://stackoverflow.com/questions/8786084/reproducibility-of-python-pseudo-random-numbers-across-systems-and-versions</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="nb">tuple</span><span class="p">(</span><span class="n">random_triplet_generator</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">prng</span><span class="p">)))</span>
+<span class="go">(array([ 0.9670298...,  0.5472322...,  0.9726843...]),</span>
+<span class="go"> array([ 0.7148159...,  0.6977288...,  0.2160895...]),</span>
+<span class="go"> array([ 0.9762744...,  0.0062302...,  0.2529823...]),</span>
+<span class="go"> array([ 0.4347915...,  0.7793829...,  0.1976850...]),</span>
+<span class="go"> array([ 0.8629932...,  0.9834006...,  0.1638422...]),</span>
+<span class="go"> array([ 0.5973339...,  0.0089861...,  0.3865712...]),</span>
+<span class="go"> array([ 0.0441600...,  0.9566529...,  0.4361466...]),</span>
+<span class="go"> array([ 0.9489773...,  0.7863059...,  0.8662893...]),</span>
+<span class="go"> array([ 0.1731654...,  0.0749485...,  0.6007427...]),</span>
+<span class="go"> array([ 0.1679721...,  0.7333801...,  0.4084438...]))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.algebra Package</a><ul>
+<li><a class="reference internal" href="#sub-packages">Sub-Packages</a></li>
+<li><a class="reference internal" href="#sub-modules">Sub-Modules</a></li>
+<li><a class="reference internal" href="#module-colour.algebra">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.algebra.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.algebra.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

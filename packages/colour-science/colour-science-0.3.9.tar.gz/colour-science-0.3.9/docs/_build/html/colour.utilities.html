@@ -1,0 +1,1981 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.utilities Package &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="colour-utilities-package">
+<h1>colour.utilities Package<a class="headerlink" href="#colour-utilities-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sub-modules">
+<h2>Sub-Modules<a class="headerlink" href="#sub-modules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="colour.utilities.array.html">colour.utilities.array Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.utilities.array.html#array-utilities">Array Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.utilities.common.html">colour.utilities.common Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.utilities.common.html#common-utilities">Common Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.utilities.data_structures.html">colour.utilities.data_structures Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.utilities.data_structures.html#data-structures">Data Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="colour.utilities.verbose.html">colour.utilities.verbose Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="colour.utilities.verbose.html#verbose">Verbose</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-colour.utilities">
+<span id="module-contents"></span><h2>Module Contents<a class="headerlink" href="#module-colour.utilities" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="colour.utilities.handle_numpy_errors">
+<code class="descclassname">colour.utilities.</code><code class="descname">handle_numpy_errors</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#handle_numpy_errors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.handle_numpy_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for handling <em>Numpy</em> errors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Keywords arguments.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Kienzle, P., Patel, N., &amp; Krycka, J. (2011). refl1d.numpyerrors -
+Refl1D v0.6.19 documentation. Retrieved January 30, 2015, from
+<a class="reference external" href="http://www.reflectometry.org/danse/docs/refl1d/_modules/refl1d/numpyerrors.html">http://www.reflectometry.org/danse/docs/refl1d/_modules/refl1d/numpyerrors.html</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@handle_numpy_errors</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="mi">1</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.ignore_numpy_errors">
+<code class="descclassname">colour.utilities.</code><code class="descname">ignore_numpy_errors</code><span class="sig-paren">(</span><em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.ignore_numpy_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for given function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.raise_numpy_errors">
+<code class="descclassname">colour.utilities.</code><code class="descname">raise_numpy_errors</code><span class="sig-paren">(</span><em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.raise_numpy_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for given function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.print_numpy_errors">
+<code class="descclassname">colour.utilities.</code><code class="descname">print_numpy_errors</code><span class="sig-paren">(</span><em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.print_numpy_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for given function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.warn_numpy_errors">
+<code class="descclassname">colour.utilities.</code><code class="descname">warn_numpy_errors</code><span class="sig-paren">(</span><em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.warn_numpy_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for given function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.ignore_python_warnings">
+<code class="descclassname">colour.utilities.</code><code class="descname">ignore_python_warnings</code><span class="sig-paren">(</span><em>function</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#ignore_python_warnings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ignore_python_warnings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for ignoring <em>Python</em> warnings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Function to decorate.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ignore_python_warnings</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;This is an ignored warning!&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.batch">
+<code class="descclassname">colour.utilities.</code><code class="descname">batch</code><span class="sig-paren">(</span><em>iterable</em>, <em>k=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a batch generator from given iterable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>iterable</strong> (<em>iterable</em>) &#8211; Iterable to create batches from.</li>
+<li><strong>k</strong> (<em>integer</em>) &#8211; Batches size.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Is <em>string_like</em> variable.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">batch</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>  
+<span class="go">&lt;generator object batch at 0x...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.is_openimageio_installed">
+<code class="descclassname">colour.utilities.</code><code class="descname">is_openimageio_installed</code><span class="sig-paren">(</span><em>raise_exception=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#is_openimageio_installed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.is_openimageio_installed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if <em>OpenImageIO</em> is installed and available.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>raise_exception</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Raise exception if <em>OpenImageIO</em> is unavailable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is <em>OpenImageIO</em> installed.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ImportError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ImportError</span></code></a> &#8211;
+If <em>OpenImageIO</em> is not installed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.is_iterable">
+<code class="descclassname">colour.utilities.</code><code class="descname">is_iterable</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#is_iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.is_iterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if given <span class="math">\(a\)</span> variable is iterable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Variable to check the iterability.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><span class="math">\(a\)</span> variable iterability.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_iterable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.is_string">
+<code class="descclassname">colour.utilities.</code><code class="descname">is_string</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#is_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.is_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if given <span class="math">\(a\)</span> variable is a <em>string</em> like variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Data to test.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is <span class="math">\(a\)</span> variable a <em>string</em> like variable.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_string</span><span class="p">(</span><span class="s1">&#39;I`m a string!&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_string</span><span class="p">([</span><span class="s1">&#39;I`m a string!&#39;</span><span class="p">])</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.is_numeric">
+<code class="descclassname">colour.utilities.</code><code class="descname">is_numeric</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#is_numeric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.is_numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if given <span class="math">\(a\)</span> variable is a number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Variable to check.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is <span class="math">\(a\)</span> variable a number.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.is_integer" title="colour.utilities.is_integer"><code class="xref py py-func docutils literal"><span class="pre">is_integer()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_numeric</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_numeric</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.is_integer">
+<code class="descclassname">colour.utilities.</code><code class="descname">is_integer</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#is_integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.is_integer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if given <span class="math">\(a\)</span> variable is an integer under given threshold.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Variable to check.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is <span class="math">\(a\)</span> variable an integer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>The determination threshold is defined by the
+<code class="xref py py-attr docutils literal"><span class="pre">colour.algebra.common.INTEGER_THRESHOLD</span></code> attribute.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.is_numeric" title="colour.utilities.is_numeric"><code class="xref py py-func docutils literal"><span class="pre">is_numeric()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_integer</span><span class="p">(</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.filter_kwargs">
+<code class="descclassname">colour.utilities.</code><code class="descname">filter_kwargs</code><span class="sig-paren">(</span><em>function</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/common.html#filter_kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.filter_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters keyword arguments incompatible with the given function signature.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#callable" title="(in Python v3.5)"><em>callable</em></a>) &#8211; Callable to filter the incompatible keyword arguments.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Keywords arguments.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Filtered keyword arguments.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fn_a</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fn_b</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fn_c</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn_a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_kwargs</span><span class="p">(</span><span class="n">fn_a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn_b</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_kwargs</span><span class="p">(</span><span class="n">fn_b</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">(1, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn_c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_kwargs</span><span class="p">(</span><span class="n">fn_c</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">(1, 2, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.as_numeric">
+<code class="descclassname">colour.utilities.</code><code class="descname">as_numeric</code><span class="sig-paren">(</span><em>a</em>, <em>type_=&lt;type 'numpy.float64'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#as_numeric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.as_numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts given <span class="math">\(a\)</span> variable to <em>numeric</em>. In the event where
+<span class="math">\(a\)</span> cannot be converted, it is passed as is.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Variable to convert.</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Type to use for conversion.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><span class="math">\(a\)</span> variable converted to <em>numeric</em>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-func docutils literal"><span class="pre">as_stack()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">as_shape()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">auto_axis()</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="go">array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.closest">
+<code class="descclassname">colour.utilities.</code><code class="descname">closest</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#closest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.closest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns closest <span class="math">\(a\)</span> variable element to reference <span class="math">\(b\)</span> variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Variable to search for the closest element.</li>
+<li><strong>b</strong> (<em>numeric</em>) &#8211; Reference variable.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Closest <span class="math">\(a\)</span> variable element.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">24.31357115</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">63.62396289</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">55.71528816</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">62.70988028</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">46.84480573</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="mf">25.40026416</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">closest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">63</span><span class="p">)</span>
+<span class="go">62.70988028</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.normalise_maximum">
+<code class="descclassname">colour.utilities.</code><code class="descname">normalise_maximum</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>factor=1</em>, <em>clip=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#normalise_maximum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.normalise_maximum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalises given <em>array_like</em> <span class="math">\(a\)</span> variable values by <span class="math">\(a\)</span>
+variable maximum value and optionally clip them between.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; <span class="math">\(a\)</span> variable to normalise.</li>
+<li><strong>axis</strong> (<em>numeric, optional</em>) &#8211; Normalization axis.</li>
+<li><strong>factor</strong> (<em>numeric, optional</em>) &#8211; Normalization factor.</li>
+<li><strong>clip</strong> (<em>bool, optional</em>) &#8211; Clip values between in domain [0, &#8216;factor&#8217;].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Maximum normalised <span class="math">\(a\)</span> variable.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.48222001</span><span class="p">,</span> <span class="mf">0.31654775</span><span class="p">,</span> <span class="mf">0.22070353</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalise_maximum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  
+<span class="go">array([ 1.        ,  0.6564384...,  0.4576822...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.interval">
+<code class="descclassname">colour.utilities.</code><code class="descname">interval</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the interval size of given distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>distribution</strong> (<em>array_like</em>) &#8211; Distribution to retrieve the interval.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Distribution interval.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Uniformly spaced variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interval</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>Non-uniformly spaced variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interval</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">array([1, 4])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.is_uniform">
+<code class="descclassname">colour.utilities.</code><code class="descname">is_uniform</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#is_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.is_uniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if given distribution is uniform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>distribution</strong> (<em>array_like</em>) &#8211; Distribution to check for uniformity.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is distribution uniform.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Uniformly spaced variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_uniform</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Non-uniformly spaced variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.1415</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_uniform</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.in_array">
+<code class="descclassname">colour.utilities.</code><code class="descname">in_array</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>tolerance=1e-15</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#in_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.in_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests whether each element of an array is also present in a second array
+within given tolerance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Array to test the elements from.</li>
+<li><strong>b</strong> (<em>array_like</em>) &#8211; The values against which to test each value of array <em>a</em>.</li>
+<li><strong>tolerance</strong> (<em>numeric, optional</em>) &#8211; Tolerance value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A boolean array with <em>a</em> shape describing whether an element of <em>a</em> is
+present in <em>b</em> within given tolerance.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Yorke, R. (2014). Python: Change format of np.array or allow
+tolerance in in1d function. Retrieved March 27, 2015, from
+<a class="reference external" href="http://stackoverflow.com/a/23521245/931625">http://stackoverflow.com/a/23521245/931625</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ True, False], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">in_array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ True,  True], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.tstack">
+<code class="descclassname">colour.utilities.</code><code class="descname">tstack</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#tstack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.tstack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stacks arrays in sequence along the last axis (tail).</p>
+<p>Rebuilds arrays divided by <a class="reference internal" href="#colour.utilities.tsplit" title="colour.utilities.tsplit"><code class="xref py py-func docutils literal"><span class="pre">tsplit()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Array to perform the stacking.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.tsplit" title="colour.utilities.tsplit"><code class="xref py py-func docutils literal"><span class="pre">tsplit()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tstack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="go">array([0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tstack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="go">array([[0, 0, 0],</span>
+<span class="go">       [1, 1, 1],</span>
+<span class="go">       [2, 2, 2],</span>
+<span class="go">       [3, 3, 3],</span>
+<span class="go">       [4, 4, 4],</span>
+<span class="go">       [5, 5, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tstack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="go">array([[[0, 0, 0],</span>
+<span class="go">        [1, 1, 1],</span>
+<span class="go">        [2, 2, 2],</span>
+<span class="go">        [3, 3, 3],</span>
+<span class="go">        [4, 4, 4],</span>
+<span class="go">        [5, 5, 5]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tstack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="go">array([[[[0, 0, 0],</span>
+<span class="go">         [1, 1, 1],</span>
+<span class="go">         [2, 2, 2],</span>
+<span class="go">         [3, 3, 3],</span>
+<span class="go">         [4, 4, 4],</span>
+<span class="go">         [5, 5, 5]]]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.tsplit">
+<code class="descclassname">colour.utilities.</code><code class="descname">tsplit</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#tsplit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.tsplit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits arrays in sequence along the last axis (tail).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Array to perform the splitting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.tstack" title="colour.utilities.tstack"><code class="xref py py-func docutils literal"><span class="pre">tstack()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[0, 1, 2, 3, 4, 5],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tsplit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[[0, 1, 2, 3, 4, 5]],</span>
+
+<span class="go">       [[0, 1, 2, 3, 4, 5]],</span>
+
+<span class="go">       [[0, 1, 2, 3, 4, 5]]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.row_as_diagonal">
+<code class="descclassname">colour.utilities.</code><code class="descname">row_as_diagonal</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#row_as_diagonal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.row_as_diagonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the per row diagonal matrices of the given array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; Array to perform the diagonal matrices computation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Castro, S. (2014). Numpy: Fastest way of computing diagonal for
+each row of a 2d array. Retrieved August 22, 2014, from
+<a class="reference external" href="http://stackoverflow.com/questions/26511401/numpy-fastest-way-of-computing-diagonal-for-each-row-of-a-2d-array/26517247#26517247">http://stackoverflow.com/questions/26511401/numpy-fastest-way-of-computing-diagonal-for-each-row-of-a-2d-array/26517247#26517247</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.25891593</span><span class="p">,</span> <span class="mf">0.07299478</span><span class="p">,</span> <span class="mf">0.36586996</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">0.30851087</span><span class="p">,</span> <span class="mf">0.37131459</span><span class="p">,</span> <span class="mf">0.16274825</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">0.71061831</span><span class="p">,</span> <span class="mf">0.67718718</span><span class="p">,</span> <span class="mf">0.09562581</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">0.71588836</span><span class="p">,</span> <span class="mf">0.76772047</span><span class="p">,</span> <span class="mf">0.15476079</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">0.92985142</span><span class="p">,</span> <span class="mf">0.22263399</span><span class="p">,</span> <span class="mf">0.88027331</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_as_diagonal</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[[ 0.25891593,  0.        ,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.07299478,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.        ,  0.36586996]],</span>
+
+<span class="go">       [[ 0.30851087,  0.        ,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.37131459,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.        ,  0.16274825]],</span>
+
+<span class="go">       [[ 0.71061831,  0.        ,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.67718718,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.        ,  0.09562581]],</span>
+
+<span class="go">       [[ 0.71588836,  0.        ,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.76772047,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.        ,  0.15476079]],</span>
+
+<span class="go">       [[ 0.92985142,  0.        ,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.22263399,  0.        ],</span>
+<span class="go">        [ 0.        ,  0.        ,  0.88027331]]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.dot_vector">
+<code class="descclassname">colour.utilities.</code><code class="descname">dot_vector</code><span class="sig-paren">(</span><em>m</em>, <em>v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#dot_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.dot_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient wrapper around <code class="xref py py-func docutils literal"><span class="pre">np.einsum()</span></code> with the following subscripts:
+<em>&#8216;...ij,...j-&gt;...i&#8217;</em>.</p>
+<p>It performs the dot product of two arrays where <em>m</em> parameter is expected
+to be an array of 3x3 matrices and parameter <em>v</em> an array of vectors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>m</strong> (<em>array_like</em>) &#8211; Array of 3x3 matrices.</li>
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Array of vectors.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.dot_matrix" title="colour.utilities.dot_matrix"><code class="xref py py-func docutils literal"><span class="pre">dot_matrix()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.7328</span><span class="p">,</span> <span class="mf">0.4296</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1624</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="o">-</span><span class="mf">0.7036</span><span class="p">,</span> <span class="mf">1.6975</span><span class="p">,</span> <span class="mf">0.0061</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">0.0030</span><span class="p">,</span> <span class="mf">0.0136</span><span class="p">,</span> <span class="mf">0.9834</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_vector</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  
+<span class="go">array([[ 0.0794399...,  0.1220905...,  0.0955788...],</span>
+<span class="go">       [ 0.0794399...,  0.1220905...,  0.0955788...],</span>
+<span class="go">       [ 0.0794399...,  0.1220905...,  0.0955788...],</span>
+<span class="go">       [ 0.0794399...,  0.1220905...,  0.0955788...],</span>
+<span class="go">       [ 0.0794399...,  0.1220905...,  0.0955788...],</span>
+<span class="go">       [ 0.0794399...,  0.1220905...,  0.0955788...]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.dot_matrix">
+<code class="descclassname">colour.utilities.</code><code class="descname">dot_matrix</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#dot_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.dot_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient wrapper around <code class="xref py py-func docutils literal"><span class="pre">np.einsum()</span></code> with the following subscripts:
+<em>&#8216;...ij,...jk-&gt;...ik&#8217;</em>.</p>
+<p>It performs the dot product of two arrays where <em>a</em> parameter is expected
+to be an array of 3x3 matrices and parameter <em>b</em> another array of of 3x3
+matrices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Array of 3x3 matrices.</li>
+<li><strong>b</strong> (<em>array_like</em>) &#8211; Array of 3x3 matrices.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.dot_matrix" title="colour.utilities.dot_matrix"><code class="xref py py-func docutils literal"><span class="pre">dot_matrix()</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.7328</span><span class="p">,</span> <span class="mf">0.4296</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1624</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="o">-</span><span class="mf">0.7036</span><span class="p">,</span> <span class="mf">1.6975</span><span class="p">,</span> <span class="mf">0.0061</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">0.0030</span><span class="p">,</span> <span class="mf">0.0136</span><span class="p">,</span> <span class="mf">0.9834</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_matrix</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">array([[[ 0.2342420...,  1.0418482..., -0.2760903...],</span>
+<span class="go">        [-1.7099407...,  2.5793226...,  0.1306181...],</span>
+<span class="go">        [-0.0044203...,  0.0377490...,  0.9666713...]],</span>
+
+<span class="go">       [[ 0.2342420...,  1.0418482..., -0.2760903...],</span>
+<span class="go">        [-1.7099407...,  2.5793226...,  0.1306181...],</span>
+<span class="go">        [-0.0044203...,  0.0377490...,  0.9666713...]],</span>
+
+<span class="go">       [[ 0.2342420...,  1.0418482..., -0.2760903...],</span>
+<span class="go">        [-1.7099407...,  2.5793226...,  0.1306181...],</span>
+<span class="go">        [-0.0044203...,  0.0377490...,  0.9666713...]],</span>
+
+<span class="go">       [[ 0.2342420...,  1.0418482..., -0.2760903...],</span>
+<span class="go">        [-1.7099407...,  2.5793226...,  0.1306181...],</span>
+<span class="go">        [-0.0044203...,  0.0377490...,  0.9666713...]],</span>
+
+<span class="go">       [[ 0.2342420...,  1.0418482..., -0.2760903...],</span>
+<span class="go">        [-1.7099407...,  2.5793226...,  0.1306181...],</span>
+<span class="go">        [-0.0044203...,  0.0377490...,  0.9666713...]],</span>
+
+<span class="go">       [[ 0.2342420...,  1.0418482..., -0.2760903...],</span>
+<span class="go">        [-1.7099407...,  2.5793226...,  0.1306181...],</span>
+<span class="go">        [-0.0044203...,  0.0377490...,  0.9666713...]]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.orient">
+<code class="descclassname">colour.utilities.</code><code class="descname">orient</code><span class="sig-paren">(</span><em>a</em>, <em>orientation</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#orient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.orient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Orient given array accordingly to given <cite>orientation</cite> value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Array to perform the orientation onto.</li>
+<li><strong>orientation</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;Flip&#8217;, &#8216;Flop&#8217;, &#8216;90 CW&#8217;, &#8216;90 CCW&#8217;, &#8216;180&#8217;}</strong>
+Orientation to perform.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Oriented array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 1, 2, 3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orient</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;90 CW&#39;</span><span class="p">)</span>
+<span class="go">array([[0, 0, 0, 0, 0],</span>
+<span class="go">       [1, 1, 1, 1, 1],</span>
+<span class="go">       [2, 2, 2, 2, 2],</span>
+<span class="go">       [3, 3, 3, 3, 3],</span>
+<span class="go">       [4, 4, 4, 4, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orient</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;Flip&#39;</span><span class="p">)</span>
+<span class="go">array([[4, 3, 2, 1, 0],</span>
+<span class="go">       [4, 3, 2, 1, 0],</span>
+<span class="go">       [4, 3, 2, 1, 0],</span>
+<span class="go">       [4, 3, 2, 1, 0],</span>
+<span class="go">       [4, 3, 2, 1, 0]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.centroid">
+<code class="descclassname">colour.utilities.</code><code class="descname">centroid</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#centroid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the centroid indexes of given <span class="math">\(a\)</span> array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<em>array_like</em>) &#8211; <span class="math">\(a\)</span> array to compute the centroid indexes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><span class="math">\(a\)</span> array centroid indexes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">centroid</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([2, 3])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.linear_conversion">
+<code class="descclassname">colour.utilities.</code><code class="descname">linear_conversion</code><span class="sig-paren">(</span><em>a</em>, <em>old_range</em>, <em>new_range</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/array.html#linear_conversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.linear_conversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a simple linear conversion of given array between the old and new
+ranges.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Array to perform the linear conversion onto.</li>
+<li><strong>old_range</strong> (<em>array_like</em>) &#8211; Old range.</li>
+<li><strong>new_range</strong> (<em>array_like</em>) &#8211; New range.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linear_conversion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
+<span class="go">array([  1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.,  10.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.ArbitraryPrecisionMapping">
+<em class="property">class </em><code class="descclassname">colour.utilities.</code><code class="descname">ArbitraryPrecisionMapping</code><span class="sig-paren">(</span><em>data=None</em>, <em>key_decimals=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">_abcoll.MutableMapping</span></code></p>
+<p>Implements a mutable mapping / <em>dict</em> like object where numeric keys are
+stored with an arbitrary precision.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict, optional</em>) &#8211; <em>dict</em> of data to store into the mapping at initialisation.</li>
+<li><strong>key_decimals</strong> (<em>int, optional</em>) &#8211; Decimals count the keys will be rounded at</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Key / Value pairs to store into the mapping at initialisation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.key_decimals">
+<code class="descname">key_decimals</code><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.key_decimals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__delitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.__len__">
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.1999999998</span><span class="p">:</span> <span class="s1">&#39;Nemo&#39;</span><span class="p">,</span> <span class="mf">0.2000000000</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apm1</span> <span class="o">=</span> <span class="n">ArbitraryPrecisionMapping</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">key_decimals</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">apm1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  
+<span class="go">(0.1999999998, 0.2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apm2</span> <span class="o">=</span> <span class="n">ArbitraryPrecisionMapping</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">key_decimals</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">apm2</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  
+<span class="go">(0.2,)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__contains__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns if the mapping contains given item (rounded if numeric).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item (rounded if numeric) name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is item in mapping.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__contains__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__delitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deletes the item (rounded if numeric) with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item (rounded if numeric) name.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__delitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__getitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the value of given item (rounded if numeric).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item (rounded if numeric) name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__getitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__iter__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Iterates over the items (rounded if numeric) names in the mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Item names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__len__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the items count.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Items count.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)">int</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>item</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#ArbitraryPrecisionMapping.__setitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sets given item (rounded if numeric) with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__setitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.utilities.ArbitraryPrecisionMapping.data">
+<code class="descname">data</code><a class="headerlink" href="#colour.utilities.ArbitraryPrecisionMapping.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.data</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#colour.utilities.ArbitraryPrecisionMapping" title="colour.utilities.ArbitraryPrecisionMapping"><code class="xref py py-class docutils literal"><span class="pre">ArbitraryPrecisionMapping</span></code></a> data structure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.ArbitraryPrecisionMapping.data" title="colour.utilities.ArbitraryPrecisionMapping.data"><code class="xref py py-attr docutils literal"><span class="pre">ArbitraryPrecisionMapping.data</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">key_decimals</code></dt>
+<dd><p>Property for <strong>self._key_decimals</strong> private attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self._key_decimals.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.Lookup">
+<em class="property">class </em><code class="descclassname">colour.utilities.</code><code class="descname">Lookup</code><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<p>Extends <em>dict</em> type to provide a lookup by value(s).</p>
+<dl class="method">
+<dt id="colour.utilities.Lookup.first_key_from_value">
+<code class="descname">first_key_from_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.first_key_from_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Lookup.first_key_from_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.Lookup.keys_from_value">
+<code class="descname">keys_from_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.keys_from_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Lookup.keys_from_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Mansencal, T. (n.d.). Lookup. Retrieved from
+<a class="reference external" href="https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py">https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span> <span class="o">=</span> <span class="n">Lookup</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">first_key_from_value</span><span class="p">(</span><span class="s1">&#39;Doe&#39;</span><span class="p">)</span>
+<span class="go">&#39;first_name&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">persons</span> <span class="o">=</span> <span class="n">Lookup</span><span class="p">(</span><span class="n">John</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">Jane</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">Luke</span><span class="o">=</span><span class="s1">&#39;Skywalker&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">persons</span><span class="o">.</span><span class="n">keys_from_value</span><span class="p">(</span><span class="s1">&#39;Doe&#39;</span><span class="p">))</span>
+<span class="go">[&#39;Jane&#39;, &#39;John&#39;]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">first_key_from_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.first_key_from_value"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Gets the first key with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Key.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">keys_from_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Lookup.keys_from_value"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Gets the keys with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Keys.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.Structure">
+<em class="property">class </em><code class="descclassname">colour.utilities.</code><code class="descname">Structure</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<p>Defines an object similar to C/C++ structured type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> (<em>list, optional</em>) &#8211;
+Arguments.</li>
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Key / Value pairs.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.utilities.Structure.__getattr__">
+<code class="descname">__getattr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__getattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Structure.__getattr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.Structure.__setattr__">
+<code class="descname">__setattr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__setattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Structure.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.Structure.__delattr__">
+<code class="descname">__delattr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__delattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Structure.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.Structure.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.Structure.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Mansencal, T. (n.d.). Structure. Retrieved from
+<a class="reference external" href="https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py">https://github.com/KelSolaar/Foundations/blob/develop/foundations/data_structures.py</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="o">.</span><span class="n">first_name</span>  
+<span class="go">&#39;Doe&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="go">[&#39;first_name&#39;, &#39;gender&#39;, &#39;last_name&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Doctests skip for Python 2.x compatibility.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span>  
+<span class="go">&#39;male&#39;</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__delattr__</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__delattr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deletes both key and sibling attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__delattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.Structure.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.Structure.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes both key and sibling attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__delattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__getattr__</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__getattr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns given attribute value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<em>unicode</em>) &#8211; Attribute name.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__getattr__()</span></code> method.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Attribute value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#AttributeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> &#8211;
+If the attribute is not defined.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__setattr__</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.__setattr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sets both key and sibling attribute with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__setattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.Structure.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.utilities.Structure.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets both key and sibling attribute with given value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">dict.__setattr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#Structure.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Updates both keys and sibling attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> (<em>list, optional</em>) &#8211;
+Arguments.</li>
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Keywords arguments.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict.update" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">dict.update()</span></code></a> method.</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.utilities.CaseInsensitiveMapping">
+<em class="property">class </em><code class="descclassname">colour.utilities.</code><code class="descname">CaseInsensitiveMapping</code><span class="sig-paren">(</span><em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">_abcoll.MutableMapping</span></code></p>
+<p>Implements a case-insensitive mutable mapping / <em>dict</em> object.</p>
+<p>Allows values retrieving from keys while ignoring the key case.
+The keys are expected to be unicode or string-like objects supporting the
+<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str.lower" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">str.lower()</span></code></a> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; <em>dict</em> of data to store into the mapping at initialisation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Key / Value pairs to store into the mapping at initialisation.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__delitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__len__">
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__ne__">
+<code class="descname">__ne__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__ne__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.utilities.CaseInsensitiveMapping.lower_items">
+<code class="descname">lower_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.lower_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.lower_items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The keys are expected to be unicode or string-like objects.</p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Reitz, K. (n.d.). CaseInsensitiveDict. Retrieved from
+<a class="reference external" href="https://github.com/kennethreitz/requests/blob/v1.2.3/requests/structures.py#L37">https://github.com/kennethreitz/requests/blob/v1.2.3/requests/structures.py#L37</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">methods</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">({</span><span class="s1">&#39;McCamy&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Hernandez&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">methods</span><span class="p">[</span><span class="s1">&#39;mccamy&#39;</span><span class="p">]</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__contains__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns if the mapping contains given item.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Is item in mapping.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__contains__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__delitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deletes the item with given name.</p>
+<p>The item is deleted from the mapping using its lower name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item name.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__delitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__eq__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the equality with given object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> &#8211; Object item.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Equality.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__eq__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__getitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the value of given item.</p>
+<p>The item value is retrieved using its lower name in the mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>unicode</em>) &#8211; Item name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)">object</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__getitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__iter__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Iterates over the items names in the mapping.</p>
+<p>The item names returned are the original input ones.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Item names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__len__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the items count.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Items count.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)">int</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__iter__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__ne__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the inequality with given object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> &#8211; Object item.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Inequality.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__ne__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__repr__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns the mapping representation with the original item names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Mapping representation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__repr__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>item</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.__setitem__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sets given item with given value.</p>
+<p>The item is stored as lower in the mapping while the original name and
+its value are stored together as the value in a <em>tuple</em>:</p>
+<p>{&#8220;item.lower()&#8221;: (&#8220;item&#8221;, value)}</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) &#8211; Value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <code class="xref py py-meth docutils literal"><span class="pre">MutableMapping.__setitem__()</span></code> method.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.copy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Returns a copy of the mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Mapping copy.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#colour.utilities.CaseInsensitiveMapping" title="colour.utilities.CaseInsensitiveMapping">CaseInsensitiveMapping</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#colour.utilities.CaseInsensitiveMapping" title="colour.utilities.CaseInsensitiveMapping"><code class="xref py py-class docutils literal"><span class="pre">CaseInsensitiveMapping</span></code></a> class copy returned is a simple
+<em>copy</em> not a <em>deepcopy</em>.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.utilities.CaseInsensitiveMapping.data">
+<code class="descname">data</code><a class="headerlink" href="#colour.utilities.CaseInsensitiveMapping.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for <strong>self.data</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#colour.utilities.ArbitraryPrecisionMapping" title="colour.utilities.ArbitraryPrecisionMapping"><code class="xref py py-class docutils literal"><span class="pre">ArbitraryPrecisionMapping</span></code></a> data structure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.utilities.ArbitraryPrecisionMapping.data" title="colour.utilities.ArbitraryPrecisionMapping.data"><code class="xref py py-attr docutils literal"><span class="pre">ArbitraryPrecisionMapping.data</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">lower_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/data_structures.html#CaseInsensitiveMapping.lower_items"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Iterates over the lower items names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Lower item names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="colour.utilities.ColourWarning">
+<em class="property">exception </em><code class="descclassname">colour.utilities.</code><code class="descname">ColourWarning</code><a class="reference internal" href="_modules/colour/utilities/verbose.html#ColourWarning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.ColourWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Warning</span></code></p>
+<p>This is the base class of <em>Colour</em> warnings. It is a subclass of <cite>Warning</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.message_box">
+<code class="descclassname">colour.utilities.</code><code class="descname">message_box</code><span class="sig-paren">(</span><em>message</em>, <em>width=79</em>, <em>padding=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/verbose.html#message_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.message_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a message inside a box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>message</strong> (<em>unicode</em>) &#8211; Message to print.</li>
+<li><strong>width</strong> (<em>int, optional</em>) &#8211; Message box width.</li>
+<li><strong>padding</strong> (<em>unicode</em>) &#8211; Padding on each sides of the message.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Definition success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet, consectetur adipiscing elit, &#39;</span>
+<span class="gp">... </span>    <span class="s1">&#39;sed do eiusmod tempor incididunt ut labore et dolore magna &#39;</span>
+<span class="gp">... </span>    <span class="s1">&#39;aliqua.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">message_box</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
+<span class="go">===========================================================================</span>
+<span class="go">*                                                                         *</span>
+<span class="go">*   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do       *</span>
+<span class="go">*   eiusmod tempor incididunt ut labore et dolore magna aliqua.           *</span>
+<span class="go">*                                                                         *</span>
+<span class="go">===========================================================================</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">message_box</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="go">============================================================</span>
+<span class="go">*                                                          *</span>
+<span class="go">*   Lorem ipsum dolor sit amet, consectetur adipiscing     *</span>
+<span class="go">*   elit, sed do eiusmod tempor incididunt ut labore et    *</span>
+<span class="go">*   dolore magna aliqua.                                   *</span>
+<span class="go">*                                                          *</span>
+<span class="go">============================================================</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">message_box</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">===========================================================================</span>
+<span class="go">*                                                                         *</span>
+<span class="go">*                Lorem ipsum dolor sit amet, consectetur                  *</span>
+<span class="go">*                adipiscing elit, sed do eiusmod tempor                   *</span>
+<span class="go">*                incididunt ut labore et dolore magna                     *</span>
+<span class="go">*                aliqua.                                                  *</span>
+<span class="go">*                                                                         *</span>
+<span class="go">===========================================================================</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.warning">
+<code class="descclassname">colour.utilities.</code><code class="descname">warning</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/verbose.html#warning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Issues a warning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>*args</strong> (<em>list, optional</em>) &#8211;
+Arguments.</li>
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+Keywords arguments.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Definition success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;This is a warning!&#39;</span><span class="p">)</span>  
+<span class="go">/Users/.../colour/utilities/verbose.py:132: UserWarning: This is a warning!</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.utilities.filter_warnings">
+<code class="descclassname">colour.utilities.</code><code class="descname">filter_warnings</code><span class="sig-paren">(</span><em>state=True</em>, <em>colour_warnings_only=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/utilities/verbose.html#filter_warnings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.utilities.filter_warnings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters <em>Colour</em> and also optionally overall Python warnings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>state</strong> (<em>bool, optional</em>) &#8211; Warnings filter state.</li>
+<li><strong>colour_warnings_only</strong> (<em>bool, optional</em>) &#8211; Whether to only filter <em>Colour</em> warnings or also overall Python
+warnings.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Definition success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p># Filtering <em>Colour</em> only warnings:
+&gt;&gt;&gt; filter_warnings()
+True</p>
+<p># Filtering <em>Colour</em> and also Python warnings:
+&gt;&gt;&gt; filter_warnings(colour_warnings_only=False)
+True</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.utilities Package</a><ul>
+<li><a class="reference internal" href="#sub-modules">Sub-Modules</a></li>
+<li><a class="reference internal" href="#module-colour.utilities">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.utilities.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.utilities.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

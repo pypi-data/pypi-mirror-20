@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.volume Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.plotting.volume">
+<span id="colour-plotting-volume-module"></span><h1>colour.plotting.volume Module<a class="headerlink" href="#module-colour.plotting.volume" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="colour-models-volume-plotting">
+<h2>Colour Models Volume Plotting<a class="headerlink" href="#colour-models-volume-plotting" title="Permalink to this headline">¶</a></h2>
+<p>Defines colour models volume and gamut plotting objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.plotting.volume.RGB_colourspaces_gamuts_plot" title="colour.plotting.volume.RGB_colourspaces_gamuts_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_colourspaces_gamuts_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.volume.RGB_scatter_plot" title="colour.plotting.volume.RGB_scatter_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_scatter_plot()</span></code></a></li>
+</ul>
+<dl class="function">
+<dt id="colour.plotting.volume.common_colourspace_model_axis_reorder">
+<code class="descclassname">colour.plotting.volume.</code><code class="descname">common_colourspace_model_axis_reorder</code><span class="sig-paren">(</span><em>a</em>, <em>model=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/volume.html#common_colourspace_model_axis_reorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.volume.common_colourspace_model_axis_reorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reorder axis of given colourspace model <span class="math">\(a\)</span> values accordingly to its
+most common volume plotting axis order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>array_like</em>) &#8211; Colourspace model values <span class="math">\(a\)</span>.</li>
+<li><strong>model</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CIE XYZ&#8217;, &#8216;CIE xyY&#8217;, &#8216;CIE Lab&#8217;, &#8216;CIE Luv&#8217;, &#8216;CIE UCS&#8217;, &#8216;CIE UVW&#8217;,
+&#8216;IPT&#8217;, &#8216;Hunter Lab&#8217;, &#8216;Hunter Rdab&#8217;}</strong>
+Colourspace model.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Reordered colourspace model values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common_colourspace_model_axis_reorder</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common_colourspace_model_axis_reorder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;CIE Lab&#39;</span><span class="p">)</span>
+<span class="go">array([1, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common_colourspace_model_axis_reorder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;CIE LCHab&#39;</span><span class="p">)</span>
+<span class="go">array([1, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common_colourspace_model_axis_reorder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;CIE Luv&#39;</span><span class="p">)</span>
+<span class="go">array([1, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common_colourspace_model_axis_reorder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;CIE LCHab&#39;</span><span class="p">)</span>
+<span class="go">array([1, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">common_colourspace_model_axis_reorder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;IPT&#39;</span><span class="p">)</span>
+<span class="go">array([1, 2, 0])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.volume.nadir_grid">
+<code class="descclassname">colour.plotting.volume.</code><code class="descname">nadir_grid</code><span class="sig-paren">(</span><em>limits=None</em>, <em>segments=10</em>, <em>labels=None</em>, <em>axes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/volume.html#nadir_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.volume.nadir_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a grid on <em>xy</em> plane made of quad geometric elements and its
+associated faces and edges colours. Ticks and labels are added to the
+given axes accordingly to the extended grid settings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>limits</strong> (<em>array_like, optional</em>) &#8211; Extended grid limits.</li>
+<li><strong>segments</strong> (<em>int, optional</em>) &#8211; Edge segments count for the extended grid.</li>
+<li><strong>labels</strong> (<em>array_like, optional</em>) &#8211; Axis labels.</li>
+<li><strong>axes</strong> (<em>matplotlib.axes.Axes, optional</em>) &#8211; Axes to add the grid.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>grid_face_colours</strong> (<em>array_like, optional</em>) &#8211;
+Grid face colours array such as
+<cite>grid_face_colours = (0.25, 0.25, 0.25)</cite>.</li>
+<li><strong>grid_edge_colours</strong> (<em>array_like, optional</em>) &#8211;
+Grid edge colours array such as
+<cite>grid_edge_colours = (0.25, 0.25, 0.25)</cite>.</li>
+<li><strong>grid_face_alpha</strong> (<em>numeric, optional</em>) &#8211;
+Grid face opacity value such as <cite>grid_face_alpha = 0.1</cite>.</li>
+<li><strong>grid_edge_alpha</strong> (<em>numeric, optional</em>) &#8211;
+Grid edge opacity value such as <cite>grid_edge_alpha = 0.5</cite>.</li>
+<li><strong>x_axis_colour</strong> (<em>array_like, optional</em>) &#8211;
+<em>X</em> axis colour array such as <cite>x_axis_colour = (0.0, 0.0, 0.0, 1.0)</cite>.</li>
+<li><strong>y_axis_colour</strong> (<em>array_like, optional</em>) &#8211;
+<em>Y</em> axis colour array such as <cite>y_axis_colour = (0.0, 0.0, 0.0, 1.0)</cite>.</li>
+<li><strong>x_ticks_colour</strong> (<em>array_like, optional</em>) &#8211;
+<em>X</em> axis ticks colour array such as
+<cite>x_ticks_colour = (0.0, 0.0, 0.0, 0.85)</cite>.</li>
+<li><strong>y_ticks_colour</strong> (<em>array_like, optional</em>) &#8211;
+<em>Y</em> axis ticks colour array such as
+<cite>y_ticks_colour = (0.0, 0.0, 0.0, 0.85)</cite>.</li>
+<li><strong>x_label_colour</strong> (<em>array_like, optional</em>) &#8211;
+<em>X</em> axis label colour array such as
+<cite>x_label_colour = (0.0, 0.0, 0.0, 0.85)</cite>.</li>
+<li><strong>y_label_colour</strong> (<em>array_like, optional</em>) &#8211;
+<em>Y</em> axis label colour array such as
+<cite>y_label_colour = (0.0, 0.0, 0.0, 0.85)</cite>.</li>
+<li><strong>ticks_and_label_location</strong> (<em>array_like, optional</em>) &#8211;
+Location of the <em>X</em> and <em>Y</em> axis ticks and labels such as
+<cite>ticks_and_label_location = (&#8216;-x&#8217;, &#8216;-y&#8217;)</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Grid quads, faces colours, edges colours.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nadir_grid</span><span class="p">(</span><span class="n">segments</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(array([[[-1.   , -1.   ,  0.   ],</span>
+<span class="go">        [ 1.   , -1.   ,  0.   ],</span>
+<span class="go">        [ 1.   ,  1.   ,  0.   ],</span>
+<span class="go">        [-1.   ,  1.   ,  0.   ]],</span>
+
+<span class="go">       [[-1.   , -1.   ,  0.   ],</span>
+<span class="go">        [ 0.   , -1.   ,  0.   ],</span>
+<span class="go">        [ 0.   ,  0.   ,  0.   ],</span>
+<span class="go">        [-1.   ,  0.   ,  0.   ]],</span>
+
+<span class="go">       [[-1.   ,  0.   ,  0.   ],</span>
+<span class="go">        [ 0.   ,  0.   ,  0.   ],</span>
+<span class="go">        [ 0.   ,  1.   ,  0.   ],</span>
+<span class="go">        [-1.   ,  1.   ,  0.   ]],</span>
+
+<span class="go">       [[ 0.   , -1.   ,  0.   ],</span>
+<span class="go">        [ 1.   , -1.   ,  0.   ],</span>
+<span class="go">        [ 1.   ,  0.   ,  0.   ],</span>
+<span class="go">        [ 0.   ,  0.   ,  0.   ]],</span>
+
+<span class="go">       [[ 0.   ,  0.   ,  0.   ],</span>
+<span class="go">        [ 1.   ,  0.   ,  0.   ],</span>
+<span class="go">        [ 1.   ,  1.   ,  0.   ],</span>
+<span class="go">        [ 0.   ,  1.   ,  0.   ]],</span>
+
+<span class="go">       [[-1.   , -0.001,  0.   ],</span>
+<span class="go">        [ 1.   , -0.001,  0.   ],</span>
+<span class="go">        [ 1.   ,  0.001,  0.   ],</span>
+<span class="go">        [-1.   ,  0.001,  0.   ]],</span>
+
+<span class="go">       [[-0.001, -1.   ,  0.   ],</span>
+<span class="go">        [ 0.001, -1.   ,  0.   ],</span>
+<span class="go">        [ 0.001,  1.   ,  0.   ],</span>
+<span class="go">        [-0.001,  1.   ,  0.   ]]]), array([[ 0.25,  0.25,  0.25,  0.1 ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  1.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  1.  ]]), array([[ 0.5 ,  0.5 ,  0.5 ,  0.5 ],</span>
+<span class="go">       [ 0.75,  0.75,  0.75,  0.25],</span>
+<span class="go">       [ 0.75,  0.75,  0.75,  0.25],</span>
+<span class="go">       [ 0.75,  0.75,  0.75,  0.25],</span>
+<span class="go">       [ 0.75,  0.75,  0.75,  0.25],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  1.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  1.  ]]))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.volume.RGB_identity_cube">
+<code class="descclassname">colour.plotting.volume.</code><code class="descname">RGB_identity_cube</code><span class="sig-paren">(</span><em>plane=None</em>, <em>width_segments=16</em>, <em>height_segments=16</em>, <em>depth_segments=16</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/volume.html#RGB_identity_cube"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.volume.RGB_identity_cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an <em>RGB</em> identity cube made of quad geometric elements and its
+associated <em>RGB</em> colours.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>plane</strong> (<em>array_like, optional</em>) &#8211; Any combination of <strong>{&#8216;+x&#8217;, &#8216;-x&#8217;, &#8216;+y&#8217;, &#8216;-y&#8217;, &#8216;+z&#8217;, &#8216;-z&#8217;}</strong>,
+Included grids in the cube construction.</li>
+<li><strong>width_segments</strong> (<em>int, optional</em>) &#8211; Cube segments, quad counts along the width.</li>
+<li><strong>height_segments</strong> (<em>int, optional</em>) &#8211; Cube segments, quad counts along the height.</li>
+<li><strong>depth_segments</strong> (<em>int, optional</em>) &#8211; Cube segments, quad counts along the depth.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Cube quads, <em>RGB</em> colours.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vertices</span><span class="p">,</span> <span class="n">RGB</span> <span class="o">=</span> <span class="n">RGB_identity_cube</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vertices</span>
+<span class="go">array([[[ 0.,  0.,  0.],</span>
+<span class="go">        [ 1.,  0.,  0.],</span>
+<span class="go">        [ 1.,  1.,  0.],</span>
+<span class="go">        [ 0.,  1.,  0.]],</span>
+
+<span class="go">       [[ 0.,  0.,  1.],</span>
+<span class="go">        [ 1.,  0.,  1.],</span>
+<span class="go">        [ 1.,  1.,  1.],</span>
+<span class="go">        [ 0.,  1.,  1.]],</span>
+
+<span class="go">       [[ 0.,  0.,  0.],</span>
+<span class="go">        [ 1.,  0.,  0.],</span>
+<span class="go">        [ 1.,  0.,  1.],</span>
+<span class="go">        [ 0.,  0.,  1.]],</span>
+
+<span class="go">       [[ 0.,  1.,  0.],</span>
+<span class="go">        [ 1.,  1.,  0.],</span>
+<span class="go">        [ 1.,  1.,  1.],</span>
+<span class="go">        [ 0.,  1.,  1.]],</span>
+
+<span class="go">       [[ 0.,  0.,  0.],</span>
+<span class="go">        [ 0.,  1.,  0.],</span>
+<span class="go">        [ 0.,  1.,  1.],</span>
+<span class="go">        [ 0.,  0.,  1.]],</span>
+
+<span class="go">       [[ 1.,  0.,  0.],</span>
+<span class="go">        [ 1.,  1.,  0.],</span>
+<span class="go">        [ 1.,  1.,  1.],</span>
+<span class="go">        [ 1.,  0.,  1.]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span>
+<span class="go">array([[ 0.5,  0.5,  0. ],</span>
+<span class="go">       [ 0.5,  0.5,  1. ],</span>
+<span class="go">       [ 0.5,  0. ,  0.5],</span>
+<span class="go">       [ 0.5,  1. ,  0.5],</span>
+<span class="go">       [ 0. ,  0.5,  0.5],</span>
+<span class="go">       [ 1. ,  0.5,  0.5]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.volume.RGB_colourspaces_gamuts_plot">
+<code class="descclassname">colour.plotting.volume.</code><code class="descname">RGB_colourspaces_gamuts_plot</code><span class="sig-paren">(</span><em>colourspaces=None</em>, <em>reference_colourspace='CIE xyY'</em>, <em>segments=8</em>, <em>display_grid=True</em>, <em>grid_segments=10</em>, <em>spectral_locus=False</em>, <em>spectral_locus_colour=None</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/volume.html#RGB_colourspaces_gamuts_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.volume.RGB_colourspaces_gamuts_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspaces gamuts in given reference colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>colourspaces</strong> (<em>array_like, optional</em>) &#8211; <em>RGB</em> colourspaces to plot the gamuts.</li>
+<li><strong>reference_colourspace</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CIE XYZ&#8217;, &#8216;CIE xyY&#8217;, &#8216;CIE Lab&#8217;, &#8216;CIE Luv&#8217;, &#8216;CIE UCS&#8217;, &#8216;CIE UVW&#8217;,
+&#8216;IPT&#8217;, &#8216;Hunter Lab&#8217;, &#8216;Hunter Rdab&#8217;}</strong>,
+Reference colourspace to plot the gamuts into.</li>
+<li><strong>segments</strong> (<em>int, optional</em>) &#8211; Edge segments count for each <em>RGB</em> colourspace cubes.</li>
+<li><strong>display_grid</strong> (<em>bool, optional</em>) &#8211; Display a grid at the bottom of the <em>RGB</em> colourspace cubes.</li>
+<li><strong>grid_segments</strong> (<em>bool, optional</em>) &#8211; Edge segments count for the grid.</li>
+<li><strong>spectral_locus</strong> (<em>bool, optional</em>) &#8211; Is spectral locus line plotted.</li>
+<li><strong>spectral_locus_colour</strong> (<em>array_like, optional</em>) &#8211; Spectral locus line colour.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for spectral locus.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.volume.nadir_grid" title="colour.plotting.volume.nadir_grid"><code class="xref py py-func docutils literal"><span class="pre">nadir_grid()</span></code></a>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>face_colours</strong> (<em>array_like, optional</em>) &#8211;
+Face colours array such as <cite>face_colours = (None, (0.5, 0.5, 1.0))</cite>.</li>
+<li><strong>edge_colours</strong> (<em>array_like, optional</em>) &#8211;
+Edge colours array such as <cite>edge_colours = (None, (0.5, 0.5, 1.0))</cite>.</li>
+<li><strong>face_alpha</strong> (<em>numeric, optional</em>) &#8211;
+Face opacity value such as <cite>face_alpha = (0.5, 1.0)</cite>.</li>
+<li><strong>edge_alpha</strong> (<em>numeric, optional</em>) &#8211;
+Edge opacity value such as <cite>edge_alpha = (0.0, 1.0)</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_colourspaces_gamuts_plot</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.volume.RGB_scatter_plot">
+<code class="descclassname">colour.plotting.volume.</code><code class="descname">RGB_scatter_plot</code><span class="sig-paren">(</span><em>RGB</em>, <em>colourspace</em>, <em>reference_colourspace='CIE xyY'</em>, <em>colourspaces=None</em>, <em>segments=8</em>, <em>display_grid=True</em>, <em>grid_segments=10</em>, <em>spectral_locus=False</em>, <em>spectral_locus_colour=None</em>, <em>points_size=12</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/volume.html#RGB_scatter_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.volume.RGB_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>RGB</em> colourspace array in a scatter plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>RGB</em> colourspace array.</li>
+<li><strong>colourspace</strong> (<a class="reference internal" href="colour.models.html#colour.models.RGB_Colourspace" title="colour.models.RGB_Colourspace"><em>RGB_Colourspace</em></a>) &#8211; <em>RGB</em> colourspace of the <em>RGB</em> array.</li>
+<li><strong>reference_colourspace</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CIE XYZ&#8217;, &#8216;CIE xyY&#8217;, &#8216;CIE Lab&#8217;, &#8216;CIE Luv&#8217;, &#8216;CIE UCS&#8217;, &#8216;CIE UVW&#8217;,
+&#8216;IPT&#8217;, &#8216;Hunter Lab&#8217;, &#8216;Hunter Rdab&#8217;}</strong>,
+Reference colourspace for colour conversion.</li>
+<li><strong>colourspaces</strong> (<em>array_like, optional</em>) &#8211; <em>RGB</em> colourspaces to plot the gamuts.</li>
+<li><strong>segments</strong> (<em>int, optional</em>) &#8211; Edge segments count for each <em>RGB</em> colourspace cubes.</li>
+<li><strong>display_grid</strong> (<em>bool, optional</em>) &#8211; Display a grid at the bottom of the <em>RGB</em> colourspace cubes.</li>
+<li><strong>grid_segments</strong> (<em>bool, optional</em>) &#8211; Edge segments count for the grid.</li>
+<li><strong>spectral_locus</strong> (<em>bool, optional</em>) &#8211; Is spectral locus line plotted.</li>
+<li><strong>spectral_locus_colour</strong> (<em>array_like, optional</em>) &#8211; Spectral locus line colour.</li>
+<li><strong>points_size</strong> (<em>numeric, optional</em>) &#8211; Scatter points size.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for spectral locus.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.volume.RGB_colourspaces_gamuts_plot" title="colour.plotting.volume.RGB_colourspaces_gamuts_plot"><code class="xref py py-func docutils literal"><span class="pre">RGB_colourspaces_gamuts_plot()</span></code></a>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;Rec. 709&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_scatter_plot</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.plotting.volume Module</a><ul>
+<li><a class="reference internal" href="#colour-models-volume-plotting">Colour Models Volume Plotting</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.plotting.volume.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.plotting.volume.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

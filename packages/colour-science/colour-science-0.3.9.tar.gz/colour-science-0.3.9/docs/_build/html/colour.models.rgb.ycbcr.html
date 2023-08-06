@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.ycbcr Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.ycbcr">
+<span id="colour-models-rgb-ycbcr-module"></span><h1>colour.models.rgb.ycbcr Module<a class="headerlink" href="#module-colour.models.rgb.ycbcr" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="y-cbcr-colour-encoding">
+<h2>Y&#8217;CbCr Colour Encoding<a class="headerlink" href="#y-cbcr-colour-encoding" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>Y&#8217;CbCr</em> colour encoding related transformations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.ycbcr.RGB_to_YCbCr" title="colour.models.rgb.ycbcr.RGB_to_YCbCr"><code class="xref py py-func docutils literal"><span class="pre">RGB_to_YCbCr()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.ycbcr.YCbCr_to_RGB" title="colour.models.rgb.ycbcr.YCbCr_to_RGB"><code class="xref py py-func docutils literal"><span class="pre">YCbCr_to_RGB()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.ycbcr.RGB_to_YcCbcCrc" title="colour.models.rgb.ycbcr.RGB_to_YcCbcCrc"><code class="xref py py-func docutils literal"><span class="pre">RGB_to_YcCbcCrc()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.ycbcr.YcCbcCrc_to_RGB" title="colour.models.rgb.ycbcr.YcCbcCrc_to_RGB"><code class="xref py py-func docutils literal"><span class="pre">YcCbcCrc_to_RGB()</span></code></a></li>
+</ul>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><em>Y&#8217;CbCr</em> is not an absolute colourspace.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/ycbcr.ipynb">YCbCr Colours Encoding Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Wikipedia. (n.d.). YCbCr. Retrieved February 29, 2016, from
+<a class="reference external" href="https://en.wikipedia.org/wiki/YCbCr">https://en.wikipedia.org/wiki/YCbCr</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>International Telecommunication Union. (2015). Recommendation
+ITU-R BT.709-6 - Parameter values for the HDTV standards for
+production and international programme exchange BT Series Broadcasting
+service (Vol. 5). Retrieved from <a class="reference external" href="https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.709-6-201506-I!!PDF-E.pdf">https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.709-6-201506-I!!PDF-E.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id6">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>, <a class="fn-backref" href="#id10">4</a>)</em> International Telecommunication Union. (2015). Recommendation
+ITU-R BT.2020 - Parameter values for ultra-high definition television
+systems for production and international programme exchange (Vol. 1).
+Retrieved from <a class="reference external" href="https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.2020-2-201510-I!!PDF-E.pdf">https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.2020-2-201510-I!!PDF-E.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>Society of Motion Picture and Television Engineers. (1999).
+ANSI/SMPTE 240M-1995 - Signal Parameters - 1125-Line High-Definition
+Production Systems, 1–7. Retrieved from
+<a class="reference external" href="http://car.france3.mars.free.fr/HD/INA-%2026%20jan%2006/SMPTE%20normes%20et%20confs/s240m.pdf">http://car.france3.mars.free.fr/HD/INA-%2026%20jan%2006/SMPTE%20normes%20et%20confs/s240m.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[5]</a></td><td>International Telecommunication Union. (2011). Recommendation ITU-T
+T.871 - Information technology – Digital compression and coding of
+continuous-tone still images: JPEG File Interchange Format (JFIF).
+Retrieved from <a class="reference external" href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-T.871-201105-I!!PDF-E&amp;type=items">https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-T.871-201105-I!!PDF-E&amp;type=items</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.models.rgb.ycbcr.YCBCR_WEIGHTS">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">YCBCR_WEIGHTS</code><em class="property"> = CaseInsensitiveMapping({u'Rec. 2020': array([ 0.2627,  0.0593]), u'SMPTE-240M': array([ 0.2122,  0.0865]), u'Rec. 709': array([ 0.2126,  0.0722]), u'Rec. 601': array([ 0.299,  0.114])})</em><a class="headerlink" href="#colour.models.rgb.ycbcr.YCBCR_WEIGHTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Luma weightings presets.</p>
+<dl class="docutils">
+<dt>YCBCR_WEIGHTS <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><strong>{&#8216;Rec. 601&#8217;, &#8216;Rec. 709&#8217;, &#8216;Rec. 2020&#8217;, &#8216;SMPTE-240M}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.ycbcr.RGB_range">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">RGB_range</code><span class="sig-paren">(</span><em>bits</em>, <em>is_legal</em>, <em>is_int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/ycbcr.html#RGB_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.ycbcr.RGB_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8221;
+Returns the <em>RGB</em> range array for given bit depth, range legality and
+representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>bits</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; Bit depth of the <em>RGB</em> output ranges array.</li>
+<li><strong>is_legal</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Whether the <em>RGB</em> output ranges array is legal.</li>
+<li><strong>is_int</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Whether the <em>RGB</em> output ranges array represents integer code values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>RGB</em> ranges array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="go">array([ 16, 235])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>  
+<span class="go">array([ 0.0627451...,  0.9215686...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<span class="go">array([ 0.,  1.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.ycbcr.YCbCr_ranges">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">YCbCr_ranges</code><span class="sig-paren">(</span><em>bits</em>, <em>is_legal</em>, <em>is_int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/ycbcr.html#YCbCr_ranges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.ycbcr.YCbCr_ranges" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8221;
+Returns the <em>Y&#8217;CbCr</em> colour encoding ranges array for given bit depth,
+range legality and representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>bits</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; Bit depth of the <em>Y&#8217;CbCr</em> colour encoding ranges array.</li>
+<li><strong>is_legal</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Whether the <em>Y&#8217;CbCr</em> colour encoding ranges array is legal.</li>
+<li><strong>is_int</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Whether the <em>Y&#8217;CbCr</em> colour encoding ranges array represents integer
+code values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Y&#8217;CbCr</em> colour encoding ranges array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">YCbCr_ranges</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="go">array([ 16, 235,  16, 240])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">YCbCr_ranges</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>  
+<span class="go">array([ 0.0627451...,  0.9215686...,  0.0627451...,  0.9411764...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">YCbCr_ranges</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<span class="go">array([ 0. ,  1. , -0.5,  0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.ycbcr.RGB_to_YCbCr">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">RGB_to_YCbCr</code><span class="sig-paren">(</span><em>RGB</em>, <em>K=array([ 0.2126</em>, <em>0.0722])</em>, <em>in_bits=10</em>, <em>in_legal=False</em>, <em>in_int=False</em>, <em>out_bits=8</em>, <em>out_legal=True</em>, <em>out_int=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/ycbcr.html#RGB_to_YCbCr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.ycbcr.RGB_to_YCbCr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an array of <em>R&#8217;G&#8217;B&#8217;</em> values to the corresponding <em>Y&#8217;CbCr</em> colour
+encoding values array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; Input <em>R&#8217;G&#8217;B&#8217;</em> array of floats or integer values.</li>
+<li><strong>K</strong> (<em>array_like, optional</em>) &#8211; Luma weighting coefficients of red and blue. See :attr:
+<cite>YCBCR_WEIGHTS</cite> for presets. Default is <cite>(0.2126, 0.0722)</cite>, the
+weightings for Rec. 709.</li>
+<li><strong>in_bits</strong> (<em>int, optional</em>) &#8211; Bit depth for integer input, or used in the calculation of the
+denominator for legal range float values, i.e. 8-bit means the float
+value for legal white is <cite>235 / 255</cite>. Default is <cite>10</cite>.</li>
+<li><strong>in_legal</strong> (<em>bool, optional</em>) &#8211; Whether to treat the input values as legal range. Default is <cite>False</cite>.</li>
+<li><strong>in_int</strong> (<em>bool, optional</em>) &#8211; Whether to treat the input values as <cite>in_bits</cite> integer code values.
+Default is <cite>False</cite>.</li>
+<li><strong>out_bits</strong> (<em>int, optional</em>) &#8211; Bit depth for integer output, or used in the calculation of the
+denominator for legal range float values, i.e. 8-bit means the float
+value for legal white is <cite>235 / 255</cite>. Ignored if <cite>out_legal</cite> and
+<cite>out_int</cite> are both False. Default is <cite>8</cite>.</li>
+<li><strong>out_legal</strong> (<em>bool, optional</em>) &#8211; Whether to return legal range values. Default is <cite>True</cite>.</li>
+<li><strong>out_int</strong> (<em>bool, optional</em>) &#8211; Whether to return values as <cite>out_bits</cite> integer code values. Default is
+<cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>in_range</strong> (<em>array_like, optional</em>) &#8211;
+Array overriding the computed range such as
+<cite>in_range = (RGB_min, RGB_max)</cite>. If <cite>in_range</cite> is undefined, <cite>RGB_min</cite>
+and <cite>RGB_max</cite> will be computed using <a class="reference internal" href="#colour.models.rgb.ycbcr.RGB_range" title="colour.models.rgb.ycbcr.RGB_range"><code class="xref py py-func docutils literal"><span class="pre">RGB_range()</span></code></a> definition.</li>
+<li><strong>out_range</strong> (<em>array_like, optional</em>) &#8211;
+Array overriding the computed range such as
+<cite>out_range = (Y_min, Y_max, C_min, C_max)</cite>. If <cite>out_range</cite> is
+undefined, <cite>Y_min</cite>, <cite>Y_max</cite>, <cite>C_min</cite> and <cite>C_max</cite> will be computed
+using <a class="reference internal" href="#colour.models.rgb.ycbcr.YCbCr_ranges" title="colour.models.rgb.ycbcr.YCbCr_ranges"><code class="xref py py-func docutils literal"><span class="pre">YCbCr_ranges()</span></code></a> definition.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Y&#8217;CbCr</em> colour encoding array of integer or float values.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For <em>Recommendation ITU-R BT.2020</em>, <a class="reference internal" href="#colour.models.rgb.ycbcr.RGB_to_YCbCr" title="colour.models.rgb.ycbcr.RGB_to_YCbCr"><code class="xref py py-func docutils literal"><span class="pre">RGB_to_YCbCr()</span></code></a> definition is only
+applicable to the non-constant luminance implementation.
+<a class="reference internal" href="#colour.models.rgb.ycbcr.RGB_to_YcCbcCrc" title="colour.models.rgb.ycbcr.RGB_to_YcCbcCrc"><code class="xref py py-func docutils literal"><span class="pre">RGB_to_YcCbcCrc()</span></code></a> definition should be used for the constant
+luminance case as per <a class="footnote-reference" href="#id3" id="id6">[3]</a>.</p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>The default arguments, <code class="docutils literal"><span class="pre">**{'in_bits':</span> <span class="pre">10,</span> <span class="pre">'in_legal':</span> <span class="pre">False,</span>
+<span class="pre">'in_int':</span> <span class="pre">False,</span> <span class="pre">'out_bits':</span> <span class="pre">8,</span> <span class="pre">'out_legal':</span> <span class="pre">True,</span> <span class="pre">'out_int':</span> <span class="pre">False}</span></code>
+transform a float <em>R&#8217;G&#8217;B&#8217;</em> input array in range [0, 1] (<cite>in_bits</cite> is
+ignored) to a float <em>Y&#8217;CbCr</em> output array where <em>Y&#8217;</em> is in range
+[16 / 255, 235 / 255] and <em>Cb</em> and <em>Cr</em> are in range
+[16 / 255, 240./255]. The float values are calculated based on an
+[0, 255] integer range, but no 8-bit quantisation or clamping are
+performed.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YCbCr</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>  
+<span class="go">array([ 0.9215686...,  0.5019607...,  0.5019607...])</span>
+</pre></div>
+</div>
+<p>Matching float output of The Foundry Nuke&#8217;s Colorspace node set to YCbCr:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YCbCr</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_range</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">235</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">15.5</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">239.5</span> <span class="o">/</span> <span class="mi">255</span><span class="p">))</span>
+<span class="go">array([ 0.9215686...,  0.5       ,  0.5       ])</span>
+</pre></div>
+</div>
+<p>Matching float output of The Foundry Nuke&#8217;s Colorspace node set to YPbPr:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YCbCr</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_legal</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_int</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">array([ 1.,  0.,  0.])</span>
+</pre></div>
+</div>
+<p>Creating integer code values as per standard 10-bit SDI:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YCbCr</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span> <span class="n">out_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">out_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">out_int</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">array([940, 512, 512])</span>
+</pre></div>
+</div>
+<p>For JFIF JPEG conversion as per ITU-T T.871 <a class="footnote-reference" href="#id5" id="id7">[5]</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">102</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">51</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YCbCr</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">K</span><span class="o">=</span><span class="n">YCBCR_WEIGHTS</span><span class="p">[</span><span class="s1">&#39;Rec. 601&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">in_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">out_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">out_int</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">array([ 36, 136, 175])</span>
+</pre></div>
+</div>
+<p>Note the use of 256 for the max <em>Cb / Cr</em> value, which is required so that
+the <em>Cb</em> and <em>Cr</em> output is centered about 128. Using 255 centres it
+about 127.5, meaning that there is no integer code value to represent
+achromatic colours. This does however create the possibility of output
+integer codes with value of 256, which cannot be stored in 8-bit integer
+representation. Recommendation ITU-T T.871 specifies these should be
+clamped to 255.</p>
+<p>These JFIF JPEG ranges are also obtained as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YCbCr</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">K</span><span class="o">=</span><span class="n">YCBCR_WEIGHTS</span><span class="p">[</span><span class="s1">&#39;Rec. 601&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">in_bits</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_int</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_legal</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_int</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">array([ 36, 136, 175])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.ycbcr.YCbCr_to_RGB">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">YCbCr_to_RGB</code><span class="sig-paren">(</span><em>YCbCr</em>, <em>K=array([ 0.2126</em>, <em>0.0722])</em>, <em>in_bits=8</em>, <em>in_legal=True</em>, <em>in_int=False</em>, <em>out_bits=10</em>, <em>out_legal=False</em>, <em>out_int=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/ycbcr.html#YCbCr_to_RGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.ycbcr.YCbCr_to_RGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an array of <em>Y&#8217;CbCr</em> colour encoding values to the corresponding
+<em>R&#8217;G&#8217;B&#8217;</em> values array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>YCbCr</strong> (<em>array_like</em>) &#8211; Input <em>Y&#8217;CbCr</em> colour encoding array of integer or float values.</li>
+<li><strong>K</strong> (<em>array_like, optional</em>) &#8211; Luma weighting coefficients of red and blue. See :attr:
+<cite>YCBCR_WEIGHTS</cite> for presets. Default is <cite>(0.2126, 0.0722)</cite>, the
+weightings for Rec. 709.</li>
+<li><strong>in_bits</strong> (<em>int, optional</em>) &#8211; Bit depth for integer input, or used in the calculation of the
+denominator for legal range float values, i.e. 8-bit means the float
+value for legal white is <cite>235 / 255</cite>. Default is <cite>10</cite>.</li>
+<li><strong>in_legal</strong> (<em>bool, optional</em>) &#8211; Whether to treat the input values as legal range. Default is <cite>False</cite>.</li>
+<li><strong>in_int</strong> (<em>bool, optional</em>) &#8211; Whether to treat the input values as <cite>in_bits</cite> integer code values.
+Default is <cite>False</cite>.</li>
+<li><strong>out_bits</strong> (<em>int, optional</em>) &#8211; Bit depth for integer output, or used in the calculation of the
+denominator for legal range float values, i.e. 8-bit means the float
+value for legal white is <cite>235 / 255</cite>. Ignored if <cite>out_legal</cite> and
+<cite>out_int</cite> are both False. Default is <cite>8</cite>.</li>
+<li><strong>out_legal</strong> (<em>bool, optional</em>) &#8211; Whether to return legal range values. Default is <cite>True</cite>.</li>
+<li><strong>out_int</strong> (<em>bool, optional</em>) &#8211; Whether to return values as <cite>out_bits</cite> integer code values. Default is
+<cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>in_range</strong> (<em>array_like, optional</em>) &#8211;
+Array overriding the computed range such as
+<cite>in_range = (Y_min, Y_max, C_min, C_max)</cite>. If <cite>in_range</cite> is undefined,
+<cite>Y_min</cite>, <cite>Y_max</cite>, <cite>C_min</cite> and <cite>C_max</cite> will be computed using
+<a class="reference internal" href="#colour.models.rgb.ycbcr.YCbCr_ranges" title="colour.models.rgb.ycbcr.YCbCr_ranges"><code class="xref py py-func docutils literal"><span class="pre">YCbCr_ranges()</span></code></a> definition.</li>
+<li><strong>out_range</strong> (<em>array_like, optional</em>) &#8211;
+Array overriding the computed range such as
+<cite>out_range = (RGB_min, RGB_max)</cite>. If <cite>out_range</cite> is undefined,
+<cite>RGB_min</cite> and <cite>RGB_max</cite> will be computed using <a class="reference internal" href="#colour.models.rgb.ycbcr.RGB_range" title="colour.models.rgb.ycbcr.RGB_range"><code class="xref py py-func docutils literal"><span class="pre">RGB_range()</span></code></a>
+definition.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>R&#8217;G&#8217;B&#8217;</em> array of integer or float values.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For <em>Recommendation ITU-R BT.2020</em>, <a class="reference internal" href="#colour.models.rgb.ycbcr.YCbCr_to_RGB" title="colour.models.rgb.ycbcr.YCbCr_to_RGB"><code class="xref py py-func docutils literal"><span class="pre">YCbCr_to_RGB()</span></code></a>
+definition is only applicable to the non-constant luminance implementation.
+<a class="reference internal" href="#colour.models.rgb.ycbcr.YcCbcCrc_to_RGB" title="colour.models.rgb.ycbcr.YcCbcCrc_to_RGB"><code class="xref py py-func docutils literal"><span class="pre">YcCbcCrc_to_RGB()</span></code></a> definition should be used for the constant
+luminance case as per <a class="footnote-reference" href="#id3" id="id8">[3]</a>.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">YCbCr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">502</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">YCbCr_to_RGB</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">YCbCr</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_int</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">array([ 0.5,  0.5,  0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.ycbcr.RGB_to_YcCbcCrc">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">RGB_to_YcCbcCrc</code><span class="sig-paren">(</span><em>RGB</em>, <em>out_bits=10</em>, <em>out_legal=True</em>, <em>out_int=False</em>, <em>is_12_bits_system=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/ycbcr.html#RGB_to_YcCbcCrc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.ycbcr.RGB_to_YcCbcCrc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an array of <em>RGB</em> linear values to the corresponding <em>Yc&#8217;Cbc&#8217;Crc&#8217;</em>
+colour encoding values array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; Input <em>RGB</em> array of linear float values.</li>
+<li><strong>out_bits</strong> (<em>int, optional</em>) &#8211; Bit depth for integer output, or used in the calculation of the
+denominator for legal range float values, i.e. 8-bit means the float
+value for legal white is <cite>235 / 255</cite>. Ignored if <cite>out_legal</cite> and
+<cite>out_int</cite> are both False. Default is <cite>10</cite>.</li>
+<li><strong>out_legal</strong> (<em>bool, optional</em>) &#8211; Whether to return legal range values. Default is <cite>True</cite>.</li>
+<li><strong>out_int</strong> (<em>bool, optional</em>) &#8211; Whether to return values as <cite>out_bits</cite> integer code values. Default is
+<cite>False</cite>.</li>
+<li><strong>is_12_bits_system</strong> (<em>bool, optional</em>) &#8211; <em>Recommendation ITU-R BT.2020</em> OETF (OECF) adopts different parameters
+for 10 and 12 bit systems. Default is <cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>out_range</strong> (<em>array_like, optional</em>) &#8211;
+Array overriding the computed range such as
+<cite>out_range = (Y_min, Y_max, C_min, C_max)</cite>. If <cite>out_range</cite> is
+undefined, <cite>Y_min</cite>, <cite>Y_max</cite>, <cite>C_min</cite> and <cite>C_max</cite> will be computed
+using <a class="reference internal" href="#colour.models.rgb.ycbcr.YCbCr_ranges" title="colour.models.rgb.ycbcr.YCbCr_ranges"><code class="xref py py-func docutils literal"><span class="pre">YCbCr_ranges()</span></code></a> definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Yc&#8217;Cbc&#8217;Crc&#8217;</em> colour encoding array of integer or float values.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This definition is specifically for usage with
+<em>Recommendation ITU-R BT.2020</em> <a class="footnote-reference" href="#id3" id="id9">[3]</a> when adopting the constant luminance
+implementation.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_YcCbcCrc</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">out_int</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">is_12_bits_system</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">array([422, 512, 512])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.ycbcr.YcCbcCrc_to_RGB">
+<code class="descclassname">colour.models.rgb.ycbcr.</code><code class="descname">YcCbcCrc_to_RGB</code><span class="sig-paren">(</span><em>YcCbcCrc</em>, <em>in_bits=10</em>, <em>in_legal=True</em>, <em>in_int=False</em>, <em>is_12_bits_system=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/ycbcr.html#YcCbcCrc_to_RGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.ycbcr.YcCbcCrc_to_RGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an array of <em>Yc&#8217;Cbc&#8217;Crc&#8217;</em> colour encoding values to the
+corresponding <em>RGB</em> array of linear values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>YcCbcCrc</strong> (<em>array_like</em>) &#8211; Input <em>Yc&#8217;Cbc&#8217;Crc&#8217;</em> colour encoding array of linear float values.</li>
+<li><strong>in_bits</strong> (<em>int, optional</em>) &#8211; Bit depth for integer input, or used in the calculation of the
+denominator for legal range float values, i.e. 8-bit means the float
+value for legal white is <cite>235 / 255</cite>. Default is <cite>10</cite>.</li>
+<li><strong>in_legal</strong> (<em>bool, optional</em>) &#8211; Whether to treat the input values as legal range. Default is <cite>False</cite>.</li>
+<li><strong>in_int</strong> (<em>bool, optional</em>) &#8211; Whether to treat the input values as <cite>in_bits</cite> integer code values.
+Default is <cite>False</cite>.</li>
+<li><strong>is_12_bits_system</strong> (<em>bool, optional</em>) &#8211; <em>Recommendation ITU-R BT.2020</em> EOTF (EOCF) adopts different parameters
+for 10 and 12 bit systems. Default is <cite>False</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>in_range</strong> (<em>array_like, optional</em>) &#8211;
+Array overriding the computed range such as
+<cite>in_range = (Y_min, Y_max, C_min, C_max)</cite>. If <cite>in_range</cite> is undefined,
+<cite>Y_min</cite>, <cite>Y_max</cite>, <cite>C_min</cite> and <cite>C_max</cite> will be computed using
+<a class="reference internal" href="#colour.models.rgb.ycbcr.YCbCr_ranges" title="colour.models.rgb.ycbcr.YCbCr_ranges"><code class="xref py py-func docutils literal"><span class="pre">YCbCr_ranges()</span></code></a> definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>RGB</em> array of linear float values.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This definition is specifically for usage with
+<em>Recommendation ITU-R BT.2020</em> <a class="footnote-reference" href="#id3" id="id10">[3]</a> when adopting the constant luminance
+implementation.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">YcCbcCrc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1689</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">2048</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">YcCbcCrc_to_RGB</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">YcCbcCrc</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_bits</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">in_int</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">is_12_bits_system</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">array([ 0.1800903...,  0.1800903...,  0.1800903...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.ycbcr Module</a><ul>
+<li><a class="reference internal" href="#y-cbcr-colour-encoding">Y&#8217;CbCr Colour Encoding</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.ycbcr.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.ycbcr.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

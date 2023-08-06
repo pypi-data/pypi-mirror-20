@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.dataset.v_gamut Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.dataset.v_gamut">
+<span id="colour-models-rgb-dataset-v-gamut-module"></span><h1>colour.models.rgb.dataset.v_gamut Module<a class="headerlink" href="#module-colour.models.rgb.dataset.v_gamut" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v-gamut-colourspace">
+<h2>V-Gamut Colourspace<a class="headerlink" href="#v-gamut-colourspace" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>V-Gamut</em> colourspace:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.dataset.v_gamut.V_GAMUT_COLOURSPACE" title="colour.models.rgb.dataset.v_gamut.V_GAMUT_COLOURSPACE"><code class="xref py py-attr docutils literal"><span class="pre">V_GAMUT_COLOURSPACE</span></code></a>.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/rgb.ipynb">RGB Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Panasonic. (2014). VARICAM V-Log/V-Gamut. Retrieved from
+<a class="reference external" href="http://pro-av.panasonic.net/en/varicam/common/pdf/VARICAM_V-Log_V-Gamut.pdf">http://pro-av.panasonic.net/en/varicam/common/pdf/VARICAM_V-Log_V-Gamut.pdf</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.models.rgb.dataset.v_gamut.V_GAMUT_PRIMARIES">
+<code class="descclassname">colour.models.rgb.dataset.v_gamut.</code><code class="descname">V_GAMUT_PRIMARIES</code><em class="property"> = array([[ 0.73 ,  0.28 ],        [ 0.165,  0.84 ],        [ 0.1  , -0.03 ]])</em><a class="headerlink" href="#colour.models.rgb.dataset.v_gamut.V_GAMUT_PRIMARIES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>V-Gamut</em> colourspace primaries.</p>
+<p>V_GAMUT_PRIMARIES : ndarray, (3, 2)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.v_gamut.V_GAMUT_ILLUMINANT">
+<code class="descclassname">colour.models.rgb.dataset.v_gamut.</code><code class="descname">V_GAMUT_ILLUMINANT</code><em class="property"> = u'D65'</em><a class="headerlink" href="#colour.models.rgb.dataset.v_gamut.V_GAMUT_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>V-Gamut</em> colourspace whitepoint name as illuminant.</p>
+<p>V_GAMUT_WHITEPOINT : unicode</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.v_gamut.V_GAMUT_WHITEPOINT">
+<code class="descclassname">colour.models.rgb.dataset.v_gamut.</code><code class="descname">V_GAMUT_WHITEPOINT</code><em class="property"> = array([ 0.3127,  0.329 ])</em><a class="headerlink" href="#colour.models.rgb.dataset.v_gamut.V_GAMUT_WHITEPOINT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>V-Gamut</em> colourspace whitepoint.</p>
+<p>V_GAMUT_WHITEPOINT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.v_gamut.V_GAMUT_TO_XYZ_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.v_gamut.</code><code class="descname">V_GAMUT_TO_XYZ_MATRIX</code><em class="property"> = array([[ 0.679644,  0.152211,  0.1186  ],        [ 0.260686,  0.774894, -0.03558 ],        [-0.00931 , -0.004612,  1.10298 ]])</em><a class="headerlink" href="#colour.models.rgb.dataset.v_gamut.V_GAMUT_TO_XYZ_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>V-Gamut</em> colourspace to <em>CIE XYZ</em> tristimulus values matrix.</p>
+<p>V_GAMUT_TO_XYZ_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.v_gamut.XYZ_TO_V_GAMUT_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.v_gamut.</code><code class="descname">XYZ_TO_V_GAMUT_MATRIX</code><em class="property"> = array([[ 1.589012, -0.313204, -0.180965],        [-0.534053,  1.396011,  0.102458],        [ 0.011179,  0.003194,  0.905535]])</em><a class="headerlink" href="#colour.models.rgb.dataset.v_gamut.XYZ_TO_V_GAMUT_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE XYZ</em> tristimulus values to <em>V-Gamut</em> colourspace matrix.</p>
+<p>XYZ_TO_V_GAMUT_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.v_gamut.V_GAMUT_COLOURSPACE">
+<code class="descclassname">colour.models.rgb.dataset.v_gamut.</code><code class="descname">V_GAMUT_COLOURSPACE</code><em class="property"> = &lt;colour.models.rgb.rgb_colourspace.RGB_Colourspace object&gt;</em><a class="headerlink" href="#colour.models.rgb.dataset.v_gamut.V_GAMUT_COLOURSPACE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>V-Gamut</em> colourspace.</p>
+<p>V_GAMUT_COLOURSPACE : RGB_Colourspace</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.dataset.v_gamut Module</a><ul>
+<li><a class="reference internal" href="#v-gamut-colourspace">V-Gamut Colourspace</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.dataset.v_gamut.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.dataset.v_gamut.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.bt_1886 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.transfer_functions.bt_1886">
+<span id="colour-models-rgb-transfer-functions-bt-1886-module"></span><h1>colour.models.rgb.transfer_functions.bt_1886 Module<a class="headerlink" href="#module-colour.models.rgb.transfer_functions.bt_1886" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="itu-r-bt-1886">
+<h2>ITU-R BT.1886<a class="headerlink" href="#itu-r-bt-1886" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>Recommendation ITU-R BT.1886</em> opto-electrical transfer function
+(OETF / OECF) and electro-optical transfer function (EOTF / EOCF):</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.transfer_functions.bt_1886.oetf_BT1886" title="colour.models.rgb.transfer_functions.bt_1886.oetf_BT1886"><code class="xref py py-func docutils literal"><span class="pre">oetf_BT1886()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.transfer_functions.bt_1886.eotf_BT1886" title="colour.models.rgb.transfer_functions.bt_1886.eotf_BT1886"><code class="xref py py-func docutils literal"><span class="pre">eotf_BT1886()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/rgb.ipynb">RGB Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>International Telecommunication Union. (2011). Recommendation ITU-R
+BT.1886 - Reference electro-optical transfer function for flat panel
+displays used in HDTV studio production BT Series Broadcasting service.</td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.bt_1886.oetf_BT1886">
+<code class="descclassname">colour.models.rgb.transfer_functions.bt_1886.</code><code class="descname">oetf_BT1886</code><span class="sig-paren">(</span><em>L</em>, <em>L_B=64</em>, <em>L_W=940</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_1886.html#oetf_BT1886"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.bt_1886.oetf_BT1886" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.1886</em> opto-electrical transfer function
+(OETF / OECF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>L</strong> (<em>numeric or array_like</em>) &#8211; Screen luminance in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>L_B</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for black.</li>
+<li><strong>L_W</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for white.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Input video signal level (normalized, black at <span class="math">\(V = 0\)</span>, to white
+at <span class="math">\(V = 1\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><em>Recommendation ITU-R BT.1886</em> doesn&#8217;t specify an opto-electrical
+transfer function. This definition is used for symmetry in unit tests and
+other computations but should not be used as an <em>OETF</em>.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oetf_BT1886</span><span class="p">(</span><span class="mf">277.98159179331145</span><span class="p">)</span>  
+<span class="go">0.4090077...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.bt_1886.eotf_BT1886">
+<code class="descclassname">colour.models.rgb.transfer_functions.bt_1886.</code><code class="descname">eotf_BT1886</code><span class="sig-paren">(</span><em>V</em>, <em>L_B=64</em>, <em>L_W=940</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/bt_1886.html#eotf_BT1886"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.bt_1886.eotf_BT1886" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines <em>Recommendation ITU-R BT.1886</em> electro-optical transfer function
+(EOTF / EOCF).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>V</strong> (<em>numeric or array_like</em>) &#8211; Input video signal level (normalized, black at <span class="math">\(V = 0\)</span>, to white
+at <span class="math">\(V = 1\)</span>. For content mastered per
+<em>Recommendation ITU-R BT.709</em>, 10-bit digital code values <span class="math">\(D\)</span> map
+into values of <span class="math">\(V\)</span> per the following equation:
+<span class="math">\(V = (D–64)/876\)</span></li>
+<li><strong>L_B</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for black.</li>
+<li><strong>L_W</strong> (<em>numeric, optional</em>) &#8211; Screen luminance for white.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Screen luminance in <span class="math">\(cd/m^2\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eotf_BT1886</span><span class="p">(</span><span class="mf">0.409007728864150</span><span class="p">)</span>  
+<span class="go">277.9815917...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.transfer_functions.bt_1886 Module</a><ul>
+<li><a class="reference internal" href="#itu-r-bt-1886">ITU-R BT.1886</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.transfer_functions.bt_1886.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.transfer_functions.bt_1886.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

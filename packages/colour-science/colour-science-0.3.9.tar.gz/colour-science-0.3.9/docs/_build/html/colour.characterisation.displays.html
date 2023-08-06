@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.characterisation.displays Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.characterisation.displays">
+<span id="colour-characterisation-displays-module"></span><h1>colour.characterisation.displays Module<a class="headerlink" href="#module-colour.characterisation.displays" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rgb-displays">
+<h2>RGB Displays<a class="headerlink" href="#rgb-displays" title="Permalink to this headline">¶</a></h2>
+<p>Defines spectral power distributions classes for the dataset from
+<a class="reference internal" href="colour.characterisation.dataset.displays.html#module-colour.characterisation.dataset.displays" title="colour.characterisation.dataset.displays"><code class="xref py py-mod docutils literal"><span class="pre">colour.characterisation.dataset.displays</span></code></a> module:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.characterisation.displays.RGB_DisplayPrimaries" title="colour.characterisation.displays.RGB_DisplayPrimaries"><code class="xref py py-class docutils literal"><span class="pre">RGB_DisplayPrimaries</span></code></a>: Implements support for a <em>RGB</em> display (such
+as a <em>CRT</em> or <em>LCD</em>) primaries tri-spectral power distributions.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/characterisation/displays.ipynb">Displays Jupyter Notebook</a></p>
+</div>
+<dl class="class">
+<dt id="colour.characterisation.displays.RGB_DisplayPrimaries">
+<em class="property">class </em><code class="descclassname">colour.characterisation.displays.</code><code class="descname">RGB_DisplayPrimaries</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/characterisation/displays.html#RGB_DisplayPrimaries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.characterisation.displays.RGB_DisplayPrimaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="colour.colorimetry.spectrum.html#colour.colorimetry.spectrum.TriSpectralPowerDistribution" title="colour.colorimetry.spectrum.TriSpectralPowerDistribution"><code class="xref py py-class docutils literal"><span class="pre">colour.colorimetry.spectrum.TriSpectralPowerDistribution</span></code></a></p>
+<p>Implements support for a <em>RGB</em> display (such as a <em>CRT</em> or <em>LCD</em>)
+primaries tri-spectral power distributions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>unicode</em>) &#8211; <em>RGB</em> display name.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; <em>RGB</em> display primaries tri-spectral power distributions data.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="colour.characterisation.displays.RGB_DisplayPrimaries.red">
+<code class="descname">red</code><a class="headerlink" href="#colour.characterisation.displays.RGB_DisplayPrimaries.red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.displays.RGB_DisplayPrimaries.green">
+<code class="descname">green</code><a class="headerlink" href="#colour.characterisation.displays.RGB_DisplayPrimaries.green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.displays.RGB_DisplayPrimaries.blue">
+<code class="descname">blue</code><a class="headerlink" href="#colour.characterisation.displays.RGB_DisplayPrimaries.blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">blue</code></dt>
+<dd><p>Property for <strong>self.z</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.z</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.characterisation.displays.RGB_DisplayPrimaries.blue" title="colour.characterisation.displays.RGB_DisplayPrimaries.blue"><code class="xref py py-attr docutils literal"><span class="pre">RGB_DisplayPrimaries.blue</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">green</code></dt>
+<dd><p>Property for <strong>self.y</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.y</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.characterisation.displays.RGB_DisplayPrimaries.green" title="colour.characterisation.displays.RGB_DisplayPrimaries.green"><code class="xref py py-attr docutils literal"><span class="pre">RGB_DisplayPrimaries.green</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">red</code></dt>
+<dd><p>Property for <strong>self.x</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.x</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.characterisation.displays.RGB_DisplayPrimaries.red" title="colour.characterisation.displays.RGB_DisplayPrimaries.red"><code class="xref py py-attr docutils literal"><span class="pre">RGB_DisplayPrimaries.red</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.characterisation.displays Module</a><ul>
+<li><a class="reference internal" href="#rgb-displays">RGB Displays</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.characterisation.displays.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.characterisation.displays.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

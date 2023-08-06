@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.aces Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.transfer_functions.aces">
+<span id="colour-models-rgb-transfer-functions-aces-module"></span><h1>colour.models.rgb.transfer_functions.aces Module<a class="headerlink" href="#module-colour.models.rgb.transfer_functions.aces" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="academy-color-encoding-system-log-encodings">
+<h2>Academy Color Encoding System - Log Encodings<a class="headerlink" href="#academy-color-encoding-system-log-encodings" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>Academy Color Encoding System</em> (ACES) log encodings:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.transfer_functions.aces.log_encoding_ACESproxy" title="colour.models.rgb.transfer_functions.aces.log_encoding_ACESproxy"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ACESproxy()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.transfer_functions.aces.log_decoding_ACESproxy" title="colour.models.rgb.transfer_functions.aces.log_decoding_ACESproxy"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ACESproxy()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.transfer_functions.aces.log_encoding_ACEScc" title="colour.models.rgb.transfer_functions.aces.log_encoding_ACEScc"><code class="xref py py-func docutils literal"><span class="pre">log_encoding_ACEScc()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.rgb.transfer_functions.aces.log_decoding_ACEScc" title="colour.models.rgb.transfer_functions.aces.log_decoding_ACEScc"><code class="xref py py-func docutils literal"><span class="pre">log_decoding_ACEScc()</span></code></a></li>
+<li>:func:&#8217;log_encoding_ACEScct&#8217;</li>
+<li>:func:&#8217;log_decoding_ACEScct&#8217;</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/rgb.ipynb">RGB Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (n.d.). Academy Color Encoding System. Retrieved
+February 24, 2014, from
+<a class="reference external" href="http://www.oscars.org/science-technology/council/projects/aces.html">http://www.oscars.org/science-technology/council/projects/aces.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (2014). Technical Bulletin TB-2014-004 - Informative
+Notes on SMPTE ST 2065-1 – Academy Color Encoding Specification
+(ACES). Retrieved from
+<a class="reference external" href="https://github.com/ampas/aces-dev/tree/master/documents">https://github.com/ampas/aces-dev/tree/master/documents</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (2014). Specification S-2014-003 - ACEScc , A
+Logarithmic Encoding of ACES Data for use within Color Grading
+Systems. Retrieved from
+<a class="reference external" href="https://github.com/ampas/aces-dev/tree/master/documents">https://github.com/ampas/aces-dev/tree/master/documents</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (2014). Specification S-2013-001 - ACESproxy , an
+Integer Log Encoding of ACES Image Data. Retrieved from
+<a class="reference external" href="https://github.com/ampas/aces-dev/tree/master/documents">https://github.com/ampas/aces-dev/tree/master/documents</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>The Academy of Motion Picture Arts and Sciences. (2016).
+Specification S-2016-001 - ACEScct, A Quasi-Logarithmic
+Encoding of ACES Data for use within Color Grading Systems.
+Retrieved October 10, 2016, from
+<a class="reference external" href="https://github.com/ampas/aces-dev/tree/v1.0.3/documents">https://github.com/ampas/aces-dev/tree/v1.0.3/documents</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.aces.ACES_PROXY_10_CONSTANTS">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">ACES_PROXY_10_CONSTANTS</code><em class="property"> = {'CV_min': 64, 'steps_per_stop': 50, 'mid_CV_offset': 425, 'CV_max': 940, 'mid_log_offset': 2.5}</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.ACES_PROXY_10_CONSTANTS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ACESproxy</em> 10 bit colourspace constants.</p>
+<p>ACES_PROXY_10_CONSTANTS : Structure</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.aces.ACES_PROXY_12_CONSTANTS">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">ACES_PROXY_12_CONSTANTS</code><em class="property"> = {'CV_min': 256, 'steps_per_stop': 200, 'mid_CV_offset': 1700, 'CV_max': 3760, 'mid_log_offset': 2.5}</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.ACES_PROXY_12_CONSTANTS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ACESproxy</em> 12 bit colourspace constants.</p>
+<p>ACES_PROXY_12_CONSTANTS : Structure</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.aces.ACES_PROXY_CONSTANTS">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">ACES_PROXY_CONSTANTS</code><em class="property"> = CaseInsensitiveMapping({u'12 Bit': {'CV_min': 256, 'steps_per_stop': 200, 'mid_CV_offset': 1700, 'CV_max': 3760, 'mid_log_offset': 2.5}, u'10 Bit': {'CV_min': 64, 'steps_per_stop': 50, 'mid_CV_offset': 425, 'CV_max': 940, 'mid_log_offset': 2.5}})</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.ACES_PROXY_CONSTANTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregated <em>ACESproxy</em> colourspace constants.</p>
+<dl class="docutils">
+<dt>ACES_PROXY_CONSTANTS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.transfer_functions.aces.ACES_CCT_CONSTANTS">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">ACES_CCT_CONSTANTS</code><em class="property"> = {'A': 10.5402377416545, 'B': 0.0729055341958355, 'X_BRK': 0.0078125, 'Y_BRK': 0.155251141552511}</em><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.ACES_CCT_CONSTANTS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ACEScct</em> colourspace constants.</p>
+<p>ACES_CCT_CONSTANTS : Structure</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.aces.log_encoding_ACESproxy">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">log_encoding_ACESproxy</code><span class="sig-paren">(</span><em>lin_AP1</em>, <em>bit_depth=u'10 Bit'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_encoding_ACESproxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.log_encoding_ACESproxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACESproxy</em> colourspace log encoding curve / opto-electronic
+transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lin_AP1</strong> (<em>numeric or array_like</em>) &#8211; <em>lin_AP1</em> value.</li>
+<li><strong>bit_depth</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong>,
+<em>ACESproxy</em> bit depth.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>ACESproxy</em> non-linear value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ACESproxy</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>
+<span class="go">426</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.aces.log_decoding_ACESproxy">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">log_decoding_ACESproxy</code><span class="sig-paren">(</span><em>ACESproxy</em>, <em>bit_depth=u'10 Bit'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_decoding_ACESproxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.log_decoding_ACESproxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACESproxy</em> colourspace log decoding curve / electro-optical
+transfer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ACESproxy</strong> (<em>numeric or array_like</em>) &#8211; <em>ACESproxy</em> non-linear value.</li>
+<li><strong>bit_depth</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;10 Bit&#8217;, &#8216;12 Bit&#8217;}</strong>,
+<em>ACESproxy</em> bit depth.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>lin_AP1</em> value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ACESproxy</span><span class="p">(</span><span class="mi">426</span><span class="p">)</span>  
+<span class="go">0.1792444...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.aces.log_encoding_ACEScc">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">log_encoding_ACEScc</code><span class="sig-paren">(</span><em>lin_AP1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_encoding_ACEScc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.log_encoding_ACEScc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScc</em> colourspace log encoding / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lin_AP1</strong> (<em>numeric or array_like</em>) &#8211; <em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>ACEScc</em> non-linear value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ACEScc</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4135884...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.aces.log_decoding_ACEScc">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">log_decoding_ACEScc</code><span class="sig-paren">(</span><em>ACEScc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_decoding_ACEScc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.log_decoding_ACEScc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScc</em> colourspace log decoding / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ACEScc</strong> (<em>numeric or array_like</em>) &#8211; <em>ACEScc</em> non-linear value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ACEScc</span><span class="p">(</span><span class="mf">0.413588402492442</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.aces.log_encoding_ACEScct">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">log_encoding_ACEScct</code><span class="sig-paren">(</span><em>lin_AP1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_encoding_ACEScct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.log_encoding_ACEScct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScct</em> colourspace log encoding / opto-electronic transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lin_AP1</strong> (<em>numeric or array_like</em>) &#8211; <em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>ACEScct</em> non-linear value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_encoding_ACEScct</span><span class="p">(</span><span class="mf">0.18</span><span class="p">)</span>  
+<span class="go">0.4135884...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.rgb.transfer_functions.aces.log_decoding_ACEScct">
+<code class="descclassname">colour.models.rgb.transfer_functions.aces.</code><code class="descname">log_decoding_ACEScct</code><span class="sig-paren">(</span><em>ACEScct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/transfer_functions/aces.html#log_decoding_ACEScct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.transfer_functions.aces.log_decoding_ACEScct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the <em>ACEScct</em> colourspace log decoding / electro-optical transfer
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ACEScct</strong> (<em>numeric or array_like</em>) &#8211; <em>ACEScct</em> non-linear value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>lin_AP1</em> value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log_decoding_ACEScct</span><span class="p">(</span><span class="mf">0.413588402492442</span><span class="p">)</span>  
+<span class="go">0.1799999...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.transfer_functions.aces Module</a><ul>
+<li><a class="reference internal" href="#academy-color-encoding-system-log-encodings">Academy Color Encoding System - Log Encodings</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.transfer_functions.aces.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.transfer_functions.aces.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

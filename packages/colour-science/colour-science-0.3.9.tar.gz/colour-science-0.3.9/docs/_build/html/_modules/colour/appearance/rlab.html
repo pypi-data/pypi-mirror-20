@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.appearance.rlab &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.appearance.rlab</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">RLAB Colour Appearance Model</span>
+<span class="sd">============================</span>
+
+<span class="sd">Defines *RLAB* colour appearance model objects:</span>
+
+<span class="sd">-   :attr:`RLAB_VIEWING_CONDITIONS`</span>
+<span class="sd">-   :attr:`RLAB_D_FACTOR`</span>
+<span class="sd">-   :class:`RLAB_Specification`</span>
+<span class="sd">-   :func:`XYZ_to_RLAB`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`RLAB Colour Appearance Model Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/appearance/rlab.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Fairchild, M. D. (1996). Refinement of the RLAB color space. Color</span>
+<span class="sd">        Research &amp; Application, 21(5), 338–346.</span>
+<span class="sd">        doi:10.1002/(SICI)1520-6378(199610)21:5&lt;338::AID-COL3&gt;3.0.CO;2-Z</span>
+<span class="sd">.. [2]  Fairchild, M. D. (2013). The RLAB Model. In Color Appearance Models</span>
+<span class="sd">        (3rd ed., pp. 5563–5824). Wiley. ASIN:B00DAYO8E2</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">from</span> <span class="nn">colour.appearance.hunt</span> <span class="kn">import</span> <span class="n">XYZ_TO_HPE_MATRIX</span><span class="p">,</span> <span class="n">XYZ_to_rgb</span>
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CaseInsensitiveMapping</span><span class="p">,</span>
+    <span class="n">dot_matrix</span><span class="p">,</span>
+    <span class="n">dot_vector</span><span class="p">,</span>
+    <span class="n">tsplit</span><span class="p">,</span>
+    <span class="n">row_as_diagonal</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R_MATRIX&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RLAB_VIEWING_CONDITIONS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RLAB_D_FACTOR&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RLAB_ReferenceSpecification&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RLAB_Specification&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;XYZ_to_RLAB&#39;</span><span class="p">]</span>
+
+<span class="n">R_MATRIX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mf">1.9569</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1882</span><span class="p">,</span> <span class="mf">0.2313</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.3612</span><span class="p">,</span> <span class="mf">0.6388</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">,</span> <span class="mf">1.0000</span><span class="p">]])</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">*RLAB* colour appearance model precomputed helper matrix.</span>
+
+<span class="sd">R_MATRIX : array_like, (3, 3)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">RLAB_VIEWING_CONDITIONS</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;Average&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">2.3</span><span class="p">,</span>
+     <span class="s1">&#39;Dim&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">2.9</span><span class="p">,</span>
+     <span class="s1">&#39;Dark&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">3.5</span><span class="p">})</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Reference *RLAB* colour appearance model viewing conditions.</span>
+
+<span class="sd">RLAB_VIEWING_CONDITIONS : CaseInsensitiveMapping</span>
+<span class="sd">    **{&#39;Average&#39;, &#39;Dim&#39;, &#39;Dark&#39;}**</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">RLAB_D_FACTOR</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;Hard Copy Images&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+     <span class="s1">&#39;Soft Copy Images&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s1">&#39;Projected Transparencies, Dark Room&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">*RLAB* colour appearance model *Discounting-the-Illuminant* factor values.</span>
+
+<span class="sd">RLAB_D_FACTOR : CaseInsensitiveMapping</span>
+<span class="sd">    **{&#39;Hard Copy Images&#39;,</span>
+<span class="sd">    &#39;Soft Copy Images&#39;,</span>
+<span class="sd">    &#39;Projected Transparencies, Dark Room&#39;}**</span>
+
+<span class="sd">Aliases:</span>
+
+<span class="sd">-   &#39;hard_cp_img&#39;: &#39;Hard Copy Images&#39;</span>
+<span class="sd">-   &#39;soft_cp_img&#39;: &#39;Soft Copy Images&#39;</span>
+<span class="sd">-   &#39;projected_dark&#39;: &#39;Projected Transparencies, Dark Room&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;hard_cp_img&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;Hard Copy Images&#39;</span><span class="p">])</span>
+<span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;soft_cp_img&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;Soft Copy Images&#39;</span><span class="p">])</span>
+<span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;projected_dark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;Projected Transparencies, Dark Room&#39;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="RLAB_ReferenceSpecification"><a class="viewcode-back" href="../../../colour.appearance.rlab.html#colour.RLAB_ReferenceSpecification">[docs]</a><span class="k">class</span> <span class="nc">RLAB_ReferenceSpecification</span><span class="p">(</span>
+    <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;RLAB_ReferenceSpecification&#39;</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;LR&#39;</span><span class="p">,</span> <span class="s1">&#39;CR&#39;</span><span class="p">,</span> <span class="s1">&#39;hR&#39;</span><span class="p">,</span> <span class="s1">&#39;sR&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;aR&#39;</span><span class="p">,</span> <span class="s1">&#39;bR&#39;</span><span class="p">))):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *RLAB* colour appearance model reference specification.</span>
+
+<span class="sd">    This specification has field names consistent with *Fairchild (2013)*</span>
+<span class="sd">    reference.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    LR : numeric or array_like</span>
+<span class="sd">        Correlate of *Lightness* :math:`L^R`.</span>
+<span class="sd">    CR : numeric or array_like</span>
+<span class="sd">        Correlate of *achromatic chroma* :math:`C^R`.</span>
+<span class="sd">    hR : numeric or array_like</span>
+<span class="sd">        *Hue* angle :math:`h^R` in degrees.</span>
+<span class="sd">    sR : numeric or array_like</span>
+<span class="sd">        Correlate of *saturation* :math:`s^R`.</span>
+<span class="sd">    HR : numeric or array_like</span>
+<span class="sd">        *Hue* :math:`h` composition :math:`H^R`.</span>
+<span class="sd">    aR : numeric or array_like</span>
+<span class="sd">        Red–green chromatic response :math:`a^R`.</span>
+<span class="sd">    bR : numeric or array_like</span>
+<span class="sd">        Yellow–blue chromatic response :math:`b^R`.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="RLAB_Specification"><a class="viewcode-back" href="../../../colour.appearance.rlab.html#colour.RLAB_Specification">[docs]</a><span class="k">class</span> <span class="nc">RLAB_Specification</span><span class="p">(</span>
+    <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;RLAB_Specification&#39;</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;HC&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *RLAB* colour appearance model specification.</span>
+
+<span class="sd">    This specification has field names consistent with the remaining colour</span>
+<span class="sd">    appearance models in :mod:`colour.appearance` but diverge from</span>
+<span class="sd">    *Fairchild (2013)* reference.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    J : numeric or array_like</span>
+<span class="sd">        Correlate of *Lightness* :math:`L^R`.</span>
+<span class="sd">    C : numeric or array_like</span>
+<span class="sd">        Correlate of *achromatic chroma* :math:`C^R`.</span>
+<span class="sd">    h : numeric or array_like</span>
+<span class="sd">        *Hue* angle :math:`h^R` in degrees.</span>
+<span class="sd">    s : numeric or array_like</span>
+<span class="sd">        Correlate of *saturation* :math:`s^R`.</span>
+<span class="sd">    HC : numeric or array_like</span>
+<span class="sd">        *Hue* :math:`h` composition :math:`H^C`.</span>
+<span class="sd">    a : numeric or array_like</span>
+<span class="sd">        Red–green chromatic response :math:`a^R`.</span>
+<span class="sd">    b : numeric or array_like</span>
+<span class="sd">        Yellow–blue chromatic response :math:`b^R`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   This specification is the one used in the current model implementation.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="XYZ_to_RLAB"><a class="viewcode-back" href="../../../colour.appearance.rlab.html#colour.XYZ_to_RLAB">[docs]</a><span class="k">def</span> <span class="nf">XYZ_to_RLAB</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span>
+                <span class="n">XYZ_n</span><span class="p">,</span>
+                <span class="n">Y_n</span><span class="p">,</span>
+                <span class="n">sigma</span><span class="o">=</span><span class="n">RLAB_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">],</span>
+                <span class="n">D</span><span class="o">=</span><span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;Hard Copy Images&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the *RLAB* model color appearance correlates.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    XYZ : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values of test sample / stimulus in domain</span>
+<span class="sd">        [0, 100].</span>
+<span class="sd">    XYZ_n : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values of reference white in domain [0, 100].</span>
+<span class="sd">    Y_n : numeric or array_like</span>
+<span class="sd">        Absolute adapting luminance in :math:`cd/m^2`.</span>
+<span class="sd">    sigma : numeric or array_like, optional</span>
+<span class="sd">        Relative luminance of the surround, see :attr:`RLAB_VIEWING_CONDITIONS`</span>
+<span class="sd">        for reference.</span>
+<span class="sd">    D : numeric or array_like, optional</span>
+<span class="sd">        *Discounting-the-Illuminant* factor in domain [0, 1].</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    RLAB_Specification</span>
+<span class="sd">        *RLAB* colour appearance model specification.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The input domain of that definition is non standard!</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *CIE XYZ* tristimulus values are in domain [0, 100].</span>
+<span class="sd">    -   Input *CIE XYZ_n* tristimulus values are in domain [0, 100].</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; XYZ = np.array([19.01, 20.00, 21.78])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_n = np.array([109.85, 100, 35.58])</span>
+<span class="sd">    &gt;&gt;&gt; Y_n = 31.83</span>
+<span class="sd">    &gt;&gt;&gt; sigma = RLAB_VIEWING_CONDITIONS[&#39;Average&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; D = RLAB_D_FACTOR[&#39;Hard Copy Images&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_RLAB(XYZ, XYZ_n, Y_n, sigma, D)  # doctest: +ELLIPSIS</span>
+<span class="sd">    RLAB_Specification(J=49.8347069..., C=54.8700585..., h=286.4860208..., \</span>
+<span class="sd">s=1.1010410..., HC=None, a=15.5711021..., b=-52.6142956...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Y_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Y_n</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+
+    <span class="c1"># Converting to cone responses.</span>
+    <span class="n">LMS_n</span> <span class="o">=</span> <span class="n">XYZ_to_rgb</span><span class="p">(</span><span class="n">XYZ_n</span><span class="p">)</span>
+
+    <span class="c1"># Computing the :math:`A` matrix.</span>
+    <span class="n">LMS_l_E</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">LMS_n</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">LMS_n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">LMS_n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">LMS_n</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">LMS_p_L</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y_n</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="n">LMS_l_E</span><span class="p">)</span> <span class="o">/</span>
+               <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y_n</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">LMS_l_E</span><span class="p">)))</span>
+    <span class="n">LMS_a_L</span> <span class="o">=</span> <span class="p">(</span><span class="n">LMS_p_L</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">LMS_p_L</span><span class="p">))</span> <span class="o">/</span> <span class="n">LMS_n</span>
+
+    <span class="n">aR</span> <span class="o">=</span> <span class="n">row_as_diagonal</span><span class="p">(</span><span class="n">LMS_a_L</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">dot_matrix</span><span class="p">(</span><span class="n">dot_matrix</span><span class="p">(</span><span class="n">R_MATRIX</span><span class="p">,</span> <span class="n">aR</span><span class="p">),</span> <span class="n">XYZ_TO_HPE_MATRIX</span><span class="p">)</span>
+    <span class="n">XYZ_ref</span> <span class="o">=</span> <span class="n">dot_vector</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">XYZ</span><span class="p">)</span>
+
+    <span class="n">X_ref</span><span class="p">,</span> <span class="n">Y_ref</span><span class="p">,</span> <span class="n">Z_ref</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">XYZ_ref</span><span class="p">)</span>
+
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="c1"># Computing the correlate of *Lightness* :math:`L^R`.</span>
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="n">LR</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">Y_ref</span> <span class="o">**</span> <span class="n">sigma</span><span class="p">)</span>
+
+    <span class="c1"># Computing opponent colour dimensions :math:`a^R` and :math:`b^R`.</span>
+    <span class="n">aR</span> <span class="o">=</span> <span class="mi">430</span> <span class="o">*</span> <span class="p">((</span><span class="n">X_ref</span> <span class="o">**</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">Y_ref</span> <span class="o">**</span> <span class="n">sigma</span><span class="p">))</span>
+    <span class="n">bR</span> <span class="o">=</span> <span class="mi">170</span> <span class="o">*</span> <span class="p">((</span><span class="n">Y_ref</span> <span class="o">**</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">Z_ref</span> <span class="o">**</span> <span class="n">sigma</span><span class="p">))</span>
+
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="c1"># Computing the *hue* angle :math:`h^R`.</span>
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="n">hR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">bR</span><span class="p">,</span> <span class="n">aR</span><span class="p">))</span> <span class="o">%</span> <span class="mi">360</span>
+    <span class="c1"># TODO: Implement hue composition computation.</span>
+
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="c1"># Computing the correlate of *chroma* :math:`C^R`.</span>
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="n">CR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">aR</span><span class="p">,</span> <span class="n">bR</span><span class="p">)</span>
+
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="c1"># Computing the correlate of *saturation* :math:`s^R`.</span>
+    <span class="c1"># -------------------------------------------------------------------------</span>
+    <span class="n">sR</span> <span class="o">=</span> <span class="n">CR</span> <span class="o">/</span> <span class="n">LR</span>
+
+    <span class="k">return</span> <span class="n">RLAB_Specification</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">CR</span><span class="p">,</span> <span class="n">hR</span><span class="p">,</span> <span class="n">sR</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">aR</span><span class="p">,</span> <span class="n">bR</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

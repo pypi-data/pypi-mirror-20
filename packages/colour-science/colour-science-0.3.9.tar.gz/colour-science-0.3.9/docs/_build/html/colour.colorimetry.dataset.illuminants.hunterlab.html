@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.dataset.illuminants.hunterlab Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.dataset.illuminants.hunterlab">
+<span id="colour-colorimetry-dataset-illuminants-hunterlab-module"></span><h1>colour.colorimetry.dataset.illuminants.hunterlab Module<a class="headerlink" href="#module-colour.colorimetry.dataset.illuminants.hunterlab" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hunterlab-dataset">
+<h2>HunterLab Dataset<a class="headerlink" href="#hunterlab-dataset" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>HunterLab</em> illuminants dataset for the
+<em>CIE 1931 2 Degree Standard Observer</em> and
+<em>CIE 1964 10 Degree Standard Observer</em>.</p>
+<p>The currently implemented data has been extracted from <a class="footnote-reference" href="#id3" id="id1">[1]</a>, however you may
+want to use different data accordingly to the tables given in <a class="footnote-reference" href="#id4" id="id2">[2]</a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/illuminants.ipynb">Illuminants Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>HunterLab. (2008). Hunter L,a,b Color Scale. Retrieved from
+<a class="reference external" href="http://www.hunterlab.se/wp-content/uploads/2012/11/Hunter-L-a-b.pdf">http://www.hunterlab.se/wp-content/uploads/2012/11/Hunter-L-a-b.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>HunterLab. (2008). Illuminant Factors in Universal Software and
+EasyMatch Coatings. Retrieved from
+<a class="reference external" href="https://support.hunterlab.com/hc/en-us/article_attachments/201437785/an02_02.pdf">https://support.hunterlab.com/hc/en-us/article_attachments/201437785/an02_02.pdf</a></td></tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification">
+<em class="property">class </em><code class="descclassname">colour.colorimetry.dataset.illuminants.hunterlab.</code><code class="descname">HunterLab_Illuminant_Specification</code><span class="sig-paren">(</span><em>name</em>, <em>XYZ_n</em>, <em>K_ab</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></a></p>
+<dl class="attribute">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.K_ab">
+<code class="descname">K_ab</code><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.K_ab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.XYZ_n">
+<code class="descname">XYZ_n</code><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.XYZ_n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.__getnewargs__">
+<code class="descname">__getnewargs__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.__getnewargs__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self as a plain tuple.  Used by copy and pickle.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.__getstate__">
+<code class="descname">__getstate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.__getstate__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exclude the OrderedDict from pickling</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a nicely formatted representation string</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.name">
+<code class="descname">name</code><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HunterLab_Illuminant_Specification.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.illuminants.hunterlab.</code><code class="descname">HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'A': HunterLab_Illuminant_Specification(name=u'A', XYZ_n=array([ 109.83,  100.  ,   35.55]), K_ab=array([ 185.2,   38.4])), u'TL 4': HunterLab_Illuminant_Specification(name=u'TL 4', XYZ_n=array([ 101.4,  100. ,   65.9]), K_ab=array([ 178. ,   52.3])), u'C': HunterLab_Illuminant_Specification(name=u'C', XYZ_n=array([  98.04,  100.  ,  118.11]), K_ab=array([ 175.,   70.])), u'D75': HunterLab_Illuminant_Specification(name=u'D75', XYZ_n=array([  94.96,  100.  ,  122.53]), K_ab=array([ 172.22,   71.3 ])), u'F2': HunterLab_Illuminant_Specification(name=u'F2', XYZ_n=array([  98.09,  100.  ,   67.53]), K_ab=array([ 175. ,   52.9])), u'D50': HunterLab_Illuminant_Specification(name=u'D50', XYZ_n=array([  96.38,  100.  ,   82.45]), K_ab=array([ 173.51,   58.48])), u'D65': HunterLab_Illuminant_Specification(name=u'D65', XYZ_n=array([  95.02,  100.  ,  108.82]), K_ab=array([ 172.3,   67.2])), u'D60': HunterLab_Illuminant_Specification(name=u'D60', XYZ_n=array([  95.23,  100.  ,  100.86]), K_ab=array([ 172.47,   64.72])), u'UL 3000': HunterLab_Illuminant_Specification(name=u'UL 3000', XYZ_n=array([ 107.99,  100.  ,   33.91]), K_ab=array([ 183.7,   37.5]))})</em><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Hunter L,a,b</em> illuminant dataset for <em>CIE 1931 2 Degree Standard Observer</em>.</p>
+<dl class="docutils">
+<dt>HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping</dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.illuminants.hunterlab.</code><code class="descname">HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'A': HunterLab_Illuminant_Specification(name=u'A', XYZ_n=array([ 111.16,  100.  ,   35.19]), K_ab=array([ 186.3,   38.2])), u'TL 4': HunterLab_Illuminant_Specification(name=u'TL 4', XYZ_n=array([ 103.82,  100.  ,   66.9 ]), K_ab=array([ 180.1,   52.7])), u'C': HunterLab_Illuminant_Specification(name=u'C', XYZ_n=array([  97.3 ,  100.  ,  116.14]), K_ab=array([ 174.3,   69.4])), u'D75': HunterLab_Illuminant_Specification(name=u'D75', XYZ_n=array([  94.45,  100.  ,  120.7 ]), K_ab=array([ 171.76,   70.76])), u'F2': HunterLab_Illuminant_Specification(name=u'F2', XYZ_n=array([ 102.13,  100.  ,   69.37]), K_ab=array([ 178.6,   53.6])), u'D65': HunterLab_Illuminant_Specification(name=u'D65', XYZ_n=array([  94.83,  100.  ,  107.38]), K_ab=array([ 172.1,   66.7])), u'D50': HunterLab_Illuminant_Specification(name=u'D50', XYZ_n=array([  96.72,  100.  ,   81.45]), K_ab=array([ 173.82,   58.13])), u'D60': HunterLab_Illuminant_Specification(name=u'D60', XYZ_n=array([  95.21,  100.  ,   99.6 ]), K_ab=array([ 172.45,   64.28])), u'UL 3000': HunterLab_Illuminant_Specification(name=u'UL 3000', XYZ_n=array([ 111.12,  100.  ,   35.21]), K_ab=array([ 186.3,   38.2]))})</em><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Hunter L,a,b</em> illuminant dataset for <em>CIE 1964 10 Degree Standard Observer</em>.</p>
+<dl class="docutils">
+<dt>HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping</dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.illuminants.hunterlab.HUNTERLAB_ILLUMINANTS">
+<code class="descclassname">colour.colorimetry.dataset.illuminants.hunterlab.</code><code class="descname">HUNTERLAB_ILLUMINANTS</code><em class="property"> = CaseInsensitiveMapping({u'CIE 1931 2 Degree Standard Observer': CaseInsensitiveMapping({u'A': HunterLab_Illuminant_Specification(name=u'A', XYZ_n=array([ 109.83,  100.  ,   35.55]), K_ab=array([ 185.2,   38.4])), u'TL 4': HunterLab_Illuminant_Specification(name=u'TL 4', XYZ_n=array([ 101.4,  100. ,   65.9]), K_ab=array([ 178. ,   52.3])), u'C': HunterLab_Illuminant_Specification(name=u'C', XYZ_n=array([  98.04,  100.  ,  118.11]), K_ab=array([ 175.,   70.])), u'D75': HunterLab_Illuminant_Specification(name=u'D75', XYZ_n=array([  94.96,  100.  ,  122.53]), K_ab=array([ 172.22,   71.3 ])), u'F2': HunterLab_Illuminant_Specification(name=u'F2', XYZ_n=array([  98.09,  100.  ,   67.53]), K_ab=array([ 175. ,   52.9])), u'D50': HunterLab_Illuminant_Specification(name=u'D50', XYZ_n=array([  96.38,  100.  ,   82.45]), K_ab=array([ 173.51,   58.48])), u'D65': HunterLab_Illuminant_Specification(name=u'D65', XYZ_n=array([  95.02,  100.  ,  108.82]), K_ab=array([ 172.3,   67.2])), u'D60': HunterLab_Illuminant_Specification(name=u'D60', XYZ_n=array([  95.23,  100.  ,  100.86]), K_ab=array([ 172.47,   64.72])), u'UL 3000': HunterLab_Illuminant_Specification(name=u'UL 3000', XYZ_n=array([ 107.99,  100.  ,   33.91]), K_ab=array([ 183.7,   37.5]))}), u'CIE 1964 10 Degree Standard Observer': CaseInsensitiveMapping({u'A': HunterLab_Illuminant_Specification(name=u'A', XYZ_n=array([ 111.16,  100.  ,   35.19]), K_ab=array([ 186.3,   38.2])), u'TL 4': HunterLab_Illuminant_Specification(name=u'TL 4', XYZ_n=array([ 103.82,  100.  ,   66.9 ]), K_ab=array([ 180.1,   52.7])), u'C': HunterLab_Illuminant_Specification(name=u'C', XYZ_n=array([  97.3 ,  100.  ,  116.14]), K_ab=array([ 174.3,   69.4])), u'D75': HunterLab_Illuminant_Specification(name=u'D75', XYZ_n=array([  94.45,  100.  ,  120.7 ]), K_ab=array([ 171.76,   70.76])), u'F2': HunterLab_Illuminant_Specification(name=u'F2', XYZ_n=array([ 102.13,  100.  ,   69.37]), K_ab=array([ 178.6,   53.6])), u'D65': HunterLab_Illuminant_Specification(name=u'D65', XYZ_n=array([  94.83,  100.  ,  107.38]), K_ab=array([ 172.1,   66.7])), u'D50': HunterLab_Illuminant_Specification(name=u'D50', XYZ_n=array([  96.72,  100.  ,   81.45]), K_ab=array([ 173.82,   58.13])), u'D60': HunterLab_Illuminant_Specification(name=u'D60', XYZ_n=array([  95.21,  100.  ,   99.6 ]), K_ab=array([ 172.45,   64.28])), u'UL 3000': HunterLab_Illuminant_Specification(name=u'UL 3000', XYZ_n=array([ 111.12,  100.  ,   35.21]), K_ab=array([ 186.3,   38.2]))}), u'cie_10_1964': CaseInsensitiveMapping({u'A': HunterLab_Illuminant_Specification(name=u'A', XYZ_n=array([ 111.16,  100.  ,   35.19]), K_ab=array([ 186.3,   38.2])), u'TL 4': HunterLab_Illuminant_Specification(name=u'TL 4', XYZ_n=array([ 103.82,  100.  ,   66.9 ]), K_ab=array([ 180.1,   52.7])), u'C': HunterLab_Illuminant_Specification(name=u'C', XYZ_n=array([  97.3 ,  100.  ,  116.14]), K_ab=array([ 174.3,   69.4])), u'D75': HunterLab_Illuminant_Specification(name=u'D75', XYZ_n=array([  94.45,  100.  ,  120.7 ]), K_ab=array([ 171.76,   70.76])), u'F2': HunterLab_Illuminant_Specification(name=u'F2', XYZ_n=array([ 102.13,  100.  ,   69.37]), K_ab=array([ 178.6,   53.6])), u'D65': HunterLab_Illuminant_Specification(name=u'D65', XYZ_n=array([  94.83,  100.  ,  107.38]), K_ab=array([ 172.1,   66.7])), u'D50': HunterLab_Illuminant_Specification(name=u'D50', XYZ_n=array([  96.72,  100.  ,   81.45]), K_ab=array([ 173.82,   58.13])), u'D60': HunterLab_Illuminant_Specification(name=u'D60', XYZ_n=array([  95.21,  100.  ,   99.6 ]), K_ab=array([ 172.45,   64.28])), u'UL 3000': HunterLab_Illuminant_Specification(name=u'UL 3000', XYZ_n=array([ 111.12,  100.  ,   35.21]), K_ab=array([ 186.3,   38.2]))}), u'cie_2_1931': CaseInsensitiveMapping({u'A': HunterLab_Illuminant_Specification(name=u'A', XYZ_n=array([ 109.83,  100.  ,   35.55]), K_ab=array([ 185.2,   38.4])), u'TL 4': HunterLab_Illuminant_Specification(name=u'TL 4', XYZ_n=array([ 101.4,  100. ,   65.9]), K_ab=array([ 178. ,   52.3])), u'C': HunterLab_Illuminant_Specification(name=u'C', XYZ_n=array([  98.04,  100.  ,  118.11]), K_ab=array([ 175.,   70.])), u'D75': HunterLab_Illuminant_Specification(name=u'D75', XYZ_n=array([  94.96,  100.  ,  122.53]), K_ab=array([ 172.22,   71.3 ])), u'F2': HunterLab_Illuminant_Specification(name=u'F2', XYZ_n=array([  98.09,  100.  ,   67.53]), K_ab=array([ 175. ,   52.9])), u'D50': HunterLab_Illuminant_Specification(name=u'D50', XYZ_n=array([  96.38,  100.  ,   82.45]), K_ab=array([ 173.51,   58.48])), u'D65': HunterLab_Illuminant_Specification(name=u'D65', XYZ_n=array([  95.02,  100.  ,  108.82]), K_ab=array([ 172.3,   67.2])), u'D60': HunterLab_Illuminant_Specification(name=u'D60', XYZ_n=array([  95.23,  100.  ,  100.86]), K_ab=array([ 172.47,   64.72])), u'UL 3000': HunterLab_Illuminant_Specification(name=u'UL 3000', XYZ_n=array([ 107.99,  100.  ,   33.91]), K_ab=array([ 183.7,   37.5]))})})</em><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.hunterlab.HUNTERLAB_ILLUMINANTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregated <em>Hunter L,a,b</em> illuminant dataset.</p>
+<dl class="docutils">
+<dt>HUNTERLAB_ILLUMINANTS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;CIE 1931 2 Degree Standard Observer&#8217;,
+&#8216;CIE 1964 10 Degree Standard Observer&#8217;}</strong></dd>
+</dl>
+<p>Aliases:</p>
+<ul class="simple">
+<li>&#8216;cie_2_1931&#8217;: &#8216;CIE 1931 2 Degree Standard Observer&#8217;</li>
+<li>&#8216;cie_10_1964&#8217;: &#8216;CIE 1964 10 Degree Standard Observer&#8217;</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.dataset.illuminants.hunterlab Module</a><ul>
+<li><a class="reference internal" href="#hunterlab-dataset">HunterLab Dataset</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.dataset.illuminants.hunterlab.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.dataset.illuminants.hunterlab.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.colorimetry Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.plotting.colorimetry">
+<span id="colour-plotting-colorimetry-module"></span><h1>colour.plotting.colorimetry Module<a class="headerlink" href="#module-colour.plotting.colorimetry" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="colorimetry-plotting">
+<h2>Colorimetry Plotting<a class="headerlink" href="#colorimetry-plotting" title="Permalink to this headline">¶</a></h2>
+<p>Defines the colorimetry plotting objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.plotting.colorimetry.single_spd_plot" title="colour.plotting.colorimetry.single_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">single_spd_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.multi_spd_plot" title="colour.plotting.colorimetry.multi_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_spd_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.single_cmfs_plot" title="colour.plotting.colorimetry.single_cmfs_plot"><code class="xref py py-func docutils literal"><span class="pre">single_cmfs_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.multi_cmfs_plot" title="colour.plotting.colorimetry.multi_cmfs_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_cmfs_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.single_illuminant_relative_spd_plot" title="colour.plotting.colorimetry.single_illuminant_relative_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">single_illuminant_relative_spd_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.multi_illuminants_relative_spd_plot" title="colour.plotting.colorimetry.multi_illuminants_relative_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_illuminants_relative_spd_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.visible_spectrum_plot" title="colour.plotting.colorimetry.visible_spectrum_plot"><code class="xref py py-func docutils literal"><span class="pre">visible_spectrum_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.single_lightness_function_plot" title="colour.plotting.colorimetry.single_lightness_function_plot"><code class="xref py py-func docutils literal"><span class="pre">single_lightness_function_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.multi_lightness_function_plot" title="colour.plotting.colorimetry.multi_lightness_function_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_lightness_function_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.blackbody_spectral_radiance_plot" title="colour.plotting.colorimetry.blackbody_spectral_radiance_plot"><code class="xref py py-func docutils literal"><span class="pre">blackbody_spectral_radiance_plot()</span></code></a></li>
+<li><a class="reference internal" href="#colour.plotting.colorimetry.blackbody_colours_plot" title="colour.plotting.colorimetry.blackbody_colours_plot"><code class="xref py py-func docutils literal"><span class="pre">blackbody_colours_plot()</span></code></a></li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id4">3</a>)</em> Spiker, N. (2015). Private Discussion with Mansencal, T. Retrieved from
+<a class="reference external" href="http://www.repairfaq.org/sam/repspec/">http://www.repairfaq.org/sam/repspec/</a></td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.plotting.colorimetry.single_spd_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">single_spd_plot</code><span class="sig-paren">(</span><em>spd</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>out_of_gamut_clipping=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#single_spd_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.single_spd_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given spectral power distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>spd</strong> (<a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution"><em>SpectralPowerDistribution</em></a>) &#8211; Spectral power distribution to plot.</li>
+<li><strong>out_of_gamut_clipping</strong> (<em>bool, optional</em>) &#8211; Whether to clip out of gamut colours otherwise, the colours will be
+offset by the absolute minimal colour leading to a rendering on
+gray background, less saturated and smoother. <a class="footnote-reference" href="#id1" id="id2">[1]</a></li>
+<li><strong>cmfs</strong> (<em>unicode</em>) &#8211; Standard observer colour matching functions used for spectrum creation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>y0_plot</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code>},
+Whether to plot <em>y0</em> line.</li>
+<li><strong>y1_plot</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code>},
+Whether to plot <em>y1</em> line.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colour</span> <span class="kn">import</span> <span class="n">SpectralPowerDistribution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">400</span><span class="p">:</span> <span class="mf">0.0641</span><span class="p">,</span> <span class="mi">420</span><span class="p">:</span> <span class="mf">0.0645</span><span class="p">,</span> <span class="mi">440</span><span class="p">:</span> <span class="mf">0.0562</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spd</span> <span class="o">=</span> <span class="n">SpectralPowerDistribution</span><span class="p">(</span><span class="s1">&#39;Custom&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single_spd_plot</span><span class="p">(</span><span class="n">spd</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.multi_spd_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">multi_spd_plot</code><span class="sig-paren">(</span><em>spds</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>use_spds_colours=False</em>, <em>normalise_spds_colours=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#multi_spd_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.multi_spd_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given spectral power distributions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>spds</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) &#8211; Spectral power distributions to plot.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for spectrum creation.</li>
+<li><strong>use_spds_colours</strong> (<em>bool, optional</em>) &#8211; Whether to use spectral power distributions colours.</li>
+<li><strong>normalise_spds_colours</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Whether to normalise spectral power distributions colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colour</span> <span class="kn">import</span> <span class="n">SpectralPowerDistribution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">400</span><span class="p">:</span> <span class="mf">0.0641</span><span class="p">,</span> <span class="mi">420</span><span class="p">:</span> <span class="mf">0.0645</span><span class="p">,</span> <span class="mi">440</span><span class="p">:</span> <span class="mf">0.0562</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">400</span><span class="p">:</span> <span class="mf">0.134</span><span class="p">,</span> <span class="mi">420</span><span class="p">:</span> <span class="mf">0.789</span><span class="p">,</span> <span class="mi">440</span><span class="p">:</span> <span class="mf">1.289</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spd1</span> <span class="o">=</span> <span class="n">SpectralPowerDistribution</span><span class="p">(</span><span class="s1">&#39;Custom1&#39;</span><span class="p">,</span> <span class="n">data1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spd2</span> <span class="o">=</span> <span class="n">SpectralPowerDistribution</span><span class="p">(</span><span class="s1">&#39;Custom2&#39;</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multi_spd_plot</span><span class="p">([</span><span class="n">spd1</span><span class="p">,</span> <span class="n">spd2</span><span class="p">])</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.single_cmfs_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">single_cmfs_plot</code><span class="sig-paren">(</span><em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#single_cmfs_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.single_cmfs_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Colour matching functions to plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Current figure or None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Figure</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_cmfs_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.multi_cmfs_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">multi_cmfs_plot</code><span class="sig-paren">(</span><em>cmfs=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#multi_cmfs_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.multi_cmfs_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmfs</strong> (<em>array_like, optional</em>) &#8211; Colour matching functions to plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Current figure or None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Figure</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cmfs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;CIE 1964 10 Degree Standard Observer&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multi_cmfs_plot</span><span class="p">(</span><span class="n">cmfs</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.single_illuminant_relative_spd_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">single_illuminant_relative_spd_plot</code><span class="sig-paren">(</span><em>illuminant='A'</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#single_illuminant_relative_spd_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.single_illuminant_relative_spd_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given single illuminant relative spectral power distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>illuminant</strong> (<em>unicode, optional</em>) &#8211; Factory illuminant to plot.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions to plot.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>out_of_gamut_clipping</strong> (<em>bool, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.colorimetry.single_spd_plot" title="colour.plotting.colorimetry.single_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">single_spd_plot()</span></code></a>},
+Whether to clip out of gamut colours otherwise, the colours will be
+offset by the absolute minimal colour leading to a rendering on
+gray background, less saturated and smoother. <a class="footnote-reference" href="#id1" id="id3">[1]</a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_illuminant_relative_spd_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.multi_illuminants_relative_spd_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">multi_illuminants_relative_spd_plot</code><span class="sig-paren">(</span><em>illuminants=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#multi_illuminants_relative_spd_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.multi_illuminants_relative_spd_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given illuminants relative spectral power distributions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>illuminants</strong> (<em>array_like, optional</em>) &#8211; Factory illuminants to plot.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>use_spds_colours</strong> (<em>bool, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.colorimetry.multi_spd_plot" title="colour.plotting.colorimetry.multi_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_spd_plot()</span></code></a>}
+Whether to use spectral power distributions colours.</li>
+<li><strong>normalise_spds_colours</strong> (<em>bool</em>) &#8211;
+{<a class="reference internal" href="#colour.plotting.colorimetry.multi_spd_plot" title="colour.plotting.colorimetry.multi_spd_plot"><code class="xref py py-func docutils literal"><span class="pre">multi_spd_plot()</span></code></a>}
+Whether to normalise spectral power distributions colours.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multi_illuminants_relative_spd_plot</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.visible_spectrum_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">visible_spectrum_plot</code><span class="sig-paren">(</span><em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>out_of_gamut_clipping=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#visible_spectrum_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.visible_spectrum_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the visible colours spectrum using given standard observer <em>CIE XYZ</em>
+colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions used for spectrum creation.</li>
+<li><strong>out_of_gamut_clipping</strong> (<em>bool, optional</em>) &#8211; Whether to clip out of gamut colours otherwise, the colours will be
+offset by the absolute minimal colour leading to a rendering on
+gray background, less saturated and smoother. <a class="footnote-reference" href="#id1" id="id4">[1]</a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>y0_plot</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code>},
+Whether to plot <em>y0</em> line.</li>
+<li><strong>y1_plot</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code>},
+Whether to plot <em>y1</em> line.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">visible_spectrum_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.single_lightness_function_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">single_lightness_function_plot</code><span class="sig-paren">(</span><em>function='CIE 1976'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#single_lightness_function_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.single_lightness_function_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>Lightness</em> function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> (<em>unicode, optional</em>) &#8211; <em>Lightness</em> function to plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Current figure or None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Figure</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_lightness_function_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.multi_lightness_function_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">multi_lightness_function_plot</code><span class="sig-paren">(</span><em>functions=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#multi_lightness_function_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.multi_lightness_function_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given <em>Lightness</em> functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>functions</strong> (<em>array_like, optional</em>) &#8211; <em>Lightness</em> functions to plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Current figure or None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Figure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> &#8211;
+If one of the given <em>Lightness</em> function is not found in the factory
+<em>Lightness</em> functions.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fs</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;CIE 1976&#39;</span><span class="p">,</span> <span class="s1">&#39;Wyszecki 1963&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multi_lightness_function_plot</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.blackbody_spectral_radiance_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">blackbody_spectral_radiance_plot</code><span class="sig-paren">(</span><em>temperature=3500</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>blackbody='VY Canis Major'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#blackbody_spectral_radiance_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.blackbody_spectral_radiance_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots given blackbody spectral radiance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>temperature</strong> (<em>numeric, optional</em>) &#8211; Blackbody temperature.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions.</li>
+<li><strong>blackbody</strong> (<em>unicode, optional</em>) &#8211; Blackbody name.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">blackbody_spectral_radiance_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.plotting.colorimetry.blackbody_colours_plot">
+<code class="descclassname">colour.plotting.colorimetry.</code><code class="descname">blackbody_colours_plot</code><span class="sig-paren">(</span><em>shape=SpectralShape(150.0</em>, <em>12500.0</em>, <em>50.0)</em>, <em>cmfs='CIE 1931 2 Degree Standard Observer'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/plotting/colorimetry.html#blackbody_colours_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.plotting.colorimetry.blackbody_colours_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots blackbody colours.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>shape</strong> (<em>SpectralShape, optional</em>) &#8211; Spectral shape to use as plot boundaries.</li>
+<li><strong>cmfs</strong> (<em>unicode, optional</em>) &#8211; Standard observer colour matching functions.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>**kwargs</strong> (<em>dict, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">boundaries()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">canvas()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">decorate()</span></code>,
+<code class="xref py py-func docutils literal"><span class="pre">display()</span></code>},
+Please refer to the documentation of the previously listed definitions.</li>
+<li><strong>y0_plot</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code>},
+Whether to plot <em>y0</em> line.</li>
+<li><strong>y1_plot</strong> (<em>bool, optional</em>) &#8211;
+{<code class="xref py py-func docutils literal"><span class="pre">colour_parameters_plot()</span></code>},
+Whether to plot <em>y1</em> line.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current figure or None.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Figure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">blackbody_colours_plot</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.plotting.colorimetry Module</a><ul>
+<li><a class="reference internal" href="#colorimetry-plotting">Colorimetry Plotting</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.plotting.colorimetry.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.plotting.colorimetry.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

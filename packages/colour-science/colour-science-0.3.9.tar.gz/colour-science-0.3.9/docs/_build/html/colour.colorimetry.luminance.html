@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.luminance Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.luminance">
+<span id="colour-colorimetry-luminance-module"></span><h1>colour.colorimetry.luminance Module<a class="headerlink" href="#module-colour.colorimetry.luminance" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="luminance">
+<h2>Luminance <span class="math">\(Y\)</span><a class="headerlink" href="#luminance" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>luminance</em> <span class="math">\(Y\)</span> computation objects.</p>
+<p>The following methods are available:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.colorimetry.luminance.luminance_Newhall1943" title="colour.colorimetry.luminance.luminance_Newhall1943"><code class="xref py py-func docutils literal"><span class="pre">luminance_Newhall1943()</span></code></a>: <em>luminance</em> <span class="math">\(Y\)</span> computation of given
+<em>Munsell</em> value <span class="math">\(V\)</span> using <em>Newhall, Nickerson and Judd (1943)</em>
+method.</li>
+<li><a class="reference internal" href="#colour.colorimetry.luminance.luminance_ASTMD153508" title="colour.colorimetry.luminance.luminance_ASTMD153508"><code class="xref py py-func docutils literal"><span class="pre">luminance_ASTMD153508()</span></code></a>: <em>luminance</em> <span class="math">\(Y\)</span> computation of given
+<em>Munsell</em> value <span class="math">\(V\)</span> using <em>ASTM D1535-08e1</em> method.</li>
+<li><a class="reference internal" href="#colour.colorimetry.luminance.luminance_CIE1976" title="colour.colorimetry.luminance.luminance_CIE1976"><code class="xref py py-func docutils literal"><span class="pre">luminance_CIE1976()</span></code></a>: <em>luminance</em> <span class="math">\(Y\)</span> computation of given
+<em>Lightness</em> <span class="math">\(L^*\)</span> as per <em>CIE 1976</em> recommendation.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/luminance.ipynb">Luminance Jupyter Notebook</a></p>
+</div>
+<dl class="function">
+<dt id="colour.colorimetry.luminance.luminance_Newhall1943">
+<code class="descclassname">colour.colorimetry.luminance.</code><code class="descname">luminance_Newhall1943</code><span class="sig-paren">(</span><em>V</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/luminance.html#luminance_Newhall1943"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.luminance.luminance_Newhall1943" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>luminance</em> <span class="math">\(R_Y\)</span> of given <em>Munsell</em> value <span class="math">\(V\)</span>
+using <em>Newhall et al. (1943)</em> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>V</strong> (<em>numeric or array_like</em>) &#8211; <em>Munsell</em> value <span class="math">\(V\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>luminance</em> <span class="math">\(R_Y\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or array_like</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>Munsell</em> value <span class="math">\(V\)</span> is in domain [0, 10].</li>
+<li>Output <em>luminance</em> <span class="math">\(R_Y\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Newhall, S. M., Nickerson, D., &amp; Judd, D. B. (1943). Final report
+of the OSA subcommittee on the spacing of the munsell colors. JOSA,
+33(7), 385. doi:10.1364/JOSA.33.000385</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">luminance_Newhall1943</span><span class="p">(</span><span class="mf">3.74629715382</span><span class="p">)</span>  
+<span class="go">10.4089874...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.luminance.luminance_ASTMD153508">
+<code class="descclassname">colour.colorimetry.luminance.</code><code class="descname">luminance_ASTMD153508</code><span class="sig-paren">(</span><em>V</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/luminance.html#luminance_ASTMD153508"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.luminance.luminance_ASTMD153508" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>luminance</em> <span class="math">\(Y\)</span> of given <em>Munsell</em> value <span class="math">\(V\)</span> using
+<em>ASTM D1535-08e1</em> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>V</strong> (<em>numeric or array_like</em>) &#8211; <em>Munsell</em> value <span class="math">\(V\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>luminance</em> <span class="math">\(Y\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or array_like</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>Munsell</em> value <span class="math">\(V\)</span> is in domain [0, 10].</li>
+<li>Output <em>luminance</em> <span class="math">\(Y\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>ASTM International. (n.d.). ASTM D1535-08e1 Standard Practice for
+Specifying Color by the Munsell System. doi:10.1520/D1535-08E01</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">luminance_ASTMD153508</span><span class="p">(</span><span class="mf">3.74629715382</span><span class="p">)</span>  
+<span class="go">10.1488096...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.luminance.luminance_CIE1976">
+<code class="descclassname">colour.colorimetry.luminance.</code><code class="descname">luminance_CIE1976</code><span class="sig-paren">(</span><em>Lstar</em>, <em>Y_n=100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/luminance.html#luminance_CIE1976"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.luminance.luminance_CIE1976" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>luminance</em> <span class="math">\(Y\)</span> of given <em>Lightness</em> <span class="math">\(L^*\)</span> with
+given reference white <em>luminance</em> <span class="math">\(Y_n\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Lstar</strong> (<em>numeric or array_like</em>) &#8211; <em>Lightness</em> <span class="math">\(L^*\)</span></li>
+<li><strong>Y_n</strong> (<em>numeric or array_like</em>) &#8211; White reference <em>luminance</em> <span class="math">\(Y_n\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>luminance</em> <span class="math">\(Y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>Lightness</em> <span class="math">\(L^*\)</span> and reference white <em>luminance</em>
+<span class="math">\(Y_n\)</span> are in domain [0, 100].</li>
+<li>Output <em>luminance</em> <span class="math">\(Y\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Wyszecki, G., &amp; Stiles, W. S. (2000). CIE 1976 (L*u*v*)-Space and
+Color-Difference Formula. In Color Science: Concepts and Methods,
+Quantitative Data and Formulae (p. 167). Wiley. ISBN:978-0471399186</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Lindbloom, B. (2003). A Continuity Study of the CIE L* Function.
+Retrieved February 24, 2014, from
+<a class="reference external" href="http://brucelindbloom.com/LContinuity.html">http://brucelindbloom.com/LContinuity.html</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">luminance_CIE1976</span><span class="p">(</span><span class="mf">37.98562910</span><span class="p">)</span>  
+<span class="go">array(10.0800000...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">luminance_CIE1976</span><span class="p">(</span><span class="mf">37.98562910</span><span class="p">,</span> <span class="mi">95</span><span class="p">)</span>  
+<span class="go">array(9.5760000...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.luminance.LUMINANCE_METHODS">
+<code class="descclassname">colour.colorimetry.luminance.</code><code class="descname">LUMINANCE_METHODS</code><em class="property"> = CaseInsensitiveMapping({u'astm2008': &lt;function luminance_ASTMD153508 at 0x10e6dd230&gt;, u'Newhall 1943': &lt;function luminance_Newhall1943 at 0x10e6dd1b8&gt;, u'ASTM D1535-08': &lt;function luminance_ASTMD153508 at 0x10e6dd230&gt;, u'CIE 1976': &lt;function luminance_CIE1976 at 0x10e6dd2a8&gt;, u'cie1976': &lt;function luminance_CIE1976 at 0x10e6dd2a8&gt;})</em><a class="headerlink" href="#colour.colorimetry.luminance.LUMINANCE_METHODS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported <em>luminance</em> computations methods.</p>
+<dl class="docutils">
+<dt>LUMINANCE_METHODS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Newhall 1943&#8217;, &#8216;ASTM D1535-08&#8217;, &#8216;CIE 1976&#8217;}</strong></dd>
+</dl>
+<p>Aliases:</p>
+<ul class="simple">
+<li>&#8216;astm2008&#8217;: &#8216;ASTM D1535-08&#8217;</li>
+<li>&#8216;cie1976&#8217;: &#8216;CIE 1976&#8217;</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.luminance.luminance">
+<code class="descclassname">colour.colorimetry.luminance.</code><code class="descname">luminance</code><span class="sig-paren">(</span><em>LV</em>, <em>method=u'CIE 1976'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/luminance.html#luminance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.luminance.luminance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>luminance</em> <span class="math">\(Y\)</span> of given <em>Lightness</em> <span class="math">\(L^*\)</span> or given
+<em>Munsell</em> value <span class="math">\(V\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>LV</strong> (<em>numeric or array_like</em>) &#8211; <em>Lightness</em> <span class="math">\(L^*\)</span> or <em>Munsell</em> value <span class="math">\(V\)</span>.</li>
+<li><strong>method</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CIE 1976&#8217;, &#8216;Newhall 1943&#8217;, &#8216;ASTM D1535-08&#8217;}</strong>,
+Computation method.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>Y_n</strong> (<em>numeric or array_like, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.colorimetry.luminance.luminance_CIE1976" title="colour.colorimetry.luminance.luminance_CIE1976"><code class="xref py py-func docutils literal"><span class="pre">luminance_CIE1976()</span></code></a>},
+White reference <em>luminance</em> <span class="math">\(Y_n\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>luminance</em> <span class="math">\(Y\)</span>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>LV</em> is in domain [0, 100] or [0, 10] and optional <em>luminance</em>
+<span class="math">\(Y_n\)</span> is in domain [0, 100].</li>
+<li>Output <em>luminance</em> <span class="math">\(Y\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">luminance</span><span class="p">(</span><span class="mf">37.98562910</span><span class="p">)</span>  
+<span class="go">array(10.0800000...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">luminance</span><span class="p">(</span><span class="mf">37.98562910</span><span class="p">,</span> <span class="n">Y_n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  
+<span class="go">array(10.0800000...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">luminance</span><span class="p">(</span><span class="mf">37.98562910</span><span class="p">,</span> <span class="n">Y_n</span><span class="o">=</span><span class="mi">95</span><span class="p">)</span>  
+<span class="go">array(9.5760000...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">luminance</span><span class="p">(</span><span class="mf">3.74629715</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Newhall 1943&#39;</span><span class="p">)</span>  
+<span class="go">10.4089874...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">luminance</span><span class="p">(</span><span class="mf">3.74629715</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ASTM D1535-08&#39;</span><span class="p">)</span>  
+<span class="go">10.1488096...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.luminance Module</a><ul>
+<li><a class="reference internal" href="#luminance">Luminance <span class="math">\(Y\)</span></a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.luminance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.luminance.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

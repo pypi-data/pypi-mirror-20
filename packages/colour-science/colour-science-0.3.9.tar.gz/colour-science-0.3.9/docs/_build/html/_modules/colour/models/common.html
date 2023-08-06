@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.common &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.common</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Common Colour Models Utilities</span>
+<span class="sd">==============================</span>
+
+<span class="sd">Defines various colour models common utilities.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">colour.models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Lab_to_LCHab</span><span class="p">,</span>
+    <span class="n">Luv_to_LCHuv</span><span class="p">,</span>
+    <span class="n">Luv_to_uv</span><span class="p">,</span>
+    <span class="n">UCS_to_uv</span><span class="p">,</span>
+    <span class="n">XYZ_to_IPT</span><span class="p">,</span>
+    <span class="n">XYZ_to_Hunter_Lab</span><span class="p">,</span>
+    <span class="n">XYZ_to_Hunter_Rdab</span><span class="p">,</span>
+    <span class="n">XYZ_to_Lab</span><span class="p">,</span>
+    <span class="n">XYZ_to_Luv</span><span class="p">,</span>
+    <span class="n">XYZ_to_UCS</span><span class="p">,</span>
+    <span class="n">XYZ_to_UVW</span><span class="p">,</span>
+    <span class="n">XYZ_to_xy</span><span class="p">,</span>
+    <span class="n">XYZ_to_xyY</span><span class="p">,</span>
+    <span class="n">xy_to_XYZ</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;COLOURSPACE_MODELS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;COLOURSPACE_MODELS_LABELS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;XYZ_to_colourspace_model&#39;</span><span class="p">]</span>
+
+<span class="n">COLOURSPACE_MODELS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;CIE XYZ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE xyY&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE Lab&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE LCHab&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE Luv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE Luv uv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE LCHuv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE UCS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE UCS uv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CIE UVW&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IPT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Hunter Lab&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Hunter Rdab&#39;</span><span class="p">)</span>
+
+<span class="n">COLOURSPACE_MODELS_LABELS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CIE XYZ&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE xyY&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE Lab&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;$a^*$&#39;</span><span class="p">,</span> <span class="s1">&#39;$b^*$&#39;</span><span class="p">,</span> <span class="s1">&#39;$L^*$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE LCHab&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;ab&#39;</span><span class="p">,</span> <span class="s1">&#39;$L^*$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE Luv&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;$u^\prime$&#39;</span><span class="p">,</span> <span class="s1">&#39;$v^\prime$&#39;</span><span class="p">,</span> <span class="s1">&#39;$L^*$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE Luv uv&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;$u^\prime$&#39;</span><span class="p">,</span> <span class="s1">&#39;$v^\prime$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE LCHuv&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;uv&#39;</span><span class="p">,</span> <span class="s1">&#39;$L^*$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE UCS&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE UCS uv&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;$u$&#39;</span><span class="p">,</span> <span class="s1">&#39;$v$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CIE UVW&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;IPT&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;Hunter Lab&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;$a^*$&#39;</span><span class="p">,</span> <span class="s1">&#39;$b^*$&#39;</span><span class="p">,</span> <span class="s1">&#39;$L^*$&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;Hunter Rdab&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;$a$&#39;</span><span class="p">,</span> <span class="s1">&#39;$b$&#39;</span><span class="p">,</span> <span class="s1">&#39;$Rd$&#39;</span><span class="p">)}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Colourspace models labels mapping.</span>
+
+<span class="sd">COLOURSPACE_MODELS_LABELS : dict</span>
+<span class="sd">    **{&#39;CIE XYZ&#39;, &#39;CIE xyY&#39;, &#39;CIE Lab&#39;, &#39;CIE LCHab, &#39;CIE Luv&#39;, &#39;CIE Luv uv&#39;,</span>
+<span class="sd">    &#39;CIE LCHuv&#39;, &#39;CIE UCS&#39;, &#39;CIE UCS uv&#39;, &#39;CIE UVW&#39;, &#39;IPT&#39;, &#39;Hunter Lab&#39;,</span>
+<span class="sd">    &#39;Hunter Rdab&#39;}**</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="XYZ_to_colourspace_model"><a class="viewcode-back" href="../../../colour.models.common.html#colour.XYZ_to_colourspace_model">[docs]</a><span class="k">def</span> <span class="nf">XYZ_to_colourspace_model</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts from *CIE XYZ* tristimulus values to given colourspace model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    XYZ : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values.</span>
+<span class="sd">    illuminant : array_like</span>
+<span class="sd">        *CIE XYZ* tristimulus values *illuminant* *xy* chromaticity</span>
+<span class="sd">        coordinates.</span>
+<span class="sd">    model : unicode</span>
+<span class="sd">        **{&#39;CIE XYZ&#39;, &#39;CIE xyY&#39;, &#39;CIE xy&#39;, &#39;CIE Lab&#39;, &#39;CIE LCHab&#39;, &#39;CIE Luv&#39;,</span>
+<span class="sd">        &#39;CIE Luv uv&#39;, &#39;CIE LCHuv&#39;, &#39;CIE UCS&#39;, &#39;CIE UCS uv&#39;, &#39;CIE UVW&#39;, &#39;IPT&#39;,</span>
+<span class="sd">        &#39;Hunter Lab&#39;, &#39;Hunter Rdab&#39;}**,</span>
+<span class="sd">        Colourspace model to convert the *CIE XYZ* tristimulus values to.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        Colourspace model values.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; XYZ = np.array([0.07049534, 0.10080000, 0.09558313])</span>
+<span class="sd">    &gt;&gt;&gt; W = np.array([0.34570, 0.35850])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE XYZ&#39;)</span>
+<span class="sd">    array([ 0.0704953...,  0.1008    ,  0.0955831...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE xyY&#39;)</span>
+<span class="sd">    array([ 0.2641477...,  0.3777000...,  0.1008    ])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE xy&#39;)</span>
+<span class="sd">    array([ 0.2641477...,  0.3777000...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE Lab&#39;)</span>
+<span class="sd">    array([ 37.9856291..., -23.6290768...,  -4.4174661...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE LCHab&#39;)</span>
+<span class="sd">    array([  37.9856291...,   24.0384542...,  190.5892337...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE Luv&#39;)</span>
+<span class="sd">    array([ 37.9856291..., -28.8021959...,  -1.3580070...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE Luv uv&#39;)</span>
+<span class="sd">    array([ 0.1508531...,  0.4853297...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE LCHuv&#39;)</span>
+<span class="sd">    array([  37.9856291...,   28.8341927...,  182.6994640...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE UCS uv&#39;)</span>
+<span class="sd">    array([ 0.1508531...,  0.32355314...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;CIE UVW&#39;)</span>
+<span class="sd">    array([-28.0579733...,  -0.8819449...,  37.0041149...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;IPT&#39;)</span>
+<span class="sd">    array([ 0.3657112..., -0.1111479...,  0.0159474...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;Hunter Lab&#39;)</span>
+<span class="sd">    array([ 31.7490157..., -15.1351736...,  -2.7709606...])</span>
+<span class="sd">    &gt;&gt;&gt; XYZ_to_colourspace_model(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ... XYZ, W, &#39;Hunter Rdab&#39;)</span>
+<span class="sd">    array([ 10.08..., -18.7019271...,  -3.4239649...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE XYZ&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE xyY&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_xyY</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE xy&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_xy</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE Lab&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_Lab</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE LCHab&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">Lab_to_LCHab</span><span class="p">(</span><span class="n">XYZ_to_Lab</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE Luv&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE Luv uv&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE LCHuv&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">Luv_to_LCHuv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE UCS&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE UCS uv&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">UCS_to_uv</span><span class="p">(</span><span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">XYZ</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;CIE UVW&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_UVW</span><span class="p">(</span><span class="n">XYZ</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;IPT&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_IPT</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;Hunter Lab&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_Hunter_Lab</span><span class="p">(</span><span class="n">XYZ</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">xy_to_XYZ</span><span class="p">(</span><span class="n">illuminant</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;Hunter Rdab&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">XYZ_to_Hunter_Rdab</span><span class="p">(</span><span class="n">XYZ</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">xy_to_XYZ</span><span class="p">(</span><span class="n">illuminant</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">values</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;&quot;{0}&quot; not found in colourspace models: &quot;{1}&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">COLOURSPACE_MODELS</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">values</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

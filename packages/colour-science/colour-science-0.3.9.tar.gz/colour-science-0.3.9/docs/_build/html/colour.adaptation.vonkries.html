@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.adaptation.vonkries Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.adaptation.vonkries">
+<span id="colour-adaptation-vonkries-module"></span><h1>colour.adaptation.vonkries Module<a class="headerlink" href="#module-colour.adaptation.vonkries" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="von-kries-chromatic-adaptation-model">
+<h2>Von Kries Chromatic Adaptation Model<a class="headerlink" href="#von-kries-chromatic-adaptation-model" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>Von Kries</em> chromatic adaptation model objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.adaptation.vonkries.chromatic_adaptation_matrix_VonKries" title="colour.adaptation.vonkries.chromatic_adaptation_matrix_VonKries"><code class="xref py py-func docutils literal"><span class="pre">chromatic_adaptation_matrix_VonKries()</span></code></a></li>
+<li><a class="reference internal" href="#colour.adaptation.vonkries.chromatic_adaptation_VonKries" title="colour.adaptation.vonkries.chromatic_adaptation_VonKries"><code class="xref py py-func docutils literal"><span class="pre">chromatic_adaptation_VonKries()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/adaptation/vonkries.ipynb">Chromatic Adaptation Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Fairchild, M. D. (2013). Chromatic Adaptation Models. In Color
+Appearance Models (3rd ed., pp. 4179–4252). Wiley. ASIN:B00DAYO8E2</td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.adaptation.vonkries.chromatic_adaptation_matrix_VonKries">
+<code class="descclassname">colour.adaptation.vonkries.</code><code class="descname">chromatic_adaptation_matrix_VonKries</code><span class="sig-paren">(</span><em>XYZ_w</em>, <em>XYZ_wr</em>, <em>transform=u'CAT02'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/vonkries.html#chromatic_adaptation_matrix_VonKries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.vonkries.chromatic_adaptation_matrix_VonKries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the <em>chromatic adaptation</em> matrix from test viewing conditions
+to reference viewing conditions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ_w</strong> (<em>array_like</em>) &#8211; Test viewing condition <em>CIE XYZ</em> tristimulus values of whitepoint.</li>
+<li><strong>XYZ_wr</strong> (<em>array_like</em>) &#8211; Reference viewing condition <em>CIE XYZ</em> tristimulus values of whitepoint.</li>
+<li><strong>transform</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CAT02&#8217;, &#8216;XYZ Scaling&#8217;, &#8216;Von Kries&#8217;, &#8216;Bradford&#8217;, &#8216;Sharp&#8217;,
+&#8216;Fairchild&#8217;, &#8216;CMCCAT97&#8217;, &#8216;CMCCAT2000&#8217;, &#8216;CAT02_BRILL_CAT&#8217;, &#8216;Bianco&#8217;,
+&#8216;Bianco PC&#8217;}</strong>,
+Chromatic adaptation transform.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Chromatic adaptation matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">ndarray</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> &#8211;
+If chromatic adaptation method is not defined.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.09846607</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">0.35582280</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.95042855</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">1.08890037</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chromatic_adaptation_matrix_VonKries</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">)</span>
+<span class="go">array([[ 0.8687653..., -0.1416539...,  0.3871961...],</span>
+<span class="go">       [-0.1030072...,  1.0584014...,  0.1538646...],</span>
+<span class="go">       [ 0.0078167...,  0.0267875...,  2.9608177...]])</span>
+</pre></div>
+</div>
+<p>Using Bradford method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.09846607</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">0.35582280</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.95042855</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">1.08890037</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Bradford&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chromatic_adaptation_matrix_VonKries</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+<span class="go">array([[ 0.8446794..., -0.1179355...,  0.3948940...],</span>
+<span class="go">       [-0.1366408...,  1.1041236...,  0.1291981...],</span>
+<span class="go">       [ 0.0798671..., -0.1349315...,  3.1928829...]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.vonkries.chromatic_adaptation_VonKries">
+<code class="descclassname">colour.adaptation.vonkries.</code><code class="descname">chromatic_adaptation_VonKries</code><span class="sig-paren">(</span><em>XYZ</em>, <em>XYZ_w</em>, <em>XYZ_wr</em>, <em>transform=u'CAT02'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/vonkries.html#chromatic_adaptation_VonKries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.vonkries.chromatic_adaptation_VonKries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adapts given stimulus from test viewing conditions to reference viewing
+conditions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of stimulus to adapt.</li>
+<li><strong>XYZ_w</strong> (<em>array_like</em>) &#8211; Test viewing condition <em>CIE XYZ</em> tristimulus values of whitepoint.</li>
+<li><strong>XYZ_wr</strong> (<em>array_like</em>) &#8211; Reference viewing condition <em>CIE XYZ</em> tristimulus values of whitepoint.</li>
+<li><strong>transform</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CAT02&#8217;, &#8216;XYZ Scaling&#8217;, &#8216;Von Kries&#8217;, &#8216;Bradford&#8217;, &#8216;Sharp&#8217;,
+&#8216;Fairchild&#8217;, &#8216;CMCCAT97&#8217;, &#8216;CMCCAT2000&#8217;, &#8216;CAT02_BRILL_CAT&#8217;, &#8216;Bianco&#8217;,
+&#8216;Bianco PC&#8217;}</strong>,
+Chromatic adaptation transform.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIE XYZ_c</em> tristimulus values of the stimulus corresponding colour.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.09846607</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">0.35582280</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.95042855</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">1.08890037</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chromatic_adaptation_VonKries</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">)</span>  
+<span class="go">array([ 0.0839746...,  0.1141321...,  0.2862554...])</span>
+</pre></div>
+</div>
+<p>Using Bradford method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.09846607</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">0.35582280</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.95042855</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">1.08890037</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Bradford&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chromatic_adaptation_VonKries</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">XYZ_wr</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+<span class="go">array([ 0.0854032...,  0.1140122...,  0.2972149...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.adaptation.vonkries Module</a><ul>
+<li><a class="reference internal" href="#von-kries-chromatic-adaptation-model">Von Kries Chromatic Adaptation Model</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.adaptation.vonkries.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.adaptation.vonkries.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

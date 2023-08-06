@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.rimm_romm_rgb &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../../index.html" />
+    <link rel="up" title="colour.models.rgb.transfer_functions" href="../transfer_functions.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.transfer_functions.rimm_romm_rgb</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">RIMM, ROMM and ERIMM Encodings</span>
+<span class="sd">==============================</span>
+
+<span class="sd">Defines the *RIMM, ROMM and ERIMM* encodings opto-electrical transfer functions</span>
+<span class="sd">(OETF / OECF) and electro-optical transfer functions (EOTF / EOCF):</span>
+
+<span class="sd">-   :func:`oetf_ROMMRGB`</span>
+<span class="sd">-   :func:`eotf_ROMMRGB`</span>
+<span class="sd">-   :func:`oetf_ProPhotoRGB`</span>
+<span class="sd">-   :func:`eotf_ProPhotoRGB`</span>
+<span class="sd">-   :func:`oetf_RIMMRGB`</span>
+<span class="sd">-   :func:`eotf_RIMMRGB`</span>
+<span class="sd">-   :func:`log_encoding_ERIMMRGB`</span>
+<span class="sd">-   :func:`log_decoding_ERIMMRGB`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`RGB Colourspaces Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/rgb.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Spaulding, K. E., Woolfe, G. J., &amp; Giorgianni, E. J. (2000). Reference</span>
+<span class="sd">        Input/Output Medium Metric RGB Color Encodings (RIMM/ROMM RGB), 1–8.</span>
+<span class="sd">        Retrieved from http://www.photo-lovers.org/pdf/color/romm.pdf</span>
+<span class="sd">.. [3]  ANSI. (2003). Specification of ROMM RGB. Retrieved from</span>
+<span class="sd">        http://www.color.org/ROMMRGB.pdf</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">as_numeric</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;oetf_ROMMRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;eotf_ROMMRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;oetf_ProPhotoRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;eotf_ProPhotoRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;oetf_RIMMRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;eotf_RIMMRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_encoding_ERIMMRGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_ERIMMRGB&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="oetf_ROMMRGB"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.rimm_romm_rgb.html#colour.oetf_ROMMRGB">[docs]</a><span class="k">def</span> <span class="nf">oetf_ROMMRGB</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">I_max</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *ROMM RGB* encoding opto-electronic transfer function</span>
+<span class="sd">    (OETF / OECF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X : numeric or array_like</span>
+<span class="sd">        Linear data :math:`X_{ROMM}`.</span>
+<span class="sd">    I_max : numeric, optional</span>
+<span class="sd">        Maximum code value: 255, 4095 and 650535 for respectively 8-bit,</span>
+<span class="sd">        12-bit and 16-bit per channel.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`X&#39;_{ROMM}`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; oetf_ROMMRGB(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    98.3564133...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="n">E_t</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.8</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">1.8</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">X</span> <span class="o">&lt;</span> <span class="n">E_t</span><span class="p">,</span>
+                 <span class="n">X</span> <span class="o">*</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">I_max</span><span class="p">,</span>
+                 <span class="n">X</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">1.8</span><span class="p">)</span> <span class="o">*</span> <span class="n">I_max</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">I_max</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="eotf_ROMMRGB"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.rimm_romm_rgb.html#colour.eotf_ROMMRGB">[docs]</a><span class="k">def</span> <span class="nf">eotf_ROMMRGB</span><span class="p">(</span><span class="n">X_p</span><span class="p">,</span> <span class="n">I_max</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *ROMM RGB* encoding electro-optical transfer function</span>
+<span class="sd">    (EOTF / EOCF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X_p : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`X&#39;_{ROMM}`.</span>
+<span class="sd">    I_max : numeric, optional</span>
+<span class="sd">        Maximum code value: 255, 4095 and 650535 for respectively 8-bit,</span>
+<span class="sd">        12-bit and 16-bit per channel.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`X_{ROMM}`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; eotf_ROMMRGB(98.356413311540095) # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_p</span><span class="p">)</span>
+
+    <span class="n">E_t</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.8</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">1.8</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">X_p</span> <span class="o">&lt;</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">E_t</span> <span class="o">*</span> <span class="n">I_max</span><span class="p">,</span>
+        <span class="n">X_p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">16</span> <span class="o">*</span> <span class="n">I_max</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">X_p</span> <span class="o">/</span> <span class="n">I_max</span><span class="p">)</span> <span class="o">**</span> <span class="mf">1.8</span><span class="p">))</span></div>
+
+
+<span class="n">oetf_ProPhotoRGB</span> <span class="o">=</span> <span class="n">oetf_ROMMRGB</span>
+<span class="n">eotf_ProPhotoRGB</span> <span class="o">=</span> <span class="n">eotf_ROMMRGB</span>
+
+
+<div class="viewcode-block" id="oetf_RIMMRGB"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.rimm_romm_rgb.html#colour.oetf_RIMMRGB">[docs]</a><span class="k">def</span> <span class="nf">oetf_RIMMRGB</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">I_max</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">E_clip</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *RIMM RGB* encoding opto-electronic transfer function</span>
+<span class="sd">    (OETF / OECF).</span>
+
+<span class="sd">    *RIMM RGB* encoding non-linearity is based on that specified by</span>
+<span class="sd">    *Recommendation ITU-R BT.709-6*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X : numeric or array_like</span>
+<span class="sd">        Linear data :math:`X_{RIMM}`.</span>
+<span class="sd">    I_max : numeric, optional</span>
+<span class="sd">        Maximum code value: 255, 4095 and 650535 for respectively 8-bit,</span>
+<span class="sd">        12-bit and 16-bit per channel.</span>
+<span class="sd">    E_clip : numeric, optional</span>
+<span class="sd">        Maximum exposure level.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`X&#39;_{RIMM}`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; oetf_RIMMRGB(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    74.3768017...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="n">V_clip</span> <span class="o">=</span> <span class="mf">1.099</span> <span class="o">*</span> <span class="n">E_clip</span> <span class="o">**</span> <span class="mf">0.45</span> <span class="o">-</span> <span class="mf">0.099</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">I_max</span> <span class="o">/</span> <span class="n">V_clip</span>
+
+    <span class="n">X_p_RIMM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">X</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">,</span>
+         <span class="n">X</span> <span class="o">&lt;</span> <span class="mf">0.018</span><span class="p">,</span> <span class="n">X</span> <span class="o">&gt;=</span> <span class="mf">0.018</span><span class="p">,</span>
+         <span class="n">X</span> <span class="o">&gt;</span> <span class="n">E_clip</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span> <span class="mf">1.099</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">**</span> <span class="mf">0.45</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.099</span><span class="p">,</span> <span class="n">I_max</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">q</span> <span class="o">*</span> <span class="n">X_p_RIMM</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="eotf_RIMMRGB"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.rimm_romm_rgb.html#colour.eotf_RIMMRGB">[docs]</a><span class="k">def</span> <span class="nf">eotf_RIMMRGB</span><span class="p">(</span><span class="n">X_p</span><span class="p">,</span> <span class="n">I_max</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">E_clip</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *RIMM RGB* encoding electro-optical transfer function</span>
+<span class="sd">    (EOTF / EOCF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X_p : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`X&#39;_{RIMM}`.</span>
+<span class="sd">    I_max : numeric, optional</span>
+<span class="sd">        Maximum code value: 255, 4095 and 650535 for respectively 8-bit,</span>
+<span class="sd">        12-bit and 16-bit per channel.</span>
+<span class="sd">    E_clip : numeric, optional</span>
+<span class="sd">        Maximum exposure level.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`X_{RIMM}`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; eotf_RIMMRGB(74.37680178131521)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_p</span><span class="p">)</span>
+
+    <span class="n">V_clip</span> <span class="o">=</span> <span class="mf">1.099</span> <span class="o">*</span> <span class="n">E_clip</span> <span class="o">**</span> <span class="mf">0.45</span> <span class="o">-</span> <span class="mf">0.099</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">V_clip</span> <span class="o">*</span> <span class="n">X_p</span> <span class="o">/</span> <span class="n">I_max</span>
+
+    <span class="n">X_RIMM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">X_p</span> <span class="o">&lt;</span> <span class="n">oetf_RIMMRGB</span><span class="p">(</span><span class="mf">0.018</span><span class="p">),</span>
+        <span class="n">m</span> <span class="o">/</span> <span class="mf">4.5</span><span class="p">,</span> <span class="p">((</span><span class="n">m</span> <span class="o">+</span> <span class="mf">0.099</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.099</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">0.45</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">X_RIMM</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_encoding_ERIMMRGB"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.rimm_romm_rgb.html#colour.log_encoding_ERIMMRGB">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_ERIMMRGB</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                          <span class="n">I_max</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+                          <span class="n">E_min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+                          <span class="n">E_clip</span><span class="o">=</span><span class="mf">316.2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *ERIMM RGB* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function (OETF / OECF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X : numeric or array_like</span>
+<span class="sd">        Linear data :math:`X_{ERIMM}`.</span>
+<span class="sd">    I_max : numeric, optional</span>
+<span class="sd">        Maximum code value: 255, 4095 and 650535 for respectively 8-bit,</span>
+<span class="sd">        12-bit and 16-bit per channel.</span>
+<span class="sd">    E_min : numeric, optional</span>
+<span class="sd">        Minimum exposure limit.</span>
+<span class="sd">    E_clip : numeric, optional</span>
+<span class="sd">        Maximum exposure limit.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`X&#39;_{ERIMM}`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_ERIMMRGB(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    104.5633593...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="n">E_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_min</span>
+
+    <span class="n">X_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">X</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">,</span>
+         <span class="n">X</span> <span class="o">&lt;=</span> <span class="n">E_t</span><span class="p">,</span> <span class="n">X</span> <span class="o">&gt;</span> <span class="n">E_t</span><span class="p">,</span>
+         <span class="n">X</span> <span class="o">&gt;</span> <span class="n">E_clip</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span>
+         <span class="n">I_max</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))</span> <span class="o">/</span>
+                  <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_clip</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">/</span> <span class="n">E_t</span><span class="p">),</span>
+         <span class="n">I_max</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))</span> <span class="o">/</span>
+                  <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_clip</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))),</span>
+         <span class="n">I_max</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">X_p</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_ERIMMRGB"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.rimm_romm_rgb.html#colour.log_decoding_ERIMMRGB">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_ERIMMRGB</span><span class="p">(</span><span class="n">X_p</span><span class="p">,</span>
+                          <span class="n">I_max</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+                          <span class="n">E_min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+                          <span class="n">E_clip</span><span class="o">=</span><span class="mf">316.2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *ERIMM RGB* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function (EOTF / EOCF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X_p : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`X&#39;_{ERIMM}`.</span>
+<span class="sd">    I_max : numeric, optional</span>
+<span class="sd">        Maximum code value: 255, 4095 and 650535 for respectively 8-bit,</span>
+<span class="sd">        12-bit and 16-bit per channel.</span>
+<span class="sd">    E_min : numeric, optional</span>
+<span class="sd">        Minimum exposure limit.</span>
+<span class="sd">    E_clip : numeric, optional</span>
+<span class="sd">        Maximum exposure limit.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`X_{ERIMM}`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_ERIMMRGB(104.56335932049294) # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_p</span><span class="p">)</span>
+
+    <span class="n">E_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_min</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">X_p</span> <span class="o">&lt;=</span> <span class="n">I_max</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))</span> <span class="o">/</span>
+                        <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_clip</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))),</span>
+        <span class="p">(((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_clip</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">)))</span> <span class="o">*</span>
+         <span class="p">((</span><span class="n">X_p</span> <span class="o">*</span> <span class="n">E_t</span><span class="p">)</span> <span class="o">/</span> <span class="n">I_max</span><span class="p">)),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">X_p</span> <span class="o">/</span> <span class="n">I_max</span><span class="p">)</span> <span class="o">*</span>
+               <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_clip</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">E_min</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../transfer_functions.html">colour.models.rgb.transfer_functions</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

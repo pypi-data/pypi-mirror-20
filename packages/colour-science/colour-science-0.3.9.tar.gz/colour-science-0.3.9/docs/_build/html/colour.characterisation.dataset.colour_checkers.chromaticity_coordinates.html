@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.characterisation.dataset.colour_checkers.chromaticity_coordinates Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.characterisation.dataset.colour_checkers.chromaticity_coordinates">
+<span id="colour-characterisation-dataset-colour-checkers-chromaticity-coordinates-module"></span><h1>colour.characterisation.dataset.colour_checkers.chromaticity_coordinates Module<a class="headerlink" href="#module-colour.characterisation.dataset.colour_checkers.chromaticity_coordinates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="colourcheckers-chromaticity-coordinates">
+<h2>ColourCheckers Chromaticity Coordinates<a class="headerlink" href="#colourcheckers-chromaticity-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>ColourCheckers</em> chromaticity coordinates in <em>CIE xyY</em> colourspace.</p>
+<p>Each <em>ColourChecker</em> data is in the form of a list of 24 <em>namedtuples</em> as
+follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;xyY&#39;</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;xyY&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The following <em>ColourCheckers</em> data is available:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.BABELCOLOR_AVERAGE" title="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.BABELCOLOR_AVERAGE"><code class="xref py py-attr docutils literal"><span class="pre">BABELCOLOR_AVERAGE</span></code></a>: Average data derived from measurements of 30
+<em>ColourChecker</em> charts.</li>
+<li><a class="reference internal" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_2005" title="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_2005"><code class="xref py py-attr docutils literal"><span class="pre">COLORCHECKER_2005</span></code></a>: Reference data from <em>GretagMacbeth</em> published in
+2005.</li>
+<li><a class="reference internal" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_1976" title="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_1976"><code class="xref py py-attr docutils literal"><span class="pre">COLORCHECKER_1976</span></code></a>: <em>ColourChecker</em> developed by <em>McCamy et al.</em> at
+Macbeth, a Division of Kollmorgen.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/characterisation/fitting.ipynb">Colour Fitting Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>BabelColor. (2012). ColorChecker RGB and spectra. Retrieved from
+<a class="reference external" href="http://www.babelcolor.com/download/ColorChecker_RGB_and_spectra.xls">http://www.babelcolor.com/download/ColorChecker_RGB_and_spectra.xls</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>BabelColor. (2012). The ColorChecker (since 1976!). Retrieved
+September 26, 2014, from
+<a class="reference external" href="http://www.babelcolor.com/main_level/ColorChecker.htm">http://www.babelcolor.com/main_level/ColorChecker.htm</a></td></tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification">
+<em class="property">class </em><code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">ColourChecker_Specification</code><span class="sig-paren">(</span><em>index</em>, <em>name</em>, <em>xyY</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></a></p>
+<dl class="method">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.__getnewargs__">
+<code class="descname">__getnewargs__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.__getnewargs__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self as a plain tuple.  Used by copy and pickle.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.__getstate__">
+<code class="descname">__getstate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.__getstate__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exclude the OrderedDict from pickling</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a nicely formatted representation string</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.index">
+<code class="descname">index</code><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.name">
+<code class="descname">name</code><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.xyY">
+<code class="descname">xyY</code><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker_Specification.xyY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker">
+<em class="property">class </em><code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">ColourChecker</code><span class="sig-paren">(</span><em>name</em>, <em>data</em>, <em>illuminant</em><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></a></p>
+<dl class="method">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.__getnewargs__">
+<code class="descname">__getnewargs__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.__getnewargs__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self as a plain tuple.  Used by copy and pickle.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.__getstate__">
+<code class="descname">__getstate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.__getstate__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exclude the OrderedDict from pickling</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a nicely formatted representation string</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.data">
+<code class="descname">data</code><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.illuminant">
+<code class="descname">illuminant</code><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.illuminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.name">
+<code class="descname">name</code><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.ColourChecker.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.BABELCOLOR_AVERAGE_ILLUMINANT">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">BABELCOLOR_AVERAGE_ILLUMINANT</code><em class="property"> = array([ 0.3457,  0.3585])</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.BABELCOLOR_AVERAGE_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>BabelColor Average</em> illuminant.</p>
+<p>BABELCOLOR_AVERAGE_ILLUMINANT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.BABELCOLOR_AVERAGE">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">BABELCOLOR_AVERAGE</code><em class="property"> = [ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4325,  0.3788,  0.1034])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.4191,  0.3748,  0.3525])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.2761,  0.3004,  0.1847])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.37  ,  0.4501,  0.1335])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.302 ,  0.2877,  0.2324])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2856,  0.391 ,  0.4174])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.5291,  0.4075,  0.3117])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.2339,  0.2155,  0.114 ])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.5008,  0.3293,  0.1979])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.3326,  0.2556,  0.0644])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.3989,  0.4998,  0.4435])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4962,  0.4428,  0.4358])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.204 ,  0.1696,  0.0579])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.327 ,  0.5033,  0.2307])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5709,  0.3298,  0.1268])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.4694,  0.4732,  0.6081])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.4177,  0.2704,  0.2007])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.2151,  0.3037,  0.1903])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3488,  0.3628,  0.9129])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.3451,  0.3596,  0.5885])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3446,  0.359 ,  0.3595])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3438,  0.3589,  0.1912])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3423,  0.3576,  0.0893])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3439,  0.3565,  0.032 ]))]</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.BABELCOLOR_AVERAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average data derived from measurements of 30 <em>ColourChecker</em> charts.</p>
+<p>BABELCOLOR_AVERAGE : list</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_2005_ILLUMINANT">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">COLORCHECKER_2005_ILLUMINANT</code><em class="property"> = array([ 0.3457,  0.3585])</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_2005_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ColorChecker 2005</em> illuminant.</p>
+<p>COLORCHECKER_2005_ILLUMINANT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_2005">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">COLORCHECKER_2005</code><em class="property"> = [ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4316,  0.3777,  0.1008])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.4197,  0.3744,  0.3495])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.276 ,  0.3016,  0.1836])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.3703,  0.4499,  0.1325])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.2999,  0.2856,  0.2304])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2848,  0.3911,  0.4178])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.5295,  0.4055,  0.3118])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.2305,  0.2106,  0.1126])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.5012,  0.3273,  0.1938])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.3319,  0.2482,  0.0637])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.3984,  0.5008,  0.4446])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4957,  0.4427,  0.4357])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.2018,  0.1692,  0.0575])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.3253,  0.5032,  0.2318])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5686,  0.3303,  0.1257])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.4697,  0.4734,  0.5981])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.4159,  0.2688,  0.2009])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.2131,  0.3023,  0.193 ])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3469,  0.3608,  0.9131])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.344 ,  0.3584,  0.5894])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3432,  0.3581,  0.3632])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3446,  0.3579,  0.1915])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3401,  0.3548,  0.0883])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3406,  0.3537,  0.0311]))]</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_2005" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference data from <em>GretagMacbeth (2005)</em>.</p>
+<p>COLORCHECKER_2005 : list</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_1976_ILLUMINANT">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">COLORCHECKER_1976_ILLUMINANT</code><em class="property"> = array([ 0.31006,  0.31616])</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_1976_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ColorChecker 1976</em> illuminant.</p>
+<p>COLORCHECKER_1976_ILLUMINANT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_1976">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">COLORCHECKER_1976</code><em class="property"> = [ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4002,  0.3504,  0.1005])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.3773,  0.3446,  0.3582])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.247 ,  0.2514,  0.1933])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.3372,  0.422 ,  0.1329])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.2651,  0.24  ,  0.2427])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2608,  0.343 ,  0.4306])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.506 ,  0.407 ,  0.3005])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.211,  0.175,  0.12 ])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.4533,  0.3058,  0.1977])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.2845,  0.202 ,  0.0656])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.38  ,  0.4887,  0.4429])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4729,  0.4375,  0.4306])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.1866,  0.1285,  0.0611])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.3046,  0.4782,  0.2339])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5385,  0.3129,  0.12  ])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.448 ,  0.4703,  0.591 ])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.3635,  0.2325,  0.1977])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.1958,  0.2519,  0.1977])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3101,  0.3163,  0.9001])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.3101,  0.3163,  0.591 ])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3101,  0.3163,  0.362 ])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3101,  0.3163,  0.1977])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3101,  0.3163,  0.09  ])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3101,  0.3163,  0.0313]))]</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLORCHECKER_1976" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ColourChecker</em> developed by <em>McCamy et al.</em> at Macbeth, a Division of
+Kollmorgen.</p>
+<p>COLORCHECKER_1976 : list</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLOURCHECKERS">
+<code class="descclassname">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.</code><code class="descname">COLOURCHECKERS</code><em class="property"> = CaseInsensitiveMapping({u'ColorChecker 2005': ColourChecker(name=u'ColorChecker 2005', data=[ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4316,  0.3777,  0.1008])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.4197,  0.3744,  0.3495])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.276 ,  0.3016,  0.1836])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.3703,  0.4499,  0.1325])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.2999,  0.2856,  0.2304])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2848,  0.3911,  0.4178])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.5295,  0.4055,  0.3118])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.2305,  0.2106,  0.1126])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.5012,  0.3273,  0.1938])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.3319,  0.2482,  0.0637])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.3984,  0.5008,  0.4446])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4957,  0.4427,  0.4357])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.2018,  0.1692,  0.0575])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.3253,  0.5032,  0.2318])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5686,  0.3303,  0.1257])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.4697,  0.4734,  0.5981])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.4159,  0.2688,  0.2009])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.2131,  0.3023,  0.193 ])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3469,  0.3608,  0.9131])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.344 ,  0.3584,  0.5894])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3432,  0.3581,  0.3632])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3446,  0.3579,  0.1915])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3401,  0.3548,  0.0883])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3406,  0.3537,  0.0311]))], illuminant=array([ 0.3457,  0.3585])), u'babel_average': ColourChecker(name=u'BabelColor Average', data=[ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4325,  0.3788,  0.1034])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.4191,  0.3748,  0.3525])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.2761,  0.3004,  0.1847])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.37  ,  0.4501,  0.1335])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.302 ,  0.2877,  0.2324])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2856,  0.391 ,  0.4174])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.5291,  0.4075,  0.3117])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.2339,  0.2155,  0.114 ])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.5008,  0.3293,  0.1979])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.3326,  0.2556,  0.0644])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.3989,  0.4998,  0.4435])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4962,  0.4428,  0.4358])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.204 ,  0.1696,  0.0579])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.327 ,  0.5033,  0.2307])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5709,  0.3298,  0.1268])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.4694,  0.4732,  0.6081])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.4177,  0.2704,  0.2007])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.2151,  0.3037,  0.1903])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3488,  0.3628,  0.9129])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.3451,  0.3596,  0.5885])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3446,  0.359 ,  0.3595])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3438,  0.3589,  0.1912])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3423,  0.3576,  0.0893])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3439,  0.3565,  0.032 ]))], illuminant=array([ 0.3457,  0.3585])), u'ColorChecker 1976': ColourChecker(name=u'ColorChecker 1976', data=[ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4002,  0.3504,  0.1005])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.3773,  0.3446,  0.3582])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.247 ,  0.2514,  0.1933])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.3372,  0.422 ,  0.1329])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.2651,  0.24  ,  0.2427])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2608,  0.343 ,  0.4306])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.506 ,  0.407 ,  0.3005])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.211,  0.175,  0.12 ])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.4533,  0.3058,  0.1977])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.2845,  0.202 ,  0.0656])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.38  ,  0.4887,  0.4429])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4729,  0.4375,  0.4306])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.1866,  0.1285,  0.0611])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.3046,  0.4782,  0.2339])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5385,  0.3129,  0.12  ])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.448 ,  0.4703,  0.591 ])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.3635,  0.2325,  0.1977])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.1958,  0.2519,  0.1977])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3101,  0.3163,  0.9001])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.3101,  0.3163,  0.591 ])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3101,  0.3163,  0.362 ])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3101,  0.3163,  0.1977])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3101,  0.3163,  0.09  ])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3101,  0.3163,  0.0313]))], illuminant=array([ 0.31006,  0.31616])), u'BabelColor Average': ColourChecker(name=u'BabelColor Average', data=[ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4325,  0.3788,  0.1034])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.4191,  0.3748,  0.3525])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.2761,  0.3004,  0.1847])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.37  ,  0.4501,  0.1335])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.302 ,  0.2877,  0.2324])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2856,  0.391 ,  0.4174])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.5291,  0.4075,  0.3117])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.2339,  0.2155,  0.114 ])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.5008,  0.3293,  0.1979])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.3326,  0.2556,  0.0644])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.3989,  0.4998,  0.4435])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4962,  0.4428,  0.4358])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.204 ,  0.1696,  0.0579])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.327 ,  0.5033,  0.2307])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5709,  0.3298,  0.1268])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.4694,  0.4732,  0.6081])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.4177,  0.2704,  0.2007])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.2151,  0.3037,  0.1903])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3488,  0.3628,  0.9129])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.3451,  0.3596,  0.5885])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3446,  0.359 ,  0.3595])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3438,  0.3589,  0.1912])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3423,  0.3576,  0.0893])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3439,  0.3565,  0.032 ]))], illuminant=array([ 0.3457,  0.3585])), u'cc2005': ColourChecker(name=u'ColorChecker 2005', data=[ColourChecker_Specification(index=1, name=u'dark skin', xyY=array([ 0.4316,  0.3777,  0.1008])), ColourChecker_Specification(index=2, name=u'light skin', xyY=array([ 0.4197,  0.3744,  0.3495])), ColourChecker_Specification(index=3, name=u'blue sky', xyY=array([ 0.276 ,  0.3016,  0.1836])), ColourChecker_Specification(index=4, name=u'foliage', xyY=array([ 0.3703,  0.4499,  0.1325])), ColourChecker_Specification(index=5, name=u'blue flower', xyY=array([ 0.2999,  0.2856,  0.2304])), ColourChecker_Specification(index=6, name=u'bluish green', xyY=array([ 0.2848,  0.3911,  0.4178])), ColourChecker_Specification(index=7, name=u'orange', xyY=array([ 0.5295,  0.4055,  0.3118])), ColourChecker_Specification(index=8, name=u'purplish blue', xyY=array([ 0.2305,  0.2106,  0.1126])), ColourChecker_Specification(index=9, name=u'moderate red', xyY=array([ 0.5012,  0.3273,  0.1938])), ColourChecker_Specification(index=10, name=u'purple', xyY=array([ 0.3319,  0.2482,  0.0637])), ColourChecker_Specification(index=11, name=u'yellow green', xyY=array([ 0.3984,  0.5008,  0.4446])), ColourChecker_Specification(index=12, name=u'orange yellow', xyY=array([ 0.4957,  0.4427,  0.4357])), ColourChecker_Specification(index=13, name=u'blue', xyY=array([ 0.2018,  0.1692,  0.0575])), ColourChecker_Specification(index=14, name=u'green', xyY=array([ 0.3253,  0.5032,  0.2318])), ColourChecker_Specification(index=15, name=u'red', xyY=array([ 0.5686,  0.3303,  0.1257])), ColourChecker_Specification(index=16, name=u'yellow', xyY=array([ 0.4697,  0.4734,  0.5981])), ColourChecker_Specification(index=17, name=u'magenta', xyY=array([ 0.4159,  0.2688,  0.2009])), ColourChecker_Specification(index=18, name=u'cyan', xyY=array([ 0.2131,  0.3023,  0.193 ])), ColourChecker_Specification(index=19, name=u'white 9.5 (.05 D)', xyY=array([ 0.3469,  0.3608,  0.9131])), ColourChecker_Specification(index=20, name=u'neutral 8 (.23 D)', xyY=array([ 0.344 ,  0.3584,  0.5894])), ColourChecker_Specification(index=21, name=u'neutral 6.5 (.44 D)', xyY=array([ 0.3432,  0.3581,  0.3632])), ColourChecker_Specification(index=22, name=u'neutral 5 (.70 D)', xyY=array([ 0.3446,  0.3579,  0.1915])), ColourChecker_Specification(index=23, name=u'neutral 3.5 (1.05 D)', xyY=array([ 0.3401,  0.3548,  0.0883])), ColourChecker_Specification(index=24, name=u'black 2 (1.5 D)', xyY=array([ 0.3406,  0.3537,  0.0311]))], illuminant=array([ 0.3457,  0.3585]))})</em><a class="headerlink" href="#colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.COLOURCHECKERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregated <em>ColourCheckers</em> chromaticity coordinates.</p>
+<dl class="docutils">
+<dt>COLOURCHECKERS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;BabelColor Average&#8217;, &#8216;ColorChecker 2005&#8217;, &#8216;ColorChecker 1976&#8217;}</strong></dd>
+</dl>
+<p>Aliases:</p>
+<ul class="simple">
+<li>&#8216;babel_average&#8217;: &#8216;BabelColor Average&#8217;</li>
+<li>&#8216;cc2005&#8217;: &#8216;ColorChecker 2005&#8217;</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.characterisation.dataset.colour_checkers.chromaticity_coordinates Module</a><ul>
+<li><a class="reference internal" href="#colourcheckers-chromaticity-coordinates">ColourCheckers Chromaticity Coordinates</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.characterisation.dataset.colour_checkers.chromaticity_coordinates.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

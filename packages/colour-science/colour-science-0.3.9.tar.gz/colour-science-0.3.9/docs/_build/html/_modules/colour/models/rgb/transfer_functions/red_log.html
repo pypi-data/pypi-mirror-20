@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.red_log &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../../index.html" />
+    <link rel="up" title="colour.models.rgb.transfer_functions" href="../transfer_functions.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.transfer_functions.red_log</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">RED Log Encodings</span>
+<span class="sd">=================</span>
+
+<span class="sd">Defines the *RED* log encodings:</span>
+
+<span class="sd">-   :func:`log_encoding_REDLog`</span>
+<span class="sd">-   :func:`log_decoding_REDLog`</span>
+<span class="sd">-   :func:`log_encoding_REDLogFilm`</span>
+<span class="sd">-   :func:`log_decoding_REDLogFilm`</span>
+<span class="sd">-   :func:`log_encoding_Log3G10`</span>
+<span class="sd">-   :func:`log_decoding_Log3G10`</span>
+<span class="sd">-   :func:`log_encoding_Log3G12`</span>
+<span class="sd">-   :func:`log_decoding_Log3G12`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`RGB Colourspaces Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/rgb.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Sony Imageworks. (2012). make.py. Retrieved November 27, 2014, from</span>
+<span class="sd">        https://github.com/imageworks/OpenColorIO-Configs/\</span>
+<span class="sd">blob/master/nuke-default/make.py</span>
+<span class="sd">.. [2]  Nattress, G. (2016). Private Discussion with Shaw, N.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.models.rgb.transfer_functions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">log_encoding_Cineon</span><span class="p">,</span>
+    <span class="n">log_decoding_Cineon</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;log_encoding_REDLog&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_REDLog&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_encoding_REDLogFilm&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_REDLogFilm&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_encoding_Log3G10&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_Log3G10&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_encoding_Log3G12&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_Log3G12&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="log_encoding_REDLog"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_encoding_REDLog">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_REDLog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+                        <span class="n">black_offset</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mi">0</span> <span class="o">-</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">/</span> <span class="mi">511</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *REDLog* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+<span class="sd">    black_offset : numeric or array_like</span>
+<span class="sd">        Black offset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_REDLog(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.6376218...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">((</span><span class="mi">1023</span> <span class="o">+</span>
+             <span class="mi">511</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">black_offset</span><span class="p">)</span> <span class="o">+</span> <span class="n">black_offset</span><span class="p">))</span> <span class="o">/</span> <span class="mi">1023</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_REDLog"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_decoding_REDLog">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_REDLog</span><span class="p">(</span><span class="n">y</span><span class="p">,</span>
+                        <span class="n">black_offset</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mi">0</span> <span class="o">-</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">/</span> <span class="mi">511</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *REDLog* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+<span class="sd">    black_offset : numeric or array_like</span>
+<span class="sd">        Black offset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_REDLog(0.637621845988175)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(((</span><span class="mi">10</span> <span class="o">**</span>
+              <span class="p">((</span><span class="mi">1023</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1023</span><span class="p">)</span> <span class="o">/</span> <span class="mi">511</span><span class="p">))</span> <span class="o">-</span> <span class="n">black_offset</span><span class="p">)</span> <span class="o">/</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">black_offset</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="log_encoding_REDLogFilm"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_encoding_REDLogFilm">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_REDLogFilm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+                            <span class="n">black_offset</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mi">95</span> <span class="o">-</span> <span class="mi">685</span><span class="p">)</span> <span class="o">/</span> <span class="mi">300</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *REDLogFilm* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+<span class="sd">    black_offset : numeric or array_like</span>
+<span class="sd">        Black offset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_REDLogFilm(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.4573196...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">log_encoding_Cineon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">black_offset</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_REDLogFilm"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_decoding_REDLogFilm">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_REDLogFilm</span><span class="p">(</span><span class="n">y</span><span class="p">,</span>
+                            <span class="n">black_offset</span><span class="o">=</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mi">95</span> <span class="o">-</span> <span class="mi">685</span><span class="p">)</span> <span class="o">/</span> <span class="mi">300</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *REDLogFilm* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+<span class="sd">    black_offset : numeric or array_like</span>
+<span class="sd">        Black offset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_REDLogFilm(0.457319613085418)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1799999...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">log_decoding_Cineon</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">black_offset</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_encoding_Log3G10"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_encoding_Log3G10">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_Log3G10</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">legacy_curve</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Log3G10* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+<span class="sd">    legacy_curve : bool, optional</span>
+<span class="sd">        Whether to use the v1 *Log3G10* log encoding curve. Default is `False`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   The v1 *Log3G10* log encoding curve is the one used in *REDCINE-X beta</span>
+<span class="sd">        42*. *Resolve 12.5.2* also uses the v1 curve. *RED* is planning to use</span>
+<span class="sd">        v2 *Log3G10* log encoding curve in the release version of the</span>
+<span class="sd">        *RED SDK*.</span>
+<span class="sd">        Use the `legacy_curve=True` argument to switch to the v1 curve for</span>
+<span class="sd">        compatibility with the current (as of September 21, 2016) *RED SDK*.</span>
+<span class="sd">    -   The intent of the v1 *Log3G10* log encoding curve is that zero maps to</span>
+<span class="sd">        zero, 0.18 maps to 1/3, and 10 stops above 0.18 maps to 1.0.</span>
+<span class="sd">        The name indicates this in a similar way to the naming conventions of</span>
+<span class="sd">        *Sony HyperGamma* curves.</span>
+
+<span class="sd">        The constants used in the functions do not in fact quite hit these</span>
+<span class="sd">        values, but rather than use corrected constants, the functions here</span>
+<span class="sd">        use the official *RED* values, in order to match the output of the</span>
+<span class="sd">        *RED SDK*.</span>
+
+<span class="sd">        For those interested, solving for constants which exactly hit 1/3</span>
+<span class="sd">        and 1.0 yields the following values::</span>
+
+<span class="sd">            B = 25 * (np.sqrt(4093.0) - 3) / 9</span>
+<span class="sd">            A = 1 / np.log10(B * 184.32 + 1)</span>
+
+<span class="sd">        where the function takes the form::</span>
+
+<span class="sd">            Log3G10(x) = A * np.log10(B * x + 1)</span>
+
+<span class="sd">        Similarly for *Log3G12*, the values which hit exactly 1/3 and 1.0</span>
+<span class="sd">        are::</span>
+
+<span class="sd">            B = 25 * (np.sqrt(16381.0) - 3) / 9</span>
+<span class="sd">            A = 1 / np.log10(B * 737.28 + 1)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_Log3G10(0.18, legacy_curve=True)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.3333336...</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_Log3G10(0.0)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.0915514...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">legacy_curve</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.222497</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">169.379333</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">*</span>
+                <span class="mf">0.224282</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">*</span> <span class="mf">155.975327</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_Log3G10"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_decoding_Log3G10">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_Log3G10</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">legacy_curve</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Log3G10* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+<span class="sd">    legacy_curve : bool, optional</span>
+<span class="sd">        Whether to use the v1 *Log3G10* log encoding curve. Default is `False`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_Log3G10(1.0 / 3, legacy_curve=True)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1799994...</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_Log3G10(1.0)  # doctest: +ELLIPSIS</span>
+<span class="sd">    184.3223476...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">legacy_curve</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.222497</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">169.379333</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.224282</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span>
+                <span class="mf">155.975327</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.01</span></div>
+
+
+<div class="viewcode-block" id="log_encoding_Log3G12"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_encoding_Log3G12">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_Log3G12</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Log3G12* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_Log3G12(0.18)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.3333326...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.184904</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">347.189667</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_Log3G12"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.red_log.html#colour.log_decoding_Log3G12">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_Log3G12</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Log3G12* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y : numeric or array_like</span>
+<span class="sd">        Non-linear data :math:`y`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_Log3G12(1.0 / 3)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.1800015...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.184904</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">347.189667</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../transfer_functions.html">colour.models.rgb.transfer_functions</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

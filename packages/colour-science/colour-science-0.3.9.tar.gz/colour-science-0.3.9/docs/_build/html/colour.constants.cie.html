@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.constants.cie Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.constants.cie">
+<span id="colour-constants-cie-module"></span><h1>colour.constants.cie Module<a class="headerlink" href="#module-colour.constants.cie" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cie-constants">
+<h2>CIE Constants<a class="headerlink" href="#cie-constants" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>CIE</em> constants.</p>
+<dl class="data">
+<dt id="colour.constants.cie.CIE_E">
+<code class="descclassname">colour.constants.cie.</code><code class="descname">CIE_E</code><em class="property"> = 0.008856451679035631</em><a class="headerlink" href="#colour.constants.cie.CIE_E" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE</em> <span class="math">\(\epsilon\)</span> constant.</p>
+<p>CIE_E : numeric</p>
+<p class="rubric">Notes</p>
+<ul>
+<li><p class="first">The original <em>CIE</em> value for <span class="math">\(\epsilon\)</span> is <span class="math">\(\epsilon=0.008856\)</span>,
+Lindbloom (2003) has shown that this value is causing a discontinuity
+at the junction point of the two functions grafted together to create the
+<em>Lightness</em> <span class="math">\(L^*\)</span> function.</p>
+<p>That discontinuity can be avoided by using the rational representation as
+follows: <span class="math">\(\epsilon=216\ /\ 24389\)</span>.</p>
+</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Lindbloom, B. (2003). A Continuity Study of the CIE L* Function.
+Retrieved February 24, 2014, from
+<a class="reference external" href="http://brucelindbloom.com/LContinuity.html">http://brucelindbloom.com/LContinuity.html</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.constants.cie.CIE_K">
+<code class="descclassname">colour.constants.cie.</code><code class="descname">CIE_K</code><em class="property"> = 903.2962962962963</em><a class="headerlink" href="#colour.constants.cie.CIE_K" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE</em> <span class="math">\(\kappa\)</span> constant.</p>
+<p>CIE_K : numeric</p>
+<p class="rubric">Notes</p>
+<ul>
+<li><p class="first">The original <em>CIE</em> value for <span class="math">\(\kappa\)</span> is <span class="math">\(\kappa=903.3\)</span>,
+Lindbloom (2003) has shown that this value is causing a discontinuity
+at the junction point of the two functions grafted together to create the
+<em>Lightness</em> <span class="math">\(L^*\)</span> function. <a class="footnote-reference" href="#id1" id="id2">[1]</a></p>
+<p>That discontinuity can be avoided by using the rational representation as
+follows: <span class="math">\(k=24389\ /\ 27\)</span>.</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.constants.cie.K_M">
+<code class="descclassname">colour.constants.cie.</code><code class="descname">K_M</code><em class="property"> = 683</em><a class="headerlink" href="#colour.constants.cie.K_M" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rounded maximum photopic luminous efficiency <span class="math">\(K_m\)</span> value in
+<span class="math">\(lm\cdot W^{-1}\)</span>.</p>
+<p>K_M : numeric</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>To be adequate for all practical applications the <span class="math">\(K_m\)</span> value has
+been rounded from the original 683.002 value. <a class="footnote-reference" href="#id4" id="id3">[2]</a></li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> Wyszecki, G., &amp; Stiles, W. S. (2000). Standard Photometric Observers.
+In Color Science: Concepts and Methods, Quantitative Data and Formulae
+(pp. 256–259,395). Wiley. ISBN:978-0471399186</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.constants.cie.KP_M">
+<code class="descclassname">colour.constants.cie.</code><code class="descname">KP_M</code><em class="property"> = 1700</em><a class="headerlink" href="#colour.constants.cie.KP_M" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rounded maximum scotopic luminous efficiency <span class="math">\(K^{\prime}_m\)</span> value in
+<span class="math">\(lm\cdot W^{-1}\)</span>.</p>
+<p>KP_M : numeric</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>To be adequate for all practical applications the <span class="math">\(K^{\prime}_m\)</span>
+value has been rounded from the original 1700.06 value. <a class="footnote-reference" href="#id4" id="id5">[2]</a></li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.constants.cie Module</a><ul>
+<li><a class="reference internal" href="#cie-constants">CIE Constants</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.constants.cie.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.constants.cie.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

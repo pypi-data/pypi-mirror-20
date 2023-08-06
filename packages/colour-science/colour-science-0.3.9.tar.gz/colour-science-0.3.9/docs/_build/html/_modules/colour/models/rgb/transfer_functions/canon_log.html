@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.transfer_functions.canon_log &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../../index.html" />
+    <link rel="up" title="colour.models.rgb.transfer_functions" href="../transfer_functions.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.transfer_functions.canon_log</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Canon Log Encodings</span>
+<span class="sd">===================</span>
+
+<span class="sd">Defines the *Canon Log* encodings:</span>
+
+<span class="sd">-   :func:`log_encoding_CanonLog`</span>
+<span class="sd">-   :func:`log_decoding_CanonLog`</span>
+<span class="sd">-   :func:`log_encoding_CanonLog2`</span>
+<span class="sd">-   :func:`log_decoding_CanonLog2`</span>
+<span class="sd">-   :func:`log_encoding_CanonLog3`</span>
+<span class="sd">-   :func:`log_decoding_CanonLog3`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`RGB Colourspaces Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/rgb.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Thorpe, L. (2012). CANON-LOG TRANSFER CHARACTERISTIC. Retrieved</span>
+<span class="sd">        from http://downloads.canon.com/CDLC/\</span>
+<span class="sd">Canon-Log_Transfer_Characteristic_6-20-2012.pdf</span>
+<span class="sd">.. [2]  Canon. (n.d.). EOS C300 Mark II - EOS C300 Mark II Input Transform</span>
+<span class="sd">        Version 2.0 (for Cinema Gamut / BT.2020). Retrieved August 23, 2016,</span>
+<span class="sd">        from https://www.usa.canon.com/internet/portal/us/home/support/\</span>
+<span class="sd">details/cameras/cinema-eos/eos-c300-mark-ii</span>
+
+<span class="sd">Notes</span>
+<span class="sd">-----</span>
+<span class="sd">-   [2]_ is available as a *Drivers &amp; Downloads* *Software* for Windows 10</span>
+<span class="sd">    (x64) *Operating System*, a copy of the archive is hosted at this url:</span>
+<span class="sd">    https://drive.google.com/open?id=0B_IQZQdc4Vy8ZGYyY29pMEVwZU0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">as_numeric</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;log_encoding_CanonLog&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_CanonLog&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_encoding_CanonLog2&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_CanonLog2&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_encoding_CanonLog3&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log_decoding_CanonLog3&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="log_encoding_CanonLog"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.canon_log.html#colour.log_encoding_CanonLog">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_CanonLog</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Canon Log* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        *Canon Log* non-linear *IRE* data.</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Output *Canon Log* non-linear *IRE* data should be converted to code</span>
+<span class="sd">        value *CV* as follows: `CV = IRE * (940 - 64) + 64`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_CanonLog(0.20) * 100  # doctest: +ELLIPSIS</span>
+<span class="sd">    32.7953896...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">clog_ire</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;</span> <span class="n">log_decoding_CanonLog</span><span class="p">(</span><span class="mf">0.0730597</span><span class="p">),</span>
+        <span class="o">-</span><span class="p">(</span><span class="mf">0.529136</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="mf">10.1596</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.0730597</span><span class="p">),</span>
+        <span class="mf">0.529136</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">10.1596</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0730597</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">clog_ire</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_CanonLog"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.canon_log.html#colour.log_decoding_CanonLog">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_CanonLog</span><span class="p">(</span><span class="n">clog_ire</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Canon Log* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    clog_ire : numeric or array_like</span>
+<span class="sd">        *Canon Log* non-linear *IRE* data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *Canon Log* non-linear *IRE* data should be converted from code</span>
+<span class="sd">        value *CV* to *IRE* as follows: `IRE = (CV - 64) / (940 - 64)`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_CanonLog(32.795389693580908 / 100)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.19999999...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">clog_ire</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">clog_ire</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">clog_ire</span> <span class="o">&lt;</span> <span class="mf">0.0730597</span><span class="p">,</span>
+        <span class="o">-</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mf">0.0730597</span> <span class="o">-</span> <span class="n">clog_ire</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.529136</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.1596</span><span class="p">,</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="n">clog_ire</span> <span class="o">-</span> <span class="mf">0.0730597</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.529136</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.1596</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_encoding_CanonLog2"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.canon_log.html#colour.log_encoding_CanonLog2">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_CanonLog2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Canon Log 2* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        *Canon Log 2* non-linear *IRE* data.</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Output *Canon Log 2* non-linear *IRE* data should be converted to code</span>
+<span class="sd">        value *CV* as follows: `CV = IRE * (940 - 64) + 64`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_CanonLog2(0.20) * 100  # doctest: +ELLIPSIS</span>
+<span class="sd">    39.2025745...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">clog2_ire</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;</span> <span class="n">log_decoding_CanonLog2</span><span class="p">(</span><span class="mf">0.035388128</span><span class="p">),</span>
+        <span class="o">-</span><span class="p">(</span><span class="mf">0.281863093</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="mf">87.09937546</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.035388128</span><span class="p">),</span>
+        <span class="mf">0.281863093</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mf">87.09937546</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.035388128</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">clog2_ire</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_CanonLog2"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.canon_log.html#colour.log_decoding_CanonLog2">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_CanonLog2</span><span class="p">(</span><span class="n">clog2_ire</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Canon Log 2* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    clog2_ire : numeric or array_like</span>
+<span class="sd">        *Canon Log 2* non-linear *IRE* data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *Canon Log 2* non-linear *IRE* data should be converted from code</span>
+<span class="sd">        value *CV* to *IRE* as follows: `IRE = (CV - 64) / (940 - 64)`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_CanonLog2(39.202574539700947 / 100)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.2000000...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">clog2_ire</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">clog2_ire</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">clog2_ire</span> <span class="o">&lt;</span> <span class="mf">0.035388128</span><span class="p">,</span>
+        <span class="o">-</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mf">0.035388128</span> <span class="o">-</span> <span class="n">clog2_ire</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.281863093</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">87.09937546</span><span class="p">,</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="n">clog2_ire</span> <span class="o">-</span> <span class="mf">0.035388128</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.281863093</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">87.09937546</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_encoding_CanonLog3"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.canon_log.html#colour.log_encoding_CanonLog3">[docs]</a><span class="k">def</span> <span class="nf">log_encoding_CanonLog3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Canon Log 3* log encoding curve / opto-electronic transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numeric or array_like</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        *Canon Log 3* non-linear *IRE* data.</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Output *Canon Log 3* non-linear *IRE* data should be converted to code</span>
+<span class="sd">        value *CV* as follows: `CV = IRE * (940 - 64) + 64`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_encoding_CanonLog3(0.20) * 100  # doctest: +ELLIPSIS</span>
+<span class="sd">    32.7953567...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">clog3_ire</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">log_decoding_CanonLog3</span><span class="p">(</span><span class="mf">0.04076162</span><span class="p">),</span>
+         <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">log_decoding_CanonLog3</span><span class="p">(</span><span class="mf">0.105357102</span><span class="p">),</span>
+         <span class="n">x</span> <span class="o">&gt;</span> <span class="n">log_decoding_CanonLog3</span><span class="p">(</span><span class="mf">0.105357102</span><span class="p">)),</span>
+        <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mf">0.42889912</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="mf">14.98325</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.069886632</span><span class="p">),</span>
+         <span class="mf">2.3069815</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.073059361</span><span class="p">,</span>
+         <span class="mf">0.42889912</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mf">14.98325</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.069886632</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">clog3_ire</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_decoding_CanonLog3"><a class="viewcode-back" href="../../../../../colour.models.rgb.transfer_functions.canon_log.html#colour.log_decoding_CanonLog3">[docs]</a><span class="k">def</span> <span class="nf">log_decoding_CanonLog3</span><span class="p">(</span><span class="n">clog3_ire</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the *Canon Log 3* log decoding curve / electro-optical transfer</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    clog3_ire : numeric or array_like</span>
+<span class="sd">        *Canon Log 3* non-linear *IRE* data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or ndarray</span>
+<span class="sd">        Linear data :math:`x`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   Input *Canon Log 3* non-linear *IRE* data should be converted from code</span>
+<span class="sd">        value *CV* to *IRE* as follows: `IRE = (CV - 64) / (940 - 64)`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; log_decoding_CanonLog3(32.795356721989336 / 100)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.2000000...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">clog3_ire</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">clog3_ire</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">clog3_ire</span> <span class="o">&lt;</span> <span class="mf">0.04076162</span><span class="p">,</span>
+         <span class="n">clog3_ire</span> <span class="o">&lt;=</span> <span class="mf">0.105357102</span><span class="p">,</span>
+         <span class="n">clog3_ire</span> <span class="o">&gt;</span> <span class="mf">0.105357102</span><span class="p">),</span>
+        <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="mf">0.069886632</span> <span class="o">-</span> <span class="n">clog3_ire</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.42889912</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">14.98325</span><span class="p">,</span>
+         <span class="p">(</span><span class="n">clog3_ire</span> <span class="o">-</span> <span class="mf">0.073059361</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.3069815</span><span class="p">,</span>
+         <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">((</span><span class="n">clog3_ire</span> <span class="o">-</span> <span class="mf">0.069886632</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.42889912</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">14.98325</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">as_numeric</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../transfer_functions.html">colour.models.rgb.transfer_functions</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

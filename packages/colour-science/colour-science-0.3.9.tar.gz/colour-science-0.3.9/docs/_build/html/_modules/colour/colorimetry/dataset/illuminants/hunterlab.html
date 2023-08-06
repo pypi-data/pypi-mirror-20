@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.dataset.illuminants.hunterlab &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.colorimetry.dataset.illuminants.hunterlab</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">HunterLab Dataset</span>
+<span class="sd">=================</span>
+
+<span class="sd">Defines the *HunterLab* illuminants dataset for the</span>
+<span class="sd">*CIE 1931 2 Degree Standard Observer* and</span>
+<span class="sd">*CIE 1964 10 Degree Standard Observer*.</span>
+
+<span class="sd">The currently implemented data has been extracted from [1]_, however you may</span>
+<span class="sd">want to use different data accordingly to the tables given in [2]_.</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`Illuminants Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/colorimetry/illuminants.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  HunterLab. (2008). Hunter L,a,b Color Scale. Retrieved from</span>
+<span class="sd">        http://www.hunterlab.se/wp-content/uploads/2012/11/Hunter-L-a-b.pdf</span>
+<span class="sd">.. [2]  HunterLab. (2008). Illuminant Factors in Universal Software and</span>
+<span class="sd">        EasyMatch Coatings. Retrieved from</span>
+<span class="sd">        https://support.hunterlab.com/hc/en-us/article_attachments/\</span>
+<span class="sd">201437785/an02_02.pdf</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">CaseInsensitiveMapping</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;HunterLab_Illuminant_Specification&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER_DATA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER_DATA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HUNTERLAB_ILLUMINANTS&#39;</span><span class="p">]</span>
+
+<span class="n">HunterLab_Illuminant_Specification</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;HunterLab_Illuminant_Specification&#39;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;XYZ_n&#39;</span><span class="p">,</span> <span class="s1">&#39;K_ab&#39;</span><span class="p">))</span>
+
+<span class="n">HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER_DATA</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">109.83</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">35.55</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">185.20</span><span class="p">,</span> <span class="mf">38.40</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">98.04</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">118.11</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">175.00</span><span class="p">,</span> <span class="mf">70.00</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D65&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">95.02</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">108.82</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">172.30</span><span class="p">,</span> <span class="mf">67.20</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D50&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">96.38</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">82.45</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">173.51</span><span class="p">,</span> <span class="mf">58.48</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D60&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">95.23</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">100.86</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">172.47</span><span class="p">,</span> <span class="mf">64.72</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D75&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">94.96</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">122.53</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">172.22</span><span class="p">,</span> <span class="mf">71.30</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;F2&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">98.09</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">67.53</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">175.00</span><span class="p">,</span> <span class="mf">52.90</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;TL 4&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">101.40</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">65.90</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">178.00</span><span class="p">,</span> <span class="mf">52.30</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;UL 3000&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">107.99</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">33.91</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">183.70</span><span class="p">,</span> <span class="mf">37.50</span><span class="p">])))</span>
+
+<span class="n">HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">CaseInsensitiveMapping</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">HunterLab_Illuminant_Specification</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
+         <span class="n">HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER_DATA</span><span class="p">])))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">*Hunter L,a,b* illuminant dataset for *CIE 1931 2 Degree Standard Observer*.</span>
+
+<span class="sd">HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER :</span>
+<span class="sd">    CaseInsensitiveMapping</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER_DATA</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">111.16</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">35.19</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">186.30</span><span class="p">,</span> <span class="mf">38.20</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">97.30</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">116.14</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">174.30</span><span class="p">,</span> <span class="mf">69.40</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D50&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">96.72</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">81.45</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">173.82</span><span class="p">,</span> <span class="mf">58.13</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D60&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">95.21</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">99.60</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">172.45</span><span class="p">,</span> <span class="mf">64.28</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D65&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">94.83</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">107.38</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">172.10</span><span class="p">,</span> <span class="mf">66.70</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;D75&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">94.45</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">120.70</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">171.76</span><span class="p">,</span> <span class="mf">70.76</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;F2&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">102.13</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">69.37</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">178.60</span><span class="p">,</span> <span class="mf">53.60</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;TL 4&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">103.82</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">66.90</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">180.10</span><span class="p">,</span> <span class="mf">52.70</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;UL 3000&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">111.12</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">35.21</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">186.30</span><span class="p">,</span> <span class="mf">38.20</span><span class="p">])))</span>
+
+<span class="n">HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">CaseInsensitiveMapping</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">HunterLab_Illuminant_Specification</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
+         <span class="n">HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER_DATA</span><span class="p">])))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">*Hunter L,a,b* illuminant dataset for *CIE 1964 10 Degree Standard Observer*.</span>
+
+<span class="sd">HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER :</span>
+<span class="sd">    CaseInsensitiveMapping</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">HUNTERLAB_ILLUMINANTS</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">({</span>
+    <span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">:</span>
+        <span class="n">HUNTERLAB_ILLUMINANTS_CIE_1931_2_DEGREE_STANDARD_OBSERVER</span><span class="p">,</span>
+    <span class="s1">&#39;CIE 1964 10 Degree Standard Observer&#39;</span><span class="p">:</span>
+        <span class="n">HUNTERLAB_ILLUMINANTS_CIE_1964_10_DEGREE_STANDARD_OBSERVER</span><span class="p">})</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Aggregated *Hunter L,a,b* illuminant dataset.</span>
+
+<span class="sd">HUNTERLAB_ILLUMINANTS : CaseInsensitiveMapping</span>
+<span class="sd">    **{&#39;CIE 1931 2 Degree Standard Observer&#39;,</span>
+<span class="sd">    &#39;CIE 1964 10 Degree Standard Observer&#39;}**</span>
+
+<span class="sd">Aliases:</span>
+
+<span class="sd">-   &#39;cie_2_1931&#39;: &#39;CIE 1931 2 Degree Standard Observer&#39;</span>
+<span class="sd">-   &#39;cie_10_1964&#39;: &#39;CIE 1964 10 Degree Standard Observer&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">HUNTERLAB_ILLUMINANTS</span><span class="p">[</span><span class="s1">&#39;cie_2_1931&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">HUNTERLAB_ILLUMINANTS</span><span class="p">[</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">])</span>
+<span class="n">HUNTERLAB_ILLUMINANTS</span><span class="p">[</span><span class="s1">&#39;cie_10_1964&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">HUNTERLAB_ILLUMINANTS</span><span class="p">[</span><span class="s1">&#39;CIE 1964 10 Degree Standard Observer&#39;</span><span class="p">])</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

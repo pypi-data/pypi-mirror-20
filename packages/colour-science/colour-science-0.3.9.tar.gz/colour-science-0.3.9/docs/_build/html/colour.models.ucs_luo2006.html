@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.ucs_luo2006 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.ucs_luo2006">
+<span id="colour-models-ucs-luo2006-module"></span><h1>colour.models.ucs_luo2006 Module<a class="headerlink" href="#module-colour.models.ucs_luo2006" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cam02-lcd-cam02-scd-and-cam02-ucs-colourspaces-luo-cui-and-li-2006">
+<h2>CAM02-LCD, CAM02-SCD, and CAM02-UCS Colourspaces - Luo, Cui and Li (2006)<a class="headerlink" href="#cam02-lcd-cam02-scd-and-cam02-ucs-colourspaces-luo-cui-and-li-2006" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>Luo et al. (2006)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, and <em>CAM02-UCS</em>
+colourspaces transformations:</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">JMh_CIECAM02_to_CAM02LCD()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">CAM02LCD_to_JMh_CIECAM02()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">JMh_CIECAM02_to_CAM02SCD()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">CAM02SCD_to_JMh_CIECAM02()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">JMh_CIECAM02_to_CAM02UCS()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">CAM02UCS_to_JMh_CIECAM02()</span></code></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/ucs_luo2006.ipynb">CAM02-LCD, CAM02-SCD, and CAM02-UCS Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Luo, R. M., Cui, G., &amp; Li, C. (2006). Uniform Colour Spaces Based on
+CIECAM02 Colour Appearance Model. Color Research and Application,
+31(4), 320–330. doi:10.1002/col.20227</td></tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="colour.models.ucs_luo2006.Coefficients_UCS_Luo2006">
+<em class="property">class </em><code class="descclassname">colour.models.ucs_luo2006.</code><code class="descname">Coefficients_UCS_Luo2006</code><a class="reference internal" href="_modules/colour/models/ucs_luo2006.html#Coefficients_UCS_Luo2006"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.ucs_luo2006.Coefficients_UCS_Luo2006" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.models.ucs_luo2006.Coefficients_UCS_Luo2006" title="colour.models.ucs_luo2006.Coefficients_UCS_Luo2006"><code class="xref py py-class docutils literal"><span class="pre">colour.models.ucs_luo2006.Coefficients_UCS_Luo2006</span></code></a></p>
+<p>Defines the the class storing <em>Luo et al. (2006)</em> fitting coefficients for
+the <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, and <em>CAM02-UCS</em> colourspaces.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.ucs_luo2006.COEFFICIENTS_UCS_LUO2006">
+<code class="descclassname">colour.models.ucs_luo2006.</code><code class="descname">COEFFICIENTS_UCS_LUO2006</code><em class="property"> = CaseInsensitiveMapping({u'CAM02-LCD': Coefficients_UCS_Luo2006(K_L=0.77, c_1=0.007, c_2=0.0053), u'CAM02-SCD': Coefficients_UCS_Luo2006(K_L=1.24, c_1=0.007, c_2=0.0363), u'CAM02-UCS': Coefficients_UCS_Luo2006(K_L=1.0, c_1=0.007, c_2=0.0228)})</em><a class="headerlink" href="#colour.models.ucs_luo2006.COEFFICIENTS_UCS_LUO2006" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Luo et al. (2006)</em> fitting coefficients for the <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, and
+<em>CAM02-UCS</em> colourspaces.</p>
+<dl class="docutils">
+<dt>COEFFICIENTS_UCS_LUO2006 <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;CAM02-LCD&#8217;, &#8216;CAM02-SCD&#8217;, &#8216;CAM02-UCS&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.ucs_luo2006.JMh_CIECAM02_to_UCS_Luo2006">
+<code class="descclassname">colour.models.ucs_luo2006.</code><code class="descname">JMh_CIECAM02_to_UCS_Luo2006</code><span class="sig-paren">(</span><em>JMh</em>, <em>coefficients</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/ucs_luo2006.html#JMh_CIECAM02_to_UCS_Luo2006"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.ucs_luo2006.JMh_CIECAM02_to_UCS_Luo2006" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIECAM02</em> <span class="math">\(JMh\)</span> correlates array to one of the
+<em>Luo et al. (2006)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or <em>CAM02-UCS</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</p>
+<p>The <span class="math">\(JMh\)</span> correlates array is constructed using the CIECAM02
+correlate of <em>Lightness</em> <span class="math">\(J\)</span>, the <em>CIECAM02</em> correlate of
+<em>colourfulness</em> <span class="math">\(M\)</span> and the <em>CIECAM02</em> <em>Hue</em> angle <span class="math">\(h\)</span> in
+degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>JMh</strong> (<em>array_like</em>) &#8211; <em>CIECAM02</em> correlates array <span class="math">\(JMh\)</span>.</li>
+<li><strong>coefficients</strong> (<em>array_like</em>) &#8211; Coefficients of one of the <em>Luo et al. (2006)</em> <em>CAM02-LCD</em>,
+<em>CAM02-SCD</em>, or <em>CAM02-UCS</em> colourspaces.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Luo et al. (2006)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or <em>CAM02-UCS</em>
+colourspaces <span class="math">\(J'a'b'\)</span> array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colour.appearance</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">CIECAM02_VIEWING_CONDITIONS</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">XYZ_to_CIECAM02</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.01</span><span class="p">,</span> <span class="mf">20.00</span><span class="p">,</span> <span class="mf">21.78</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">95.05</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">108.88</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L_A</span> <span class="o">=</span> <span class="mf">318.31</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_b</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">surround</span> <span class="o">=</span> <span class="n">CIECAM02_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">specification</span> <span class="o">=</span> <span class="n">XYZ_to_CIECAM02</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">L_A</span><span class="p">,</span> <span class="n">Y_b</span><span class="p">,</span> <span class="n">surround</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JMh</span> <span class="o">=</span> <span class="p">(</span><span class="n">specification</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="n">specification</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="n">specification</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JMh_CIECAM02_to_UCS_Luo2006</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">JMh</span><span class="p">,</span> <span class="n">COEFFICIENTS_UCS_LUO2006</span><span class="p">[</span><span class="s1">&#39;CAM02-LCD&#39;</span><span class="p">])</span>
+<span class="go">array([ 54.9043313...,  -0.0845039...,  -0.0685483...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.ucs_luo2006.UCS_Luo2006_to_JMh_CIECAM02">
+<code class="descclassname">colour.models.ucs_luo2006.</code><code class="descname">UCS_Luo2006_to_JMh_CIECAM02</code><span class="sig-paren">(</span><em>Jpapbp</em>, <em>coefficients</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/ucs_luo2006.html#UCS_Luo2006_to_JMh_CIECAM02"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.ucs_luo2006.UCS_Luo2006_to_JMh_CIECAM02" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from one of the <em>Luo et al. (2006)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or
+<em>CAM02-UCS</em> colourspaces <span class="math">\(J'a'b'\)</span> array to <em>CIECAM02</em> <span class="math">\(JMh\)</span>
+correlates array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Jpapbp</strong> (<em>array_like</em>) &#8211; <em>Luo et al. (2006)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or <em>CAM02-UCS</em>
+colourspaces <span class="math">\(J'a'b'\)</span> array.</li>
+<li><strong>coefficients</strong> (<em>array_like</em>) &#8211; Coefficients of one of the <em>Luo et al. (2006)</em> <em>CAM02-LCD</em>,
+<em>CAM02-SCD</em>, or <em>CAM02-UCS</em> colourspaces.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIECAM02</em> correlates array <span class="math">\(JMh\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08450395</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06854831</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">UCS_Luo2006_to_JMh_CIECAM02</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">Jpapbp</span><span class="p">,</span> <span class="n">COEFFICIENTS_UCS_LUO2006</span><span class="p">[</span><span class="s1">&#39;CAM02-LCD&#39;</span><span class="p">])</span>
+<span class="go">array([  4.1731091...e+01,   1.0884217...e-01,   2.1904843...e+02])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.ucs_luo2006 Module</a><ul>
+<li><a class="reference internal" href="#cam02-lcd-cam02-scd-and-cam02-ucs-colourspaces-luo-cui-and-li-2006">CAM02-LCD, CAM02-SCD, and CAM02-UCS Colourspaces - Luo, Cui and Li (2006)</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.ucs_luo2006.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.ucs_luo2006.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

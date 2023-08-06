@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.cmfs Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.cmfs">
+<span id="colour-colorimetry-cmfs-module"></span><h1>colour.colorimetry.cmfs Module<a class="headerlink" href="#module-colour.colorimetry.cmfs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="colour-matching-functions">
+<h2>Colour Matching Functions<a class="headerlink" href="#colour-matching-functions" title="Permalink to this headline">¶</a></h2>
+<p>Defines colour matching functions classes for the dataset from
+<a class="reference internal" href="colour.colorimetry.dataset.cmfs.html#module-colour.colorimetry.dataset.cmfs" title="colour.colorimetry.dataset.cmfs"><code class="xref py py-mod docutils literal"><span class="pre">colour.colorimetry.dataset.cmfs</span></code></a> module:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals" title="colour.colorimetry.cmfs.LMS_ConeFundamentals"><code class="xref py py-class docutils literal"><span class="pre">LMS_ConeFundamentals</span></code></a>: Implements support for the
+Stockman and Sharpe <em>LMS</em> cone fundamentals colour matching functions.</li>
+<li><a class="reference internal" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions" title="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions"><code class="xref py py-class docutils literal"><span class="pre">RGB_ColourMatchingFunctions</span></code></a>: Implements support for the <em>CIE RGB</em>
+colour matching functions.</li>
+<li><a class="reference internal" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions" title="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions"><code class="xref py py-class docutils literal"><span class="pre">XYZ_ColourMatchingFunctions</span></code></a>: Implements support for the <em>CIE</em>
+Standard Observers <em>XYZ</em> colour matching functions.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/cmfs.ipynb">Colour Matching Functions Jupyter Notebook</a>
+colour.colorimetry.dataset.cmfs,
+colour.colorimetry.spectrum.TriSpectralPowerDistribution</p>
+</div>
+<dl class="class">
+<dt id="colour.colorimetry.cmfs.LMS_ConeFundamentals">
+<em class="property">class </em><code class="descclassname">colour.colorimetry.cmfs.</code><code class="descname">LMS_ConeFundamentals</code><span class="sig-paren">(</span><em>name</em>, <em>data</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/cmfs.html#LMS_ConeFundamentals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="colour.colorimetry.spectrum.html#colour.colorimetry.spectrum.TriSpectralPowerDistribution" title="colour.colorimetry.spectrum.TriSpectralPowerDistribution"><code class="xref py py-class docutils literal"><span class="pre">colour.colorimetry.spectrum.TriSpectralPowerDistribution</span></code></a></p>
+<p>Implements support for the Stockman and Sharpe <em>LMS</em> cone fundamentals
+colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>unicode</em>) &#8211; <em>LMS</em> colour matching functions name.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; <em>LMS</em> colour matching functions.</li>
+<li><strong>title</strong> (<em>unicode, optional</em>) &#8211; <em>LMS</em> colour matching functions title for figures.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.LMS_ConeFundamentals.l_bar">
+<code class="descname">l_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.l_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.LMS_ConeFundamentals.m_bar">
+<code class="descname">m_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.m_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.LMS_ConeFundamentals.s_bar">
+<code class="descname">s_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.s_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.colorimetry.cmfs.LMS_ConeFundamentals.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/cmfs.html#LMS_ConeFundamentals.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted string representation of the <em>LMS</em> cone
+fundamentals colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Formatted string representation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <a class="reference external" href="https://docs.python.org/3.5/reference/datamodel.html#object.__repr__" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">object.__repr__()</span></code></a> method.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">49.67</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">69.59</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">81.73</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">88.19</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">90.56</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">87.34</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">45.76</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">23.45</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">12.43</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">23.15</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">67.98</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">90.28</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;l_bar&#39;</span><span class="p">:</span> <span class="n">l_bar</span><span class="p">,</span> <span class="s1">&#39;m_bar&#39;</span><span class="p">:</span> <span class="n">m_bar</span><span class="p">,</span> <span class="s1">&#39;s_bar&#39;</span><span class="p">:</span> <span class="n">s_bar</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LMS_ConeFundamentals</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="s1">&#39;LMS CMFS&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="s1">&#39;*LMS* Cone Fundamentals&#39;</span><span class="p">)</span>
+<span class="go">LMS_ConeFundamentals(</span>
+<span class="go">    &#39;LMS CMFS&#39;,</span>
+<span class="go">    {...&#39;l_bar&#39;: {510...: 49.67, 520...: 69.59, 530...: 81.73, 540...: 88.19},</span>
+<span class="go">     ...&#39;m_bar&#39;: {510...: 90.56, 520...: 87.34, 530...: 45.76, 540...: 23.45},</span>
+<span class="go">     ...&#39;s_bar&#39;: {510...: 12.43, 520...: 23.15, 530...: 67.98, 540...: 90.28}},</span>
+<span class="go">    &#39;*LMS* Cone Fundamentals&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">l_bar</code></dt>
+<dd><p>Property for <strong>self.x</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.x</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.l_bar" title="colour.colorimetry.cmfs.LMS_ConeFundamentals.l_bar"><code class="xref py py-attr docutils literal"><span class="pre">LMS_ConeFundamentals.l_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">m_bar</code></dt>
+<dd><p>Property for <strong>self.y</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.y</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.m_bar" title="colour.colorimetry.cmfs.LMS_ConeFundamentals.m_bar"><code class="xref py py-attr docutils literal"><span class="pre">LMS_ConeFundamentals.m_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">s_bar</code></dt>
+<dd><p>Property for <strong>self.z</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.z</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.LMS_ConeFundamentals.s_bar" title="colour.colorimetry.cmfs.LMS_ConeFundamentals.s_bar"><code class="xref py py-attr docutils literal"><span class="pre">LMS_ConeFundamentals.s_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions">
+<em class="property">class </em><code class="descclassname">colour.colorimetry.cmfs.</code><code class="descname">RGB_ColourMatchingFunctions</code><span class="sig-paren">(</span><em>name</em>, <em>data</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/cmfs.html#RGB_ColourMatchingFunctions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="colour.colorimetry.spectrum.html#colour.colorimetry.spectrum.TriSpectralPowerDistribution" title="colour.colorimetry.spectrum.TriSpectralPowerDistribution"><code class="xref py py-class docutils literal"><span class="pre">colour.colorimetry.spectrum.TriSpectralPowerDistribution</span></code></a></p>
+<p>Implements support for the <em>CIE RGB</em> colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>unicode</em>) &#8211; <em>CIE RGB</em> colour matching functions name.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; <em>CIE RGB</em> colour matching functions.</li>
+<li><strong>title</strong> (<em>unicode, optional</em>) &#8211; <em>CIE RGB</em> colour matching functions title for figures.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.r_bar">
+<code class="descname">r_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.r_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.g_bar">
+<code class="descname">g_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.g_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.b_bar">
+<code class="descname">b_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.b_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/cmfs.html#RGB_ColourMatchingFunctions.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted string representation of the <em>CIE RGB</em> colour
+matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Formatted string representation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <a class="reference external" href="https://docs.python.org/3.5/reference/datamodel.html#object.__repr__" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">object.__repr__()</span></code></a> method.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">49.67</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">69.59</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">81.73</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">88.19</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">90.56</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">87.34</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">45.76</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">23.45</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">12.43</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">23.15</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">67.98</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">90.28</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;r_bar&#39;</span><span class="p">:</span> <span class="n">r_bar</span><span class="p">,</span> <span class="s1">&#39;g_bar&#39;</span><span class="p">:</span> <span class="n">g_bar</span><span class="p">,</span> <span class="s1">&#39;b_bar&#39;</span><span class="p">:</span> <span class="n">b_bar</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_ColourMatchingFunctions</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="s1">&#39;RGB CMFS&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="s1">&#39;*RGB* CMFS&#39;</span><span class="p">)</span>
+<span class="go">RGB_ColourMatchingFunctions(</span>
+<span class="go">    &#39;RGB CMFS&#39;,</span>
+<span class="go">    {...&#39;b_bar&#39;: {510...: 12.43, 520...: 23.15, 530...: 67.98, 540...: 90.28},</span>
+<span class="go">     ...&#39;g_bar&#39;: {510...: 90.56, 520...: 87.34, 530...: 45.76, 540...: 23.45},</span>
+<span class="go">     ...&#39;r_bar&#39;: {510...: 49.67, 520...: 69.59, 530...: 81.73, 540...: 88.19}},</span>
+<span class="go">    &#39;*RGB* CMFS&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">b_bar</code></dt>
+<dd><p>Property for <strong>self.z</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.z</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.b_bar" title="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.b_bar"><code class="xref py py-attr docutils literal"><span class="pre">RGB_ColourMatchingFunctions.b_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">g_bar</code></dt>
+<dd><p>Property for <strong>self.y</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.y</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.g_bar" title="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.g_bar"><code class="xref py py-attr docutils literal"><span class="pre">RGB_ColourMatchingFunctions.g_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">r_bar</code></dt>
+<dd><p>Property for <strong>self.x</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.x</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.r_bar" title="colour.colorimetry.cmfs.RGB_ColourMatchingFunctions.r_bar"><code class="xref py py-attr docutils literal"><span class="pre">RGB_ColourMatchingFunctions.r_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions">
+<em class="property">class </em><code class="descclassname">colour.colorimetry.cmfs.</code><code class="descname">XYZ_ColourMatchingFunctions</code><span class="sig-paren">(</span><em>name</em>, <em>data</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/cmfs.html#XYZ_ColourMatchingFunctions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="colour.colorimetry.spectrum.html#colour.colorimetry.spectrum.TriSpectralPowerDistribution" title="colour.colorimetry.spectrum.TriSpectralPowerDistribution"><code class="xref py py-class docutils literal"><span class="pre">colour.colorimetry.spectrum.TriSpectralPowerDistribution</span></code></a></p>
+<p>Implements support for the <em>CIE</em> Standard Observers <em>XYZ</em> colour matching
+functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>unicode</em>) &#8211; <em>CIE</em> Standard Observer <em>XYZ</em> colour matching functions name.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; <em>CIE</em> Standard Observer <em>XYZ</em> colour matching functions.</li>
+<li><strong>title</strong> (<em>unicode, optional</em>) &#8211; <em>CIE</em> Standard Observer <em>XYZ</em> colour matching functions title for
+figures.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.x_bar">
+<code class="descname">x_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.x_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.y_bar">
+<code class="descname">y_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.y_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.z_bar">
+<code class="descname">z_bar</code><a class="headerlink" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.z_bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/cmfs.html#XYZ_ColourMatchingFunctions.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted string representation of the <em>XYZ</em> colour matching
+functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Formatted string representation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Reimplements the <a class="reference external" href="https://docs.python.org/3.5/reference/datamodel.html#object.__repr__" title="(in Python v3.5)"><code class="xref py py-meth docutils literal"><span class="pre">object.__repr__()</span></code></a> method.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">49.67</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">69.59</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">81.73</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">88.19</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">90.56</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">87.34</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">45.76</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">23.45</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z_bar</span> <span class="o">=</span> <span class="p">{</span><span class="mi">510</span><span class="p">:</span> <span class="mf">12.43</span><span class="p">,</span> <span class="mi">520</span><span class="p">:</span> <span class="mf">23.15</span><span class="p">,</span> <span class="mi">530</span><span class="p">:</span> <span class="mf">67.98</span><span class="p">,</span> <span class="mi">540</span><span class="p">:</span> <span class="mf">90.28</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x_bar&#39;</span><span class="p">:</span> <span class="n">x_bar</span><span class="p">,</span> <span class="s1">&#39;y_bar&#39;</span><span class="p">:</span> <span class="n">y_bar</span><span class="p">,</span> <span class="s1">&#39;z_bar&#39;</span><span class="p">:</span> <span class="n">z_bar</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_ColourMatchingFunctions</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="s1">&#39;XYZ CMFS&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="s1">&#39;*XYZ* CMFS&#39;</span><span class="p">)</span>
+<span class="go">XYZ_ColourMatchingFunctions(</span>
+<span class="go">    &#39;XYZ CMFS&#39;,</span>
+<span class="go">    {...&#39;x_bar&#39;: {510...: 49.67, 520...: 69.59, 530...: 81.73, 540...: 88.19},</span>
+<span class="go">     ...&#39;y_bar&#39;: {510...: 90.56, 520...: 87.34, 530...: 45.76, 540...: 23.45},</span>
+<span class="go">     ...&#39;z_bar&#39;: {510...: 12.43, 520...: 23.15, 530...: 67.98, 540...: 90.28}},</span>
+<span class="go">    &#39;*XYZ* CMFS&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">x_bar</code></dt>
+<dd><p>Property for <strong>self.x</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.x</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.x_bar" title="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.x_bar"><code class="xref py py-attr docutils literal"><span class="pre">XYZ_ColourMatchingFunctions.x_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">y_bar</code></dt>
+<dd><p>Property for <strong>self.y</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.y</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.y_bar" title="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.y_bar"><code class="xref py py-attr docutils literal"><span class="pre">XYZ_ColourMatchingFunctions.y_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">z_bar</code></dt>
+<dd><p>Property for <strong>self.z</strong> attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self.z</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference internal" href="#colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.z_bar" title="colour.colorimetry.cmfs.XYZ_ColourMatchingFunctions.z_bar"><code class="xref py py-attr docutils literal"><span class="pre">XYZ_ColourMatchingFunctions.z_bar</span></code></a> is read only.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.cmfs Module</a><ul>
+<li><a class="reference internal" href="#colour-matching-functions">Colour Matching Functions</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.cmfs.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.cmfs.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

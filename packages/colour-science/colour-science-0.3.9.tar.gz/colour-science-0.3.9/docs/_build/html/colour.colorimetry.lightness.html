@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.lightness Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.lightness">
+<span id="colour-colorimetry-lightness-module"></span><h1>colour.colorimetry.lightness Module<a class="headerlink" href="#module-colour.colorimetry.lightness" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="lightness">
+<h2>Lightness <span class="math">\(L^*\)</span><a class="headerlink" href="#lightness" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>Lightness</em> <span class="math">\(L^*\)</span> computation objects.</p>
+<p>The following methods are available:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.colorimetry.lightness.lightness_Glasser1958" title="colour.colorimetry.lightness.lightness_Glasser1958"><code class="xref py py-func docutils literal"><span class="pre">lightness_Glasser1958()</span></code></a>: <em>Lightness</em> <span class="math">\(L^*\)</span> computation of given
+<em>luminance</em> <span class="math">\(Y\)</span> using <em>Glasser, Mckinney, Reilly and Schnelle (1958)
+method</em>.</li>
+<li><a class="reference internal" href="#colour.colorimetry.lightness.lightness_Wyszecki1963" title="colour.colorimetry.lightness.lightness_Wyszecki1963"><code class="xref py py-func docutils literal"><span class="pre">lightness_Wyszecki1963()</span></code></a>: <em>Lightness</em> <span class="math">\(W\)</span> computation of
+given <em>luminance</em> <span class="math">\(Y\)</span> using <em>Wyszecki (1963)⁠⁠⁠⁠</em> method.</li>
+<li><a class="reference internal" href="#colour.colorimetry.lightness.lightness_CIE1976" title="colour.colorimetry.lightness.lightness_CIE1976"><code class="xref py py-func docutils literal"><span class="pre">lightness_CIE1976()</span></code></a>: <em>Lightness</em> <span class="math">\(L^*\)</span> computation of given
+<em>luminance</em> <span class="math">\(Y\)</span> as per <em>CIE 1976</em> recommendation.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/lightness.ipynb">Lightness Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Wikipedia. (n.d.). Lightness. Retrieved April 13, 2014, from
+<a class="reference external" href="http://en.wikipedia.org/wiki/Lightness">http://en.wikipedia.org/wiki/Lightness</a></td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.colorimetry.lightness.lightness_Glasser1958">
+<code class="descclassname">colour.colorimetry.lightness.</code><code class="descname">lightness_Glasser1958</code><span class="sig-paren">(</span><em>Y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/lightness.html#lightness_Glasser1958"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.lightness.lightness_Glasser1958" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>Lightness</em> <span class="math">\(L\)</span> of given <em>luminance</em> <span class="math">\(Y\)</span> using
+<em>Glasser et al. (1958)</em> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Y</strong> (<em>numeric or array_like</em>) &#8211; <em>luminance</em> <span class="math">\(Y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Lightness</em> <span class="math">\(L\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or array_like</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>luminance</em> <span class="math">\(Y\)</span> is in domain [0, 100].</li>
+<li>Output <em>Lightness</em> <span class="math">\(L\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Glasser, L. G., McKinney, A. H., Reilly, C. D., &amp; Schnelle, P. D.
+(1958). Cube-Root Color Coordinate System. J. Opt. Soc. Am.,
+48(10), 736–740. doi:10.1364/JOSA.48.000736</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lightness_Glasser1958</span><span class="p">(</span><span class="mf">10.08</span><span class="p">)</span>  
+<span class="go">36.2505626...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.lightness.lightness_Wyszecki1963">
+<code class="descclassname">colour.colorimetry.lightness.</code><code class="descname">lightness_Wyszecki1963</code><span class="sig-paren">(</span><em>Y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/lightness.html#lightness_Wyszecki1963"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.lightness.lightness_Wyszecki1963" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>Lightness</em> <span class="math">\(W\)</span> of given <em>luminance</em> <span class="math">\(Y\)</span> using
+<em>Wyszecki (1963)</em> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Y</strong> (<em>numeric or array_like</em>) &#8211; <em>luminance</em> <span class="math">\(Y\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Lightness</em> <span class="math">\(W\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or array_like</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>luminance</em> <span class="math">\(Y\)</span> is in domain [0, 100].</li>
+<li>Output <em>Lightness</em> <span class="math">\(W\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Wyszecki, G. (1963). Proposal for a New Color-Difference Formula.
+J. Opt. Soc. Am., 53(11), 1318–1319. doi:10.1364/JOSA.53.001318</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lightness_Wyszecki1963</span><span class="p">(</span><span class="mf">10.08</span><span class="p">)</span>  
+<span class="go">37.0041149...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.lightness.lightness_CIE1976">
+<code class="descclassname">colour.colorimetry.lightness.</code><code class="descname">lightness_CIE1976</code><span class="sig-paren">(</span><em>Y</em>, <em>Y_n=100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/lightness.html#lightness_CIE1976"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.lightness.lightness_CIE1976" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>Lightness</em> <span class="math">\(L^*\)</span> of given <em>luminance</em> <span class="math">\(Y\)</span> using
+given reference white <em>luminance</em> <span class="math">\(Y_n\)</span> as per <em>CIE 1976</em>
+recommendation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<em>numeric or array_like</em>) &#8211; <em>luminance</em> <span class="math">\(Y\)</span>.</li>
+<li><strong>Y_n</strong> (<em>numeric or array_like, optional</em>) &#8211; White reference <em>luminance</em> <span class="math">\(Y_n\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Lightness</em> <span class="math">\(L^*\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>luminance</em> <span class="math">\(Y\)</span> and <span class="math">\(Y_n\)</span> are in domain [0, 100].</li>
+<li>Output <em>Lightness</em> <span class="math">\(L^*\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>Wyszecki, G., &amp; Stiles, W. S. (2000). CIE 1976 (L*u*v*)-Space and
+Color-Difference Formula. In Color Science: Concepts and Methods,
+Quantitative Data and Formulae (p. 167). Wiley. ISBN:978-0471399186</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>Lindbloom, B. (2003). A Continuity Study of the CIE L* Function.
+Retrieved February 24, 2014, from
+<a class="reference external" href="http://brucelindbloom.com/LContinuity.html">http://brucelindbloom.com/LContinuity.html</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lightness_CIE1976</span><span class="p">(</span><span class="mf">10.08</span><span class="p">)</span>  
+<span class="go">array(37.9856290...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.lightness.LIGHTNESS_METHODS">
+<code class="descclassname">colour.colorimetry.lightness.</code><code class="descname">LIGHTNESS_METHODS</code><em class="property"> = CaseInsensitiveMapping({u'Lstar1976': &lt;function lightness_CIE1976 at 0x10e673f50&gt;, u'Wyszecki 1963': &lt;function lightness_Wyszecki1963 at 0x10e673ed8&gt;, u'CIE 1976': &lt;function lightness_CIE1976 at 0x10e673f50&gt;, u'Glasser 1958': &lt;function lightness_Glasser1958 at 0x10e673e60&gt;})</em><a class="headerlink" href="#colour.colorimetry.lightness.LIGHTNESS_METHODS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported <em>Lightness</em> computations methods.</p>
+<dl class="docutils">
+<dt>LIGHTNESS_METHODS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Glasser 1958&#8217;, &#8216;Wyszecki 1963&#8217;, &#8216;CIE 1976&#8217;}</strong></dd>
+</dl>
+<p>Aliases:</p>
+<ul class="simple">
+<li>&#8216;Lstar1976&#8217;: &#8216;CIE 1976&#8217;</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.lightness.lightness">
+<code class="descclassname">colour.colorimetry.lightness.</code><code class="descname">lightness</code><span class="sig-paren">(</span><em>Y</em>, <em>method=u'CIE 1976'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/lightness.html#lightness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.lightness.lightness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>Lightness</em> <span class="math">\(L^*\)</span> using given method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<em>numeric or array_like</em>) &#8211; <em>luminance</em> <span class="math">\(Y\)</span>.</li>
+<li><strong>method</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CIE 1976&#8217;, &#8216;Glasser 1958&#8217;, &#8216;Wyszecki 1963&#8217;}</strong>,
+Computation method.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Other Parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>Y_n</strong> (<em>numeric or array_like, optional</em>) &#8211;
+{<a class="reference internal" href="#colour.colorimetry.lightness.lightness_CIE1976" title="colour.colorimetry.lightness.lightness_CIE1976"><code class="xref py py-func docutils literal"><span class="pre">lightness_CIE1976()</span></code></a>},
+White reference <em>luminance</em> <span class="math">\(Y_n\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Lightness</em> <span class="math">\(L^*\)</span>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>luminance</em> <span class="math">\(Y\)</span> and optional <span class="math">\(Y_n\)</span> are in domain
+[0, 100].</li>
+<li>Output <em>Lightness</em> <span class="math">\(L^*\)</span> is in range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lightness</span><span class="p">(</span><span class="mf">10.08</span><span class="p">)</span>  
+<span class="go">array(37.9856290...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lightness</span><span class="p">(</span><span class="mf">10.08</span><span class="p">,</span> <span class="n">Y_n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  
+<span class="go">array(37.9856290...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lightness</span><span class="p">(</span><span class="mf">10.08</span><span class="p">,</span> <span class="n">Y_n</span><span class="o">=</span><span class="mi">95</span><span class="p">)</span>  
+<span class="go">array(38.9165987...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lightness</span><span class="p">(</span><span class="mf">10.08</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Glasser 1958&#39;</span><span class="p">)</span>  
+<span class="go">36.2505626...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lightness</span><span class="p">(</span><span class="mf">10.08</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Wyszecki 1963&#39;</span><span class="p">)</span>  
+<span class="go">37.0041149...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.lightness Module</a><ul>
+<li><a class="reference internal" href="#lightness">Lightness <span class="math">\(L^*\)</span></a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.lightness.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.lightness.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

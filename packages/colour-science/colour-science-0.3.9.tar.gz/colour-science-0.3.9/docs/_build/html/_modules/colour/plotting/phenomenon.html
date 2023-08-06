@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.phenomenon &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.plotting.phenomenon</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Optical Phenomenon Plotting</span>
+<span class="sd">===========================</span>
+
+<span class="sd">Defines the optical phenomenons plotting objects:</span>
+
+<span class="sd">-   :func:`single_rayleigh_scattering_spd_plot`</span>
+<span class="sd">-   :func:`the_blue_sky_plot`</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+
+<span class="kn">from</span> <span class="nn">colour.colorimetry</span> <span class="kn">import</span> <span class="n">spectral_to_XYZ</span>
+<span class="kn">from</span> <span class="nn">colour.models</span> <span class="kn">import</span> <span class="n">XYZ_to_sRGB</span>
+<span class="kn">from</span> <span class="nn">colour.phenomenons</span> <span class="kn">import</span> <span class="n">rayleigh_scattering_spd</span>
+<span class="kn">from</span> <span class="nn">colour.phenomenons.rayleigh</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AVERAGE_PRESSURE_MEAN_SEA_LEVEL</span><span class="p">,</span>
+    <span class="n">DEFAULT_ALTITUDE</span><span class="p">,</span>
+    <span class="n">DEFAULT_LATITUDE</span><span class="p">,</span>
+    <span class="n">STANDARD_AIR_TEMPERATURE</span><span class="p">,</span>
+    <span class="n">STANDARD_CO2_CONCENTRATION</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">colour.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ASTM_G_173_ETR</span><span class="p">,</span>
+    <span class="n">ColourParameter</span><span class="p">,</span>
+    <span class="n">boundaries</span><span class="p">,</span>
+    <span class="n">canvas</span><span class="p">,</span>
+    <span class="n">decorate</span><span class="p">,</span>
+    <span class="n">display</span><span class="p">,</span>
+    <span class="n">get_cmfs</span><span class="p">,</span>
+    <span class="n">single_colour_plot</span><span class="p">,</span>
+    <span class="n">single_spd_plot</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">normalise_maximum</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;single_rayleigh_scattering_spd_plot&#39;</span><span class="p">,</span> <span class="s1">&#39;the_blue_sky_plot&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="single_rayleigh_scattering_spd_plot"><a class="viewcode-back" href="../../../colour.plotting.phenomenon.html#colour.plotting.single_rayleigh_scattering_spd_plot">[docs]</a><span class="k">def</span> <span class="nf">single_rayleigh_scattering_spd_plot</span><span class="p">(</span>
+        <span class="n">CO2_concentration</span><span class="o">=</span><span class="n">STANDARD_CO2_CONCENTRATION</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="n">STANDARD_AIR_TEMPERATURE</span><span class="p">,</span>
+        <span class="n">pressure</span><span class="o">=</span><span class="n">AVERAGE_PRESSURE_MEAN_SEA_LEVEL</span><span class="p">,</span>
+        <span class="n">latitude</span><span class="o">=</span><span class="n">DEFAULT_LATITUDE</span><span class="p">,</span>
+        <span class="n">altitude</span><span class="o">=</span><span class="n">DEFAULT_ALTITUDE</span><span class="p">,</span>
+        <span class="n">cmfs</span><span class="o">=</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots a single *Rayleigh* scattering spectral power distribution.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    CO2_concentration : numeric, optional</span>
+<span class="sd">        :math:`CO_2` concentration in parts per million (ppm).</span>
+<span class="sd">    temperature : numeric, optional</span>
+<span class="sd">        Air temperature :math:`T[K]` in kelvin degrees.</span>
+<span class="sd">    pressure : numeric</span>
+<span class="sd">        Surface pressure :math:`P` of the measurement site.</span>
+<span class="sd">    latitude : numeric, optional</span>
+<span class="sd">        Latitude of the site in degrees.</span>
+<span class="sd">    altitude : numeric, optional</span>
+<span class="sd">        Altitude of the site in meters.</span>
+<span class="sd">    cmfs : unicode, optional</span>
+<span class="sd">        Standard observer colour matching functions.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    out_of_gamut_clipping : bool, optional</span>
+<span class="sd">        {:func:`single_spd_plot`},</span>
+<span class="sd">        Whether to clip out of gamut colours otherwise, the colours will be</span>
+<span class="sd">        offset by the absolute minimal colour leading to a rendering on</span>
+<span class="sd">        gray background, less saturated and smoother. [1]_</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; single_rayleigh_scattering_spd_plot()  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Rayleigh Scattering&#39;</span>
+
+    <span class="n">cmfs</span> <span class="o">=</span> <span class="n">get_cmfs</span><span class="p">(</span><span class="n">cmfs</span><span class="p">)</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;y_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Optical Depth&#39;</span><span class="p">}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">spd</span> <span class="o">=</span> <span class="n">rayleigh_scattering_spd</span><span class="p">(</span><span class="n">cmfs</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                  <span class="n">CO2_concentration</span><span class="p">,</span>
+                                  <span class="n">temperature</span><span class="p">,</span>
+                                  <span class="n">pressure</span><span class="p">,</span>
+                                  <span class="n">latitude</span><span class="p">,</span>
+                                  <span class="n">altitude</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">single_spd_plot</span><span class="p">(</span><span class="n">spd</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="the_blue_sky_plot"><a class="viewcode-back" href="../../../colour.plotting.phenomenon.html#colour.plotting.the_blue_sky_plot">[docs]</a><span class="k">def</span> <span class="nf">the_blue_sky_plot</span><span class="p">(</span>
+        <span class="n">cmfs</span><span class="o">=</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the blue sky.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cmfs : unicode, optional</span>
+<span class="sd">        Standard observer colour matching functions.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; the_blue_sky_plot()  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">canvas</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">cmfs</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_cmfs</span><span class="p">(</span><span class="n">cmfs</span><span class="p">),</span> <span class="n">cmfs</span>
+
+    <span class="n">ASTM_G_173_spd</span> <span class="o">=</span> <span class="n">ASTM_G_173_ETR</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">rayleigh_spd</span> <span class="o">=</span> <span class="n">rayleigh_scattering_spd</span><span class="p">()</span>
+    <span class="n">ASTM_G_173_spd</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">rayleigh_spd</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">spd</span> <span class="o">=</span> <span class="n">rayleigh_spd</span> <span class="o">*</span> <span class="n">ASTM_G_173_spd</span>
+
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;The Blue Sky - Synthetic Spectral Power Distribution&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;y_label&#39;</span><span class="p">:</span> <span class="s1">u&#39;W / m-2 / nm-1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">single_spd_plot</span><span class="p">(</span><span class="n">spd</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;The Blue Sky - Colour&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;x_label&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The sky is blue because molecules in the atmosphere &#39;</span>
+                    <span class="s1">&#39;scatter shorter wavelengths more than longer ones.</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;The synthetic spectral power distribution is computed as &#39;</span>
+                    <span class="s1">&#39;follows: &#39;</span>
+                    <span class="s1">&#39;(ASTM G-173 ETR * Standard Air Rayleigh Scattering).&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;y_label&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;aspect&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+
+    <span class="n">blue_sky_color</span> <span class="o">=</span> <span class="n">XYZ_to_sRGB</span><span class="p">(</span><span class="n">spectral_to_XYZ</span><span class="p">(</span><span class="n">spd</span><span class="p">))</span>
+    <span class="n">single_colour_plot</span><span class="p">(</span><span class="n">ColourParameter</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">normalise_maximum</span><span class="p">(</span><span class="n">blue_sky_color</span><span class="p">)),</span>
+                       <span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

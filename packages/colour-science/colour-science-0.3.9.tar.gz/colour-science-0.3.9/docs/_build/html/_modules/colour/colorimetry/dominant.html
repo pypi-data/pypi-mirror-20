@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.dominant &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.colorimetry.dominant</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Dominant Wavelength and Purity</span>
+<span class="sd">==============================</span>
+
+<span class="sd">Defines objects to compute the *dominant wavelength* and *purity* of a colour</span>
+<span class="sd">and related quantities:</span>
+
+<span class="sd">-   :func:`dominant_wavelength`</span>
+<span class="sd">-   :func:`complementary_wavelength`</span>
+<span class="sd">-   :func:`excitation_purity`</span>
+<span class="sd">-   :func:`colorimetric_purity`</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`Dominant Wavelength and Purity Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/colorimetry/dominant_wavelength.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  CIE TC 1-48. (2004). 9.1 Dominant wavelength and purity. In CIE</span>
+<span class="sd">        015:2004 Colorimetry, 3rd Edition (pp. 32–33). ISBN:978-3-901-90633-6</span>
+<span class="sd">.. [2]  Erdogan, T. (n.d.). How to Calculate Luminosity, Dominant Wavelength,</span>
+<span class="sd">        and Excitation Purity, 7. Retrieved from http://www.semrock.com/Data/\</span>
+<span class="sd">Sites/1/semrockpdfs/whitepaper_howtocalculateluminositywavelengthandpurity.pdf</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.spatial.distance</span>
+
+<span class="kn">from</span> <span class="nn">colour.algebra</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">euclidean_distance</span><span class="p">,</span>
+    <span class="n">extend_line_segment</span><span class="p">,</span>
+    <span class="n">intersect_line_segments</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">colour.colorimetry</span> <span class="kn">import</span> <span class="n">CMFS</span>
+<span class="kn">from</span> <span class="nn">colour.models</span> <span class="kn">import</span> <span class="n">XYZ_to_xy</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;closest_spectral_locus_wavelength&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;dominant_wavelength&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;complementary_wavelength&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;excitation_purity&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;colorimetric_purity&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="closest_spectral_locus_wavelength"><a class="viewcode-back" href="../../../colour.colorimetry.dominant.html#colour.closest_spectral_locus_wavelength">[docs]</a><span class="k">def</span> <span class="nf">closest_spectral_locus_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">xy_s</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the coordinates and closest spectral locus wavelength index to the</span>
+<span class="sd">    point where the line defined by the given achromatic stimulus :math:`xy_n`</span>
+<span class="sd">    to colour stimulus :math:`xy_n` *xy* chromaticity coordinates intersects</span>
+<span class="sd">    the spectral locus.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xy : array_like</span>
+<span class="sd">        Colour stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    xy_n : array_like</span>
+<span class="sd">        Achromatic stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    xy_s : array_like</span>
+<span class="sd">        Spectral locus *xy* chromaticity coordinates.</span>
+<span class="sd">    reverse : bool, optional</span>
+<span class="sd">        The intersection will be computed using the colour stimulus :math:`xy`</span>
+<span class="sd">        to achromatic stimulus :math:`xy_n` reverse direction.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        Closest wavelength index, intersection point *xy* chromaticity</span>
+<span class="sd">        coordinates.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If no closest spectral locus wavelength index and coordinates found.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.26415, 0.37770])</span>
+<span class="sd">    &gt;&gt;&gt; xy_n = np.array([0.31270, 0.32900])</span>
+<span class="sd">    &gt;&gt;&gt; xy_s = XYZ_to_xy(CMFS[&#39;CIE 1931 2 Degree Standard Observer&#39;].values)</span>
+<span class="sd">    &gt;&gt;&gt; closest_spectral_locus_wavelength(xy, xy_n, xy_s)  # doctest: +ELLIPSIS</span>
+<span class="sd">    (array(144), array([ 0.0036969...,  0.6389577...]))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>
+    <span class="n">xy_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">xy_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xy_s</span><span class="p">)</span>
+
+    <span class="n">xy_e</span> <span class="o">=</span> <span class="p">(</span><span class="n">extend_line_segment</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span>
+            <span class="n">extend_line_segment</span><span class="p">(</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy</span><span class="p">))</span>
+
+    <span class="c1"># Closing horse-shoe shape to handle line of purples intersections.</span>
+    <span class="n">xy_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">xy_s</span><span class="p">,</span> <span class="n">xy_s</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]))</span>
+
+    <span class="n">xy_wl</span> <span class="o">=</span> <span class="n">intersect_line_segments</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy_e</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">xy_s</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">xy_s</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))))</span><span class="o">.</span><span class="n">xy</span>
+    <span class="n">xy_wl</span> <span class="o">=</span> <span class="n">xy_wl</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">xy_wl</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">xy_wl</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;No closest spectral locus wavelength index and coordinates found &#39;</span>
+            <span class="s1">&#39;for &quot;{0}&quot; colour stimulus and &quot;{1}&quot; achromatic stimulus &quot;xy&quot; &#39;</span>
+            <span class="s1">&#39;chromaticity coordinates!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">))</span>
+
+    <span class="n">i_wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">xy_wl</span><span class="p">,</span> <span class="n">xy_s</span><span class="p">),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">i_wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">i_wl</span><span class="p">,</span> <span class="n">xy</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">xy_wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xy_wl</span><span class="p">,</span> <span class="n">xy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">i_wl</span><span class="p">,</span> <span class="n">xy_wl</span></div>
+
+
+<div class="viewcode-block" id="dominant_wavelength"><a class="viewcode-back" href="../../../colour.colorimetry.dominant.html#colour.dominant_wavelength">[docs]</a><span class="k">def</span> <span class="nf">dominant_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span>
+                        <span class="n">xy_n</span><span class="p">,</span>
+                        <span class="n">cmfs</span><span class="o">=</span><span class="n">CMFS</span><span class="p">[</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">],</span>
+                        <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the *dominant wavelength* :math:`\lambda_d` for given colour</span>
+<span class="sd">    stimulus :math:`xy` and the related :math:`xy_wl` first and :math:`xy_{cw}`</span>
+<span class="sd">    second intersection coordinates with the spectral locus.</span>
+
+<span class="sd">    In the eventuality where the :math:`xy_wl` first intersection coordinates</span>
+<span class="sd">    are on the line of purples, the *complementary wavelength* will be</span>
+<span class="sd">    computed in lieu.</span>
+
+<span class="sd">    The *complementary wavelength* is indicated by a negative sign</span>
+<span class="sd">    and the :math:`xy_{cw}` second intersection coordinates which are set by</span>
+<span class="sd">    default to the same value than :math:`xy_wl` first intersection coordinates</span>
+<span class="sd">    will be set to the *complementary dominant wavelength* intersection</span>
+<span class="sd">    coordinates with the spectral locus.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xy : array_like</span>
+<span class="sd">        Colour stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    xy_n : array_like</span>
+<span class="sd">        Achromatic stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    cmfs : XYZ_ColourMatchingFunctions, optional</span>
+<span class="sd">        Standard observer colour matching functions.</span>
+<span class="sd">    reverse : bool, optional</span>
+<span class="sd">        Reverse the computation direction to retrieve the</span>
+<span class="sd">        *complementary wavelength*.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        *Dominant wavelength*, first intersection point *xy* chromaticity</span>
+<span class="sd">        coordinates, second intersection point *xy* chromaticity coordinates.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    complementary_wavelength</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    *Dominant wavelength* computation:</span>
+
+<span class="sd">    &gt;&gt;&gt; from pprint import pprint</span>
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.26415, 0.37770])</span>
+<span class="sd">    &gt;&gt;&gt; xy_n = np.array([0.31270, 0.32900])</span>
+<span class="sd">    &gt;&gt;&gt; cmfs = CMFS[&#39;CIE 1931 2 Degree Standard Observer&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; pprint(dominant_wavelength(xy, xy_n, cmfs))  # doctest: +ELLIPSIS</span>
+<span class="sd">    (array(504...),</span>
+<span class="sd">     array([ 0.0036969...,  0.6389577...]),</span>
+<span class="sd">     array([ 0.0036969...,  0.6389577...]))</span>
+
+<span class="sd">    *Complementary dominant wavelength* is returned if the first intersection</span>
+<span class="sd">    is located on the line of purples:</span>
+
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.35000, 0.25000])</span>
+<span class="sd">    &gt;&gt;&gt; pprint(dominant_wavelength(xy, xy_n, cmfs))  # doctest: +ELLIPSIS</span>
+<span class="sd">    (array(-520...),</span>
+<span class="sd">     array([ 0.4133314...,  0.1158663...]),</span>
+<span class="sd">     array([ 0.0743553...,  0.8338050...]))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>
+    <span class="n">xy_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">xy_s</span> <span class="o">=</span> <span class="n">XYZ_to_xy</span><span class="p">(</span><span class="n">cmfs</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="n">i_wl</span><span class="p">,</span> <span class="n">xy_wl</span> <span class="o">=</span> <span class="n">closest_spectral_locus_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">xy_s</span><span class="p">,</span> <span class="n">reverse</span><span class="p">)</span>
+    <span class="n">xy_cwl</span> <span class="o">=</span> <span class="n">xy_wl</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">cmfs</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">[</span><span class="n">i_wl</span><span class="p">]</span>
+
+    <span class="n">xy_e</span> <span class="o">=</span> <span class="p">(</span><span class="n">extend_line_segment</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span>
+            <span class="n">extend_line_segment</span><span class="p">(</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy</span><span class="p">))</span>
+    <span class="n">intersect</span> <span class="o">=</span> <span class="n">intersect_line_segments</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy_e</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">xy_s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xy_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span><span class="o">.</span><span class="n">intersect</span>
+    <span class="n">intersect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">intersect</span><span class="p">,</span> <span class="n">wl</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">i_wl_r</span><span class="p">,</span> <span class="n">xy_cwl_r</span> <span class="o">=</span> <span class="n">closest_spectral_locus_wavelength</span><span class="p">(</span>
+        <span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">xy_s</span><span class="p">,</span> <span class="ow">not</span> <span class="n">reverse</span><span class="p">)</span>
+    <span class="n">wl_r</span> <span class="o">=</span> <span class="o">-</span><span class="n">cmfs</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">[</span><span class="n">i_wl_r</span><span class="p">]</span>
+
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">intersect</span><span class="p">,</span> <span class="n">wl_r</span><span class="p">,</span> <span class="n">wl</span><span class="p">)</span>
+    <span class="n">xy_cwl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">intersect</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">xy_cwl_r</span><span class="p">,</span> <span class="n">xy_cwl</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wl</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">xy_wl</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">xy_cwl</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="complementary_wavelength"><a class="viewcode-back" href="../../../colour.colorimetry.dominant.html#colour.complementary_wavelength">[docs]</a><span class="k">def</span> <span class="nf">complementary_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span>
+                             <span class="n">xy_n</span><span class="p">,</span>
+                             <span class="n">cmfs</span><span class="o">=</span><span class="n">CMFS</span><span class="p">[</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the *complementary wavelength* :math:`\lambda_c` for given colour</span>
+<span class="sd">    stimulus :math:`xy` and the related :math:`xy_wl` first and :math:`xy_{cw}`</span>
+<span class="sd">    second intersection coordinates with the spectral locus.</span>
+
+<span class="sd">    In the eventuality where the :math:`xy_wl` first intersection coordinates</span>
+<span class="sd">    are on the line of purples, the *dominant wavelength* will be computed in</span>
+<span class="sd">    lieu.</span>
+
+<span class="sd">    The *dominant wavelength* is indicated by a negative sign and the</span>
+<span class="sd">    :math:`xy_{cw}` second intersection coordinates which are set by default to</span>
+<span class="sd">    the same value than :math:`xy_wl` first intersection coordinates will be</span>
+<span class="sd">    set to the *dominant wavelength* intersection coordinates with the spectral</span>
+<span class="sd">    locus.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xy : array_like</span>
+<span class="sd">        Colour stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    xy_n : array_like</span>
+<span class="sd">        Achromatic stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    cmfs : XYZ_ColourMatchingFunctions, optional</span>
+<span class="sd">        Standard observer colour matching functions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        *Complementary wavelength*, first intersection point *xy* chromaticity</span>
+<span class="sd">        coordinates, second intersection point *xy* chromaticity coordinates.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    dominant_wavelength</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    *Complementary wavelength* computation:</span>
+
+<span class="sd">    &gt;&gt;&gt; from pprint import pprint</span>
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.35000, 0.25000])</span>
+<span class="sd">    &gt;&gt;&gt; xy_n = np.array([0.31270, 0.32900])</span>
+<span class="sd">    &gt;&gt;&gt; cmfs = CMFS[&#39;CIE 1931 2 Degree Standard Observer&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; pprint(complementary_wavelength(xy, xy_n, cmfs))  # doctest: +ELLIPSIS</span>
+<span class="sd">    (array(520...),</span>
+<span class="sd">     array([ 0.0743553...,  0.8338050...]),</span>
+<span class="sd">     array([ 0.0743553...,  0.8338050...]))</span>
+
+<span class="sd">    *Dominant wavelength* is returned if the first intersection is located on</span>
+<span class="sd">    the line of purples:</span>
+
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.26415, 0.37770])</span>
+<span class="sd">    &gt;&gt;&gt; pprint(complementary_wavelength(xy, xy_n, cmfs))  # doctest: +ELLIPSIS</span>
+<span class="sd">    (array(-504...),</span>
+<span class="sd">     array([ 0.4897494...,  0.1514035...]),</span>
+<span class="sd">     array([ 0.0036969...,  0.6389577...]))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">dominant_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">cmfs</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="excitation_purity"><a class="viewcode-back" href="../../../colour.colorimetry.dominant.html#colour.excitation_purity">[docs]</a><span class="k">def</span> <span class="nf">excitation_purity</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span>
+                      <span class="n">xy_n</span><span class="p">,</span>
+                      <span class="n">cmfs</span><span class="o">=</span><span class="n">CMFS</span><span class="p">[</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the *excitation purity* :math:`P_e` for given colour stimulus</span>
+<span class="sd">    :math:`xy`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xy : array_like</span>
+<span class="sd">        Colour stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    xy_n : array_like</span>
+<span class="sd">        Achromatic stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    cmfs : XYZ_ColourMatchingFunctions, optional</span>
+<span class="sd">        Standard observer colour matching functions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or array_like</span>
+<span class="sd">        *Excitation purity* :math:`P_e`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.28350, 0.68700])</span>
+<span class="sd">    &gt;&gt;&gt; xy_n = np.array([0.31270, 0.32900])</span>
+<span class="sd">    &gt;&gt;&gt; cmfs = CMFS[&#39;CIE 1931 2 Degree Standard Observer&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; excitation_purity(xy, xy_n, cmfs)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.9386035...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">wl</span><span class="p">,</span> <span class="n">xy_wl</span><span class="p">,</span> <span class="n">xy_cwl</span> <span class="o">=</span> <span class="n">dominant_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">cmfs</span><span class="p">)</span>
+
+    <span class="n">P_e</span> <span class="o">=</span> <span class="n">euclidean_distance</span><span class="p">(</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy</span><span class="p">)</span> <span class="o">/</span> <span class="n">euclidean_distance</span><span class="p">(</span><span class="n">xy_n</span><span class="p">,</span> <span class="n">xy_wl</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">P_e</span></div>
+
+
+<div class="viewcode-block" id="colorimetric_purity"><a class="viewcode-back" href="../../../colour.colorimetry.dominant.html#colour.colorimetric_purity">[docs]</a><span class="k">def</span> <span class="nf">colorimetric_purity</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span>
+                        <span class="n">xy_n</span><span class="p">,</span>
+                        <span class="n">cmfs</span><span class="o">=</span><span class="n">CMFS</span><span class="p">[</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the *colorimetric purity* :math:`P_c` for given colour stimulus</span>
+<span class="sd">    :math:`xy`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xy : array_like</span>
+<span class="sd">        Colour stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    xy_n : array_like</span>
+<span class="sd">        Achromatic stimulus *xy* chromaticity coordinates.</span>
+<span class="sd">    cmfs : XYZ_ColourMatchingFunctions, optional</span>
+<span class="sd">        Standard observer colour matching functions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numeric or array_like</span>
+<span class="sd">        *Colorimetric purity* :math:`P_c`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; xy = np.array([0.28350, 0.68700])</span>
+<span class="sd">    &gt;&gt;&gt; xy_n = np.array([0.31270, 0.32900])</span>
+<span class="sd">    &gt;&gt;&gt; cmfs = CMFS[&#39;CIE 1931 2 Degree Standard Observer&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; colorimetric_purity(xy, xy_n, cmfs)  # doctest: +ELLIPSIS</span>
+<span class="sd">    0.9705976...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>
+
+    <span class="n">wl</span><span class="p">,</span> <span class="n">xy_wl</span><span class="p">,</span> <span class="n">xy_cwl</span> <span class="o">=</span> <span class="n">dominant_wavelength</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">cmfs</span><span class="p">)</span>
+    <span class="n">P_e</span> <span class="o">=</span> <span class="n">excitation_purity</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">xy_n</span><span class="p">,</span> <span class="n">cmfs</span><span class="p">)</span>
+
+    <span class="n">P_c</span> <span class="o">=</span> <span class="n">P_e</span> <span class="o">*</span> <span class="n">xy_wl</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">P_c</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

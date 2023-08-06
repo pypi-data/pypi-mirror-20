@@ -1,0 +1,923 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.models &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.plotting.models</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Colour Models Plotting</span>
+<span class="sd">======================</span>
+
+<span class="sd">Defines the colour models plotting objects:</span>
+
+<span class="sd">-   :func:`RGB_colourspaces_CIE_1931_chromaticity_diagram_plot`</span>
+<span class="sd">-   :func:`RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot`</span>
+<span class="sd">-   :func:`RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot`</span>
+<span class="sd">-   :func:`RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot`</span>
+<span class="sd">-   :func:`RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot`</span>
+<span class="sd">-   :func:`RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot`</span>
+<span class="sd">-   :func:`single_cctf_plot`</span>
+<span class="sd">-   :func:`multi_cctf_plot`</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+
+<span class="kn">from</span> <span class="nn">colour.constants</span> <span class="kn">import</span> <span class="n">EPSILON</span>
+<span class="kn">from</span> <span class="nn">colour.models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LCHab_to_Lab</span><span class="p">,</span>
+    <span class="n">Lab_to_XYZ</span><span class="p">,</span>
+    <span class="n">Luv_to_uv</span><span class="p">,</span>
+    <span class="n">POINTER_GAMUT_BOUNDARIES</span><span class="p">,</span>
+    <span class="n">POINTER_GAMUT_DATA</span><span class="p">,</span>
+    <span class="n">POINTER_GAMUT_ILLUMINANT</span><span class="p">,</span>
+    <span class="n">RGB_to_XYZ</span><span class="p">,</span>
+    <span class="n">UCS_to_uv</span><span class="p">,</span>
+    <span class="n">XYZ_to_Luv</span><span class="p">,</span>
+    <span class="n">XYZ_to_UCS</span><span class="p">,</span>
+    <span class="n">XYZ_to_xy</span><span class="p">,</span>
+    <span class="n">xy_to_XYZ</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">colour.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CIE_1931_chromaticity_diagram_plot</span><span class="p">,</span>
+    <span class="n">CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">,</span>
+    <span class="n">CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">,</span>
+    <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span>
+    <span class="n">DEFAULT_PLOTTING_ILLUMINANT</span><span class="p">,</span>
+    <span class="n">boundaries</span><span class="p">,</span>
+    <span class="n">canvas</span><span class="p">,</span>
+    <span class="n">colour_cycle</span><span class="p">,</span>
+    <span class="n">decorate</span><span class="p">,</span>
+    <span class="n">display</span><span class="p">,</span>
+    <span class="n">get_RGB_colourspace</span><span class="p">,</span>
+    <span class="n">get_cmfs</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;RGB_colourspaces_CIE_1931_chromaticity_diagram_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;single_cctf_plot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;multi_cctf_plot&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="RGB_colourspaces_CIE_1931_chromaticity_diagram_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.RGB_colourspaces_CIE_1931_chromaticity_diagram_plot">[docs]</a><span class="k">def</span> <span class="nf">RGB_colourspaces_CIE_1931_chromaticity_diagram_plot</span><span class="p">(</span>
+        <span class="n">colourspaces</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">cmfs</span><span class="o">=</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given *RGB* colourspaces in *CIE 1931 Chromaticity Diagram*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    colourspaces : array_like, optional</span>
+<span class="sd">        *RGB* colourspaces to plot.</span>
+<span class="sd">    cmfs : unicode, optional</span>
+<span class="sd">        Standard observer colour matching functions used for diagram bounds.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1931_chromaticity_diagram_plot`},</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; c = [&#39;Rec. 709&#39;, &#39;ACEScg&#39;, &#39;S-Gamut&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; RGB_colourspaces_CIE_1931_chromaticity_diagram_plot(</span>
+<span class="sd">    ...     c)  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure_size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span> <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">canvas</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colourspaces</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">colourspaces</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">,</span> <span class="s1">&#39;Pointer Gamut&#39;</span><span class="p">)</span>
+
+    <span class="n">cmfs</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_cmfs</span><span class="p">(</span><span class="n">cmfs</span><span class="p">),</span> <span class="n">cmfs</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;{0} - {1} - CIE 1931 Chromaticity Diagram&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">),</span> <span class="n">name</span><span class="p">),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">CIE_1931_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">x_limit_min</span><span class="p">,</span> <span class="n">x_limit_max</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">]</span>
+    <span class="n">y_limit_min</span><span class="p">,</span> <span class="n">y_limit_max</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">]</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;colour_cycle_map&#39;</span><span class="p">:</span> <span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;colour_cycle_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">cycle</span> <span class="o">=</span> <span class="n">colour_cycle</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">colourspace</span> <span class="ow">in</span> <span class="n">colourspaces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colourspace</span> <span class="o">==</span> <span class="s1">&#39;Pointer Gamut&#39;</span><span class="p">:</span>
+            <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">POINTER_GAMUT_BOUNDARIES</span><span class="p">)</span>
+            <span class="n">alpha_p</span><span class="p">,</span> <span class="n">colour_p</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                       <span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pointer</span><span class="se">\&#39;</span><span class="s1">s Gamut&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                       <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">xy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                       <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">XYZ</span> <span class="o">=</span> <span class="n">Lab_to_XYZ</span><span class="p">(</span><span class="n">LCHab_to_Lab</span><span class="p">(</span><span class="n">POINTER_GAMUT_DATA</span><span class="p">),</span>
+                             <span class="n">POINTER_GAMUT_ILLUMINANT</span><span class="p">)</span>
+            <span class="n">xy</span> <span class="o">=</span> <span class="n">XYZ_to_xy</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">POINTER_GAMUT_ILLUMINANT</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                          <span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                          <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                          <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">colourspace</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">),</span> <span class="n">colourspace</span>
+
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+
+            <span class="n">primaries</span> <span class="o">=</span> <span class="n">colourspace</span><span class="o">.</span><span class="n">primaries</span>
+            <span class="n">whitepoint</span> <span class="o">=</span> <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span>
+
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">label</span><span class="o">=</span><span class="n">colourspace</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">x_limit_min</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">y_limit_min</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">x_limit_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">y_limit_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;legend&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;legend_location&#39;</span><span class="p">:</span> <span class="s1">&#39;upper right&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;x_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;y_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;limits&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x_limit_min</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_limit_max</span><span class="p">),</span>
+                   <span class="nb">min</span><span class="p">(</span><span class="n">y_limit_min</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_limit_max</span><span class="p">)),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot">[docs]</a><span class="k">def</span> <span class="nf">RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+        <span class="n">colourspaces</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">cmfs</span><span class="o">=</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given *RGB* colourspaces in *CIE 1960 UCS Chromaticity Diagram*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    colourspaces : array_like, optional</span>
+<span class="sd">        *RGB* colourspaces to plot.</span>
+<span class="sd">    cmfs : unicode, optional</span>
+<span class="sd">        Standard observer colour matching functions used for diagram bounds.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1960_UCS_chromaticity_diagram_plot`},</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; c = [&#39;Rec. 709&#39;, &#39;ACEScg&#39;, &#39;S-Gamut&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot(</span>
+<span class="sd">    ...     c)  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure_size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span> <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">canvas</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colourspaces</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">colourspaces</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">,</span> <span class="s1">&#39;Pointer Gamut&#39;</span><span class="p">)</span>
+
+    <span class="n">cmfs</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_cmfs</span><span class="p">(</span><span class="n">cmfs</span><span class="p">),</span> <span class="n">cmfs</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;{0} - {1} - CIE 1960 UCS Chromaticity Diagram&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">),</span> <span class="n">name</span><span class="p">),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">x_limit_min</span><span class="p">,</span> <span class="n">x_limit_max</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">]</span>
+    <span class="n">y_limit_min</span><span class="p">,</span> <span class="n">y_limit_max</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">]</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;colour_cycle_map&#39;</span><span class="p">:</span> <span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;colour_cycle_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">cycle</span> <span class="o">=</span> <span class="n">colour_cycle</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">colourspace</span> <span class="ow">in</span> <span class="n">colourspaces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colourspace</span> <span class="o">==</span> <span class="s1">&#39;Pointer Gamut&#39;</span><span class="p">:</span>
+            <span class="n">uv</span> <span class="o">=</span> <span class="n">UCS_to_uv</span><span class="p">(</span><span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">xy_to_XYZ</span><span class="p">(</span><span class="n">POINTER_GAMUT_BOUNDARIES</span><span class="p">)))</span>
+            <span class="n">alpha_p</span><span class="p">,</span> <span class="n">colour_p</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                       <span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pointer</span><span class="se">\&#39;</span><span class="s1">s Gamut&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                       <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">uv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">uv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">uv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                       <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">XYZ</span> <span class="o">=</span> <span class="n">Lab_to_XYZ</span><span class="p">(</span><span class="n">LCHab_to_Lab</span><span class="p">(</span><span class="n">POINTER_GAMUT_DATA</span><span class="p">),</span>
+                             <span class="n">POINTER_GAMUT_ILLUMINANT</span><span class="p">)</span>
+            <span class="n">uv</span> <span class="o">=</span> <span class="n">UCS_to_uv</span><span class="p">(</span><span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">XYZ</span><span class="p">))</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                          <span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                          <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                          <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">colourspace</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">),</span> <span class="n">colourspace</span>
+
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+
+            <span class="c1"># RGB colourspaces such as *ACES2065-1* have primaries with</span>
+            <span class="c1"># chromaticity coordinates set to 0 thus we prevent nan from being</span>
+            <span class="c1"># yield by zero division in later colour transformations.</span>
+            <span class="n">primaries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">colourspace</span><span class="o">.</span><span class="n">primaries</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">EPSILON</span><span class="p">,</span>
+                                 <span class="n">colourspace</span><span class="o">.</span><span class="n">primaries</span><span class="p">)</span>
+
+            <span class="n">primaries</span> <span class="o">=</span> <span class="n">UCS_to_uv</span><span class="p">(</span><span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">xy_to_XYZ</span><span class="p">(</span><span class="n">primaries</span><span class="p">)))</span>
+            <span class="n">whitepoint</span> <span class="o">=</span> <span class="n">UCS_to_uv</span><span class="p">(</span><span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">xy_to_XYZ</span><span class="p">(</span>
+                <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">)))</span>
+
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">label</span><span class="o">=</span><span class="n">colourspace</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">x_limit_min</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">y_limit_min</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">x_limit_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">y_limit_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;legend&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;legend_location&#39;</span><span class="p">:</span> <span class="s1">&#39;upper right&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;x_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;y_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;limits&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x_limit_min</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_limit_max</span><span class="p">),</span>
+                   <span class="nb">min</span><span class="p">(</span><span class="n">y_limit_min</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_limit_max</span><span class="p">)),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot">[docs]</a><span class="k">def</span> <span class="nf">RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+        <span class="n">colourspaces</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">cmfs</span><span class="o">=</span><span class="s1">&#39;CIE 1931 2 Degree Standard Observer&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given *RGB* colourspaces in *CIE 1976 UCS Chromaticity Diagram*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    colourspaces : array_like, optional</span>
+<span class="sd">        *RGB* colourspaces to plot.</span>
+<span class="sd">    cmfs : unicode, optional</span>
+<span class="sd">        Standard observer colour matching functions used for diagram bounds.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1976_UCS_chromaticity_diagram_plot`},</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; c = [&#39;Rec. 709&#39;, &#39;ACEScg&#39;, &#39;S-Gamut&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot(</span>
+<span class="sd">    ...     c)  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure_size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span> <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">canvas</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colourspaces</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">colourspaces</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;ACEScg&#39;</span><span class="p">,</span> <span class="s1">&#39;S-Gamut&#39;</span><span class="p">,</span> <span class="s1">&#39;Pointer Gamut&#39;</span><span class="p">)</span>
+
+    <span class="n">cmfs</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_cmfs</span><span class="p">(</span><span class="n">cmfs</span><span class="p">),</span> <span class="n">cmfs</span>
+
+    <span class="n">illuminant</span> <span class="o">=</span> <span class="n">DEFAULT_PLOTTING_ILLUMINANT</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;{0} - {1} - CIE 1976 UCS Chromaticity Diagram&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">),</span> <span class="n">name</span><span class="p">),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">x_limit_min</span><span class="p">,</span> <span class="n">x_limit_max</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">]</span>
+    <span class="n">y_limit_min</span><span class="p">,</span> <span class="n">y_limit_max</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">]</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;colour_cycle_map&#39;</span><span class="p">:</span> <span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;colour_cycle_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">cycle</span> <span class="o">=</span> <span class="n">colour_cycle</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">colourspace</span> <span class="ow">in</span> <span class="n">colourspaces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colourspace</span> <span class="o">==</span> <span class="s1">&#39;Pointer Gamut&#39;</span><span class="p">:</span>
+            <span class="n">uv</span> <span class="o">=</span> <span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">xy_to_XYZ</span><span class="p">(</span>
+                <span class="n">POINTER_GAMUT_BOUNDARIES</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">)</span>
+            <span class="n">alpha_p</span><span class="p">,</span> <span class="n">colour_p</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                       <span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pointer</span><span class="se">\&#39;</span><span class="s1">s Gamut&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                       <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">uv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">uv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">uv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                       <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">XYZ</span> <span class="o">=</span> <span class="n">Lab_to_XYZ</span><span class="p">(</span><span class="n">LCHab_to_Lab</span><span class="p">(</span><span class="n">POINTER_GAMUT_DATA</span><span class="p">),</span>
+                             <span class="n">POINTER_GAMUT_ILLUMINANT</span><span class="p">)</span>
+            <span class="n">uv</span> <span class="o">=</span> <span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                          <span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                          <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                          <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">colourspace</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">),</span> <span class="n">colourspace</span>
+
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+
+            <span class="c1"># RGB colourspaces such as *ACES2065-1* have primaries with</span>
+            <span class="c1"># chromaticity coordinates set to 0 thus we prevent nan from being</span>
+            <span class="c1"># yield by zero division in later colour transformations.</span>
+            <span class="n">primaries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">colourspace</span><span class="o">.</span><span class="n">primaries</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">EPSILON</span><span class="p">,</span>
+                                 <span class="n">colourspace</span><span class="o">.</span><span class="n">primaries</span><span class="p">)</span>
+
+            <span class="n">primaries</span> <span class="o">=</span> <span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">xy_to_XYZ</span><span class="p">(</span>
+                <span class="n">primaries</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">)</span>
+            <span class="n">whitepoint</span> <span class="o">=</span> <span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">xy_to_XYZ</span><span class="p">(</span>
+                <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">),</span> <span class="n">illuminant</span><span class="p">)</span>
+
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">label</span><span class="o">=</span><span class="n">colourspace</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">whitepoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                       <span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">primaries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="s1">&#39;o-&#39;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">x_limit_min</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">y_limit_min</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">x_limit_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">y_limit_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">primaries</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;legend&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;legend_location&#39;</span><span class="p">:</span> <span class="s1">&#39;upper right&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;x_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;y_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;limits&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x_limit_min</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_limit_max</span><span class="p">),</span>
+                   <span class="nb">min</span><span class="p">(</span><span class="n">y_limit_min</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_limit_max</span><span class="p">)),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot">[docs]</a><span class="k">def</span> <span class="nf">RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot</span><span class="p">(</span>
+        <span class="n">RGB</span><span class="p">,</span>
+        <span class="n">colourspace</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given *RGB* colourspace array in *CIE 1931 Chromaticity Diagram*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like</span>
+<span class="sd">        *RGB* colourspace array.</span>
+<span class="sd">    colourspace : unicode</span>
+<span class="sd">        *RGB* colourspace of the *RGB* array.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1931_chromaticity_diagram_plot`},</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.random.random((10, 10, 3))</span>
+<span class="sd">    &gt;&gt;&gt; c = &#39;Rec. 709&#39;</span>
+<span class="sd">    &gt;&gt;&gt; RGB_chromaticity_coordinates_CIE_1931_chromaticity_diagram_plot(</span>
+<span class="sd">    ...     RGB, c)  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
+
+    <span class="n">colourspace</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">),</span> <span class="n">colourspace</span>
+    <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;colourspaces&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;colourspaces&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+
+    <span class="n">RGB_colourspaces_CIE_1931_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">alpha_p</span><span class="p">,</span> <span class="n">colour_p</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span>
+
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">XYZ_to_xy</span><span class="p">(</span><span class="n">RGB_to_XYZ</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span>
+                              <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">,</span>
+                              <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">,</span>
+                              <span class="n">colourspace</span><span class="o">.</span><span class="n">RGB_to_XYZ_matrix</span><span class="p">),</span>
+                   <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">)</span>
+
+    <span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="n">xy</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                  <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot">[docs]</a><span class="k">def</span> <span class="nf">RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+        <span class="n">RGB</span><span class="p">,</span>
+        <span class="n">colourspace</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given *RGB* colourspace array in *CIE 1960 UCS Chromaticity Diagram*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like</span>
+<span class="sd">        *RGB* colourspace array.</span>
+<span class="sd">    colourspace : unicode</span>
+<span class="sd">        *RGB* colourspace of the *RGB* array.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1960_UCS_chromaticity_diagram_plot`},</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.random.random((10, 10, 3))</span>
+<span class="sd">    &gt;&gt;&gt; c = &#39;Rec. 709&#39;</span>
+<span class="sd">    &gt;&gt;&gt; RGB_chromaticity_coordinates_CIE_1960_UCS_chromaticity_diagram_plot(</span>
+<span class="sd">    ...     RGB, c)  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
+
+    <span class="n">colourspace</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">),</span> <span class="n">colourspace</span>
+    <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;colourspaces&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;colourspaces&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+
+    <span class="n">RGB_colourspaces_CIE_1960_UCS_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">alpha_p</span><span class="p">,</span> <span class="n">colour_p</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span>
+
+    <span class="n">uv</span> <span class="o">=</span> <span class="n">UCS_to_uv</span><span class="p">(</span><span class="n">XYZ_to_UCS</span><span class="p">(</span><span class="n">RGB_to_XYZ</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span>
+                                         <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">,</span>
+                                         <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">,</span>
+                                         <span class="n">colourspace</span><span class="o">.</span><span class="n">RGB_to_XYZ_matrix</span><span class="p">)))</span>
+
+    <span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                  <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot">[docs]</a><span class="k">def</span> <span class="nf">RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span>
+        <span class="n">RGB</span><span class="p">,</span>
+        <span class="n">colourspace</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given *RGB* colourspace array in *CIE 1976 UCS Chromaticity Diagram*.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like</span>
+<span class="sd">        *RGB* colourspace array.</span>
+<span class="sd">    colourspace : unicode</span>
+<span class="sd">        *RGB* colourspace of the *RGB* array.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1976_UCS_chromaticity_diagram_plot`},</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.random.random((10, 10, 3))</span>
+<span class="sd">    &gt;&gt;&gt; c = &#39;Rec. 709&#39;</span>
+<span class="sd">    &gt;&gt;&gt; RGB_chromaticity_coordinates_CIE_1976_UCS_chromaticity_diagram_plot(</span>
+<span class="sd">    ...     RGB, c)  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
+
+    <span class="n">colourspace</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">),</span> <span class="n">colourspace</span>
+    <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;colourspaces&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;colourspaces&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+
+    <span class="n">RGB_colourspaces_CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">alpha_p</span><span class="p">,</span> <span class="n">colour_p</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span>
+
+    <span class="n">uv</span> <span class="o">=</span> <span class="n">Luv_to_uv</span><span class="p">(</span><span class="n">XYZ_to_Luv</span><span class="p">(</span><span class="n">RGB_to_XYZ</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span>
+                                         <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">,</span>
+                                         <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">,</span>
+                                         <span class="n">colourspace</span><span class="o">.</span><span class="n">RGB_to_XYZ_matrix</span><span class="p">),</span>
+                              <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">),</span>
+                   <span class="n">colourspace</span><span class="o">.</span><span class="n">whitepoint</span><span class="p">)</span>
+
+    <span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="n">uv</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                  <span class="n">alpha</span><span class="o">=</span><span class="n">alpha_p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="n">colour_p</span><span class="p">,</span>
+                  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="single_cctf_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.single_cctf_plot">[docs]</a><span class="k">def</span> <span class="nf">single_cctf_plot</span><span class="p">(</span><span class="n">colourspace</span><span class="o">=</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="n">decoding_cctf</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given colourspace colour component transfer function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    colourspace : unicode, optional</span>
+<span class="sd">        *RGB* Colourspace colour component transfer function to plot.</span>
+<span class="sd">    decoding_cctf : bool</span>
+<span class="sd">        Plot decoding colour component transfer function instead.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; single_cctf_plot()  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;{0} - {1} CCTF&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">colourspace</span><span class="p">,</span> <span class="s1">&#39;Decoding&#39;</span> <span class="k">if</span> <span class="n">decoding_cctf</span> <span class="k">else</span> <span class="s1">&#39;Encoding&#39;</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">multi_cctf_plot</span><span class="p">([</span><span class="n">colourspace</span><span class="p">],</span> <span class="n">decoding_cctf</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="multi_cctf_plot"><a class="viewcode-back" href="../../../colour.plotting.models.html#colour.plotting.multi_cctf_plot">[docs]</a><span class="k">def</span> <span class="nf">multi_cctf_plot</span><span class="p">(</span><span class="n">colourspaces</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">decoding_cctf</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given colourspaces colour component transfer functions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    colourspaces : array_like, optional</span>
+<span class="sd">        Colourspaces colour component transfer function to plot.</span>
+<span class="sd">    decoding_cctf : bool</span>
+<span class="sd">        Plot decoding colour component transfer function instead.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; multi_cctf_plot([&#39;Rec. 709&#39;, &#39;sRGB&#39;])  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure_size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span> <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">canvas</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colourspaces</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">colourspaces</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">,</span> <span class="s1">&#39;sRGB&#39;</span><span class="p">)</span>
+
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">colourspace</span> <span class="ow">in</span> <span class="n">colourspaces</span><span class="p">:</span>
+        <span class="n">colourspace</span> <span class="o">=</span> <span class="n">get_RGB_colourspace</span><span class="p">(</span><span class="n">colourspace</span><span class="p">)</span>
+
+        <span class="n">RGBs</span> <span class="o">=</span> <span class="p">(</span><span class="n">colourspace</span><span class="o">.</span><span class="n">decoding_cctf</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">decoding_cctf</span> <span class="k">else</span> <span class="n">colourspace</span><span class="o">.</span><span class="n">encoding_cctf</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span>
+                   <span class="n">RGBs</span><span class="p">,</span>
+                   <span class="n">label</span><span class="o">=</span><span class="s1">u&#39;{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">colourspace</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                   <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;{0} - {1} CCTFs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colourspaces</span><span class="p">),</span>
+            <span class="s1">&#39;Decoding&#39;</span> <span class="k">if</span> <span class="n">decoding_cctf</span> <span class="k">else</span> <span class="s1">&#39;Encoding&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;x_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;x_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Signal Value&#39;</span> <span class="k">if</span> <span class="n">decoding_cctf</span> <span class="k">else</span> <span class="s1">&#39;Tristimulus Value&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;y_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Tristimulus Value&#39;</span> <span class="k">if</span> <span class="n">decoding_cctf</span> <span class="k">else</span> <span class="s1">&#39;Signal Value&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;legend&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;legend_location&#39;</span><span class="p">:</span> <span class="s1">&#39;upper left&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;limits&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="s1">&#39;aspect&#39;</span><span class="p">:</span> <span class="s1">&#39;equal&#39;</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

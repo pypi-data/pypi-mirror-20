@@ -1,0 +1,693 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.ycbcr &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.models.rgb.ycbcr</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Y&#39;CbCr Colour Encoding</span>
+<span class="sd">======================</span>
+
+<span class="sd">Defines the *Y&#39;CbCr* colour encoding related transformations:</span>
+
+<span class="sd">-   :func:`RGB_to_YCbCr`</span>
+<span class="sd">-   :func:`YCbCr_to_RGB`</span>
+<span class="sd">-   :func:`RGB_to_YcCbcCrc`</span>
+<span class="sd">-   :func:`YcCbcCrc_to_RGB`</span>
+
+<span class="sd">Notes</span>
+<span class="sd">-----</span>
+<span class="sd">-   *Y&#39;CbCr* is not an absolute colourspace.</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">`YCbCr Colours Encoding Jupyter Notebook</span>
+<span class="sd">&lt;http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/\</span>
+<span class="sd">blob/master/notebooks/models/ycbcr.ipynb&gt;`_</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">.. [1]  Wikipedia. (n.d.). YCbCr. Retrieved February 29, 2016, from</span>
+<span class="sd">        https://en.wikipedia.org/wiki/YCbCr</span>
+<span class="sd">.. [2]  International Telecommunication Union. (2015). Recommendation</span>
+<span class="sd">        ITU-R BT.709-6 - Parameter values for the HDTV standards for</span>
+<span class="sd">        production and international programme exchange BT Series Broadcasting</span>
+<span class="sd">        service (Vol. 5). Retrieved from https://www.itu.int/dms_pubrec/\</span>
+<span class="sd">itu-r/rec/bt/R-REC-BT.709-6-201506-I!!PDF-E.pdf</span>
+<span class="sd">.. [3]  International Telecommunication Union. (2015). Recommendation</span>
+<span class="sd">        ITU-R BT.2020 - Parameter values for ultra-high definition television</span>
+<span class="sd">        systems for production and international programme exchange (Vol. 1).</span>
+<span class="sd">        Retrieved from https://www.itu.int/dms_pubrec/\</span>
+<span class="sd">itu-r/rec/bt/R-REC-BT.2020-2-201510-I!!PDF-E.pdf</span>
+<span class="sd">.. [4]  Society of Motion Picture and Television Engineers. (1999).</span>
+<span class="sd">        ANSI/SMPTE 240M-1995 - Signal Parameters - 1125-Line High-Definition</span>
+<span class="sd">        Production Systems, 1–7. Retrieved from</span>
+<span class="sd">        http://car.france3.mars.free.fr/\</span>
+<span class="sd">HD/INA-%2026%20jan%2006/SMPTE%20normes%20et%20confs/s240m.pdf</span>
+<span class="sd">.. [5]  International Telecommunication Union. (2011). Recommendation ITU-T</span>
+<span class="sd">        T.871 - Information technology – Digital compression and coding of</span>
+<span class="sd">        continuous-tone still images: JPEG File Interchange Format (JFIF).</span>
+<span class="sd">        Retrieved from https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;\</span>
+<span class="sd">id=T-REC-T.871-201105-I!!PDF-E&amp;type=items</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">colour.utilities</span> <span class="kn">import</span> <span class="n">CaseInsensitiveMapping</span><span class="p">,</span> <span class="n">tsplit</span><span class="p">,</span> <span class="n">tstack</span>
+<span class="kn">from</span> <span class="nn">colour.models.rgb.transfer_functions</span> <span class="kn">import</span> <span class="n">oetf_BT2020</span><span class="p">,</span> <span class="n">eotf_BT2020</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Development&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;YCBCR_WEIGHTS&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RGB_range&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;YCbCr_ranges&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RGB_to_YCbCr&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;YCbCr_to_RGB&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;RGB_to_YcCbcCrc&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;YcCbcCrc_to_RGB&#39;</span><span class="p">]</span>
+
+<span class="n">YCBCR_WEIGHTS</span> <span class="o">=</span> <span class="n">CaseInsensitiveMapping</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;Rec. 601&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2990</span><span class="p">,</span> <span class="mf">0.1140</span><span class="p">]),</span>
+     <span class="s1">&#39;Rec. 709&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2126</span><span class="p">,</span> <span class="mf">0.0722</span><span class="p">]),</span>
+     <span class="s1">&#39;Rec. 2020&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2627</span><span class="p">,</span> <span class="mf">0.0593</span><span class="p">]),</span>
+     <span class="s1">&#39;SMPTE-240M&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2122</span><span class="p">,</span> <span class="mf">0.0865</span><span class="p">])})</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Luma weightings presets.</span>
+
+<span class="sd">YCBCR_WEIGHTS : dict</span>
+<span class="sd">    **{&#39;Rec. 601&#39;, &#39;Rec. 709&#39;, &#39;Rec. 2020&#39;, &#39;SMPTE-240M}**</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="RGB_range"><a class="viewcode-back" href="../../../../colour.models.rgb.ycbcr.html#colour.RGB_range">[docs]</a><span class="k">def</span> <span class="nf">RGB_range</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">is_legal</span><span class="p">,</span> <span class="n">is_int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">    Returns the *RGB* range array for given bit depth, range legality and</span>
+<span class="sd">    representation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bits : int</span>
+<span class="sd">        Bit depth of the *RGB* output ranges array.</span>
+<span class="sd">    is_legal : bool</span>
+<span class="sd">        Whether the *RGB* output ranges array is legal.</span>
+<span class="sd">    is_int : bool</span>
+<span class="sd">        Whether the *RGB* output ranges array represents integer code values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *RGB* ranges array.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB_range(8, True, True)</span>
+<span class="sd">    array([ 16, 235])</span>
+<span class="sd">    &gt;&gt;&gt; RGB_range(8, True, False)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 0.0627451...,  0.9215686...])</span>
+<span class="sd">    &gt;&gt;&gt; RGB_range(10, False, False)</span>
+<span class="sd">    array([ 0.,  1.])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_legal</span><span class="p">:</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">235</span><span class="p">])</span>
+        <span class="n">ranges</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_int</span><span class="p">:</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ranges</span></div>
+
+
+<div class="viewcode-block" id="YCbCr_ranges"><a class="viewcode-back" href="../../../../colour.models.rgb.ycbcr.html#colour.YCbCr_ranges">[docs]</a><span class="k">def</span> <span class="nf">YCbCr_ranges</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">is_legal</span><span class="p">,</span> <span class="n">is_int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">    Returns the *Y&#39;CbCr* colour encoding ranges array for given bit depth,</span>
+<span class="sd">    range legality and representation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bits : int</span>
+<span class="sd">        Bit depth of the *Y&#39;CbCr* colour encoding ranges array.</span>
+<span class="sd">    is_legal : bool</span>
+<span class="sd">        Whether the *Y&#39;CbCr* colour encoding ranges array is legal.</span>
+<span class="sd">    is_int : bool</span>
+<span class="sd">        Whether the *Y&#39;CbCr* colour encoding ranges array represents integer</span>
+<span class="sd">        code values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *Y&#39;CbCr* colour encoding ranges array.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; YCbCr_ranges(8, True, True)</span>
+<span class="sd">    array([ 16, 235,  16, 240])</span>
+<span class="sd">    &gt;&gt;&gt; YCbCr_ranges(8, True, False)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 0.0627451...,  0.9215686...,  0.0627451...,  0.9411764...])</span>
+<span class="sd">    &gt;&gt;&gt; YCbCr_ranges(10, False, False)</span>
+<span class="sd">    array([ 0. ,  1. , -0.5,  0.5])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_legal</span><span class="p">:</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">240</span><span class="p">])</span>
+        <span class="n">ranges</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_int</span><span class="p">:</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">is_int</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_legal</span><span class="p">:</span>
+        <span class="n">ranges</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">bits</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_int</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_legal</span><span class="p">:</span>
+        <span class="n">ranges</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
+        <span class="n">ranges</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+    <span class="k">return</span> <span class="n">ranges</span></div>
+
+
+<div class="viewcode-block" id="RGB_to_YCbCr"><a class="viewcode-back" href="../../../../colour.models.rgb.ycbcr.html#colour.RGB_to_YCbCr">[docs]</a><span class="k">def</span> <span class="nf">RGB_to_YCbCr</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span>
+                 <span class="n">K</span><span class="o">=</span><span class="n">YCBCR_WEIGHTS</span><span class="p">[</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">],</span>
+                 <span class="n">in_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">in_legal</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">in_int</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">out_bits</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                 <span class="n">out_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                 <span class="n">out_int</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts an array of *R&#39;G&#39;B&#39;* values to the corresponding *Y&#39;CbCr* colour</span>
+<span class="sd">    encoding values array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like</span>
+<span class="sd">        Input *R&#39;G&#39;B&#39;* array of floats or integer values.</span>
+<span class="sd">    K : array_like, optional</span>
+<span class="sd">        Luma weighting coefficients of red and blue. See :attr:</span>
+<span class="sd">        `YCBCR_WEIGHTS` for presets. Default is `(0.2126, 0.0722)`, the</span>
+<span class="sd">        weightings for Rec. 709.</span>
+<span class="sd">    in_bits : int, optional</span>
+<span class="sd">        Bit depth for integer input, or used in the calculation of the</span>
+<span class="sd">        denominator for legal range float values, i.e. 8-bit means the float</span>
+<span class="sd">        value for legal white is `235 / 255`. Default is `10`.</span>
+<span class="sd">    in_legal : bool, optional</span>
+<span class="sd">        Whether to treat the input values as legal range. Default is `False`.</span>
+<span class="sd">    in_int : bool, optional</span>
+<span class="sd">        Whether to treat the input values as `in_bits` integer code values.</span>
+<span class="sd">        Default is `False`.</span>
+<span class="sd">    out_bits : int, optional</span>
+<span class="sd">        Bit depth for integer output, or used in the calculation of the</span>
+<span class="sd">        denominator for legal range float values, i.e. 8-bit means the float</span>
+<span class="sd">        value for legal white is `235 / 255`. Ignored if `out_legal` and</span>
+<span class="sd">        `out_int` are both False. Default is `8`.</span>
+<span class="sd">    out_legal : bool, optional</span>
+<span class="sd">        Whether to return legal range values. Default is `True`.</span>
+<span class="sd">    out_int : bool, optional</span>
+<span class="sd">        Whether to return values as `out_bits` integer code values. Default is</span>
+<span class="sd">        `False`.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    in_range : array_like, optional</span>
+<span class="sd">        Array overriding the computed range such as</span>
+<span class="sd">        `in_range = (RGB_min, RGB_max)`. If `in_range` is undefined, `RGB_min`</span>
+<span class="sd">        and `RGB_max` will be computed using :func:`RGB_range` definition.</span>
+<span class="sd">    out_range : array_like, optional</span>
+<span class="sd">        Array overriding the computed range such as</span>
+<span class="sd">        `out_range = (Y_min, Y_max, C_min, C_max)`. If `out_range` is</span>
+<span class="sd">        undefined, `Y_min`, `Y_max`, `C_min` and `C_max` will be computed</span>
+<span class="sd">        using :func:`YCbCr_ranges` definition.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *Y&#39;CbCr* colour encoding array of integer or float values.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    For *Recommendation ITU-R BT.2020*, :func:`RGB_to_YCbCr` definition is only</span>
+<span class="sd">    applicable to the non-constant luminance implementation.</span>
+<span class="sd">    :func:`RGB_to_YcCbcCrc` definition should be used for the constant</span>
+<span class="sd">    luminance case as per [3]_.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    -   The default arguments, ``**{&#39;in_bits&#39;: 10, &#39;in_legal&#39;: False,</span>
+<span class="sd">        &#39;in_int&#39;: False, &#39;out_bits&#39;: 8, &#39;out_legal&#39;: True, &#39;out_int&#39;: False}``</span>
+<span class="sd">        transform a float *R&#39;G&#39;B&#39;* input array in range [0, 1] (`in_bits` is</span>
+<span class="sd">        ignored) to a float *Y&#39;CbCr* output array where *Y&#39;* is in range</span>
+<span class="sd">        [16 / 255, 235 / 255] and *Cb* and *Cr* are in range</span>
+<span class="sd">        [16 / 255, 240./255]. The float values are calculated based on an</span>
+<span class="sd">        [0, 255] integer range, but no 8-bit quantisation or clamping are</span>
+<span class="sd">        performed.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.array([1.0, 1.0, 1.0])</span>
+<span class="sd">    &gt;&gt;&gt; RGB_to_YCbCr(RGB)  # doctest: +ELLIPSIS</span>
+<span class="sd">    array([ 0.9215686...,  0.5019607...,  0.5019607...])</span>
+
+<span class="sd">    Matching float output of The Foundry Nuke&#39;s Colorspace node set to YCbCr:</span>
+
+<span class="sd">    &gt;&gt;&gt; RGB_to_YCbCr(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     RGB,</span>
+<span class="sd">    ...     out_range=(16 / 255, 235 / 255, 15.5 / 255, 239.5 / 255))</span>
+<span class="sd">    array([ 0.9215686...,  0.5       ,  0.5       ])</span>
+
+<span class="sd">    Matching float output of The Foundry Nuke&#39;s Colorspace node set to YPbPr:</span>
+
+<span class="sd">    &gt;&gt;&gt; RGB_to_YCbCr(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     RGB,</span>
+<span class="sd">    ...     out_legal=False,</span>
+<span class="sd">    ...     out_int=False)</span>
+<span class="sd">    array([ 1.,  0.,  0.])</span>
+
+<span class="sd">    Creating integer code values as per standard 10-bit SDI:</span>
+
+<span class="sd">    &gt;&gt;&gt; RGB_to_YCbCr(RGB, out_legal=True, out_bits=10, out_int=True)</span>
+<span class="sd">    array([940, 512, 512])</span>
+
+<span class="sd">    For JFIF JPEG conversion as per ITU-T T.871 [5]_:</span>
+
+<span class="sd">    &gt;&gt;&gt; RGB = np.array([102, 0, 51])</span>
+<span class="sd">    &gt;&gt;&gt; RGB_to_YCbCr(</span>
+<span class="sd">    ...     RGB,</span>
+<span class="sd">    ...     K=YCBCR_WEIGHTS[&#39;Rec. 601&#39;],</span>
+<span class="sd">    ...     in_range=(0, 255),</span>
+<span class="sd">    ...     out_range=(0, 255, 0, 256),</span>
+<span class="sd">    ...     out_int=True)</span>
+<span class="sd">    array([ 36, 136, 175])</span>
+
+<span class="sd">    Note the use of 256 for the max *Cb / Cr* value, which is required so that</span>
+<span class="sd">    the *Cb* and *Cr* output is centered about 128. Using 255 centres it</span>
+<span class="sd">    about 127.5, meaning that there is no integer code value to represent</span>
+<span class="sd">    achromatic colours. This does however create the possibility of output</span>
+<span class="sd">    integer codes with value of 256, which cannot be stored in 8-bit integer</span>
+<span class="sd">    representation. Recommendation ITU-T T.871 specifies these should be</span>
+<span class="sd">    clamped to 255.</span>
+
+<span class="sd">    These JFIF JPEG ranges are also obtained as follows:</span>
+
+<span class="sd">    &gt;&gt;&gt; RGB_to_YCbCr(</span>
+<span class="sd">    ...     RGB,</span>
+<span class="sd">    ...     K=YCBCR_WEIGHTS[&#39;Rec. 601&#39;],</span>
+<span class="sd">    ...     in_bits=8,</span>
+<span class="sd">    ...     in_int=True,</span>
+<span class="sd">    ...     out_legal=False,</span>
+<span class="sd">    ...     out_int=True)</span>
+<span class="sd">    array([ 36, 136, 175])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>
+    <span class="n">Kr</span><span class="p">,</span> <span class="n">Kb</span> <span class="o">=</span> <span class="n">K</span>
+    <span class="n">RGB_min</span><span class="p">,</span> <span class="n">RGB_max</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;in_range&#39;</span><span class="p">,</span> <span class="n">RGB_range</span><span class="p">(</span><span class="n">in_bits</span><span class="p">,</span> <span class="n">in_legal</span><span class="p">,</span> <span class="n">in_int</span><span class="p">))</span>
+    <span class="n">Y_min</span><span class="p">,</span> <span class="n">Y_max</span><span class="p">,</span> <span class="n">C_min</span><span class="p">,</span> <span class="n">C_max</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;out_range&#39;</span><span class="p">,</span> <span class="n">YCbCr_ranges</span><span class="p">(</span><span class="n">out_bits</span><span class="p">,</span> <span class="n">out_legal</span><span class="p">,</span> <span class="n">out_int</span><span class="p">))</span>
+
+    <span class="n">RGB_float</span> <span class="o">=</span> <span class="n">RGB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">)</span> <span class="o">-</span> <span class="n">RGB_min</span>
+    <span class="n">RGB_float</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">RGB_max</span> <span class="o">-</span> <span class="n">RGB_min</span><span class="p">)</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">RGB_float</span><span class="p">)</span>
+
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Kr</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Kr</span> <span class="o">-</span> <span class="n">Kb</span><span class="p">)</span> <span class="o">*</span> <span class="n">G</span> <span class="o">+</span> <span class="n">Kb</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="n">Cb</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Kb</span><span class="p">)</span>
+    <span class="n">Cr</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Kr</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">*=</span> <span class="n">Y_max</span> <span class="o">-</span> <span class="n">Y_min</span>
+    <span class="n">Y</span> <span class="o">+=</span> <span class="n">Y_min</span>
+    <span class="n">Cb</span> <span class="o">*=</span> <span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span>
+    <span class="n">Cr</span> <span class="o">*=</span> <span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span>
+    <span class="n">Cb</span> <span class="o">+=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">Cr</span> <span class="o">+=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">YCbCr</span> <span class="o">=</span> <span class="n">tstack</span><span class="p">((</span><span class="n">Y</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cr</span><span class="p">))</span>
+    <span class="n">YCbCr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">YCbCr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span> <span class="k">if</span> <span class="n">out_int</span> <span class="k">else</span> <span class="n">YCbCr</span>
+
+    <span class="k">return</span> <span class="n">YCbCr</span></div>
+
+
+<div class="viewcode-block" id="YCbCr_to_RGB"><a class="viewcode-back" href="../../../../colour.models.rgb.ycbcr.html#colour.YCbCr_to_RGB">[docs]</a><span class="k">def</span> <span class="nf">YCbCr_to_RGB</span><span class="p">(</span><span class="n">YCbCr</span><span class="p">,</span>
+                 <span class="n">K</span><span class="o">=</span><span class="n">YCBCR_WEIGHTS</span><span class="p">[</span><span class="s1">&#39;Rec. 709&#39;</span><span class="p">],</span>
+                 <span class="n">in_bits</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                 <span class="n">in_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                 <span class="n">in_int</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">out_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">out_legal</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">out_int</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts an array of *Y&#39;CbCr* colour encoding values to the corresponding</span>
+<span class="sd">    *R&#39;G&#39;B&#39;* values array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    YCbCr : array_like</span>
+<span class="sd">        Input *Y&#39;CbCr* colour encoding array of integer or float values.</span>
+<span class="sd">    K : array_like, optional</span>
+<span class="sd">        Luma weighting coefficients of red and blue. See :attr:</span>
+<span class="sd">        `YCBCR_WEIGHTS` for presets. Default is `(0.2126, 0.0722)`, the</span>
+<span class="sd">        weightings for Rec. 709.</span>
+<span class="sd">    in_bits : int, optional</span>
+<span class="sd">        Bit depth for integer input, or used in the calculation of the</span>
+<span class="sd">        denominator for legal range float values, i.e. 8-bit means the float</span>
+<span class="sd">        value for legal white is `235 / 255`. Default is `10`.</span>
+<span class="sd">    in_legal : bool, optional</span>
+<span class="sd">        Whether to treat the input values as legal range. Default is `False`.</span>
+<span class="sd">    in_int : bool, optional</span>
+<span class="sd">        Whether to treat the input values as `in_bits` integer code values.</span>
+<span class="sd">        Default is `False`.</span>
+<span class="sd">    out_bits : int, optional</span>
+<span class="sd">        Bit depth for integer output, or used in the calculation of the</span>
+<span class="sd">        denominator for legal range float values, i.e. 8-bit means the float</span>
+<span class="sd">        value for legal white is `235 / 255`. Ignored if `out_legal` and</span>
+<span class="sd">        `out_int` are both False. Default is `8`.</span>
+<span class="sd">    out_legal : bool, optional</span>
+<span class="sd">        Whether to return legal range values. Default is `True`.</span>
+<span class="sd">    out_int : bool, optional</span>
+<span class="sd">        Whether to return values as `out_bits` integer code values. Default is</span>
+<span class="sd">        `False`.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    in_range : array_like, optional</span>
+<span class="sd">        Array overriding the computed range such as</span>
+<span class="sd">        `in_range = (Y_min, Y_max, C_min, C_max)`. If `in_range` is undefined,</span>
+<span class="sd">        `Y_min`, `Y_max`, `C_min` and `C_max` will be computed using</span>
+<span class="sd">        :func:`YCbCr_ranges` definition.</span>
+<span class="sd">    out_range : array_like, optional</span>
+<span class="sd">        Array overriding the computed range such as</span>
+<span class="sd">        `out_range = (RGB_min, RGB_max)`. If `out_range` is undefined,</span>
+<span class="sd">        `RGB_min` and `RGB_max` will be computed using :func:`RGB_range`</span>
+<span class="sd">        definition.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *R&#39;G&#39;B&#39;* array of integer or float values.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    For *Recommendation ITU-R BT.2020*, :func:`YCbCr_to_RGB`</span>
+<span class="sd">    definition is only applicable to the non-constant luminance implementation.</span>
+<span class="sd">    :func:`YcCbcCrc_to_RGB` definition should be used for the constant</span>
+<span class="sd">    luminance case as per [3]_.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; YCbCr = np.array([502, 512, 512])</span>
+<span class="sd">    &gt;&gt;&gt; YCbCr_to_RGB(</span>
+<span class="sd">    ...     YCbCr,</span>
+<span class="sd">    ...     in_bits=10,</span>
+<span class="sd">    ...     in_legal=True,</span>
+<span class="sd">    ...     in_int=True)</span>
+<span class="sd">    array([ 0.5,  0.5,  0.5])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">YCbCr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">YCbCr</span><span class="p">)</span>
+    <span class="n">Y</span><span class="p">,</span> <span class="n">Cb</span><span class="p">,</span> <span class="n">Cr</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">YCbCr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">))</span>
+    <span class="n">Kr</span><span class="p">,</span> <span class="n">Kb</span> <span class="o">=</span> <span class="n">K</span>
+    <span class="n">Y_min</span><span class="p">,</span> <span class="n">Y_max</span><span class="p">,</span> <span class="n">C_min</span><span class="p">,</span> <span class="n">C_max</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;in_range&#39;</span><span class="p">,</span> <span class="n">YCbCr_ranges</span><span class="p">(</span><span class="n">in_bits</span><span class="p">,</span> <span class="n">in_legal</span><span class="p">,</span> <span class="n">in_int</span><span class="p">))</span>
+    <span class="n">RGB_min</span><span class="p">,</span> <span class="n">RGB_max</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;out_range&#39;</span><span class="p">,</span> <span class="n">RGB_range</span><span class="p">(</span><span class="n">out_bits</span><span class="p">,</span> <span class="n">out_legal</span><span class="p">,</span> <span class="n">out_int</span><span class="p">))</span>
+
+    <span class="n">Y</span> <span class="o">-=</span> <span class="n">Y_min</span>
+    <span class="n">Cb</span> <span class="o">-=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">Cr</span> <span class="o">-=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">Y</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">Y_max</span> <span class="o">-</span> <span class="n">Y_min</span><span class="p">)</span>
+    <span class="n">Cb</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span><span class="p">)</span>
+    <span class="n">Cr</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Kr</span><span class="p">)</span> <span class="o">*</span> <span class="n">Cr</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Kb</span><span class="p">)</span> <span class="o">*</span> <span class="n">Cb</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">Kr</span> <span class="o">*</span> <span class="n">R</span> <span class="o">-</span> <span class="n">Kb</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Kr</span> <span class="o">-</span> <span class="n">Kb</span><span class="p">)</span>
+
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">tstack</span><span class="p">((</span><span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+    <span class="n">RGB</span> <span class="o">*=</span> <span class="n">RGB_max</span> <span class="o">-</span> <span class="n">RGB_min</span>
+    <span class="n">RGB</span> <span class="o">+=</span> <span class="n">RGB_min</span>
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span> <span class="k">if</span> <span class="n">out_int</span> <span class="k">else</span> <span class="n">RGB</span>
+
+    <span class="k">return</span> <span class="n">RGB</span></div>
+
+
+<div class="viewcode-block" id="RGB_to_YcCbcCrc"><a class="viewcode-back" href="../../../../colour.models.rgb.ycbcr.html#colour.RGB_to_YcCbcCrc">[docs]</a><span class="k">def</span> <span class="nf">RGB_to_YcCbcCrc</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span>
+                    <span class="n">out_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">out_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                    <span class="n">out_int</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                    <span class="n">is_12_bits_system</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts an array of *RGB* linear values to the corresponding *Yc&#39;Cbc&#39;Crc&#39;*</span>
+<span class="sd">    colour encoding values array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RGB : array_like</span>
+<span class="sd">        Input *RGB* array of linear float values.</span>
+<span class="sd">    out_bits : int, optional</span>
+<span class="sd">        Bit depth for integer output, or used in the calculation of the</span>
+<span class="sd">        denominator for legal range float values, i.e. 8-bit means the float</span>
+<span class="sd">        value for legal white is `235 / 255`. Ignored if `out_legal` and</span>
+<span class="sd">        `out_int` are both False. Default is `10`.</span>
+<span class="sd">    out_legal : bool, optional</span>
+<span class="sd">        Whether to return legal range values. Default is `True`.</span>
+<span class="sd">    out_int : bool, optional</span>
+<span class="sd">        Whether to return values as `out_bits` integer code values. Default is</span>
+<span class="sd">        `False`.</span>
+<span class="sd">    is_12_bits_system : bool, optional</span>
+<span class="sd">        *Recommendation ITU-R BT.2020* OETF (OECF) adopts different parameters</span>
+<span class="sd">        for 10 and 12 bit systems. Default is `False`.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    out_range : array_like, optional</span>
+<span class="sd">        Array overriding the computed range such as</span>
+<span class="sd">        `out_range = (Y_min, Y_max, C_min, C_max)`. If `out_range` is</span>
+<span class="sd">        undefined, `Y_min`, `Y_max`, `C_min` and `C_max` will be computed</span>
+<span class="sd">        using :func:`YCbCr_ranges` definition.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *Yc&#39;Cbc&#39;Crc&#39;* colour encoding array of integer or float values.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    This definition is specifically for usage with</span>
+<span class="sd">    *Recommendation ITU-R BT.2020* [3]_ when adopting the constant luminance</span>
+<span class="sd">    implementation.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; RGB = np.array([0.18, 0.18, 0.18])</span>
+<span class="sd">    &gt;&gt;&gt; RGB_to_YcCbcCrc(</span>
+<span class="sd">    ...     RGB,</span>
+<span class="sd">    ...     out_legal=True,</span>
+<span class="sd">    ...     out_bits=10,</span>
+<span class="sd">    ...     out_int=True,</span>
+<span class="sd">    ...     is_12_bits_system=False)</span>
+<span class="sd">    array([422, 512, 512])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>
+    <span class="n">Y_min</span><span class="p">,</span> <span class="n">Y_max</span><span class="p">,</span> <span class="n">C_min</span><span class="p">,</span> <span class="n">C_max</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;out_range&#39;</span><span class="p">,</span> <span class="n">YCbCr_ranges</span><span class="p">(</span><span class="n">out_bits</span><span class="p">,</span> <span class="n">out_legal</span><span class="p">,</span> <span class="n">out_int</span><span class="p">))</span>
+
+    <span class="n">Yc</span> <span class="o">=</span> <span class="mf">0.2627</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="mf">0.6780</span> <span class="o">*</span> <span class="n">G</span> <span class="o">+</span> <span class="mf">0.0593</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="n">Yc</span> <span class="o">=</span> <span class="n">oetf_BT2020</span><span class="p">(</span><span class="n">Yc</span><span class="p">,</span> <span class="n">is_12_bits_system</span><span class="o">=</span><span class="n">is_12_bits_system</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">oetf_BT2020</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">is_12_bits_system</span><span class="o">=</span><span class="n">is_12_bits_system</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">oetf_BT2020</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">is_12_bits_system</span><span class="o">=</span><span class="n">is_12_bits_system</span><span class="p">)</span>
+    <span class="n">Cbc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">B</span> <span class="o">-</span> <span class="n">Yc</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">Yc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.9404</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">Yc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.5816</span><span class="p">)</span>
+    <span class="n">Crc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">R</span> <span class="o">-</span> <span class="n">Yc</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">Yc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.7184</span><span class="p">,</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">Yc</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.9936</span><span class="p">)</span>
+    <span class="n">Yc</span> <span class="o">*=</span> <span class="n">Y_max</span> <span class="o">-</span> <span class="n">Y_min</span>
+    <span class="n">Yc</span> <span class="o">+=</span> <span class="n">Y_min</span>
+    <span class="n">Cbc</span> <span class="o">*=</span> <span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span>
+    <span class="n">Crc</span> <span class="o">*=</span> <span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span>
+    <span class="n">Cbc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">Crc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">YcCbcCrc</span> <span class="o">=</span> <span class="n">tstack</span><span class="p">((</span><span class="n">Yc</span><span class="p">,</span> <span class="n">Cbc</span><span class="p">,</span> <span class="n">Crc</span><span class="p">))</span>
+    <span class="n">YcCbcCrc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">YcCbcCrc</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span> <span class="k">if</span> <span class="n">out_int</span> <span class="k">else</span> <span class="n">YcCbcCrc</span>
+
+    <span class="k">return</span> <span class="n">YcCbcCrc</span></div>
+
+
+<div class="viewcode-block" id="YcCbcCrc_to_RGB"><a class="viewcode-back" href="../../../../colour.models.rgb.ycbcr.html#colour.YcCbcCrc_to_RGB">[docs]</a><span class="k">def</span> <span class="nf">YcCbcCrc_to_RGB</span><span class="p">(</span><span class="n">YcCbcCrc</span><span class="p">,</span>
+                    <span class="n">in_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">in_legal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                    <span class="n">in_int</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                    <span class="n">is_12_bits_system</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts an array of *Yc&#39;Cbc&#39;Crc&#39;* colour encoding values to the</span>
+<span class="sd">    corresponding *RGB* array of linear values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    YcCbcCrc : array_like</span>
+<span class="sd">        Input *Yc&#39;Cbc&#39;Crc&#39;* colour encoding array of linear float values.</span>
+<span class="sd">    in_bits : int, optional</span>
+<span class="sd">        Bit depth for integer input, or used in the calculation of the</span>
+<span class="sd">        denominator for legal range float values, i.e. 8-bit means the float</span>
+<span class="sd">        value for legal white is `235 / 255`. Default is `10`.</span>
+<span class="sd">    in_legal : bool, optional</span>
+<span class="sd">        Whether to treat the input values as legal range. Default is `False`.</span>
+<span class="sd">    in_int : bool, optional</span>
+<span class="sd">        Whether to treat the input values as `in_bits` integer code values.</span>
+<span class="sd">        Default is `False`.</span>
+<span class="sd">    is_12_bits_system : bool, optional</span>
+<span class="sd">        *Recommendation ITU-R BT.2020* EOTF (EOCF) adopts different parameters</span>
+<span class="sd">        for 10 and 12 bit systems. Default is `False`.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    in_range : array_like, optional</span>
+<span class="sd">        Array overriding the computed range such as</span>
+<span class="sd">        `in_range = (Y_min, Y_max, C_min, C_max)`. If `in_range` is undefined,</span>
+<span class="sd">        `Y_min`, `Y_max`, `C_min` and `C_max` will be computed using</span>
+<span class="sd">        :func:`YCbCr_ranges` definition.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        *RGB* array of linear float values.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    This definition is specifically for usage with</span>
+<span class="sd">    *Recommendation ITU-R BT.2020* [3]_ when adopting the constant luminance</span>
+<span class="sd">    implementation.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; YcCbcCrc = np.array([1689, 2048, 2048])</span>
+<span class="sd">    &gt;&gt;&gt; YcCbcCrc_to_RGB(  # doctest: +ELLIPSIS</span>
+<span class="sd">    ...     YcCbcCrc,</span>
+<span class="sd">    ...     in_legal=True,</span>
+<span class="sd">    ...     in_bits=12,</span>
+<span class="sd">    ...     in_int=True,</span>
+<span class="sd">    ...     is_12_bits_system=True)</span>
+<span class="sd">    array([ 0.1800903...,  0.1800903...,  0.1800903...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">YcCbcCrc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">YcCbcCrc</span><span class="p">)</span>
+    <span class="n">Yc</span><span class="p">,</span> <span class="n">Cbc</span><span class="p">,</span> <span class="n">Crc</span> <span class="o">=</span> <span class="n">tsplit</span><span class="p">(</span><span class="n">YcCbcCrc</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">))</span>
+    <span class="n">Y_min</span><span class="p">,</span> <span class="n">Y_max</span><span class="p">,</span> <span class="n">C_min</span><span class="p">,</span> <span class="n">C_max</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;in_range&#39;</span><span class="p">,</span> <span class="n">YCbCr_ranges</span><span class="p">(</span><span class="n">in_bits</span><span class="p">,</span> <span class="n">in_legal</span><span class="p">,</span> <span class="n">in_int</span><span class="p">))</span>
+
+    <span class="n">Yc</span> <span class="o">-=</span> <span class="n">Y_min</span>
+    <span class="n">Cbc</span> <span class="o">-=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">Crc</span> <span class="o">-=</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">+</span> <span class="n">C_min</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">Yc</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">Y_max</span> <span class="o">-</span> <span class="n">Y_min</span><span class="p">)</span>
+    <span class="n">Cbc</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span><span class="p">)</span>
+    <span class="n">Crc</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">-</span> <span class="n">C_min</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Cbc</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Cbc</span> <span class="o">*</span> <span class="mf">1.9404</span> <span class="o">+</span> <span class="n">Yc</span><span class="p">,</span> <span class="n">Cbc</span> <span class="o">*</span> <span class="mf">1.5816</span> <span class="o">+</span> <span class="n">Yc</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Crc</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Crc</span> <span class="o">*</span> <span class="mf">1.7184</span> <span class="o">+</span> <span class="n">Yc</span><span class="p">,</span> <span class="n">Crc</span> <span class="o">*</span> <span class="mf">0.9936</span> <span class="o">+</span> <span class="n">Yc</span><span class="p">)</span>
+    <span class="n">Yc</span> <span class="o">=</span> <span class="n">eotf_BT2020</span><span class="p">(</span><span class="n">Yc</span><span class="p">,</span> <span class="n">is_12_bits_system</span><span class="o">=</span><span class="n">is_12_bits_system</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">eotf_BT2020</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">is_12_bits_system</span><span class="o">=</span><span class="n">is_12_bits_system</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">eotf_BT2020</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">is_12_bits_system</span><span class="o">=</span><span class="n">is_12_bits_system</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="p">(</span><span class="n">Yc</span> <span class="o">-</span> <span class="mf">0.0593</span> <span class="o">*</span> <span class="n">B</span> <span class="o">-</span> <span class="mf">0.2627</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.6780</span>
+
+    <span class="n">RGB</span> <span class="o">=</span> <span class="n">tstack</span><span class="p">((</span><span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">RGB</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../index.html">
+              <img class="logo" src="../../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

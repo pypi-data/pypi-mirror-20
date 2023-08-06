@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.ipt Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.ipt">
+<span id="colour-models-ipt-module"></span><h1>colour.models.ipt Module<a class="headerlink" href="#module-colour.models.ipt" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ipt-colourspace">
+<h2>IPT Colourspace<a class="headerlink" href="#ipt-colourspace" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>IPT</em> colourspace transformations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.ipt.XYZ_to_IPT" title="colour.models.ipt.XYZ_to_IPT"><code class="xref py py-func docutils literal"><span class="pre">XYZ_to_IPT()</span></code></a></li>
+<li><a class="reference internal" href="#colour.models.ipt.IPT_to_XYZ" title="colour.models.ipt.IPT_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">IPT_to_XYZ()</span></code></a></li>
+</ul>
+<p>And computation of correlates:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.ipt.IPT_hue_angle" title="colour.models.ipt.IPT_hue_angle"><code class="xref py py-func docutils literal"><span class="pre">IPT_hue_angle()</span></code></a></li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Fairchild, M. D. (2013). IPT Colourspace. In Color Appearance Models
+(3rd ed., pp. 6197–6223). Wiley. ISBN:B00DAYO8E2</td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.models.ipt.IPT_XYZ_TO_LMS_MATRIX">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">IPT_XYZ_TO_LMS_MATRIX</code><em class="property"> = array([[ 0.4002,  0.7075, -0.0807],        [-0.228 ,  1.15  ,  0.0612],        [ 0.    ,  0.    ,  0.9184]])</em><a class="headerlink" href="#colour.models.ipt.IPT_XYZ_TO_LMS_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE XYZ</em> tristimulus values to normalised cone responses matrix.</p>
+<p>IPT_XYZ_TO_LMS_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.ipt.IPT_LMS_TO_XYZ_MATRIX">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">IPT_LMS_TO_XYZ_MATRIX</code><em class="property"> = array([[ 1.85024294, -1.13830164,  0.23843496],        [ 0.36683078,  0.64388454, -0.01067344],        [ 0.        ,  0.        ,  1.08885017]])</em><a class="headerlink" href="#colour.models.ipt.IPT_LMS_TO_XYZ_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalised cone responses to <em>CIE XYZ</em> tristimulus values matrix.</p>
+<p>IPT_LMS_TO_XYZ_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.ipt.IPT_LMS_TO_IPT_MATRIX">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">IPT_LMS_TO_IPT_MATRIX</code><em class="property"> = array([[ 0.4   ,  0.4   ,  0.2   ],        [ 4.455 , -4.851 ,  0.396 ],        [ 0.8056,  0.3572, -1.1628]])</em><a class="headerlink" href="#colour.models.ipt.IPT_LMS_TO_IPT_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalised cone responses to <em>IPT</em> colourspace matrix.</p>
+<p>IPT_LMS_TO_IPT_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.ipt.IPT_IPT_TO_LMS_MATRIX">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">IPT_IPT_TO_LMS_MATRIX</code><em class="property"> = array([[ 1.        ,  0.09756893,  0.20522643],        [ 1.        , -0.11387649,  0.13321716],        [ 1.        ,  0.03261511, -0.67688718]])</em><a class="headerlink" href="#colour.models.ipt.IPT_IPT_TO_LMS_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>IPT</em> colourspace to normalised cone responses matrix.</p>
+<p>IPT_IPT_TO_LMS_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.ipt.XYZ_to_IPT">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">XYZ_to_IPT</code><span class="sig-paren">(</span><em>XYZ</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/ipt.html#XYZ_to_IPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.ipt.XYZ_to_IPT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE XYZ</em> tristimulus values to <em>IPT</em> colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>IPT</em> colourspace array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values needs to be adapted for
+<em>CIE Standard Illuminant D Series</em> <em>D65</em>.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.96907232</span><span class="p">,</span> <span class="mf">1.00000000</span><span class="p">,</span> <span class="mf">1.12179215</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_IPT</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>  
+<span class="go">array([ 1.0030082...,  0.0190691..., -0.0136929...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.ipt.IPT_to_XYZ">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">IPT_to_XYZ</code><span class="sig-paren">(</span><em>IPT</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/ipt.html#IPT_to_XYZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.ipt.IPT_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>IPT</em> colourspace to <em>CIE XYZ</em> tristimulus values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>IPT</strong> (<em>array_like</em>) &#8211; <em>IPT</em> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IPT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.00300825</span><span class="p">,</span> <span class="mf">0.01906918</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01369292</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IPT_to_XYZ</span><span class="p">(</span><span class="n">IPT</span><span class="p">)</span>  
+<span class="go">array([ 0.9690723...,  1.        ,  1.1217921...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.models.ipt.IPT_hue_angle">
+<code class="descclassname">colour.models.ipt.</code><code class="descname">IPT_hue_angle</code><span class="sig-paren">(</span><em>IPT</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/ipt.html#IPT_hue_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.ipt.IPT_hue_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the hue angle in degrees from <em>IPT</em> colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>IPT</strong> (<em>array_like</em>) &#8211; <em>IPT</em> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Hue angle in degrees.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IPT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.96907232</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.12179215</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IPT_hue_angle</span><span class="p">(</span><span class="n">IPT</span><span class="p">)</span>  
+<span class="go">48.2852074...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.ipt Module</a><ul>
+<li><a class="reference internal" href="#ipt-colourspace">IPT Colourspace</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.ipt.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.ipt.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

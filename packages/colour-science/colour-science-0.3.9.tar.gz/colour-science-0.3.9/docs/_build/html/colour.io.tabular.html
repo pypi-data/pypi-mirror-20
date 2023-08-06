@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.io.tabular Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.io.tabular">
+<span id="colour-io-tabular-module"></span><h1>colour.io.tabular Module<a class="headerlink" href="#module-colour.io.tabular" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="csv-tabular-data-input-output">
+<h2>CSV Tabular Data Input / Output<a class="headerlink" href="#csv-tabular-data-input-output" title="Permalink to this headline">¶</a></h2>
+<p>Defines various input / output objects for <em>CSV</em> tabular data files:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.io.tabular.read_spectral_data_from_csv_file" title="colour.io.tabular.read_spectral_data_from_csv_file"><code class="xref py py-func docutils literal"><span class="pre">read_spectral_data_from_csv_file()</span></code></a></li>
+<li><a class="reference internal" href="#colour.io.tabular.read_spds_from_csv_file" title="colour.io.tabular.read_spds_from_csv_file"><code class="xref py py-func docutils literal"><span class="pre">read_spds_from_csv_file()</span></code></a></li>
+<li><a class="reference internal" href="#colour.io.tabular.write_spds_to_csv_file" title="colour.io.tabular.write_spds_to_csv_file"><code class="xref py py-func docutils literal"><span class="pre">write_spds_to_csv_file()</span></code></a></li>
+</ul>
+<dl class="function">
+<dt id="colour.io.tabular.read_spectral_data_from_csv_file">
+<code class="descclassname">colour.io.tabular.</code><code class="descname">read_spectral_data_from_csv_file</code><span class="sig-paren">(</span><em>path</em>, <em>delimiter=u'</em>, <em>'</em>, <em>fields=None</em>, <em>default=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/io/tabular.html#read_spectral_data_from_csv_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.io.tabular.read_spectral_data_from_csv_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the spectral data from given <em>CSV</em> file in the following form:</p>
+<p>390,  4.15003E-04,  3.68349E-04,  9.54729E-03
+395,  1.05192E-03,  9.58658E-04,  2.38250E-02
+400,  2.40836E-03,  2.26991E-03,  5.66498E-02
+...
+830,  9.74306E-07,  9.53411E-08,  0.00000</p>
+<p>and returns it as an <em>OrderedDict</em> of <em>dict</em> as follows:</p>
+<p>OrderedDict([
+(&#8216;field&#8217;, {&#8216;wavelength&#8217;: &#8216;value&#8217;, ..., &#8216;wavelength&#8217;: &#8216;value&#8217;}),
+...,
+(&#8216;field&#8217;, {&#8216;wavelength&#8217;: &#8216;value&#8217;, ..., &#8216;wavelength&#8217;: &#8216;value&#8217;})])</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<em>unicode</em>) &#8211; Absolute <em>CSV</em> file path.</li>
+<li><strong>delimiter</strong> (<em>unicode, optional</em>) &#8211; <em>CSV</em> file content delimiter.</li>
+<li><strong>fields</strong> (<em>array_like, optional</em>) &#8211; <em>CSV</em> file spectral data fields names. If no value is provided the
+first line of the file will be used as spectral data fields names.</li>
+<li><strong>default</strong> (<em>numeric, optional</em>) &#8211; Default value for fields row with missing value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CSV</em> file content.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">OrderedDict</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code></a> &#8211;
+If the <em>CSV</em> spectral data file doesn&#8217;t define the appropriate fields.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>A <em>CSV</em> spectral data file should define at least define two fields:
+one for the wavelengths and one for the associated values of one
+spectral power distribution.</li>
+<li>If no value is provided for the fields names, the first line of the
+file will be used as spectral data fields names.</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csv_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;tests&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;resources&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;colorchecker_n_ohta.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spds_data</span> <span class="o">=</span> <span class="n">read_spectral_data_from_csv_file</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">spds_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="go">[&#39;1&#39;,</span>
+<span class="go"> &#39;2&#39;,</span>
+<span class="go"> &#39;3&#39;,</span>
+<span class="go"> &#39;4&#39;,</span>
+<span class="go"> &#39;5&#39;,</span>
+<span class="go"> &#39;6&#39;,</span>
+<span class="go"> &#39;7&#39;,</span>
+<span class="go"> &#39;8&#39;,</span>
+<span class="go"> &#39;9&#39;,</span>
+<span class="go"> &#39;10&#39;,</span>
+<span class="go"> &#39;11&#39;,</span>
+<span class="go"> &#39;12&#39;,</span>
+<span class="go"> &#39;13&#39;,</span>
+<span class="go"> &#39;14&#39;,</span>
+<span class="go"> &#39;15&#39;,</span>
+<span class="go"> &#39;16&#39;,</span>
+<span class="go"> &#39;17&#39;,</span>
+<span class="go"> &#39;18&#39;,</span>
+<span class="go"> &#39;19&#39;,</span>
+<span class="go"> &#39;20&#39;,</span>
+<span class="go"> &#39;21&#39;,</span>
+<span class="go"> &#39;22&#39;,</span>
+<span class="go"> &#39;23&#39;,</span>
+<span class="go"> &#39;24&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.io.tabular.read_spds_from_csv_file">
+<code class="descclassname">colour.io.tabular.</code><code class="descname">read_spds_from_csv_file</code><span class="sig-paren">(</span><em>path</em>, <em>delimiter=u'</em>, <em>'</em>, <em>fields=None</em>, <em>default=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/io/tabular.html#read_spds_from_csv_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.io.tabular.read_spds_from_csv_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the spectral data from given <em>CSV</em> file and return its content as an
+<em>OrderedDict</em> of
+<a class="reference internal" href="colour.colorimetry.spectrum.html#colour.colorimetry.spectrum.SpectralPowerDistribution" title="colour.colorimetry.spectrum.SpectralPowerDistribution"><code class="xref py py-class docutils literal"><span class="pre">colour.colorimetry.spectrum.SpectralPowerDistribution</span></code></a> classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<em>unicode</em>) &#8211; Absolute <em>CSV</em> file path.</li>
+<li><strong>delimiter</strong> (<em>unicode, optional</em>) &#8211; <em>CSV</em> file content delimiter.</li>
+<li><strong>fields</strong> (<em>array_like, optional</em>) &#8211; <em>CSV</em> file spectral data fields names. If no value is provided the
+first line of the file will be used for as spectral data fields names.</li>
+<li><strong>default</strong> (<em>numeric</em>) &#8211; Default value for fields row with missing value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><a class="reference internal" href="colour.colorimetry.spectrum.html#colour.colorimetry.spectrum.SpectralPowerDistribution" title="colour.colorimetry.spectrum.SpectralPowerDistribution"><code class="xref py py-class docutils literal"><span class="pre">colour.colorimetry.spectrum.SpectralPowerDistribution</span></code></a>
+classes of given <em>CSV</em> file.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">OrderedDict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csv_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;tests&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;resources&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;colorchecker_n_ohta.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spds</span> <span class="o">=</span> <span class="n">read_spds_from_csv_file</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">spds</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="go">(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;, &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;, &#39;21&#39;, &#39;22&#39;, &#39;23&#39;, &#39;24&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">spds</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">])</span>
+<span class="go">SpectralPowerDistribution(&#39;1&#39;, (380.0, 780.0, 5.0))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.io.tabular.write_spds_to_csv_file">
+<code class="descclassname">colour.io.tabular.</code><code class="descname">write_spds_to_csv_file</code><span class="sig-paren">(</span><em>spds</em>, <em>path</em>, <em>delimiter=u'</em>, <em>'</em>, <em>fields=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/io/tabular.html#write_spds_to_csv_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.io.tabular.write_spds_to_csv_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the given spectral power distributions to given <em>CSV</em> file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>spds</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) &#8211; Spectral power distributions to write.</li>
+<li><strong>path</strong> (<em>unicode</em>) &#8211; Absolute <em>CSV</em> file path.</li>
+<li><strong>delimiter</strong> (<em>unicode, optional</em>) &#8211; <em>CSV</em> file content delimiter.</li>
+<li><strong>fields</strong> (<em>array_like, optional</em>) &#8211; <em>CSV</em> file spectral data fields names. If no value is provided the
+order of fields will be the one defined by the sorted spectral power
+distributions <em>dict</em>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Definition success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code></a> &#8211;
+If the given spectral power distributions have different shapes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.io.tabular Module</a><ul>
+<li><a class="reference internal" href="#csv-tabular-data-input-output">CSV Tabular Data Input / Output</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.io.tabular.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.io.tabular.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

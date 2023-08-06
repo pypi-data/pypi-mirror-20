@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.dataset.rec_709 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.dataset.rec_709">
+<span id="colour-models-rgb-dataset-rec-709-module"></span><h1>colour.models.rgb.dataset.rec_709 Module<a class="headerlink" href="#module-colour.models.rgb.dataset.rec_709" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rec-709-colourspace">
+<h2>Rec. 709 Colourspace<a class="headerlink" href="#rec-709-colourspace" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>Rec. 709</em> colourspace:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.dataset.rec_709.REC_709_COLOURSPACE" title="colour.models.rgb.dataset.rec_709.REC_709_COLOURSPACE"><code class="xref py py-attr docutils literal"><span class="pre">REC_709_COLOURSPACE</span></code></a>.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/rgb.ipynb">RGB Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>International Telecommunication Union. (2015). Recommendation
+ITU-R BT.709-6 - Parameter values for the HDTV standards for
+production and international programme exchange BT Series Broadcasting
+service (Vol. 5). Retrieved from <a class="reference external" href="https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.709-6-201506-I!!PDF-E.pdf">https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.709-6-201506-I!!PDF-E.pdf</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.models.rgb.dataset.rec_709.REC_709_PRIMARIES">
+<code class="descclassname">colour.models.rgb.dataset.rec_709.</code><code class="descname">REC_709_PRIMARIES</code><em class="property"> = array([[ 0.64,  0.33],        [ 0.3 ,  0.6 ],        [ 0.15,  0.06]])</em><a class="headerlink" href="#colour.models.rgb.dataset.rec_709.REC_709_PRIMARIES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Rec. 709</em> colourspace primaries.</p>
+<p>REC_709_PRIMARIES : ndarray, (3, 2)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.rec_709.REC_709_WHITEPOINT">
+<code class="descclassname">colour.models.rgb.dataset.rec_709.</code><code class="descname">REC_709_WHITEPOINT</code><em class="property"> = array([ 0.3127,  0.329 ])</em><a class="headerlink" href="#colour.models.rgb.dataset.rec_709.REC_709_WHITEPOINT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Rec. 709</em> colourspace whitepoint.</p>
+<p>REC_709_WHITEPOINT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.rec_709.REC_709_ILLUMINANT">
+<code class="descclassname">colour.models.rgb.dataset.rec_709.</code><code class="descname">REC_709_ILLUMINANT</code><em class="property"> = u'D65'</em><a class="headerlink" href="#colour.models.rgb.dataset.rec_709.REC_709_ILLUMINANT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Rec. 709</em> colourspace whitepoint name as illuminant.</p>
+<p>REC_709_ILLUMINANT : unicode</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.rec_709.REC_709_TO_XYZ_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.rec_709.</code><code class="descname">REC_709_TO_XYZ_MATRIX</code><em class="property"> = array([[ 0.4123908 ,  0.35758434,  0.18048079],        [ 0.21263901,  0.71516868,  0.07219232],        [ 0.01933082,  0.11919478,  0.95053215]])</em><a class="headerlink" href="#colour.models.rgb.dataset.rec_709.REC_709_TO_XYZ_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Rec. 709</em> colourspace to <em>CIE XYZ</em> tristimulus values matrix.</p>
+<p>REC_709_TO_XYZ_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.rec_709.XYZ_TO_REC_709_MATRIX">
+<code class="descclassname">colour.models.rgb.dataset.rec_709.</code><code class="descname">XYZ_TO_REC_709_MATRIX</code><em class="property"> = array([[ 3.24096994, -1.53738318, -0.49861076],        [-0.96924364,  1.8759675 ,  0.04155506],        [ 0.05563008, -0.20397696,  1.05697151]])</em><a class="headerlink" href="#colour.models.rgb.dataset.rec_709.XYZ_TO_REC_709_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE XYZ</em> tristimulus values to <em>Rec. 709</em> colourspace matrix.</p>
+<p>XYZ_TO_REC_709_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.models.rgb.dataset.rec_709.REC_709_COLOURSPACE">
+<code class="descclassname">colour.models.rgb.dataset.rec_709.</code><code class="descname">REC_709_COLOURSPACE</code><em class="property"> = &lt;colour.models.rgb.rgb_colourspace.RGB_Colourspace object&gt;</em><a class="headerlink" href="#colour.models.rgb.dataset.rec_709.REC_709_COLOURSPACE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Rec. 709</em> colourspace.</p>
+<p>REC_709_COLOURSPACE : RGB_Colourspace</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.dataset.rec_709 Module</a><ul>
+<li><a class="reference internal" href="#rec-709-colourspace">Rec. 709 Colourspace</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.dataset.rec_709.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.dataset.rec_709.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.dataset.light_sources.chromaticity_coordinates Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.dataset.light_sources.chromaticity_coordinates">
+<span id="colour-colorimetry-dataset-light-sources-chromaticity-coordinates-module"></span><h1>colour.colorimetry.dataset.light_sources.chromaticity_coordinates Module<a class="headerlink" href="#module-colour.colorimetry.dataset.light_sources.chromaticity_coordinates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="light-sources-chromaticity-coordinates">
+<h2>Light Sources Chromaticity Coordinates<a class="headerlink" href="#light-sources-chromaticity-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>Defines various light sources chromaticity coordinates.</p>
+<p>The following light sources are available:</p>
+<ul class="simple">
+<li><em>RIT</em> <em>PointerData.xls</em> spreadsheet light sources: Natural,
+Philips TL-84, T8 Luxline Plus White, SA, SC, T8 Polylux 3000,
+T8 Polylux 4000, Thorn Kolor-rite</li>
+<li><em>NIST</em> <em>NIST CQS simulation 7.4.xls</em> spreadsheet traditional light sources:
+Cool White FL, Daylight FL, HPS, Incandescent, LPS, Mercury,
+Metal Halide, Neodimium Incandescent, Super HPS, Triphosphor FL</li>
+<li><em>NIST</em> <em>NIST CQS simulation 7.4.xls</em> spreadsheet LED light sources:
+3-LED-1 (457/540/605), 3-LED-2 (473/545/616), 3-LED-2 Yellow,
+3-LED-3 (465/546/614), 3-LED-4 (455/547/623), 4-LED No Yellow,
+4-LED Yellow, 4-LED-1 (461/526/576/624), 4-LED-2 (447/512/573/627),
+Luxeon WW 2880, PHOS-1, PHOS-2, PHOS-3, PHOS-4,
+Phosphor LED YAG</li>
+<li><em>NIST</em> <em>NIST CQS simulation 7.4.xls</em> spreadsheet Philips light sources:
+60 A/W (Soft White), C100S54 (HPS), C100S54C (HPS),
+F32T8/TL830 (Triphosphor), F32T8/TL835 (Triphosphor),
+F32T8/TL841 (Triphosphor), F32T8/TL850 (Triphosphor),
+F32T8/TL865 /PLUS (Triphosphor), F34/CW/RS/EW (Cool White FL),
+F34T12/LW/RS /EW, F34T12WW/RS /EW (Warm White FL),
+F40/C50 (Broadband FL), F40/C75 (Broadband FL),
+F40/CWX (Broadband FL), F40/DX (Broadband FL), F40/DXTP (Delux FL),
+F40/N (Natural FL), H38HT-100 (Mercury), H38JA-100/DX (Mercury DX),
+MHC100/U/MP /3K, MHC100/U/MP /4K, SDW-T 100W/LV (Super HPS)</li>
+<li>Projectors and Xenon Arc Lamps:
+Kinoton 75P</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/light_sources.ipynb">Light Sources Jupyter Notebook</a></p>
+</div>
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_RIT_CIE_1931_2_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_RIT_CIE_1931_2_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'Natural': array([ 0.38158573,  0.35922414]), u'T8 Luxline Plus White': array([ 0.4104922 ,  0.38893253]), u'Philips TL-84': array([ 0.3784136 ,  0.37929025]), u'T8 Polylux 4000': array([ 0.37921947,  0.38446909]), u'Thorn Kolor-rite': array([ 0.38191912,  0.37430926]), u'SC': array([ 0.31005673,  0.3161457 ]), u'SA': array([ 0.44757303,  0.40743814]), u'T8 Polylux 3000': array([ 0.43170608,  0.41387774])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_RIT_CIE_1931_2_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Light sources chromaticity coordinates from <em>RIT</em> <em>PointerData.xls</em> spreadsheet
+for <em>CIE 1931 2 Degree Standard Observer</em>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The chromaticity coordinates have been calculated from <em>PointerData.xls</em>
+spreadsheet that doesn&#8217;t mention the data source thus the light source names
+cannot be accurately verified.</p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Pointer, M. R. (1980). Pointer’s Gamut Data. Retrieved from
+<a class="reference external" href="http://www.cis.rit.edu/research/mcsl2/online/PointerData.xls">http://www.cis.rit.edu/research/mcsl2/online/PointerData.xls</a></td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_RIT_CIE_1931_2_DEGREE_STANDARD_OBSERVER <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Natural&#8217;, &#8216;Philips TL-84&#8217;, &#8216;T8 Luxline Plus White&#8217;, &#8216;SA&#8217;, &#8216;SC&#8217;,
+&#8216;T8 Polylux 3000&#8217;, &#8216;T8 Polylux 4000&#8217;, &#8216;Thorn Kolor-rite&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_RIT_CIE_1964_10_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_RIT_CIE_1964_10_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'Natural': array([ 0.38487099,  0.35386922]), u'T8 Luxline Plus White': array([ 0.41694698,  0.38099143]), u'Philips TL-84': array([ 0.383592  ,  0.37392274]), u'T8 Polylux 4000': array([ 0.38511516,  0.37780093]), u'Thorn Kolor-rite': array([ 0.38553393,  0.37084049]), u'SC': array([ 0.31038864,  0.31905065]), u'SA': array([ 0.4511768 ,  0.40593605]), u'T8 Polylux 3000': array([ 0.43903893,  0.40455433])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_RIT_CIE_1964_10_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Light sources chromaticity coordinates from <em>RIT</em> <em>PointerData.xls</em> spreadsheet
+for <em>CIE 1964 10 Degree Standard Observer</em>. <a class="footnote-reference" href="#id1" id="id2">[1]</a></p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_RIT_CIE_1964_10_DEGREE_STANDARD_OBSERVER <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Natural&#8217;, &#8216;Philips TL-84&#8217;, &#8216;T8 Luxline Plus White&#8217;, &#8216;SA&#8217;, &#8216;SC&#8217;,
+&#8216;T8 Polylux 3000&#8217;, &#8216;T8 Polylux 4000&#8217;, &#8216;Thorn Kolor-rite&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1931_2_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1931_2_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'Mercury': array([ 0.39201846,  0.38377707]), u'Metal Halide': array([ 0.37254456,  0.38560393]), u'Daylight FL': array([ 0.31266299,  0.33198569]), u'HPS': array([ 0.5216777 ,  0.41797118]), u'Neodimium Incandescent': array([ 0.4473987,  0.3950086]), u'LPS': array([ 0.57515131,  0.42423223]), u'Triphosphor FL': array([ 0.41316327,  0.39642205]), u'Incandescent': array([ 0.45073022,  0.40804613]), u'Cool White FL': array([ 0.36925632,  0.37254988]), u'Super HPS': array([ 0.47006166,  0.40611658])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1931_2_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traditional light sources chromaticity coordinates from <em>NIST</em>
+<em>NIST CQS simulation 7.4.xls</em> spreadsheet.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id6">3</a>, <a class="fn-backref" href="#id7">4</a>, <a class="fn-backref" href="#id8">5</a>)</em> Ohno, Y., &amp; Davis, W. (2008). NIST CQS simulation 7.4. Retrieved from
+<a class="reference external" href="http://cie2.nist.gov/TC1-69/NIST">http://cie2.nist.gov/TC1-69/NIST</a> CQS simulation 7.4.xls</td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1931_2_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;Cool White FL&#8217;, &#8216;Daylight FL&#8217;, &#8216;HPS&#8217;, &#8216;Incandescent&#8217;, &#8216;LPS&#8217;, &#8216;Mercury&#8217;,
+&#8216;Metal Halide&#8217;, &#8216;Neodimium Incandescent&#8217;, &#8216;Super HPS&#8217;, &#8216;Triphosphor FL&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1964_10_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1964_10_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'Mercury': array([ 0.40126641,  0.36473254]), u'Metal Halide': array([ 0.37878617,  0.37749693]), u'Daylight FL': array([ 0.31739588,  0.33078082]), u'HPS': array([ 0.5317645 ,  0.40875272]), u'Neodimium Incandescent': array([ 0.44751672,  0.39673415]), u'LPS': array([ 0.58996005,  0.41003995]), u'Triphosphor FL': array([ 0.41859196,  0.38894771]), u'Incandescent': array([ 0.4543656 ,  0.40657368]), u'Cool White FL': array([ 0.37671505,  0.3645768 ]), u'Super HPS': array([ 0.47385957,  0.40138183])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1964_10_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traditional light sources chromaticity coordinates from <em>NIST</em>
+<em>NIST CQS simulation 7.4.xls</em> spreadsheet. <a class="footnote-reference" href="#id3" id="id4">[2]</a></p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_NIST_TRADITIONAL_CIE_1964_10_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;Cool White FL&#8217;, &#8216;Daylight FL&#8217;, &#8216;HPS&#8217;, &#8216;Incandescent&#8217;, &#8216;LPS&#8217;, &#8216;Mercury&#8217;,
+&#8216;Metal Halide&#8217;, &#8216;Neodimium Incandescent&#8217;, &#8216;Super HPS&#8217;, &#8216;Triphosphor FL&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_LED_CIE_1931_2_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_NIST_LED_CIE_1931_2_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'3-LED-4 (455/547/623)': array([ 0.41706794,  0.39627628]), u'3-LED-2 Yellow': array([ 0.43656308,  0.44364962]), u'3-LED-2 (473/545/616)': array([ 0.41706048,  0.39626812]), u'4-LED Yellow': array([ 0.41706964,  0.39627677]), u'PHOS-2': array([ 0.45270446,  0.43758454]), u'PHOS-1': array([ 0.43644317,  0.40461603]), u'3-LED-1 (457/540/605)': array([ 0.41705769,  0.39626246]), u'PHOS-4': array([ 0.43693602,  0.40411356]), u'4-LED No Yellow': array([ 0.41706059,  0.39626815]), u'PHOS-3': array([ 0.43689987,  0.40403737]), u'4-LED-2 (447/512/573/627)': array([ 0.41707157,  0.39627875]), u'Luxeon WW 2880': array([ 0.45908853,  0.43291648]), u'Phosphor LED YAG': array([ 0.30776182,  0.32526894]), u'3-LED-3 (465/546/614)': array([ 0.3804605,  0.376772 ]), u'4-LED-1 (461/526/576/624)': array([ 0.41706762,  0.39627506])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_LED_CIE_1931_2_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>LED light sources chromaticity coordinates from <em>NIST</em>
+<em>NIST CQS simulation 7.4.xls</em> spreadsheet. <a class="footnote-reference" href="#id3" id="id5">[2]</a></p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_NIST_LED_CIE_1931_2_DEGREE_STANDARD_OBSERVER :</dt>
+<dd><strong>{&#8216;3-LED-1 (457/540/605)&#8217;, &#8216;3-LED-2 (473/545/616)&#8217;, &#8216;3-LED-2 Yellow&#8217;,
+&#8216;3-LED-3 (465/546/614)&#8217;, &#8216;3-LED-4 (455/547/623)&#8217;, &#8216;4-LED No Yellow&#8217;,
+&#8216;4-LED Yellow&#8217;, &#8216;4-LED-1 (461/526/576/624)&#8217;, &#8216;4-LED-2 (447/512/573/627)&#8217;,
+&#8216;Luxeon WW 2880&#8217;, &#8216;PHOS-1&#8217;, &#8216;PHOS-2&#8217;, &#8216;PHOS-3&#8217;, &#8216;PHOS-4&#8217;,
+&#8216;Phosphor LED YAG&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_LED_CIE_1964_10_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_NIST_LED_CIE_1964_10_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'3-LED-4 (455/547/623)': array([ 0.42286546,  0.38877224]), u'3-LED-2 Yellow': array([ 0.44622222,  0.44164646]), u'3-LED-2 (473/545/616)': array([ 0.42222212,  0.4012985 ]), u'4-LED Yellow': array([ 0.4227206 ,  0.39028466]), u'PHOS-2': array([ 0.4614874 ,  0.43615029]), u'PHOS-1': array([ 0.44012   ,  0.40313578]), u'3-LED-1 (457/540/605)': array([ 0.42509999,  0.38945135]), u'PHOS-4': array([ 0.44176044,  0.40726748]), u'4-LED No Yellow': array([ 0.41980753,  0.39946529]), u'PHOS-3': array([ 0.44089266,  0.40866226]), u'4-LED-2 (447/512/573/627)': array([ 0.42157104,  0.39408974]), u'Luxeon WW 2880': array([ 0.4666393 ,  0.43081742]), u'Phosphor LED YAG': array([ 0.31280783,  0.33418094]), u'3-LED-3 (465/546/614)': array([ 0.38747047,  0.37640472]), u'4-LED-1 (461/526/576/624)': array([ 0.42389978,  0.39417089])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_LED_CIE_1964_10_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>LED light sources chromaticity coordinates from <em>NIST</em>
+<em>NIST CQS simulation 7.4.xls</em> spreadsheet. <a class="footnote-reference" href="#id3" id="id6">[2]</a></p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_NIST_LED_CIE_1964_10_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;3-LED-1 (457/540/605)&#8217;, &#8216;3-LED-2 (473/545/616)&#8217;, &#8216;3-LED-2 Yellow&#8217;,
+&#8216;3-LED-3 (465/546/614)&#8217;, &#8216;3-LED-4 (455/547/623)&#8217;, &#8216;4-LED No Yellow&#8217;,
+&#8216;4-LED Yellow&#8217;, &#8216;4-LED-1 (461/526/576/624)&#8217;, &#8216;4-LED-2 (447/512/573/627)&#8217;,
+&#8216;Luxeon WW 2880&#8217;, &#8216;PHOS-1&#8217;, &#8216;PHOS-2&#8217;, &#8216;PHOS-3&#8217;, &#8216;PHOS-4&#8217;,
+&#8216;Phosphor LED YAG&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_PHILIPS_CIE_1931_2_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_NIST_PHILIPS_CIE_1931_2_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'MHC100/U/MP /4K': array([ 0.37314525,  0.37136699]), u'60 A/W (Soft White)': array([ 0.45073022,  0.40804613]), u'C100S54C (HPS)': array([ 0.50238041,  0.4158773 ]), u'F40/C75 (Broadband FL)': array([ 0.29996666,  0.31658217]), u'F34T12/LW/RS /EW': array([ 0.37886364,  0.39496063]), u'F40/DXTP (Delux FL)': array([ 0.31306654,  0.34222571]), u'C100S54 (HPS)': array([ 0.52923152,  0.41137016]), u'SDW-T 100W/LV (Super HPS)': array([ 0.47233916,  0.40710633]), u'F40/DX (Broadband FL)': array([ 0.31192231,  0.3428021 ]), u'F32T8/TL835 (Triphosphor)': array([ 0.40715027,  0.39317274]), u'MHC100/U/MP /3K': array([ 0.42858177,  0.38816892]), u'F34/CW/RS/EW (Cool White FL)': array([ 0.37725093,  0.39308766]), u'H38HT-100 (Mercury)': array([ 0.31120059,  0.38294425]), u'H38JA-100/DX (Mercury DX)': array([ 0.38979163,  0.37339469]), u'F32T8/TL865 /PLUS (Triphosphor)': array([ 0.31636888,  0.34532079]), u'F32T8/TL841 (Triphosphor)': array([ 0.38537669,  0.39037076]), u'F32T8/TL830 (Triphosphor)': array([ 0.44325076,  0.4095237 ]), u'F32T8/TL850 (Triphosphor)': array([ 0.34376891,  0.35844744]), u'F40/C50 (Broadband FL)': array([ 0.34583657,  0.36172445]), u'F40/N (Natural FL)': array([ 0.3768787 ,  0.35415346]), u'F40/CWX (Broadband FL)': array([ 0.37503705,  0.36054395]), u'F34T12WW/RS /EW (Warm White FL)': array([ 0.43846697,  0.40863544])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_PHILIPS_CIE_1931_2_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Philips light sources chromaticity coordinates from <em>NIST</em>
+<em>NIST CQS simulation 7.4.xls</em> spreadsheet. <a class="footnote-reference" href="#id3" id="id7">[2]</a></p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_NIST_PHILIPS_CIE_1931_2_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;60 A/W (Soft White)&#8217;, &#8216;C100S54 (HPS)&#8217;, &#8216;C100S54C (HPS)&#8217;,
+&#8216;F32T8/TL830 (Triphosphor)&#8217;, &#8216;F32T8/TL835 (Triphosphor)&#8217;,
+&#8216;F32T8/TL841 (Triphosphor)&#8217;, &#8216;F32T8/TL850 (Triphosphor)&#8217;,
+&#8216;F32T8/TL865 /PLUS (Triphosphor)&#8217;, &#8216;F34/CW/RS/EW (Cool White FL)&#8217;,
+&#8216;F34T12/LW/RS /EW&#8217;, &#8216;F34T12WW/RS /EW (Warm White FL)&#8217;,
+&#8216;F40/C50 (Broadband FL)&#8217;, &#8216;F40/C75 (Broadband FL)&#8217;,
+&#8216;F40/CWX (Broadband FL)&#8217;, &#8216;F40/DX (Broadband FL)&#8217;, &#8216;F40/DXTP (Delux FL)&#8217;,
+&#8216;F40/N (Natural FL)&#8217;, &#8216;H38HT-100 (Mercury)&#8217;, &#8216;H38JA-100/DX (Mercury DX)&#8217;,
+&#8216;MHC100/U/MP /3K&#8217;, &#8216;MHC100/U/MP /4K&#8217;, &#8216;SDW-T 100W/LV (Super HPS)&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_PHILIPS_CIE_1964_10_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_NIST_PHILIPS_CIE_1964_10_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'MHC100/U/MP /4K': array([ 0.37570711,  0.36615647]), u'60 A/W (Soft White)': array([ 0.4543656 ,  0.40657368]), u'C100S54C (HPS)': array([ 0.50966306,  0.40906451]), u'F40/C75 (Broadband FL)': array([ 0.30198853,  0.31847903]), u'F34T12/LW/RS /EW': array([ 0.38962891,  0.38207472]), u'F40/DXTP (Delux FL)': array([ 0.31877475,  0.33979883]), u'C100S54 (HPS)': array([ 0.53855461,  0.40257583]), u'SDW-T 100W/LV (Super HPS)': array([ 0.47646191,  0.40228801]), u'F40/DX (Broadband FL)': array([ 0.31678304,  0.34174927]), u'F32T8/TL835 (Triphosphor)': array([ 0.41208253,  0.38800107]), u'MHC100/U/MP /3K': array([ 0.43142299,  0.38064221]), u'F34/CW/RS/EW (Cool White FL)': array([ 0.38651485,  0.38284333]), u'H38HT-100 (Mercury)': array([ 0.32626063,  0.3600011 ]), u'H38JA-100/DX (Mercury DX)': array([ 0.3970586 ,  0.35653243]), u'F32T8/TL865 /PLUS (Triphosphor)': array([ 0.3206982 ,  0.34387144]), u'F32T8/TL841 (Triphosphor)': array([ 0.39090862,  0.38529056]), u'F32T8/TL830 (Triphosphor)': array([ 0.44879522,  0.40357464]), u'F32T8/TL850 (Triphosphor)': array([ 0.34788243,  0.35584574]), u'F40/C50 (Broadband FL)': array([ 0.34988083,  0.36066132]), u'F40/N (Natural FL)': array([ 0.37883316,  0.3507244 ]), u'F40/CWX (Broadband FL)': array([ 0.37850231,  0.35637189]), u'F34T12WW/RS /EW (Warm White FL)': array([ 0.44839538,  0.39566664])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_NIST_PHILIPS_CIE_1964_10_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Philips light sources chromaticity coordinates from <em>NIST</em>
+<em>NIST CQS simulation 7.4.xls</em> spreadsheet. <a class="footnote-reference" href="#id3" id="id8">[2]</a></p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_NIST_PHILIPS_CIE_1964_10_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;60 A/W (Soft White)&#8217;, &#8216;C100S54 (HPS)&#8217;, &#8216;C100S54C (HPS)&#8217;,
+&#8216;F32T8/TL830 (Triphosphor)&#8217;, &#8216;F32T8/TL835 (Triphosphor)&#8217;,
+&#8216;F32T8/TL841 (Triphosphor)&#8217;, &#8216;F32T8/TL850 (Triphosphor)&#8217;,
+&#8216;F32T8/TL865 /PLUS (Triphosphor)&#8217;, &#8216;F34/CW/RS/EW (Cool White FL)&#8217;,
+&#8216;F34T12/LW/RS /EW&#8217;, &#8216;F34T12WW/RS /EW (Warm White FL)&#8217;,
+&#8216;F40/C50 (Broadband FL)&#8217;, &#8216;F40/C75 (Broadband FL)&#8217;,
+&#8216;F40/CWX (Broadband FL)&#8217;, &#8216;F40/DX (Broadband FL)&#8217;, &#8216;F40/DXTP (Delux FL)&#8217;,
+&#8216;F40/N (Natural FL)&#8217;, &#8216;H38HT-100 (Mercury)&#8217;, &#8216;H38JA-100/DX (Mercury DX)&#8217;,
+&#8216;MHC100/U/MP /3K&#8217;, &#8216;MHC100/U/MP /4K&#8217;, &#8216;SDW-T 100W/LV (Super HPS)&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_PROJECTORS_CIE_1931_2_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_PROJECTORS_CIE_1931_2_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'Kinoton 75P': array([ 0.31525241,  0.33287079])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_PROJECTORS_CIE_1931_2_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projectors and Xenon Arc Lamps.</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Houston, J. (2015). Private Discussion with Mansencal, T.</td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_PROJECTORS_CIE_1931_2_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;Kinoton 75P&#8217;, }</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_PROJECTORS_CIE_1964_10_DEGREE_STANDARD_OBSERVER">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES_PROJECTORS_CIE_1964_10_DEGREE_STANDARD_OBSERVER</code><em class="property"> = CaseInsensitiveMapping({u'Kinoton 75P': array([ 0.31708664,  0.33622243])})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES_PROJECTORS_CIE_1964_10_DEGREE_STANDARD_OBSERVER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projectors and Xenon Arc Lamps. [<a class="reference internal" href="#id9">3</a>]</p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES_PROJECTORS_CIE_1964_10_DEGREE_STANDARD_OBSERVER :</dt>
+<dd>CaseInsensitiveMapping
+<strong>{&#8216;Kinoton 75P&#8217;, }</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES">
+<code class="descclassname">colour.colorimetry.dataset.light_sources.chromaticity_coordinates.</code><code class="descname">LIGHT_SOURCES</code><em class="property"> = CaseInsensitiveMapping({u'CIE 1931 2 Degree Standard Observer': CaseInsensitiveMapping({u'Mercury': array([ 0.39201846,  0.38377707]), u'F34T12WW/RS /EW (Warm White FL)': array([ 0.43846697,  0.40863544]), u'4-LED-2 (447/512/573/627)': array([ 0.41707157,  0.39627875]), u'T8 Polylux 4000': array([ 0.37921947,  0.38446909]), u'MHC100/U/MP /4K': array([ 0.37314525,  0.37136699]), u'60 A/W (Soft White)': array([ 0.45073022,  0.40804613]), u'F40/C50 (Broadband FL)': array([ 0.34583657,  0.36172445]), u'Cool White FL': array([ 0.36925632,  0.37254988]), u'H38HT-100 (Mercury)': array([ 0.31120059,  0.38294425]), u'Super HPS': array([ 0.47006166,  0.40611658]), u'C100S54C (HPS)': array([ 0.50238041,  0.4158773 ]), u'F34T12/LW/RS /EW': array([ 0.37886364,  0.39496063]), u'F40/DXTP (Delux FL)': array([ 0.31306654,  0.34222571]), u'F40/C75 (Broadband FL)': array([ 0.29996666,  0.31658217]), u'Neodimium Incandescent': array([ 0.4473987,  0.3950086]), u'Philips TL-84': array([ 0.3784136 ,  0.37929025]), u'4-LED No Yellow': array([ 0.41706059,  0.39626815]), u'Triphosphor FL': array([ 0.41316327,  0.39642205]), u'F40/DX (Broadband FL)': array([ 0.31192231,  0.3428021 ]), u'C100S54 (HPS)': array([ 0.52923152,  0.41137016]), u'Kinoton 75P': array([ 0.31525241,  0.33287079]), u'SDW-T 100W/LV (Super HPS)': array([ 0.47233916,  0.40710633]), u'3-LED-3 (465/546/614)': array([ 0.3804605,  0.376772 ]), u'F32T8/TL835 (Triphosphor)': array([ 0.40715027,  0.39317274]), u'MHC100/U/MP /3K': array([ 0.42858177,  0.38816892]), u'3-LED-2 (473/545/616)': array([ 0.41706048,  0.39626812]), u'F34/CW/RS/EW (Cool White FL)': array([ 0.37725093,  0.39308766]), u'Daylight FL': array([ 0.31266299,  0.33198569]), u'3-LED-2 Yellow': array([ 0.43656308,  0.44364962]), u'3-LED-1 (457/540/605)': array([ 0.41705769,  0.39626246]), u'HPS': array([ 0.5216777 ,  0.41797118]), u'LPS': array([ 0.57515131,  0.42423223]), u'H38JA-100/DX (Mercury DX)': array([ 0.38979163,  0.37339469]), u'F32T8/TL865 /PLUS (Triphosphor)': array([ 0.31636888,  0.34532079]), u'F32T8/TL841 (Triphosphor)': array([ 0.38537669,  0.39037076]), u'F32T8/TL830 (Triphosphor)': array([ 0.44325076,  0.4095237 ]), u'T8 Luxline Plus White': array([ 0.4104922 ,  0.38893253]), u'T8 Polylux 3000': array([ 0.43170608,  0.41387774]), u'3-LED-4 (455/547/623)': array([ 0.41706794,  0.39627628]), u'Metal Halide': array([ 0.37254456,  0.38560393]), u'Natural': array([ 0.38158573,  0.35922414]), u'F32T8/TL850 (Triphosphor)': array([ 0.34376891,  0.35844744]), u'Thorn Kolor-rite': array([ 0.38191912,  0.37430926]), u'4-LED Yellow': array([ 0.41706964,  0.39627677]), u'PHOS-2': array([ 0.45270446,  0.43758454]), u'PHOS-1': array([ 0.43644317,  0.40461603]), u'F40/N (Natural FL)': array([ 0.3768787 ,  0.35415346]), u'PHOS-4': array([ 0.43693602,  0.40411356]), u'PHOS-3': array([ 0.43689987,  0.40403737]), u'Incandescent': array([ 0.45073022,  0.40804613]), u'SC': array([ 0.31005673,  0.3161457 ]), u'Luxeon WW 2880': array([ 0.45908853,  0.43291648]), u'SA': array([ 0.44757303,  0.40743814]), u'Phosphor LED YAG': array([ 0.30776182,  0.32526894]), u'4-LED-1 (461/526/576/624)': array([ 0.41706762,  0.39627506]), u'F40/CWX (Broadband FL)': array([ 0.37503705,  0.36054395])}), u'CIE 1964 10 Degree Standard Observer': CaseInsensitiveMapping({u'Mercury': array([ 0.40126641,  0.36473254]), u'F34T12WW/RS /EW (Warm White FL)': array([ 0.44839538,  0.39566664]), u'4-LED-2 (447/512/573/627)': array([ 0.42157104,  0.39408974]), u'T8 Polylux 4000': array([ 0.38511516,  0.37780093]), u'MHC100/U/MP /4K': array([ 0.37570711,  0.36615647]), u'60 A/W (Soft White)': array([ 0.4543656 ,  0.40657368]), u'F40/C50 (Broadband FL)': array([ 0.34988083,  0.36066132]), u'Cool White FL': array([ 0.37671505,  0.3645768 ]), u'H38HT-100 (Mercury)': array([ 0.32626063,  0.3600011 ]), u'Super HPS': array([ 0.47385957,  0.40138183]), u'C100S54C (HPS)': array([ 0.50966306,  0.40906451]), u'F34T12/LW/RS /EW': array([ 0.38962891,  0.38207472]), u'F40/DXTP (Delux FL)': array([ 0.31877475,  0.33979883]), u'F40/C75 (Broadband FL)': array([ 0.30198853,  0.31847903]), u'Neodimium Incandescent': array([ 0.44751672,  0.39673415]), u'Philips TL-84': array([ 0.383592  ,  0.37392274]), u'4-LED No Yellow': array([ 0.41980753,  0.39946529]), u'Triphosphor FL': array([ 0.41859196,  0.38894771]), u'F40/DX (Broadband FL)': array([ 0.31678304,  0.34174927]), u'C100S54 (HPS)': array([ 0.53855461,  0.40257583]), u'Kinoton 75P': array([ 0.31708664,  0.33622243]), u'SDW-T 100W/LV (Super HPS)': array([ 0.47646191,  0.40228801]), u'3-LED-3 (465/546/614)': array([ 0.38747047,  0.37640472]), u'F32T8/TL835 (Triphosphor)': array([ 0.41208253,  0.38800107]), u'MHC100/U/MP /3K': array([ 0.43142299,  0.38064221]), u'3-LED-2 (473/545/616)': array([ 0.42222212,  0.4012985 ]), u'F34/CW/RS/EW (Cool White FL)': array([ 0.38651485,  0.38284333]), u'Daylight FL': array([ 0.31739588,  0.33078082]), u'3-LED-2 Yellow': array([ 0.44622222,  0.44164646]), u'3-LED-1 (457/540/605)': array([ 0.42509999,  0.38945135]), u'HPS': array([ 0.5317645 ,  0.40875272]), u'LPS': array([ 0.58996005,  0.41003995]), u'H38JA-100/DX (Mercury DX)': array([ 0.3970586 ,  0.35653243]), u'F32T8/TL865 /PLUS (Triphosphor)': array([ 0.3206982 ,  0.34387144]), u'F32T8/TL841 (Triphosphor)': array([ 0.39090862,  0.38529056]), u'F32T8/TL830 (Triphosphor)': array([ 0.44879522,  0.40357464]), u'T8 Luxline Plus White': array([ 0.41694698,  0.38099143]), u'T8 Polylux 3000': array([ 0.43903893,  0.40455433]), u'3-LED-4 (455/547/623)': array([ 0.42286546,  0.38877224]), u'Metal Halide': array([ 0.37878617,  0.37749693]), u'Natural': array([ 0.38487099,  0.35386922]), u'F32T8/TL850 (Triphosphor)': array([ 0.34788243,  0.35584574]), u'Thorn Kolor-rite': array([ 0.38553393,  0.37084049]), u'4-LED Yellow': array([ 0.4227206 ,  0.39028466]), u'PHOS-2': array([ 0.4614874 ,  0.43615029]), u'PHOS-1': array([ 0.44012   ,  0.40313578]), u'F40/N (Natural FL)': array([ 0.37883316,  0.3507244 ]), u'PHOS-4': array([ 0.44176044,  0.40726748]), u'PHOS-3': array([ 0.44089266,  0.40866226]), u'Incandescent': array([ 0.4543656 ,  0.40657368]), u'SC': array([ 0.31038864,  0.31905065]), u'Luxeon WW 2880': array([ 0.4666393 ,  0.43081742]), u'SA': array([ 0.4511768 ,  0.40593605]), u'Phosphor LED YAG': array([ 0.31280783,  0.33418094]), u'4-LED-1 (461/526/576/624)': array([ 0.42389978,  0.39417089]), u'F40/CWX (Broadband FL)': array([ 0.37850231,  0.35637189])}), u'cie_10_1964': CaseInsensitiveMapping({u'Mercury': array([ 0.40126641,  0.36473254]), u'F34T12WW/RS /EW (Warm White FL)': array([ 0.44839538,  0.39566664]), u'4-LED-2 (447/512/573/627)': array([ 0.42157104,  0.39408974]), u'T8 Polylux 4000': array([ 0.38511516,  0.37780093]), u'MHC100/U/MP /4K': array([ 0.37570711,  0.36615647]), u'60 A/W (Soft White)': array([ 0.4543656 ,  0.40657368]), u'F40/C50 (Broadband FL)': array([ 0.34988083,  0.36066132]), u'Cool White FL': array([ 0.37671505,  0.3645768 ]), u'H38HT-100 (Mercury)': array([ 0.32626063,  0.3600011 ]), u'Super HPS': array([ 0.47385957,  0.40138183]), u'C100S54C (HPS)': array([ 0.50966306,  0.40906451]), u'F34T12/LW/RS /EW': array([ 0.38962891,  0.38207472]), u'F40/DXTP (Delux FL)': array([ 0.31877475,  0.33979883]), u'F40/C75 (Broadband FL)': array([ 0.30198853,  0.31847903]), u'Neodimium Incandescent': array([ 0.44751672,  0.39673415]), u'Philips TL-84': array([ 0.383592  ,  0.37392274]), u'4-LED No Yellow': array([ 0.41980753,  0.39946529]), u'Triphosphor FL': array([ 0.41859196,  0.38894771]), u'F40/DX (Broadband FL)': array([ 0.31678304,  0.34174927]), u'C100S54 (HPS)': array([ 0.53855461,  0.40257583]), u'Kinoton 75P': array([ 0.31708664,  0.33622243]), u'SDW-T 100W/LV (Super HPS)': array([ 0.47646191,  0.40228801]), u'3-LED-3 (465/546/614)': array([ 0.38747047,  0.37640472]), u'F32T8/TL835 (Triphosphor)': array([ 0.41208253,  0.38800107]), u'MHC100/U/MP /3K': array([ 0.43142299,  0.38064221]), u'3-LED-2 (473/545/616)': array([ 0.42222212,  0.4012985 ]), u'F34/CW/RS/EW (Cool White FL)': array([ 0.38651485,  0.38284333]), u'Daylight FL': array([ 0.31739588,  0.33078082]), u'3-LED-2 Yellow': array([ 0.44622222,  0.44164646]), u'3-LED-1 (457/540/605)': array([ 0.42509999,  0.38945135]), u'HPS': array([ 0.5317645 ,  0.40875272]), u'LPS': array([ 0.58996005,  0.41003995]), u'H38JA-100/DX (Mercury DX)': array([ 0.3970586 ,  0.35653243]), u'F32T8/TL865 /PLUS (Triphosphor)': array([ 0.3206982 ,  0.34387144]), u'F32T8/TL841 (Triphosphor)': array([ 0.39090862,  0.38529056]), u'F32T8/TL830 (Triphosphor)': array([ 0.44879522,  0.40357464]), u'T8 Luxline Plus White': array([ 0.41694698,  0.38099143]), u'T8 Polylux 3000': array([ 0.43903893,  0.40455433]), u'3-LED-4 (455/547/623)': array([ 0.42286546,  0.38877224]), u'Metal Halide': array([ 0.37878617,  0.37749693]), u'Natural': array([ 0.38487099,  0.35386922]), u'F32T8/TL850 (Triphosphor)': array([ 0.34788243,  0.35584574]), u'Thorn Kolor-rite': array([ 0.38553393,  0.37084049]), u'4-LED Yellow': array([ 0.4227206 ,  0.39028466]), u'PHOS-2': array([ 0.4614874 ,  0.43615029]), u'PHOS-1': array([ 0.44012   ,  0.40313578]), u'F40/N (Natural FL)': array([ 0.37883316,  0.3507244 ]), u'PHOS-4': array([ 0.44176044,  0.40726748]), u'PHOS-3': array([ 0.44089266,  0.40866226]), u'Incandescent': array([ 0.4543656 ,  0.40657368]), u'SC': array([ 0.31038864,  0.31905065]), u'Luxeon WW 2880': array([ 0.4666393 ,  0.43081742]), u'SA': array([ 0.4511768 ,  0.40593605]), u'Phosphor LED YAG': array([ 0.31280783,  0.33418094]), u'4-LED-1 (461/526/576/624)': array([ 0.42389978,  0.39417089]), u'F40/CWX (Broadband FL)': array([ 0.37850231,  0.35637189])}), u'cie_2_1931': CaseInsensitiveMapping({u'Mercury': array([ 0.39201846,  0.38377707]), u'F34T12WW/RS /EW (Warm White FL)': array([ 0.43846697,  0.40863544]), u'4-LED-2 (447/512/573/627)': array([ 0.41707157,  0.39627875]), u'T8 Polylux 4000': array([ 0.37921947,  0.38446909]), u'MHC100/U/MP /4K': array([ 0.37314525,  0.37136699]), u'60 A/W (Soft White)': array([ 0.45073022,  0.40804613]), u'F40/C50 (Broadband FL)': array([ 0.34583657,  0.36172445]), u'Cool White FL': array([ 0.36925632,  0.37254988]), u'H38HT-100 (Mercury)': array([ 0.31120059,  0.38294425]), u'Super HPS': array([ 0.47006166,  0.40611658]), u'C100S54C (HPS)': array([ 0.50238041,  0.4158773 ]), u'F34T12/LW/RS /EW': array([ 0.37886364,  0.39496063]), u'F40/DXTP (Delux FL)': array([ 0.31306654,  0.34222571]), u'F40/C75 (Broadband FL)': array([ 0.29996666,  0.31658217]), u'Neodimium Incandescent': array([ 0.4473987,  0.3950086]), u'Philips TL-84': array([ 0.3784136 ,  0.37929025]), u'4-LED No Yellow': array([ 0.41706059,  0.39626815]), u'Triphosphor FL': array([ 0.41316327,  0.39642205]), u'F40/DX (Broadband FL)': array([ 0.31192231,  0.3428021 ]), u'C100S54 (HPS)': array([ 0.52923152,  0.41137016]), u'Kinoton 75P': array([ 0.31525241,  0.33287079]), u'SDW-T 100W/LV (Super HPS)': array([ 0.47233916,  0.40710633]), u'3-LED-3 (465/546/614)': array([ 0.3804605,  0.376772 ]), u'F32T8/TL835 (Triphosphor)': array([ 0.40715027,  0.39317274]), u'MHC100/U/MP /3K': array([ 0.42858177,  0.38816892]), u'3-LED-2 (473/545/616)': array([ 0.41706048,  0.39626812]), u'F34/CW/RS/EW (Cool White FL)': array([ 0.37725093,  0.39308766]), u'Daylight FL': array([ 0.31266299,  0.33198569]), u'3-LED-2 Yellow': array([ 0.43656308,  0.44364962]), u'3-LED-1 (457/540/605)': array([ 0.41705769,  0.39626246]), u'HPS': array([ 0.5216777 ,  0.41797118]), u'LPS': array([ 0.57515131,  0.42423223]), u'H38JA-100/DX (Mercury DX)': array([ 0.38979163,  0.37339469]), u'F32T8/TL865 /PLUS (Triphosphor)': array([ 0.31636888,  0.34532079]), u'F32T8/TL841 (Triphosphor)': array([ 0.38537669,  0.39037076]), u'F32T8/TL830 (Triphosphor)': array([ 0.44325076,  0.4095237 ]), u'T8 Luxline Plus White': array([ 0.4104922 ,  0.38893253]), u'T8 Polylux 3000': array([ 0.43170608,  0.41387774]), u'3-LED-4 (455/547/623)': array([ 0.41706794,  0.39627628]), u'Metal Halide': array([ 0.37254456,  0.38560393]), u'Natural': array([ 0.38158573,  0.35922414]), u'F32T8/TL850 (Triphosphor)': array([ 0.34376891,  0.35844744]), u'Thorn Kolor-rite': array([ 0.38191912,  0.37430926]), u'4-LED Yellow': array([ 0.41706964,  0.39627677]), u'PHOS-2': array([ 0.45270446,  0.43758454]), u'PHOS-1': array([ 0.43644317,  0.40461603]), u'F40/N (Natural FL)': array([ 0.3768787 ,  0.35415346]), u'PHOS-4': array([ 0.43693602,  0.40411356]), u'PHOS-3': array([ 0.43689987,  0.40403737]), u'Incandescent': array([ 0.45073022,  0.40804613]), u'SC': array([ 0.31005673,  0.3161457 ]), u'Luxeon WW 2880': array([ 0.45908853,  0.43291648]), u'SA': array([ 0.44757303,  0.40743814]), u'Phosphor LED YAG': array([ 0.30776182,  0.32526894]), u'4-LED-1 (461/526/576/624)': array([ 0.41706762,  0.39627506]), u'F40/CWX (Broadband FL)': array([ 0.37503705,  0.36054395])})})</em><a class="headerlink" href="#colour.colorimetry.dataset.light_sources.chromaticity_coordinates.LIGHT_SOURCES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregated light sources chromaticity coordinates.</p>
+<dl class="docutils">
+<dt>LIGHT_SOURCES <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;CIE 1931 2 Degree Standard Observer&#8217;,
+&#8216;CIE 1964 10 Degree Standard Observer&#8217;}</strong></dd>
+</dl>
+<p>Aliases:</p>
+<ul class="simple">
+<li>&#8216;cie_2_1931&#8217;: &#8216;CIE 1931 2 Degree Standard Observer&#8217;</li>
+<li>&#8216;cie_10_1964&#8217;: &#8216;CIE 1964 10 Degree Standard Observer&#8217;</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.dataset.light_sources.chromaticity_coordinates Module</a><ul>
+<li><a class="reference internal" href="#light-sources-chromaticity-coordinates">Light Sources Chromaticity Coordinates</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.dataset.light_sources.chromaticity_coordinates.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.dataset.light_sources.chromaticity_coordinates.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

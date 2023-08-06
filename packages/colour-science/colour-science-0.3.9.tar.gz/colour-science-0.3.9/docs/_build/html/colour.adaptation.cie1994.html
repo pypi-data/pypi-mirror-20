@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.adaptation.cie1994 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.adaptation.cie1994">
+<span id="colour-adaptation-cie1994-module"></span><h1>colour.adaptation.cie1994 Module<a class="headerlink" href="#module-colour.adaptation.cie1994" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cie-1994-chromatic-adaptation-model">
+<h2>CIE 1994 Chromatic Adaptation Model<a class="headerlink" href="#cie-1994-chromatic-adaptation-model" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>CIE 1994</em> chromatic adaptation model objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.adaptation.cie1994.chromatic_adaptation_CIE1994" title="colour.adaptation.cie1994.chromatic_adaptation_CIE1994"><code class="xref py py-func docutils literal"><span class="pre">chromatic_adaptation_CIE1994()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/adaptation/cie1994.ipynb">CIE 1994 Chromatic Adaptation Model Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>CIE TC 1-32. (1994). CIE 109-1994 A Method of Predicting Corresponding
+Colours under Different Chromatic and Illuminance Adaptations
+(pp. 1–18). ISBN:978-3-900734-51-0</td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.adaptation.cie1994.CIE1994_XYZ_TO_RGB_MATRIX">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">CIE1994_XYZ_TO_RGB_MATRIX</code><em class="property"> = array([[ 0.40024,  0.7076 , -0.08081],        [-0.2263 ,  1.16532,  0.0457 ],        [ 0.     ,  0.     ,  0.91822]])</em><a class="headerlink" href="#colour.adaptation.cie1994.CIE1994_XYZ_TO_RGB_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE 1994</em> colour appearance model <em>CIE XYZ</em> tristimulus values to cone
+responses matrix.</p>
+<p>CIE1994_XYZ_TO_RGB_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.adaptation.cie1994.CIE1994_RGB_TO_XYZ_MATRIX">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">CIE1994_RGB_TO_XYZ_MATRIX</code><em class="property"> = array([[  1.85993639e+00,  -1.12938162e+00,   2.19897410e-01],        [  3.61191436e-01,   6.38812463e-01,  -6.37059684e-06],        [  0.00000000e+00,   0.00000000e+00,   1.08906362e+00]])</em><a class="headerlink" href="#colour.adaptation.cie1994.CIE1994_RGB_TO_XYZ_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE 1994</em> colour appearance model cone responses to <em>CIE XYZ</em> tristimulus
+values matrix.</p>
+<p>CIE1994_RGB_TO_XYZ_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.chromatic_adaptation_CIE1994">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">chromatic_adaptation_CIE1994</code><span class="sig-paren">(</span><em>XYZ_1</em>, <em>xy_o1</em>, <em>xy_o2</em>, <em>Y_o</em>, <em>E_o1</em>, <em>E_o2</em>, <em>n=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#chromatic_adaptation_CIE1994"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.chromatic_adaptation_CIE1994" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adapts given stimulus <em>CIE XYZ_1</em> tristimulus values from test viewing
+conditions to reference viewing conditions using <em>CIE 1994</em> chromatic
+adaptation model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ_1</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of test sample / stimulus in domain
+[0, 100].</li>
+<li><strong>xy_o1</strong> (<em>array_like</em>) &#8211; Chromaticity coordinates <span class="math">\(x_{o1}\)</span> and <span class="math">\(y_{o1}\)</span> of test
+illuminant and background.</li>
+<li><strong>xy_o2</strong> (<em>array_like</em>) &#8211; Chromaticity coordinates <span class="math">\(x_{o2}\)</span> and <span class="math">\(y_{o2}\)</span> of reference
+illuminant and background.</li>
+<li><strong>Y_o</strong> (<em>numeric</em>) &#8211; Luminance factor <span class="math">\(Y_o\)</span> of achromatic background as percentage in
+domain [18, 100].</li>
+<li><strong>E_o1</strong> (<em>numeric</em>) &#8211; Test illuminance <span class="math">\(E_{o1}\)</span> in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>E_o2</strong> (<em>numeric</em>) &#8211; Reference illuminance <span class="math">\(E_{o2}\)</span> in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>n</strong> (<em>numeric, optional</em>) &#8211; Noise component in fundamental primary system.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Adapted <em>CIE XYZ_2</em> tristimulus values of test stimulus.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The input domain of that definition is non standard!</p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ_1</em> tristimulus values are in domain [0, 100].</li>
+<li>Output <em>CIE XYZ_2</em> tristimulus values are in range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">28.00</span><span class="p">,</span> <span class="mf">21.26</span><span class="p">,</span> <span class="mf">5.27</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy_o1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.4476</span><span class="p">,</span> <span class="mf">0.4074</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xy_o2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3127</span><span class="p">,</span> <span class="mf">0.3290</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_o</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_o1</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_o2</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chromatic_adaptation_CIE1994</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">XYZ_1</span><span class="p">,</span> <span class="n">xy_o1</span><span class="p">,</span> <span class="n">xy_o2</span><span class="p">,</span> <span class="n">Y_o</span><span class="p">,</span> <span class="n">E_o1</span><span class="p">,</span> <span class="n">E_o2</span><span class="p">)</span>
+<span class="go">array([ 24.0337952...,  21.1562121...,  17.6430119...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.XYZ_to_RGB_CIE1994">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">XYZ_to_RGB_CIE1994</code><span class="sig-paren">(</span><em>XYZ</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#XYZ_to_RGB_CIE1994"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.XYZ_to_RGB_CIE1994" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <em>CIE XYZ</em> tristimulus values to cone responses.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Cone responses.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">28.00</span><span class="p">,</span> <span class="mf">21.26</span><span class="p">,</span> <span class="mf">5.27</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_RGB_CIE1994</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>  
+<span class="go">array([ 25.8244273...,  18.6791422...,   4.8390194...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.RGB_to_XYZ_CIE1994">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">RGB_to_XYZ_CIE1994</code><span class="sig-paren">(</span><em>RGB</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#RGB_to_XYZ_CIE1994"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.RGB_to_XYZ_CIE1994" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from cone responses to <em>CIE XYZ</em> tristimulus values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>RGB</strong> (<em>array_like</em>) &#8211; Cone responses.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE XYZ</em> tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">25.82442730</span><span class="p">,</span> <span class="mf">18.67914220</span><span class="p">,</span> <span class="mf">4.83901940</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_XYZ_CIE1994</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>  
+<span class="go">array([ 28.  ,  21.26,   5.27])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.intermediate_values">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">intermediate_values</code><span class="sig-paren">(</span><em>xy_o</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#intermediate_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.intermediate_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the intermediate values <span class="math">\(\xi\)</span>, <span class="math">\(\eta\)</span>, <span class="math">\(\zeta\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>xy_o</strong> (<em>array_like</em>) &#8211; Chromaticity coordinates <span class="math">\(x_o\)</span> and <span class="math">\(y_o\)</span> of whitepoint.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Intermediate values <span class="math">\(\xi\)</span>, <span class="math">\(\eta\)</span>, <span class="math">\(\zeta\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.4476</span><span class="p">,</span> <span class="mf">0.4074</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">intermediate_values</span><span class="p">(</span><span class="n">xy_o</span><span class="p">)</span>  
+<span class="go">array([ 1.1185719...,  0.9329553...,  0.3268087...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.effective_adapting_responses">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">effective_adapting_responses</code><span class="sig-paren">(</span><em>xez</em>, <em>Y_o</em>, <em>E_o</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#effective_adapting_responses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.effective_adapting_responses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives the effective adapting responses in the fundamental primary system
+of the test or reference field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xez</strong> (<em>ndarray</em>) &#8211; Intermediate values <span class="math">\(\xi\)</span>, <span class="math">\(\eta\)</span>, <span class="math">\(\zeta\)</span>.</li>
+<li><strong>E_o</strong> (<em>numeric</em>) &#8211; Test or reference illuminance <span class="math">\(E_{o}\)</span> in lux.</li>
+<li><strong>Y_o</strong> (<em>numeric</em>) &#8211; Luminance factor <span class="math">\(Y_o\)</span> of achromatic background as percentage in
+domain [18, 100].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Effective adapting responses.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xez</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.11857195</span><span class="p">,</span> <span class="mf">0.93295530</span><span class="p">,</span> <span class="mf">0.32680879</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_o</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_o</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">effective_adapting_responses</span><span class="p">(</span><span class="n">xez</span><span class="p">,</span> <span class="n">Y_o</span><span class="p">,</span> <span class="n">E_o</span><span class="p">)</span>  
+<span class="go">array([ 71.2105020...,  59.3937790...,  20.8052937...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.beta_1">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">beta_1</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#beta_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.beta_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponent <span class="math">\(\beta_1\)</span> for the middle and long-wavelength
+sensitive cones.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Middle and long-wavelength sensitive cone response.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Exponent <span class="math">\(\beta_1\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or array_like</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beta_1</span><span class="p">(</span><span class="mf">318.323316315</span><span class="p">)</span>  
+<span class="go">4.6106222...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.beta_2">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">beta_2</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#beta_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.beta_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponent <span class="math">\(\beta_2\)</span> for the short-wavelength sensitive
+cones.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>numeric or array_like</em>) &#8211; Short-wavelength sensitive cone response.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Exponent <span class="math">\(\beta_2\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or array_like</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beta_2</span><span class="p">(</span><span class="mf">318.323316315</span><span class="p">)</span>  
+<span class="go">4.6522416...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.exponential_factors">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">exponential_factors</code><span class="sig-paren">(</span><em>RGB_o</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#exponential_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.exponential_factors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the chromatic adaptation exponential factors <span class="math">\(\beta_1(R_o)\)</span>,
+<span class="math">\(\beta_1(G_o)\)</span> and <span class="math">\(\beta_2(B_o)\)</span> of given cone responses.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>RGB_o</strong> (<em>array_like</em>) &#8211; Cone responses.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Chromatic adaptation exponential factors <span class="math">\(\beta_1(R_o)\)</span>,
+<span class="math">\(\beta_1(G_o)\)</span> and <span class="math">\(\beta_2(B_o)\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">318.32331631</span><span class="p">,</span> <span class="mf">318.30352317</span><span class="p">,</span> <span class="mf">318.23283482</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exponential_factors</span><span class="p">(</span><span class="n">RGB_o</span><span class="p">)</span>  
+<span class="go">array([ 4.6106222...,  4.6105892...,  4.6520698...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.K_coefficient">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">K_coefficient</code><span class="sig-paren">(</span><em>xez_1</em>, <em>xez_2</em>, <em>bRGB_o1</em>, <em>bRGB_o2</em>, <em>Y_o</em>, <em>n=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#K_coefficient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.K_coefficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the coefficient <span class="math">\(K\)</span> for correcting the difference between
+the test and references illuminances.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xez_1</strong> (<em>array_like</em>) &#8211; Intermediate values <span class="math">\(\xi_1\)</span>, <span class="math">\(\eta_1\)</span>, <span class="math">\(\zeta_1\)</span> for
+the test illuminant and background.</li>
+<li><strong>xez_2</strong> (<em>array_like</em>) &#8211; Intermediate values <span class="math">\(\xi_2\)</span>, <span class="math">\(\eta_2\)</span>, <span class="math">\(\zeta_2\)</span> for
+the reference illuminant and background.</li>
+<li><strong>bRGB_o1</strong> (<em>array_like</em>) &#8211; Chromatic adaptation exponential factors <span class="math">\(\beta_1(R_{o1})\)</span>,
+<span class="math">\(\beta_1(G_{o1})\)</span> and <span class="math">\(\beta_2(B_{o1})\)</span> of test sample.</li>
+<li><strong>bRGB_o2</strong> (<em>array_like</em>) &#8211; Chromatic adaptation exponential factors <span class="math">\(\beta_1(R_{o2})\)</span>,
+<span class="math">\(\beta_1(G_{o2})\)</span> and <span class="math">\(\beta_2(B_{o2})\)</span> of reference
+sample.</li>
+<li><strong>Y_o</strong> (<em>numeric or array_like</em>) &#8211; Luminance factor <span class="math">\(Y_o\)</span> of achromatic background as percentage in
+domain [18, 100].</li>
+<li><strong>n</strong> (<em>numeric or array_like, optional</em>) &#8211; Noise component in fundamental primary system.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Coefficient <span class="math">\(K\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xez_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.11857195</span><span class="p">,</span> <span class="mf">0.93295530</span><span class="p">,</span> <span class="mf">0.32680879</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xez_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.00000372</span><span class="p">,</span> <span class="mf">1.00000176</span><span class="p">,</span> <span class="mf">0.99999461</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRGB_o1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.74852518</span><span class="p">,</span> <span class="mf">3.63920879</span><span class="p">,</span> <span class="mf">2.78924811</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRGB_o2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.68102374</span><span class="p">,</span> <span class="mf">3.68102256</span><span class="p">,</span> <span class="mf">3.56557351</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_o</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K_coefficient</span><span class="p">(</span><span class="n">xez_1</span><span class="p">,</span> <span class="n">xez_2</span><span class="p">,</span> <span class="n">bRGB_o1</span><span class="p">,</span> <span class="n">bRGB_o2</span><span class="p">,</span> <span class="n">Y_o</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.adaptation.cie1994.corresponding_colour">
+<code class="descclassname">colour.adaptation.cie1994.</code><code class="descname">corresponding_colour</code><span class="sig-paren">(</span><em>RGB_1</em>, <em>xez_1</em>, <em>xez_2</em>, <em>bRGB_o1</em>, <em>bRGB_o2</em>, <em>Y_o</em>, <em>K</em>, <em>n=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/adaptation/cie1994.html#corresponding_colour"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.adaptation.cie1994.corresponding_colour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the corresponding colour cone responses of given test sample cone
+responses <span class="math">\(RGB_1\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB_1</strong> (<em>array_like</em>) &#8211; Test sample cone responses <span class="math">\(RGB_1\)</span>.</li>
+<li><strong>xez_1</strong> (<em>array_like</em>) &#8211; Intermediate values <span class="math">\(\xi_1\)</span>, <span class="math">\(\eta_1\)</span>, <span class="math">\(\zeta_1\)</span> for
+the test illuminant and background.</li>
+<li><strong>xez_2</strong> (<em>array_like</em>) &#8211; Intermediate values <span class="math">\(\xi_2\)</span>, <span class="math">\(\eta_2\)</span>, <span class="math">\(\zeta_2\)</span> for
+the reference illuminant and background.</li>
+<li><strong>bRGB_o1</strong> (<em>array_like</em>) &#8211; Chromatic adaptation exponential factors <span class="math">\(\beta_1(R_{o1})\)</span>,
+<span class="math">\(\beta_1(G_{o1})\)</span> and <span class="math">\(\beta_2(B_{o1})\)</span> of test sample.</li>
+<li><strong>bRGB_o2</strong> (<em>array_like</em>) &#8211; Chromatic adaptation exponential factors <span class="math">\(\beta_1(R_{o2})\)</span>,
+<span class="math">\(\beta_1(G_{o2})\)</span> and <span class="math">\(\beta_2(B_{o2})\)</span> of reference
+sample.</li>
+<li><strong>Y_o</strong> (<em>numeric or array_like</em>) &#8211; Luminance factor <span class="math">\(Y_o\)</span> of achromatic background as percentage in
+domain [18, 100].</li>
+<li><strong>K</strong> (<em>numeric or array_like</em>) &#8211; Coefficient <span class="math">\(K\)</span>.</li>
+<li><strong>n</strong> (<em>numeric or array_like, optional</em>) &#8211; Noise component in fundamental primary system.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Corresponding colour cone responses of given test sample cone
+responses.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">25.82442730</span><span class="p">,</span> <span class="mf">18.67914220</span><span class="p">,</span> <span class="mf">4.83901940</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xez_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.11857195</span><span class="p">,</span> <span class="mf">0.93295530</span><span class="p">,</span> <span class="mf">0.32680879</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xez_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.00000372</span><span class="p">,</span> <span class="mf">1.00000176</span><span class="p">,</span> <span class="mf">0.99999461</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRGB_o1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.74852518</span><span class="p">,</span> <span class="mf">3.63920879</span><span class="p">,</span> <span class="mf">2.78924811</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRGB_o2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.68102374</span><span class="p">,</span> <span class="mf">3.68102256</span><span class="p">,</span> <span class="mf">3.56557351</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_o</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corresponding_colour</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">RGB_1</span><span class="p">,</span> <span class="n">xez_1</span><span class="p">,</span> <span class="n">xez_2</span><span class="p">,</span> <span class="n">bRGB_o1</span><span class="p">,</span> <span class="n">bRGB_o2</span><span class="p">,</span> <span class="n">Y_o</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+<span class="go">array([ 23.1636901...,  20.0211948...,  16.2001664...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.adaptation.cie1994 Module</a><ul>
+<li><a class="reference internal" href="#cie-1994-chromatic-adaptation-model">CIE 1994 Chromatic Adaptation Model</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.adaptation.cie1994.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.adaptation.cie1994.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

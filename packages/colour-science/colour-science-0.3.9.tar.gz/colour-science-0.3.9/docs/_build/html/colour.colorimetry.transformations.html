@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.transformations Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.transformations">
+<span id="colour-colorimetry-transformations-module"></span><h1>colour.colorimetry.transformations Module<a class="headerlink" href="#module-colour.colorimetry.transformations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="colour-matching-functions-transformations">
+<h2>Colour Matching Functions Transformations<a class="headerlink" href="#colour-matching-functions-transformations" title="Permalink to this headline">¶</a></h2>
+<p>Defines various educational objects for colour matching functions
+transformations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.colorimetry.transformations.RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs" title="colour.colorimetry.transformations.RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs"><code class="xref py py-func docutils literal"><span class="pre">RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs()</span></code></a></li>
+<li><a class="reference internal" href="#colour.colorimetry.transformations.RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs" title="colour.colorimetry.transformations.RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs"><code class="xref py py-func docutils literal"><span class="pre">RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs()</span></code></a></li>
+<li><a class="reference internal" href="#colour.colorimetry.transformations.RGB_10_degree_cmfs_to_LMS_10_degree_cmfs" title="colour.colorimetry.transformations.RGB_10_degree_cmfs_to_LMS_10_degree_cmfs"><code class="xref py py-func docutils literal"><span class="pre">RGB_10_degree_cmfs_to_LMS_10_degree_cmfs()</span></code></a></li>
+<li><a class="reference internal" href="#colour.colorimetry.transformations.LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs" title="colour.colorimetry.transformations.LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs"><code class="xref py py-func docutils literal"><span class="pre">LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs()</span></code></a></li>
+<li><a class="reference internal" href="#colour.colorimetry.transformations.LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs" title="colour.colorimetry.transformations.LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs"><code class="xref py py-func docutils literal"><span class="pre">LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/cmfs.ipynb">Colour Matching Functions Jupyter Notebook</a></p>
+</div>
+<dl class="function">
+<dt id="colour.colorimetry.transformations.RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs">
+<code class="descclassname">colour.colorimetry.transformations.</code><code class="descname">RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs</code><span class="sig-paren">(</span><em>wavelength</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/transformations.html#RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.transformations.RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <em>Wright &amp; Guild 1931 2 Degree RGB CMFs</em> colour matching functions
+into the <em>CIE 1931 2 Degree Standard Observer</em> colour matching functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavelength</strong> (<em>numeric or array_like</em>) &#8211; Wavelength <span class="math">\(\lambda\)</span> in nm.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE 1931 2 Degree Standard Observer</em> spectral tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="colour.colorimetry.dataset.cmfs.html#colour.colorimetry.dataset.cmfs.RGB_CMFS" title="colour.colorimetry.dataset.cmfs.RGB_CMFS"><code class="xref py py-attr docutils literal"><span class="pre">colour.colorimetry.dataset.cmfs.RGB_CMFS</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Data for the <em>CIE 1931 2 Degree Standard Observer</em> already exists,
+this definition is intended for educational purpose.</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Wyszecki, G., &amp; Stiles, W. S. (2000). Table 1(3.3.3). In Color
+Science: Concepts and Methods, Quantitative Data and Formulae
+(pp. 138–139). Wiley. ISBN:978-0471399186</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_2_degree_cmfs_to_XYZ_2_degree_cmfs</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>  
+<span class="go">array([ 0.0113577...,  0.004102  ,  0.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.transformations.RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs">
+<code class="descclassname">colour.colorimetry.transformations.</code><code class="descname">RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs</code><span class="sig-paren">(</span><em>wavelength</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/transformations.html#RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.transformations.RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <em>Stiles &amp; Burch 1959 10 Degree RGB CMFs</em> colour matching
+functions into the <em>CIE 1964 10 Degree Standard Observer</em> colour matching
+functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavelength</strong> (<em>numeric or array_like</em>) &#8211; Wavelength <span class="math">\(\lambda\)</span> in nm.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE 1964 10 Degree Standard Observer</em> spectral tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="colour.colorimetry.dataset.cmfs.html#colour.colorimetry.dataset.cmfs.RGB_CMFS" title="colour.colorimetry.dataset.cmfs.RGB_CMFS"><code class="xref py py-attr docutils literal"><span class="pre">colour.colorimetry.dataset.cmfs.RGB_CMFS</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Data for the <em>CIE 1964 10 Degree Standard Observer</em> already exists,
+this definition is intended for educational purpose.</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Wyszecki, G., &amp; Stiles, W. S. (2000). The CIE 1964 Standard
+Observer. In Color Science: Concepts and Methods, Quantitative
+Data and Formulae (p. 141). Wiley. ISBN:978-0471399186</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_10_degree_cmfs_to_XYZ_10_degree_cmfs</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>  
+<span class="go">array([  9.6432150...e-03,   3.7526317...e-03,  -4.1078830...e-06])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.transformations.RGB_10_degree_cmfs_to_LMS_10_degree_cmfs">
+<code class="descclassname">colour.colorimetry.transformations.</code><code class="descname">RGB_10_degree_cmfs_to_LMS_10_degree_cmfs</code><span class="sig-paren">(</span><em>wavelength</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/transformations.html#RGB_10_degree_cmfs_to_LMS_10_degree_cmfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.transformations.RGB_10_degree_cmfs_to_LMS_10_degree_cmfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <em>Stiles &amp; Burch 1959 10 Degree RGB CMFs</em> colour matching
+functions into the <em>Stockman &amp; Sharpe 10 Degree Cone Fundamentals</em>
+spectral sensitivity functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavelength</strong> (<em>numeric or array_like</em>) &#8211; Wavelength <span class="math">\(\lambda\)</span> in nm.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Stockman &amp; Sharpe 10 Degree Cone Fundamentals</em> spectral tristimulus
+values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Data for the <em>Stockman &amp; Sharpe 10 Degree Cone Fundamentals</em> already
+exists, this definition is intended for educational purpose.</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>CIE TC 1-36. (2006). CIE 170-1:2006 Fundamental Chromaticity
+Diagram with Physiological Axes - Part 1 (pp. 1–56).
+ISBN:978-3-901-90646-6</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_10_degree_cmfs_to_LMS_10_degree_cmfs</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>  
+<span class="go">array([ 0.0052860...,  0.0003252...,  0.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.transformations.LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs">
+<code class="descclassname">colour.colorimetry.transformations.</code><code class="descname">LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs</code><span class="sig-paren">(</span><em>wavelength</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/transformations.html#LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.transformations.LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <em>Stockman &amp; Sharpe 2 Degree Cone Fundamentals</em> colour matching
+functions into the <em>CIE 2012 2 Degree Standard Observer</em> colour matching
+functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavelength</strong> (<em>numeric or array_like</em>) &#8211; Wavelength <span class="math">\(\lambda\)</span> in nm.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE 2012 2 Degree Standard Observer</em> spectral tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Data for the <em>CIE 2012 2 Degree Standard Observer</em> already exists,
+this definition is intended for educational purpose.</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>CVRL. (n.d.). CIE (2012) 2-deg XYZ “physiologically-relevant”
+colour matching functions. Retrieved June 25, 2014, from
+<a class="reference external" href="http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm">http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LMS_2_degree_cmfs_to_XYZ_2_degree_cmfs</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>  
+<span class="go">array([ 0.0109677...,  0.0041959...,  0.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.colorimetry.transformations.LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs">
+<code class="descclassname">colour.colorimetry.transformations.</code><code class="descname">LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs</code><span class="sig-paren">(</span><em>wavelength</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/colorimetry/transformations.html#LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.colorimetry.transformations.LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <em>Stockman &amp; Sharpe 10 Degree Cone Fundamentals</em> colour matching
+functions into the <em>CIE 2012 10 Degree Standard Observer</em> colour matching
+functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavelength</strong> (<em>numeric or array_like</em>) &#8211; Wavelength <span class="math">\(\lambda\)</span> in nm.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>CIE 2012 10 Degree Standard Observer</em> spectral tristimulus values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Data for the <em>CIE 2012 10 Degree Standard Observer</em> already exists,
+this definition is intended for educational purpose.</li>
+</ul>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>CVRL. (n.d.). CIE (2012) 10-deg XYZ “physiologically-relevant”
+colour matching functions. Retrieved June 25, 2014, from
+<a class="reference external" href="http://www.cvrl.org/database/text/cienewxyz/cie2012xyz10.htm">http://www.cvrl.org/database/text/cienewxyz/cie2012xyz10.htm</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LMS_10_degree_cmfs_to_XYZ_10_degree_cmfs</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>  
+<span class="go">array([ 0.0098162...,  0.0037761...,  0.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.transformations Module</a><ul>
+<li><a class="reference internal" href="#colour-matching-functions-transformations">Colour Matching Functions Transformations</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.transformations.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.transformations.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

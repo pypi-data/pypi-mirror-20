@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.recovery.smits1999 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.recovery.smits1999">
+<span id="colour-recovery-smits1999-module"></span><h1>colour.recovery.smits1999 Module<a class="headerlink" href="#module-colour.recovery.smits1999" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="smits-1999-reflectance-recovery">
+<h2>Smits (1999) - Reflectance Recovery<a class="headerlink" href="#smits-1999-reflectance-recovery" title="Permalink to this headline">¶</a></h2>
+<p>Defines objects for reflectance recovery using <em>Smits (1999)</em> method.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/recovery/smits1999.ipynb">Smits (1999) - Reflectance Recovery Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Smits, B. (1999). An RGB-to-Spectrum Conversion for Reflectances.
+Journal of Graphics Tools, 4(4), 11–22.
+doi:10.1080/10867651.1999.10487511</td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.recovery.smits1999.SMITS1999_PRIMARIES">
+<code class="descclassname">colour.recovery.smits1999.</code><code class="descname">SMITS1999_PRIMARIES</code><em class="property"> = array([[ 0.64,  0.33],        [ 0.3 ,  0.6 ],        [ 0.15,  0.06]])</em><a class="headerlink" href="#colour.recovery.smits1999.SMITS1999_PRIMARIES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current <em>Smits (1999)</em> method implementation colourspace primaries.</p>
+<p>SMITS1999_PRIMARIES : ndarray, (3, 2)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.recovery.smits1999.SMITS1999_WHITEPOINT">
+<code class="descclassname">colour.recovery.smits1999.</code><code class="descname">SMITS1999_WHITEPOINT</code><em class="property"> = array([ 0.33333333,  0.33333333])</em><a class="headerlink" href="#colour.recovery.smits1999.SMITS1999_WHITEPOINT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current <em>Smits (1999)</em> method implementation colourspace whitepoint.</p>
+<p>SMITS1999_WHITEPOINT : ndarray</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.recovery.smits1999.SMITS1999_XYZ_TO_RGB_MATRIX">
+<code class="descclassname">colour.recovery.smits1999.</code><code class="descname">SMITS1999_XYZ_TO_RGB_MATRIX</code><em class="property"> = array([[ 2.68965517, -1.27586207, -0.4137931 ],        [-1.02210817,  1.97828662,  0.04382156],        [ 0.06122449, -0.2244898 ,  1.16326531]])</em><a class="headerlink" href="#colour.recovery.smits1999.SMITS1999_XYZ_TO_RGB_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current <em>Smits (1999)</em> method implementation <em>RGB</em> colourspace to
+<em>CIE XYZ</em> tristimulus values matrix.</p>
+<p>SMITS1999_XYZ_TO_RGB_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.recovery.smits1999.XYZ_to_RGB_Smits1999">
+<code class="descclassname">colour.recovery.smits1999.</code><code class="descname">XYZ_to_RGB_Smits1999</code><span class="sig-paren">(</span><em>XYZ</em>, <em>chromatic_adaptation_transform=u'Bradford'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/recovery/smits1999.html#XYZ_to_RGB_Smits1999"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.recovery.smits1999.XYZ_to_RGB_Smits1999" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient object to convert from <em>CIE XYZ</em> tristimulus values to <em>RGB</em>
+colourspace in conditions required by the current <em>Smits (1999)</em> method
+implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values.</li>
+<li><strong>chromatic_adaptation_transform</strong> (<em>unicode, optional</em>) &#8211; <strong>{&#8216;CAT02&#8217;, &#8216;XYZ Scaling&#8217;, &#8216;Von Kries&#8217;, &#8216;Bradford&#8217;, &#8216;Sharp&#8217;,
+&#8216;Fairchild&#8217;, &#8216;CMCCAT97&#8217;, &#8216;CMCCAT2000&#8217;, &#8216;CAT02_BRILL_CAT&#8217;, &#8216;Bianco&#8217;,
+&#8216;Bianco PC&#8217;}</strong>,
+<em>Chromatic adaptation</em> method.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>RGB</em> colour array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values are in domain [0, 1].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.07049534</span><span class="p">,</span> <span class="mf">0.10080000</span><span class="p">,</span> <span class="mf">0.09558313</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_RGB_Smits1999</span><span class="p">(</span><span class="n">XYZ</span><span class="p">)</span>  
+<span class="go">array([ 0.0214496...,  0.1315460...,  0.0928760...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.recovery.smits1999.RGB_to_spectral_Smits1999">
+<code class="descclassname">colour.recovery.smits1999.</code><code class="descname">RGB_to_spectral_Smits1999</code><span class="sig-paren">(</span><em>RGB</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/recovery/smits1999.html#RGB_to_spectral_Smits1999"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.recovery.smits1999.RGB_to_spectral_Smits1999" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recovers the spectral power distribution of given <em>RGB</em> colourspace array
+using <em>Smits (1999)</em> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>RGB</strong> (<em>array_like, (3,)</em>) &#8211; <em>RGB</em> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Recovered spectral power distribution.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution">SpectralPowerDistribution</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.02144962</span><span class="p">,</span> <span class="mf">0.13154603</span><span class="p">,</span> <span class="mf">0.09287601</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">RGB_to_spectral_Smits1999</span><span class="p">(</span><span class="n">RGB</span><span class="p">))</span>  
+<span class="go">SpectralPowerDistribution(&#39;0 Constant&#39;, (380.0, 720.0, 37.7777777...))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.recovery.smits1999 Module</a><ul>
+<li><a class="reference internal" href="#smits-1999-reflectance-recovery">Smits (1999) - Reflectance Recovery</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.recovery.smits1999.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.recovery.smits1999.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

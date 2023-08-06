@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.models.rgb.aces_it Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.models.rgb.aces_it">
+<span id="colour-models-rgb-aces-it-module"></span><h1>colour.models.rgb.aces_it Module<a class="headerlink" href="#module-colour.models.rgb.aces_it" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="academy-color-encoding-system-input-transform">
+<h2>Academy Color Encoding System - Input Transform<a class="headerlink" href="#academy-color-encoding-system-input-transform" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>Academy Color Encoding System</em> (ACES) <em>Input Transform</em> utilities:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.models.rgb.aces_it.spectral_to_aces_relative_exposure_values" title="colour.models.rgb.aces_it.spectral_to_aces_relative_exposure_values"><code class="xref py py-func docutils literal"><span class="pre">spectral_to_aces_relative_exposure_values()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/rgb.ipynb">RGB Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (n.d.). Academy Color Encoding System. Retrieved
+February 24, 2014, from
+<a class="reference external" href="http://www.oscars.org/science-technology/council/projects/aces.html">http://www.oscars.org/science-technology/council/projects/aces.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (2014). Technical Bulletin TB-2014-004 - Informative
+Notes on SMPTE ST 2065-1 – Academy Color Encoding Specification
+(ACES). Retrieved from
+<a class="reference external" href="https://github.com/ampas/aces-dev/tree/master/documents">https://github.com/ampas/aces-dev/tree/master/documents</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>The Academy of Motion Picture Arts and Sciences, Science and
+Technology Council, &amp; Academy Color Encoding System (ACES) Project
+Subcommittee. (2014). Technical Bulletin TB-2014-012 - Academy Color
+Encoding System Version 1.0 Component Names. Retrieved from
+<a class="reference external" href="https://github.com/ampas/aces-dev/tree/master/documents">https://github.com/ampas/aces-dev/tree/master/documents</a></td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.models.rgb.aces_it.spectral_to_aces_relative_exposure_values">
+<code class="descclassname">colour.models.rgb.aces_it.</code><code class="descname">spectral_to_aces_relative_exposure_values</code><span class="sig-paren">(</span><em>spd</em>, <em>illuminant=SpectralPowerDistribution(     'D60'</em>, <em>{300.0: 0.029370758174923</em>, <em>310.0: 2.619241317964963</em>, <em>320.0: 15.71689061312826</em>, <em>330.0: 28.774580263919134</em>, <em>340.0: 31.86483993666198</em>, <em>350.0: 36.3774264446741</em>, <em>360.0: 38.68311546316286</em>, <em>370.0: 42.717548461834966</em>, <em>380.0: 41.45494057963752</em>, <em>390.0: 46.60531924327943</em>, <em>400.0: 72.27859383884864</em>, <em>410.0: 80.44059999279465</em>, <em>420.0: 82.91502693894319</em>, <em>430.0: 77.67626397731756</em>, <em>440.0: 95.68127430379398</em>, <em>450.0: 107.95482086750596</em>, <em>460.0: 109.55918680507406</em>, <em>470.0: 107.75814070682792</em>, <em>480.0: 109.6714042353418</em>, <em>490.0: 103.70787331005091</em>, <em>500.0: 105.23219857523205</em>, <em>510.0: 104.42766692185435</em>, <em>520.0: 102.52293357805246</em>, <em>530.0: 106.05267087904782</em>, <em>540.0: 103.31515403458198</em>, <em>550.0: 103.53859891732658</em>, <em>560.0: 100.0</em>, <em>570.0: 96.7514214188669</em>, <em>580.0: 96.71282250154032</em>, <em>590.0: 89.92147908442617</em>, <em>600.0: 91.99979329504407</em>, <em>610.0: 92.09870955067275</em>, <em>620.0: 90.64600269701035</em>, <em>630.0: 86.52648272486029</em>, <em>640.0: 87.57918623550152</em>, <em>650.0: 83.97614003583296</em>, <em>660.0: 84.72407422805772</em>, <em>670.0: 87.49349084772983</em>, <em>680.0: 83.48307015694974</em>, <em>690.0: 74.17245111876663</em>, <em>700.0: 76.62038531099138</em>, <em>710.0: 79.05184907375583</em>, <em>720.0: 65.47137071741646</em>, <em>730.0: 74.10607902725252</em>, <em>740.0: 79.5271204277263</em>, <em>750.0: 67.30716277162384</em>, <em>760.0: 49.273538206159095</em>, <em>770.0: 70.89241211789025</em>, <em>780.0: 67.16399622630497</em>, <em>790.0: 68.17137071741647</em>, <em>800.0: 62.9898086167058</em>, <em>810.0: 54.990892361077115</em>, <em>820.0: 60.82560067091317</em>, <em>830.0: 63.89349586226156})</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/models/rgb/aces_it.html#spectral_to_aces_relative_exposure_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.models.rgb.aces_it.spectral_to_aces_relative_exposure_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts given spectral power distribution to <em>ACES2065-1</em> colourspace
+relative exposure values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>spd</strong> (<a class="reference internal" href="colour.colorimetry.html#colour.colorimetry.SpectralPowerDistribution" title="colour.colorimetry.SpectralPowerDistribution"><em>SpectralPowerDistribution</em></a>) &#8211; Spectral power distribution.</li>
+<li><strong>illuminant</strong> (<em>SpectralPowerDistribution, optional</em>) &#8211; <em>Illuminant</em> spectral power distribution.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>ACES2065-1</em> colourspace relative exposure values array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray, (3,)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Output <em>ACES2065-1</em> colourspace relative exposure values array is in
+range [0, 1].</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="colour.colorimetry.tristimulus.html#colour.colorimetry.tristimulus.spectral_to_XYZ" title="colour.colorimetry.tristimulus.spectral_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">colour.colorimetry.tristimulus.spectral_to_XYZ()</span></code></a></p>
+</div>
+<p class="rubric">References</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">colour</span> <span class="kn">import</span> <span class="n">COLOURCHECKERS_SPDS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spd</span> <span class="o">=</span> <span class="n">COLOURCHECKERS_SPDS</span><span class="p">[</span><span class="s1">&#39;ColorChecker N Ohta&#39;</span><span class="p">][</span><span class="s1">&#39;dark skin&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectral_to_aces_relative_exposure_values</span><span class="p">(</span><span class="n">spd</span><span class="p">)</span>  
+<span class="go">array([ 0.1187697...,  0.0870866...,  0.0589442...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.models.rgb.aces_it Module</a><ul>
+<li><a class="reference internal" href="#academy-color-encoding-system-input-transform">Academy Color Encoding System - Input Transform</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.models.rgb.aces_it.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.models.rgb.aces_it.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

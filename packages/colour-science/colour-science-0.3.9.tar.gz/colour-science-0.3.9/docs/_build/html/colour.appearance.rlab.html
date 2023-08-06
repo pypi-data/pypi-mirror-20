@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.appearance.rlab Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.appearance.rlab">
+<span id="colour-appearance-rlab-module"></span><h1>colour.appearance.rlab Module<a class="headerlink" href="#module-colour.appearance.rlab" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rlab-colour-appearance-model">
+<h2>RLAB Colour Appearance Model<a class="headerlink" href="#rlab-colour-appearance-model" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>RLAB</em> colour appearance model objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.appearance.rlab.RLAB_VIEWING_CONDITIONS" title="colour.appearance.rlab.RLAB_VIEWING_CONDITIONS"><code class="xref py py-attr docutils literal"><span class="pre">RLAB_VIEWING_CONDITIONS</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.rlab.RLAB_D_FACTOR" title="colour.appearance.rlab.RLAB_D_FACTOR"><code class="xref py py-attr docutils literal"><span class="pre">RLAB_D_FACTOR</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.rlab.RLAB_Specification" title="colour.appearance.rlab.RLAB_Specification"><code class="xref py py-class docutils literal"><span class="pre">RLAB_Specification</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.rlab.XYZ_to_RLAB" title="colour.appearance.rlab.XYZ_to_RLAB"><code class="xref py py-func docutils literal"><span class="pre">XYZ_to_RLAB()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/appearance/rlab.ipynb">RLAB Colour Appearance Model Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Fairchild, M. D. (1996). Refinement of the RLAB color space. Color
+Research &amp; Application, 21(5), 338–346.
+doi:10.1002/(SICI)1520-6378(199610)21:5&lt;338::AID-COL3&gt;3.0.CO;2-Z</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Fairchild, M. D. (2013). The RLAB Model. In Color Appearance Models
+(3rd ed., pp. 5563–5824). Wiley. ASIN:B00DAYO8E2</td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.appearance.rlab.R_MATRIX">
+<code class="descclassname">colour.appearance.rlab.</code><code class="descname">R_MATRIX</code><em class="property"> = array([[ 1.9569, -1.1882,  0.2313],        [ 0.3612,  0.6388,  0.    ],        [ 0.    ,  0.    ,  1.    ]])</em><a class="headerlink" href="#colour.appearance.rlab.R_MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>RLAB</em> colour appearance model precomputed helper matrix.</p>
+<p>R_MATRIX : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.appearance.rlab.RLAB_VIEWING_CONDITIONS">
+<code class="descclassname">colour.appearance.rlab.</code><code class="descname">RLAB_VIEWING_CONDITIONS</code><em class="property"> = CaseInsensitiveMapping({u'Dark': 0.2857142857142857, u'Dim': 0.3448275862068966, u'Average': 0.4347826086956522})</em><a class="headerlink" href="#colour.appearance.rlab.RLAB_VIEWING_CONDITIONS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference <em>RLAB</em> colour appearance model viewing conditions.</p>
+<dl class="docutils">
+<dt>RLAB_VIEWING_CONDITIONS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Average&#8217;, &#8216;Dim&#8217;, &#8216;Dark&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.appearance.rlab.RLAB_D_FACTOR">
+<code class="descclassname">colour.appearance.rlab.</code><code class="descname">RLAB_D_FACTOR</code><em class="property"> = CaseInsensitiveMapping({u'Soft Copy Images': 0, u'Projected Transparencies, Dark Room': 0.5, u'soft_cp_img': 0, u'Hard Copy Images': 1, u'projected_dark': 0.5, u'hard_cp_img': 1})</em><a class="headerlink" href="#colour.appearance.rlab.RLAB_D_FACTOR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>RLAB</em> colour appearance model <em>Discounting-the-Illuminant</em> factor values.</p>
+<dl class="docutils">
+<dt>RLAB_D_FACTOR <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Hard Copy Images&#8217;,
+&#8216;Soft Copy Images&#8217;,
+&#8216;Projected Transparencies, Dark Room&#8217;}</strong></dd>
+</dl>
+<p>Aliases:</p>
+<ul class="simple">
+<li>&#8216;hard_cp_img&#8217;: &#8216;Hard Copy Images&#8217;</li>
+<li>&#8216;soft_cp_img&#8217;: &#8216;Soft Copy Images&#8217;</li>
+<li>&#8216;projected_dark&#8217;: &#8216;Projected Transparencies, Dark Room&#8217;</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.appearance.rlab.RLAB_ReferenceSpecification">
+<em class="property">class </em><code class="descclassname">colour.appearance.rlab.</code><code class="descname">RLAB_ReferenceSpecification</code><a class="reference internal" href="_modules/colour/appearance/rlab.html#RLAB_ReferenceSpecification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.rlab.RLAB_ReferenceSpecification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.appearance.rlab.RLAB_ReferenceSpecification" title="colour.appearance.rlab.RLAB_ReferenceSpecification"><code class="xref py py-class docutils literal"><span class="pre">colour.appearance.rlab.RLAB_ReferenceSpecification</span></code></a></p>
+<p>Defines the <em>RLAB</em> colour appearance model reference specification.</p>
+<p>This specification has field names consistent with <em>Fairchild (2013)</em>
+reference.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>LR</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>Lightness</em> <span class="math">\(L^R\)</span>.</li>
+<li><strong>CR</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>achromatic chroma</em> <span class="math">\(C^R\)</span>.</li>
+<li><strong>hR</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> angle <span class="math">\(h^R\)</span> in degrees.</li>
+<li><strong>sR</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>saturation</em> <span class="math">\(s^R\)</span>.</li>
+<li><strong>HR</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> <span class="math">\(h\)</span> composition <span class="math">\(H^R\)</span>.</li>
+<li><strong>aR</strong> (<em>numeric or array_like</em>) &#8211; Red–green chromatic response <span class="math">\(a^R\)</span>.</li>
+<li><strong>bR</strong> (<em>numeric or array_like</em>) &#8211; Yellow–blue chromatic response <span class="math">\(b^R\)</span>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.appearance.rlab.RLAB_Specification">
+<em class="property">class </em><code class="descclassname">colour.appearance.rlab.</code><code class="descname">RLAB_Specification</code><a class="reference internal" href="_modules/colour/appearance/rlab.html#RLAB_Specification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.rlab.RLAB_Specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.appearance.rlab.RLAB_Specification" title="colour.appearance.rlab.RLAB_Specification"><code class="xref py py-class docutils literal"><span class="pre">colour.appearance.rlab.RLAB_Specification</span></code></a></p>
+<p>Defines the <em>RLAB</em> colour appearance model specification.</p>
+<p>This specification has field names consistent with the remaining colour
+appearance models in <a class="reference internal" href="colour.appearance.html#module-colour.appearance" title="colour.appearance"><code class="xref py py-mod docutils literal"><span class="pre">colour.appearance</span></code></a> but diverge from
+<em>Fairchild (2013)</em> reference.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>Lightness</em> <span class="math">\(L^R\)</span>.</li>
+<li><strong>C</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>achromatic chroma</em> <span class="math">\(C^R\)</span>.</li>
+<li><strong>h</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> angle <span class="math">\(h^R\)</span> in degrees.</li>
+<li><strong>s</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>saturation</em> <span class="math">\(s^R\)</span>.</li>
+<li><strong>HC</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> <span class="math">\(h\)</span> composition <span class="math">\(H^C\)</span>.</li>
+<li><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Red–green chromatic response <span class="math">\(a^R\)</span>.</li>
+<li><strong>b</strong> (<em>numeric or array_like</em>) &#8211; Yellow–blue chromatic response <span class="math">\(b^R\)</span>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>This specification is the one used in the current model implementation.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.rlab.XYZ_to_RLAB">
+<code class="descclassname">colour.appearance.rlab.</code><code class="descname">XYZ_to_RLAB</code><span class="sig-paren">(</span><em>XYZ</em>, <em>XYZ_n</em>, <em>Y_n</em>, <em>sigma=0.4347826086956522</em>, <em>D=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/rlab.html#XYZ_to_RLAB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.rlab.XYZ_to_RLAB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the <em>RLAB</em> model color appearance correlates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of test sample / stimulus in domain
+[0, 100].</li>
+<li><strong>XYZ_n</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of reference white in domain [0, 100].</li>
+<li><strong>Y_n</strong> (<em>numeric or array_like</em>) &#8211; Absolute adapting luminance in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>sigma</strong> (<em>numeric or array_like, optional</em>) &#8211; Relative luminance of the surround, see <a class="reference internal" href="#colour.appearance.rlab.RLAB_VIEWING_CONDITIONS" title="colour.appearance.rlab.RLAB_VIEWING_CONDITIONS"><code class="xref py py-attr docutils literal"><span class="pre">RLAB_VIEWING_CONDITIONS</span></code></a>
+for reference.</li>
+<li><strong>D</strong> (<em>numeric or array_like, optional</em>) &#8211; <em>Discounting-the-Illuminant</em> factor in domain [0, 1].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>RLAB</em> colour appearance model specification.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#colour.appearance.rlab.RLAB_Specification" title="colour.appearance.rlab.RLAB_Specification">RLAB_Specification</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The input domain of that definition is non standard!</p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values are in domain [0, 100].</li>
+<li>Input <em>CIE XYZ_n</em> tristimulus values are in domain [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.01</span><span class="p">,</span> <span class="mf">20.00</span><span class="p">,</span> <span class="mf">21.78</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">109.85</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">35.58</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_n</span> <span class="o">=</span> <span class="mf">31.83</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span> <span class="o">=</span> <span class="n">RLAB_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">RLAB_D_FACTOR</span><span class="p">[</span><span class="s1">&#39;Hard Copy Images&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_RLAB</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_n</span><span class="p">,</span> <span class="n">Y_n</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>  
+<span class="go">RLAB_Specification(J=49.8347069..., C=54.8700585..., h=286.4860208..., s=1.1010410..., HC=None, a=15.5711021..., b=-52.6142956...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.appearance.rlab Module</a><ul>
+<li><a class="reference internal" href="#rlab-colour-appearance-model">RLAB Colour Appearance Model</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.appearance.rlab.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.appearance.rlab.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

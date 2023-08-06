@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.difference.delta_e_luo2006 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.difference.delta_e_luo2006">
+<span id="colour-difference-delta-e-luo2006-module"></span><h1>colour.difference.delta_e_luo2006 Module<a class="headerlink" href="#module-colour.difference.delta_e_luo2006" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="delta-e-colour-difference-luo-cui-and-li-2006">
+<h2><span class="math">\(\Delta E'\)</span> - Delta E Colour Difference - Luo, Cui and Li (2006)<a class="headerlink" href="#delta-e-colour-difference-luo-cui-and-li-2006" title="Permalink to this headline">¶</a></h2>
+<p>Defines <span class="math">\(\Delta E'\)</span> colour difference computation objects based on
+<em>Luo et al. (2006)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, and <em>CAM02-UCS</em> colourspaces:</p>
+<p>The following objects are available:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.difference.delta_e_luo2006.delta_E_CAM02LCD" title="colour.difference.delta_e_luo2006.delta_E_CAM02LCD"><code class="xref py py-func docutils literal"><span class="pre">delta_E_CAM02LCD()</span></code></a></li>
+<li><a class="reference internal" href="#colour.difference.delta_e_luo2006.delta_E_CAM02SCD" title="colour.difference.delta_e_luo2006.delta_E_CAM02SCD"><code class="xref py py-func docutils literal"><span class="pre">delta_E_CAM02SCD()</span></code></a></li>
+<li><a class="reference internal" href="#colour.difference.delta_e_luo2006.delta_E_CAM02UCS" title="colour.difference.delta_e_luo2006.delta_E_CAM02UCS"><code class="xref py py-func docutils literal"><span class="pre">delta_E_CAM02UCS()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/models/ucs_luo2006.ipynb">CAM02-LCD, CAM02-SCD, and CAM02-UCS Colourspaces Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Luo, R. M., Cui, G., &amp; Li, C. (2006). Uniform Colour Spaces Based on
+CIECAM02 Colour Appearance Model. Color Research and Application,
+31(4), 320–330. doi:10.1002/col.20227</td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="colour.difference.delta_e_luo2006.delta_E_Luo2006">
+<code class="descclassname">colour.difference.delta_e_luo2006.</code><code class="descname">delta_E_Luo2006</code><span class="sig-paren">(</span><em>Jpapbp_1</em>, <em>Jpapbp_2</em>, <em>coefficients</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/difference/delta_e_luo2006.html#delta_E_Luo2006"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.difference.delta_e_luo2006.delta_E_Luo2006" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the difference <span class="math">\(\Delta E'\)</span> between two given
+<em>Luo et al. (2016)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or <em>CAM02-UCS</em> colourspaces
+<span class="math">\(J'a'b'\)</span> arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Jpapbp_1</strong> (<em>array_like</em>) &#8211; Standard / reference <em>Luo et al.</em> (2016) <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or
+<em>CAM02-UCS</em> colourspaces <span class="math">\(J'a'b'\)</span> array.</li>
+<li><strong>Jpapbp_2</strong> (<em>array_like</em>) &#8211; Sample / test <em>Luo et al. (2016)</em> <em>CAM02-LCD</em>, <em>CAM02-SCD</em>, or
+<em>CAM02-UCS</em> colourspaces <span class="math">\(J'a'b'\)</span> array.</li>
+<li><strong>coefficients</strong> (<em>array_like</em>) &#8211; Coefficients of one of the <em>Luo et al. (2016)</em> <em>CAM02-LCD</em>,
+<em>CAM02-SCD</em>, or <em>CAM02-UCS</em> colourspaces.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Colour difference <span class="math">\(\Delta E'\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08450395</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06854831</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08442362</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06848314</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delta_E_Luo2006</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">Jpapbp_1</span><span class="p">,</span> <span class="n">Jpapbp_2</span><span class="p">,</span> <span class="n">COEFFICIENTS_UCS_LUO2006</span><span class="p">[</span><span class="s1">&#39;CAM02-LCD&#39;</span><span class="p">])</span>
+<span class="go">0.0001034...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.difference.delta_e_luo2006.delta_E_CAM02LCD">
+<code class="descclassname">colour.difference.delta_e_luo2006.</code><code class="descname">delta_E_CAM02LCD</code><span class="sig-paren">(</span><em>Jpapbp_1</em>, <em>Jpapbp_2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/difference/delta_e_luo2006.html#delta_E_CAM02LCD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.difference.delta_e_luo2006.delta_E_CAM02LCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the difference <span class="math">\(\Delta E'\)</span> between two given
+<em>Luo et al. (2016)</em> <em>CAM02-LCD</em> colourspaces <span class="math">\(J'a'b'\)</span> arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Jpapbp_1</strong> (<em>array_like</em>) &#8211; Standard / reference <em>Luo et al.</em> (2016) <em>CAM02-LCD</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</li>
+<li><strong>Jpapbp_2</strong> (<em>array_like</em>) &#8211; Sample / test <em>Luo et al.</em> (2016) <em>CAM02-LCD</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Colour difference <span class="math">\(\Delta E'\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08450395</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06854831</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08442362</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06848314</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delta_E_CAM02LCD</span><span class="p">(</span><span class="n">Jpapbp_1</span><span class="p">,</span> <span class="n">Jpapbp_2</span><span class="p">)</span>  
+<span class="go">0.0001034...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.difference.delta_e_luo2006.delta_E_CAM02SCD">
+<code class="descclassname">colour.difference.delta_e_luo2006.</code><code class="descname">delta_E_CAM02SCD</code><span class="sig-paren">(</span><em>Jpapbp_1</em>, <em>Jpapbp_2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/difference/delta_e_luo2006.html#delta_E_CAM02SCD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.difference.delta_e_luo2006.delta_E_CAM02SCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the difference <span class="math">\(\Delta E'\)</span> between two given
+<em>Luo et al. (2016)</em> <em>CAM02-SCD</em> colourspaces <span class="math">\(J'a'b'\)</span> arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Jpapbp_1</strong> (<em>array_like</em>) &#8211; Standard / reference <em>Luo et al.</em> (2016) <em>CAM02-SCD</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</li>
+<li><strong>Jpapbp_2</strong> (<em>array_like</em>) &#8211; Sample / test <em>Luo et al.</em> (2016) <em>CAM02-SCD</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Colour difference <span class="math">\(\Delta E'\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08450395</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06854831</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08442362</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06848314</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delta_E_CAM02SCD</span><span class="p">(</span><span class="n">Jpapbp_1</span><span class="p">,</span> <span class="n">Jpapbp_2</span><span class="p">)</span>  
+<span class="go">0.0001034...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.difference.delta_e_luo2006.delta_E_CAM02UCS">
+<code class="descclassname">colour.difference.delta_e_luo2006.</code><code class="descname">delta_E_CAM02UCS</code><span class="sig-paren">(</span><em>Jpapbp_1</em>, <em>Jpapbp_2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/difference/delta_e_luo2006.html#delta_E_CAM02UCS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.difference.delta_e_luo2006.delta_E_CAM02UCS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the difference <span class="math">\(\Delta E'\)</span> between two given
+<em>Luo et al. (2016)</em> <em>CAM02-UCS</em> colourspaces <span class="math">\(J'a'b'\)</span> arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Jpapbp_1</strong> (<em>array_like</em>) &#8211; Standard / reference <em>Luo et al.</em> (2016) <em>CAM02-UCS</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</li>
+<li><strong>Jpapbp_2</strong> (<em>array_like</em>) &#8211; Sample / test <em>Luo et al.</em> (2016) <em>CAM02-UCS</em> colourspaces
+<span class="math">\(J'a'b'\)</span> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Colour difference <span class="math">\(\Delta E'\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08450395</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06854831</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Jpapbp_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.90433134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08442362</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06848314</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delta_E_CAM02UCS</span><span class="p">(</span><span class="n">Jpapbp_1</span><span class="p">,</span> <span class="n">Jpapbp_2</span><span class="p">)</span>  
+<span class="go">0.0001034...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.difference.delta_e_luo2006 Module</a><ul>
+<li><a class="reference internal" href="#delta-e-colour-difference-luo-cui-and-li-2006"><span class="math">\(\Delta E'\)</span> - Delta E Colour Difference - Luo, Cui and Li (2006)</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.difference.delta_e_luo2006.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.difference.delta_e_luo2006.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

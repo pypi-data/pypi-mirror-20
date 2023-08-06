@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.colorimetry.dataset.illuminants.d_illuminants_s_spds Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.colorimetry.dataset.illuminants.d_illuminants_s_spds">
+<span id="colour-colorimetry-dataset-illuminants-d-illuminants-s-spds-module"></span><h1>colour.colorimetry.dataset.illuminants.d_illuminants_s_spds Module<a class="headerlink" href="#module-colour.colorimetry.dataset.illuminants.d_illuminants_s_spds" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cie-standard-illuminant-d-series-distributions">
+<h2>CIE Standard Illuminant D Series <span class="math">\(S_n(\lambda)\)</span> Distributions<a class="headerlink" href="#cie-standard-illuminant-d-series-distributions" title="Permalink to this headline">¶</a></h2>
+<p>Defines the <em>CIE Standard Illuminant D Series</em> <span class="math">\(S_n(\lambda)\)</span>
+distributions involved in the computation of
+<em>CIE Standard Illuminant D Series</em> relative spectral power distributions.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/colorimetry/illuminants.ipynb">Illuminants Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Wyszecki, G., &amp; Stiles, W. S. (2000). CIE Method of Calculating
+D-Illuminants. In Color Science: Concepts and Methods,
+Quantitative Data and Formulae (pp. 145–146). Wiley.
+ISBN:978-0471399186</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Lindbloom, B. (2007). Spectral Power Distribution of a
+CIE D-Illuminant. Retrieved April 05, 2014, from
+<a class="reference external" href="http://www.brucelindbloom.com/Eqn_DIlluminant.html">http://www.brucelindbloom.com/Eqn_DIlluminant.html</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.colorimetry.dataset.illuminants.d_illuminants_s_spds.D_ILLUMINANTS_S_SPDS">
+<code class="descclassname">colour.colorimetry.dataset.illuminants.d_illuminants_s_spds.</code><code class="descname">D_ILLUMINANTS_S_SPDS</code><em class="property"> = CaseInsensitiveMapping({u'S2': SpectralPowerDistribution(     'S2',     {300.0: 0.0,      310.0: 2.0,      320.0: 4.0,      330.0: 8.5,      340.0: 7.8,      350.0: 6.7,      360.0: 5.3,      370.0: 6.1,      380.0: 3.0,      390.0: 1.2,      400.0: -1.1,      410.0: -0.5,      420.0: -0.7,      430.0: -1.2,      440.0: -2.6,      450.0: -2.9,      460.0: -2.8,      470.0: -2.6,      480.0: -2.6,      490.0: -1.8,      500.0: -1.5,      510.0: -1.3,      520.0: -1.2,      530.0: -1.0,      540.0: -0.5,      550.0: -0.3,      560.0: 0.0,      570.0: 0.2,      580.0: 0.5,      590.0: 2.1,      600.0: 3.2,      610.0: 4.1,      620.0: 4.7,      630.0: 5.1,      640.0: 6.7,      650.0: 7.3,      660.0: 8.6,      670.0: 9.8,      680.0: 10.2,      690.0: 8.3,      700.0: 9.6,      710.0: 8.5,      720.0: 7.0,      730.0: 7.6,      740.0: 8.0,      750.0: 6.7,      760.0: 5.2,      770.0: 7.4,      780.0: 6.8,      790.0: 7.0,      800.0: 6.4,      810.0: 5.5,      820.0: 6.1,      830.0: 6.5}), u'S1': SpectralPowerDistribution(     'S1',     {300.0: 0.02,      310.0: 4.5,      320.0: 22.4,      330.0: 42.0,      340.0: 40.6,      350.0: 41.6,      360.0: 38.0,      370.0: 43.4,      380.0: 38.5,      390.0: 35.0,      400.0: 43.4,      410.0: 46.3,      420.0: 43.9,      430.0: 37.1,      440.0: 36.7,      450.0: 35.9,      460.0: 32.6,      470.0: 27.9,      480.0: 24.3,      490.0: 20.1,      500.0: 16.2,      510.0: 13.2,      520.0: 8.6,      530.0: 6.1,      540.0: 4.2,      550.0: 1.9,      560.0: 0.0,      570.0: -1.6,      580.0: -3.5,      590.0: -3.5,      600.0: -5.8,      610.0: -7.2,      620.0: -8.6,      630.0: -9.5,      640.0: -10.9,      650.0: -10.7,      660.0: -12.0,      670.0: -14.0,      680.0: -13.6,      690.0: -12.0,      700.0: -13.3,      710.0: -12.9,      720.0: -10.6,      730.0: -11.6,      740.0: -12.2,      750.0: -10.2,      760.0: -7.8,      770.0: -11.2,      780.0: -10.4,      790.0: -10.6,      800.0: -9.7,      810.0: -8.3,      820.0: -9.3,      830.0: -9.8}), u'S0': SpectralPowerDistribution(     'S0',     {300.0: 0.04,      310.0: 6.0,      320.0: 29.6,      330.0: 55.3,      340.0: 57.3,      350.0: 61.8,      360.0: 61.5,      370.0: 68.8,      380.0: 63.4,      390.0: 65.8,      400.0: 94.8,      410.0: 104.8,      420.0: 105.9,      430.0: 96.8,      440.0: 113.9,      450.0: 125.6,      460.0: 125.5,      470.0: 121.3,      480.0: 121.3,      490.0: 113.5,      500.0: 113.1,      510.0: 110.8,      520.0: 106.5,      530.0: 108.8,      540.0: 105.3,      550.0: 104.4,      560.0: 100.0,      570.0: 96.0,      580.0: 95.1,      590.0: 89.1,      600.0: 90.5,      610.0: 90.3,      620.0: 88.4,      630.0: 84.0,      640.0: 85.1,      650.0: 81.9,      660.0: 82.6,      670.0: 84.9,      680.0: 81.3,      690.0: 71.9,      700.0: 74.3,      710.0: 76.4,      720.0: 63.3,      730.0: 71.7,      740.0: 77.0,      750.0: 65.2,      760.0: 47.7,      770.0: 68.6,      780.0: 65.0,      790.0: 66.0,      800.0: 61.0,      810.0: 53.3,      820.0: 58.9,      830.0: 61.9})})</em><a class="headerlink" href="#colour.colorimetry.dataset.illuminants.d_illuminants_s_spds.D_ILLUMINANTS_S_SPDS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>CIE Standard Illuminant D Series</em> <span class="math">\(S_n(\lambda)\)</span> spectral power
+distributions</p>
+<dl class="docutils">
+<dt>D_ILLUMINANTS_S_SPDS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;S0&#8217;, &#8216;S1&#8217;, &#8216;S1&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.colorimetry.dataset.illuminants.d_illuminants_s_spds Module</a><ul>
+<li><a class="reference internal" href="#cie-standard-illuminant-d-series-distributions">CIE Standard Illuminant D Series <span class="math">\(S_n(\lambda)\)</span> Distributions</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.colorimetry.dataset.illuminants.d_illuminants_s_spds.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.colorimetry.dataset.illuminants.d_illuminants_s_spds.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

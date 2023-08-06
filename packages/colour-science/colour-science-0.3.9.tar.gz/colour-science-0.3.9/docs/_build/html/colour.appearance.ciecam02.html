@@ -1,0 +1,1152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.appearance.ciecam02 Module &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colour.appearance.ciecam02">
+<span id="colour-appearance-ciecam02-module"></span><h1>colour.appearance.ciecam02 Module<a class="headerlink" href="#module-colour.appearance.ciecam02" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ciecam02-colour-appearance-model">
+<h2>CIECAM02 Colour Appearance Model<a class="headerlink" href="#ciecam02-colour-appearance-model" title="Permalink to this headline">¶</a></h2>
+<p>Defines <em>CIECAM02</em> colour appearance model objects:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#colour.appearance.ciecam02.CIECAM02_InductionFactors" title="colour.appearance.ciecam02.CIECAM02_InductionFactors"><code class="xref py py-class docutils literal"><span class="pre">CIECAM02_InductionFactors</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.ciecam02.CIECAM02_VIEWING_CONDITIONS" title="colour.appearance.ciecam02.CIECAM02_VIEWING_CONDITIONS"><code class="xref py py-attr docutils literal"><span class="pre">CIECAM02_VIEWING_CONDITIONS</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.ciecam02.CIECAM02_Specification" title="colour.appearance.ciecam02.CIECAM02_Specification"><code class="xref py py-class docutils literal"><span class="pre">CIECAM02_Specification</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.ciecam02.XYZ_to_CIECAM02" title="colour.appearance.ciecam02.XYZ_to_CIECAM02"><code class="xref py py-func docutils literal"><span class="pre">XYZ_to_CIECAM02()</span></code></a></li>
+<li><a class="reference internal" href="#colour.appearance.ciecam02.CIECAM02_to_XYZ" title="colour.appearance.ciecam02.CIECAM02_to_XYZ"><code class="xref py py-func docutils literal"><span class="pre">CIECAM02_to_XYZ()</span></code></a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://nbviewer.jupyter.org/github/colour-science/colour-notebooks/blob/master/notebooks/appearance/ciecam02.ipynb">CIECAM02 Colour Appearance Model Jupyter Notebook</a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Wikipedia. (n.d.). CIECAM02. Retrieved August 14, 2014, from
+<a class="reference external" href="http://en.wikipedia.org/wiki/CIECAM02">http://en.wikipedia.org/wiki/CIECAM02</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Fairchild, M. D. (2004). CIECAM02. In Color Appearance Models
+(2nd ed., pp. 289–301). Wiley. ISBN:978-0470012161</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Westland, S., Ripamonti, C., &amp; Cheung, V. (2012). Extrapolation
+Methods. Computational Colour Science Using MATLAB (2nd ed., p. 38).
+ISBN:978-0-470-66569-5</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>Moroney, N., Fairchild, M. D., Hunt, R. W. G., Li, C., Luo, M. R., &amp;
+Newman, T. (n.d.). The CIECAM02 Color Appearance Model. Color and
+Imaging Conference, 2002(1), 23–27. Retrieved from
+<a class="reference external" href="http://www.ingentaconnect.com/content/ist/cic/2002/00002002/00000001/art00006">http://www.ingentaconnect.com/content/ist/cic/2002/00002002/00000001/art00006</a></td></tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="colour.appearance.ciecam02.CAT02_INVERSE_CAT">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">CAT02_INVERSE_CAT</code><em class="property"> = array([[ 1.09612382, -0.278869  ,  0.18274518],        [ 0.45436904,  0.47353315,  0.0720978 ],        [-0.00962761, -0.00569803,  1.01532564]])</em><a class="headerlink" href="#colour.appearance.ciecam02.CAT02_INVERSE_CAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse CAT02 chromatic adaptation transform.</p>
+<p>CAT02_INVERSE_CAT : array_like, (3, 3)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.appearance.ciecam02.CIECAM02_InductionFactors">
+<em class="property">class </em><code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">CIECAM02_InductionFactors</code><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#CIECAM02_InductionFactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.CIECAM02_InductionFactors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.appearance.ciecam02.CIECAM02_InductionFactors" title="colour.appearance.ciecam02.CIECAM02_InductionFactors"><code class="xref py py-class docutils literal"><span class="pre">colour.appearance.ciecam02.CIECAM02_InductionFactors</span></code></a></p>
+<p><em>CIECAM02</em> colour appearance model induction factors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>F</strong> (<em>numeric or array_like</em>) &#8211; Maximum degree of adaptation <span class="math">\(F\)</span>.</li>
+<li><strong>c</strong> (<em>numeric or array_like</em>) &#8211; Exponential non linearity <span class="math">\(c\)</span>.</li>
+<li><strong>N_c</strong> (<em>numeric or array_like</em>) &#8211; Chromatic induction factor <span class="math">\(N_c\)</span>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="colour.appearance.ciecam02.CIECAM02_VIEWING_CONDITIONS">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">CIECAM02_VIEWING_CONDITIONS</code><em class="property"> = CaseInsensitiveMapping({u'Dark': CIECAM02_InductionFactors(F=0.8, c=0.525, N_c=0.8), u'Dim': CIECAM02_InductionFactors(F=0.9, c=0.59, N_c=0.95), u'Average': CIECAM02_InductionFactors(F=1, c=0.69, N_c=1)})</em><a class="headerlink" href="#colour.appearance.ciecam02.CIECAM02_VIEWING_CONDITIONS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference <em>CIECAM02</em> colour appearance model viewing conditions.</p>
+<dl class="docutils">
+<dt>CIECAM02_VIEWING_CONDITIONS <span class="classifier-delimiter">:</span> <span class="classifier">CaseInsensitiveMapping</span></dt>
+<dd><strong>{&#8216;Average&#8217;, &#8216;Dim&#8217;, &#8216;Dark&#8217;}</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="colour.appearance.ciecam02.CIECAM02_Specification">
+<em class="property">class </em><code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">CIECAM02_Specification</code><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#CIECAM02_Specification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.CIECAM02_Specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#colour.appearance.ciecam02.CIECAM02_Specification" title="colour.appearance.ciecam02.CIECAM02_Specification"><code class="xref py py-class docutils literal"><span class="pre">colour.appearance.ciecam02.CIECAM02_Specification</span></code></a></p>
+<p>Defines the <em>CIECAM02</em> colour appearance model specification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>Lightness</em> <span class="math">\(J\)</span>.</li>
+<li><strong>C</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>chroma</em> <span class="math">\(C\)</span>.</li>
+<li><strong>h</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> angle <span class="math">\(h\)</span> in degrees.</li>
+<li><strong>s</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>saturation</em> <span class="math">\(s\)</span>.</li>
+<li><strong>Q</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>brightness</em> <span class="math">\(Q\)</span>.</li>
+<li><strong>M</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>colourfulness</em> <span class="math">\(M\)</span>.</li>
+<li><strong>H</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> <span class="math">\(h\)</span> quadrature <span class="math">\(H\)</span>.</li>
+<li><strong>HC</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> <span class="math">\(h\)</span> composition <span class="math">\(H^C\)</span>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.XYZ_to_CIECAM02">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">XYZ_to_CIECAM02</code><span class="sig-paren">(</span><em>XYZ</em>, <em>XYZ_w</em>, <em>L_A</em>, <em>Y_b</em>, <em>surround=CIECAM02_InductionFactors(F=1</em>, <em>c=0.69</em>, <em>N_c=1)</em>, <em>discount_illuminant=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#XYZ_to_CIECAM02"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.XYZ_to_CIECAM02" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the <em>CIECAM02</em> colour appearance model correlates from given
+<em>CIE XYZ</em> tristimulus values.</p>
+<p>This is the <em>forward</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>XYZ</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of test sample / stimulus in domain
+[0, 100].</li>
+<li><strong>XYZ_w</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of reference white in domain [0, 100].</li>
+<li><strong>L_A</strong> (<em>numeric or array_like</em>) &#8211; Adapting field <em>luminance</em> <span class="math">\(L_A\)</span> in <span class="math">\(cd/m^2\)</span>, (often taken
+to be 20% of the luminance of a white object in the scene).</li>
+<li><strong>Y_b</strong> (<em>numeric or array_like</em>) &#8211; Relative luminance of background <span class="math">\(Y_b\)</span> in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>surround</strong> (<em>CIECAM02_InductionFactors, optional</em>) &#8211; Surround viewing conditions induction factors.</li>
+<li><strong>discount_illuminant</strong> (<em>bool, optional</em>) &#8211; Truth value indicating if the illuminant should be discounted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>CIECAM02</em> colour appearance model specification.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="colour.appearance.html#colour.appearance.CIECAM02_Specification" title="colour.appearance.CIECAM02_Specification">CIECAM02_Specification</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The input domain of that definition is non standard!</p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ</em> tristimulus values are in domain [0, 100].</li>
+<li>Input <em>CIE XYZ_w</em> tristimulus values are in domain [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.01</span><span class="p">,</span> <span class="mf">20.00</span><span class="p">,</span> <span class="mf">21.78</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">95.05</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">108.88</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L_A</span> <span class="o">=</span> <span class="mf">318.31</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_b</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">surround</span> <span class="o">=</span> <span class="n">CIECAM02_VIEWING_CONDITIONS</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_to_CIECAM02</span><span class="p">(</span><span class="n">XYZ</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">L_A</span><span class="p">,</span> <span class="n">Y_b</span><span class="p">,</span> <span class="n">surround</span><span class="p">)</span>  
+<span class="go">CIECAM02_Specification(J=41.7310911..., C=0.1047077..., h=219.0484326..., s=2.3603053..., Q=195.3713259..., M=0.1088421..., H=278.0607358..., HC=None)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.CIECAM02_to_XYZ">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">CIECAM02_to_XYZ</code><span class="sig-paren">(</span><em>J</em>, <em>C</em>, <em>h</em>, <em>XYZ_w</em>, <em>L_A</em>, <em>Y_b</em>, <em>surround=CIECAM02_InductionFactors(F=1</em>, <em>c=0.69</em>, <em>N_c=1)</em>, <em>discount_illuminant=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#CIECAM02_to_XYZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.CIECAM02_to_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <em>CIECAM02</em> specification to <em>CIE XYZ</em> tristimulus values.</p>
+<p>This is the <em>reverse</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>Lightness</em> <span class="math">\(J\)</span>.</li>
+<li><strong>C</strong> (<em>numeric or array_like</em>) &#8211; Correlate of <em>chroma</em> <span class="math">\(C\)</span>.</li>
+<li><strong>h</strong> (<em>numeric or array_like</em>) &#8211; <em>Hue</em> angle <span class="math">\(h\)</span> in degrees.</li>
+<li><strong>XYZ_w</strong> (<em>array_like</em>) &#8211; <em>CIE XYZ</em> tristimulus values of reference white.</li>
+<li><strong>L_A</strong> (<em>numeric or array_like</em>) &#8211; Adapting field <em>luminance</em> <span class="math">\(L_A\)</span> in <span class="math">\(cd/m^2\)</span>, (often taken
+to be 20% of the luminance of a white object in the scene).</li>
+<li><strong>Y_b</strong> (<em>numeric or array_like</em>) &#8211; Relative luminance of background <span class="math">\(Y_b\)</span> in <span class="math">\(cd/m^2\)</span>.</li>
+<li><strong>surround</strong> (<em>CIECAM02_Surround, optional</em>) &#8211; Surround viewing conditions.</li>
+<li><strong>discount_illuminant</strong> (<em>bool, optional</em>) &#8211; Discount the illuminant.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>XYZ</strong> &#8211;
+<em>CIE XYZ</em> tristimulus values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The output range of that definition is non standard!</p>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Input <em>CIE XYZ_w</em> tristimulus values are in domain [0, 100].</li>
+<li>Output <em>CIE XYZ</em> tristimulus values are in range [0, 100].</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mf">41.731091132513917</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="mf">0.104707757171105</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="mf">219.04843265827190</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XYZ_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">95.05</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">,</span> <span class="mf">108.88</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L_A</span> <span class="o">=</span> <span class="mf">318.31</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_b</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CIECAM02_to_XYZ</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">XYZ_w</span><span class="p">,</span> <span class="n">L_A</span><span class="p">,</span> <span class="n">Y_b</span><span class="p">)</span>  
+<span class="go">array([ 19.01...,  20...  ,  21.78...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.chromatic_induction_factors">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">chromatic_induction_factors</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#chromatic_induction_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.chromatic_induction_factors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the chromatic induction factors <span class="math">\(N_{bb}\)</span> and <span class="math">\(N_{cb}\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>numeric or array_like</em>) &#8211; Function of the luminance factor of the background <span class="math">\(n\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Chromatic induction factors <span class="math">\(N_{bb}\)</span> and <span class="math">\(N_{cb}\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chromatic_induction_factors</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  
+<span class="go">array([ 1.000304...,  1.000304...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.base_exponential_non_linearity">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">base_exponential_non_linearity</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#base_exponential_non_linearity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.base_exponential_non_linearity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the base exponential non linearity <span class="math">\(n\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>numeric or array_like</em>) &#8211; Function of the luminance factor of the background <span class="math">\(n\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Base exponential non linearity <span class="math">\(z\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_exponential_non_linearity</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  
+<span class="go">1.9272135...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.viewing_condition_dependent_parameters">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">viewing_condition_dependent_parameters</code><span class="sig-paren">(</span><em>Y_b</em>, <em>Y_w</em>, <em>L_A</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#viewing_condition_dependent_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.viewing_condition_dependent_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the viewing condition dependent parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y_b</strong> (<em>numeric or array_like</em>) &#8211; Adapting field <em>Y</em> tristimulus value <span class="math">\(Y_b\)</span>.</li>
+<li><strong>Y_w</strong> (<em>numeric or array_like</em>) &#8211; Whitepoint <em>Y</em> tristimulus value <span class="math">\(Y_w\)</span>.</li>
+<li><strong>L_A</strong> (<em>numeric or array_like</em>) &#8211; Adapting field <em>luminance</em> <span class="math">\(L_A\)</span> in <span class="math">\(cd/m^2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Viewing condition dependent parameters.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">viewing_condition_dependent_parameters</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="mf">20.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">318.31</span><span class="p">)</span>
+<span class="go">array([ 0.2...,  1.1675444...,  1.000304...,  1.000304...,  1.9272136...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.degree_of_adaptation">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">degree_of_adaptation</code><span class="sig-paren">(</span><em>F</em>, <em>L_A</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#degree_of_adaptation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.degree_of_adaptation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the degree of adaptation <span class="math">\(D\)</span> from given surround maximum
+degree of adaptation <span class="math">\(F\)</span> and Adapting field <em>luminance</em> <span class="math">\(L_A\)</span>
+in <span class="math">\(cd/m^2\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>F</strong> (<em>numeric or array_like</em>) &#8211; Surround maximum degree of adaptation <span class="math">\(F\)</span>.</li>
+<li><strong>L_A</strong> (<em>numeric or array_like</em>) &#8211; Adapting field <em>luminance</em> <span class="math">\(L_A\)</span> in <span class="math">\(cd/m^2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Degree of adaptation <span class="math">\(D\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">degree_of_adaptation</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">318.31</span><span class="p">)</span>  
+<span class="go">0.9944687...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.full_chromatic_adaptation_forward">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">full_chromatic_adaptation_forward</code><span class="sig-paren">(</span><em>RGB</em>, <em>RGB_w</em>, <em>Y_w</em>, <em>D</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#full_chromatic_adaptation_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.full_chromatic_adaptation_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies full chromatic adaptation to given <em>CMCCAT2000</em> transform sharpened
+<em>RGB</em> array using given <em>CMCCAT2000</em> transform sharpened whitepoint
+<em>RGB_w</em> array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+<li><strong>RGB_w</strong> (<em>array_like</em>) &#8211; <em>CMCCAT2000</em> transform sharpened whitepoint <em>RGB_w</em> array.</li>
+<li><strong>Y_w</strong> (<em>numeric or array_like</em>) &#8211; Whitepoint <em>Y</em> tristimulus value <span class="math">\(Y_w\)</span>.</li>
+<li><strong>D</strong> (<em>numeric or array_like</em>) &#8211; Degree of adaptation <span class="math">\(D\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Adapted <em>RGB</em> array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">18.985456</span><span class="p">,</span> <span class="mf">20.707422</span><span class="p">,</span> <span class="mf">21.747482</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">94.930528</span><span class="p">,</span> <span class="mf">103.536988</span><span class="p">,</span> <span class="mf">108.717742</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_w</span> <span class="o">=</span> <span class="mf">100.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="mf">0.994468780088</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">full_chromatic_adaptation_forward</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span> <span class="n">RGB_w</span><span class="p">,</span> <span class="n">Y_w</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+<span class="go">array([ 19.9937078...,  20.0039363...,  20.0132638...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.full_chromatic_adaptation_reverse">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">full_chromatic_adaptation_reverse</code><span class="sig-paren">(</span><em>RGB</em>, <em>RGB_w</em>, <em>Y_w</em>, <em>D</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#full_chromatic_adaptation_reverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.full_chromatic_adaptation_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverts full chromatic adaptation of given <em>CMCCAT2000</em> transform sharpened
+<em>RGB</em> array using given <em>CMCCAT2000</em> transform sharpened whitepoint
+<em>RGB_w</em> array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+<li><strong>RGB_w</strong> (<em>array_like</em>) &#8211; <em>CMCCAT2000</em> transform sharpened whitepoint <em>RGB_w</em> array.</li>
+<li><strong>Y_w</strong> (<em>numeric or array_like</em>) &#8211; Whitepoint <em>Y</em> tristimulus value <span class="math">\(Y_w\)</span>.</li>
+<li><strong>D</strong> (<em>numeric or array_like</em>) &#8211; Degree of adaptation <span class="math">\(D\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Adapted <em>RGB</em> array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.99370783</span><span class="p">,</span> <span class="mf">20.00393634</span><span class="p">,</span> <span class="mf">20.01326387</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">94.930528</span><span class="p">,</span> <span class="mf">103.536988</span><span class="p">,</span> <span class="mf">108.717742</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y_w</span> <span class="o">=</span> <span class="mf">100.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="mf">0.994468780088</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">full_chromatic_adaptation_reverse</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span> <span class="n">RGB_w</span><span class="p">,</span> <span class="n">Y_w</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+<span class="go">array([ 18.985456,  20.707422,  21.747482])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.RGB_to_rgb">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">RGB_to_rgb</code><span class="sig-paren">(</span><em>RGB</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#RGB_to_rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.RGB_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts given <em>RGB</em> array to <em>Hunt-Pointer-Estevez</em>
+<span class="math">\(\rho\gamma\beta\)</span> colourspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>RGB</em> array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>Hunt-Pointer-Estevez</em> <span class="math">\(\rho\gamma\beta\)</span> colourspace array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.99370783</span><span class="p">,</span> <span class="mf">20.00393634</span><span class="p">,</span> <span class="mf">20.01326387</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_to_rgb</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>  
+<span class="go">array([ 19.9969397...,  20.0018612...,  20.0135053...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.rgb_to_RGB">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">rgb_to_RGB</code><span class="sig-paren">(</span><em>rgb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#rgb_to_RGB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.rgb_to_RGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts given <em>Hunt-Pointer-Estevez</em> <span class="math">\(\rho\gamma\beta\)</span> colourspace
+array to <em>RGB</em> array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rgb</strong> (<em>array_like</em>) &#8211; <em>Hunt-Pointer-Estevez</em> <span class="math">\(\rho\gamma\beta\)</span> colourspace array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><em>RGB</em> array.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.99693975</span><span class="p">,</span> <span class="mf">20.00186123</span><span class="p">,</span> <span class="mf">20.01350530</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rgb_to_RGB</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>  
+<span class="go">array([ 19.9937078...,  20.0039363...,  20.0132638...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.post_adaptation_non_linear_response_compression_forward">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">post_adaptation_non_linear_response_compression_forward</code><span class="sig-paren">(</span><em>RGB</em>, <em>F_L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#post_adaptation_non_linear_response_compression_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.post_adaptation_non_linear_response_compression_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns given <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array with post
+adaptation non linear response compression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+<li><strong>F_L</strong> (<em>array_like</em>) &#8211; <em>Luminance</em> level adaptation factor <span class="math">\(F_L\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Compressed <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">19.99693975</span><span class="p">,</span> <span class="mf">20.00186123</span><span class="p">,</span> <span class="mf">20.01350530</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F_L</span> <span class="o">=</span> <span class="mf">1.16754446415</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post_adaptation_non_linear_response_compression_forward</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span> <span class="n">F_L</span><span class="p">)</span>  
+<span class="go">array([ 7.9463202...,  7.9471152...,  7.9489959...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.post_adaptation_non_linear_response_compression_reverse">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">post_adaptation_non_linear_response_compression_reverse</code><span class="sig-paren">(</span><em>RGB</em>, <em>F_L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#post_adaptation_non_linear_response_compression_reverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.post_adaptation_non_linear_response_compression_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns given <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array without post
+adaptation non linear response compression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+<li><strong>F_L</strong> (<em>array_like</em>) &#8211; <em>Luminance</em> level adaptation factor <span class="math">\(F_L\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Uncompressed <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.94632020</span><span class="p">,</span> <span class="mf">7.94711528</span><span class="p">,</span> <span class="mf">7.94899595</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F_L</span> <span class="o">=</span> <span class="mf">1.16754446415</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post_adaptation_non_linear_response_compression_reverse</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">RGB</span><span class="p">,</span> <span class="n">F_L</span><span class="p">)</span>  
+<span class="go">array([ 19.9969397...,  20.0018612...,  20.0135052...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.opponent_colour_dimensions_forward">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">opponent_colour_dimensions_forward</code><span class="sig-paren">(</span><em>RGB</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#opponent_colour_dimensions_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.opponent_colour_dimensions_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns opponent colour dimensions from given compressed <em>CMCCAT2000</em>
+transform sharpened <em>RGB</em> array for forward <em>CIECAM02</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>RGB</strong> (<em>array_like</em>) &#8211; Compressed <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Opponent colour dimensions.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.94632020</span><span class="p">,</span> <span class="mf">7.94711528</span><span class="p">,</span> <span class="mf">7.94899595</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opponent_colour_dimensions_forward</span><span class="p">(</span><span class="n">RGB</span><span class="p">)</span>  
+<span class="go">array([-0.0006241..., -0.0005062...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.opponent_colour_dimensions_reverse">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">opponent_colour_dimensions_reverse</code><span class="sig-paren">(</span><em>P_n</em>, <em>h</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#opponent_colour_dimensions_reverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.opponent_colour_dimensions_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns opponent colour dimensions from given points <span class="math">\(P_n\)</span> and hue
+<span class="math">\(h\)</span> in degrees for reverse <em>CIECAM02</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>P_n</strong> (<em>array_like</em>) &#8211; Points <span class="math">\(P_n\)</span>.</li>
+<li><strong>h</strong> (<em>numeric or array_like</em>) &#8211; Hue <span class="math">\(h\)</span> in degrees.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Opponent colour dimensions.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">30162.89081534</span><span class="p">,</span> <span class="mf">24.23720547</span><span class="p">,</span> <span class="mf">1.05000000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="o">-</span><span class="mf">140.95156734</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opponent_colour_dimensions_reverse</span><span class="p">(</span><span class="n">P_n</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>  
+<span class="go">array([-0.0006241..., -0.0005062...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.hue_angle">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">hue_angle</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#hue_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.hue_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>hue</em> angle <span class="math">\(h\)</span> in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(b\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Hue</em> angle <span class="math">\(h\)</span> in degrees.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000624112068243</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000506270106773</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hue_angle</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">219.0484326...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.hue_quadrature">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">hue_quadrature</code><span class="sig-paren">(</span><em>h</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#hue_quadrature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.hue_quadrature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the hue quadrature from given hue <span class="math">\(h\)</span> angle in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>h</strong> (<em>numeric or array_like</em>) &#8211; Hue <span class="math">\(h\)</span> angle in degrees.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Hue quadrature.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hue_quadrature</span><span class="p">(</span><span class="mf">219.0484326582719</span><span class="p">)</span>  
+<span class="go">278.0607358...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.eccentricity_factor">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">eccentricity_factor</code><span class="sig-paren">(</span><em>h</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#eccentricity_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.eccentricity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the eccentricity factor <span class="math">\(e_t\)</span> from given hue <span class="math">\(h\)</span> angle
+in degrees for forward <em>CIECAM02</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>h</strong> (<em>numeric or array_like</em>) &#8211; Hue <span class="math">\(h\)</span> angle in degrees.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Eccentricity factor <span class="math">\(e_t\)</span>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numeric or ndarray</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eccentricity_factor</span><span class="p">(</span><span class="o">-</span><span class="mf">140.951567342</span><span class="p">)</span>  
+<span class="go">1.1740054...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.achromatic_response_forward">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">achromatic_response_forward</code><span class="sig-paren">(</span><em>RGB</em>, <em>N_bb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#achromatic_response_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.achromatic_response_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the achromatic response <span class="math">\(A\)</span> from given compressed
+<em>CMCCAT2000</em> transform sharpened <em>RGB</em> array and <span class="math">\(N_{bb}\)</span> chromatic
+induction factor for forward <em>CIECAM02</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>RGB</strong> (<em>array_like</em>) &#8211; Compressed <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+<li><strong>N_bb</strong> (<em>numeric or array_like</em>) &#8211; Chromatic induction factor <span class="math">\(N_{bb}\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Achromatic response <span class="math">\(A\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RGB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.94632020</span><span class="p">,</span> <span class="mf">7.94711528</span><span class="p">,</span> <span class="mf">7.94899595</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_bb</span> <span class="o">=</span> <span class="mf">1.000304004559381</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">achromatic_response_forward</span><span class="p">(</span><span class="n">RGB</span><span class="p">,</span> <span class="n">N_bb</span><span class="p">)</span>  
+<span class="go">23.9394809...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.achromatic_response_reverse">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">achromatic_response_reverse</code><span class="sig-paren">(</span><em>A_w</em>, <em>J</em>, <em>c</em>, <em>z</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#achromatic_response_reverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.achromatic_response_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the achromatic response <span class="math">\(A\)</span> from given achromatic response
+<span class="math">\(A_w\)</span> for the whitepoint, <em>Lightness</em> correlate <span class="math">\(J\)</span>, surround
+exponential non linearity <span class="math">\(c\)</span> and base exponential non linearity
+<span class="math">\(z\)</span> for reverse <em>CIECAM02</em> implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>A_w</strong> (<em>numeric or array_like</em>) &#8211; Achromatic response <span class="math">\(A_w\)</span> for the whitepoint.</li>
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; <em>Lightness</em> correlate <span class="math">\(J\)</span>.</li>
+<li><strong>c</strong> (<em>numeric or array_like</em>) &#8211; Surround exponential non linearity <span class="math">\(c\)</span>.</li>
+<li><strong>z</strong> (<em>numeric or array_like</em>) &#8211; Base exponential non linearity <span class="math">\(z\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Achromatic response <span class="math">\(A\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A_w</span> <span class="o">=</span> <span class="mf">46.1882087914</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mf">41.73109113251392</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="mf">0.69</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="mf">1.927213595499958</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">achromatic_response_reverse</span><span class="p">(</span><span class="n">A_w</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>  
+<span class="go">23.9394809...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.lightness_correlate">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">lightness_correlate</code><span class="sig-paren">(</span><em>A</em>, <em>A_w</em>, <em>c</em>, <em>z</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#lightness_correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.lightness_correlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>Lightness</em> correlate <span class="math">\(J\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>A</strong> (<em>numeric or array_like</em>) &#8211; Achromatic response <span class="math">\(A\)</span> for the stimulus.</li>
+<li><strong>A_w</strong> (<em>numeric or array_like</em>) &#8211; Achromatic response <span class="math">\(A_w\)</span> for the whitepoint.</li>
+<li><strong>c</strong> (<em>numeric or array_like</em>) &#8211; Surround exponential non linearity <span class="math">\(c\)</span>.</li>
+<li><strong>z</strong> (<em>numeric or array_like</em>) &#8211; Base exponential non linearity <span class="math">\(z\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Lightness</em> correlate <span class="math">\(J\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="mf">23.9394809667</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_w</span> <span class="o">=</span> <span class="mf">46.1882087914</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="mf">0.69</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="mf">1.9272135955</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lightness_correlate</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A_w</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>  
+<span class="go">41.7310911...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.brightness_correlate">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">brightness_correlate</code><span class="sig-paren">(</span><em>c</em>, <em>J</em>, <em>A_w</em>, <em>F_L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#brightness_correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.brightness_correlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>brightness</em> correlate <span class="math">\(Q\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c</strong> (<em>numeric or array_like</em>) &#8211; Surround exponential non linearity <span class="math">\(c\)</span>.</li>
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; <em>Lightness</em> correlate <span class="math">\(J\)</span>.</li>
+<li><strong>A_w</strong> (<em>numeric or array_like</em>) &#8211; Achromatic response <span class="math">\(A_w\)</span> for the whitepoint.</li>
+<li><strong>F_L</strong> (<em>numeric or array_like</em>) &#8211; <em>Luminance</em> level adaptation factor <span class="math">\(F_L\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Brightness</em> correlate <span class="math">\(Q\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="mf">0.69</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mf">41.7310911325</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_w</span> <span class="o">=</span> <span class="mf">46.1882087914</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F_L</span> <span class="o">=</span> <span class="mf">1.16754446415</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brightness_correlate</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">A_w</span><span class="p">,</span> <span class="n">F_L</span><span class="p">)</span>  
+<span class="go">195.3713259...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.temporary_magnitude_quantity_forward">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">temporary_magnitude_quantity_forward</code><span class="sig-paren">(</span><em>N_c</em>, <em>N_cb</em>, <em>e_t</em>, <em>a</em>, <em>b</em>, <em>RGB_a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#temporary_magnitude_quantity_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.temporary_magnitude_quantity_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the temporary magnitude quantity <span class="math">\(t\)</span>. for forward <em>CIECAM02</em>
+implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>N_c</strong> (<em>numeric or array_like</em>) &#8211; Surround chromatic induction factor <span class="math">\(N_{c}\)</span>.</li>
+<li><strong>N_cb</strong> (<em>numeric or array_like</em>) &#8211; Chromatic induction factor <span class="math">\(N_{cb}\)</span>.</li>
+<li><strong>e_t</strong> (<em>numeric or array_like</em>) &#8211; Eccentricity factor <span class="math">\(e_t\)</span>.</li>
+<li><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(b\)</span>.</li>
+<li><strong>RGB_a</strong> (<em>array_like</em>) &#8211; Compressed stimulus <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Temporary magnitude quantity <span class="math">\(t\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N_c</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_cb</span> <span class="o">=</span> <span class="mf">1.00030400456</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e_t</span> <span class="o">=</span> <span class="mf">1.174005472851914</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000624112068243</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000506270106773</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.94632020</span><span class="p">,</span> <span class="mf">7.94711528</span><span class="p">,</span> <span class="mf">7.94899595</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temporary_magnitude_quantity_forward</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">N_c</span><span class="p">,</span> <span class="n">N_cb</span><span class="p">,</span> <span class="n">e_t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">RGB_a</span><span class="p">)</span>
+<span class="go">0.1497462...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.temporary_magnitude_quantity_reverse">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">temporary_magnitude_quantity_reverse</code><span class="sig-paren">(</span><em>C</em>, <em>J</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#temporary_magnitude_quantity_reverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.temporary_magnitude_quantity_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the temporary magnitude quantity <span class="math">\(t\)</span>. for reverse <em>CIECAM02</em>
+implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>C</strong> (<em>numeric or array_like</em>) &#8211; <em>Chroma</em> correlate <span class="math">\(C\)</span>.</li>
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; <em>Lightness</em> correlate <span class="math">\(J\)</span>.</li>
+<li><strong>n</strong> (<em>numeric or array_like</em>) &#8211; Function of the luminance factor of the background <span class="math">\(n\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Temporary magnitude quantity <span class="math">\(t\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="mf">68.8364136888275</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mf">41.749268505999</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temporary_magnitude_quantity_reverse</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>  
+<span class="go">202.3873619...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.chroma_correlate">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">chroma_correlate</code><span class="sig-paren">(</span><em>J</em>, <em>n</em>, <em>N_c</em>, <em>N_cb</em>, <em>e_t</em>, <em>a</em>, <em>b</em>, <em>RGB_a</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#chroma_correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.chroma_correlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>chroma</em> correlate <span class="math">\(C\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>J</strong> (<em>numeric or array_like</em>) &#8211; <em>Lightness</em> correlate <span class="math">\(J\)</span>.</li>
+<li><strong>n</strong> (<em>numeric or array_like</em>) &#8211; Function of the luminance factor of the background <span class="math">\(n\)</span>.</li>
+<li><strong>N_c</strong> (<em>numeric or array_like</em>) &#8211; Surround chromatic induction factor <span class="math">\(N_{c}\)</span>.</li>
+<li><strong>N_cb</strong> (<em>numeric or array_like</em>) &#8211; Chromatic induction factor <span class="math">\(N_{cb}\)</span>.</li>
+<li><strong>e_t</strong> (<em>numeric or array_like</em>) &#8211; Eccentricity factor <span class="math">\(e_t\)</span>.</li>
+<li><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(b\)</span>.</li>
+<li><strong>RGB_a</strong> (<em>array_like</em>) &#8211; Compressed stimulus <em>CMCCAT2000</em> transform sharpened <em>RGB</em> array.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Chroma</em> correlate <span class="math">\(C\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mf">41.7310911325</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_c</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_cb</span> <span class="o">=</span> <span class="mf">1.00030400456</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e_t</span> <span class="o">=</span> <span class="mf">1.17400547285</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000624112068243</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000506270106773</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RGB_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.94632020</span><span class="p">,</span> <span class="mf">7.94711528</span><span class="p">,</span> <span class="mf">7.94899595</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chroma_correlate</span><span class="p">(</span>  
+<span class="gp">... </span>    <span class="n">J</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">N_c</span><span class="p">,</span> <span class="n">N_cb</span><span class="p">,</span> <span class="n">e_t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">RGB_a</span><span class="p">)</span>
+<span class="go">0.1047077...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.colourfulness_correlate">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">colourfulness_correlate</code><span class="sig-paren">(</span><em>C</em>, <em>F_L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#colourfulness_correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.colourfulness_correlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>colourfulness</em> correlate <span class="math">\(M\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>C</strong> (<em>numeric or array_like</em>) &#8211; <em>Chroma</em> correlate <span class="math">\(C\)</span>.</li>
+<li><strong>F_L</strong> (<em>numeric or array_like</em>) &#8211; <em>Luminance</em> level adaptation factor <span class="math">\(F_L\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Colourfulness</em> correlate <span class="math">\(M\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="mf">0.104707757171</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F_L</span> <span class="o">=</span> <span class="mf">1.16754446415</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">colourfulness_correlate</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">F_L</span><span class="p">)</span>  
+<span class="go">0.1088421...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.saturation_correlate">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">saturation_correlate</code><span class="sig-paren">(</span><em>M</em>, <em>Q</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#saturation_correlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.saturation_correlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>saturation</em> correlate <span class="math">\(s\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>M</strong> (<em>numeric or array_like</em>) &#8211; <em>Colourfulness</em> correlate <span class="math">\(M\)</span>.</li>
+<li><strong>Q</strong> (<em>numeric or array_like</em>) &#8211; <em>Brightness</em> correlate <span class="math">\(C\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><em>Saturation</em> correlate <span class="math">\(s\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numeric or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mf">0.108842175669</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span> <span class="o">=</span> <span class="mf">195.371325966</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">saturation_correlate</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>  
+<span class="go">2.3603053...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.P">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">P</code><span class="sig-paren">(</span><em>N_c</em>, <em>N_cb</em>, <em>e_t</em>, <em>t</em>, <em>A</em>, <em>N_bb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#P"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.P" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the points <span class="math">\(P_1\)</span>, <span class="math">\(P_2\)</span> and <span class="math">\(P_3\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>N_c</strong> (<em>numeric or array_like</em>) &#8211; Surround chromatic induction factor <span class="math">\(N_{c}\)</span>.</li>
+<li><strong>N_cb</strong> (<em>numeric or array_like</em>) &#8211; Chromatic induction factor <span class="math">\(N_{cb}\)</span>.</li>
+<li><strong>e_t</strong> (<em>numeric or array_like</em>) &#8211; Eccentricity factor <span class="math">\(e_t\)</span>.</li>
+<li><strong>t</strong> (<em>numeric or array_like</em>) &#8211; Temporary magnitude quantity <span class="math">\(t\)</span>.</li>
+<li><strong>A</strong> (<em>numeric or array_like</em>) &#8211; Achromatic response  <span class="math">\(A\)</span> for the stimulus.</li>
+<li><strong>N_bb</strong> (<em>numeric or array_like</em>) &#8211; Chromatic induction factor <span class="math">\(N_{bb}\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Points <span class="math">\(P\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N_c</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_cb</span> <span class="o">=</span> <span class="mf">1.00030400456</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e_t</span> <span class="o">=</span> <span class="mf">1.174005472851914</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="mf">0.149746202921</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="mf">23.9394809667</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_bb</span> <span class="o">=</span> <span class="mf">1.00030400456</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="p">(</span><span class="n">N_c</span><span class="p">,</span> <span class="n">N_cb</span><span class="p">,</span> <span class="n">e_t</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">N_bb</span><span class="p">)</span>  
+<span class="go">array([  3.0162890...e+04,   2.4237205...e+01,   1.0500000...e+00])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="colour.appearance.ciecam02.post_adaptation_non_linear_response_compression_matrix">
+<code class="descclassname">colour.appearance.ciecam02.</code><code class="descname">post_adaptation_non_linear_response_compression_matrix</code><span class="sig-paren">(</span><em>P_2</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/colour/appearance/ciecam02.html#post_adaptation_non_linear_response_compression_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#colour.appearance.ciecam02.post_adaptation_non_linear_response_compression_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the post adaptation non linear response compression matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>P_2</strong> (<em>numeric or array_like</em>) &#8211; Point <span class="math">\(P_2\)</span>.</li>
+<li><strong>a</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(a\)</span>.</li>
+<li><strong>b</strong> (<em>numeric or array_like</em>) &#8211; Opponent colour dimension <span class="math">\(b\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Points <span class="math">\(P\)</span>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P_2</span> <span class="o">=</span> <span class="mf">24.2372054671</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000624112068243</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000506270106773</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post_adaptation_non_linear_response_compression_matrix</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">P_2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  
+<span class="go">array([ 7.9463202...,  7.9471152...,  7.9489959...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">colour.appearance.ciecam02 Module</a><ul>
+<li><a class="reference internal" href="#ciecam02-colour-appearance-model">CIECAM02 Colour Appearance Model</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colour.appearance.ciecam02.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/colour.appearance.ciecam02.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

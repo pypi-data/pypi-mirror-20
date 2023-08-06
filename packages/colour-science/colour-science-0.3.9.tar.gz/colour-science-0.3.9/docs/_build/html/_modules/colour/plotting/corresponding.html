@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>colour.plotting.corresponding &mdash; Colour 0.3.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Colour 0.3.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for colour.plotting.corresponding</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Corresponding Chromaticities Prediction Plotting</span>
+<span class="sd">================================================</span>
+
+<span class="sd">Defines corresponding chromaticities prediction plotting objects:</span>
+
+<span class="sd">-   :func:`corresponding_chromaticities_prediction_plot`</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+
+<span class="kn">from</span> <span class="nn">colour.corresponding</span> <span class="kn">import</span> <span class="n">corresponding_chromaticities_prediction</span>
+<span class="kn">from</span> <span class="nn">colour.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">,</span>
+    <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span>
+    <span class="n">boundaries</span><span class="p">,</span>
+    <span class="n">canvas</span><span class="p">,</span>
+    <span class="n">decorate</span><span class="p">,</span>
+    <span class="n">display</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;Copyright (C) 2013-2017 - Colour Developers&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;New BSD License - http://opensource.org/licenses/BSD-3-Clause&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Colour Developers&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;colour-science@googlegroups.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Production&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;corresponding_chromaticities_prediction_plot&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="corresponding_chromaticities_prediction_plot"><a class="viewcode-back" href="../../../colour.plotting.corresponding.html#colour.plotting.corresponding_chromaticities_prediction_plot">[docs]</a><span class="k">def</span> <span class="nf">corresponding_chromaticities_prediction_plot</span><span class="p">(</span>
+        <span class="n">experiment</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s1">&#39;Von Kries&#39;</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;CAT02&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots given chromatic adaptation model corresponding chromaticities</span>
+<span class="sd">    prediction.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    experiment : int, optional</span>
+<span class="sd">        Corresponding chromaticities prediction experiment number.</span>
+<span class="sd">    model : unicode, optional</span>
+<span class="sd">        Corresponding chromaticities prediction model name.</span>
+<span class="sd">    transform : unicode, optional</span>
+<span class="sd">        Transformation to use with *Von Kries* chromatic adaptation model.</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    \**kwargs : dict, optional</span>
+<span class="sd">        {:func:`boundaries`, :func:`canvas`, :func:`decorate`,</span>
+<span class="sd">        :func:`display`},</span>
+<span class="sd">        Please refer to the documentation of the previously listed definitions.</span>
+<span class="sd">    show_diagram_colours : bool, optional</span>
+<span class="sd">        {:func:`CIE_1976_UCS_chromaticity_diagram_plot`}</span>
+<span class="sd">        Whether to display the chromaticity diagram background colours.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Figure</span>
+<span class="sd">        Current figure or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; corresponding_chromaticities_prediction_plot()  # doctest: +SKIP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figure_size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">,</span> <span class="n">DEFAULT_FIGURE_WIDTH</span><span class="p">)}</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">canvas</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;Corresponding Chromaticities Prediction</span><span class="se">\n</span><span class="s1">{0} ({1}) - &#39;</span>
+                   <span class="s1">&#39;Experiment {2}</span><span class="se">\n</span><span class="s1">CIE 1976 UCS Chromaticity Diagram&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">experiment</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;von kries&#39;</span><span class="p">,</span> <span class="s1">&#39;vonkries&#39;</span><span class="p">)</span> <span class="k">else</span>
+            <span class="p">(</span><span class="s1">&#39;Corresponding Chromaticities Prediction</span><span class="se">\n</span><span class="s1">{0} - &#39;</span>
+                <span class="s1">&#39;Experiment {1}</span><span class="se">\n</span><span class="s1">CIE 1976 UCS Chromaticity Diagram&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">model</span><span class="p">,</span> <span class="n">experiment</span><span class="p">)),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">CIE_1976_UCS_chromaticity_diagram_plot</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">corresponding_chromaticities_prediction</span><span class="p">(</span>
+        <span class="n">experiment</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">uvp_t</span><span class="p">,</span> <span class="n">uvp_m</span><span class="p">,</span> <span class="n">uvp_p</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">uvp_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">uvp_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">uvp_p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">uvp_t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="p">(</span><span class="n">uvp_p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">uvp_t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">uvp_p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">uvp_t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="p">(</span><span class="n">uvp_p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">uvp_t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="n">head_width</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+                    <span class="n">head_length</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+                    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uvp_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvp_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uvp_m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvp_m</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uvp_p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvp_p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s1">&#39;x_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;y_tighten&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;limits&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span>
+        <span class="s1">&#39;standalone&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">boundaries</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/Colour_Logo_Small_001.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2013-2017, Colour Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
