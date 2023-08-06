@@ -1,0 +1,9 @@
+[Unit]
+Description=read_from_scanner
+
+[Service]
+Type=simple
+ExecStart=/venv/bin/read_from_scanner
+
+[Install]
+WantedBy=multi-user.target
