@@ -1,0 +1,11 @@
+<div tal:condition="condition" i18n:domain="novaideo">
+	<span i18n:attributes="title" title="My discussions" class="all-channels-toggle ion-chatbubbles">
+      <div id="alert-message" class="popover fade in right">
+      	<div style="" class="arrow"></div>
+      	<span class="icon glyphicon glyphicon-bell"></span> <span i18n:translate="">
+      	You have unread messages!</span></div>
+	</span>
+	<div class="all-channels ${(request.cookies.get('channels', 'off') == 'off') and 'toggled'}">
+	    <div tal:replace="structure channels"/>
+    </div>
+</div>

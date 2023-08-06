@@ -1,0 +1,27 @@
+<div class="thumbnail right-caption span4 search-item result-item" 
+     i18n:domain="novaideo"
+     tal:condition="object.subjects"
+     tal:define="
+         icon object.icon;
+         alert_kind getattr(object, 'alert_kind', '');">
+  <div class="media-body" tal:define="subject object.subjects[0]">
+    <h4><span class="icon ${icon}"></span> <span tal:replace="layout.to_localized_time(object.modified_at)"/></h4>
+    <span i18n:translate="" tal:condition="alert_kind == 'moderation'">The moderators have decided on the contribution <a i18n:name="dynamic"  href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.</span>
+    <span i18n:translate="" tal:condition="alert_kind == 'new_report'">
+      A new content has been reported as potentially offensive. The reported contents can be reached <a i18n:name="dynamic"  href="${request.resource_url(request.root, '@@seereportedcontents')}">ici</a>.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_archive'">
+      The contribution <a i18n:name="dynamic"  href="${subject.get_url(request)}"><span class="${subject.icon}"></span> ${subject.get_title()}</a> has been archived.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_restor'">
+      The contribution <a i18n:name="dynamic"  href="${subject.get_url(request)}"><span class="${subject.icon}"></span> ${subject.get_title()}</a> has been restored.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_censor'">
+      The contribution <a i18n:name="dynamic"  href="${subject.get_url(request)}"><span class="${subject.icon}"></span> ${subject.get_title()}</a> has been censored.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_closed'">
+      The Woking Group on the Proposal <a i18n:name="dynamic"  href="${subject.get_url(request)}"><span class="${subject.icon}"></span> ${subject.get_title()}</a> has been inactive for several cycles, each lasting more than one week. For this reason, the Group has been dissolved, and the Proposal is back to the state "Open to a working group".
+    </span>
+  </div>
+  <span tal:condition="object.is_to_alert(current_user)" style="color: red; margin:5px" class="pull-right glyphicon glyphicon-bell"></span>
+</div>

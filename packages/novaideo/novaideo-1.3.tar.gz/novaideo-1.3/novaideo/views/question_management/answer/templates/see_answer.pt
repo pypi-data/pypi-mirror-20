@@ -1,0 +1,16 @@
+<div i18n:domain="novaideo" class="content-view">
+  <div tal:replace="structure answer_body"/>
+  <a role="button"
+     data-toggle="collapse"
+     href="#related_question"
+     aria-expanded="false"
+     aria-controls="related_question"
+     style="margin-bottom: 15px;
+            display: block;">
+    <span class="${answer.question.icon}"></span> <span i18n:translate="">See the question related to this answer</span>
+  </a>
+  <div class="collapse" id="related_question">
+    <div tal:replace="structure question_body"/>
+  </div>
+</div>
+

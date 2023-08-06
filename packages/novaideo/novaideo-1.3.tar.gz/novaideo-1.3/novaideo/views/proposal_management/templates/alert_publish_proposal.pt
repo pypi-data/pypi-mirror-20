@@ -1,0 +1,32 @@
+<div  i18n:domain="novaideo" id="publication-data" data-is_unique="${'true' if is_unique_choice else 'false'}">
+ <div class="alert alert-info">
+ 	<div tal:omit-tag="" tal:condition="not request.moderate_ideas and not_published_ideas">
+      <span class="glyphicon glyphicon-warning-sign pull-right"></span>
+      <p i18n:translate="">For a proposal to be published, all related ideas must have been previously published. You may either publish them as they are by clicking on « Continue », or edit them by clicking on those which are to be re-worked upon.</p>
+        <ol class="list-unstyled not-published-list">
+          <tal:loop repeat="i not_published_ideas">
+            <li><a target="_blank" class="btn btn-info btn-xs" tal:attributes="href request.resource_url(i, '@@editidea')"><strong><span class="glyphicon glyphicon-pencil"></span> ${i.title}</strong></a></li>
+          </tal:loop>
+        </ol>
+    </div>
+ 	<span class="glyphicon glyphicon-info-sign pull-right"></span>
+    <div>
+      <p i18n:translate="">As soon as your proposal is published, you can decide:</p>
+      <ul>
+        <li i18n:translate="">either to submit it as it is to all Members, without improving it,</li>
+        <li i18n:translate="">or to first improve it with other Members in a Working Group, and then submit it to the evaluation of all Members.</li>
+      </ul>
+   </div>
+   <p i18n:translate="">
+    If you choose to improve it with other Members, which is the default choice, you must specify the duration of the improvement cycle. The default value for this duration is one week.
+   </p>
+
+ </div>
+ <div tal:condition="len(request.root.get_work_modes()) > 1" class="alert alert-warning">
+  <span class="glyphicon glyphicon-warning-sign pull-right"></span>
+  <p>
+    <b i18n:translate="">In order to improve the proposal, the Working Group must gather at least the quorum, i.e. the minimum number of Participants indicated for each working mode. If this quorum is not reached, the Working Group remains inactive and the proposal cannot be improved.</b>
+  </p>
+ </div>
+</div>
+

@@ -1,0 +1,42 @@
+<div i18n:domain="novaideo"
+     tal:condition="object.subjects"
+     tal:define="icon object.icon;
+                 alert_kind getattr(object, 'alert_kind', '');
+                 url getattr(object, 'url', None);
+                 duplicate_title getattr(object, 'duplicate_title', None);
+                 member_url getattr(object, 'member_url', None);
+                 member_title getattr(object, 'member_title', None);
+                 new_alert object.is_to_alert(current_user)">
+  <div tal:define="subject object.subjects[0]" class="alert-item ${new_alert and 'new-alert'}">
+    <h4><span class="icon ${icon}"></span> <span tal:replace="layout.to_localized_time(object.modified_at)"/></h4>
+    <span i18n:translate="" tal:condition="alert_kind == 'duplicated'">
+      The content <a i18n:name="obj" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has been duplicated. The duplicated content is visible under <a i18n:name="dynamic" href="${url}"><span class="${getattr(subject, 'icon')}"></span> ${duplicate_title}</a>.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'modified'">The content <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>, which is part of your favourites, has been modified.</span>
+    <span i18n:translate="" tal:condition="alert_kind == 'published'">The content <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>, which is part of your topics of interest, has been published.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'published_author'">
+      The member <a i18n:name="obj" href="${member_url}"><span class="icon glyphicon glyphicon-user"></span> ${member_title}</a>, which is part of your favourites, has published the content <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'present'">
+      The content <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has been sent to you.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'user_deactivated'">
+      The account of the Member <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>, which is part of your favourites, has been disactivated.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'new_answer'"
+      tal:define="author_title getattr(object, 'author_title', '');
+                 author_first_name getattr(object, 'author_first_name', '');
+                 author_last_name getattr(object, 'author_last_name', '');
+                 author_parts [author_title, author_first_name, author_last_name];
+                 author ' '.join([a for a in author_parts if a]);">
+      <span i18n:name="aut" >${author or 'Une personne'}</span> answered the question <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')+'#comment-'+str(getattr(object, 'comment_oid', 'None'))}"><span class="${getattr(subject, 'icon', '')}"></span> ${subject.title}</a>, which is part of your favourites.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'published_in_challenge'">The content <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has been published in a challenge, which is part of your favourites.</span>
+
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div tal:define="icon 'octicon octicon-check'" i18n:domain="novaideo">
+  <div tal:define="
+  	    subject object.subjects[0];
+  	    alert_kind getattr(object, 'alert_kind', '');">
+    <span i18n:translate="" tal:condition="alert_kind == 'moderation'">The moderators have decided on this contribution.</span>
+    <span i18n:translate="" tal:condition="alert_kind == 'new_report'">
+      A new content has been reported as potentially offensive.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_archive'">
+      The contribution <span i18n:name="dynamic" >${subject.get_title()}</span> has been archived.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_restor'">
+      The contribution <span i18n:name="dynamic" >${subject.get_title()}</span> has been restored.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_censor'">
+      The contribution <span i18n:name="dynamic" >${subject.get_title()}</span> has been censored.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'object_closed'">
+      The Woking Group on this Proposal has been inactive for several cycles, each lasting more than one week. For this reason, the Group has been dissolved, and the Proposal is back to the state "Open to a working group".
+    </span>
+  </div>
+</div>

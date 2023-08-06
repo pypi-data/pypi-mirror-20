@@ -1,0 +1,62 @@
+<div class="thumbnail right-caption span4 search-item result-item" 
+     i18n:domain="novaideo"
+     tal:condition="object.subjects"
+     tal:define="icon object.icon;
+                 alert_kind getattr(object, 'alert_kind', '')">
+  <div class="media-body" tal:define="subject object.subjects[0]">
+    <h4><span class="icon ${icon}"></span> <span tal:replace="layout.to_localized_time(object.modified_at)"/></h4>
+    
+     <span i18n:translate="" tal:condition="alert_kind == 'start_work'">
+      The Working Group has voted to pursue the improvement of the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.
+    </span>
+    
+    <span i18n:translate="" tal:condition="alert_kind == 'submit_proposal'">
+      The Working Group has voted to submit the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> as is to the Members of the platform.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'end_work'">
+        The improvement cycle of the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> is now closed. You must now vote to decide whether you want to continue improving it, or to submit it as is to the Members of the platform.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'voting_amendment'">
+        The improvement cycle of the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> is now closed. You must now vote on the amendments submitted.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'alert_end_work'">
+      The improvement cycle of the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> is almost finished. You can still bring in improvements, before the Working Group votes to decide whether it wants to submit it as is or to start a new improvement cycle.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'new_amendments'">Amendments for the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> have just been added.</span>
+    
+    <span i18n:translate="" tal:condition="alert_kind == 'no_amendment'">The improvement cycle related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> finished with no amendment.</span>
+    
+    <span i18n:translate="" tal:condition="alert_kind == 'amendments_result'">The result of the votes on the amendments associated to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has been computed.</span>
+    
+     <span i18n:translate="" tal:condition="alert_kind == 'correction_added'">The Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has received suggestions for improvement and must be re-read.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'participate'">One Member has joined the Working Group related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'wg_wating_list_participation'">One Member, which was on the waiting list, joined the Working Group related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'resign'">One Member has left the Working Group related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'resign_to_wg_open'">The Working Group related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> is below the quorum, i.e. the minimum number of Participants required to be considered as active. It can therefore not continue improving the Proposal until is has reached again the quorum.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'amendable'">The Working Group related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has reached the quorum, i.e. the minimum number of Participants required to be considered as active. It can now improve the Proposal.</span>
+    
+    <span i18n:translate="" tal:condition="alert_kind == 'add_files'">Files were added in the work space related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a>.</span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'wg_participation_max'">
+        The Working Group related to the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> has reached its maximum number of Participants, and cannot include new ones. Additional candidates will be placed on the Waiting List.
+    </span>
+
+    <span i18n:translate="" tal:condition="alert_kind == 'participations_maxi'">
+        Currently, you participate in, or are a candidate to, <span i18n:name="dynamic">${request.root.participations_maxi}</span> Working Groups, which is the maximum number allowed. Therefore, you cannot join any additional Working Group.
+    </span>
+    <span i18n:translate="" tal:condition="alert_kind == 'correction_validated'">
+        The improvement suggestions on the Proposal <a i18n:name="dynamic" href="${request.resource_url(subject, '@@index')}"><span class="${getattr(subject, 'icon')}"></span> ${subject.title}</a> have all been either accepted or refused. You can now suggest new improvements.
+    </span>
+    
+  </div>
+  <span tal:condition="object.is_to_alert(current_user)" style="color: red; margin:5px" class="pull-right glyphicon glyphicon-bell"></span>
+</div>
