@@ -1,0 +1,174 @@
+Metadata-Version: 1.0
+Name: aplite
+Version: 0.1.dev1
+Summary: UNKNOWN
+Home-page: https://github.com/barell/aplite
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: MIT
+Description: aplite
+        ======
+        
+        Simple tool for managing the docker containers dependency suitable for
+        local development envorionment.
+        
+        Current version: **none**
+        
+        Release date: **not released yet**
+        
+        License: **MIT**
+        
+        Introduction
+        ~~~~~~~~~~~~
+        
+        This tool has been created to manage your docker containers while you
+        developing an application especially when it uses depending services and
+        each service is running in a separate container. For example, imagine
+        you have a microservices architecture and want to work on one of the
+        services but to run it on your local machine you may have to run other
+        services at the same time to get it working properly. You could still
+        use docker-compose tool but it is not as flexible and easy to manage
+        when it comes to choose which services you want to run at the moment.
+        
+        Using aplite you can: - run a docker container with all it's depending
+        containers using a single command - stop any container (or pause) and
+        start again any time without touching any other containers - run only
+        depending containers which are needed to run for the project you working
+        on (don't need to run whole architecture at the same time) - add extra
+        tasks when container starts or stop using apltie configuration file
+        
+        Installation
+        ~~~~~~~~~~~~
+        
+        There are no special requirements apart from having Docker installed on
+        your machine. Then to install aplite you need to run these commands:
+        
+        .. code:: sh
+        
+            $ wget https://gitlab.com/barell/aplite/master.zip
+            $ sudo unzip master.zip /etc
+            $ sudo symlink /usr/bin/aplite /etc/aplite/bin/aplite
+        
+        To check if aplite has been successfully installed on your computer use:
+        
+        .. code:: sh
+        
+            $ aplite version
+        
+        It should output something like:
+        
+        .. code:: sh
+        
+            $ aplite v0.1 (2017-02-22); docker-api: v1.24
+        
+        You may also want to check if your docker installation is compatible
+        with aplite (more info to add).
+        
+        Basic Usage
+        ~~~~~~~~~~~
+        
+        To start using aplite in your project you need to create an
+        aplite.config file which must contain some basic info about handling
+        your docker container:
+        
+        ::
+        
+            name test-project
+            image php7-apache
+        
+        If you put this file inside your project and run
+        
+        .. code:: sh
+        
+            $ aplite up
+        
+        It will run a new container using php7-apache image. By default, there
+        are no files mounted to the image but it can be simply done by adding
+        mount command to the config file:
+        
+        ::
+        
+            name test-project
+            image php7-apache
+            mount . /var/www/html
+        
+        Every time you change the aplite.config, run the "up" command to re-run
+        all the containers. To stop all containers, use "down" command:
+        
+        .. code:: sh
+        
+            $ aplite down
+        
+        Note: it will only stop containers initialized by aplite. You can also
+        stop and remove containers by adding the -r flag:
+        
+        .. code:: sh
+        
+            $ aplite down -r
+        
+        Linking containers
+        ~~~~~~~~~~~~~~~~~~
+        
+        More complexity is added when your project depends on other services and
+        you need to run them all. In wich case you need to install all your
+        services first so aplite can localize them on your machine. When you are
+        inside your project directory, just run:
+        
+        .. code:: sh
+        
+            $ aplite install
+        
+        From now you can use the name of the project (from aplite.config) inside
+        other project's configurations. For example, let's say project-alpha
+        uses project-bravo. First you need to install both and inside
+        project-alpha aplite.config add:
+        
+        ::
+        
+            link project-bravo using project-bravo.com
+        
+        And run the up command inside project-alpha, and it will start both
+        containers. If your code inside project-alpha will call
+        project-bravo.com, the traffic will be redirected to project-bravo
+        service.
+        
+        Occasionally you may want your project-alpha directly connect to
+        project-bravo.com (skipping container running on your machine) in which
+        case you can just stop project-bravo container:
+        
+        .. code:: sh
+        
+            $ aplite stop project-bravo
+        
+        To start it again, just use start command:
+        
+        .. code:: sh
+        
+            $ aplite start project-bravo
+        
+        You can use start and stop commands even if you haven't used up command
+        before, so you can immidietaly start any of your installed container on
+        your machine and manually choose which one do you want to run. These
+        commands will also skip the linking from your configuration files.
+        
+        You can also have multi-depth dependency, where project-bravo could link
+        to another project and so on. Every time you use up command, all
+        containers will start automatically so the whole flow will be kept.
+        
+        To see which containers are running and their's links run the ps
+        command:
+        
+        .. code:: sh
+        
+            $ aplite ps
+            Service                                    Port  Image
+            project-alpha                              8000  php7-apache
+                -> project-bravo (project-bravo.com)   8001  php5-apache
+                    -> project-charlie (charilie.com)  8002  php7-apache
+        
+        Issues and feedback
+        ~~~~~~~~~~~~~~~~~~~
+        
+        Please feel free to report any issues or give us some feedback on new
+        features.
+Platform: UNKNOWN
