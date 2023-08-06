@@ -1,0 +1,30 @@
+Metadata-Version: 2.0
+Name: odfi-templates
+Version: 1.0.0
+Summary: ODFI Sphinx templates
+Home-page: https://github.com/richnou/odfi-doc
+Author: ODFI
+Author-email: dev@opendesignflow.org
+License: GPL3
+Keywords: sphinx documentation theme extension
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Framework :: Sphinx :: Theme
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: sphinx
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+
+ODFI Templates Package
+===========================
+
+Package from ODFI containing templates and extensions
+
+
