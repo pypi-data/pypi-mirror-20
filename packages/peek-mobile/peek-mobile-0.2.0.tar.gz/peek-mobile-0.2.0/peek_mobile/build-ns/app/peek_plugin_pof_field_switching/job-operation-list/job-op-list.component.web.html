@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="form-group col-xs-12">
+        <Button class="btn btn-default" (click)="navToMyJobs()">
+            My Jobs
+        </Button>
+        <Button class="btn btn-default" (click)="navToJob()">
+            {{backJobText()}}
+        </Button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>State</th>
+                <th>Location</th>
+                <th>Circuit / Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let op of operations"
+                [class.bg-primary]="op.currentState.isInstructed"
+                (click)="navToOperation(op)">
+                <td>{{op.operationNumber}}</td>
+                <td>{{op.currentState.niceName}}</td>
+                <td>{{op.substationName}}</td>
+                <td>{{op.componentDescription}}<br>
+                    {{op.action}}</td>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+        <br/>
+    </div>
+</div>

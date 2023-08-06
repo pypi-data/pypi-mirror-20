@@ -1,0 +1,29 @@
+<StackLayout class="m-10">
+    <StackLayout class="input-field" horizontalAlignment="stretch">
+
+        <Label class="h3" text="Operation Date / Time :"></Label>
+        <!--<GridLayout columns="*,*" rows="auto">-->
+        <DatePicker col="0" #datePicker (loaded)="configureDate(datePicker)" verticalAlignment="center"></DatePicker>
+        <timePicker col="1" #timePicker (loaded)="configureTime(timePicker)" verticalAlignment="center"></timePicker>
+
+        <!--</GridLayout>-->
+
+        <WrapLayout>
+            <Label class="h3"
+            text="Request Further Instructions : " textWrap="true"
+            ></Label>
+            <Switch  #furtherInstruct 
+            [checked]="inputData.requestFurtherInstructions"
+            (checkedChange)="inputData.requestFurtherInstructions = furtherInstruct.checked" 
+            ></Switch>
+        </WrapLayout>
+    </StackLayout>
+
+
+    <GridLayout columns="*,*" rows="auto">
+        <Button col="0" [text]="inputData.actionName" (tap)="nsConfirmClicked(datePicker, timePicker)"></Button>
+        <Button col="1" text="Cancel" (tap)="cancelClicked(true)">
+        </Button>
+    </GridLayout>
+
+</StackLayout>

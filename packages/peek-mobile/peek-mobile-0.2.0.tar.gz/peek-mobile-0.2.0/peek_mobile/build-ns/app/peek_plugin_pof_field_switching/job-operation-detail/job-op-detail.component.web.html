@@ -1,0 +1,219 @@
+<!--CONFIRM DIALOG -->
+<pl-pof-field-switching-op-confirm
+        *ngIf="confirmDialogShown()"
+        (confirm)="dialogConfirmed($event)"
+        (cancel)="dialogCanceled()"
+        [data]="confirmDialogData">
+
+</pl-pof-field-switching-op-confirm>
+
+<!-- Navigation Place Holder -->
+<div class="row" *ngIf="confirmDialogShown()">
+    <Button class="btn btn-default" style="opacity: 0">XX</Button>
+</div>
+
+<div class="row" *ngIf="!confirmDialogShown()">
+
+    <div class="form-group col-xs-12">
+        <Button class="btn btn-default" (click)="navToMyJobs()">
+            My Jobs
+        </Button>
+        <Button class="btn btn-default" (click)="navToJob()">
+            Job
+        </Button>
+        <Button class="btn btn-default" (click)="navToOperations()">
+            Operations
+        </Button>
+
+        <Button class="btn btn-default pull-right"
+                [disabled]="!nextOperationEnabled()" (click)="navToNextOperation()">
+            >
+        </Button>
+        <Button class="btn btn-default pull-right"
+                [disabled]="!lastOperationEnabled()" (click)="navToLastOperation()">
+            <
+        </Button>
+
+        <!-- CONFIRM THE OPERATION -->
+        <Button class="btn btn-default pull-right"
+                *ngIf="confirmEnabled()" (click)="confirmOp()">Confirm
+        </Button>
+    </div>
+</div>
+
+<style>
+    hr {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+</style>
+
+<!-- =============================================================================== -->
+<!-- BEGIN SHOWN AT THE TOP ALWAYS -->
+
+<div class="row">
+    <div class="form-group col-xs-5">
+        <h5 class="text-muted">Item</h5>
+        <h3>#{{op.operationNumber}}</h3>
+    </div>
+    <div class="form-group col-xs-7">
+        <h5 class="text-muted">State</h5>
+        <h3>{{op.currentState.niceName}}</h3>
+    </div>
+</div>
+
+<!-- END SHOWN AT THE TOP ALWAYS -->
+<!-- =============================================================================== -->
+
+
+<!-- =============================================================================== -->
+<!-- BEGIN OPERATION ENABLED FIELDS -->
+
+<!-- Operaton Location -->
+<hr *ngIf="!isPermit()">
+<div class="row" *ngIf="!isPermit()">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Location
+            <button class="btn btn-default btn-sm pull-right"
+                    *ngIf="confirmEnabled()"
+                    (click)="locationConfirmed=!locationConfirmed"
+                    [class.btn-warning]="!locationConfirmed"
+                    [class.btn-success]="locationConfirmed"
+                    type="button">{{locationConfirmed ? "CONFIRMED" : "unconfirmed"}}
+            </button>
+        </h5>
+        <h3>{{op.substationName}}</h3>
+    </div>
+</div>
+
+<hr *ngIf="!isPermit()">
+<div class="row" *ngIf="!isPermit()">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Circuit
+            <button class="btn btn-default btn-sm pull-right"
+                    *ngIf="confirmEnabled()"
+                    (click)="circuitConfirmed=!circuitConfirmed"
+                    [class.btn-warning]="!circuitConfirmed"
+                    [class.btn-success]="circuitConfirmed"
+                    type="button">{{circuitConfirmed ? "CONFIRMED" : "unconfirmed"}}
+            </button>
+        </h5>
+        <h3>{{op.componentDescription}}</h3>
+    </div>
+</div>
+
+<hr *ngIf="!isPermit()">
+<div class="row" *ngIf="!isPermit()">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Action
+            <button class="btn btn-default btn-sm pull-right"
+                    *ngIf="confirmEnabled()"
+                    (click)="actionConfirmed=!actionConfirmed"
+                    [class.btn-warning]="!actionConfirmed"
+                    [class.btn-success]="actionConfirmed"
+                    type="button">{{actionConfirmed ? "CONFIRMED" : "unconfirmed"}}
+            </button>
+        </h5>
+        <h3>{{op.action}}</h3>
+    </div>
+</div>
+
+<hr *ngIf="!isPermit()">
+<div class="row" *ngIf="!isPermit()">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Control Engineer</h5>
+        <h3>{{op.controlEngineer}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Field Engineer</h5>
+        <h3>{{op.fieldEngineer}}</h3>
+    </div>
+</div>
+
+<hr *ngIf="!isPermit()">
+<div class="row" *ngIf="!isPermit()">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Instruct</h5>
+        <h3>{{op.instructSystemDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Operated</h5>
+        <h3>{{op.confirmManualDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+</div>
+
+<hr *ngIf="!isPermit()">
+<div class="row" *ngIf="!isPermit()">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Confirmed</h5>
+        <h3>{{op.confirmSystemDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+</div>
+
+<!-- END OPERATION ENABLED FIELDS -->
+<!-- =============================================================================== -->
+
+<!-- =============================================================================== -->
+<!-- BEGIN PERMIT ENABLED FIELDS -->
+
+<!-- Permit Summary -->
+<hr *ngIf="isPermit()">
+<div class="row" *ngIf="isPermit()">
+    <div class="form-group col-xs-7">
+        <h5 class="text-muted">Permit Name</h5>
+        <h3>{{op.permit.permitName}}</h3>
+    </div>
+    <div class="form-group col-xs-5">
+        <h5 class="text-muted">Permit Number</h5>
+        <h3>{{op.permit.permitNumber}}</h3>
+    </div>
+</div>
+
+<!-- Permit Summary -->
+<hr *ngIf="isPermit()">
+<div class="row" *ngIf="isPermit()">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Permit Summary</h5>
+        <h3>{{op.permit.permitSummary}}</h3>
+    </div>
+</div>
+
+<!-- Permit Detail -->
+<hr *ngIf="isPermit()">
+<div class="row" *ngIf="isPermit()">
+    <div class="form-group col-xs-12">
+        <h5 class="text-muted">Permit Detail</h5>
+        <h3>{{op.permit.permitDetail}}</h3>
+    </div>
+</div>
+
+<!-- Issued Details -->
+<hr *ngIf="isPermit()">
+<div class="row" *ngIf="isPermit()">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Issued By</h5>
+        <h3>{{op.permit.issuedBy}}</h3>
+        <h3>{{op.permit.issuedDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Issued To</h5>
+        <h3>{{op.permit.issuedTo}}</h3>
+    </div>
+</div>
+
+<!-- Complete Details -->
+<hr *ngIf="isPermit()">
+<div class="row" *ngIf="isPermit()">
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Completed By</h5>
+        <h3>{{op.permit.completedBy}}</h3>
+        <h3>{{op.permit.completedDate | date:'HH:mm EE dd-MMM'}}</h3>
+    </div>
+    <div class="form-group col-xs-6">
+        <h5 class="text-muted">Completed From</h5>
+        <h3>{{op.permit.completedFrom}}</h3>
+    </div>
+</div>
+
+<!-- END PERMIT ENABLED FIELDS -->
+<!-- =============================================================================== -->

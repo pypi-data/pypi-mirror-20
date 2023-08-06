@@ -1,0 +1,26 @@
+
+
+<StackLayout class="p-10" >
+
+
+<label text="Logged in as {{loggedInUserText()}}"></label>
+
+    <GridLayout rows="*, auto, auto" columns="*"  class="form"
+    horizontalAlignment="left" >
+
+
+    <!-- ROW 3 -->
+    <StackLayout row="2" col="0" class="input-field">
+
+        <ActivityIndicator *ngIf="!isAuthenticating"
+                           [busy]="isAuthenticating"></ActivityIndicator>
+
+        <Button
+                horizontalAlignment="stretch"
+                text="Logout"
+                [isEnabled]="!isAuthenticating"
+                class="submit-button"
+                (tap)="doLogout()"></Button>
+    </StackLayout>
+</GridLayout>
+</StackLayout>

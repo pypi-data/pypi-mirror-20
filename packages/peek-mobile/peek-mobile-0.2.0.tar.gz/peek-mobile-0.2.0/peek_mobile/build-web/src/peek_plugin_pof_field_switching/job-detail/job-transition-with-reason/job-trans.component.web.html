@@ -1,0 +1,23 @@
+<div [@dialogAnimation]="dialogAnimationState"
+     (@dialogAnimation.done)="animationDone($event)">
+
+    <div class="form-group">
+        <label for="userIdField">{{inputData.actionName}} Reason :</label>
+        <select id="userIdField" class="form-control" name="userId"
+                [(ngModel)]="reasonIndex">
+            <option [value]="index" *ngFor="let option of lookupOptions; let index=index">
+                {{option.mobileText}}
+            </option>
+        </select>
+    </div>
+
+    <!--BEGIN HANDBACK DIALOG -->
+    <div>
+        <Button class="btn btn-default" (click)="confirmClicked(false)">
+            {{inputData.actionName}}
+        </Button>
+
+        <Button class="btn btn-default" (click)="cancelClicked(false)">Cancel
+        </Button>
+    </div>
+</div>

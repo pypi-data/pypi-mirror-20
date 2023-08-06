@@ -1,0 +1,61 @@
+{
+  "dependencies": {
+    "@angular/common": "2.4.3",
+    "@angular/compiler": "2.4.3",
+    "@angular/core": "2.4.3",
+    "@angular/forms": "2.4.3",
+    "@angular/http": "2.4.3",
+    "@angular/platform-browser": "2.4.3",
+    "@angular/platform-browser-dynamic": "2.4.3",
+    "@angular/router": "3.4.3",
+    "@mobile/peek_plugin_data_dms": "file:/home/peek/project/peek-plugin-data-dms/peek_plugin_data_dms/data",
+    "@mobile/peek_plugin_noop": "file:/home/peek/project/peek-plugin-noop/peek_plugin_noop/_private/mobile_module",
+    "@mobile/peek_plugin_pof_field_switching": "file:/home/peek/project/peek-plugin-pof-field-switching/peek_plugin_pof_field_switching/_private/client_fe_module",
+    "@mobile/peek_plugin_user": "file:/home/peek/project/peek-plugin-user/peek_plugin_user/client_fe_module",
+    "@peek-mobile/peek_plugin_data_dms": "file:/home/peek/project/peek-plugin-data-dms/peek_plugin_data_dms/data",
+    "@peek-mobile/peek_plugin_noop": "file:/home/peek/project/peek-plugin-noop/peek_plugin_noop/_private/mobile_module",
+    "@peek-mobile/peek_plugin_pof_field_switching": "file:/home/peek/project/peek-plugin-pof-field-switching/peek_plugin_pof_field_switching/_private/client_fe_module",
+    "@peek-mobile/peek_plugin_user": "file:/home/peek/project/peek-plugin-user/peek_plugin_user/client_fe_module",
+    "@synerty/ng2-balloon-msg": "^0.1.3",
+    "@synerty/peek-client-fe-util": "^0.1.2",
+    "@synerty/peek-web-ns": "^0.2.7",
+    "@synerty/vortexjs": "^0.6.5",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "json-stable-stringify": "^1.0.1",
+    "moment": "^2.17.1",
+    "nativescript-angular": "1.4.0",
+    "nativescript-localstorage": "^1.1.0",
+    "nativescript-ngx-fonticon": "^2.1.2",
+    "nativescript-sound": "^1.0.4",
+    "nativescript-sqlite": "^1.1.2",
+    "nativescript-theme-core": "~1.0.2",
+    "nativescript-websockets": "^1.3.1",
+    "ng2-datetime-picker": "^0.13.2",
+    "reflect-metadata": "~0.1.8",
+    "rxjs": "~5.0.1",
+    "tns-core-modules": "2.5.1"
+  },
+  "description": "NativeScript Application",
+  "devDependencies": {
+    "babel-traverse": "6.23.1",
+    "babel-types": "6.23.0",
+    "babylon": "6.16.1",
+    "lazy": "1.0.11",
+    "nativescript-dev-android-snapshot": "^0.*.*",
+    "nativescript-dev-sass": "^0.4.2",
+    "nativescript-dev-typescript": "~0.3.5",
+    "typescript": "~2.1.0",
+    "zone.js": "~0.7.2"
+  },
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "nativescript": {
+    "id": "com.synerty.peek",
+    "tns-android": {
+      "version": "2.5.0"
+    }
+  },
+  "readme": "NativeScript Application",
+  "repository": "<fill-your-repository-here>",
+  "version": "0.0.0"
+}
