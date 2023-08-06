@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Andrew <buddha@cryptolab.net>, 2014
+# TuxBrother <vrijwilligerswerk@wij.rs>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Modoboa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-03 09:37+0100\n"
+"PO-Revision-Date: 2014-12-31 11:37+0000\n"
+"Last-Translator: TuxBrother <vrijwilligerswerk@wij.rs>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/"
+"modoboa/language/nl_NL/)\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:15
+msgid "General"
+msgstr "Algemeen"
+
+#: forms.py:18
+msgid "Path to the log file"
+msgstr "Locatie van logbestand"
+
+#: forms.py:20
+msgid "Path to log file used to collect statistics"
+msgstr "Locatie van logbestand gebruik om statistieken te maken"
+
+#: forms.py:25
+msgid "Directory to store RRD files"
+msgstr "Map om RRD bestanden op te slaan"
+
+#: forms.py:28
+msgid "Path to directory where RRD files are stored"
+msgstr "Locatie van map waar RRD bestanden staan"
+
+#: graphics.py:91
+msgid "Failed to locate rrdtool binary."
+msgstr ""
+
+#: graphics.py:132
+msgid "Average traffic (msgs/min)"
+msgstr "Gemiddeld verkeer per minuut (berichten)"
+
+#: graphics.py:135
+msgid "sent messages"
+msgstr "verstuurde berichten"
+
+#: graphics.py:136
+msgid "received messages"
+msgstr "ontvangen berichten"
+
+#: graphics.py:137
+msgid "bounced messages"
+msgstr "geweigerde berichten"
+
+#: graphics.py:138
+msgid "rejected messages"
+msgstr "geweigerde berichten"
+
+#: graphics.py:139
+#, fuzzy
+#| msgid "sent messages"
+msgid "virus messages"
+msgstr "verstuurde berichten"
+
+#: graphics.py:140
+#, fuzzy
+#| msgid "sent messages"
+msgid "spam messages"
+msgstr "verstuurde berichten"
+
+#: graphics.py:148
+msgid "Average normal traffic size (bytes/min)"
+msgstr "Gemiddelde bandbreette per minuut (bytes)"
+
+#: graphics.py:151
+msgid "received size"
+msgstr "ontvangen grootte"
+
+#: graphics.py:153
+msgid "sent size"
+msgstr "verstuurde grootte"
+
+#: graphics.py:188
+msgid "Mail traffic"
+msgstr "Mailverkeer"
+
+#: handlers.py:20
+msgid "Statistics"
+msgstr "Statistieken"
+
+#: modo_extension.py:25
+msgid "Graphical statistics about emails traffic using RRDtool"
+msgstr "Grafische statistieken over emailverkeer dmv. RRDtool"
+
+#: modo_extension.py:34 templates/modoboa_stats/index.html:4
+msgid "Graphical statistics"
+msgstr "Grafische statistieken"
+
+#: templates/modoboa_stats/index.html:42
+msgid "Search a domain"
+msgstr "Zoek een domein"
+
+#: templates/modoboa_stats/index.html:75
+msgid "Apply"
+msgstr "Toepassen"
+
+#: views.py:33
+msgid "No statistics available"
+msgstr "Geen statistieken beschikbaar"
+
+#: views.py:39
+msgid "Day"
+msgstr "Dag"
+
+#: views.py:40
+msgid "Week"
+msgstr "Week"
+
+#: views.py:41
+msgid "Month"
+msgstr "Maand"
+
+#: views.py:42
+msgid "Year"
+msgstr "Jaar"
+
+#: views.py:43
+msgid "Custom"
+msgstr "Aangepast"
+
+#: views.py:85
+msgid "Unknown graphic set"
+msgstr "Onbekende grafische set"
+
+#: views.py:96
+msgid "Bad custom period"
+msgstr "Ongeldige aangepaste periode"

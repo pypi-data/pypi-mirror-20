@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Antoine Nguyen <tonio@ngyn.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Modoboa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-03 09:37+0100\n"
+"PO-Revision-Date: 2017-03-03 08:38+0000\n"
+"Last-Translator: Antoine Nguyen <tonio@ngyn.org>\n"
+"Language-Team: French (http://www.transifex.com/tonio/modoboa/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: forms.py:15
+msgid "General"
+msgstr "Général"
+
+#: forms.py:18
+msgid "Path to the log file"
+msgstr "Chemin d'accès vers le journal"
+
+#: forms.py:20
+msgid "Path to log file used to collect statistics"
+msgstr "Emplacement du log utilisé pour collecter les statistiques"
+
+#: forms.py:25
+msgid "Directory to store RRD files"
+msgstr "Répertoire où stocker les fichiers RRD"
+
+#: forms.py:28
+msgid "Path to directory where RRD files are stored"
+msgstr "Emplacement du répertoire de stockage des fichiers RRD"
+
+#: graphics.py:91
+msgid "Failed to locate rrdtool binary."
+msgstr "Impossible de trouver le binaire rrdtool"
+
+#: graphics.py:132
+msgid "Average traffic (msgs/min)"
+msgstr "Trafic moyen (msgs/min)"
+
+#: graphics.py:135
+msgid "sent messages"
+msgstr "messages envoyés"
+
+#: graphics.py:136
+msgid "received messages"
+msgstr "messages reçus"
+
+#: graphics.py:137
+msgid "bounced messages"
+msgstr "messages non remis"
+
+#: graphics.py:138
+msgid "rejected messages"
+msgstr "messages rejetés"
+
+#: graphics.py:139
+msgid "virus messages"
+msgstr "messages de type virus"
+
+#: graphics.py:140
+msgid "spam messages"
+msgstr "messages de type spam"
+
+#: graphics.py:148
+msgid "Average normal traffic size (bytes/min)"
+msgstr "Taille moyenne du trafic normal (octets/min)"
+
+#: graphics.py:151
+msgid "received size"
+msgstr "taille reçue"
+
+#: graphics.py:153
+msgid "sent size"
+msgstr "taille envoyée"
+
+#: graphics.py:188
+msgid "Mail traffic"
+msgstr "Trafic messagerie"
+
+#: handlers.py:20
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: modo_extension.py:25
+msgid "Graphical statistics about emails traffic using RRDtool"
+msgstr "Statistiques graphiques concernant le trafic des messages utilisant RRDtool"
+
+#: modo_extension.py:34 templates/modoboa_stats/index.html:4
+msgid "Graphical statistics"
+msgstr "Statistiques graphiques"
+
+#: templates/modoboa_stats/index.html:42
+msgid "Search a domain"
+msgstr "Chercher un domaine"
+
+#: templates/modoboa_stats/index.html:75
+msgid "Apply"
+msgstr "Appliquer"
+
+#: views.py:33
+msgid "No statistics available"
+msgstr "Aucune statistique disponible"
+
+#: views.py:39
+msgid "Day"
+msgstr "Jour"
+
+#: views.py:40
+msgid "Week"
+msgstr "Semaine"
+
+#: views.py:41
+msgid "Month"
+msgstr "Mois"
+
+#: views.py:42
+msgid "Year"
+msgstr "Année"
+
+#: views.py:43
+msgid "Custom"
+msgstr "Personnalisée"
+
+#: views.py:85
+msgid "Unknown graphic set"
+msgstr "Jeu de graphiques inconnu"
+
+#: views.py:96
+msgid "Bad custom period"
+msgstr "Mauvaise période personnalisée"

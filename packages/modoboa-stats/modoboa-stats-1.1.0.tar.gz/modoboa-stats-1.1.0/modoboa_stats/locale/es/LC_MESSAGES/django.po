@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Pedro Gracia <lasarux@neuroomante.com>, 2011-2013
+# Pedro Gracia <pedro.gracia@impulzia.com>, 2010-2011
+msgid ""
+msgstr ""
+"Project-Id-Version: Modoboa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-03 09:37+0100\n"
+"PO-Revision-Date: 2013-10-01 09:56+0000\n"
+"Last-Translator: Pedro Gracia <lasarux@neuroomante.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/modoboa/language/"
+"es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:15
+msgid "General"
+msgstr "General"
+
+#: forms.py:18
+msgid "Path to the log file"
+msgstr "Ruta del fichero de log"
+
+#: forms.py:20
+msgid "Path to log file used to collect statistics"
+msgstr "Ruta al fichero de log usado para recolectar estadísticas"
+
+#: forms.py:25
+msgid "Directory to store RRD files"
+msgstr "Directorio para guardar los ficheros RRD"
+
+#: forms.py:28
+msgid "Path to directory where RRD files are stored"
+msgstr "Ruta al directorio dónde están almacenados los ficheros RRD"
+
+#: graphics.py:91
+msgid "Failed to locate rrdtool binary."
+msgstr ""
+
+#: graphics.py:132
+#, fuzzy
+msgid "Average traffic (msgs/min)"
+msgstr "Tamaño medio de tráfico normal"
+
+#: graphics.py:135
+msgid "sent messages"
+msgstr "mensajes enviados"
+
+#: graphics.py:136
+msgid "received messages"
+msgstr "mensajes recibidos"
+
+#: graphics.py:137
+msgid "bounced messages"
+msgstr "mensajes rebotados"
+
+#: graphics.py:138
+msgid "rejected messages"
+msgstr "mensajes bloqueados"
+
+#: graphics.py:139
+#, fuzzy
+#| msgid "sent messages"
+msgid "virus messages"
+msgstr "mensajes enviados"
+
+#: graphics.py:140
+#, fuzzy
+#| msgid "sent messages"
+msgid "spam messages"
+msgstr "mensajes enviados"
+
+#: graphics.py:148
+#, fuzzy
+msgid "Average normal traffic size (bytes/min)"
+msgstr "Tamaño medio de tráfico normal"
+
+#: graphics.py:151
+msgid "received size"
+msgstr "tamaño recibido"
+
+#: graphics.py:153
+msgid "sent size"
+msgstr "tamaño enviado"
+
+#: graphics.py:188
+msgid "Mail traffic"
+msgstr "Tráfico de correo"
+
+#: handlers.py:20
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: modo_extension.py:25
+msgid "Graphical statistics about emails traffic using RRDtool"
+msgstr "Estadísticas gráficas del tráfico de emails usando RRDtool"
+
+#: modo_extension.py:34 templates/modoboa_stats/index.html:4
+msgid "Graphical statistics"
+msgstr "Estadísticas gráficas"
+
+#: templates/modoboa_stats/index.html:42
+msgid "Search a domain"
+msgstr "Buscar un dominio"
+
+#: templates/modoboa_stats/index.html:75
+msgid "Apply"
+msgstr "Aplicar"
+
+#: views.py:33
+msgid "No statistics available"
+msgstr "No hay estadísticas disponibles"
+
+#: views.py:39
+msgid "Day"
+msgstr "Día"
+
+#: views.py:40
+msgid "Week"
+msgstr "Semana"
+
+#: views.py:41
+msgid "Month"
+msgstr "Mes"
+
+#: views.py:42
+msgid "Year"
+msgstr "Año"
+
+#: views.py:43
+msgid "Custom"
+msgstr ""
+
+#: views.py:85
+msgid "Unknown graphic set"
+msgstr "Conjunto gráfico desconocido"
+
+#: views.py:96
+msgid "Bad custom period"
+msgstr "Período elegido erróneo"
