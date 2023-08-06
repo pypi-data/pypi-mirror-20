@@ -1,0 +1,27 @@
+Metadata-Version: 2.0
+Name: moodleinspire
+Version: 0.0.9
+Summary: Python predictions processor backend for Moodle Inspire
+Home-page: https://github.com/dmonllao/moodleinspire-python-backend
+Author: David Monllao
+Author-email: davidm@moodle.com
+License: GPLv3
+Keywords: moodle machine learning numpy scikit-learn tensorflow
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Education
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 2.7
+Requires-Dist: matplotlib (<1.6,>=1.5.0)
+Requires-Dist: numpy (<1.12,>=1.11.0)
+Requires-Dist: scikit-learn (>=0.17.0,<0.18)
+Requires-Dist: scipy (>=0.17.0,<0.18)
+Requires-Dist: tensorflow (>=1.0.0<1.1)
+
+Python predictions processor backend for Moodle inspire
+=======================================================
+
+This package is used by Moodle's predict_python plugin to process predictions.
+
+
