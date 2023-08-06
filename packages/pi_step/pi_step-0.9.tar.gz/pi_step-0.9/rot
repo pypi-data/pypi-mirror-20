@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+
+import RPi.GPIO as GPIO
+import time
+import sys
+
+def main():
+
+        if len(sys.argv) != 4:
+
+                print ""
+                print " PIN LAYOUT"
+                print "                ____   "        
+                print " GPIO14 <- IN1 |    | o"
+                print " GPIO10 <- IN2 |    | o"
+                print " GPIO11 <- IN3 |    | o"
+                print " GPIO09 <- IN4 |____| o"
+                print "                |   |  "
+                print "               GND VCC "
+                print ""
+                print " Usage: rot direction cycles"
+                print ""
+                print " Example: rot 1 540 1"
+                print " //       rotate [clockwise] [540 degree] [speed 1 slow (min 1 - max 10)]"
+                print ""
+                print " Example: rot -1 45 10"
+                print " //       rotate [counter clockwise] [45 degree] [speed 10 fast (min 1 - max 10)]"
+                print ""
+                sys.exit(0)
+
+        else:
+
+                speed = 0.010 / float(sys.argv[3])
+
+                GPIO.setwarnings(False)
+                GPIO.setmode(GPIO.BCM)
+
+                pins = [14,10,11,9]
+
+                GPIO.setup(pins,GPIO.OUT)
+                GPIO.output(pins, GPIO.LOW)
+
+                for pin in pins:
+                        print "setup pin",pin
+
+                seq = [ [1,0,0,0],
+                        [1,1,0,0],
+                        [0,1,0,0],
+                        [0,1,1,0],
+                        [0,0,1,0],
+                        [0,0,1,1],
+                        [0,0,0,1],
+                        [1,0,0,1] ]
+
+                CALC_RAD = 1.422222222222222
+                step_count = len(seq)
+                step_counter = 0
+                cycle_count = 0
+                full_cycles = 0
+                rpm = 0
+                direction = int(sys.argv[1])
+                radius = CALC_RAD * int(sys.argv[2]) # 512 halfsteps for 360 degree
+                radius = int(round(radius))
+                start_time = time.time()
+                for i in range(radius):
+                        cycle_count += 1 
+                        if cycle_count == 512:
+                            full_cycles += 1 
+                            cycle_count = 0
+                        if cycle_count == 0:
+                            end_time = time.time()
+                            rpm = round(60 / (end_time - start_time),2)
+                            start_time = time.time()
+                        lead_z = len(str(radius))
+                        print "step",str(i+1).zfill(lead_z),"from",radius," RPM =",rpm," degree =",radius / CALC_RAD
+                        for halfstep in range(8):
+                                for pin in range(4):
+                                        if seq[step_counter][pin]!=0:
+                                                GPIO.output(pins[pin], True)
+                                        else:
+                                                GPIO.output(pins[pin], False)
+
+                                step_counter += direction
+
+                                if (step_counter>=step_count):
+                                    step_counter = 0
+                                if (step_counter<0):
+                                    step_counter = step_count+direction
+
+                                time.sleep(speed)
+                GPIO.cleanup()
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print ""
+        print "terminated by user"
+        GPIO.cleanup()
+        sys.exit(0)
+
+
