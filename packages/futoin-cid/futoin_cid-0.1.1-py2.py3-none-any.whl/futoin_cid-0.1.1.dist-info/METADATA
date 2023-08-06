@@ -1,0 +1,37 @@
+Metadata-Version: 2.0
+Name: futoin-cid
+Version: 0.1.1
+Summary: FutoIn Continuous Integration & Delivery Tool
+Home-page: https://github.com/futoin/cid-tool
+Author: Andrey Galkin
+Author-email: andrey@futoin.org
+License: Apache 2.0
+Download-URL: https://github.com/futoin/cid-tool/archive/master.zip
+Keywords: php ruby node nodejs npm gem rvm nvm grunt gulp bower puppet build deploy futoin
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: System :: Installation/Setup
+Classifier: Programming Language :: JavaScript
+Classifier: Programming Language :: PHP
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Ruby
+Classifier: Programming Language :: Unix Shell
+Classifier: Environment :: Console
+Requires-Python: >=2.7
+Requires-Dist: docopt
+Provides-Extra: test
+Requires-Dist: nose; extra == 'test'
+
+UNKNOWN
+
+
