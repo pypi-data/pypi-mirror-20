@@ -1,0 +1,129 @@
+Metadata-Version: 1.1
+Name: django-middlewall
+Version: 0.1.2
+Summary: Simple middleware for filtering requests by their source IP address
+Home-page: https://github.com/jmz-b/django-middlewall
+Author: jmz
+Author-email: jmz-b@users.noreply.github.com
+License: BSD
+Description: =============================
+        Django Middlewall
+        =============================
+        
+        .. image:: https://badge.fury.io/py/django-middlewall.svg
+          :target: https://badge.fury.io/py/django-middlewall
+        
+        .. image:: https://travis-ci.org/jmz-b/django-middlewall.svg?branch=master
+          :target: https://travis-ci.org/jmz-b/django-middlewall
+        
+        .. image:: https://codecov.io/gh/jmz-b/django-middlewall/branch/master/graph/badge.svg
+          :target: https://codecov.io/gh/jmz-b/django-middlewall
+        
+        Simple middleware for blocking requests by IP Address
+        
+        
+        Quickstart
+        ----------
+        
+        Install Django Middlewall::
+        
+            pip install django-middlewall
+        
+        Add it to your `INSTALLED_APPS`:
+        
+        .. code-block:: python
+        
+            INSTALLED_APPS = (
+                ...
+                'middlewall.apps.MiddlewallConfig',
+                ...
+            )
+        
+        Enable middleware components:
+        
+        .. code-block:: python
+        
+            # enable both white and black listing
+        
+            MIDDLEWARE = [
+                'middlewall.middleware.BlacklistMiddleware',
+                'middlewall.middleware.WhitelistMiddleware',
+                ...
+            ]
+        
+        Define access lists in CIDR notation:
+        
+        .. code-block:: python
+        
+            # only allow requests from these subnets
+        
+            MIDDLEWALL_WHITELIST = ['192.0.2.0/24', '198.51.100.0/24']
+        
+            # also block this specific address
+        
+            MIDDLEWALL_BLACKLIST = ['192.0.2.1/32']
+        
+        (optional) Define a custom function to get remote addresses from request
+        objects:
+        
+        .. code-block:: python
+        
+            # take advantage of the X_FORWARDED_FOR support in ipware
+        
+            MIDDLEWALL_ADDRESS_GETTER = 'ipware.ip.get_ip'
+        
+        
+        Running Tests
+        -------------
+        
+        ::
+        
+            source <YOURVIRTUALENV>/bin/activate
+            (myenv) $ pip install -e .[test]
+            (myenv) $ pip install tox
+            (myenv) $ tox
+        
+        
+        Credits
+        -------
+        
+        *  Cookiecutter_
+        *  `cookiecutter-djangopackage`_
+        *  ipware_
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
+        .. _ipware: https://github.com/un33k/django-ipware
+        
+        
+        
+        
+        History
+        -------
+        
+        0.1.2 (2017-03-09)
+        ++++++++++++++++++
+        
+        * General code clean up.
+        
+        0.1.1 (2017-03-09)
+        ++++++++++++++++++
+        
+        * First release.
+        
+Keywords: django-middlewall
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.9
+Classifier: Framework :: Django :: 1.10
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
