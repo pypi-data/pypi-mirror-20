@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to rancidcmd’s documentation! &#8212; rancidcmd 0.1.11 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-rancidcmd-s-documentation">
+<h1>Welcome to rancidcmd&#8217;s documentation!<a class="headerlink" href="#welcome-to-rancidcmd-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-rancidcmd"></span><p>RancidCmd.</p>
+<dl class="class">
+<dt id="rancidcmd.RancidCmd">
+<em class="property">class </em><code class="descclassname">rancidcmd.</code><code class="descname">RancidCmd</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class RancidCmd.</p>
+<p>Attributes:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">login (str):</th><td class="field-body">RANCID login command(clogin, jlogin, etc).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">user (str):</th><td class="field-body">Login username.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">password (str):</th><td class="field-body">Login password.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">address (str):</th><td class="field-body">Host name or ip address.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">enable_password (str, optional):</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Enable password for clogin.
+Default is None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">option(int, optional):</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Option example: &#8216;-d -x &#8220;commands.txt&#8221;&#8217;.
+Default is None.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">encoding(str, optional):</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Encoding type.
+Default is &#8216;utf-8&#8217;.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Using example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>Please see README.</dt>
+<dd><a class="reference external" href="https://github.com/mtoshi/rancidcmd/blob/master/README.rst">https://github.com/mtoshi/rancidcmd/blob/master/README.rst</a></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Sample code.</dt>
+<dd><a class="reference external" href="https://github.com/mtoshi/rancidcmd/blob/master/samples/sample.py">https://github.com/mtoshi/rancidcmd/blob/master/samples/sample.py</a></dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.check_native_cloginrc">
+<code class="descname">check_native_cloginrc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.check_native_cloginrc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.check_native_cloginrc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check native settings file.
+Note:</p>
+<blockquote>
+<div>If RANCID settings file is not exists or empty,
+then make temporary cloginrc file.
+So this method is for check cloginrc file.</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">str:</th><td class="field-body">RANCID settings file text.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.cmd_exec">
+<code class="descname">cmd_exec</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.cmd_exec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.cmd_exec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login and command execution.</p>
+<p>Args:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">command (str):</th><td class="field-body">Command for execution.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">dict:</th><td class="field-body">Example is below.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>{</dt>
+<dd>&#8216;std_err&#8217;: &#8216;&#8217;,
+&#8216;std_out&#8217;: &#8216;&#8217;,
+&#8216;rtn_code&#8217;: &#8216;&#8217;,</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.decode_bytes">
+<code class="descname">decode_bytes</code><span class="sig-paren">(</span><em>byte_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.decode_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.decode_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change string with encoding setting.</p>
+<p>Args:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">byte_data (bytes):</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Popen output.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command execution.</p>
+<p>Args:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">command (str):</th><td class="field-body">Example is &#8220;show version&#8221;.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">dict:</th><td class="field-body">Example is below.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>{</dt>
+<dd>&#8216;std_err&#8217;: &#8216;&#8217;,
+&#8216;std_out&#8217;: &#8216;&#8217;,
+&#8216;rtn_code&#8217;: &#8216;&#8217;,</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.generate_cmd">
+<code class="descname">generate_cmd</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.generate_cmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.generate_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate command.</p>
+<p>Args:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">command (str):</th><td class="field-body">Example is &#8220;show version&#8221;.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">str:</th><td class="field-body">Return the command string.</td>
+</tr>
+</tbody>
+</table>
+<p>If there is the &#8220;enable_password&#8221;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;xlogin -u admin -c &quot;show version&quot;&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rancidcmd.RancidCmd.get_home_path">
+<em class="property">static </em><code class="descname">get_home_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.get_home_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.get_home_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get home directory path.
+Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">str:</th><td class="field-body">User home directory path.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.is_option_x">
+<code class="descname">is_option_x</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.is_option_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.is_option_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check -x option.</p>
+<p>&#8220;-c&#8221; gets commands from command-line.
+&#8220;-x&#8221; gets commnads from file.</p>
+<p>These are for command option and exclusive.
+If &#8220;-x&#8221; option is specified, then &#8220;-c&#8221; command is ignored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.make_cloginrc">
+<code class="descname">make_cloginrc</code><span class="sig-paren">(</span><em>cloginrc_config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.make_cloginrc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.make_cloginrc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check rancid settings file.</p>
+<p>Note:</p>
+<blockquote>
+<div>If RANCID settings file is not exists,
+then make temporary settings file.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">NamedTemporaryFile:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">RANCID settings tempfile object.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rancidcmd.RancidCmd.make_default_native_cloginrc_path">
+<em class="property">static </em><code class="descname">make_default_native_cloginrc_path</code><span class="sig-paren">(</span><em>name='.cloginrc'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.make_default_native_cloginrc_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.make_default_native_cloginrc_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make native settings file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.show_command">
+<code class="descname">show_command</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.show_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.show_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute command string check.</p>
+<p>Args:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">command (str):</th><td class="field-body">Example is &#8220;show version&#8221;.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">str:</th><td class="field-body">Return the command string.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="rancidcmd.RancidCmd.show_config">
+<code class="descname">show_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rancidcmd.html#RancidCmd.show_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rancidcmd.RancidCmd.show_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>cloginrc string check.</p>
+<p>Returns:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">str:</th><td class="field-body">Return cloginrc config string.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to rancidcmd&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Toshikatsu Murakoshi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
