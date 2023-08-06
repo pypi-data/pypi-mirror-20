@@ -1,0 +1,8 @@
+libcerf.o: libcerf.c syscfg.h ../config.h \
+  /Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/include/stdbool.h
+
+syscfg.h:
+
+../config.h:
+
+/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/include/stdbool.h:
