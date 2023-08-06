@@ -1,0 +1,51 @@
+Metadata-Version: 1.1
+Name: cmsplugin-pagebreaks
+Version: 0.1.0
+Summary: Split your content into pages with pagination in DjangoCMS.
+Home-page: http://www.elcodo.pl/
+Author: ELCODO
+Author-email: info@elcodo.pl
+License: MIT License
+Description: cmsplugin-pagebreaks
+        ====================
+        
+        Split your content into pages with pagination in DjangoCMS.
+        
+        Author
+        ------
+        
+        * Grzegorz Biały (https://github.com/grzegorzbialy/)
+        * ELCODO (http://elcodo.pl)
+        
+        Requirements
+        ------------
+        
+        * django-cms 3.x
+        
+        Quick start
+        -----------
+        
+        1. Add "cmsplugin_pagebreaks" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = [
+                ...
+                'cmsplugin_pagebreaks',
+            ]
+        
+        Settings
+        --------
+        
+        * CMSPLUGIN_PAGEBREAKS_PAGE_GET_PARAMETER - default 'page'. Name of GET parameter with page number.
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
