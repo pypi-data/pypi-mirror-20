@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>treq.multipart &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for treq.multipart</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Twisted Matrix Laboratories.</span>
+<span class="c1"># See LICENSE for details.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="k">import</span> <span class="n">uuid4</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">closing</span>
+
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="k">import</span> <span class="n">defer</span><span class="p">,</span> <span class="n">task</span>
+<span class="kn">from</span> <span class="nn">twisted.python.compat</span> <span class="k">import</span> <span class="n">unicode</span><span class="p">,</span> <span class="n">_PY3</span>
+<span class="kn">from</span> <span class="nn">twisted.web.iweb</span> <span class="k">import</span> <span class="n">UNKNOWN_LENGTH</span><span class="p">,</span> <span class="n">IBodyProducer</span>
+
+<span class="kn">from</span> <span class="nn">zope.interface</span> <span class="k">import</span> <span class="n">implementer</span>
+
+<span class="k">if</span> <span class="n">_PY3</span><span class="p">:</span>
+    <span class="n">long</span> <span class="o">=</span> <span class="nb">int</span>
+
+<span class="n">CRLF</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+
+
+<span class="nd">@implementer</span><span class="p">(</span><span class="n">IBodyProducer</span><span class="p">)</span>
+<div class="viewcode-block" id="MultiPartProducer"><a class="viewcode-back" href="../../api.html#treq.multipart.MultiPartProducer">[docs]</a><span class="k">class</span> <span class="nc">MultiPartProducer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`MultiPartProducer` takes parameters for a HTTP request and</span>
+<span class="sd">    produces bytes in multipart/form-data format defined in :rfc:`2388` and</span>
+<span class="sd">    :rfc:`2046`.</span>
+
+<span class="sd">    The encoded request is produced incrementally and the bytes are</span>
+<span class="sd">    written to a consumer.</span>
+
+<span class="sd">    Fields should have form: ``[(parameter name, value), ...]``</span>
+
+<span class="sd">    Accepted values:</span>
+
+<span class="sd">    * Unicode strings (in this case parameter will be encoded with utf-8)</span>
+<span class="sd">    * Tuples with (file name, content-type,</span>
+<span class="sd">      :class:`~twisted.web.iweb.IBodyProducer` objects)</span>
+
+<span class="sd">    Since :class:`MultiPartProducer` can accept objects like</span>
+<span class="sd">    :class:`~twisted.web.iweb.IBodyProducer` which cannot be read from in an</span>
+<span class="sd">    event-driven manner it uses uses a</span>
+<span class="sd">    :class:`~twisted.internet.task.Cooperator` instance to schedule reads</span>
+<span class="sd">    from the underlying producers. Reading is also paused and resumed based on</span>
+<span class="sd">    notifications from the :class:`IConsumer` provider being written to.</span>
+
+<span class="sd">    :ivar _fields: Sorted parameters, where all strings are enforced to be</span>
+<span class="sd">        unicode and file objects stacked on bottom (to produce a human readable</span>
+<span class="sd">        form-data request)</span>
+
+<span class="sd">    :ivar _cooperate: A method like `Cooperator.cooperate` which is used to</span>
+<span class="sd">        schedule all reads.</span>
+
+<span class="sd">    :ivar boundary: The generated boundary used in form-data encoding</span>
+<span class="sd">    :type boundary: `bytes`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cooperator</span><span class="o">=</span><span class="n">task</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_sorted_by_type</span><span class="p">(</span><span class="n">_converted</span><span class="p">(</span><span class="n">fields</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cooperate</span> <span class="o">=</span> <span class="n">cooperator</span><span class="o">.</span><span class="n">cooperate</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span> <span class="o">=</span> <span class="n">boundary</span> <span class="ow">or</span> <span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculateLength</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MultiPartProducer.startProducing"><a class="viewcode-back" href="../../api.html#treq.multipart.MultiPartProducer.startProducing">[docs]</a>    <span class="k">def</span> <span class="nf">startProducing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start a cooperative task which will read bytes from the input file and</span>
+<span class="sd">        write them to `consumer`.  Return a `Deferred` which fires after all</span>
+<span class="sd">        bytes have been written.</span>
+
+<span class="sd">        :param consumer: Any `IConsumer` provider</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cooperate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_writeLoop</span><span class="p">(</span><span class="n">consumer</span><span class="p">))</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">whenDone</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">maybeStopped</span><span class="p">(</span><span class="n">reason</span><span class="p">):</span>
+            <span class="n">reason</span><span class="o">.</span><span class="n">trap</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">TaskStopped</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">defer</span><span class="o">.</span><span class="n">Deferred</span><span class="p">()</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">addCallbacks</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ignored</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">maybeStopped</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="MultiPartProducer.stopProducing"><a class="viewcode-back" href="../../api.html#treq.multipart.MultiPartProducer.stopProducing">[docs]</a>    <span class="k">def</span> <span class="nf">stopProducing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Permanently stop writing bytes from the file to the consumer by</span>
+<span class="sd">        stopping the underlying `CooperativeTask`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span><span class="o">.</span><span class="n">stopProducing</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MultiPartProducer.pauseProducing"><a class="viewcode-back" href="../../api.html#treq.multipart.MultiPartProducer.pauseProducing">[docs]</a>    <span class="k">def</span> <span class="nf">pauseProducing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Temporarily suspend copying bytes from the input file to the consumer</span>
+<span class="sd">        by pausing the `CooperativeTask` which drives that activity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span><span class="p">:</span>
+            <span class="c1"># Having a current producer means that we are in</span>
+            <span class="c1"># the paused state because we&#39;ve returned</span>
+            <span class="c1"># the deferred of the current producer to the</span>
+            <span class="c1"># the cooperator. So this request</span>
+            <span class="c1"># for pausing us is actually a request to pause</span>
+            <span class="c1"># our underlying current producer.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span><span class="o">.</span><span class="n">pauseProducing</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MultiPartProducer.resumeProducing"><a class="viewcode-back" href="../../api.html#treq.multipart.MultiPartProducer.resumeProducing">[docs]</a>    <span class="k">def</span> <span class="nf">resumeProducing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Undo the effects of a previous `pauseProducing` and resume copying</span>
+<span class="sd">        bytes to the consumer by resuming the `CooperativeTask` which drives</span>
+<span class="sd">        the write activity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span><span class="o">.</span><span class="n">resumeProducing</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_calculateLength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine how many bytes the overall form post would consume.</span>
+<span class="sd">        The easiest way is to calculate is to generate of `fObj`</span>
+<span class="sd">        (assuming it is not modified from this point on).</span>
+<span class="sd">        If the determination cannot be made, return `UNKNOWN_LENGTH`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">consumer</span> <span class="o">=</span> <span class="n">_LengthConsumer</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_writeLoop</span><span class="p">(</span><span class="n">consumer</span><span class="p">)):</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">consumer</span><span class="o">.</span><span class="n">length</span>
+
+    <span class="k">def</span> <span class="nf">_getBoundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a boundary line, either final (the one that ends the</span>
+<span class="sd">        form data request or a regular, the one that separates the boundaries)</span>
+
+<span class="sd">        --this-is-my-boundary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;--&quot;</span> <span class="k">if</span> <span class="n">final</span> <span class="k">else</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;--&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span> <span class="o">+</span> <span class="n">f</span>
+
+    <span class="k">def</span> <span class="nf">_writeLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return an iterator which generates the multipart/form-data</span>
+<span class="sd">        request including the encoded objects</span>
+<span class="sd">        and writes them to the consumer for each time it is iterated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">):</span>
+            <span class="c1"># We don&#39;t write the CRLF of the first boundary:</span>
+            <span class="c1"># HTTP request headers are already separated with CRLF</span>
+            <span class="c1"># from the request body, another newline is possible</span>
+            <span class="c1"># and should be considered as an empty preamble per rfc2046,</span>
+            <span class="c1"># but is generally confusing, so we omit it when generating</span>
+            <span class="c1"># the request. We don&#39;t write Content-Type: multipart/form-data</span>
+            <span class="c1"># header here as well as it&#39;s defined in the context of the HTTP</span>
+            <span class="c1"># request headers, not the producer, so we gust generate</span>
+            <span class="c1"># the body.</span>
+
+            <span class="c1"># It&#39;s also important to note that the boundary in the message</span>
+            <span class="c1"># is defined not only by &quot;--boundary-value&quot; but</span>
+            <span class="c1"># but with CRLF characers before it and after the line.</span>
+            <span class="c1"># This is very important.</span>
+            <span class="c1"># proper boundary is &quot;CRLF--boundary-valueCRLF&quot;</span>
+            <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">CRLF</span> <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getBoundary</span><span class="p">()</span> <span class="o">+</span> <span class="n">CRLF</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writeField</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">consumer</span><span class="p">)</span>
+
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">CRLF</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getBoundary</span><span class="p">(</span><span class="n">final</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">CRLF</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_writeField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_writeString</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">consumer</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">producer</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writeFile</span><span class="p">(</span>
+                <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">producer</span><span class="p">,</span> <span class="n">consumer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_writeString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
+        <span class="n">cdisp</span> <span class="o">=</span> <span class="n">_Header</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;form-data&quot;</span><span class="p">)</span>
+        <span class="n">cdisp</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">cdisp</span><span class="p">)</span> <span class="o">+</span> <span class="n">CRLF</span> <span class="o">+</span> <span class="n">CRLF</span><span class="p">)</span>
+
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_writeFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">producer</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
+        <span class="n">cdisp</span> <span class="o">=</span> <span class="n">_Header</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;form-data&quot;</span><span class="p">)</span>
+        <span class="n">cdisp</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">cdisp</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">cdisp</span><span class="p">)</span> <span class="o">+</span> <span class="n">CRLF</span><span class="p">)</span>
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">_Header</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="n">content_type</span><span class="p">))</span> <span class="o">+</span> <span class="n">CRLF</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">producer</span><span class="o">.</span><span class="n">length</span> <span class="o">!=</span> <span class="n">UNKNOWN_LENGTH</span><span class="p">:</span>
+            <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">_Header</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="n">producer</span><span class="o">.</span><span class="n">length</span><span class="p">))</span> <span class="o">+</span> <span class="n">CRLF</span><span class="p">)</span>
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">CRLF</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">consumer</span><span class="p">,</span> <span class="n">_LengthConsumer</span><span class="p">):</span>
+            <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">producer</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span> <span class="o">=</span> <span class="n">producer</span>
+
+            <span class="k">def</span> <span class="nf">unset</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_currentProducer</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">return</span> <span class="n">val</span>
+
+            <span class="n">d</span> <span class="o">=</span> <span class="n">producer</span><span class="o">.</span><span class="n">startProducing</span><span class="p">(</span><span class="n">consumer</span><span class="p">)</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">unset</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">d</span></div>
+
+
+<span class="k">def</span> <span class="nf">_escape</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function prevents header values from corrupting the request,</span>
+<span class="sd">    a newline in the file name parameter makes form-data request unreadable</span>
+<span class="sd">    for majority of parsers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_enforce_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function enforces the stings passed to be unicode, so we won&#39;t</span>
+<span class="sd">    need to guess what&#39;s the encoding of the binary strings passed in.</span>
+<span class="sd">    If someone needs to pass the binary string, use BytesIO and wrap it with</span>
+<span class="sd">    `FileBodyProducer`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="c1"># we got a byte string, and we have no ide what&#39;s the encoding of it</span>
+        <span class="c1"># we can only assume that it&#39;s something cool</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Supplied raw bytes that are not ascii/utf-8.&quot;</span>
+                <span class="s2">&quot; When supplying raw string make sure it&#39;s ascii or utf-8&quot;</span>
+                <span class="s2">&quot;, or work with unicode if you are not sure&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Unsupported field type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,))</span>
+
+
+<span class="k">def</span> <span class="nf">_converted</span><span class="p">(</span><span class="n">fields</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="s2">&quot;iteritems&quot;</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">_enforce_unicode</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected tuple: (filename, content type, producer)&quot;</span><span class="p">)</span>
+            <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">producer</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">_enforce_unicode</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">if</span> <span class="n">filename</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">yield</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">producer</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)):</span>
+            <span class="k">yield</span> <span class="n">name</span><span class="p">,</span> <span class="n">_enforce_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unsupported value, expected string, unicode  &quot;</span>
+                <span class="s2">&quot;or tuple (filename, content type, IBodyProducer)&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_LengthConsumer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `_LengthConsumer` is used to calculate the length of the multi-part</span>
+<span class="sd">    request. The easiest way to do that is to consume all the fields,</span>
+<span class="sd">    but instead writing them to the string just accumulate the request</span>
+<span class="sd">    length.</span>
+
+<span class="sd">    :ivar length: The length of the request. Can be `UNKNOWN_LENGTH`</span>
+<span class="sd">        if consumer finds the field that has length that can not be calculated</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># this means that we have encountered</span>
+        <span class="c1"># unknown length producer</span>
+        <span class="c1"># so we need to stop attempts calculating</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="n">UNKNOWN_LENGTH</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">UNKNOWN_LENGTH</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">long</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">+=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_Header</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `_Header` This class is a tiny wrapper that produces</span>
+<span class="sd">    request headers. We can&#39;t use standard python header</span>
+<span class="sd">    class because it encodes unicode fields using =? bla bla ?=</span>
+<span class="sd">    encoding, which is correct, but no one in HTTP world expects</span>
+<span class="sd">    that, everyone wants utf-8 raw bytes.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">add_param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">())</span> <span class="k">as</span> <span class="n">h</span><span class="p">:</span>
+            <span class="n">h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">_escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;us-ascii&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                    <span class="n">h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;; &quot;</span><span class="p">)</span>
+                    <span class="n">h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;us-ascii&quot;</span><span class="p">))</span>
+                    <span class="n">h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+                    <span class="n">h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">_escape</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+            <span class="n">h</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">h</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__bytes__</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_sorted_by_type</span><span class="p">(</span><span class="n">fields</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sorts params so that strings are placed before files.</span>
+
+<span class="sd">    That makes a request more readable, as generally files are bigger.</span>
+<span class="sd">    It also provides deterministic order of fields what is easier for testing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+        <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

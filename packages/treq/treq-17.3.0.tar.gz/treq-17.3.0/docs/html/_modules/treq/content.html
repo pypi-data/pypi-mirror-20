@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>treq.content &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for treq.content</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">cgi</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">twisted.python.compat</span> <span class="k">import</span> <span class="n">_PY3</span>
+<span class="kn">from</span> <span class="nn">twisted.internet.defer</span> <span class="k">import</span> <span class="n">Deferred</span><span class="p">,</span> <span class="n">succeed</span>
+
+<span class="kn">from</span> <span class="nn">twisted.internet.protocol</span> <span class="k">import</span> <span class="n">Protocol</span>
+<span class="kn">from</span> <span class="nn">twisted.web.client</span> <span class="k">import</span> <span class="n">ResponseDone</span>
+<span class="kn">from</span> <span class="nn">twisted.web.http</span> <span class="k">import</span> <span class="n">PotentialDataLoss</span>
+<span class="kn">from</span> <span class="nn">twisted.web.http_headers</span> <span class="k">import</span> <span class="n">Headers</span>
+
+
+<span class="k">def</span> <span class="nf">_encoding_from_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+    <span class="n">content_types</span> <span class="o">=</span> <span class="n">headers</span><span class="o">.</span><span class="n">getRawHeaders</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">content_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># This seems to be the choice browsers make when encountering multiple</span>
+    <span class="c1"># content-type headers.</span>
+    <span class="n">content_type</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">cgi</span><span class="o">.</span><span class="n">parse_header</span><span class="p">(</span><span class="n">content_types</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s1">&#39;charset&#39;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;charset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_BodyCollector</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">finished</span><span class="p">,</span> <span class="n">collector</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="n">finished</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collector</span> <span class="o">=</span> <span class="n">collector</span>
+
+    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">connectionLost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">reason</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">ResponseDone</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">reason</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">PotentialDataLoss</span><span class="p">):</span>
+            <span class="c1"># http://twistedmatrix.com/trac/ticket/4840</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">errback</span><span class="p">(</span><span class="n">reason</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="collect"><a class="viewcode-back" href="../../api.html#treq.collect">[docs]</a><span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">collector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Incrementally collect the body of the response.</span>
+
+<span class="sd">    This function may only be called **once** for a given response.</span>
+
+<span class="sd">    :param IResponse response: The HTTP response to collect the body from.</span>
+<span class="sd">    :param collector: A callable to be called each time data is available</span>
+<span class="sd">        from the response body.</span>
+<span class="sd">    :type collector: single argument callable</span>
+
+<span class="sd">    :rtype: Deferred that fires with None when the entire body has been read.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">succeed</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">Deferred</span><span class="p">()</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">deliverBody</span><span class="p">(</span><span class="n">_BodyCollector</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">collector</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+<div class="viewcode-block" id="content"><a class="viewcode-back" href="../../api.html#treq.content">[docs]</a><span class="k">def</span> <span class="nf">content</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the contents of an HTTP response.</span>
+
+<span class="sd">    This function may be called multiple times for a response, it uses a</span>
+<span class="sd">    ``WeakKeyDictionary`` to cache the contents of the response.</span>
+
+<span class="sd">    :param IResponse response: The HTTP Response to get the contents of.</span>
+
+<span class="sd">    :rtype: Deferred that fires with the content as a str.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">_content</span><span class="o">.</span><span class="n">append</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_content</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+<div class="viewcode-block" id="json_content"><a class="viewcode-back" href="../../api.html#treq.json_content">[docs]</a><span class="k">def</span> <span class="nf">json_content</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the contents of an HTTP response and attempt to decode it as JSON.</span>
+
+<span class="sd">    This function relies on :py:func:`content` and so may be called more than</span>
+<span class="sd">    once for a given response.</span>
+
+<span class="sd">    :param IResponse response: The HTTP Response to get the contents of.</span>
+
+<span class="sd">    :rtype: Deferred that fires with the decoded JSON.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_PY3</span><span class="p">:</span>
+        <span class="c1"># RFC7159 (8.1): Default JSON character encoding is UTF-8</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">text_content</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">content</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+<div class="viewcode-block" id="text_content"><a class="viewcode-back" href="../../api.html#treq.text_content">[docs]</a><span class="k">def</span> <span class="nf">text_content</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the contents of an HTTP response and decode it with an appropriate</span>
+<span class="sd">    charset, which may be guessed from the ``Content-Type`` header.</span>
+
+<span class="sd">    :param IResponse response: The HTTP Response to get the contents of.</span>
+<span class="sd">    :param str encoding: An valid charset, such as ``UTF-8`` or ``ISO-8859-1``.</span>
+
+<span class="sd">    :rtype: Deferred that fires with a unicode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">_decode_content</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">_PY3</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="n">Headers</span><span class="p">({</span>
+                <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">):</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">val</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">getAllRawHeaders</span><span class="p">()})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span>
+
+        <span class="n">e</span> <span class="o">=</span> <span class="n">_encoding_from_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">e</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">content</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">_decode_content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

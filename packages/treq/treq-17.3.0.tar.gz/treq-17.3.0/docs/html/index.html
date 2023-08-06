@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>treq: High-level Twisted HTTP Client API &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Use Cases" href="howto.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="howto.html" title="Use Cases"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">treq 16.12.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="treq-high-level-twisted-http-client-api">
+<h1>treq: High-level Twisted HTTP Client API<a class="headerlink" href="#treq-high-level-twisted-http-client-api" title="Permalink to this headline">¶</a></h1>
+<p>treq depends on Twisted 16.0.0 or later and optionally pyOpenSSL.
+It functions on Python 2.7 and Python 3.3+.</p>
+<div class="section" id="why">
+<h2>Why?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://python-requests.org/">requests</a> by <a class="reference external" href="https://www.gittip.com/kennethreitz/">Kenneth Reitz</a> is a wonderful library.
+I want the same ease of use when writing Twisted applications.
+treq is not of course a perfect clone of <cite>requests</cite>.
+I have tried to stay true to the do-what-I-mean spirit of the <cite>requests</cite> API and also kept the API familiar to users of <a class="reference external" href="http://twistedmatrix.com/">Twisted</a> and <a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.client.Agent.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">twisted.web.client.Agent</span></code></a> on which treq is based.</p>
+</div>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<p>Installation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">treq</span>
+</pre></div>
+</div>
+<div class="section" id="get">
+<h3>GET<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/basic_get.py" download=""><code class="xref download docutils literal"><span class="pre">basic_get.py</span></code></a></p>
+</div>
+<div class="section" id="post">
+<h3>POST<a class="headerlink" href="#post" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/post&#39;</span><span class="p">,</span>
+                  <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello!&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+                  <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="sa">b</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">b</span><span class="s1">&#39;application/json&#39;</span><span class="p">]})</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/basic_post.py" download=""><code class="xref download docutils literal"><span class="pre">basic_post.py</span></code></a></p>
+</div>
+</div>
+<div class="section" id="why-not-100-requests-alike">
+<h2>Why not 100% requests-alike?<a class="headerlink" href="#why-not-100-requests-alike" title="Permalink to this headline">¶</a></h2>
+<p>Initially when I started off working on treq I thought the API should look exactly like <a class="reference external" href="http://python-requests.org/">requests</a> except anything that would involve the network would return a <cite>Deferred</cite>.</p>
+<p>Over time while attempting to mimic the <a class="reference external" href="http://python-requests.org/">requests</a> API it became clear that not enough code could be shared between <a class="reference external" href="http://python-requests.org/">requests</a> and treq for it to be worth the effort to translate many of the usage patterns from <a class="reference external" href="http://python-requests.org/">requests</a>.</p>
+<p>With the current version of treq I have tried to keep the API simple, yet remain familiar to users of Twisted and its lower-level HTTP libraries.</p>
+</div>
+<div class="section" id="feature-parity-with-requests">
+<h2>Feature Parity with Requests<a class="headerlink" href="#feature-parity-with-requests" title="Permalink to this headline">¶</a></h2>
+<p>Even though mimicking the <a class="reference external" href="http://python-requests.org/">requests</a> API is not a goal, supporting most of its features is.
+Here is a list of <a class="reference external" href="http://python-requests.org/">requests</a> features and their status in treq.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="63%" />
+<col width="19%" />
+<col width="19%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td>requests</td>
+<td>treq</td>
+</tr>
+<tr class="row-even"><td>International Domains and URLs</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Keep-Alive &amp; Connection Pooling</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Sessions with Cookie Persistence</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Browser-style SSL Verification</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Basic Authentication</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Digest Authentication</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td>Elegant Key/Value Cookies</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Automatic Decompression</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Unicode Response Bodies</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Multipart File Uploads</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Connection Timeouts</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>.netrc support</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td>Python 2.6</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td>Python 2.7</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Python 3.x</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">Use Cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#handling-streaming-responses">Handling Streaming Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#query-parameters">Query Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#auth">Auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#redirects">Redirects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#cookies">Cookies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#agent-customization">Agent Customization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Helpers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#writing-tests-for-http-clients">Writing tests for HTTP clients</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#loosely-matching-the-request">Loosely matching the request</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#writing-tests-for-twisted-web-resources">Writing tests for Twisted Web resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-treq">Making Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#accessing-content">Accessing Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-treq.client">HTTPClient Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#augmented-response-objects">Augmented Response Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-treq.testing">Test Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#multipartproducer-objects">MultiPartProducer Objects</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">treq: High-level Twisted HTTP Client API</a><ul>
+<li><a class="reference internal" href="#why">Why?</a></li>
+<li><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li><a class="reference internal" href="#get">GET</a></li>
+<li><a class="reference internal" href="#post">POST</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#why-not-100-requests-alike">Why not 100% requests-alike?</a></li>
+<li><a class="reference internal" href="#feature-parity-with-requests">Feature Parity with Requests</a></li>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="howto.html"
+                        title="next chapter">Use Cases</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="howto.html" title="Use Cases"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">treq 16.12.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

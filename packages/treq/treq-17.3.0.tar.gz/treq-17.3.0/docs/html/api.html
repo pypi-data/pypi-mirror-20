@@ -1,0 +1,781 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Reference &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Testing Helpers" href="testing.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Helpers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">treq 16.12.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<p>This page lists all of the interfaces exposed by the <cite>treq</cite> package.</p>
+<div class="section" id="module-treq">
+<span id="making-requests"></span><h2>Making Requests<a class="headerlink" href="#module-treq" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="treq.request">
+<code class="descclassname">treq.</code><code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an HTTP request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; HTTP method. Example: <code class="docutils literal"><span class="pre">'GET'</span></code>, <code class="docutils literal"><span class="pre">'HEAD'</span></code>. <code class="docutils literal"><span class="pre">'PUT'</span></code>,
+<code class="docutils literal"><span class="pre">'POST'</span></code>.</li>
+<li><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; http or https URL, which may include query arguments.</li>
+<li><strong>headers</strong> (<em>Headers</em><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)"><em>None</em></a>) &#8211; Optional HTTP Headers to send with this request.</li>
+<li><strong>params</strong> (<em>dict w/ str</em><em> or </em><em>list/tuple of str values</em><em>, </em><em>list of 2-tuples</em><em>, or
+</em><em>None.</em>) &#8211; Optional parameters to be append as the query string to
+the URL, any query string parameters in the URL already will be
+preserved.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><em>file-like</em><em>, </em><em>IBodyProducer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)"><em>None</em></a>) &#8211; Optional request body.</li>
+<li><strong>reactor</strong> &#8211; Optional twisted reactor.</li>
+<li><strong>persistent</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Use persistent HTTP connections.  Default: <code class="docutils literal"><span class="pre">True</span></code></li>
+<li><strong>allow_redirects</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Follow HTTP redirects.  Default: <code class="docutils literal"><span class="pre">True</span></code></li>
+<li><strong>auth</strong> (tuple of <code class="docutils literal"><span class="pre">('username',</span> <span class="pre">'password')</span></code>.) &#8211; HTTP Basic Authentication information.</li>
+<li><strong>cookies</strong> (<code class="docutils literal"><span class="pre">dict</span></code> or <code class="docutils literal"><span class="pre">cookielib.CookieJar</span></code>) &#8211; Cookies to send with this request.  The HTTP kind, not the
+tasty kind.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; Request timeout seconds. If a response is not
+received within this timeframe, a connection is aborted with
+<code class="docutils literal"><span class="pre">CancelledError</span></code>.</li>
+<li><strong>browser_like_redirects</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Use browser like redirects
+(i.e. Ignore  RFC2616 section 10.3 and follow redirects from
+POST requests).  Default: <code class="docutils literal"><span class="pre">False</span></code></li>
+<li><strong>unbuffered</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; Pass <code class="docutils literal"><span class="pre">True</span></code> to to disable response buffering.  By
+default treq buffers the entire response body in memory.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Deferred that fires with an IResponse provider.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.get">
+<code class="descclassname">treq.</code><code class="descname">get</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a <code class="docutils literal"><span class="pre">GET</span></code> request.</p>
+<p>See <a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.head">
+<code class="descclassname">treq.</code><code class="descname">head</code><span class="sig-paren">(</span><em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a <code class="docutils literal"><span class="pre">HEAD</span></code> request.</p>
+<p>See <a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.post">
+<code class="descclassname">treq.</code><code class="descname">post</code><span class="sig-paren">(</span><em>url</em>, <em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a <code class="docutils literal"><span class="pre">POST</span></code> request.</p>
+<p>See <a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.put">
+<code class="descclassname">treq.</code><code class="descname">put</code><span class="sig-paren">(</span><em>url</em>, <em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a <code class="docutils literal"><span class="pre">PUT</span></code> request.</p>
+<p>See <a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.patch">
+<code class="descclassname">treq.</code><code class="descname">patch</code><span class="sig-paren">(</span><em>url</em>, <em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a <code class="docutils literal"><span class="pre">PATCH</span></code> request.</p>
+<p>See <a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.delete">
+<code class="descclassname">treq.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/api.html#delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a <code class="docutils literal"><span class="pre">DELETE</span></code> request.</p>
+<p>See <a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="accessing-content">
+<h2>Accessing Content<a class="headerlink" href="#accessing-content" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="treq.collect">
+<code class="descclassname">treq.</code><code class="descname">collect</code><span class="sig-paren">(</span><em>response</em>, <em>collector</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/content.html#collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.collect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incrementally collect the body of the response.</p>
+<p>This function may only be called <strong>once</strong> for a given response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> (<em>IResponse</em>) &#8211; The HTTP response to collect the body from.</li>
+<li><strong>collector</strong> (<em>single argument callable</em>) &#8211; A callable to be called each time data is available
+from the response body.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Deferred that fires with None when the entire body has been read.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.content">
+<code class="descclassname">treq.</code><code class="descname">content</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/content.html#content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the contents of an HTTP response.</p>
+<p>This function may be called multiple times for a response, it uses a
+<code class="docutils literal"><span class="pre">WeakKeyDictionary</span></code> to cache the contents of the response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>IResponse</em>) &#8211; The HTTP Response to get the contents of.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Deferred that fires with the content as a str.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.text_content">
+<code class="descclassname">treq.</code><code class="descname">text_content</code><span class="sig-paren">(</span><em>response</em>, <em>encoding='ISO-8859-1'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/content.html#text_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.text_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the contents of an HTTP response and decode it with an appropriate
+charset, which may be guessed from the <code class="docutils literal"><span class="pre">Content-Type</span></code> header.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> (<em>IResponse</em>) &#8211; The HTTP Response to get the contents of.</li>
+<li><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; An valid charset, such as <code class="docutils literal"><span class="pre">UTF-8</span></code> or <code class="docutils literal"><span class="pre">ISO-8859-1</span></code>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Deferred that fires with a unicode.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="treq.json_content">
+<code class="descclassname">treq.</code><code class="descname">json_content</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/content.html#json_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.json_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the contents of an HTTP response and attempt to decode it as JSON.</p>
+<p>This function relies on <a class="reference internal" href="#treq.content" title="treq.content"><code class="xref py py-func docutils literal"><span class="pre">content()</span></code></a> and so may be called more than
+once for a given response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>IResponse</em>) &#8211; The HTTP Response to get the contents of.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Deferred that fires with the decoded JSON.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-treq.client">
+<span id="httpclient-objects"></span><h2>HTTPClient Objects<a class="headerlink" href="#module-treq.client" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#treq.client.HTTPClient" title="treq.client.HTTPClient"><code class="xref py py-class docutils literal"><span class="pre">treq.client.HTTPClient</span></code></a> class provides the same interface as the <a class="reference internal" href="#module-treq" title="treq"><code class="xref py py-mod docutils literal"><span class="pre">treq</span></code></a> module itself.</p>
+<dl class="class">
+<dt id="treq.client.HTTPClient">
+<em class="property">class </em><code class="descclassname">treq.client.</code><code class="descname">HTTPClient</code><span class="sig-paren">(</span><em>agent</em>, <em>cookiejar=None</em>, <em>data_to_body_producer=&lt;InterfaceClass twisted.web.iweb.IBodyProducer&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="treq.client.HTTPClient.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.client.HTTPClient.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.client.HTTPClient.head">
+<code class="descname">head</code><span class="sig-paren">(</span><em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.client.HTTPClient.patch">
+<code class="descname">patch</code><span class="sig-paren">(</span><em>url</em>, <em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.patch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.client.HTTPClient.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>url</em>, <em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.client.HTTPClient.put">
+<code class="descname">put</code><span class="sig-paren">(</span><em>url</em>, <em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.put" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.client.HTTPClient.request">
+<code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>url</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/client.html#HTTPClient.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.client.HTTPClient.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="augmented-response-objects">
+<h2>Augmented Response Objects<a class="headerlink" href="#augmented-response-objects" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a>, <a class="reference internal" href="#treq.get" title="treq.get"><code class="xref py py-func docutils literal"><span class="pre">treq.get()</span></code></a>, etc. return an object which implements <a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.iweb.IResponse.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">twisted.web.iweb.IResponse</span></code></a>, plus a few additional convenience methods:</p>
+<span class="target" id="module-treq.response"></span><dl class="class">
+<dt id="treq.response._Response">
+<em class="property">class </em><code class="descclassname">treq.response.</code><code class="descname">_Response</code><a class="reference internal" href="_modules/treq/response.html#_Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="treq.response._Response.collect">
+<code class="descname">collect</code><span class="sig-paren">(</span><em>collector</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/response.html#_Response.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response.collect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incrementally collect the body of the response, per
+<a class="reference internal" href="#treq.collect" title="treq.collect"><code class="xref py py-func docutils literal"><span class="pre">treq.collect()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>collector</strong> &#8211; A single argument callable that will be called
+with chunks of body data as it is received.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <cite>Deferred</cite> that fires when the entire body has been
+received.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.response._Response.content">
+<code class="descname">content</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/response.html#_Response.content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the entire body all at once, per <a class="reference internal" href="#treq.content" title="treq.content"><code class="xref py py-func docutils literal"><span class="pre">treq.content()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <cite>Deferred</cite> that fires with a <cite>bytes</cite> object when the entire
+body has been received.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.response._Response.json">
+<code class="descname">json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/response.html#_Response.json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response.json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collect the response body as JSON per <a class="reference internal" href="#treq.json_content" title="treq.json_content"><code class="xref py py-func docutils literal"><span class="pre">treq.json_content()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Deferred that fires with the decoded JSON when the entire body
+has been read.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.response._Response.text">
+<code class="descname">text</code><span class="sig-paren">(</span><em>encoding='ISO-8859-1'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/response.html#_Response.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the entire body all at once as text, per
+<a class="reference internal" href="#treq.text_content" title="treq.text_content"><code class="xref py py-func docutils literal"><span class="pre">treq.text_content()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">A <cite>Deferred</cite> that fires with a unicode string when the entire
+body has been received.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.response._Response.history">
+<code class="descname">history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/response.html#_Response.history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response.history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all responses that (such as intermediate redirects),
+that ultimately ended in the current response. The responses are
+ordered chronologically.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <cite>list</cite> of <a class="reference internal" href="#treq.response._Response" title="treq.response._Response"><code class="xref py py-class docutils literal"><span class="pre">_Response</span></code></a> objects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.response._Response.cookies">
+<code class="descname">cookies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/response.html#_Response.cookies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.response._Response.cookies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a copy of this response&#8217;s cookies.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">requests.cookies.RequestsCookieJar</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Inherited from <a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.iweb.IResponse.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">twisted.web.iweb.IResponse</span></code></a>:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>version</strong> &#8211; </li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/code.html#module-code" title="(in Python v3.5)"><strong>code</strong></a> &#8211; </li>
+<li><strong>phrase</strong> &#8211; </li>
+<li><strong>headers</strong> &#8211; </li>
+<li><strong>length</strong> &#8211; </li>
+<li><a class="reference internal" href="#treq.testing.RequestTraversalAgent.request" title="treq.testing.RequestTraversalAgent.request"><strong>request</strong></a> &#8211; </li>
+<li><strong>previousResponse</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="treq.response._Response.deliverBody">
+<code class="descname">deliverBody</code><span class="sig-paren">(</span><em>protocol</em><span class="sig-paren">)</span><a class="headerlink" href="#treq.response._Response.deliverBody" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="treq.response._Response.setPreviousResponse">
+<code class="descname">setPreviousResponse</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#treq.response._Response.setPreviousResponse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-treq.testing">
+<span id="test-helpers"></span><h2>Test Helpers<a class="headerlink" href="#module-treq.testing" title="Permalink to this headline">¶</a></h2>
+<p>In-memory version of treq for testing.</p>
+<dl class="class">
+<dt id="treq.testing.EndpointFactory">
+<em class="property">class </em><code class="descclassname">treq.testing.</code><code class="descname">EndpointFactory</code><span class="sig-paren">(</span><em>reactor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#EndpointFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.EndpointFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>An endpoint factory used by <a class="reference internal" href="#treq.testing.RequestTraversalAgent" title="treq.testing.RequestTraversalAgent"><code class="xref py py-class docutils literal"><span class="pre">RequestTraversalAgent</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>reactor</strong> &#8211; The agent&#8217;s reactor.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="treq.testing.EndpointFactory.endpointForURI">
+<code class="descname">endpointForURI</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#EndpointFactory.endpointForURI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.EndpointFactory.endpointForURI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an endpoint that represents an in-memory connection to
+a URI.</p>
+<p>Note: This always creates a
+<a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.internet.endpoints.TCP4ClientEndpoint.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">TCP4ClientEndpoint</span></code></a> on the
+assumption <a class="reference internal" href="#treq.testing.RequestTraversalAgent" title="treq.testing.RequestTraversalAgent"><code class="xref py py-class docutils literal"><span class="pre">RequestTraversalAgent</span></code></a> ignores everything
+about the endpoint but its port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uri</strong> (<a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.client.URI.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">URI</span></code></a>) &#8211; The URI to connect to.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The endpoint.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">An
+<a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.IStreamClientEndpoint.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">IStreamClientEndpoint</span></code></a>
+provider.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="treq.testing.HasHeaders">
+<em class="property">class </em><code class="descclassname">treq.testing.</code><code class="descname">HasHeaders</code><span class="sig-paren">(</span><em>headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#HasHeaders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.HasHeaders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Since Twisted adds headers to a request, such as the host and the content
+length, it&#8217;s necessary to test whether request headers CONTAIN the expected
+headers (the ones that are not automatically added by Twisted).</p>
+<p>This wraps a set of headers, and can be used in an equality test against
+a superset if the provided headers. The headers keys are lowercased, and
+keys and values are compared in their bytes-encoded forms.</p>
+<p>Headers should be provided as a mapping from strings or bytes to a list of
+strings or bytes.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="treq.testing.RequestSequence">
+<em class="property">class </em><code class="descclassname">treq.testing.</code><code class="descname">RequestSequence</code><span class="sig-paren">(</span><em>sequence</em>, <em>async_failure_reporter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#RequestSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.RequestSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>For an example usage, see <a class="reference internal" href="#treq.testing.RequestSequence.consume" title="treq.testing.RequestSequence.consume"><code class="xref py py-meth docutils literal"><span class="pre">RequestSequence.consume()</span></code></a>.</p>
+<p>Takes a sequence of:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[((</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="p">)),</span>
+ <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Expects the requests to arrive in sequence order.  If there are no more
+responses, or the request&#8217;s parameters do not match the next item&#8217;s
+expected request parameters, raises <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#AssertionError" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">AssertionError</span></code></a>.</p>
+<p>For the expected request arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">method</span></code> should be <cite>bytes</cite> normalized to lowercase.</li>
+<li><code class="docutils literal"><span class="pre">url</span></code> should be a <cite>str</cite> normalized as per the transformations in
+<a class="reference external" href="https://en.wikipedia.org/wiki/URL_normalization">https://en.wikipedia.org/wiki/URL_normalization</a> that (usually) preserve
+semantics.  A URL to <cite>http://something-that-looks-like-a-directory</cite>
+would be normalized to <cite>http://something-that-looks-like-a-directory/</cite>
+and a URL to <cite>http://something-that-looks-like-a-page/page.html</cite>
+remains unchanged.</li>
+<li><code class="docutils literal"><span class="pre">params</span></code> is a dictionary mapping <cite>bytes</cite> to <cite>lists</cite> of <cite>bytes</cite></li>
+<li><code class="docutils literal"><span class="pre">headers</span></code> is a dictionary mapping <cite>bytes</cite> to <cite>lists</cite> of <cite>bytes</cite> - note
+that <a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.client.Agent.html" title="(in Twisted v2.0)"><code class="xref py py-obj docutils literal"><span class="pre">twisted.web.client.Agent</span></code></a> may add its own headers though,
+which are not guaranteed (for instance, <cite>user-agent</cite> or
+<cite>content-length</cite>), so it&#8217;s better to use some kind of matcher like
+<a class="reference internal" href="#treq.testing.HasHeaders" title="treq.testing.HasHeaders"><code class="xref py py-obj docutils literal"><span class="pre">HasHeaders</span></code></a>.</li>
+<li><code class="docutils literal"><span class="pre">data</span></code> is a <cite>bytes</cite></li>
+</ul>
+<p>For the response:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">code</span></code> is an integer representing the HTTP status code to return</li>
+<li><code class="docutils literal"><span class="pre">headers</span></code> is a dictionary mapping <cite>bytes</cite> to <cite>bytes</cite> or <cite>lists</cite> of
+<cite>bytes</cite></li>
+<li><code class="docutils literal"><span class="pre">body</span></code> is a <cite>bytes</cite></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sequence</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) &#8211; The sequence of expected request arguments mapped to
+stubbed responses</li>
+<li><strong>async_failure_reporter</strong> &#8211; A callable that takes a single message
+reporting failures—it&#8217;s asynchronous because it cannot just raise
+an exception—if it does, <code class="xref py py-obj docutils literal"><span class="pre">Resource.render</span></code> will just convert
+that into a 500 response, and there will be no other failure reporting
+mechanism. Under Trial, this may be
+a <code class="xref py py-class docutils literal"><span class="pre">twisted.logger.Logger.error</span></code>, as Trial fails the test when an
+error is logged.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="treq.testing.RequestSequence.consume">
+<code class="descname">consume</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#RequestSequence.consume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.RequestSequence.consume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">async_failures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sequence_stubs</span> <span class="o">=</span> <span class="n">RequestSequence</span><span class="p">([</span><span class="o">...</span><span class="p">],</span> <span class="n">async_failures</span><span class="o">.</span><span class="n">append</span><span class="p">)</span>
+<span class="n">stub_treq</span> <span class="o">=</span> <span class="n">StubTreq</span><span class="p">(</span><span class="n">StringStubbingResource</span><span class="p">(</span><span class="n">sequence_stubs</span><span class="p">))</span>
+<span class="k">with</span> <span class="n">sequence_stubs</span><span class="o">.</span><span class="n">consume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">):</span>  <span class="c1"># self = unittest.TestCase</span>
+    <span class="n">stub_treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://fakeurl.com&#39;</span><span class="p">)</span>
+    <span class="n">stub_treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://another-fake-url.com&#39;</span><span class="p">)</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">([],</span> <span class="n">async_failures</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If there are still remaining expected requests to be made in the
+sequence, fails the provided test case.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sync_failure_reporter</strong> &#8211; A callable that takes a single message
+reporting failures.  This can just raise an exception - it does
+not need to be asynchronous, since the exception would not get
+raised within a Resource.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a context manager that can be used to ensure all expected
+requests have been made.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.testing.RequestSequence.consumed">
+<code class="descname">consumed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#RequestSequence.consumed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.RequestSequence.consumed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><cite>bool</cite> representing whether the entire sequence has been
+consumed.  This is useful in tests to assert that the expected
+requests have all been made.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="treq.testing.RequestTraversalAgent">
+<em class="property">class </em><code class="descclassname">treq.testing.</code><code class="descname">RequestTraversalAgent</code><span class="sig-paren">(</span><em>rootResource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#RequestTraversalAgent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.RequestTraversalAgent" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">IAgent</span></code> implementation that issues an in-memory request rather than
+going out to a real network socket.</p>
+<dl class="method">
+<dt id="treq.testing.RequestTraversalAgent.flush">
+<code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#RequestTraversalAgent.flush"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.RequestTraversalAgent.flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush all data between pending client/server pairs.</p>
+<p>This is only necessary if a <code class="xref py py-obj docutils literal"><span class="pre">Resource</span></code> under test returns
+<code class="xref py py-obj docutils literal"><span class="pre">NOT_DONE_YET</span></code> from its <code class="docutils literal"><span class="pre">render</span></code> method, making a response
+asynchronous. In that case, after each write from the server,
+<code class="xref py py-meth docutils literal"><span class="pre">pump()</span></code> must be called so the client can see it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.testing.RequestTraversalAgent.request">
+<code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>uri</em>, <em>headers=None</em>, <em>bodyProducer=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#RequestTraversalAgent.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.RequestTraversalAgent.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement IAgent.request.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="treq.testing.StringStubbingResource">
+<em class="property">class </em><code class="descclassname">treq.testing.</code><code class="descname">StringStubbingResource</code><span class="sig-paren">(</span><em>get_response_for</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#StringStubbingResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.StringStubbingResource" title="Permalink to this definition">¶</a></dt>
+<dd><p>A resource that takes a callable with 5 parameters
+<code class="docutils literal"><span class="pre">(method,</span> <span class="pre">url,</span> <span class="pre">params,</span> <span class="pre">headers,</span> <span class="pre">data)</span></code> and returns
+<code class="docutils literal"><span class="pre">(code,</span> <span class="pre">headers,</span> <span class="pre">body)</span></code>.</p>
+<p>The resource uses the callable to return a real response as a result of a
+request.</p>
+<p>The parameters for the callable are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">method</span></code>, the HTTP method as <cite>bytes</cite>.</li>
+<li><code class="docutils literal"><span class="pre">url</span></code>, the full URL of the request as text.</li>
+<li><code class="docutils literal"><span class="pre">params</span></code>, a dictionary of query parameters mapping query keys
+lists of values (sorted alphabetically).</li>
+<li><code class="docutils literal"><span class="pre">headers</span></code>, a dictionary of headers mapping header keys to
+a list of header values (sorted alphabetically).</li>
+<li><code class="docutils literal"><span class="pre">data</span></code>, the request body as <cite>bytes</cite>.</li>
+</ul>
+<p>The callable must return a <code class="docutils literal"><span class="pre">tuple</span></code> of (code, headers, body) where the
+code is the HTTP status code, the headers is a dictionary of bytes (unlike
+the <cite>headers</cite> parameter, which is a dictionary of lists), and body is
+a string that will be returned as the response body.</p>
+<p>If there is a stubbing error, the return value is undefined (if an
+exception is raised, <a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.resource.Resource.html" title="(in Twisted v2.0)"><code class="xref py py-obj docutils literal"><span class="pre">Resource</span></code></a> will just eat it
+and return 500 in its place).  The callable, or whomever creates the
+callable, should have a way to handle error reporting.</p>
+<dl class="method">
+<dt id="treq.testing.StringStubbingResource.render">
+<code class="descname">render</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#StringStubbingResource.render"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.StringStubbingResource.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce a response according to the stubs provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="treq.testing.StubTreq">
+<em class="property">class </em><code class="descclassname">treq.testing.</code><code class="descname">StubTreq</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/testing.html#StubTreq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.testing.StubTreq" title="Permalink to this definition">¶</a></dt>
+<dd><p>A fake version of the treq module that can be used for testing that
+provides all the function calls exposed in <code class="xref py py-obj docutils literal"><span class="pre">treq.__all__</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/resource.html#module-resource" title="(in Python v3.5)"><strong>resource</strong></a> &#8211; A <code class="xref py py-obj docutils literal"><span class="pre">Resource</span></code> object that provides the fake responses</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="multipartproducer-objects">
+<h2>MultiPartProducer Objects<a class="headerlink" href="#multipartproducer-objects" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#treq.multipart.MultiPartProducer" title="treq.multipart.MultiPartProducer"><code class="xref py py-class docutils literal"><span class="pre">treq.multipart.MultiPartProducer</span></code></a> is used internally when making requests which involve files.</p>
+<span class="target" id="module-treq.multipart"></span><dl class="class">
+<dt id="treq.multipart.MultiPartProducer">
+<em class="property">class </em><code class="descclassname">treq.multipart.</code><code class="descname">MultiPartProducer</code><span class="sig-paren">(</span><em>fields</em>, <em>boundary=None</em>, <em>cooperator=&lt;module 'twisted.internet.task' from '/home/mrw/src/python/treq/.tox/docs/local/lib/python2.7/site-packages/twisted/internet/task.pyc'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/multipart.html#MultiPartProducer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.multipart.MultiPartProducer" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#treq.multipart.MultiPartProducer" title="treq.multipart.MultiPartProducer"><code class="xref py py-class docutils literal"><span class="pre">MultiPartProducer</span></code></a> takes parameters for a HTTP request and
+produces bytes in multipart/form-data format defined in <span class="target" id="index-0"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2388.html"><strong>RFC 2388</strong></a> and
+<span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2046.html"><strong>RFC 2046</strong></a>.</p>
+<p>The encoded request is produced incrementally and the bytes are
+written to a consumer.</p>
+<p>Fields should have form: <code class="docutils literal"><span class="pre">[(parameter</span> <span class="pre">name,</span> <span class="pre">value),</span> <span class="pre">...]</span></code></p>
+<p>Accepted values:</p>
+<ul class="simple">
+<li>Unicode strings (in this case parameter will be encoded with utf-8)</li>
+<li>Tuples with (file name, content-type,
+<a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.iweb.IBodyProducer.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">IBodyProducer</span></code></a> objects)</li>
+</ul>
+<p>Since <a class="reference internal" href="#treq.multipart.MultiPartProducer" title="treq.multipart.MultiPartProducer"><code class="xref py py-class docutils literal"><span class="pre">MultiPartProducer</span></code></a> can accept objects like
+<a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.iweb.IBodyProducer.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">IBodyProducer</span></code></a> which cannot be read from in an
+event-driven manner it uses uses a
+<a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.internet.task.Cooperator.html" title="(in Twisted v2.0)"><code class="xref py py-class docutils literal"><span class="pre">Cooperator</span></code></a> instance to schedule reads
+from the underlying producers. Reading is also paused and resumed based on
+notifications from the <code class="xref py py-class docutils literal"><span class="pre">IConsumer</span></code> provider being written to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_fields</strong> &#8211; Sorted parameters, where all strings are enforced to be
+unicode and file objects stacked on bottom (to produce a human readable
+form-data request)</li>
+<li><strong>_cooperate</strong> &#8211; A method like <cite>Cooperator.cooperate</cite> which is used to
+schedule all reads.</li>
+<li><strong>boundary</strong> &#8211; The generated boundary used in form-data encoding</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="treq.multipart.MultiPartProducer.pauseProducing">
+<code class="descname">pauseProducing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/multipart.html#MultiPartProducer.pauseProducing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.multipart.MultiPartProducer.pauseProducing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temporarily suspend copying bytes from the input file to the consumer
+by pausing the <cite>CooperativeTask</cite> which drives that activity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.multipart.MultiPartProducer.resumeProducing">
+<code class="descname">resumeProducing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/multipart.html#MultiPartProducer.resumeProducing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.multipart.MultiPartProducer.resumeProducing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo the effects of a previous <cite>pauseProducing</cite> and resume copying
+bytes to the consumer by resuming the <cite>CooperativeTask</cite> which drives
+the write activity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.multipart.MultiPartProducer.startProducing">
+<code class="descname">startProducing</code><span class="sig-paren">(</span><em>consumer</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/multipart.html#MultiPartProducer.startProducing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.multipart.MultiPartProducer.startProducing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a cooperative task which will read bytes from the input file and
+write them to <cite>consumer</cite>.  Return a <cite>Deferred</cite> which fires after all
+bytes have been written.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>consumer</strong> &#8211; Any <cite>IConsumer</cite> provider</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="treq.multipart.MultiPartProducer.stopProducing">
+<code class="descname">stopProducing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/treq/multipart.html#MultiPartProducer.stopProducing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#treq.multipart.MultiPartProducer.stopProducing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permanently stop writing bytes from the file to the consumer by
+stopping the underlying <cite>CooperativeTask</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Reference</a><ul>
+<li><a class="reference internal" href="#module-treq">Making Requests</a></li>
+<li><a class="reference internal" href="#accessing-content">Accessing Content</a></li>
+<li><a class="reference internal" href="#module-treq.client">HTTPClient Objects</a></li>
+<li><a class="reference internal" href="#augmented-response-objects">Augmented Response Objects</a></li>
+<li><a class="reference internal" href="#module-treq.testing">Test Helpers</a></li>
+<li><a class="reference internal" href="#multipartproducer-objects">MultiPartProducer Objects</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="previous chapter">Testing Helpers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Helpers"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">treq 16.12.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

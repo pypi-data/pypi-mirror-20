@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>treq.response &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for treq.response</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">twisted.python.components</span> <span class="k">import</span> <span class="n">proxyForInterface</span>
+<span class="kn">from</span> <span class="nn">twisted.web.iweb</span> <span class="k">import</span> <span class="n">IResponse</span>
+
+<span class="kn">from</span> <span class="nn">requests.cookies</span> <span class="k">import</span> <span class="n">cookiejar_from_dict</span>
+
+<span class="kn">from</span> <span class="nn">treq.content</span> <span class="k">import</span> <span class="n">collect</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">json_content</span><span class="p">,</span> <span class="n">text_content</span>
+
+
+<div class="viewcode-block" id="_Response"><a class="viewcode-back" href="../../api.html#treq.response._Response">[docs]</a><span class="k">class</span> <span class="nc">_Response</span><span class="p">(</span><span class="n">proxyForInterface</span><span class="p">(</span><span class="n">IResponse</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A wrapper for :class:`twisted.web.iweb.IResponse` which manages cookies and</span>
+<span class="sd">    adds a few convenience methods.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original</span><span class="p">,</span> <span class="n">cookiejar</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original</span> <span class="o">=</span> <span class="n">original</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cookiejar</span> <span class="o">=</span> <span class="n">cookiejar</span>
+
+<div class="viewcode-block" id="_Response.collect"><a class="viewcode-back" href="../../api.html#treq.response._Response.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collector</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Incrementally collect the body of the response, per</span>
+<span class="sd">        :func:`treq.collect()`.</span>
+
+<span class="sd">        :param collector: A single argument callable that will be called</span>
+<span class="sd">            with chunks of body data as it is received.</span>
+
+<span class="sd">        :returns: A `Deferred` that fires when the entire body has been</span>
+<span class="sd">            received.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">collect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="p">,</span> <span class="n">collector</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Response.content"><a class="viewcode-back" href="../../api.html#treq.response._Response.content">[docs]</a>    <span class="k">def</span> <span class="nf">content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read the entire body all at once, per :func:`treq.content()`.</span>
+
+<span class="sd">        :returns: A `Deferred` that fires with a `bytes` object when the entire</span>
+<span class="sd">            body has been received.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">content</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Response.json"><a class="viewcode-back" href="../../api.html#treq.response._Response.json">[docs]</a>    <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the response body as JSON per :func:`treq.json_content()`.</span>
+
+<span class="sd">        :rtype: Deferred that fires with the decoded JSON when the entire body</span>
+<span class="sd">            has been read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">json_content</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Response.text"><a class="viewcode-back" href="../../api.html#treq.response._Response.text">[docs]</a>    <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read the entire body all at once as text, per</span>
+<span class="sd">        :func:`treq.text_content()`.</span>
+
+<span class="sd">        :rtype: A `Deferred` that fires with a unicode string when the entire</span>
+<span class="sd">            body has been received.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">text_content</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Response.history"><a class="viewcode-back" href="../../api.html#treq.response._Response.history">[docs]</a>    <span class="k">def</span> <span class="nf">history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of all responses that (such as intermediate redirects),</span>
+<span class="sd">        that ultimately ended in the current response. The responses are</span>
+<span class="sd">        ordered chronologically.</span>
+
+<span class="sd">        :returns: A `list` of :class:`~treq.response._Response` objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;previousResponse&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="s2">&quot;Twisted &lt; 13.1.0 does not support response history.&quot;</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="n">response</span><span class="o">.</span><span class="n">previousResponse</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_Response</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">previousResponse</span><span class="p">,</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">_cookiejar</span><span class="p">))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">previousResponse</span>
+
+        <span class="n">history</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">history</span></div>
+
+<div class="viewcode-block" id="_Response.cookies"><a class="viewcode-back" href="../../api.html#treq.response._Response.cookies">[docs]</a>    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a copy of this response&#39;s cookies.</span>
+
+<span class="sd">        :rtype: :class:`requests.cookies.RequestsCookieJar`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jar</span> <span class="o">=</span> <span class="n">cookiejar_from_dict</span><span class="p">({})</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cookiejar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">cookie</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cookiejar</span><span class="p">:</span>
+                <span class="n">jar</span><span class="o">.</span><span class="n">set_cookie</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">jar</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

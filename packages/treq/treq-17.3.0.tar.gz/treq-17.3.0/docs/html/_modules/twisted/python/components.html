@@ -1,0 +1,540 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>twisted.python.components &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for twisted.python.components</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- test-case-name: twisted.python.test.test_components -*-</span>
+<span class="c1"># Copyright (c) Twisted Matrix Laboratories.</span>
+<span class="c1"># See LICENSE for details.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Component architecture for Twisted, based on Zope3 components.</span>
+
+<span class="sd">Using the Zope3 API directly is strongly recommended. Everything</span>
+<span class="sd">you need is in the top-level of the zope.interface package, e.g.::</span>
+
+<span class="sd">   from zope.interface import Interface, implementer</span>
+
+<span class="sd">   class IFoo(Interface):</span>
+<span class="sd">       pass</span>
+
+<span class="sd">   @implementer(IFoo)</span>
+<span class="sd">   class Foo:</span>
+
+<span class="sd">   print(IFoo.implementedBy(Foo)) # True</span>
+<span class="sd">   print(IFoo.providedBy(Foo())) # True</span>
+
+<span class="sd">L{twisted.python.components.registerAdapter} from this module may be used to</span>
+<span class="sd">add to Twisted&#39;s global adapter registry.</span>
+
+<span class="sd">L{twisted.python.components.proxyForInterface} is a factory for classes</span>
+<span class="sd">which allow access to only the parts of another class defined by a specified</span>
+<span class="sd">interface.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="c1"># zope3 imports</span>
+<span class="kn">from</span> <span class="nn">zope.interface</span> <span class="k">import</span> <span class="n">interface</span><span class="p">,</span> <span class="n">declarations</span>
+<span class="kn">from</span> <span class="nn">zope.interface.adapter</span> <span class="k">import</span> <span class="n">AdapterRegistry</span>
+
+<span class="c1"># twisted imports</span>
+<span class="kn">from</span> <span class="nn">twisted.python.compat</span> <span class="k">import</span> <span class="n">NativeStringIO</span>
+<span class="kn">from</span> <span class="nn">twisted.python</span> <span class="k">import</span> <span class="n">reflect</span>
+<span class="kn">from</span> <span class="nn">twisted.python._oldstyle</span> <span class="k">import</span> <span class="n">_oldStyle</span>
+
+
+
+<span class="c1"># Twisted&#39;s global adapter registry</span>
+<span class="n">globalRegistry</span> <span class="o">=</span> <span class="n">AdapterRegistry</span><span class="p">()</span>
+
+<span class="c1"># Attribute that registerAdapter looks at. Is this supposed to be public?</span>
+<span class="n">ALLOW_DUPLICATES</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Define a function to find the registered adapter factory, using either a</span>
+<span class="c1"># version of Zope Interface which has the `registered&#39; method or an older</span>
+<span class="c1"># version which does not.</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">AdapterRegistry</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_registered</span><span class="p">(</span><span class="n">registry</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">provided</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the adapter factory for the given parameters in the given</span>
+<span class="sd">        registry, or None if there is not one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">required</span><span class="p">)</span><span class="o">.</span><span class="n">selfImplied</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">provided</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_registered</span><span class="p">(</span><span class="n">registry</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">provided</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the adapter factory for the given parameters in the given</span>
+<span class="sd">        registry, or None if there is not one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">registry</span><span class="o">.</span><span class="n">registered</span><span class="p">([</span><span class="n">required</span><span class="p">],</span> <span class="n">provided</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">registerAdapter</span><span class="p">(</span><span class="n">adapterFactory</span><span class="p">,</span> <span class="n">origInterface</span><span class="p">,</span> <span class="o">*</span><span class="n">interfaceClasses</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Register an adapter class.</span>
+
+<span class="sd">    An adapter class is expected to implement the given interface, by</span>
+<span class="sd">    adapting instances implementing &#39;origInterface&#39;. An adapter class&#39;s</span>
+<span class="sd">    __init__ method should accept one parameter, an instance implementing</span>
+<span class="sd">    &#39;origInterface&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span> <span class="o">=</span> <span class="n">globalRegistry</span>
+    <span class="k">assert</span> <span class="n">interfaceClasses</span><span class="p">,</span> <span class="s2">&quot;You need to pass an Interface&quot;</span>
+    <span class="k">global</span> <span class="n">ALLOW_DUPLICATES</span>
+
+    <span class="c1"># deal with class-&gt;interface adapters:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">origInterface</span><span class="p">,</span> <span class="n">interface</span><span class="o">.</span><span class="n">InterfaceClass</span><span class="p">):</span>
+        <span class="n">origInterface</span> <span class="o">=</span> <span class="n">declarations</span><span class="o">.</span><span class="n">implementedBy</span><span class="p">(</span><span class="n">origInterface</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">interfaceClass</span> <span class="ow">in</span> <span class="n">interfaceClasses</span><span class="p">:</span>
+        <span class="n">factory</span> <span class="o">=</span> <span class="n">_registered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origInterface</span><span class="p">,</span> <span class="n">interfaceClass</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">factory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ALLOW_DUPLICATES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;an adapter (</span><span class="si">%s</span><span class="s2">) was already registered.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="p">))</span>
+    <span class="k">for</span> <span class="n">interfaceClass</span> <span class="ow">in</span> <span class="n">interfaceClasses</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">([</span><span class="n">origInterface</span><span class="p">],</span> <span class="n">interfaceClass</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">adapterFactory</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">getAdapterFactory</span><span class="p">(</span><span class="n">fromInterface</span><span class="p">,</span> <span class="n">toInterface</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return registered adapter for a given class and interface.</span>
+
+<span class="sd">    Note that is tied to the *Twisted* global registry, and will</span>
+<span class="sd">    thus not find adapters registered elsewhere.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span> <span class="o">=</span> <span class="n">globalRegistry</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fromInterface</span><span class="p">,</span> <span class="n">interface</span><span class="o">.</span><span class="n">InterfaceClass</span><span class="p">):</span>
+        <span class="n">fromInterface</span> <span class="o">=</span> <span class="n">declarations</span><span class="o">.</span><span class="n">implementedBy</span><span class="p">(</span><span class="n">fromInterface</span><span class="p">)</span>
+    <span class="n">factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup1</span><span class="p">(</span><span class="n">fromInterface</span><span class="p">,</span> <span class="n">toInterface</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">factory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">factory</span> <span class="o">=</span> <span class="n">default</span>
+    <span class="k">return</span> <span class="n">factory</span>
+
+
+<span class="k">def</span> <span class="nf">_addHook</span><span class="p">(</span><span class="n">registry</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add an adapter hook which will attempt to look up adapters in the given</span>
+<span class="sd">    registry.</span>
+
+<span class="sd">    @type registry: L{zope.interface.adapter.AdapterRegistry}</span>
+
+<span class="sd">    @return: The hook which was added, for later use with L{_removeHook}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lookup</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">lookup1</span>
+    <span class="k">def</span> <span class="nf">_hook</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="n">ob</span><span class="p">):</span>
+        <span class="n">factory</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">declarations</span><span class="o">.</span><span class="n">providedBy</span><span class="p">(</span><span class="n">ob</span><span class="p">),</span> <span class="n">iface</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">factory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">factory</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span>
+    <span class="n">interface</span><span class="o">.</span><span class="n">adapter_hooks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_hook</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_hook</span>
+
+
+<span class="k">def</span> <span class="nf">_removeHook</span><span class="p">(</span><span class="n">hook</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove a previously added adapter hook.</span>
+
+<span class="sd">    @param hook: An object previously returned by a call to L{_addHook}.  This</span>
+<span class="sd">        will be removed from the list of adapter hooks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">interface</span><span class="o">.</span><span class="n">adapter_hooks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">hook</span><span class="p">)</span>
+
+<span class="c1"># add global adapter lookup hook for our newly created registry</span>
+<span class="n">_addHook</span><span class="p">(</span><span class="n">globalRegistry</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">getRegistry</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Returns the Twisted global</span>
+<span class="sd">    C{zope.interface.adapter.AdapterRegistry} instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">globalRegistry</span>
+
+<span class="c1"># FIXME: deprecate attribute somehow?</span>
+<span class="n">CannotAdapt</span> <span class="o">=</span> <span class="ne">TypeError</span>
+
+<span class="nd">@_oldStyle</span>
+<span class="k">class</span> <span class="nc">Adapter</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;I am the default implementation of an Adapter for some interface.</span>
+
+<span class="sd">    This docstring contains a limerick, by popular demand::</span>
+
+<span class="sd">        Subclassing made Zope and TR</span>
+<span class="sd">        much harder to work with by far.</span>
+<span class="sd">            So before you inherit,</span>
+<span class="sd">            be sure to declare it</span>
+<span class="sd">        Adapter, not PyObject*</span>
+
+<span class="sd">    @cvar temporaryAdapter: If this is True, the adapter will not be</span>
+<span class="sd">          persisted on the Componentized.</span>
+<span class="sd">    @cvar multiComponent: If this adapter is persistent, should it be</span>
+<span class="sd">          automatically registered for all appropriate interfaces.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># These attributes are used with Componentized.</span>
+
+    <span class="n">temporaryAdapter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">multiComponent</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set my &#39;original&#39; attribute to be the object I am adapting.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original</span> <span class="o">=</span> <span class="n">original</span>
+
+    <span class="k">def</span> <span class="nf">__conform__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        I forward __conform__ to self.original if it has it, otherwise I</span>
+<span class="sd">        simply return None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="p">,</span> <span class="s2">&quot;__conform__&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="o">.</span><span class="n">__conform__</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">isuper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iface</span><span class="p">,</span> <span class="n">adapter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Forward isuper to self.original</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="o">.</span><span class="n">isuper</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="n">adapter</span><span class="p">)</span>
+
+
+<span class="nd">@_oldStyle</span>
+<span class="k">class</span> <span class="nc">Componentized</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;I am a mixin to allow you to be adapted in various ways persistently.</span>
+
+<span class="sd">    I define a list of persistent adapters.  This is to allow adapter classes</span>
+<span class="sd">    to store system-specific state, and initialized on demand.  The</span>
+<span class="sd">    getComponent method implements this.  You must also register adapters for</span>
+<span class="sd">    this class for the interfaces that you wish to pass to getComponent.</span>
+
+<span class="sd">    Many other classes and utilities listed here are present in Zope3; this one</span>
+<span class="sd">    is specific to Twisted.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">persistenceVersion</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">locateAdapterClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">klass</span><span class="p">,</span> <span class="n">interfaceClass</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">getAdapterFactory</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span> <span class="n">interfaceClass</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setAdapter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interfaceClass</span><span class="p">,</span> <span class="n">adapterClass</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cache a provider for the given interface, by adapting C{self} using</span>
+<span class="sd">        the given adapter class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setComponent</span><span class="p">(</span><span class="n">interfaceClass</span><span class="p">,</span> <span class="n">adapterClass</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">addAdapter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adapterClass</span><span class="p">,</span> <span class="n">ignoreClass</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Utility method that calls addComponent.  I take an adapter class and</span>
+<span class="sd">        instantiate it with myself as the first argument.</span>
+
+<span class="sd">        @return: The adapter instantiated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">adapt</span> <span class="o">=</span> <span class="n">adapterClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addComponent</span><span class="p">(</span><span class="n">adapt</span><span class="p">,</span> <span class="n">ignoreClass</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">adapt</span>
+
+    <span class="k">def</span> <span class="nf">setComponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interfaceClass</span><span class="p">,</span> <span class="n">component</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cache a provider of the given interface.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">[</span><span class="n">reflect</span><span class="o">.</span><span class="n">qual</span><span class="p">(</span><span class="n">interfaceClass</span><span class="p">)]</span> <span class="o">=</span> <span class="n">component</span>
+
+    <span class="k">def</span> <span class="nf">addComponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">,</span> <span class="n">ignoreClass</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a component to me, for all appropriate interfaces.</span>
+
+<span class="sd">        In order to determine which interfaces are appropriate, the component&#39;s</span>
+<span class="sd">        provided interfaces will be scanned.</span>
+
+<span class="sd">        If the argument &#39;ignoreClass&#39; is True, then all interfaces are</span>
+<span class="sd">        considered appropriate.</span>
+
+<span class="sd">        Otherwise, an &#39;appropriate&#39; interface is one for which its class has</span>
+<span class="sd">        been registered as an adapter for my class according to the rules of</span>
+<span class="sd">        getComponent.</span>
+
+<span class="sd">        @return: the list of appropriate interfaces</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">iface</span> <span class="ow">in</span> <span class="n">declarations</span><span class="o">.</span><span class="n">providedBy</span><span class="p">(</span><span class="n">component</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ignoreClass</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locateAdapterClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">iface</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                 <span class="o">==</span> <span class="n">component</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">[</span><span class="n">reflect</span><span class="o">.</span><span class="n">qual</span><span class="p">(</span><span class="n">iface</span><span class="p">)]</span> <span class="o">=</span> <span class="n">component</span>
+
+    <span class="k">def</span> <span class="nf">unsetComponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interfaceClass</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove my component specified by the given interface class.&quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">[</span><span class="n">reflect</span><span class="o">.</span><span class="n">qual</span><span class="p">(</span><span class="n">interfaceClass</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">removeComponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove the given component from me entirely, for all interfaces for which</span>
+<span class="sd">        it has been registered.</span>
+
+<span class="sd">        @return: a list of the interfaces that were removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="n">component</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">namedObject</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+    <span class="k">def</span> <span class="nf">getComponent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create or retrieve an adapter for the given interface.</span>
+
+<span class="sd">        If such an adapter has already been created, retrieve it from the cache</span>
+<span class="sd">        that this instance keeps of all its adapters.  Adapters created through</span>
+<span class="sd">        this mechanism may safely store system-specific state.</span>
+
+<span class="sd">        If you want to register an adapter that will be created through</span>
+<span class="sd">        getComponent, but you don&#39;t require (or don&#39;t want) your adapter to be</span>
+<span class="sd">        cached and kept alive for the lifetime of this Componentized object,</span>
+<span class="sd">        set the attribute &#39;temporaryAdapter&#39; to True on your adapter class.</span>
+
+<span class="sd">        If you want to automatically register an adapter for all appropriate</span>
+<span class="sd">        interfaces (with addComponent), set the attribute &#39;multiComponent&#39; to</span>
+<span class="sd">        True on your adapter class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">reflect</span><span class="o">.</span><span class="n">qual</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">adapter</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">__adapt__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">adapter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
+                <span class="nb">hasattr</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="s2">&quot;temporaryAdapter&quot;</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="n">adapter</span><span class="o">.</span><span class="n">temporaryAdapter</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">adapter</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="s2">&quot;multiComponent&quot;</span><span class="p">)</span> <span class="ow">and</span>
+                    <span class="n">adapter</span><span class="o">.</span><span class="n">multiComponent</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">addComponent</span><span class="p">(</span><span class="n">adapter</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">adapter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">default</span>
+            <span class="k">return</span> <span class="n">adapter</span>
+
+
+    <span class="k">def</span> <span class="nf">__conform__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getComponent</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ReprableComponentized</span><span class="p">(</span><span class="n">Componentized</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Componentized</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+        <span class="n">sio</span> <span class="o">=</span> <span class="n">NativeStringIO</span><span class="p">()</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adapterCache</span><span class="p">,</span> <span class="n">sio</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sio</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+
+
+
+<span class="k">def</span> <span class="nf">proxyForInterface</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="n">originalAttribute</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a class which proxies all method calls which adhere to an interface</span>
+<span class="sd">    to another provider of that interface.</span>
+
+<span class="sd">    This function is intended for creating specialized proxies. The typical way</span>
+<span class="sd">    to use it is by subclassing the result::</span>
+
+<span class="sd">      class MySpecializedProxy(proxyForInterface(IFoo)):</span>
+<span class="sd">          def someInterfaceMethod(self, arg):</span>
+<span class="sd">              if arg == 3:</span>
+<span class="sd">                  return 3</span>
+<span class="sd">              return self.original.someInterfaceMethod(arg)</span>
+
+<span class="sd">    @param iface: The Interface to which the resulting object will conform, and</span>
+<span class="sd">        which the wrapped object must provide.</span>
+
+<span class="sd">    @param originalAttribute: name of the attribute used to save the original</span>
+<span class="sd">        object in the resulting class. Default to C{original}.</span>
+<span class="sd">    @type originalAttribute: C{str}</span>
+
+<span class="sd">    @return: A class whose constructor takes the original object as its only</span>
+<span class="sd">        argument. Constructing the class creates the proxy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">originalAttribute</span><span class="p">,</span> <span class="n">original</span><span class="p">)</span>
+    <span class="n">contents</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;__init__&quot;</span><span class="p">:</span> <span class="fm">__init__</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">iface</span><span class="p">:</span>
+        <span class="n">contents</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ProxyDescriptor</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">originalAttribute</span><span class="p">)</span>
+    <span class="n">proxy</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s2">&quot;(Proxy for </span><span class="si">%s</span><span class="s2">)&quot;</span>
+                 <span class="o">%</span> <span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">qual</span><span class="p">(</span><span class="n">iface</span><span class="p">),),</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="n">contents</span><span class="p">)</span>
+    <span class="n">declarations</span><span class="o">.</span><span class="n">classImplements</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="n">iface</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">proxy</span>
+
+
+
+<span class="k">class</span> <span class="nc">_ProxiedClassMethod</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A proxied class method.</span>
+
+<span class="sd">    @ivar methodName: the name of the method which this should invoke when</span>
+<span class="sd">        called.</span>
+<span class="sd">    @type methodName: L{str}</span>
+
+<span class="sd">    @ivar __name__: The name of the method being proxied (the same as</span>
+<span class="sd">        C{methodName}).</span>
+<span class="sd">    @type __name__: L{str}</span>
+
+<span class="sd">    @ivar originalAttribute: name of the attribute of the proxy where the</span>
+<span class="sd">        original object is stored.</span>
+<span class="sd">    @type originalAttribute: L{str}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodName</span><span class="p">,</span> <span class="n">originalAttribute</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">methodName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">methodName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span> <span class="o">=</span> <span class="n">originalAttribute</span>
+
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oself</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Invoke the specified L{methodName} method of the C{original} attribute</span>
+<span class="sd">        for proxyForInterface.</span>
+
+<span class="sd">        @param oself: an instance of a L{proxyForInterface} object.</span>
+
+<span class="sd">        @return: the result of the underlying method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">original</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">oself</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span><span class="p">)</span>
+        <span class="n">actualMethod</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">methodName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">actualMethod</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+
+
+<span class="k">class</span> <span class="nc">_ProxyDescriptor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A descriptor which will proxy attribute access, mutation, and</span>
+<span class="sd">    deletion to the L{_ProxyDescriptor.originalAttribute} of the</span>
+<span class="sd">    object it is being accessed from.</span>
+
+<span class="sd">    @ivar attributeName: the name of the attribute which this descriptor will</span>
+<span class="sd">        retrieve from instances&#39; C{original} attribute.</span>
+<span class="sd">    @type attributeName: C{str}</span>
+
+<span class="sd">    @ivar originalAttribute: name of the attribute of the proxy where the</span>
+<span class="sd">        original object is stored.</span>
+<span class="sd">    @type originalAttribute: C{str}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributeName</span><span class="p">,</span> <span class="n">originalAttribute</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributeName</span> <span class="o">=</span> <span class="n">attributeName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span> <span class="o">=</span> <span class="n">originalAttribute</span>
+
+
+    <span class="k">def</span> <span class="nf">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oself</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the C{self.attributeName} property from I{oself}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">oself</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_ProxiedClassMethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attributeName</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span><span class="p">)</span>
+        <span class="n">original</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">oself</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributeName</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oself</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the C{self.attributeName} property of I{oself}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">original</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">oself</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributeName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oself</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete the C{self.attributeName} property of I{oself}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">original</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">oself</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">originalAttribute</span><span class="p">)</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributeName</span><span class="p">)</span>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;registerAdapter&quot;</span><span class="p">,</span> <span class="s2">&quot;getAdapterFactory&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Adapter&quot;</span><span class="p">,</span> <span class="s2">&quot;Componentized&quot;</span><span class="p">,</span> <span class="s2">&quot;ReprableComponentized&quot;</span><span class="p">,</span> <span class="s2">&quot;getRegistry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;proxyForInterface&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

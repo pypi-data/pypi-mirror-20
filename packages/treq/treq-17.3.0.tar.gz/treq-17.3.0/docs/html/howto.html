@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Use Cases &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Testing Helpers" href="testing.html" />
+    <link rel="prev" title="treq: High-level Twisted HTTP Client API" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Helpers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="treq: High-level Twisted HTTP Client API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">treq 16.12.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="use-cases">
+<h1>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="handling-streaming-responses">
+<h2>Handling Streaming Responses<a class="headerlink" href="#handling-streaming-responses" title="Permalink to this headline">¶</a></h2>
+<p>In addition to <a class="reference external" href="https://twistedmatrix.com/documents/current/web/howto/client.html#receiving-responses">receiving responses</a>
+with <code class="xref py py-meth docutils literal"><span class="pre">IResponse.deliverBody()</span></code>, treq provides a helper function
+<a class="reference internal" href="api.html#treq.collect" title="treq.collect"><code class="xref py py-func docutils literal"><span class="pre">treq.collect()</span></code></a> which takes a
+<code class="docutils literal"><span class="pre">response</span></code> and a single argument function which will be called with all new
+data available from the response.  Much like <code class="xref py py-meth docutils literal"><span class="pre">IProtocol.dataReceived()</span></code>,
+<a class="reference internal" href="api.html#treq.collect" title="treq.collect"><code class="xref py py-func docutils literal"><span class="pre">treq.collect()</span></code></a> knows nothing about the framing of your data and will
+simply call your collector function with any data that is currently available.</p>
+<p>Here is an example which simply a file object&#8217;s write method to
+<a class="reference internal" href="api.html#treq.collect" title="treq.collect"><code class="xref py py-func docutils literal"><span class="pre">treq.collect()</span></code></a> to save the response body to a file.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">destination_filename</span><span class="p">):</span>
+    <span class="n">destination</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">destination_filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">treq</span><span class="o">.</span><span class="n">collect</span><span class="p">,</span> <span class="n">destination</span><span class="o">.</span><span class="n">write</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addBoth</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">destination</span><span class="o">.</span><span class="n">close</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/download_file.py" download=""><code class="xref download docutils literal"><span class="pre">download_file.py</span></code></a></p>
+</div>
+<div class="section" id="query-parameters">
+<h2>Query Parameters<a class="headerlink" href="#query-parameters" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="api.html#treq.request" title="treq.request"><code class="xref py py-func docutils literal"><span class="pre">treq.request()</span></code></a> supports a <code class="docutils literal"><span class="pre">params</span></code> keyword argument which will
+be URL-encoded and added to the <code class="docutils literal"><span class="pre">url</span></code> argument in addition to any query
+parameters that may already exist.</p>
+<p>The <code class="docutils literal"><span class="pre">params</span></code> argument may be either a <code class="docutils literal"><span class="pre">dict</span></code> or a <code class="docutils literal"><span class="pre">list</span></code> of
+<code class="docutils literal"><span class="pre">(key,</span> <span class="pre">value)</span></code> tuples.</p>
+<p>If it is a <code class="docutils literal"><span class="pre">dict</span></code> then the values in the dict may either be a <code class="docutils literal"><span class="pre">str</span></code> value
+or a <code class="docutils literal"><span class="pre">list</span></code> of <code class="docutils literal"><span class="pre">str</span></code> values.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@inlineCallbacks</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;List of tuples&#39;</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">,</span>
+                          <span class="n">params</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;bax&#39;</span><span class="p">)])</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single value dictionary&#39;</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">,</span>
+                          <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="s1">&#39;bax&#39;</span><span class="p">})</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Multi value dictionary&#39;</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">,</span>
+                          <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;bax&#39;</span><span class="p">]})</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mixed value dictionary&#39;</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">,</span>
+                          <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">],</span> <span class="s1">&#39;bax&#39;</span><span class="p">:</span> <span class="s1">&#39;quux&#39;</span><span class="p">})</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Preserved query parameters&#39;</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get?foo=bar&#39;</span><span class="p">,</span>
+                          <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="s1">&#39;bax&#39;</span><span class="p">})</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/query_params.py" download=""><code class="xref download docutils literal"><span class="pre">query_params.py</span></code></a></p>
+</div>
+<div class="section" id="auth">
+<h2>Auth<a class="headerlink" href="#auth" title="Permalink to this headline">¶</a></h2>
+<p>HTTP Basic authentication as specified in <span class="target" id="index-0"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2617.html"><strong>RFC 2617</strong></a> is easily supported by
+passing an <code class="docutils literal"><span class="pre">auth</span></code> keyword argument to any of the request functions.</p>
+<p>The <code class="docutils literal"><span class="pre">auth</span></code> argument should be a tuple of the form <code class="docutils literal"><span class="pre">('username',</span> <span class="pre">'password')</span></code>.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s1">&#39;http://httpbin.org/basic-auth/treq/treq&#39;</span><span class="p">,</span>
+        <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;treq&#39;</span><span class="p">,</span> <span class="s1">&#39;treq&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/basic_auth.py" download=""><code class="xref download docutils literal"><span class="pre">basic_auth.py</span></code></a></p>
+</div>
+<div class="section" id="redirects">
+<h2>Redirects<a class="headerlink" href="#redirects" title="Permalink to this headline">¶</a></h2>
+<p>treq handles redirects by default.</p>
+<p>The following will print a 200 OK response.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/redirect/1&#39;</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+
+<span class="n">react</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="p">[])</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/redirects.py" download=""><code class="xref download docutils literal"><span class="pre">redirects.py</span></code></a></p>
+<p>You can easily disable redirects by simply passing <cite>allow_redirects=False</cite> to
+any of the request methods.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/redirect/1&#39;</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+
+<span class="n">react</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="p">[])</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/disable_redirects.py" download=""><code class="xref download docutils literal"><span class="pre">disable_redirects.py</span></code></a></p>
+<p>You can even access the complete history of treq response objects by calling
+the <a class="reference internal" href="api.html#treq.response._Response.history" title="treq.response._Response.history"><code class="xref py py-meth docutils literal"><span class="pre">history()</span></code></a> method on the response.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/redirect/1&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cb</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Response history:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">history</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">print_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">cb</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/response_history.py" download=""><code class="xref download docutils literal"><span class="pre">response_history.py</span></code></a></p>
+</div>
+<div class="section" id="cookies">
+<h2>Cookies<a class="headerlink" href="#cookies" title="Permalink to this headline">¶</a></h2>
+<p>Cookies can be set by passing a <code class="docutils literal"><span class="pre">dict</span></code> or <code class="docutils literal"><span class="pre">cookielib.CookieJar</span></code> instance
+via the <code class="docutils literal"><span class="pre">cookies</span></code> keyword argument.  Later cookies set by the server can be
+retrieved using the <a class="reference internal" href="api.html#treq.response._Response.cookies" title="treq.response._Response.cookies"><code class="xref py py-meth docutils literal"><span class="pre">cookies()</span></code></a> method.</p>
+<p>The object returned by <a class="reference internal" href="api.html#treq.response._Response.cookies" title="treq.response._Response.cookies"><code class="xref py py-meth docutils literal"><span class="pre">cookies()</span></code></a> supports the same key/value
+access as <a class="reference external" href="http://requests.readthedocs.org/en/latest/user/quickstart/#cookies">requests cookies</a>.</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/cookies/set?hello=world&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_jar</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+        <span class="n">jar</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">cookies</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The server set our hello cookie to: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jar</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/cookies&#39;</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">jar</span><span class="p">)</span>
+
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">_get_jar</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_response</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</td></tr></table></div>
+<p>Full example: <a class="reference download internal" href="_downloads/using_cookies.py" download=""><code class="xref download docutils literal"><span class="pre">using_cookies.py</span></code></a></p>
+</div>
+<div class="section" id="agent-customization">
+<h2>Agent Customization<a class="headerlink" href="#agent-customization" title="Permalink to this headline">¶</a></h2>
+<p>treq creates its own <a class="reference external" href="https://twistedmatrix.com/documents/current/api/twisted.web.client.Agent.html">twisted.web.client.Agent</a>
+with reasonable defaults, but you may want to provide your own custom agent.
+A custom agent can be passed to the various treq request methods using the
+<code class="docutils literal"><span class="pre">agent</span></code> keyword argument.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">custom_agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">connectTimeout</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">treq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">custom_agent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Use Cases</a><ul>
+<li><a class="reference internal" href="#handling-streaming-responses">Handling Streaming Responses</a></li>
+<li><a class="reference internal" href="#query-parameters">Query Parameters</a></li>
+<li><a class="reference internal" href="#auth">Auth</a></li>
+<li><a class="reference internal" href="#redirects">Redirects</a></li>
+<li><a class="reference internal" href="#cookies">Cookies</a></li>
+<li><a class="reference internal" href="#agent-customization">Agent Customization</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">treq: High-level Twisted HTTP Client API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="next chapter">Testing Helpers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/howto.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Helpers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="treq: High-level Twisted HTTP Client API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">treq 16.12.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

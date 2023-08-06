@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>treq.testing &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for treq.testing</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In-memory version of treq for testing.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">six</span> <span class="k">import</span> <span class="n">text_type</span><span class="p">,</span> <span class="n">PY3</span>
+
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+
+<span class="kn">from</span> <span class="nn">twisted.test.proto_helpers</span> <span class="k">import</span> <span class="n">MemoryReactor</span>
+<span class="kn">from</span> <span class="nn">twisted.test</span> <span class="k">import</span> <span class="n">iosim</span>
+
+<span class="kn">from</span> <span class="nn">twisted.internet.address</span> <span class="k">import</span> <span class="n">IPv4Address</span>
+<span class="kn">from</span> <span class="nn">twisted.internet.defer</span> <span class="k">import</span> <span class="n">succeed</span>
+<span class="kn">from</span> <span class="nn">twisted.internet.interfaces</span> <span class="k">import</span> <span class="n">ISSLTransport</span>
+
+<span class="kn">from</span> <span class="nn">twisted.python.urlpath</span> <span class="k">import</span> <span class="n">URLPath</span>
+
+<span class="kn">from</span> <span class="nn">twisted.internet.endpoints</span> <span class="k">import</span> <span class="n">TCP4ClientEndpoint</span>
+<span class="kn">from</span> <span class="nn">twisted.web.client</span> <span class="k">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">twisted.web.error</span> <span class="k">import</span> <span class="n">SchemeNotSupported</span>
+<span class="kn">from</span> <span class="nn">twisted.web.iweb</span> <span class="k">import</span> <span class="n">IAgent</span><span class="p">,</span> <span class="n">IAgentEndpointFactory</span><span class="p">,</span> <span class="n">IBodyProducer</span>
+<span class="kn">from</span> <span class="nn">twisted.web.resource</span> <span class="k">import</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">twisted.web.server</span> <span class="k">import</span> <span class="n">Site</span>
+
+<span class="kn">from</span> <span class="nn">zope.interface</span> <span class="k">import</span> <span class="n">directlyProvides</span><span class="p">,</span> <span class="n">implementer</span>
+
+<span class="kn">import</span> <span class="nn">treq</span>
+<span class="kn">from</span> <span class="nn">treq.client</span> <span class="k">import</span> <span class="n">HTTPClient</span>
+<span class="kn">import</span> <span class="nn">attr</span>
+
+
+<span class="nd">@implementer</span><span class="p">(</span><span class="n">IAgentEndpointFactory</span><span class="p">)</span>
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<div class="viewcode-block" id="EndpointFactory"><a class="viewcode-back" href="../../api.html#treq.testing.EndpointFactory">[docs]</a><span class="k">class</span> <span class="nc">EndpointFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An endpoint factory used by :class:`RequestTraversalAgent`.</span>
+
+<span class="sd">    :ivar reactor: The agent&#39;s reactor.</span>
+<span class="sd">    :type reactor: :class:`MemoryReactor`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">reactor</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+<div class="viewcode-block" id="EndpointFactory.endpointForURI"><a class="viewcode-back" href="../../api.html#treq.testing.EndpointFactory.endpointForURI">[docs]</a>    <span class="k">def</span> <span class="nf">endpointForURI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an endpoint that represents an in-memory connection to</span>
+<span class="sd">        a URI.</span>
+
+<span class="sd">        Note: This always creates a</span>
+<span class="sd">        :class:`~twisted.internet.endpoints.TCP4ClientEndpoint` on the</span>
+<span class="sd">        assumption :class:`RequestTraversalAgent` ignores everything</span>
+<span class="sd">        about the endpoint but its port.</span>
+
+<span class="sd">        :param uri: The URI to connect to.</span>
+<span class="sd">        :type uri: :class:`~twisted.web.client.URI`</span>
+
+<span class="sd">        :return: The endpoint.</span>
+<span class="sd">        :rtype: An</span>
+<span class="sd">                :class:`~twisted.internet.interfaces.IStreamClientEndpoint`</span>
+<span class="sd">                provider.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">uri</span><span class="o">.</span><span class="n">scheme</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="sa">b</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;https&#39;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="n">SchemeNotSupported</span><span class="p">(</span><span class="s2">&quot;Unsupported scheme: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">scheme</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">TCP4ClientEndpoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="p">,</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">port</span><span class="p">)</span></div></div>
+
+<span class="n">_EndpointFactory</span> <span class="o">=</span> <span class="n">EndpointFactory</span>
+
+<span class="nd">@implementer</span><span class="p">(</span><span class="n">IAgent</span><span class="p">)</span>
+<div class="viewcode-block" id="RequestTraversalAgent"><a class="viewcode-back" href="../../api.html#treq.testing.RequestTraversalAgent">[docs]</a><span class="k">class</span> <span class="nc">RequestTraversalAgent</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :obj:`IAgent` implementation that issues an in-memory request rather than</span>
+<span class="sd">    going out to a real network socket.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rootResource</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param rootResource: The Twisted `IResource` at the root of the</span>
+<span class="sd">            resource tree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memoryReactor</span> <span class="o">=</span> <span class="n">MemoryReactor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_realAgent</span> <span class="o">=</span> <span class="n">Agent</span><span class="o">.</span><span class="n">usingEndpointFactory</span><span class="p">(</span>
+            <span class="n">reactor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_memoryReactor</span><span class="p">,</span>
+            <span class="n">endpointFactory</span><span class="o">=</span><span class="n">_EndpointFactory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_memoryReactor</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rootResource</span> <span class="o">=</span> <span class="n">rootResource</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pumps</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<div class="viewcode-block" id="RequestTraversalAgent.request"><a class="viewcode-back" href="../../api.html#treq.testing.RequestTraversalAgent.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bodyProducer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement IAgent.request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># We want to use Agent to parse the HTTP response, so let&#39;s ask it to</span>
+        <span class="c1"># make a request against our in-memory reactor.</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_realAgent</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">bodyProducer</span><span class="p">)</span>
+
+        <span class="c1"># If the request has already finished, just propagate the result.  In</span>
+        <span class="c1"># reality this would only happen in failure, but if the agent ever adds</span>
+        <span class="c1"># a local cache this might be a success.</span>
+        <span class="n">already_called</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">def</span> <span class="nf">check_already_called</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+            <span class="n">already_called</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">r</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">addBoth</span><span class="p">(</span><span class="n">check_already_called</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">already_called</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">response</span>
+
+        <span class="c1"># That will try to establish an HTTP connection with the reactor&#39;s</span>
+        <span class="c1"># connectTCP method, and MemoryReactor will place Agent&#39;s factory into</span>
+        <span class="c1"># the tcpClients list.  Alternately, it will try to establish an HTTPS</span>
+        <span class="c1"># connection with the reactor&#39;s connectSSL method, and MemoryReactor</span>
+        <span class="c1"># will place it into the sslClients list.  We&#39;ll extract that.</span>
+        <span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="n">URLPath</span><span class="o">.</span><span class="n">fromBytes</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="n">URLPath</span><span class="o">.</span><span class="n">fromString</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span>
+
+        <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">factory</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">bindAddress</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_memoryReactor</span><span class="o">.</span><span class="n">tcpClients</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">serverAddress</span> <span class="o">=</span> <span class="n">IPv4Address</span><span class="p">(</span><span class="s1">&#39;TCP&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="n">clientAddress</span> <span class="o">=</span> <span class="n">IPv4Address</span><span class="p">(</span><span class="s1">&#39;TCP&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">31337</span><span class="p">)</span>
+
+        <span class="c1"># Create the protocol and fake transport for the client and server,</span>
+        <span class="c1"># using the factory that was passed to the MemoryReactor for the</span>
+        <span class="c1"># client, and a Site around our rootResource for the server.</span>
+        <span class="n">serverProtocol</span> <span class="o">=</span> <span class="n">Site</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rootResource</span><span class="p">)</span><span class="o">.</span><span class="n">buildProtocol</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">serverTransport</span> <span class="o">=</span> <span class="n">iosim</span><span class="o">.</span><span class="n">FakeTransport</span><span class="p">(</span>
+            <span class="n">serverProtocol</span><span class="p">,</span> <span class="n">isServer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">hostAddress</span><span class="o">=</span><span class="n">serverAddress</span><span class="p">,</span> <span class="n">peerAddress</span><span class="o">=</span><span class="n">clientAddress</span><span class="p">)</span>
+        <span class="n">clientProtocol</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">buildProtocol</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">clientTransport</span> <span class="o">=</span> <span class="n">iosim</span><span class="o">.</span><span class="n">FakeTransport</span><span class="p">(</span>
+            <span class="n">clientProtocol</span><span class="p">,</span> <span class="n">isServer</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">hostAddress</span><span class="o">=</span><span class="n">clientAddress</span><span class="p">,</span> <span class="n">peerAddress</span><span class="o">=</span><span class="n">serverAddress</span><span class="p">)</span>
+
+        <span class="c1"># Twisted 13.2 compatibility.</span>
+        <span class="n">serverTransport</span><span class="o">.</span><span class="n">abortConnection</span> <span class="o">=</span> <span class="n">serverTransport</span><span class="o">.</span><span class="n">loseConnection</span>
+        <span class="n">clientTransport</span><span class="o">.</span><span class="n">abortConnection</span> <span class="o">=</span> <span class="n">clientTransport</span><span class="o">.</span><span class="n">loseConnection</span>
+
+        <span class="k">if</span> <span class="n">scheme</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;https&quot;</span><span class="p">:</span>
+            <span class="c1"># Provide ISSLTransport on both transports, so everyone knows that</span>
+            <span class="c1"># this is HTTPS.</span>
+            <span class="n">directlyProvides</span><span class="p">(</span><span class="n">serverTransport</span><span class="p">,</span> <span class="n">ISSLTransport</span><span class="p">)</span>
+            <span class="n">directlyProvides</span><span class="p">(</span><span class="n">clientTransport</span><span class="p">,</span> <span class="n">ISSLTransport</span><span class="p">)</span>
+
+        <span class="c1"># Make a pump for wiring the client and server together.</span>
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">iosim</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="n">serverProtocol</span><span class="p">,</span> <span class="n">serverTransport</span><span class="p">,</span> <span class="n">clientProtocol</span><span class="p">,</span> <span class="n">clientTransport</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pumps</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pump</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="RequestTraversalAgent.flush"><a class="viewcode-back" href="../../api.html#treq.testing.RequestTraversalAgent.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Flush all data between pending client/server pairs.</span>
+
+<span class="sd">        This is only necessary if a :obj:`Resource` under test returns</span>
+<span class="sd">        :obj:`NOT_DONE_YET` from its ``render`` method, making a response</span>
+<span class="sd">        asynchronous. In that case, after each write from the server,</span>
+<span class="sd">        :meth:`pump` must be called so the client can see it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">old_pumps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pumps</span>
+        <span class="n">new_pumps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pumps</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">old_pumps</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">clientIO</span><span class="o">.</span><span class="n">disconnected</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">serverIO</span><span class="o">.</span><span class="n">disconnected</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">new_pumps</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div></div>
+
+
+<span class="nd">@implementer</span><span class="p">(</span><span class="n">IBodyProducer</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">_SynchronousProducer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A partial implementation of an :obj:`IBodyProducer` which produces its</span>
+<span class="sd">    entire payload immediately.  There is no way to access to an instance of</span>
+<span class="sd">    this object from :obj:`RequestTraversalAgent` or :obj:`StubTreq`, or even a</span>
+<span class="sd">    :obj:`Resource: passed to :obj:`StubTreq`.</span>
+
+<span class="sd">    This does not implement the :func:`IBodyProducer.stopProducing` method,</span>
+<span class="sd">    because that is very difficult to trigger.  (The request from</span>
+<span class="sd">    `RequestTraversalAgent` would have to be canceled while it is still in the</span>
+<span class="sd">    transmitting state), and the intent is to use `RequestTraversalAgent` to</span>
+<span class="sd">    make synchronous requests.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a synchronous producer with some bytes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">body</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;StubTreq currently only supports url-encodable types, bytes, &quot;</span>
+               <span class="s2">&quot;or unicode as data.&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">text_type</span><span class="p">)),</span> <span class="n">msg</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">text_type</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">startProducing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Immediately produce all data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">consumer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">succeed</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_reject_files</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator that rejects the &#39;files&#39; keyword argument to the request</span>
+<span class="sd">    functions, because that is not handled by this yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;files&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;StubTreq cannot handle files.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<div class="viewcode-block" id="StubTreq"><a class="viewcode-back" href="../../api.html#treq.testing.StubTreq">[docs]</a><span class="k">class</span> <span class="nc">StubTreq</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A fake version of the treq module that can be used for testing that</span>
+<span class="sd">    provides all the function calls exposed in :obj:`treq.__all__`.</span>
+
+<span class="sd">    :ivar resource: A :obj:`Resource` object that provides the fake responses</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a client, and pass through client methods and/or</span>
+<span class="sd">        treq.content functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_agent</span> <span class="o">=</span> <span class="n">RequestTraversalAgent</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+        <span class="n">_client</span> <span class="o">=</span> <span class="n">HTTPClient</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">_agent</span><span class="p">,</span>
+                             <span class="n">data_to_body_producer</span><span class="o">=</span><span class="n">_SynchronousProducer</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">function_name</span> <span class="ow">in</span> <span class="n">treq</span><span class="o">.</span><span class="n">__all__</span><span class="p">:</span>
+            <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">_client</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">function</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">treq</span><span class="p">,</span> <span class="n">function_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">function</span> <span class="o">=</span> <span class="n">_reject_files</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flush</span> <span class="o">=</span> <span class="n">_agent</span><span class="o">.</span><span class="n">flush</span></div>
+
+
+<div class="viewcode-block" id="StringStubbingResource"><a class="viewcode-back" href="../../api.html#treq.testing.StringStubbingResource">[docs]</a><span class="k">class</span> <span class="nc">StringStubbingResource</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A resource that takes a callable with 5 parameters</span>
+<span class="sd">    ``(method, url, params, headers, data)`` and returns</span>
+<span class="sd">    ``(code, headers, body)``.</span>
+
+<span class="sd">    The resource uses the callable to return a real response as a result of a</span>
+<span class="sd">    request.</span>
+
+<span class="sd">    The parameters for the callable are:</span>
+
+<span class="sd">    - ``method``, the HTTP method as `bytes`.</span>
+<span class="sd">    - ``url``, the full URL of the request as text.</span>
+<span class="sd">    - ``params``, a dictionary of query parameters mapping query keys</span>
+<span class="sd">      lists of values (sorted alphabetically).</span>
+<span class="sd">    - ``headers``, a dictionary of headers mapping header keys to</span>
+<span class="sd">      a list of header values (sorted alphabetically).</span>
+<span class="sd">    - ``data``, the request body as `bytes`.</span>
+
+<span class="sd">    The callable must return a ``tuple`` of (code, headers, body) where the</span>
+<span class="sd">    code is the HTTP status code, the headers is a dictionary of bytes (unlike</span>
+<span class="sd">    the `headers` parameter, which is a dictionary of lists), and body is</span>
+<span class="sd">    a string that will be returned as the response body.</span>
+
+<span class="sd">    If there is a stubbing error, the return value is undefined (if an</span>
+<span class="sd">    exception is raised, :obj:`~twisted.web.resource.Resource` will just eat it</span>
+<span class="sd">    and return 500 in its place).  The callable, or whomever creates the</span>
+<span class="sd">    callable, should have a way to handle error reporting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">isLeaf</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">get_response_for</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See `StringStubbingResource`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Resource</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_response_for</span> <span class="o">=</span> <span class="n">get_response_for</span>
+
+<div class="viewcode-block" id="StringStubbingResource.render"><a class="viewcode-back" href="../../api.html#treq.testing.StringStubbingResource.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce a response according to the stubs provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">requestHeaders</span><span class="o">.</span><span class="n">getAllRawHeaders</span><span class="p">():</span>
+            <span class="n">headers</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="k">for</span> <span class="n">dictionary</span> <span class="ow">in</span> <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="n">dictionary</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+        <span class="c1"># The incoming request does not have the absoluteURI property, because</span>
+        <span class="c1"># an incoming request is a IRequest, not an IClientRequest, so it</span>
+        <span class="c1"># the absolute URI needs to be synthesized.</span>
+
+        <span class="c1"># But request.URLPath() only returns the scheme and hostname, because</span>
+        <span class="c1"># that is the URL for this resource (because this resource handles</span>
+        <span class="c1"># everything from the root on down).</span>
+
+        <span class="c1"># So we need to add the request.path (not request.uri, which includes</span>
+        <span class="c1"># the query parameters)</span>
+        <span class="n">absoluteURI</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">URLPath</span><span class="p">()</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+
+        <span class="n">status_code</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response_for</span><span class="p">(</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">absoluteURI</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="n">setResponseCode</span><span class="p">(</span><span class="n">status_code</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">body</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_maybeEncode</span><span class="p">(</span><span class="n">someStr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encode `someStr` to ASCII if required.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">someStr</span><span class="p">,</span> <span class="n">text_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">someStr</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">someStr</span>
+
+
+<span class="k">def</span> <span class="nf">_maybeEncodeHeaders</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Convert a headers mapping to its bytes-encoded form. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">_maybeEncode</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="p">[</span><span class="n">_maybeEncode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vs</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
+<div class="viewcode-block" id="HasHeaders"><a class="viewcode-back" href="../../api.html#treq.testing.HasHeaders">[docs]</a><span class="k">class</span> <span class="nc">HasHeaders</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Since Twisted adds headers to a request, such as the host and the content</span>
+<span class="sd">    length, it&#39;s necessary to test whether request headers CONTAIN the expected</span>
+<span class="sd">    headers (the ones that are not automatically added by Twisted).</span>
+
+<span class="sd">    This wraps a set of headers, and can be used in an equality test against</span>
+<span class="sd">    a superset if the provided headers. The headers keys are lowercased, and</span>
+<span class="sd">    keys and values are compared in their bytes-encoded forms.</span>
+
+<span class="sd">    Headers should be provided as a mapping from strings or bytes to a list of</span>
+<span class="sd">    strings or bytes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span> <span class="o">=</span> <span class="n">_maybeEncodeHeaders</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;HasHeaders(</span><span class="si">{0}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_headers</span><span class="p">):</span>
+        <span class="n">compare_to</span> <span class="o">=</span> <span class="n">_maybeEncodeHeaders</span><span class="p">(</span><span class="n">other_headers</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">compare_to</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span> <span class="ow">and</span>
+                <span class="nb">all</span><span class="p">([</span><span class="nb">set</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">compare_to</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
+                     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="o">.</span><span class="n">items</span><span class="p">()]))</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_headers</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other_headers</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RequestSequence"><a class="viewcode-back" href="../../api.html#treq.testing.RequestSequence">[docs]</a><span class="k">class</span> <span class="nc">RequestSequence</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For an example usage, see :meth:`RequestSequence.consume`.</span>
+
+<span class="sd">    Takes a sequence of::</span>
+
+<span class="sd">        [((method, url, params, headers, data), (code, headers, body)),</span>
+<span class="sd">         ...]</span>
+
+<span class="sd">    Expects the requests to arrive in sequence order.  If there are no more</span>
+<span class="sd">    responses, or the request&#39;s parameters do not match the next item&#39;s</span>
+<span class="sd">    expected request parameters, raises :obj:`AssertionError`.</span>
+
+<span class="sd">    For the expected request arguments:</span>
+
+<span class="sd">    - ``method`` should be `bytes` normalized to lowercase.</span>
+<span class="sd">    - ``url`` should be a `str` normalized as per the transformations in</span>
+<span class="sd">      https://en.wikipedia.org/wiki/URL_normalization that (usually) preserve</span>
+<span class="sd">      semantics.  A URL to `http://something-that-looks-like-a-directory`</span>
+<span class="sd">      would be normalized to `http://something-that-looks-like-a-directory/`</span>
+<span class="sd">      and a URL to `http://something-that-looks-like-a-page/page.html`</span>
+<span class="sd">      remains unchanged.</span>
+<span class="sd">    - ``params`` is a dictionary mapping `bytes` to `lists` of `bytes`</span>
+<span class="sd">    - ``headers`` is a dictionary mapping `bytes` to `lists` of `bytes` - note</span>
+<span class="sd">      that :obj:`twisted.web.client.Agent` may add its own headers though,</span>
+<span class="sd">      which are not guaranteed (for instance, `user-agent` or</span>
+<span class="sd">      `content-length`), so it&#39;s better to use some kind of matcher like</span>
+<span class="sd">      :obj:`HasHeaders`.</span>
+<span class="sd">    - ``data`` is a `bytes`</span>
+
+<span class="sd">    For the response:</span>
+
+<span class="sd">    - ``code`` is an integer representing the HTTP status code to return</span>
+<span class="sd">    - ``headers`` is a dictionary mapping `bytes` to `bytes` or `lists` of</span>
+<span class="sd">      `bytes`</span>
+<span class="sd">    - ``body`` is a `bytes`</span>
+
+<span class="sd">    :ivar list sequence: The sequence of expected request arguments mapped to</span>
+<span class="sd">        stubbed responses</span>
+<span class="sd">    :ivar async_failure_reporter: A callable that takes a single message</span>
+<span class="sd">        reporting failures—it&#39;s asynchronous because it cannot just raise</span>
+<span class="sd">        an exception—if it does, :obj:`Resource.render` will just convert</span>
+<span class="sd">        that into a 500 response, and there will be no other failure reporting</span>
+<span class="sd">        mechanism. Under Trial, this may be</span>
+<span class="sd">        a :class:`twisted.logger.Logger.error`, as Trial fails the test when an</span>
+<span class="sd">        error is logged.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">async_failure_reporter</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="n">sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_async_reporter</span> <span class="o">=</span> <span class="n">async_failure_reporter</span>
+
+<div class="viewcode-block" id="RequestSequence.consumed"><a class="viewcode-back" href="../../api.html#treq.testing.RequestSequence.consumed">[docs]</a>    <span class="k">def</span> <span class="nf">consumed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: `bool` representing whether the entire sequence has been</span>
+<span class="sd">            consumed.  This is useful in tests to assert that the expected</span>
+<span class="sd">            requests have all been made.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
+
+    <span class="nd">@contextmanager</span>
+<div class="viewcode-block" id="RequestSequence.consume"><a class="viewcode-back" href="../../api.html#treq.testing.RequestSequence.consume">[docs]</a>    <span class="k">def</span> <span class="nf">consume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sync_failure_reporter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Usage::</span>
+
+<span class="sd">            async_failures = []</span>
+<span class="sd">            sequence_stubs = RequestSequence([...], async_failures.append)</span>
+<span class="sd">            stub_treq = StubTreq(StringStubbingResource(sequence_stubs))</span>
+<span class="sd">            with sequence_stubs.consume(self.fail):  # self = unittest.TestCase</span>
+<span class="sd">                stub_treq.get(&#39;http://fakeurl.com&#39;)</span>
+<span class="sd">                stub_treq.get(&#39;http://another-fake-url.com&#39;)</span>
+
+<span class="sd">            self.assertEqual([], async_failures)</span>
+
+<span class="sd">        If there are still remaining expected requests to be made in the</span>
+<span class="sd">        sequence, fails the provided test case.</span>
+
+<span class="sd">        :param sync_failure_reporter: A callable that takes a single message</span>
+<span class="sd">            reporting failures.  This can just raise an exception - it does</span>
+<span class="sd">            not need to be asynchronous, since the exception would not get</span>
+<span class="sd">            raised within a Resource.</span>
+
+<span class="sd">        :return: a context manager that can be used to ensure all expected</span>
+<span class="sd">            requests have been made.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">yield</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">consumed</span><span class="p">():</span>
+            <span class="n">sync_failure_reporter</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;Not all expected requests were made.  Still expecting:&quot;</span><span class="p">]</span> <span class="o">+</span>
+                <span class="p">[</span><span class="s2">&quot;- </span><span class="si">{0}</span><span class="s2">(url=</span><span class="si">{1}</span><span class="s2">, params=</span><span class="si">{2}</span><span class="s2">, headers=</span><span class="si">{3}</span><span class="s2">, data=</span><span class="si">{4}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="o">*</span><span class="n">expected</span><span class="p">)</span> <span class="k">for</span> <span class="n">expected</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">]))</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the next response in the sequence, provided that the</span>
+<span class="sd">            parameters match the next in the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_async_reporter</span><span class="p">(</span>
+                <span class="s2">&quot;No more requests expected, but request </span><span class="si">{0!r}</span><span class="s2"> made.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="p">{},</span> <span class="sa">b</span><span class="s2">&quot;StubbingError&quot;</span><span class="p">)</span>
+
+        <span class="n">expected</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">e_method</span><span class="p">,</span> <span class="n">e_url</span><span class="p">,</span> <span class="n">e_params</span><span class="p">,</span> <span class="n">e_headers</span><span class="p">,</span> <span class="n">e_data</span> <span class="o">=</span> <span class="n">expected</span>
+
+        <span class="n">checks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">e_method</span> <span class="o">==</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="s2">&quot;method&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">e_url</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">e_params</span> <span class="o">==</span> <span class="n">params</span><span class="p">,</span> <span class="s1">&#39;parameters&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">e_headers</span> <span class="o">==</span> <span class="n">headers</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">e_data</span> <span class="o">==</span> <span class="n">data</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">mismatches</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span> <span class="k">for</span> <span class="n">success</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">checks</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mismatches</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_async_reporter</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Expected the next request to be: </span><span class="si">{0!r}</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Got request                    : </span><span class="si">{1!r}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mismatches: </span><span class="si">{2!r}</span><span class="s2">&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span>
+                        <span class="n">mismatches</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="p">{},</span> <span class="sa">b</span><span class="s2">&quot;StubbingError&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>treq.api &#8212; treq 16.12.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '16.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for treq.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">twisted.web.client</span> <span class="k">import</span> <span class="n">Agent</span>
+
+<span class="kn">from</span> <span class="nn">treq.client</span> <span class="k">import</span> <span class="n">HTTPClient</span>
+<span class="kn">from</span> <span class="nn">treq._utils</span> <span class="k">import</span> <span class="n">default_pool</span><span class="p">,</span> <span class="n">default_reactor</span>
+
+
+<div class="viewcode-block" id="head"><a class="viewcode-back" href="../../api.html#treq.head">[docs]</a><span class="k">def</span> <span class="nf">head</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a ``HEAD`` request.</span>
+
+<span class="sd">    See :py:func:`treq.request`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get"><a class="viewcode-back" href="../../api.html#treq.get">[docs]</a><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a ``GET`` request.</span>
+
+<span class="sd">    See :py:func:`treq.request`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="post"><a class="viewcode-back" href="../../api.html#treq.post">[docs]</a><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a ``POST`` request.</span>
+
+<span class="sd">    See :py:func:`treq.request`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="put"><a class="viewcode-back" href="../../api.html#treq.put">[docs]</a><span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a ``PUT`` request.</span>
+
+<span class="sd">    See :py:func:`treq.request`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="patch"><a class="viewcode-back" href="../../api.html#treq.patch">[docs]</a><span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a ``PATCH`` request.</span>
+
+<span class="sd">    See :py:func:`treq.request`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete"><a class="viewcode-back" href="../../api.html#treq.delete">[docs]</a><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a ``DELETE`` request.</span>
+
+<span class="sd">    See :py:func:`treq.request`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="request"><a class="viewcode-back" href="../../api.html#treq.request">[docs]</a><span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make an HTTP request.</span>
+
+<span class="sd">    :param str method: HTTP method. Example: ``&#39;GET&#39;``, ``&#39;HEAD&#39;``. ``&#39;PUT&#39;``,</span>
+<span class="sd">         ``&#39;POST&#39;``.</span>
+<span class="sd">    :param str url: http or https URL, which may include query arguments.</span>
+
+<span class="sd">    :param headers: Optional HTTP Headers to send with this request.</span>
+<span class="sd">    :type headers: Headers or None</span>
+
+<span class="sd">    :param params: Optional parameters to be append as the query string to</span>
+<span class="sd">        the URL, any query string parameters in the URL already will be</span>
+<span class="sd">        preserved.</span>
+
+<span class="sd">    :type params: dict w/ str or list/tuple of str values, list of 2-tuples, or</span>
+<span class="sd">        None.</span>
+
+<span class="sd">    :param data: Optional request body.</span>
+<span class="sd">    :type data: str, file-like, IBodyProducer, or None</span>
+
+<span class="sd">    :param reactor: Optional twisted reactor.</span>
+
+<span class="sd">    :param bool persistent: Use persistent HTTP connections.  Default: ``True``</span>
+<span class="sd">    :param bool allow_redirects: Follow HTTP redirects.  Default: ``True``</span>
+
+<span class="sd">    :param auth: HTTP Basic Authentication information.</span>
+<span class="sd">    :type auth: tuple of ``(&#39;username&#39;, &#39;password&#39;)``.</span>
+
+<span class="sd">    :param cookies: Cookies to send with this request.  The HTTP kind, not the</span>
+<span class="sd">        tasty kind.</span>
+<span class="sd">    :type cookies: ``dict`` or ``cookielib.CookieJar``</span>
+
+<span class="sd">    :param int timeout: Request timeout seconds. If a response is not</span>
+<span class="sd">        received within this timeframe, a connection is aborted with</span>
+<span class="sd">        ``CancelledError``.</span>
+
+<span class="sd">    :param bool browser_like_redirects: Use browser like redirects</span>
+<span class="sd">        (i.e. Ignore  RFC2616 section 10.3 and follow redirects from</span>
+<span class="sd">        POST requests).  Default: ``False``</span>
+
+<span class="sd">    :param bool unbuffered: Pass ``True`` to to disable response buffering.  By</span>
+<span class="sd">        default treq buffers the entire response body in memory.</span>
+
+<span class="sd">    :rtype: Deferred that fires with an IResponse provider.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="c1">#</span>
+<span class="c1"># Private API</span>
+<span class="c1">#</span>
+
+<span class="k">def</span> <span class="nf">_client</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;agent&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">agent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">reactor</span> <span class="o">=</span> <span class="n">default_reactor</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reactor&#39;</span><span class="p">))</span>
+        <span class="n">pool</span> <span class="o">=</span> <span class="n">default_pool</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span>
+                            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pool&#39;</span><span class="p">),</span>
+                            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;persistent&#39;</span><span class="p">))</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">pool</span><span class="o">=</span><span class="n">pool</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HTTPClient</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">treq 16.12.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, David Reid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>
