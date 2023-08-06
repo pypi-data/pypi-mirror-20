@@ -1,0 +1,62 @@
+tokenmanager
+============
+
+Very simple. You have tokens for all your REST APIs. This library
+manages them.
+
+What is this for?
+-----------------
+
+In my own work, I find myself having to code up a solution to the
+problem: "I need to connect to this REST API, but I don't want to have
+the token saved in my code repo." The solutions often involve either
+sourcing bash scripts with environment variables or saving some
+out-of-repo config file with the needed token.
+
+The goal of this library is to provide a dead simple solution. Create
+a "dot" file (``~/.tokenmanager.yml``) with all of your tokens that
+you can read from / write to when necessary.
+
+Installation
+------------
+
+* Install using ``pip``::
+
+    pip install tokenmanager
+
+* Initialize the ``.tokenmanager.yml`` file in your home directory::
+
+    python -m tokenmanager -i
+
+Usage
+-----
+
+To add tokens, specify them using YAML syntax::
+
+    service_a: 239e896bfe6f3b7705696c8cef84832e760b689a9633c454432fc407cb7a17af
+    service_b: 18c553b119e52cb7d1ab93699865dab38d02d09d13b453258edf859ec075d9d9
+    digitalocean:
+      app1: a1e1c084540b51b33af3c6b63d48ede2937c8df92f7e6e3beb1f630ac750b851
+      app2: 03593464105708646cc04d847ffc81c5b7775c462f68b573f2aff5d933635e17
+    twilio:
+      sid: WF32428983a878dv89df9xcfjn8d983298
+      token: 0b51b33af3c6b63d48ede2937c8df92f
+      number: '+12825552341'
+
+To access them from Python::
+
+    >>> tokens = tokenmanager.get_tokens()
+    >>> tokens.service_a
+    '239e896bfe6f3b7705696c8cef84832e760b689a9633c454432fc407cb7a17af'
+    >>> tokens.digitalocean.app1
+    'a1e1c084540b51b33af3c6b63d48ede2937c8df92f7e6e3beb1f630ac750b851'
+
+To use from bash::
+
+    $ python -m tokenmanager service_a
+    239e896bfe6f3b7705696c8cef84832e760b689a9633c454432fc407cb7a17af
+    $ python -m tokenmanager digitalocean.app1
+    a1e1c084540b51b33af3c6b63d48ede2937c8df92f7e6e3beb1f630ac750b851
+
+
+
