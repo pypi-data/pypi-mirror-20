@@ -1,0 +1,40 @@
+body {
+  margin:  0;
+  padding: 0;
+}
+
+aside {
+  background-color: $primary-color;
+  background-size: auto 100%;
+
+  &, a, #subtitle {
+    color: white;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+#brand {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  a {
+    text-decoration: none;
+    font-size: 1.5em;
+  }
+}
+
+#aside_links ul {
+  padding-top:    5px;
+  padding-bottom: 5px;
+  list-style-type: none;
+  padding-left: 0;
+
+  // Ensure they all display in a line
+  li {
+    display: inline-block;
+  }
+  li:not(:first-child)::before {
+    content: " · ";
+  }
+}
