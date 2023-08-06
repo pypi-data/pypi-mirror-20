@@ -1,0 +1,45 @@
+Metadata-Version: 2.0
+Name: nrepl
+Version: 0.1.3
+Summary: Auto reload class with Clojure nREPL
+Home-page: https://github.com/shonenada/nREPL-reloader
+Author: shonenada
+Author-email: shonenada@gmail.com
+License: UNKNOWN
+Platform: any
+Classifier: Environment :: Console
+Classifier: Topic :: System :: Shells
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 3 - Alpha
+
+nREPL-reloader
+==============
+
+Auto reload class with `nREPL <(https://github.com/clojure/tools.nrepl>`_.
+
+Quick Start
+-----------
+
+1. Install `nrepl` by `pip`::
+
+    $ pip install nrepl
+
+2. Start watching clojure files, Run `nrepl` with watch command:: 
+
+    $ nrepl watch -p 59258 -w /path/to/project
+    Start watching /home/shonenada/Projects/clojure/src
+    Detected changes of /home/shonenada/Projects/clojure/src/route.clj, reloading
+
+3. (or) Start clojure project (`lein run`) and watch clojure files::
+
+    $ nrepl run -p 59258 -w /path/to/project
+    [lein]: Compiling 1 source files...
+    [lein]: Start server on 8080
+    [nrepl]: Start watching /home/shonenada/Projects/clojure/src
+    [nrepl]: Detected changes of /home/shonenada/Projects/clojure/src/route.clj, reloading
+
+
+
