@@ -1,0 +1,44 @@
+sudo: required
+language: python
+python:
+  - 2.7
+  - 3.5
+addons:
+  firefox: 47.0.2
+env:
+  global:
+    - DISPLAY=:99.0
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=flake8
+    - python: 2.7
+      env: TOXENV=py27
+    - python: 3.5
+      env: TOXENV=flake8
+    - python: 3.5
+      env: TOXENV=py35
+  exclude:
+    - python: 2.7
+    - python: 3.5
+  allow_failures:
+    - env: TOXENV=py35
+install:
+  - pip install tox
+before_script:
+  - sh -e /etc/init.d/xvfb start
+script:
+  - tox
+notifications:
+  email: fte-ci@mozilla.com
+deploy:
+  provider: pypi
+  user: davehunt
+  password:
+    secure: GyTB/x+/F1DNmAWF4K8keaBgwUTq6AVgCfdMzArPSLiHxs4Fi98Y44U6YM4fy5qwZ8oJxYYwdlWoooStIYouV8PEg0GOl+x1m7eb02XXZEufVUqQ4p5sN3HHeUmj2Et0j0o0AkUvAZjY2zCS3hI9U8wH+rLrkyR/1g8a88HLeHo=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    repo: mozilla/fxapom
+    python: 2.7
+    condition: "$TOXENV = py27"
