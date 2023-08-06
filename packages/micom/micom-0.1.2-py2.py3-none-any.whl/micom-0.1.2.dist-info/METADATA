@@ -1,0 +1,48 @@
+Metadata-Version: 2.0
+Name: micom
+Version: 0.1.2
+Summary: Microbial community modeling based on cobrapy.
+Home-page: https://github.com/cdiener/micom
+Author: Christian Diener
+Author-email: mail@cdiener.com
+License: Apache License 2.0
+Keywords: microbiota modeling metabolism community
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: cobra (>=0.6.0a2)
+Requires-Dist: optlang (>=1.1.1)
+Requires-Dist: pandas (>=0.19.2)
+Provides-Extra: dev
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+Requires-Dist: pytest; extra == 'test'
+Requires-Dist: pytest-benchmark; extra == 'test'
+
+.. image:: micom.png
+
+|travis status| |appveyor status| |coverage| |pypi status|
+
+`micom` is a Python package for metabolic modeling of microbial
+communities.
+
+**This project is currently in alpha stage and not supposed to be used yet. More info and docs coming soon.**
+
+.. |travis status| image:: https://travis-ci.org/cdiener/micom.svg?branch=master
+   :target: https://travis-ci.org/cdiener/micom
+.. |appveyor status| image:: https://ci.appveyor.com/api/projects/status/m2vu008h7n35ji2g/branch/master?svg=true
+   :target: https://ci.appveyor.com/project/cdiener/micom/branch/master
+.. |coverage| image:: https://codecov.io/gh/cdiener/micom/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/cdiener/micom
+.. |pypi status| image:: https://img.shields.io/pypi/v/micom.svg
+   :target: https://pypi.org/project/micom/
+
+
