@@ -1,0 +1,50 @@
+Metadata-Version: 1.1
+Name: QOpenVPN
+Version: 2.0.0
+Summary: Simple OpenVPN GUI written in PyQt for systemd based distributions
+Home-page: https://github.com/xmikos/qopenvpn
+Author: Michal Krenek (Mikos)
+Author-email: m.krenek@gmail.com
+License: GNU GPLv3
+Description: QOpenVPN
+        ========
+        
+        Simple OpenVPN GUI written in PyQt for systemd based distributions
+        
+        Requirements
+        ------------
+        
+        - Python >= 3.3
+        - PyQt 5
+        - OpenVPN
+        - systemd with journald
+        - sudo and/or kdesu
+        
+        Usage
+        -----
+        
+        If you want to use systemctl without password prompt, you should add this line to /etc/sudoers (use visudo command for it)::
+        
+            %wheel ALL=(ALL) NOPASSWD: /usr/bin/systemctl
+        
+        And then add yourself to wheel group::
+        
+            gpasswd -a your_username wheel
+        
+        An alternative is to use kdesu instead of sudo (set this in QOpenVPN settings), but then you have to use password for every operation.
+        
+        You should also add yourself to adm group for log viewer to work::
+        
+            gpasswd -a your_username adm
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: X11 Applications :: Qt
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Security :: Cryptography
+Classifier: Topic :: System :: Networking
