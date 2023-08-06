@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: Flask-OAuth2-Provider
+Version: 0.1.0
+Summary: A simple flask oauth2 provider
+Home-page: https://github.com/apiwatcher/flask-ouath2-provider
+Author: Karel Jakubec
+Author-email: karel@jakubec.name
+License: MIT
+Description: A simple flask oauth2 provider
+        =======================
+        
+        This project aims to be lightweight oauth2 provider for flask based
+        applications.
+        
+        Functionality now is rather limited - just password grant authorization and
+        token refresh. The other parts of ouath2 process and some documentation are
+        comming soon. :)
+        
+Keywords: oauth authentication authorization
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Framework :: Flask
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
