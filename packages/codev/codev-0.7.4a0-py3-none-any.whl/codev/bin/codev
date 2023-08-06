@@ -1,0 +1,104 @@
+#!/home/beer/projects/baseclue/codev/env/bin/python
+
+import select
+import sys
+from json import loads
+
+import click
+
+from codev.control.cli import command, main
+
+
+@command(
+    help='Run configuration.',
+    confirmation="Run configuration '{configuration_with_option}' of project '{project}' from source '{source_transition}'?"
+)
+def run(codev_control):
+    """
+    Deploy project
+
+    :param codev_control:
+    :type codev_control: codev.CodevControl
+    :return:
+    :rtype: bool
+    """
+    if select.select([sys.stdin,], [], [], 0.0)[0]:
+        load_vars = loads(sys.stdin.read())
+    else:
+        load_vars = {}
+    return codev_control.run(load_vars)
+
+
+# @command(help='Execute command in project context in isolation.')
+# @click.argument('command', nargs=-1)
+# def execute(codev_control, command):
+#     """
+#     :param codev_control:
+#     :type codev_control: codev.CodevControl
+#     :param command:
+#     :type command: str
+#     :return:
+#     :rtype: bool
+#     """
+#
+#     if select.select([sys.stdin,], [], [], 0.0)[0]:
+#         arguments = loads(sys.stdin.read())
+#     else:
+#         arguments = {}
+#     return codev_control.execute(' '.join(command), arguments)
+
+
+@command(
+    help='Destroy isolation.',
+    confirmation="Destroy isolation of project '{project}' with configuration '{configuration}' from source '{source_transition}'?"
+)
+def destroy(codev_control):
+    """
+    :param codev_control:
+    :type codev_control: codev.CodevControl
+    :return:
+    :rtype: bool
+    """
+    return codev_control.destroy()
+
+
+@command(help='Show info about the installation.')
+def status(codev_control):
+    """
+    :param codev_control:
+    :type codev_control: codev.CodevControl
+    :return:
+    :rtype: bool
+    """
+    status = codev_control.status
+    from pprint import pformat
+    click.echo(pformat(status))
+    # formatter = click.HelpFormatter(indent_increment=4)
+    # isolation = status.get('isolation', {})
+    # if isolation:
+    #     isolation_ident = isolation.get('ident', '')
+    #     if isolation_ident:
+    #         formatter.write_text('Isolation:')
+    #         with formatter.indentation():
+    #             formatter.write_text('   ident: {ident}'.format(ident=isolation['ident']))
+    #             formatter.write_text('      ip: {ip}'.format(ip=isolation['ip']))
+    #
+    # formatter.write_text('Infrastructure:')
+    # for machine_group_name, machines in status['infrastructure'].items():
+    #     with formatter.indentation():
+    #         formatter.write_text('{name}'.format(name=machine_group_name))
+    #         for machine in machines:
+    #             with formatter.indentation():
+    #                 formatter.write_text('{ident:<20} {ip}'.format(**machine))
+    #                 if isolation:
+    #                     machine_connectivity = isolation.get('connectivity', {}).get(machine['ident'], {})
+    #                     with formatter.indentation():
+    #                         for source, target in machine_connectivity.items():
+    #                             formatter.write_text('{source} -> {target}'.format(source=source, target=target))
+    # click.echo(formatter.getvalue())
+    return True
+
+
+if __name__ == "__main__":
+    main()
+
