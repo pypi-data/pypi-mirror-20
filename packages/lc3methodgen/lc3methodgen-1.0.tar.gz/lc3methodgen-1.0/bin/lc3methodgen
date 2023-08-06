@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+"""LC-3 Method Generator.
+
+Usage:
+  lc3methodgen <methodName> <nArguments> <nVariables> <outFile>
+  lc3methodgen (-h | --help)
+  lc3methodgen --version
+
+Options:
+  -h --help     Show this screen.
+  --version     Show version.
+
+"""
+
+from docopt import docopt
+import lc3methodgen
+
+if __name__ == '__main__':
+    args = docopt(__doc__, version='LC-3 Method Generator 1.0')
+
+    arguments = int(args.get("<nArguments>"))
+    localVars = int(args.get("<nVariables>"))
+    methodName = args.get("<methodName>")
+    outFile = args.get("<outFile>")
+
+    result = lc3methodgen.generate_method(methodName, arguments, localVars)
+
+    f = open(outFile, 'w')
+    f.write(result)
+    f.close()
