@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: sqlite_checkforeignkeys
+Version: 1.0.3
+Summary: A sqlite engine that checks foreign keys
+Home-page: https://github.com/hulu/sqlite_checkforeignkeys
+Author: McKay Salisbury
+Author-email: mckay.salisbury@hulu.com
+License: UNKNOWN
+Description: This references the django sqlite engine and overrides one of its methods. When a new connection is created it [turns on the foreign key checking as per the sqlite documentation](http://www.sqlite.org/foreignkeys.html)
+Keywords: foreign key,sqlite
+Platform: UNKNOWN
