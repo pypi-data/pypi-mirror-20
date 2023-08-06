@@ -1,0 +1,77 @@
+Metadata-Version: 1.1
+Name: muscima
+Version: 0.3.2
+Summary: Tools for the MUSCIMA++ dataset of music notation.
+Home-page: https://muscima.readthedocs.io
+Author: Jan Hajič jr.
+Author-email: hajicj@ufal.mff.cuni.cz
+License: MIT Software License
+Description: 
+        muscima
+        =======
+        
+        The ``muscima`` package implements a data model for the MUSCIMA++
+        dataset of music notation. The dataset itself is available for download
+        here:
+        
+        [MUSCIMA++ v0.9](https://ufal.mff.cuni.cz/jan-hajic-jr/MUSCIMA++_v0.9.zip)
+        
+        **Current dataset version: 0.9**
+        
+        **Current package version: 0.3.2**
+        
+        The package should work with both Python 2.7 and Python 3.5,
+        although the doctest-based test suite only works on Python 3.
+        
+        The package is distributed under the MIT license (see LICENSE file).
+        
+        [The documentation is online, including a tutorial, here.](https://muscima.readthedocs.io)
+        
+        
+        Getting started
+        ---------------
+        
+        1. Install this package: ``pip install muscima``
+        2. Download the [MUSCIMA++ dataset](https://ufal.mff.cuni.cz/jan-hajic-jr/MUSCIMA++_v0.9.zip).
+        3. Run through the tutorial.
+        
+        
+        
+        
+        Changelog
+        =========
+        
+        (Note that there will be many small releases, as we attempt to always keep
+        the package up-to-date through pip.)
+        
+        0.3.2
+        -----
+        
+        * Added MANIFEST.in for easier distribution.
+        
+        0.3.1
+        -----
+        
+        * Fixing setup.py bugs with README.md and CHANGES.md file paths for long description.
+        * ``CropObject.join()`` now warns before exiting when the other CropObject
+          is from a different document.
+        * ``CropObject`` global namespace can now be set as well, through
+          ``CropObject.set_dataset()``
+        * Updated README to describe the tests situation.
+        
+        
+        0.3.0
+        -----
+        
+        First public release.
+        
+        
+Platform: any
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 4 - Beta
+Classifier: Natural Language :: English
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: Interface Engine/Protocol Translator
