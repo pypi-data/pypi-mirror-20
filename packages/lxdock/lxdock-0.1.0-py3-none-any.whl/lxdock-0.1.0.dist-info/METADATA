@@ -1,0 +1,28 @@
+Metadata-Version: 2.0
+Name: lxdock
+Version: 0.1.0
+Summary: LXDock is a tool for orchestrating LXD containers.
+Home-page: https://github.com/lxdock/lxdock
+Author: Virgil Dupras, Morgan Aubert
+Author-email: UNKNOWN
+License: GPLv3
+Keywords: lxd lxc containers environments orchestration devops
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: PyYAML (>=3.0,<4.0)
+Requires-Dist: colorlog (<3.0,>=2.0)
+Requires-Dist: pylxd (>=2.2,<3.0)
+Requires-Dist: voluptuous (<1.0,>=0.9)
+
+UNKNOWN
+
+
