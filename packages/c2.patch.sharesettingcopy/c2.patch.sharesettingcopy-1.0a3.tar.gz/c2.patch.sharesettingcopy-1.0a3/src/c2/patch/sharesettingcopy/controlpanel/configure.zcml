@@ -1,0 +1,15 @@
+<configure
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:browser="http://namespaces.zope.org/browser"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="c2.patch.sharesettingcopy">
+
+    <!-- Control panel -->
+    <browser:page
+            name="sharesettingcopy-settings"
+            for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+            class=".main.ShareSettingCopyControlPanel"
+            permission="cmf.ManagePortal"
+            />
+
+</configure>
