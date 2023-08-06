@@ -1,0 +1,64 @@
+CHANGES
+=======
+
+5.0.1
+-----
+
+* Fixes Keystone v3 401 authentication failures
+* Upgrade pip version
+* Enable coverage report in console output
+* Drop MANIFEST.in - it's not needed by pbr
+* Cloudpulse client requirements.txt to match stable/newton
+* Remove white space between print ()
+* Removes unnecessary utf-8 encoding
+
+5.0.0
+-----
+
+* Using either project name or tenant name for client
+* Fixing grammatical errors in the Client
+* Remove discover from test-requirements
+* Adding options to call all-tests from cli
+* Adding cli for listing all tests in all scenarios
+* Updating requirements.txt for stable/liberty
+
+2015.3.3
+--------
+
+* Changed help text to minutes from hours
+
+2015.3.2
+--------
+
+* Adding cacert to cloudpulseclient
+
+2015.3.1
+--------
+
+* Remove argparse from requirements
+* Change LOG.warn to LOG.warning
+* remove python 2.6 trove classifier
+* Fixing a cosmetic bug in help
+* Code for querying failed tests and list tests in the last x hours
+* Add help for cloudpulse client commands
+* Update .gitreview for new namespace
+* Change ignore-errors to ignore_errors
+
+2015.2.3
+--------
+
+* Adding Extensions and removing state and id for cloudpulse run
+* Sorting on the entries based on id
+* Adding files for cloudpulse client
+* Adding cliutils module from openstack common
+* Adding _i18n module from openstack common
+* Adding openstack common utils module
+* Adding openstack common exceptions module
+* Adding openstack common fake_client module
+* Adding openstack common client module
+* Adding openstack common base module
+* Adding apiclient auth module
+* Adding common client files and utils
+* Adding exceptions,i18n and version.py
+* Adding setup.cfg,requirements.txt and __init__.py
+* Initial cookie-cutter of python-cloudpulseclient
