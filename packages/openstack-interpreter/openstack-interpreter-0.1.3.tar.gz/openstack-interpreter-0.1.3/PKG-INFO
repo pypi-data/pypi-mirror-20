@@ -1,0 +1,43 @@
+Metadata-Version: 1.1
+Name: openstack-interpreter
+Version: 0.1.3
+Summary: A simple command to drop you into the python interpreter with the openstack easy to setup.
+Home-page: https://github.com/Adrian-Turjak/openstack-interpreter
+Author: Adrian Turjak
+Author-email: adriant@catalyst.net.nz
+License: Apache 2.0
+Description: Using the interpreter
+        =====================
+        
+        First install the tool:
+        
+        ::
+        
+            pip install openstack-interpreter
+        
+        The simply run the command. Provided you have your environment variables setup
+        correctly it will authenticate you, and drop into a python interpreter.
+        
+        ::
+        
+            $ os-interpreter
+        
+            >>> interpreter
+            <openstack_interpreter.OpenStackInterpreter object at 0x7fe39f22b090>
+            >>> keystone = interpreter.get_client('identity')
+            >>> projects = keystone.projects.list()
+            >>> keystone.projects.get(projects[0].id)
+            >>> nova = interpreter.get_client('compute')
+            >>> servers = nova.servers.list()
+            >>> server = nova.servers.get(servers[0].id)
+        
+Keywords: openstack python interpreter clients
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Environment :: OpenStack
