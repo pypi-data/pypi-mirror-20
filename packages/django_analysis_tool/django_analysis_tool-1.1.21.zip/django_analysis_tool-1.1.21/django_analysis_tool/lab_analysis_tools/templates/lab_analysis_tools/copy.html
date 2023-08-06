@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{%if all_data != None and task != None %}
+    <h2>Devices Tables           <a href="{% url 'export' task.task_id %}" class="getAllDevice_button">Export csv</a></h2>
+    <p>Task Id:{{task.task_id}}</p>
+    <table class="bordered">
+        <thead>
+        <tr>
+            <!--<example of how to use customized filter: {{ somevariable|cut:"0" }}></example>-->
+            <td>Name</td>
+            <td>Result</td>
+            <td>Detail</td>
+            {%for title in all_data|getProblemTitle%}
+                <td>{{title}}</td>
+            {%endfor%}
+            {%for taskDevice in all_data%}
+            <tr>
+                <td>{{taskDevice.name}}</td>
+                <td>{{taskDevice.result}}</td>
+                <td>{{taskDevice.fail_detail}}</td>
+                {%for title in all_data|getProblemTitle%}
+                    <td>{{taskDevice|getProblemValue:title}}</td>
+                {%endfor%}
+            </tr>
+            {%endfor%}
+        </tr>
+        </thead>
+    </table>
+{%endif%}
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lua UnitTest Sub Devices</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="{{STATIC_URL}}task_all/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}task_all/css/style.css" rel="stylesheet">
+
+  </head>
+
+  {% load poll_extras %}
+
+  <body>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Devices</td>
+            <td>Error_txt</td>
+        </tr>
+        {% for device in devices %}
+        <tr>
+            <td>{{device|luaunit_sub_devices_device:"**"}}</td>
+            {%if device|luaunit_sub_devices_error_txt:"**" == "pass" %}
+                <td><font color=#00FF00>pass</font></td>
+            {%else%}
+                <td><font color=#FF0000 >fail</font></td>
+            {%endif%}
+        </tr>
+        {%endfor%}
+        </thead>
+    </table>
+    <script src="{{STATIC_URL}}task_all/js/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}task_all/js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}task_all/js/scripts.js"></script>
+  </body>
+</html>

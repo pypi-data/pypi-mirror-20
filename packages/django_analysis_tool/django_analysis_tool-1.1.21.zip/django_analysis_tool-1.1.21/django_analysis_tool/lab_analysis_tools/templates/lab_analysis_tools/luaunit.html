@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Luaunit</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="{{STATIC_URL}}task_all/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}task_all/css/style.css" rel="stylesheet">
+
+  </head>
+
+  {% load poll_extras %}
+
+  <body>
+	<a href="{% url 'index' %}" class="btn btn-lg btn-link" type="button">Go Home</a>
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="page-header">
+				<h1>
+					{%if task != None %}
+						ID {{task.task_id}}
+					{%endif%}
+				</h1>
+			</div>
+			{%if taskUnzip != None%}
+				<p>
+					<h4>Unzip Result</h4>
+				</p> <small>Zip package represents task source data. <cite>Unzip process distinguishes several steps to check correctness</cite></small>
+				<table class="table">
+					<thead>
+					<tr>
+						<td>Check Point</td>
+						<td>Total Number</td>
+						<td>Problem Devices</td>
+					</tr>
+					<tr>
+
+					<tr>
+						<td>All compressed files devices</td>
+						<td>{{taskUnzip|zipfile:'num'}}</td>
+						<td>{{taskUnzip|zipfile:'device'}}</td>
+					</tr>
+					<tr>
+						<td>Effective compressed files devices</td>
+						<td>{{taskUnzip|valid_zipfile:'num'}}</td>
+						{%if taskUnzip|valid_zipfile:'device' == ''%}
+							<td>Not Have</td>
+						{%else%}
+							<td><a href="{% url 'zip_process' taskUnzip.task.task_id|addString:'-valid_zipfile' %}">Detail</a></td>
+						{%endif%}
+					</tr>
+					<tr>
+						<td>All Result.zip devices</td>
+						<td>{{taskUnzip|resultzip:'num'}}</td>
+						{%if taskUnzip|resultzip:'device' == ''%}
+							<td>Not Have</td>
+						{%else%}
+							<td><a href="{% url 'zip_process' taskUnzip.task.task_id|addString:'-resultzip' %}">Detail</a></td>
+						{%endif%}
+					</tr>
+					<tr>
+						<td>Effective Result.zip devices</td>
+						<td>{{taskUnzip|valid_resultzip:'num'}}</td>
+						{%if taskUnzip|valid_resultzip:'device' == ''%}
+							<td>Not Have</td>
+						{%else%}
+							<td><a href="{% url 'zip_process' taskUnzip.task.task_id|addString:'-valid_resultzip' %}">Detail</a></td>
+						{%endif%}
+					</tr>
+					</thead>
+				</table>
+			{%endif%}
+			<div class="alert alert-success alert-dismissable">
+
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+					×
+				</button>
+				<h4>
+					Alert!
+				</h4> <strong>Warning!</strong> Check problem devices details when you firstly analysis this task!
+			</div>
+			<br/>
+			<a href="{% url 'export_luaunit' task.task_id %}" class="btn btn-success" type="button">Export CSV</a>
+
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-11">
+					{%if context_length_apis != None and context_main_apis != None  and context_other_apis != None and context_length_all_data != None and context_length_poped_all_data != None and invalid_devices != None %}
+						<blockquote>
+							<p>
+								Lua UnitTest Summary
+							</p>
+							<p><small>Total Tested APIs Num. is <cite>{{context_length_apis}}</cite></small></p>
+							<p><small>Valid Devices Num. is <cite>{{context_length_all_data}}</cite></small></p>
+							<p><small><cite>(No Result Folder) is {{invalid_devices.Result}}</cite></small></p>
+							<p><small><cite>(No LuaUnit.txt File) is {{invalid_devices.LuaUnit}}</cite></small></p>
+							<p><small><cite>(Wrong SessionId) is {{invalid_devices.SessionId}}</cite></small></p>
+							<p><small><cite>(Bad LifeCycle) is {{invalid_devices.LifeCycle}}</cite></small></p>
+						</blockquote>
+						<table class="table">
+							<thead>
+							<tr>
+								<td>Main API</td>
+								<td>Valid Devices Num.</td>
+								<td>Pass Rate</td>
+								<td>Detail</td>
+							</tr>
+							{%for api in context_main_apis%}
+							<tr>
+								<td>{{api.name}}</td>
+								<td>{{api.total}}</td>
+								<td><B><font color={{api.color}}>{{api.rate}}&#37;</font></B></td>
+								<td><a href="{% url 'luaunit_devices' api.devices|toString %}">Link</a></td>
+							</tr>
+							{%endfor%}
+							</thead>
+						</table>
+
+						<blockquote>
+							<p><small>Main Apis Passed Devices Num. is <cite>{{context_length_poped_all_data}}</cite></small></p>
+						</blockquote>
+						<table class="table">
+							<thead>
+							<tr>
+								<td>Other API</td>
+								<td>Valid Devices Num.</td>
+								<td>Pass Rate</td>
+								<td>Detail</td>
+							</tr>
+							{%for api in context_other_apis%}
+							<tr>
+								<td>{{api.name}}</td>
+								<td>{{api.total}}</td>
+								<td><B><font color={{api.color}}>{{api.rate}}&#37;</font></B></td>
+								<td><a href="{% url 'luaunit_devices' api.devices|toString %}">Link</a></td>
+							</tr>
+							{%endfor%}
+							</thead>
+						</table>
+					{%endif%}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script src="{{STATIC_URL}}task_all/js/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}task_all/js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}task_all/js/scripts.js"></script>
+  </body>
+</html>

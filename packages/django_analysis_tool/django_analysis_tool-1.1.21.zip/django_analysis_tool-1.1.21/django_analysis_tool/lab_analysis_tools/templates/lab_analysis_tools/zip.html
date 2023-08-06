@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Parameter Config</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="{{STATIC_URL}}zip/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}zip/css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>
+				参数配置
+			</h3>
+			<div class="alert alert-success alert-dismissable">
+
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+					×
+				</button>
+				<h4>
+					Note:
+				</h4><strong>
+					<p>请查看字段说明信息以及演示</p>
+					<P>提示：正常2G的压缩文件，处理时间30秒钟上下; 处理过程中，请勿打断处理流程</P>
+					</strong>
+			</div>
+		</div>
+	</div>
+		<br/>
+		<br/>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel-group" id="panel-993646">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-993646" href="#panel-element-699700">压缩文件路径</a>
+					</div>
+					<div id="panel-element-699700" class="panel-collapse collapse">
+						<div class="panel-body">
+							压缩路径参数请输入文件系统绝对路径，例如C:\54321
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-993646" href="#panel-element-718336">文件内容收集 & 压缩提取对象</a>
+					</div>
+					<div id="panel-element-718336" class="panel-collapse collapse">
+						<div class="panel-body">
+							<p>1. 文件内容收集字段请输入您要扫描的文件名，例如如果您要批量收集查看Result目录的qqlog.txt, 只需输入qqlog.txt; 目前只支持单个文件收集!</p>
+							<br/>
+							<p>2. 压缩提取的对象可以是文件夹或者文件，例如如果您要批量提取Result目录的qqlogDir文件夹只需输入qqlogDir;提取Result目录的qqfile.txt，只需输入qqfile.txt; 目前只支持一个对象的提取</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			 <a id="modal-806687" href="#modal-container-806687" role="button" class="btn" data-toggle="modal">点击查看输入演示</a>
+			
+			<div class="modal fade" id="modal-container-806687" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							 
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								输入演示：
+							</h4>
+						</div>
+						<div class="modal-body">
+							<p>压缩文件路径: C:\your_zip_directory\54321</p>
+							<p>文件内容收集: qqlog.txt</p>
+							<p>压缩提取对象: qqlogDir</p>
+
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="col-md-6">
+			<form action="{% url 'zip' %}" method="get" class="form-horizontal" role="form">
+				<div class="form-group">
+					 
+					<label for="inputEmail3" class="col-sm-2 control-label">
+						压缩文件路径
+					</label>
+					<div class="col-sm-10">
+						<input type="text" name="path" placeholder= {{message}} class="form-control" id="inputEmail3">
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					<label for="inputEmail3" class="col-sm-2 control-label">
+						文件内容收集
+					</label>
+					<div class="col-sm-10">
+						<input type="text" name="xls" placeholder= "qqlog.txt" class="form-control" id="inputEmail4">
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					<label for="inputEmail3" class="col-sm-2 control-label">
+						压缩提取对象
+					</label>
+					<div class="col-sm-10">
+						<input type="text" name="zip" placeholder= "qqlogDir" class="form-control" id="inputEmail5">
+					</div>
+				</div>
+
+
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						 
+						<button type="submit" class="btn btn-default">
+							开始解压和处理（点击前请检查字段）
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+    <script src="{{STATIC_URL}}zip/js/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}zip/js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}zip/js/scripts.js"></script>
+  </body>
+</html>
