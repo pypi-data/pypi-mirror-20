@@ -1,0 +1,68 @@
+{% load i18n %}
+{% load submit_parts %}
+
+{% if user_has_admin_privileges %}
+    <p>
+        <a href="{% url 'admin:submit_submit_changelist'%}?receiver__id__exact={{ receiver.id }}">
+            <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {% trans 'View all submits of all users' %}
+        </a>
+    {% comment %}
+        This button is hidden to prevent misclicks that could cause a judge overflow.
+        Also the url path for this command is currently deactivated.
+        TODO: Implement pop-up / confirmation page for resubmit approval
+
+        {% if receiver.send_to_judge %}
+            <a href="{% url 'rejudge_receiver_submits' receiver.id %}">
+                <span class="glyphicon glyphicon-send"></span> {% trans 'Rejudge last submits' %}
+            </a>
+        {% endif %}
+    {% endcomment %}
+    </p>
+{% endif %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{% trans 'Time' %}</th>
+            <th>{% trans 'State' %}</th>
+            <th>{% trans 'Score' %}</th>
+            <th>{% trans 'Actions' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for submit in submits %}
+        {% with review=submit.last_review %}
+
+        {% if review %}
+            <tr class="{% if review.short_response == response.OK or review.short_response == response.REVIEWED %}
+                            success
+                       {% elif review.short_response == response.SENDING_TO_JUDGE or review.short_response == response.SENT_TO_JUDGE %}
+                            info
+                       {% elif review.score > 0 %}
+                            warning
+                       {% else %}
+                            danger
+                       {% endif %}">
+        {% else %}
+            <tr class="info">
+        {% endif %}
+            <td>{{ submit.time }}</td>
+            <td>
+                {% if review %}
+                    <span>{{ review.verbose_response }}</span>
+                {% else %}
+                    <span>{% trans 'Not reviewed' %}</span>
+                {% endif %}
+                {% if submit.is_accepted == Submit.NOT_ACCEPTED %}
+                    <span class="text-danger">|&nbsp;{% trans 'Not accepted' %}</span>
+                {% elif submit.is_accepted == Submit.ACCEPTED_WITH_PENALIZATION %}
+                    <span class="text-danger">|&nbsp;{% trans 'Accepted with penalization' %}</span>
+                {% endif %}
+            </td>
+            <td>{% if review %}{{ review.display_score }}{% else %}..{% endif %}</td>
+            <td><a class="btn btn-primary btn-xs" href="{% url 'view_submit' submit_id=submit.pk %}">{% trans 'View' %}</a></td>
+        </tr>
+        {% endwith %}
+    {% endfor %}
+    </tbody>
+</table>

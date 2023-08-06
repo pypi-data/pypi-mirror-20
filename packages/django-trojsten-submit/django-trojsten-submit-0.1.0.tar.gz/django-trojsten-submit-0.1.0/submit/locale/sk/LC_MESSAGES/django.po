@@ -1,0 +1,360 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-17 21:06+0100\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: admin.py:57
+msgid ""
+"Basic receiver settings will be set based on selected type. For advanced "
+"settings click \"Change\".<br />(When adding a new receiver, click \"Save "
+"and continue editing\" first.)"
+msgstr ""
+"Základné nastavenia typu submitov budú určené na základe zvolenej možnosti.<br />"
+"Pre dalšie nastavenia kliknite na \"Zmeniť\".<br />"
+"(Ak pridávate nový typ submitov k úlohe, kliknite najprv na \"Uložiť a pokračovať v úpravách\"."
+
+#: commands.py:23
+msgid "Resubmit successful."
+msgstr "Úspešne znovu-odovzdané."
+
+#: commands.py:25
+msgid "Resubmit not successful. Judge unavailable."
+msgstr "Resubmit sa nepodaril. Testovač nie je dostupný."
+
+#: commands.py:54
+msgid "Failed submits"
+msgstr "Nepodarené submity"
+
+#: commands.py:56
+msgid "Everything OK"
+msgstr "Všetko v poriadku"
+
+#: constants.py:26
+msgid "OK"
+msgstr "OK"
+
+#: constants.py:27
+msgid "Wrong answer"
+msgstr "Zlá odpoveď"
+
+#: constants.py:28
+msgid "Time limit exceeded"
+msgstr "Prekročený časový limit"
+
+#: constants.py:29
+msgid "Runtime exception"
+msgstr "Chyba počas behu programu"
+
+#: constants.py:30
+msgid "Security exception"
+msgstr "Pokus o narušenie bezpečnosti"
+
+#: constants.py:31
+msgid "Ignored"
+msgstr "Ignorované"
+
+#: constants.py:32
+msgid "Compilation error"
+msgstr "Chyba počas kompilácie"
+
+#: constants.py:54
+msgid "Sending to judge"
+msgstr "Odosielam na testovač"
+
+#: constants.py:55
+msgid "Sent to judge"
+msgstr "Odoslané na testovač"
+
+#: constants.py:56
+msgid "Judge unavailable"
+msgstr "Testovač je nedostupný"
+
+#: constants.py:57
+msgid "Protocol corrupted"
+msgstr "Protokol je nečitateľný"
+
+#: constants.py:58
+msgid "Reviewed"
+msgstr "Ohodnotené"
+
+#: constants.py:74
+msgid "Manual review"
+msgstr "Ohodnotené človekom"
+
+#: constants.py:75
+msgid "Judge test results"
+msgstr "Výsledky automatického testovania"
+
+#: constants.py:76
+msgid "Judge communication"
+msgstr "Komunikácia s testovačom"
+
+#: constants.py:82
+msgid "Deduce from extension"
+msgstr "Zisti podľa prípony"
+
+#: defaults.py:24
+#, python-brace-format
+msgid ""
+"Submit successful. Testing protocol will be soon available <a href="
+"\"{link}\">here</a>."
+msgstr ""
+"Úspešne odovzdané. Protokol z testovania bude čoskoro dostupný <a href="
+"\"{link}\">tu</a>."
+
+#: defaults.py:27
+msgid "Submit successful."
+msgstr "Úspešne odovzdané."
+
+#: forms.py:24
+msgid "No file was submitted"
+msgstr "Nebol odovzdaný žiadny súbor"
+
+#: forms.py:42
+#, python-format
+msgid "Invalid file extension %(extension)s"
+msgstr "Typ súboru %(extension)s nie je podporovaný"
+
+#: forms.py:60
+msgid "Language"
+msgstr "Jazyk"
+
+#: forms.py:73
+msgid "Automatic language discovery failed. Unknown language extension."
+msgstr ""
+"Automatické určenie jazyka zlyhalo kvôli neznámej/nepodporovanej koncovke."
+
+#: models.py:40
+#, python-format
+msgid "Language \"%(lang)s\" is not supported by judge."
+msgstr "Jazyk \"%(lang)s\" nie je podporovaný testovačom."
+
+#: models.py:50
+msgid "Check to collect files via submit form."
+msgstr "Zaškrtnite pre vykreslenie formuláru na odovzdávanie riešení."
+
+#: models.py:52
+msgid "Text that appears on the left from submit form."
+msgstr "Text sa objaví naľavo od formulára."
+
+#: models.py:54
+msgid ""
+"List of comma separated extensions e.g. \"txt, pdf, doc\".<br />Leave blank "
+"to accept any extension."
+msgstr ""
+"Zoznam čiarkou oddelených koncoviek napr.: \"txt, pdf, doc\".<br />"
+"Ak zostane prázdne, budú akceptované všetky typy súborov."
+
+#: models.py:57
+#, python-format
+msgid ""
+"List of comma separated programming language extensions e.g. \"c, cc, py, hs"
+"\".<br />Use languages supported by the judge from: %(languages)s.<br />When "
+"languages are set, field \"extensions\" is ignored."
+msgstr ""
+"Zoznam čiarkou oddelených programovacích jazykov napr.: \"c, cc, py\"<br />"
+"Použite jazyky podporované testovačom z množiny: %(languages)s.<br />"
+"Ked vyberiete aspoň jeden programovací jazyk, políčko  \"extensions\" bude ignorované."
+
+#: models.py:63
+msgid ""
+"URL for external submits. A button with link will be rendered in the submit "
+"form."
+msgstr "URL pre externé odovzdávanie. Na stránke sa vykreslí tlačítko s odkazom."
+
+
+#: models.py:66
+msgid ""
+"Secret key allowing external submits via API, will be generated "
+"automatically."
+msgstr ""
+"Token na komunikáciu s externou aplikáciou cez API.<br />"
+"Token bude vygenerovaný automaticky."
+
+#: models.py:68
+msgid "Check to send submits to automated judge."
+msgstr "Zaškrtnite ak chcete riešenia odosielať na automatické otestovanie."
+
+#: models.py:70
+msgid ""
+"If left blank, and send_to_judge is checked, this field will be set "
+"automatically."
+msgstr ""
+"Ak zaškrtnete odosielanie na testovač a necháte toto políčko prázdne, nastaví sa automaticky."
+
+#: models.py:72
+msgid "Check to display protocol details to all users."
+msgstr "Zaškrtnite pre zobrazenie detailov testovacieho protokolu pre všetkých používateľov."
+
+#: models.py:74
+msgid "Check to render submitted file as a part of web page for submit."
+msgstr "Zaškrtnite pre zobrazenie odovzdaného súboru priamo na stránke submitu."
+
+#: models.py:135
+msgid "no"
+msgstr "nie"
+
+#: models.py:136
+msgid "with penalization"
+msgstr "s penalizáciou"
+
+#: models.py:137
+msgid "yes"
+msgstr "áno"
+
+#: templates/submit/parts/submit_form.html:13
+msgid "Submit solution"
+msgstr "Odovzdaj riešenie"
+
+#: templates/submit/parts/submit_form.html:18
+msgid "Use a special page to submit."
+msgstr "Na odovzdávanie slúži samostatná stránka."
+
+#: templates/submit/parts/submit_form.html:19
+msgid "Page with external submit"
+msgstr "Stránka s odovzdávaním"
+
+#: templates/submit/parts/submit_form.html:22
+msgid "You can't submit solutions for this task."
+msgstr "Pre túto úlohu nemôžete odovzdávať riešenia."
+
+#: templates/submit/parts/submit_list.html:7
+msgid "View all submits of all users"
+msgstr "Zobraz submity všetkých používateľov"
+
+#: templates/submit/parts/submit_list.html:27
+#: templates/submit/submit_info.html:20
+msgid "Time"
+msgstr "Čas"
+
+#: templates/submit/parts/submit_list.html:28
+msgid "State"
+msgstr "Stav"
+
+#: templates/submit/parts/submit_list.html:29
+#: templates/submit/review_info.html:13
+msgid "Score"
+msgstr "Body"
+
+#: templates/submit/parts/submit_list.html:30
+msgid "Actions"
+msgstr "Akcie"
+
+#: templates/submit/parts/submit_list.html:55
+msgid "Not reviewed"
+msgstr "Neohodnotené"
+
+#: templates/submit/parts/submit_list.html:58
+msgid "Not accepted"
+msgstr "Neakceptované"
+
+#: templates/submit/parts/submit_list.html:60
+msgid "Accepted with penalization"
+msgstr "Akceptované s penalizáciou"
+
+#: templates/submit/parts/submit_list.html:64
+msgid "View"
+msgstr "Detaily"
+
+#: templates/submit/protocol.html:7
+msgid "Protocol is not available."
+msgstr "Protokol nie je dostupný."
+
+#: templates/submit/protocol.html:11
+msgid "Compiler output"
+msgstr "Výstup z kompilátora"
+
+#: templates/submit/protocol.html:18
+msgid "Test case"
+msgstr "Vstup"
+
+#: templates/submit/protocol.html:19 templates/submit/review_info.html.py:9
+msgid "Result"
+msgstr "Výsledok"
+
+#: templates/submit/protocol.html:20
+msgid "Run time"
+msgstr "Čas behu"
+
+#: templates/submit/protocol.html:34
+msgid "Show details"
+msgstr "Zobraz detaily"
+
+#: templates/submit/review_info.html:4
+msgid "Review"
+msgstr "Hodnotenie"
+
+#: templates/submit/review_info.html:18
+msgid "Reviewed file"
+msgstr "Opravené riešenie"
+
+#: templates/submit/review_info.html:24
+msgid "Reviewer's comment"
+msgstr "Komentár opravovateľa"
+
+#: templates/submit/review_info.html:34
+msgid "Not reviewed yet."
+msgstr "Zatiaľ neohodnotené."
+
+#: templates/submit/submit_info.html:4
+msgid "Submit"
+msgstr "Submit"
+
+#: templates/submit/submit_info.html:8
+msgid "Task"
+msgstr "Úloha"
+
+#: templates/submit/submit_info.html:12
+msgid "Submit ID"
+msgstr "ID submitu"
+
+#: templates/submit/submit_info.html:16
+msgid "User"
+msgstr "Používateľ"
+
+#: templates/submit/submit_info.html:24
+msgid "Accepted"
+msgstr "Akceptované"
+
+#: templates/submit/submit_info.html:29
+msgid "Submitted file"
+msgstr "Odovzdaný súbor"
+
+#: templates/submit/submit_info.html:36
+msgid "Show"
+msgstr "Ukáž"
+
+#: templates/submit/submit_info.html:38
+msgid "Download"
+msgstr "Stiahni"
+
+#: templates/submit/view_submit.html:7 templates/submit/view_submit.html:27
+msgid "Submit details"
+msgstr "Detaily submitu"
+
+#: templates/submit/view_submit.html:30
+msgid "Task statement"
+msgstr "Zadanie úlohy"
+
+#: templates/submit/view_submit.html:35
+msgid "Edit and review"
+msgstr "Uprav a ohodnoť"
+
+#: templates/submit/view_submit.html:39
+msgid "Rejudge submit"
+msgstr "Pretestovať submit"
+
+#: templates/submit/view_submit.html:60
+msgid "Protocol"
+msgstr "Protokol"
+
+#: templates/submit/view_submit.html:64
+msgid "All submits"
+msgstr "Všetky submity"
+
+#: views.py:52
+msgid "Upload to judge was not successful."
+msgstr "Pri odosielaní na testovač nastala chyba."
