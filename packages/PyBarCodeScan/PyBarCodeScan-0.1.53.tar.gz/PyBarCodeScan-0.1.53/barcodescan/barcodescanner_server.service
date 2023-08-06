@@ -1,0 +1,11 @@
+[Unit]
+Description=gets the scanned barcode and send them to a potentialy connedcted webbrowser
+
+[Service]
+Type=simple
+ExecStart=/venv/bin/barcodescanner_server
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target
