@@ -1,0 +1,13 @@
+[Unit]
+Description=An example pika consumer
+After=network.target
+ConditionPathExists=!/usr/local/etc/example-pika-consumer-should-not-be-run
+
+[Service]
+ExecStart=/usr/local/lib/pyenv/versions/3.6.0/bin/python /vagrant/bin/example_consumer.py
+Restart=on-failure
+RestartPreventExitStatus=255
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
