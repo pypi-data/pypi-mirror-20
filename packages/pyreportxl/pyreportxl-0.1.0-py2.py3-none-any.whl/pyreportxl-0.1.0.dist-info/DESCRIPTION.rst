@@ -1,0 +1,56 @@
+===============================
+pyreportxl
+===============================
+
+
+.. image:: https://img.shields.io/pypi/v/pyreportxl.svg
+        :target: https://pypi.python.org/pypi/pyreportxl
+
+.. image:: https://img.shields.io/travis/ChrisPappalardo/pyreportxl.svg
+        :target: https://travis-ci.org/ChrisPappalardo/pyreportxl
+
+.. image:: https://readthedocs.org/projects/pyreportxl/badge/?version=latest
+        :target: https://pyreportxl.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. image:: https://pyup.io/repos/github/ChrisPappalardo/pyreportxl/shield.svg
+     :target: https://pyup.io/repos/github/ChrisPappalardo/pyreportxl/
+     :alt: Updates
+
+
+An Excel reporting framework for python.
+
+
+* Free software: MIT license
+* Documentation: https://pyreportxl.readthedocs.io.
+
+
+Features
+--------
+
+* Load data from csv or xls[x] using pyexcel
+* Create internal databases dynamically using SQLAlchemy
+* Create OO excel reporting lines with minimal coding
+* Produce reports in csv or xls[x]
+* Provide a CLI framework for ingesting data and running reports
+
+Credits
+---------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+
+=======
+History
+=======
+
+0.1.0 (2017-03-19)
+------------------
+
+* First release on PyPI.
+
+
