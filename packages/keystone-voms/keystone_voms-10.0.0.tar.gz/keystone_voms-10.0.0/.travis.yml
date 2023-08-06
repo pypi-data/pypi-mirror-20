@@ -1,0 +1,24 @@
+language: python
+python:
+    "2.7"
+
+addons:
+    apt:
+        packages:
+            - swig
+            - libvomsapi1
+
+virtualenv:
+    system_site_packages: true
+
+install:
+    - pip install --upgrade tox
+    - pip install -r requirements.txt
+    - pip install -r test-requirements.txt
+    - pip install -e git+https://github.com/openstack/keystone@stable/mitaka#egg=keystone
+
+script:
+    - tox
+
+after_success:
+    - tox -e coveralls

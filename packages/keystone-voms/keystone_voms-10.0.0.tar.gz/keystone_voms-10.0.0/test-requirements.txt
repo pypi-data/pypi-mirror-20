@@ -1,0 +1,26 @@
+hacking<0.11,>=0.10.0
+
+coverage>=3.6
+fixtures>=1.3.1
+
+oslotest>=1.10.0
+
+python-subunit
+testrepository>=0.0.18
+testtools>=0.9.34
+
+oslosphinx>=2.5.0 # Apache-2.0
+sphinx>=1.1.2
+
+mock>=1.2
+
+WebOb>=1.2.3
+
+# Required by Keystone upstream tests
+pyldap
+ldappool
+# avoid DeprecationWarning: the method passlib.handlers.sha2_crypt.sha512_crypt.encrypt() is deprecated as of Passlib 1.7, and will be removed in Passlib 2.0, use .hash() instead.
+passlib<=1.6.0
+
+# test wsgi apps without starting an http server
+WebTest>=2.0 # MIT
