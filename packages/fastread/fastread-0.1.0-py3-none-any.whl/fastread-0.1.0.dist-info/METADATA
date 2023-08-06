@@ -1,0 +1,79 @@
+Metadata-Version: 2.0
+Name: fastread
+Version: 0.1.0
+Summary: UNKNOWN
+Home-page: https://github.com/stasfilin/fastread
+Author: Stanislav Filin (stasfilin)
+Author-email: stasfilinmusic@gmail.com
+License: Apache Software License
+Download-URL: https://github.com/stasfilin/fastread/tarball/v0.1.0
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Unix
+Provides-Extra: performance
+Requires-Dist: coverage (==4.2); extra == 'performance'
+Requires-Dist: pep8 (==1.7.0); extra == 'performance'
+Requires-Dist: pyflakes (==1.3.0); extra == 'performance'
+Requires-Dist: pytest (==3.0.3); extra == 'performance'
+Requires-Dist: pytest-cov (==2.4.0); extra == 'performance'
+
+# Fastread
+_Fastread is a library for read big files_
+
+## How to install and update
+
+Install latest stable version or update current from pip.
+
+```python
+pip install -U fastread
+```
+
+## Basic Usage
+
+Here's a simple example.
+
+```python
+import timeit
+
+from fastread import Fastread
+
+def main():
+    ff = Fastread('big.txt')
+    lines = ff.lines()
+
+    total = 0
+
+    for x in lines:
+        total += 1
+
+    return total
+
+if __name__ == "__main__":
+    total = main()
+    timer = timeit.timeit("main()",
+                          setup="from __main__ import main",
+                          number=1)
+    print('Read time: ', timer, '| Total lines: ', total)
+
+#RESULT
+# Read time:  0.029999009988387115 | Total lines:  128457
+```
+
+## Reference
+
+| Setup   | Command                | Notes |
+| ------- | ---------------------- | ----- |
+| install | `pip install fastread` |       |
+
+
+
