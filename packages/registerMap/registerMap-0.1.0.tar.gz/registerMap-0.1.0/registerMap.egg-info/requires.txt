@@ -1,0 +1,11 @@
+pyyaml
+
+[dev]
+zest.releaser[recommended]
+Sphinx
+setuptools
+setuptools-git
+
+[test]
+nose
+nose-exclude

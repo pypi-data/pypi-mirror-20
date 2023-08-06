@@ -1,0 +1,166 @@
+Metadata-Version: 1.1
+Name: registerMap
+Version: 0.1.0
+Summary: YAML based register map definitions for digital hardware and embedded software development
+Home-page: https://gitlab.com/blueskyjunkie/registerMap
+Author: Russell Smiley
+Author-email: im.russell.smiley@gmail.com
+License: GPLV3
+Description: registerMap
+        ===========
+        
+        A Python 3 framework for creating and maintaining register maps used for
+        integrated circuit design and embedded software development.
+        
+        Main Features
+        -------------
+        
+        -  define a register map by the *relationships* and *order* of registers
+           and bit fields
+        -  generate address of registers and modules automatically from
+           relationships
+        -  constrain registers and modules by size or address
+        -  automatically manage registers that span multiple memory units
+        -  automatically generate a series of modules from a template/reference
+           module
+        -  arbitrary number of memory unit bits (but constant across the
+           register map)
+        -  arbitrary number of address bits (but constant across the register
+           map)
+        -  automatically avoid allocating register/module addresses to page
+           registers
+        
+        Installation
+        ------------
+        
+        The simplest way to acquire ``registerMap`` is using ``pip``.
+        
+        .. code:: bash
+        
+            pip install registerMap
+        
+        Getting Started
+        ---------------
+        
+        In this framework a register map is an ordered list of modules. A module
+        is an ordered list of registers and a register is made up of bit fields.
+        
+        A memory space defines the fundamental properties of the register map
+        such as the number of bits in addresses, the base address of the
+        register map and the number of bits in memory units.
+        
+        The order of the modules defines how module addresses are generated. So
+        the first module in the list would probably get assigned the base
+        address of the register map memory space and the next module might get
+        the next available address. The words 'probably' and 'might' are used
+        here because there are other factors such as the total span of the
+        module, page registers and constraints applied to modules and registers
+        that can change what addresses are available for assignment. More on
+        that later.
+        
+        A module is a way of grouping registers together. When there is more
+        than one module, the groups will probably have some functional
+        association of the registers, for example, a set of registers associated
+        with a particular output, or a set of read only registers for reporting
+        status.
+        
+        A register is made up of bit fields. The order of bit fields is not
+        defined because the bits to which each bit field is assigned must be
+        explicitly defined. A register, or perhaps more accurately, the total
+        span of its bit fields may also span multiple memory units. This enables
+        support for data that is larger than the bit size of a single memory
+        unit; eg. If the memory unit size is 8 bits, then it may still be
+        desirable to store a 16, 32 or 64 bit number for the function of the
+        integrated circuit.
+        
+        The primary source format of the register map is YAML, so one way to get
+        started is by defining your register map directly in a YAML text file.
+        The other way is to import the Python library and start working on the
+        register map dataset directly in a Python terminal or script.
+        
+        Getting started using a YAML file
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        Using a text editor you can define the YAML structure of your register
+        map relatively easily. It gets a little easier if you use an editor that
+        understands YAML, such as `Notepad++ <https://notepad-plus-plus.org/>`__
+        or an IDE such as `PyCharm <https://www.jetbrains.com/pycharm/>`__.
+        
+        The example below shows a register map skeleton that defines some
+        properties of the memory space, along with a summary and description of
+        the register map. The modules section is left blank for now.
+        
+        In any register map you must have at least one module.
+        
+        .. code:: yaml
+        
+            registerMap: {
+              # A memorySpace is not optional
+              memorySpace: {
+                # but all the parameters are optional.
+                # Default: 0x0
+                baseAddress: 0x1000
+                # Default: None
+                pageSize: None
+                # Default: 32
+                addressBits: 48
+                # Default: 8
+                memoryUnitBits: 16
+              }
+              summary: 'A short summary of the register map'
+              description: 'A longer description of the register map'
+              modules: [
+              ]
+            }
+        
+        When you are done and have saved your YAML data to a file, your YAML
+        register map can be loaded into Python.
+        
+        .. code:: python
+        
+            import registerMap
+            myMap = registerMap.load( 'registermap.yml' )
+        
+        Let's test that the register map properties are loaded as expected.
+        
+        .. code:: python
+        
+            assert myMap.memory.addressBits == 48
+            assert myMap.memory.memoryUnitBits == 16
+            assert myMap.memory.baseAddress == 0x1000
+        
+        Getting started using Python
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        You can start creating your register map directly in Python. You just
+        need to import the ``registerMap`` library and declare a ``RegisterMap``
+        instance. At this point you will have the default settings for the
+        memory space and no modules defined.
+        
+        .. code:: python
+        
+            import registerMap
+            myMap = registerMap.RegisterMap()
+        
+            assert myMap.memory.addressBits == 32
+            assert myMap.memory.memoryUnitBits == 8
+            assert myMap.memory.baseAddress == 0x0
+            assert len( myMap[ 'modules' ] ) == 0
+        
+        Now that the register map is defined, it can be saved.
+        
+        .. code:: python
+        
+            registerMap.save( myMap, 'registermap.yml' )
+        
+Keywords: registermap buildtools development hardware digital register
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: System :: Hardware
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
