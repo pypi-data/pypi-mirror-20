@@ -1,0 +1,71 @@
+Metadata-Version: 2.0
+Name: pydaedalus
+Version: 0.1.0
+Summary: Python wrapper of Daedalus monochrome maze
+Home-page: https://github.com/wroberts/pydaedalus
+Author: Will Roberts
+Author-email: wildwilhelm@gmail.com
+License: GPLv2
+Keywords: maze generation solving daedalus
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Games/Entertainment :: Puzzle Games
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+
+============
+ pydaedalus
+============
+
+.. image:: https://travis-ci.org/wroberts/pydaedalus.svg?branch=master
+    :target: https://travis-ci.org/wroberts/pydaedalus
+
+.. image:: https://coveralls.io/repos/wroberts/pydaedalus/badge.svg?branch=master
+  :target: https://coveralls.io/r/wroberts/pydaedalus?branch=master
+     :alt: Test code coverage
+
+.. image:: https://img.shields.io/pypi/v/pydaedalus.svg
+    :target: https://pypi.python.org/pypi/pydaedalus/
+    :alt: Latest Version
+
+Daedalus source code is copyright (c) 1998-2016 Walter D. Pullen.
+
+Wrapper is copyright (c) 2016 Will Roberts <wildwilhelm@gmail.com>.
+
+Licensed under the GNU General Public License version 2.
+
+A Python wrapper of the Daedalus_ maze generator.  This project is
+currently built against version 3.2 of the Daedalus software.
+
+.. _Daedalus: http://www.astrolog.org/labyrnth/daedalus.htm
+
+Quickstart
+==========
+
+::
+
+    >>> from daedalus import Maze
+    >>> maze = Maze(63, 63)
+    >>> maze.create_perfect()
+    >>> maze.resize(31, 61)
+    >>> maze.create_perfect()
+    >>> maze.save_bitmap('test.bmp')
+    >>> maze.save_text('test.txt')
+
+Notes
+=====
+
+To compile the Cython extension::
+
+    python setup.py build_ext --inplace
+
+
