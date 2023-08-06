@@ -1,0 +1,41 @@
+Metadata-Version: 1.1
+Name: ipcqueue
+Version: 0.9.0
+Summary: Ipcqueue provides POSIX and SYS V message queues functionality to exchange data among processes.
+Home-page: https://github.com/seifert/ipcqueue
+Author: Jan Seifert
+Author-email: jan.seifert@fotkyzcest.net
+License: BSD
+Description: IpcQueue
+        ========
+        
+        IpcQueue provides POSIX and SYS V message queue functionality to exchange
+        data among processes.
+        
+        Instalation
+        -----------
+        
+        ::
+        
+            cd ipcqueue/
+            python setup.py install
+        
+        Documentation
+        -------------
+        
+        http://pythonhosted.org/ipcqueue
+        
+        License
+        -------
+        
+        3-clause BSD
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: POSIX
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
