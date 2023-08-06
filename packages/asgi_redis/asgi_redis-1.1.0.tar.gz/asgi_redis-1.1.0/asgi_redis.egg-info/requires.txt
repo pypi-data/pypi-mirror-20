@@ -1,0 +1,14 @@
+six
+redis>=2.10
+msgpack-python
+asgiref>=1.0.0
+
+[cryptography]
+cryptography>=1.3.0
+
+[tests]
+cryptography>=1.3.0
+tox
+asgi_ipc
+twisted
+txredisapi
