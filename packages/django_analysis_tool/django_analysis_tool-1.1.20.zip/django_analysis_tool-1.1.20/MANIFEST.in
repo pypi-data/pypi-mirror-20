@@ -1,0 +1,22 @@
+include HISTORY.rst  
+include MANIFEST.in
+recursive-include django_analysis_tool db.sqlite3
+recursive-include django_analysis_tool manage.py
+recursive-include django_analysis_tool run.py
+recursive-include django_analysis_tool/lab_analysis_tools/templates/lab_analysis_tools *
+recursive-include django_analysis_tool/lab/instrumentation_json *
+recursive-include django_analysis_tool/lab/static/index/css *
+recursive-include django_analysis_tool/lab/static/index/fonts *
+recursive-include django_analysis_tool/lab/static/index/img *
+recursive-include django_analysis_tool/lab/static/index/js *
+recursive-include django_analysis_tool/lab/static/task_all/css *
+recursive-include django_analysis_tool/lab/static/task_all/fonts *
+recursive-include django_analysis_tool/lab/static/zip/css *
+recursive-include django_analysis_tool/lab/static/zip/fonts *
+recursive-include django_analysis_tool/lab/static/zip/js *
+recursive-include django_analysis_tool/lab/static/wait/_css *
+recursive-include django_analysis_tool/lab/static/wait/_scripts *
+
+
+
+

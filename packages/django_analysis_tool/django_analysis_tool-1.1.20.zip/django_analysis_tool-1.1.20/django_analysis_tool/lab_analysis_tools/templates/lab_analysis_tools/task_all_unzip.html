@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Task Detail Page</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="{{STATIC_URL}}task_all/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}task_all/css/style.css" rel="stylesheet">
+
+  </head>
+
+  {% load poll_extras %}
+
+  <body>
+	<a href="{% url 'index' %}" class="btn btn-lg btn-link" type="button">Go Home</a>
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="page-header">
+				<h1>
+					{%if task != None %}
+						ID {{task.task_id}}
+					{%endif%}
+				</h1>
+			</div>
+			{%if all_data != None%}
+				<p>Total: <strong>{{taskUnzip.zipfile_num}}</strong></p>
+				<p>Runtime Success: <strong>{{taskUnzip.valid_resultzip_num}}</strong></p>
+				<p>Runtime Fail: <strong>{{taskUnzip|unvalid_resultzip_num}}</strong></p>
+			{%endif%}
+			<br/>
+			{%if taskUnzip != None%}
+				<p>
+					<h4>Unzip Result</h4>
+				</p> <small>Zip package represents task source data. <cite>Unzip process distinguishes several steps to check correctness</cite></small>
+				<table class="table">
+					<thead>
+					<tr>
+						<td>Check Point</td>
+						<td>Total Number</td>
+						<td>Problem Devices</td>
+					</tr>
+					<tr>
+
+					<tr>
+						<td>All compressed files devices</td>
+						<td>{{taskUnzip|zipfile:'num'}}</td>
+						<td>{{taskUnzip|zipfile:'device'}}</td>
+					</tr>
+					<tr>
+						<td>Effective compressed files devices</td>
+						<td>{{taskUnzip|valid_zipfile:'num'}}</td>
+						{%if taskUnzip|valid_zipfile:'device' == ''%}
+							<td>Not Have</td>
+						{%else%}
+							<td><a href="{% url 'zip_process' taskUnzip.task.task_id|addString:'-valid_zipfile' %}">Detail</a></td>
+						{%endif%}
+					</tr>
+					<tr>
+						<td>All Result.zip devices</td>
+						<td>{{taskUnzip|resultzip:'num'}}</td>
+						{%if taskUnzip|resultzip:'device' == ''%}
+							<td>Not Have</td>
+						{%else%}
+							<td><a href="{% url 'zip_process' taskUnzip.task.task_id|addString:'-resultzip' %}">Detail</a></td>
+						{%endif%}
+					</tr>
+					<tr>
+						<td>Effective Result.zip devices</td>
+						<td>{{taskUnzip|valid_resultzip:'num'}}</td>
+						{%if taskUnzip|valid_resultzip:'device' == ''%}
+							<td>Not Have</td>
+						{%else%}
+							<td><a href="{% url 'zip_process' taskUnzip.task.task_id|addString:'-valid_resultzip' %}">Detail</a></td>
+						{%endif%}
+					</tr>
+					</thead>
+				</table>
+			{%endif%}
+			<div class="alert alert-success alert-dismissable">
+
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+					×
+				</button>
+				<h4>
+					Alert!
+				</h4> <strong>Warning!</strong> Csv or Zip content is valid on first session! That means they are invalid from history list
+			</div>
+			<br/>
+			{%if historical == False %}
+				<a href="{% url 'export' %}" class="btn btn-success" type="button">Export CSV</a>
+				<a href="{% url 'export_zip' %}" class="btn btn-success" type="button">Export Zip</a>
+			{%else%}
+				<button href="{% url 'export' %}" class="btn btn-success" type="button" disabled="disabled">Export CSV(Historical)</button>
+				<button href="{% url 'export_zip' %}" class="btn btn-success" type="button" disabled="disabled">Export Zip(Historical)</button>
+			{%endif%}
+
+		</div>
+	</div>
+</div>
+    <script src="{{STATIC_URL}}task_all/js/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}task_all/js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}task_all/js/scripts.js"></script>
+  </body>
+</html>
