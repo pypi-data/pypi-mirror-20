@@ -1,0 +1,42 @@
+Metadata-Version: 1.1
+Name: django-admin-gitlog
+Version: 0.2
+Summary: Display a `git log` in your admin
+Home-page: http://github.com/mdamien/django-admin-gitlog
+Author: Damien MARIÉ
+Author-email: damien@dam.io
+License: MIT
+Description: django-admin-gitlog
+        ===================
+        
+        *Display a `git log` in your admin*
+        
+        To install, :code:`pip3 install django-admin-gitlog`
+        
+        And then add it to your :code:`INSTALLED_APPS`
+        
+        .. code:: python
+        
+            INSTALLED_APPS = [
+                # ...
+                'admin_gitlog',
+            ]
+        
+        
+        How it works: It simply overrides the default `admin.index_template` to add the info
+        
+        
+        .. image:: https://raw.githubusercontent.com/mdamien/django-admin-gitlog/master/screenshot.png
+            :target: https://github.com/mdamien/django-admin-gitlog/master/screenshot.png
+            :alt: Screenshot
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
