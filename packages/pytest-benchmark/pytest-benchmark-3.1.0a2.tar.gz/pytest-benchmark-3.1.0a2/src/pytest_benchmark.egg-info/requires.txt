@@ -1,0 +1,16 @@
+pytest>=2.8
+py-cpuinfo
+
+[:python_version < "3.4"]
+statistics
+pathlib
+
+[aspect]
+aspectlib
+
+[elasticsearch]
+elasticsearch
+
+[histogram]
+pygal
+pygaljs
