@@ -1,0 +1,40 @@
+Metadata-Version: 1.1
+Name: realclearpolitics
+Version: 0.0.3
+Summary: Simple script to scrape polling data from RealClearPolitics and output as .csv
+Home-page: https://github.com/AnthonyBloomer/rcp
+Author: Anthony Bloomer
+Author-email: ant0@protonmail.ch
+License: UNKNOWN
+Description: rcp
+        ===
+        
+        Simple script to scrape polling data from RealClearPolitics and output
+        as .csv.
+        
+        Install
+        ^^^^^^^
+        
+        ::
+        
+            pip install realclearpolitics
+        
+        Usage
+        ^^^^^
+        
+        ::
+        
+            rcp url output.csv
+        
+        Example
+        ^^^^^^^
+        
+        ::
+        
+            rcp http://www.realclearpolitics.com/epolls/2016/president/us/general_election_trump_vs_clinton-5491.html general.csv
+        
+        
+Keywords: politics,polls,realclearpolitics,web scraping
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
