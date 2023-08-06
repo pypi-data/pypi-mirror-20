@@ -1,0 +1,36 @@
+{% extends "redberry/_base.html" %}
+
+{% block head %}
+    <title>{{ category.title }}</title>
+{% endblock %}
+
+
+{% block content %}
+
+    {% include "redberry/category/_breadcrumb.html" %}
+
+    <div id="red-category-id-{{ category.id }}" class="container red-category">
+
+        <h1 class="text-center margin-bottom-10">{{ category.title | safe }}</h1>
+        <h4 class="text-center margin-bottom-30">{{ category.description }}</h4>
+
+        {% for post in category.posts %}
+            <div class="col-md-4">
+                <div class="red-post panel">
+                    <h3>
+                        <a href="{{ url_for('redberry.show_post', slug=post.slug) }}">{{ post.title }}</a>
+                    </h3>
+
+                    {{ post.summary() | safe }}
+
+
+                    <a class="btn btn-primary btn-lg red-post-more" href="{{ url_for('redberry.show_post', slug=post.slug) }}">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
