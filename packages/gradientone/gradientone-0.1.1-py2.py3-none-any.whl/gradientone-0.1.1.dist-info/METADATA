@@ -1,0 +1,64 @@
+Metadata-Version: 2.0
+Name: gradientone
+Version: 0.1.1
+Summary: Gateway client for GradientOne
+Home-page: https://gitlab.com/gradientone/gateway-client
+Author: GradientOne Team
+Author-email: dev@gradientone.com
+License: MIT
+Keywords: test and measurement device control and data collection
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: configparser
+Requires-Dist: enum34
+Requires-Dist: grequests
+Requires-Dist: jsonpickle
+Requires-Dist: numpy
+Requires-Dist: oauth2client
+Requires-Dist: psutil
+Requires-Dist: pyusb
+Requires-Dist: requests-toolbelt
+
+## Gateway Client
+
+The client code connecting test and measurement devices to the cloud.
+
+Includes a controller for managing updates to the client.
+
+
+Setup
+=======
+
+
+Install pip
+------------
+https://pip.pypa.io/en/stable/installing/
+
+Setup Config File
+------------------
+
+Copy **gradientone.gradient_one.cfg.sample** to **/etc/gradient_one.cfg** and edit the variables to include the GATEWAY_AUTH_TOKEN, among others.
+
+$ sudo cp gradient_one.cfg.sample /etc/gradient_one.cfg
+
+
+Usage
+------------------
+
+$ sudo gradientone
+
+
+More Info
+----------
+For more information visit: http://www.gradientone.com/
+
+
