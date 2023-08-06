@@ -1,0 +1,94 @@
+Changelog
+=========
+
+0.4.1 (2016-11-09)
+------------------
+
+Fix
+~~~
+
+- Fix package metadata and add supporting files. [Rajat Venkatesh]
+
+0.4.0 (2016-11-09)
+------------------
+
+Fix
+~~~
+
+- Syntax error in setup.py. [Rajat Venkatesh]
+
+0.3.0 (2016-11-09)
+------------------
+
+New
+~~~
+
+- NO-ISSUE:Support for downgrade function. [sakshi2894]
+
+  Add the following functionality:
+
+  * Support downgrade in migrations
+  * Upgrade to a specific revision
+
+Changes
+~~~~~~~
+
+- Change project name to qds_app. [Rajat Venkatesh]
+
+  Fix #5
+
+0.2.0 (2016-07-18)
+------------------
+
+New
+~~~
+
+- Add Travis commands to deploy to Pypi. [Rajat Venkatesh]
+
+- Add Context to capture information when processing migrations. [Rajat
+  Venkatesh]
+
+  Migrations as well as upgrade/downgrade functions now take a context
+  (a dict) to capture running information. Context is useful to pass
+  state to revisions.
+  A new test suite - test_integration has been added to test complete
+  workflows. The first test generates a revision and runs it.
+
+- Add upgrade and pending functions. [Rajat Venkatesh]
+
+  A new member variable `current` keeps track of revision that has been run.
+  `upgrade` function upgrades pending revisions
+  `pending` returns a list of revisions that have not been run.
+
+- Add Travis configuration file. [vrajat]
+
+- Add test for generation of first commit. [Rajat Venkatesh]
+
+  RevisionMap has been removed and assimilated into Migrations.
+  Test does not check the contents of migration file.
+
+- Add a unit test based on py.test. [Rajat Venkatesh]
+
+  Code in migrations module is also cleaned up. The test checks
+  that the module can be imported and it can handle an empty directory
+
+- Support two APIs to list & generate migrations. [Rajat Venkatesh]
+
+  Add two API calls to generate and list migrations. This commit
+  has been pulled out from a parent project and still has some
+  left over code.
+
+Fix
+~~~
+
+- Fix test failures. [vrajat]
+
+  Fix tests by using the latest py.test. Also change mako template file's extension to .py even
+  though its not a valid python file so that pip and distutils will pick up the package.
+
+Other
+~~~~~
+
+- Initial commit. [vrajat]
+
+
