@@ -1,0 +1,18 @@
+((* if is_document *))
+\documentclass{\var{ documentclass|default('article') }}
+
+((* else *))
+((* if is_correct *))
+Congratulations! Your answer is correct!
+((* else *))
+\subsection{\var{ title }}
+\begin{verbatim}
+Your response
+\var{ case.pformat()|indent(4) }
+Expected answer
+\var{ answer_key.pformat()|indent(4) }
+((*- if case.is_error *))
+\var{ case.error_message }((* endif *))
+\end{verbatim}
+((* endif *))
+((* endif *))
