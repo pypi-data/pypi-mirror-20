@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+'''
+    Copyright (c) 2017 Timothy Savannah All Rights Reserved
+
+    Licensed under terms of LGPLv3.
+'''
+
+import os
+import sys
+
+from json_to_csv import JsonToCsv, ParseError
+
+from json_to_csv.help import FORMAT_HELP
+
+
+def printUsage():
+    sys.stderr.write('Usage: %s [format str]\n' %(os.path.basename(sys.argv[0])))
+    sys.stderr.write('''  Formats a json string ( delivered via stdin ) to csv, based on provided format str.
+    
+    Options:
+
+      --null-value=XXX          Use "XXX" instead of an empty string as the null value
+
+      --help                    Show this message
+      --format-help             Show usage on format string representation
+
+
+''')
+    
+
+if __name__ == '__main__':
+
+    args = sys.argv[1:]
+
+    isDebug = False
+
+    nullValue = ''
+
+
+    # Parse the args
+    for arg in args:
+        if arg.startswith('--null-value='):
+            nullValue = arg[len('--null-value='):]
+            args.remove(arg)
+        elif arg == '--debug':
+            isDebug = True
+            args.remove('--debug')
+        elif arg == '--help':
+            printUsage()
+            sys.exit(2)
+        elif arg == '--format-help':
+            sys.stderr.write(FORMAT_HELP)
+            sys.exit(2)
+
+    if not args:
+        sys.stderr.write('Missing format str.\n\n')
+        printUsage()
+        sys.exit(1)
+
+    # Join any remaining args with a space
+    parseStr = ' '.join(args)
+
+    # Try to parse format string
+    try:
+        parser = JsonToCsv(parseStr, nullValue=nullValue, debug=isDebug)
+    except ParseError as pe:
+        # Got a readable error, print it.
+        sys.stderr.write('Error in format str: %s\n' %(str(pe),))
+        sys.exit(1)
+
+    # Read data from stdin
+    contents = sys.stdin.read()
+
+    # Parse that data, and print the csv string
+    try:
+        print ( parser.convertToCsv(contents) )
+    except ParseError as pe:
+        sys.stderr.write('Error in parsing: %s\n' %(str(pe),))
+        sys.exit(1)
