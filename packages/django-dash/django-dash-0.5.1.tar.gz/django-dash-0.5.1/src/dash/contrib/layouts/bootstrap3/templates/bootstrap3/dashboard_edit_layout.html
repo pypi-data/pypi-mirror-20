@@ -1,0 +1,23 @@
+{% extends "bootstrap3/base_layout.html" %}
+
+{% load i18n static %}
+
+{% block layout-stylesheets %}
+    {{ block.super }}
+    <link href="{% static 'css/dash_solid_borders.css' %}" rel="stylesheet" media="all" />
+{% endblock layout-stylesheets %}
+
+{% block page-title %}{% if current_workspace %}{{ current_workspace.name }} - {% endif %}{% trans 'Edit dashboard' %}{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <div class="{#col-xs-10#} col-sm-10 col-md-10 col-lg-10 {#col-xs-offset-2#} col-sm-offset-2 col-md-offset-2 col-lg-offset-2 main">
+        {% include "dash/snippets/messages_snippet.html" %}
+        {% for placeholder in placeholders %}
+        <div id="{{ placeholder.html_id }}" class="placeholder {{ placeholder.html_class }}">
+            {{ placeholder.render_for_edit|safe }}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,110 @@
+/*
+    Document   : dash_layout_bootstap3_fluid.css
+    Created on : Jan 18, 2015, 22:50:39 PM
+    Author     : Artur Barseghyan (artur.barseghyan@gmail.com)
+    Description:
+        Bootstrap 3 Fluid layout/theme for django-dash.
+*/
+
+/* Missing icons. */
+.glyphicon-reorder {
+    background-position: -336px -48px;
+}
+.glyphicon-plus-sign-alt {
+    background-position: 0 -96px;
+}
+.glyphicon-gears {
+    background-position: -360px -144px;
+}
+.glyphicon-male {
+    background-position: -168px 0;
+}
+.glyphicon-signout {
+    background-position: -384px 0;
+}
+.glyphicon-copy {
+  background-position: -216px -120px;
+}
+
+/* Override add plugin links. */
+.layout-bootstrap3_dashboard .container-fluid .add-plugin {
+    display: block;
+    height: 14px;
+    left: 50%;
+    margin: -7px 0 0 -7px;
+    position: absolute;
+    top: 50%;
+    width: 14px;
+}
+    .layout-bootstrap3_dashboard .container-fluid .add-plugin .iconic {
+        margin: 0;
+    }
+
+/* Hacks */
+ul.workspaces {
+    display: none;
+}
+
+.wrapper {
+    /*margin-top: 60px;*/
+}
+
+.layout-bootstrap3_dashboard .menu-wrapper .menu.nav {
+    display: none;
+}
+
+/* Forms */
+.generic-content-wrapper form ul,
+.generic-content-wrapper form ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content-listing.generic-form h3 {
+    font-size: 14px;
+    line-height: 14px;
+}
+
+/* Non-AJAX pages. */
+.standalone .generic-content-wrapper {
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    top: 40px;
+    width: 532px;
+}
+
+/* General styles */
+.hero-unit-small {
+    background-color: #EEEEEE;
+    border-radius: 6px;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.messagelist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.paste-from-clipboard {
+    clear: both;
+    margin-bottom: 18px;
+}
+
+/* Styles missing in Bootstrap 3 */
+.nav-sidebar li.nav-header {
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #999999;
+    line-height: 20px;
+    text-transform: uppercase;
+}
