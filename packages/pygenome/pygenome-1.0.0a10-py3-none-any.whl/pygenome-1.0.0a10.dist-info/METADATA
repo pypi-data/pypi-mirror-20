@@ -1,0 +1,148 @@
+Metadata-Version: 2.0
+Name: pygenome
+Version: 1.0.0a10
+Summary: Accessing the Saccharomyces cerevisiae genome from Python
+Home-page: http://pypi.python.org/pypi/pygenome/
+Author: Björn Johansson
+Author-email: bjorn_johansson@bio.uminho.pt
+License: LICENSE.txt
+Keywords: bioinformatics
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Education
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+
+pygenome
+========
+
+|Build Status|\ |Coverage Status|\ |Documentation Status|
+
+Pygenome provide access to the `Saccharomyces
+cerevisiae <https://microbewiki.kenyon.edu/index.php/Saccharomyces_cerevisiae>`__
+genome from Python. `Genes <http://en.wikipedia.org/wiki/Gene>`__,
+`promoters <http://en.wikipedia.org/wiki/Promoter_(genetics)>`__,
+`terminators <http://en.wikipedia.org/wiki/Terminator_(genetics)>`__,
+and `intergenic <http://en.wikipedia.org/wiki/Intergenic_region>`__,
+sequences as well as the deletion
+`loci <http://en.wikipedia.org/wiki/Locus_(genetics)>`__ created by the
+`genome wide deletion
+project <http://www-sequence.stanford.edu/group/yeast_deletion_project/deletions3.html>`__
+are available by their systematic names (like
+`YPR080w <http://www.yeastgenome.org/locus/S000006284/overview>`__) or
+by standard name (like
+`CYC1 <http://www.yeastgenome.org/locus/S000003809/overview>`__). DNA
+sequences are returned as Biopython
+`SeqRecord <http://biopython.org/wiki/SeqRecord>`__ objects.
+
+Typical usage at the `IPython <http://ipython.org/>`__ command line
+could look like this:
+
+::
+
+    from pygenome import sg
+
+    sg.gene["TEF1"]
+    Out[2]: yeast gene YPR080W
+
+    sg.gene["TEF1"].cds()
+    Out[3]: SeqRecord(seq=Seq('ATGGGTAAAGAGAAGTCTCACATTAACGTTGTCGTTATCGGTCATGTCGATTCT...TAA', IUPACAmbiguousDNA()), id='BK006949.2', name='BK006949', description='BK006949 REGION: 700594..701970', dbxrefs=[])
+
+    sg.gene["TEF1"].locus()
+    Out[4]: SeqRecord(seq=Seq('CTTCATCGGTATCTTCGCTATATTCTTTTTAGTCGAATTTGCGGGGAGAAGATG...AAC', IUPACAmbiguousDNA()), id='BK006949.2', name='BK006949', description='BK006949 REGION: 699594..702970', dbxrefs=[])
+
+    sg.gene["TEF1"].promoter()
+    Out[5]: SeqRecord(seq=Seq('ACAATGCATACTTTGTACGTTCAAAATACAATGCAGTAGATATATTTATGCATA...AAA', IUPACAmbiguousDNA()), id='YPR079W_YPR080W', name='.', description='BK006949 REGION: 700015..700593', dbxrefs=[])
+
+    sg.gene["TEF1"].deletion_locus()
+    Out[6]: 'No deletion primers available!'
+
+     sg.gene["CYC1"].deletion_locus()
+    Out[7]: SeqRecord(seq=Seq('GAGGCACCAGCGTCAGCATTTTCAAAGGTGTGTTCTTCGTCAGACATGTTTTAG...GTG', IUPACAmbiguousDNA()), id='yjr048w::KanMX4 locus with 1000 bp up and 1000 bp downstream DNA', name='yjr048w::KanMX4', description='<unknown description>', dbxrefs=[])
+
++---------+--------------+-------------------------------------------------------+
+| ver     | date         | comment                                               |
++=========+==============+=======================================================+
+| 0.9.5   | 2017-01-01   | Python 3 release                                      |
++---------+--------------+-------------------------------------------------------+
+| 0.9.0   | 2015-05-01   | Changed interface to a more object oriented style     |
++---------+--------------+-------------------------------------------------------+
+| 0.5.0   | 2015-03-03   | Documentation, automatic build, test and deployment   |
++---------+--------------+-------------------------------------------------------+
+| 0.0.6   | 2014-06-17   | Bugfix                                                |
++---------+--------------+-------------------------------------------------------+
+| 0.0.5   | 2014-06-14   | Simpler api (see example above)                       |
++---------+--------------+-------------------------------------------------------+
+| 0.0.1   | 2013-08-01   | first release                                         |
++---------+--------------+-------------------------------------------------------+
+
+Installation using conda on Anaconda
+------------------------------------
+
+The absolutely best way of installing and using pygenome is to use the
+free `Anaconda <https://store.continuum.io/cshop/anaconda>`__ or
+`Miniconda <http://conda.pydata.org/miniconda.html>`__ python
+distributions.
+
+Anaconda is a large download (about 400 Mb) while Miniconda is about
+40-50 Mb.
+
+Once Anaconda (or Miniconda) is installed, the conda package manager can
+be used to install pygenome from the
+`BjornFJohansson <https://anaconda.org/bjornfjohansson>`__ package
+channel.
+
+The first step is to add the channel by typing the command below
+followed by return:
+
+::
+
+    conda config --append channels BjornFJohansson
+
+Then pydna can be installed by typing the command below followed by
+return:
+
+::
+
+    conda install pydna
+
+This works on Windows, MacOSX and Linux, and installs all necessary and
+optional dependencies automatically.
+
+Requirements
+------------
+
+-  `Python 3 <http://www.python.org>`__ (0.9.0 was the last to support
+   Python 2.7.)
+-  `pydna <http://pypi.python.org/pypi/pydna>`__
+-  `percache <http://pypi.python.org/pypi/percache>`__
+
+Install with pip
+----------------
+
+The second best way of installing pygenome is by using
+`pip <https://packaging.python.org/en/latest/installing.html#installing-from-pypi>`__
+
+::
+
+    sudo pip install pygenome
+
+Source Code Repository
+~~~~~~~~~~~~~~~~~~~~~~
+
+pydna source code is hosted on
+`Github <https://github.com/BjornFJohansson/pygenome>`__.
+
+.. |Build Status| image:: https://travis-ci.org/BjornFJohansson/pygenome.svg?branch=master
+   :target: https://travis-ci.org/BjornFJohansson/pygenome
+.. |Coverage Status| image:: https://coveralls.io/repos/github/BjornFJohansson/pygenome/badge.svg?branch=master
+   :target: https://coveralls.io/github/BjornFJohansson/pygenome?branch=master
+.. |Documentation Status| image:: https://readthedocs.org/projects/pygenome/badge/?version=latest
+   :target: http://pygenome.readthedocs.io/en/latest/?badge=latest
+
+
