@@ -1,0 +1,71 @@
+0.7.0 (2017-03-19)
+    * Correctly normalize package names according to PEP-503 (thanks to
+      @aiman-alsari, @jstelzer, and many others).
+    * Add --aggressive-normalization option which will create a few different
+      normalizations to support older versions of pip.
+
+0.6.8 (2015-05-27)
+    * Add ``--no-build-html`` and ``--also-get-source`` options
+      (https://github.com/wolever/pip2pi/pull/43; thanks @antevens)
+    * Normalize dashes in wheel package names
+      (https://github.com/wolever/pip2pi/pull/44; thanks @rouge8)
+
+0.6.7 (2015-02-14)
+    * Special case Windows paths so that targets matching /^[A-Z]:\\/ are not
+      considered remote (https://github.com/wolever/pip2pi/issues/39; thanks
+      @dalito).
+
+0.6.6 (2015-01-13)
+    * Fix "no such file or directory" when pip2pi target is remote (thanks
+      @funkaoshi)
+
+0.6.5 (2015-01-09)
+    * Add --normalize-package-names option
+    * Add deprecation warning when non-normalized package names are
+      encountered. See also: https://github.com/wolever/pip2pi/issues/37
+    * Deprecate undocumented ``libpip2pi.commands:egg_to_package`` function.
+    * Deprecate ``dir2pi(use_symlink=...)`` option.
+    * Update documentation to explicitly mention support for pip options.
+    * Document ``file_to_package`` error handling, more explicit error when
+      building an index from a directory with non-package files.
+
+0.6.4 (2014-08-03)
+    * Fix parsing of package file names which include a dash in version number
+      (https://github.com/wolever/pip2pi/pull/29; thanks @cl3m0)
+
+0.6.3 (2014-08-03)
+    * Add --no-symlink option
+      (https://github.com/wolever/pip2pi/pull/28; thanks @georgevreilly)
+
+0.6.2 (2014-03-04)
+    * Add pip version sniffing to detect when we need to download wheels
+      versus when pip will do it correctly.
+
+0.6.1 (2014-03-03)
+    * Remove pip2whl command
+    * Fixed wheel support so dependencies are correctly downloaded
+
+0.6.0 (2014-03-02)
+    * Add support for whl files
+      (https://github.com/wolever/pip2pi/pull/24; thanks @tgross)
+
+0.5.0 (2013-12-04)
+    * Add install_requires on pip>=1.1
+
+0.4.0 (2013-11-23)
+    * Added preliminary Python 3 support
+      (https://github.com/wolever/pip2pi/pull/18; thanks @wogg).
+
+0.3.0 (2013-11-10)
+    * Added Windows support, use setup.py ``console_scripts``
+      (https://github.com/wolever/pip2pi/pull/17; thanks @georgevreilly).
+
+0.2.1 (2013-06-08)
+    * dir2pi will now do sensible things when it encounters egg files
+      (https://github.com/wolever/pip2pi/pull/8; thanks @georgevreilly).
+    * Added the start of a test suite.
+
+0.2.0 (2013-05-30)
+    * pip2pi now generates an index.html file in the package directory
+      (https://github.com/wolever/pip2pi/pull/7; thanks @venkatraju).
+    * Added explicit simplified BSD license.
