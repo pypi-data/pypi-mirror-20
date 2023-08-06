@@ -1,0 +1,50 @@
+Metadata-Version: 1.2
+Name: cpsamd_kernel
+Version: 0.1
+Summary: A Jupyter kernel for CircuitPython on CPSAMD
+Home-page: https://github.com/willingc/cpsamd_kernel
+License: UNKNOWN
+Author: Carol Willing
+Author-email: willingc@willingconsulting.com
+Requires-Python: >=3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Framework :: IPython
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Education
+Classifier: Topic :: Software Development :: Embedded Systems
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: MacOS X
+Requires-Dist: pyserial
+Requires-Dist: ipykernel
+
+cpsamd_kernel
+=============
+
+This is a pre-alpha proof of concept. Use at your own peril.
+For Adafruit Feather M0 on MacOS with Jupyter notebook.
+
+Installation
+------------
+
+Install this package::
+
+       python3 -m pip install cpsamd_kernel
+       python3 -m cpsamd_kernel.install
+
+
+Usage
+-----
+
+To use the kernel from other Jupyter interfaces, start them with
+``--kernel cpsamd``.
+
+
+Attribution
+-----------
+
+This is inspired by Thomas Kluyver's ubit_kernel for the BBC Micro:bit and
+Project Jupyter's wrapper kernel.
+
+
