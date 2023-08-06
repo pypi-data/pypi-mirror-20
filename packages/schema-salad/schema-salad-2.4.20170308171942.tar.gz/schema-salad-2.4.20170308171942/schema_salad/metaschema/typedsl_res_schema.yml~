@@ -1,0 +1,17 @@
+{
+  "$graph": [{
+    "name": "TypeDSLExample",
+    "type": "record",
+    "documentRoot": true,
+    "fields": [{
+      "name": "type",
+      "type": {
+        type: "array",
+        "items": ["string", "https://w3id.org/cwl/salad#ArraySchema"]
+      },
+      "jsonldPredicate": {
+        "typeDSL": true
+      }
+    }]
+  }]
+}
