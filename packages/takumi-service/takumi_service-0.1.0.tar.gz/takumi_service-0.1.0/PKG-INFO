@@ -1,0 +1,29 @@
+Metadata-Version: 1.0
+Name: takumi_service
+Version: 0.1.0
+Summary: Takumi service
+Home-page: https://github.com/elemecreativelab/takumi-service
+Author: Eleme Lab
+Author-email: imaralla@icloud.com
+License: UNKNOWN
+Description: takumi-service: Takumi thrift service implementation
+        ====================================================
+        
+        This package defines the interfaces for writing Takumi thrift services.
+        
+        Example
+        -------
+        
+        To define a simple app:
+        
+        .. code-block:: python
+        
+            from takumi_service.service import ServiceHandler
+        
+            app = ServiceHandler('TestService')
+        
+            @app.api
+            def say_hello(name):
+                return 'Hello ' + name
+        
+Platform: UNKNOWN
