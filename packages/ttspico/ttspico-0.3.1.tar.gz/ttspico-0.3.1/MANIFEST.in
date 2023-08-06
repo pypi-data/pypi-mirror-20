@@ -1,0 +1,4 @@
+include README.rst
+graft picopi/pico/lib
+include picopi/pico/tts/*.h
+include picopi/pico/lang/*.bin
