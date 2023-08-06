@@ -1,0 +1,53 @@
+Metadata-Version: 1.1
+Name: pywe-utils
+Version: 1.0.2
+Summary: UNKNOWN
+Home-page: https://github.com/sdkwe/pywe-utils
+Author: Hackathon
+Author-email: kimi.huang@brightcells.com
+License: UNKNOWN
+Description: ==========
+        pywe-utils
+        ==========
+        
+        Wechat Utils Module for Python.
+        
+        Installation
+        ============
+        
+        ::
+        
+            pip install pywe-utils
+        
+        
+        Usage
+        =====
+        
+        ::
+        
+            from pywe_utils import to_binary, to_text, random_string
+        
+        
+        Method
+        ======
+        
+        ::
+        
+            def to_binary(value, encoding='utf-8'):
+        
+            def to_text(value, encoding='utf-8'):
+        
+            def random_string(length=16):
+        
+Keywords: Wechat Weixin Utils
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
