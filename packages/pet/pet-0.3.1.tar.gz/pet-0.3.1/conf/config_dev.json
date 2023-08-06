@@ -1,0 +1,16 @@
+{
+    "check_interval" : 5,
+    "log_level":"DEBUG",
+    "email":{ 
+        "smtp": "smtp.naver.com:465", 
+        "imap" : "imap.naver.com:993",
+        "folder" : "pi-torrent-noty",
+        "user" : "dydwls121200@naver.com",
+        "password" : "CHOCOdydrkf45!@"
+    },
+    "transmission":{
+        "user" : "likemilk",
+        "password" : "choco2323!",
+        "host" : "http://localhost:9091"
+    }
+}
