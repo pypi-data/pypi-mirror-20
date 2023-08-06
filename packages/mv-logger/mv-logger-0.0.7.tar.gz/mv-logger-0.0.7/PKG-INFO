@@ -1,0 +1,48 @@
+Metadata-Version: 1.1
+Name: mv-logger
+Version: 0.0.7
+Summary: mv-logger
+Home-page: https://github.com/willard-ag/mv-logger
+Author: Mobile Vikings PL
+Author-email: kontakt@mobilevikings.pl
+License: MIT
+Description: # mv-logger
+        
+        To install: 
+        
+        ```
+        pip install mv-logger
+        ```
+        
+        To use in django:
+        
+        ```
+            LOGGING = {
+                'version': 1,
+                'disable_existing_loggers': False,
+                'root': {
+                    'level': 'INFO',
+                    'handlers': ['file'],
+                    'propagate': False,
+                },
+                'formatters': {
+                    'logstash': {
+                        '()': 'mv_logger.LogstashFormatter',
+                    },
+                },
+                'handlers': {
+                    'file': {
+                        'class': 'logging.FileHandler',
+                        'formatter': 'logstash',
+                        'level': 'INFO',
+                        'filename': '/var/log/app.log,
+                    },
+                },
+            }
+        ```
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Operating System :: OS Independent
+Classifier: Environment :: Web Environment
