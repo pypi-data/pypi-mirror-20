@@ -1,0 +1,1462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>Settings</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Settings</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 1. Quick reference for section &#8220;general&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-ignore-case">ignore-case</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to find text on a page case-insensitively.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-startpage">startpage</a></p></td>
+<td align="left" valign="top"><p class="table">The default page(s) to open at the start, separated by commas.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-yank-ignored-url-parameters">yank-ignored-url-parameters</a></p></td>
+<td align="left" valign="top"><p class="table">The URL parameters to strip with :yank url, separated by commas.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-default-open-dispatcher">default-open-dispatcher</a></p></td>
+<td align="left" valign="top"><p class="table">The default program used to open downloads. Set to an empty string to use the default internal handler.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-default-page">default-page</a></p></td>
+<td align="left" valign="top"><p class="table">The page to open if :open -t/-b/-w is used without URL. Use <code>about:blank</code> for a blank page.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-auto-search">auto-search</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to start a search when something else than a URL is entered.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-auto-save-config">auto-save-config</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to save the config automatically on quit.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-auto-save-interval">auto-save-interval</a></p></td>
+<td align="left" valign="top"><p class="table">How often (in milliseconds) to auto-save config/cookies/etc.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-editor">editor</a></p></td>
+<td align="left" valign="top"><p class="table">The editor (and arguments) to use for the <code>open-editor</code> command.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-editor-encoding">editor-encoding</a></p></td>
+<td align="left" valign="top"><p class="table">Encoding to use for editor.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-private-browsing">private-browsing</a></p></td>
+<td align="left" valign="top"><p class="table">Do not record visited pages in the history or store web page icons.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-developer-extras">developer-extras</a></p></td>
+<td align="left" valign="top"><p class="table">Enable extra tools for Web developers.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-print-element-backgrounds">print-element-backgrounds</a></p></td>
+<td align="left" valign="top"><p class="table">Whether the background color and images are also drawn when the page is printed.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-xss-auditing">xss-auditing</a></p></td>
+<td align="left" valign="top"><p class="table">Whether load requests should be monitored for cross-site scripting attempts.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-site-specific-quirks">site-specific-quirks</a></p></td>
+<td align="left" valign="top"><p class="table">Enable QtWebKit workarounds for broken sites.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-default-encoding">default-encoding</a></p></td>
+<td align="left" valign="top"><p class="table">Default encoding to use for websites.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-new-instance-open-target">new-instance-open-target</a></p></td>
+<td align="left" valign="top"><p class="table">How to open links in an existing instance if a new one is launched.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-new-instance-open-target.window">new-instance-open-target.window</a></p></td>
+<td align="left" valign="top"><p class="table">Which window to choose when opening links as new tabs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-log-javascript-console">log-javascript-console</a></p></td>
+<td align="left" valign="top"><p class="table">How to log javascript console messages.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-save-session">save-session</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to always save the open pages.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-session-default-name">session-default-name</a></p></td>
+<td align="left" valign="top"><p class="table">The name of the session to save by default, or empty for the last loaded session.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#general-url-incdec-segments">url-incdec-segments</a></p></td>
+<td align="left" valign="top"><p class="table">The URL segments where <code>:navigate increment/decrement</code> will search for a number.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 2. Quick reference for section &#8220;ui&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-zoom-levels">zoom-levels</a></p></td>
+<td align="left" valign="top"><p class="table">The available zoom levels, separated by commas.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-default-zoom">default-zoom</a></p></td>
+<td align="left" valign="top"><p class="table">The default zoom level.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-downloads-position">downloads-position</a></p></td>
+<td align="left" valign="top"><p class="table">Where to show the downloaded files.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-status-position">status-position</a></p></td>
+<td align="left" valign="top"><p class="table">The position of the status bar.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-message-timeout">message-timeout</a></p></td>
+<td align="left" valign="top"><p class="table">Time (in ms) to show messages in the statusbar for.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-message-unfocused">message-unfocused</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to show messages in unfocused windows.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-confirm-quit">confirm-quit</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to confirm quitting the application.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-zoom-text-only">zoom-text-only</a></p></td>
+<td align="left" valign="top"><p class="table">Whether the zoom factor on a frame applies only to the text or to all content.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-frame-flattening">frame-flattening</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to  expand each subframe to its contents.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-user-stylesheet">user-stylesheet</a></p></td>
+<td align="left" valign="top"><p class="table">User stylesheet to use (absolute filename or filename relative to the config directory). Will expand environment variables.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-hide-scrollbar">hide-scrollbar</a></p></td>
+<td align="left" valign="top"><p class="table">Hide the main scrollbar.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-css-media-type">css-media-type</a></p></td>
+<td align="left" valign="top"><p class="table">Set the CSS media type.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-smooth-scrolling">smooth-scrolling</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to enable smooth scrolling for webpages.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-remove-finished-downloads">remove-finished-downloads</a></p></td>
+<td align="left" valign="top"><p class="table">Number of milliseconds to wait before removing finished downloads. Will not be removed if value is -1.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-hide-statusbar">hide-statusbar</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to hide the statusbar unless a message is shown.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-statusbar-padding">statusbar-padding</a></p></td>
+<td align="left" valign="top"><p class="table">Padding for statusbar (top, bottom, left, right).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-window-title-format">window-title-format</a></p></td>
+<td align="left" valign="top"><p class="table">The format to use for the window title. The following placeholders are defined:</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-modal-js-dialog">modal-js-dialog</a></p></td>
+<td align="left" valign="top"><p class="table">Use standard JavaScript modal dialog for alert() and confirm()</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-hide-wayland-decoration">hide-wayland-decoration</a></p></td>
+<td align="left" valign="top"><p class="table">Hide the window decoration when using wayland (requires restart)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-keyhint-blacklist">keyhint-blacklist</a></p></td>
+<td align="left" valign="top"><p class="table">Keychains that shouldn&#8217;t be shown in the keyhint dialog</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-prompt-radius">prompt-radius</a></p></td>
+<td align="left" valign="top"><p class="table">The rounding radius for the edges of prompts.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#ui-prompt-filebrowser">prompt-filebrowser</a></p></td>
+<td align="left" valign="top"><p class="table">Show a filebrowser in upload/download prompts.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 3. Quick reference for section &#8220;network&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-do-not-track">do-not-track</a></p></td>
+<td align="left" valign="top"><p class="table">Value to send in the <code>DNT</code> header.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-accept-language">accept-language</a></p></td>
+<td align="left" valign="top"><p class="table">Value to send in the <code>accept-language</code> header.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-referer-header">referer-header</a></p></td>
+<td align="left" valign="top"><p class="table">Send the Referer header</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-user-agent">user-agent</a></p></td>
+<td align="left" valign="top"><p class="table">User agent to send. Empty to send the default.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-proxy">proxy</a></p></td>
+<td align="left" valign="top"><p class="table">The proxy to use.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-proxy-dns-requests">proxy-dns-requests</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to send DNS requests over the configured proxy.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-ssl-strict">ssl-strict</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to validate SSL handshakes.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-dns-prefetch">dns-prefetch</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to try to pre-fetch DNS entries to speed up browsing.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-custom-headers">custom-headers</a></p></td>
+<td align="left" valign="top"><p class="table">Set custom headers for qutebrowser HTTP requests.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#network-netrc-file">netrc-file</a></p></td>
+<td align="left" valign="top"><p class="table">Set location of a netrc-file for HTTP authentication. If empty, ~/.netrc is used.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 4. Quick reference for section &#8220;completion&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-show">show</a></p></td>
+<td align="left" valign="top"><p class="table">When to show the autocompletion window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-download-path-suggestion">download-path-suggestion</a></p></td>
+<td align="left" valign="top"><p class="table">What to display in the download filename input.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-timestamp-format">timestamp-format</a></p></td>
+<td align="left" valign="top"><p class="table">How to format timestamps (e.g. for history)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-height">height</a></p></td>
+<td align="left" valign="top"><p class="table">The height of the completion, in px or as percentage of the window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-cmd-history-max-items">cmd-history-max-items</a></p></td>
+<td align="left" valign="top"><p class="table">How many commands to save in the command history.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-web-history-max-items">web-history-max-items</a></p></td>
+<td align="left" valign="top"><p class="table">How many URLs to show in the web history.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-quick-complete">quick-complete</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to move on to the next part when there&#8217;s only one possible completion left.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-shrink">shrink</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to shrink the completion to be smaller than the configured size if there are no scrollbars.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-scrollbar-width">scrollbar-width</a></p></td>
+<td align="left" valign="top"><p class="table">Width of the scrollbar in the completion window (in px).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#completion-scrollbar-padding">scrollbar-padding</a></p></td>
+<td align="left" valign="top"><p class="table">Padding of scrollbar handle in completion window (in px).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 5. Quick reference for section &#8220;input&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-timeout">timeout</a></p></td>
+<td align="left" valign="top"><p class="table">Timeout (in milliseconds) for ambiguous key bindings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-partial-timeout">partial-timeout</a></p></td>
+<td align="left" valign="top"><p class="table">Timeout (in milliseconds) for partially typed key bindings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-insert-mode-on-plugins">insert-mode-on-plugins</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to switch to insert mode when clicking flash and other plugins.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-auto-leave-insert-mode">auto-leave-insert-mode</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to leave insert mode if a non-editable element is clicked.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-auto-insert-mode">auto-insert-mode</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to automatically enter insert mode if an editable element is focused after page load.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-forward-unbound-keys">forward-unbound-keys</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to forward unbound keys to the webview in normal mode.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-spatial-navigation">spatial-navigation</a></p></td>
+<td align="left" valign="top"><p class="table">Enables or disables the Spatial Navigation feature.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-links-included-in-focus-chain">links-included-in-focus-chain</a></p></td>
+<td align="left" valign="top"><p class="table">Whether hyperlinks should be included in the keyboard focus chain.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-rocker-gestures">rocker-gestures</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to enable Opera-like mouse rocker gestures. This disables the context menu.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#input-mouse-zoom-divider">mouse-zoom-divider</a></p></td>
+<td align="left" valign="top"><p class="table">How much to divide the mouse wheel movements to translate them into zoom increments.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 6. Quick reference for section &#8220;tabs&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-background-tabs">background-tabs</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to open new tabs (middleclick/ctrl+click) in background.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-select-on-remove">select-on-remove</a></p></td>
+<td align="left" valign="top"><p class="table">Which tab to select when the focused tab is removed.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-new-tab-position">new-tab-position</a></p></td>
+<td align="left" valign="top"><p class="table">How new tabs are positioned.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-new-tab-position-explicit">new-tab-position-explicit</a></p></td>
+<td align="left" valign="top"><p class="table">How new tabs opened explicitly are positioned.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-last-close">last-close</a></p></td>
+<td align="left" valign="top"><p class="table">Behavior when the last tab is closed.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-show">show</a></p></td>
+<td align="left" valign="top"><p class="table">When to show the tab bar</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-show-switching-delay">show-switching-delay</a></p></td>
+<td align="left" valign="top"><p class="table">Time to show the tab bar before hiding it when tabs&#8594;show is set to <em>switching</em>.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-wrap">wrap</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to wrap when changing tabs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-movable">movable</a></p></td>
+<td align="left" valign="top"><p class="table">Whether tabs should be movable.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-close-mouse-button">close-mouse-button</a></p></td>
+<td align="left" valign="top"><p class="table">On which mouse button to close tabs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-position">position</a></p></td>
+<td align="left" valign="top"><p class="table">The position of the tab bar.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-show-favicons">show-favicons</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to show favicons in the tab bar.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-width">width</a></p></td>
+<td align="left" valign="top"><p class="table">The width of the tab bar if it&#8217;s vertical, in px or as percentage of the window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-indicator-width">indicator-width</a></p></td>
+<td align="left" valign="top"><p class="table">Width of the progress indicator (0 to disable).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-tabs-are-windows">tabs-are-windows</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to open windows instead of tabs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-title-format">title-format</a></p></td>
+<td align="left" valign="top"><p class="table">The format to use for the tab title. The following placeholders are defined:</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-title-alignment">title-alignment</a></p></td>
+<td align="left" valign="top"><p class="table">Alignment of the text inside of tabs</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-mousewheel-tab-switching">mousewheel-tab-switching</a></p></td>
+<td align="left" valign="top"><p class="table">Switch between tabs using the mouse wheel.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-padding">padding</a></p></td>
+<td align="left" valign="top"><p class="table">Padding for tabs (top, bottom, left, right).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#tabs-indicator-padding">indicator-padding</a></p></td>
+<td align="left" valign="top"><p class="table">Padding for indicators (top, bottom, left, right).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 7. Quick reference for section &#8220;storage&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-download-directory">download-directory</a></p></td>
+<td align="left" valign="top"><p class="table">The directory to save downloads to. An empty value selects a sensible os-specific default. Will expand environment variables.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-prompt-download-directory">prompt-download-directory</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to prompt the user for the download location.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-remember-download-directory">remember-download-directory</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to remember the last used download directory.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-maximum-pages-in-cache">maximum-pages-in-cache</a></p></td>
+<td align="left" valign="top"><p class="table">The maximum number of pages to hold in the global memory page cache.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-object-cache-capacities">object-cache-capacities</a></p></td>
+<td align="left" valign="top"><p class="table">The capacities for the global memory cache for dead objects such as stylesheets or scripts. Syntax: cacheMinDeadCapacity, cacheMaxDead, totalCapacity.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-offline-storage-default-quota">offline-storage-default-quota</a></p></td>
+<td align="left" valign="top"><p class="table">Default quota for new offline storage databases.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-offline-web-application-cache-quota">offline-web-application-cache-quota</a></p></td>
+<td align="left" valign="top"><p class="table">Quota for the offline web application cache.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-offline-storage-database">offline-storage-database</a></p></td>
+<td align="left" valign="top"><p class="table">Whether support for the HTML 5 offline storage feature is enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-offline-web-application-storage">offline-web-application-storage</a></p></td>
+<td align="left" valign="top"><p class="table">Whether support for the HTML 5 web application cache feature is enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-local-storage">local-storage</a></p></td>
+<td align="left" valign="top"><p class="table">Whether support for the HTML 5 local storage feature is enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#storage-cache-size">cache-size</a></p></td>
+<td align="left" valign="top"><p class="table">Size of the HTTP network cache. Empty to use the default value.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 8. Quick reference for section &#8220;content&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-allow-images">allow-images</a></p></td>
+<td align="left" valign="top"><p class="table">Whether images are automatically loaded in web pages.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-allow-javascript">allow-javascript</a></p></td>
+<td align="left" valign="top"><p class="table">Enables or disables the running of JavaScript programs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-allow-plugins">allow-plugins</a></p></td>
+<td align="left" valign="top"><p class="table">Enables or disables plugins in Web pages.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-webgl">webgl</a></p></td>
+<td align="left" valign="top"><p class="table">Enables or disables WebGL.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-css-regions">css-regions</a></p></td>
+<td align="left" valign="top"><p class="table">Enable or disable support for CSS regions.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-hyperlink-auditing">hyperlink-auditing</a></p></td>
+<td align="left" valign="top"><p class="table">Enable or disable hyperlink auditing (&lt;a ping&gt;).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-geolocation">geolocation</a></p></td>
+<td align="left" valign="top"><p class="table">Allow websites to request geolocations.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-notifications">notifications</a></p></td>
+<td align="left" valign="top"><p class="table">Allow websites to show notifications.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-media-capture">media-capture</a></p></td>
+<td align="left" valign="top"><p class="table">Allow websites to record audio/video.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-javascript-can-open-windows-automatically">javascript-can-open-windows-automatically</a></p></td>
+<td align="left" valign="top"><p class="table">Whether JavaScript programs can open new windows without user interaction.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-javascript-can-close-windows">javascript-can-close-windows</a></p></td>
+<td align="left" valign="top"><p class="table">Whether JavaScript programs can close windows.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-javascript-can-access-clipboard">javascript-can-access-clipboard</a></p></td>
+<td align="left" valign="top"><p class="table">Whether JavaScript programs can read or write to the clipboard.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-ignore-javascript-prompt">ignore-javascript-prompt</a></p></td>
+<td align="left" valign="top"><p class="table">Whether all javascript prompts should be ignored.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-ignore-javascript-alert">ignore-javascript-alert</a></p></td>
+<td align="left" valign="top"><p class="table">Whether all javascript alerts should be ignored.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-local-content-can-access-remote-urls">local-content-can-access-remote-urls</a></p></td>
+<td align="left" valign="top"><p class="table">Whether locally loaded documents are allowed to access remote urls.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-local-content-can-access-file-urls">local-content-can-access-file-urls</a></p></td>
+<td align="left" valign="top"><p class="table">Whether locally loaded documents are allowed to access other local urls.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-cookies-accept">cookies-accept</a></p></td>
+<td align="left" valign="top"><p class="table">Control which cookies to accept.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-cookies-store">cookies-store</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to store cookies. Note this option needs a restart with QtWebEngine.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-host-block-lists">host-block-lists</a></p></td>
+<td align="left" valign="top"><p class="table">List of URLs of lists which contain hosts to block.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-host-blocking-enabled">host-blocking-enabled</a></p></td>
+<td align="left" valign="top"><p class="table">Whether host blocking is enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-host-blocking-whitelist">host-blocking-whitelist</a></p></td>
+<td align="left" valign="top"><p class="table">List of domains that should always be loaded, despite being ad-blocked.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#content-enable-pdfjs">enable-pdfjs</a></p></td>
+<td align="left" valign="top"><p class="table">Enable pdf.js to view PDF files in the browser.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="75%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 9. Quick reference for section &#8220;hints&#8221;</caption>
+<col width="25%" />
+<col width="75%" />
+<thead>
+<tr>
+<th align="left" valign="top">Setting</th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-border">border</a></p></td>
+<td align="left" valign="top"><p class="table">CSS border value for hints.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-mode">mode</a></p></td>
+<td align="left" valign="top"><p class="table">Mode to use for hints.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-chars">chars</a></p></td>
+<td align="left" valign="top"><p class="table">Chars used for hint strings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-min-chars">min-chars</a></p></td>
+<td align="left" valign="top"><p class="table">Minimum number of chars used for hint strings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-scatter">scatter</a></p></td>
+<td align="left" valign="top"><p class="table">Whether to scatter hint key chains (like Vimium) or not (like dwb). Ignored for number hints.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-uppercase">uppercase</a></p></td>
+<td align="left" valign="top"><p class="table">Make chars in hint strings uppercase.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-dictionary">dictionary</a></p></td>
+<td align="left" valign="top"><p class="table">The dictionary file to be used by the word hints.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-auto-follow">auto-follow</a></p></td>
+<td align="left" valign="top"><p class="table">Controls when a hint can be automatically followed without the user pressing Enter.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-auto-follow-timeout">auto-follow-timeout</a></p></td>
+<td align="left" valign="top"><p class="table">A timeout (in milliseconds) to inhibit normal-mode key bindings after a successful auto-follow.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-next-regexes">next-regexes</a></p></td>
+<td align="left" valign="top"><p class="table">A comma-separated list of regexes to use for <em>next</em> links.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-prev-regexes">prev-regexes</a></p></td>
+<td align="left" valign="top"><p class="table">A comma-separated list of regexes to use for <em>prev</em> links.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-find-implementation">find-implementation</a></p></td>
+<td align="left" valign="top"><p class="table">Which implementation to use to find elements to hint.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><a href="#hints-hide-unmatched-rapid-hints">hide-unmatched-rapid-hints</a></p></td>
+<td align="left" valign="top"><p class="table">Controls hiding unmatched hints in rapid mode.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
