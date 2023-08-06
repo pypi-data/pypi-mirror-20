@@ -1,0 +1,9 @@
+crlibm>=1.0.3,==1.*
+six>=1.10
+
+[develop]
+Sphinx
+flake8
+pytest-cov
+tox
+zest.releaser[recommended]
