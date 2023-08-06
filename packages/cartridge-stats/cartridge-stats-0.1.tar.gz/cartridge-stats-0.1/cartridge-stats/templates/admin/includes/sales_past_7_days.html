@@ -1,0 +1,13 @@
+{% load i18n shop_tags %}
+
+<div class="module">
+    <h2>{% trans "Sales Total Past 7 Days" %}</h2>
+    <div id="cartridge-sales-today">
+      <h1 style="text-align: center;">
+        {{ week_total.item_total__sum|currency }}
+        <div class="quiet tiny">{{ week_min|date:"m/d/Y" }} - {{ week_max|date:"m/d/Y" }}</div>
+      </h1>
+
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+{% load i18n shop_tags %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<div class="module">
+    <h2>{% trans "Sales For Last 12 Months" %}</h2>
+    <div id="cartridge-sales-by-year">
+      <div class="ct-chart-by-month ct-perfect-fourth"></div>
+    </div>
+</div>
+
+<script>
+  new Chartist.Bar('.ct-chart-by-month', {
+    labels: [{% spaceless %}{% for item in sales_by_months %}'{{ item.month|date:"M Y" }}'{% if not forloop.last %},{% endif %}{% endfor %}{% endspaceless %}],
+    series: [{% spaceless %}{% for item in sales_by_months %}'{{ item.item_total__sum }}'{% if not forloop.last %},{% endif %}{% endfor %}{% endspaceless %}]
+  }, {
+    seriesBarDistance: 10,
+    distributeSeries: true,
+    axisY: {
+        offset: 50
+      }
+  });
+</script>

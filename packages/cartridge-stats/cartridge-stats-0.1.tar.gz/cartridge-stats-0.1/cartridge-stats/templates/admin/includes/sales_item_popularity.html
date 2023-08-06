@@ -1,0 +1,44 @@
+{% load i18n shop_tags humanize %}
+<div class="module">
+    <h2>{% trans "Item Popularity All Time" %}</h2>
+    <div id="cartridge-sales-item-popularity">
+      <table>
+      {% for item in popular_items %}
+        <tr>
+          <th>{{ item.description }}</th>
+          <td class="align-right">{{ item.sku_count|intcomma }}</td>
+        </tr>
+        {% if forloop.counter0 == 5 %}
+          <tr class="show-popular-link">
+            <td colspan="2" class="align-right">
+              <a href="#">Show All</a>
+            </td>
+          </tr>
+        </table>
+        <table id="cartridge-sales-item-popularity-more" style="display: none">
+        {% endif %}
+        {% if forloop.last %}
+        <tr class="hide-popular-link">
+          <td colspan="2" class="align-right">
+            <a href="#">Show Less</a>
+          </td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+      </table>
+    </div>
+</div>
+<script>
+  jQuery(function(){
+    jQuery('.show-popular-link a').click(function(e){
+      e.preventDefault();
+      jQuery('#cartridge-sales-item-popularity-more').show();
+      jQuery('.show-popular-link').hide();
+    });
+    jQuery('.hide-popular-link a').click(function(e){
+      e.preventDefault();
+      jQuery('#cartridge-sales-item-popularity-more').hide();
+      jQuery('.show-popular-link').show();
+    });
+  });
+</script>

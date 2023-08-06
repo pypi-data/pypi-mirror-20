@@ -1,0 +1,12 @@
+{% load i18n shop_tags %}
+
+<div class="module">
+    <h2>{% trans "Sales Today" %}</h2>
+    <div id="cartridge-sales-today">
+      <h1 style="text-align: center;">
+        {{ daily_total.item_total__sum|currency }}
+        <div class="quiet tiny">{{ daily_date|date:"m/d/Y" }}</div>
+      </h1>
+
+    </div>
+</div>

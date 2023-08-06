@@ -1,0 +1,24 @@
+{% load i18n shop_tags %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<div class="module">
+    <h2>{% trans "Item Popularity Today" %}</h2>
+    <div id="cartridge-sales-item-popularity">
+      <div class="ct-chart ct-perfect-fourth"></div>
+    </div>
+</div>
+
+<script>
+  new Chartist.Bar('.ct-chart', {
+    labels: [{% spaceless %}{% for item in popular_items %}'{{ item.sku }}'{% if not forloop.last %},{% endif %}{% endfor %}{% endspaceless %}],
+    series: [{% spaceless %}{% for item in popular_items %}'{{ item.sku_count }}'{% if not forloop.last %},{% endif %}{% endfor %}{% endspaceless %}]
+  }, {
+    seriesBarDistance: 10,
+    distributeSeries: true,
+    reverseData: true,
+    horizontalBars: true,
+    axisY: {
+        offset: 170
+      }
+  });
+</script>
