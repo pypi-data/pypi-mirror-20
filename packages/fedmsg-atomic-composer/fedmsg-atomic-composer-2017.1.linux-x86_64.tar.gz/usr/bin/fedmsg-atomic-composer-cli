@@ -1,0 +1,10 @@
+#!/usr/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'fedmsg-atomic-composer==2017.1','console_scripts','fedmsg-atomic-composer-cli'
+__requires__ = 'fedmsg-atomic-composer==2017.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('fedmsg-atomic-composer==2017.1', 'console_scripts', 'fedmsg-atomic-composer-cli')()
+    )
