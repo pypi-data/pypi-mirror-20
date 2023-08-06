@@ -1,0 +1,12 @@
+
+package {{tgroup.namespace}};
+
+import java.util.Map;
+
+public class {{tgroup.name}} {
+    {% for transformer in tgroup.transformers %}
+        {# Generate a function for each transformer #}
+        {{ transformer.render() }}
+    {% endfor %}
+}
+

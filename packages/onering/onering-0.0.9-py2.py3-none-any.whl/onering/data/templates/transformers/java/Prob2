@@ -1,0 +1,32 @@
+
+Problem 2 - Now that we provide full flexibility to template writers on what getter/setter pattern they pick (ie even symbol tables is under their full control and so is when and where variables are declared and cleanlyl managed, the next problem is selecting what variable/expression/statement get selected for a setter and what gets selected for constructors and ordering these around.
+
+Consider the following dest object:
+
+Person {
+    @readonly
+    id
+    name
+    age
+    constructor(id: int, name) {
+        this.id = id
+        this.name = name
+    }
+}
+
+Here the ID is readonly so it can only be passed in via a constructor, where as name and age can be set.  Also name MUST be passed to the constructor but it can also be changed later on (this is interesting).
+
+When we have transformer rules like this:
+
+
+x/y/ref => id
+x/name => name
+32 => age
+
+our transformer should look something like:
+
+out = new Person(value_of(x.y.ref), value_of(x.name))
+out.setAge(32)
+return out
+
+// So we need the concept of what values a constructor requires absolutely and what can be setters.
