@@ -1,0 +1,13 @@
+apsw
+arrow
+nltk>=2.0,<2.1
+regex
+ujson
+
+[test]
+tox
+pytest
+pytest-cov
+coverage
+pep8
+mock
