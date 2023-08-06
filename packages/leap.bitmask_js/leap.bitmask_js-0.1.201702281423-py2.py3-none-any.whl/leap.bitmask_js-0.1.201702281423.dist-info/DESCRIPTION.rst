@@ -1,0 +1,10 @@
+leap.bitmask_js
+-----------------
+This package contains the already compiled javascript resources for the bitmask
+UI.
+
+If you want to develop for this UI, please checkout the bitmask-dev [0] repo
+and follow the instructions in the ui/README.md file.
+
+[0] https://github.com/leapcode/bitmask-dev
+
