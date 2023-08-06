@@ -1,0 +1,45 @@
+.\" Manpage for afaq-dl.
+.\" Contact ju@riseup.net to correct errors or typos.
+.TH man 8 "25 Feb 2017" "1.0" "afaq-dl man page"
+.SH NAME
+afaq-dl \- Download the online book An Anarchist FAQ (AFAQ)
+.SH SYNOPSIS
+anarchism_update [-h] [-d] [-v] [-o OUTPUTDIR] [-c] [-g] [-p] [-r] [-m] [-a]
+.SH DESCRIPTION
+afaq-dl download the online book An Anarchist FAQ (AFAQ),
+convert the HTML to Markdown and push the changes to the afaq repository.
+.SH OPTIONS
+The options which apply to the anarchism_update command are:
+
+-h, --help
+    show this help message and exit
+
+-d, --debug
+    Set logging level to debug
+
+-v, --version
+    version
+
+-o OUTPUTDIR, --outputdir OUTPUTDIR
+    output local path
+
+-c, --crawl
+    Crawl AFAQ.
+
+-g, --pull
+    Pull git repo before obtaining AFAQ.
+
+-p, --push
+    Push to git repo AFAQ changes.
+
+-r, --rm
+    Remove content outputdir before crawling.
+
+-m, --convert
+    Convert obtained AFAQ to other formats.
+
+-a, --all
+    Equivalent to -g, -c, -p, -r, -m.
+
+.SH AUTHOR
+ju xor (ju@riseup.net)
