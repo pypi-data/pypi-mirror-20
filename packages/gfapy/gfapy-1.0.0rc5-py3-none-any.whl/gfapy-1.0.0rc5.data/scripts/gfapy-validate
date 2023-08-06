@@ -1,0 +1,16 @@
+#!python
+"""
+Validate a GFA file
+"""
+
+import sys
+import os
+from gfapy import Gfa
+import argparse
+
+op = argparse.ArgumentParser(description=__doc__)
+op.add_argument("filename")
+opts = op.parse_args()
+
+gfa = Gfa.from_file(opts.filename)
+gfa.validate()
