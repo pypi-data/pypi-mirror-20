@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: python; -*-
+"""
+Common views
+"""
+
+from __future__ import unicode_literals, absolute_import
+
+from tailbone.views import common as base
+
+import rattail_demo
+
+
+class CommonView(base.CommonView):
+
+    project_title = "Rattail Demo"
+    project_version = rattail_demo.__version__ + '+dev'
+
+    def get_packages(self):
+        import rattail_tempmon
+
+        packages = super(CommonView, self).get_packages()
+        packages['rattail-tempmon'] = rattail_tempmon.__version__
+        for key in packages:
+            packages[key] = packages[key] + '+dev'
+        return packages
+
+
+def includeme(config):
+    CommonView.defaults(config)

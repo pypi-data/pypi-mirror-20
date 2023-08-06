@@ -1,0 +1,8 @@
+## -*- coding: utf-8 -*-
+<%inherit file="/base.mako" />
+
+<%def name="title()">Home</%def>
+
+${h.image(request.static_url('{{package}}.web:static/img/{{package}}.jpg'), "{{project_title}} Logo", id='logo', width=500)}
+
+<h1 style="text-align: center;">Welcome to {{project_title}}</h1>
