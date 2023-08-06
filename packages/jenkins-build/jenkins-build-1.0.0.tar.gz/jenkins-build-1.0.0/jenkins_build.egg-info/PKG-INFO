@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: jenkins-build
+Version: 1.0.0
+Summary: A python tool to manage(trigger/query/cancel/stop/log) jenkins build
+Home-page: https://github.com/LeEco-SEE/jenkins-build
+Author: Huaqiang Li
+Author-email: lihuaqiang@le.com
+License: Apache License, Version 2.0
+Description: support to trigger a jenkins build with/without parameters in configure file, query a build status with queueid or build number, cancel a build with queueid or build number, get the build log with queueid or build number with option to save the log output to a log file 
+Keywords: jenkins build trigger cancel stop query log queue_id build_number
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Software Development :: Build Tools
