@@ -1,0 +1,6 @@
+include glue.rs glue.pxd glue.h
+include htmlpyever.pyx Cargo.toml Cargo.lock
+
+include setup.py
+
+include REAME.rst LICENSE COPYING.lesser
