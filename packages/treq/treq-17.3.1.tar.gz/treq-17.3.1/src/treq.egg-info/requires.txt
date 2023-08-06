@@ -1,0 +1,11 @@
+incremental
+requests >= 2.1.0
+six
+Twisted[tls] >= 16.4.0
+attrs
+
+[dev]
+pyflakes
+pep8
+sphinx
+mock==1.0.1
