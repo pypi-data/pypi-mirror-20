@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: "<?xml version='1.0' encoding='utf-8'?>\n<request>\n  <itemDeleteRequest>\n
+      \   <item>\n      <itemUrl>item-test-01</itemUrl>\n    </item>\n  </itemDeleteRequest>\n</request>\n"
+    headers:
+      Authorization: [ESA XXXXXX]
+      Content-Length: ['166']
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: https://api.rms.rakuten.co.jp/es/1.0/item/delete
+  response:
+    body: {string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <result><status><interfaceId>item.delete</interfaceId><systemStatus>OK</systemStatus><message>OK</message><requestId>260ee2d7-e218-4235-b0d5-ca676ff6615d</requestId><requests/></status><itemDeleteResult><code>N000</code><item><itemUrl>item-test-01</itemUrl></item></itemDeleteResult></result>'}
+    headers:
+      Connection: [close]
+      Content-Length: ['331']
+      Content-Type: [text/xml; charset=utf-8]
+      Date: ['Mon, 20 Feb 2017 15:33:17 GMT']
+      Vary: [Accept-Encoding]
+      X-Powered-By: [Servlet/2.5 JSP/2.1]
+    status: {code: 200, message: OK}
+- request:
+    body: "<?xml version='1.0' encoding='utf-8'?>\n<request>\n  <itemDeleteRequest>\n
+      \   <item>\n      <itemUrl>item-test-02</itemUrl>\n    </item>\n  </itemDeleteRequest>\n</request>\n"
+    headers:
+      Authorization: [ESA XXXXXX]
+      Content-Length: ['166']
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: https://api.rms.rakuten.co.jp/es/1.0/item/delete
+  response:
+    body: {string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <result><status><interfaceId>item.delete</interfaceId><systemStatus>OK</systemStatus><message>OK</message><requestId>5d654319-111b-428f-8e6b-987b439b9300</requestId><requests/></status><itemDeleteResult><code>C001</code><item><itemUrl>item-test-02</itemUrl></item></itemDeleteResult></result>'}
+    headers:
+      Connection: [close]
+      Content-Length: ['331']
+      Content-Type: [text/xml; charset=utf-8]
+      Date: ['Mon, 20 Feb 2017 15:33:19 GMT']
+      Vary: [Accept-Encoding]
+      X-Powered-By: [Servlet/2.5 JSP/2.1]
+    status: {code: 200, message: OK}
+version: 1
