@@ -1,0 +1,44 @@
+---
+- name: Clone yas repo
+  git:
+    repo=https://github.com/schlueter/yas.git
+    dest={{ local_repository }}
+    update=no
+    accept_hostkey=yes
+
+- name: Install yas
+  pip:
+    name={{ local_repository }}
+    state=latest
+    executable={{ pip_executable }}
+
+- name: Check for yas env file
+  stat:
+    path={{ local_repository }}/yas.env
+  register: env_file
+
+- debug: msg='No env file found. Please create a populated version of example-yas.env, yas.env to proceed.'
+  when: not env_file.stat.exists
+
+- meta: end_play
+  when: not env_file.stat.exists
+
+- name: Copy yas env file
+  copy:
+    src={{ local_repository }}/yas.env
+    remote_src=yes
+    dest=/usr/local/etc/yas.env
+
+- name: Install yas systemd service
+  copy:
+    src={{ local_repository }}/yas.service
+    remote_src=yes
+    dest=/etc/systemd/system/yas.service
+  when: ansible_service_mgr == 'systemd'
+
+- name: Activate yas systemd service
+  systemd:
+    name=yas
+    daemon_reload=yes
+    enabled=yes
+    state=started
