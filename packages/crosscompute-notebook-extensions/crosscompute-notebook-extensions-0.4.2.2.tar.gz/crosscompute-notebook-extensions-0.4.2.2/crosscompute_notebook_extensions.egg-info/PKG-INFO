@@ -1,0 +1,67 @@
+Metadata-Version: 1.1
+Name: crosscompute-notebook-extensions
+Version: 0.4.2.2
+Summary: CrossCompute extensions for Jupyter Notebook
+Home-page: https://crosscompute.com/docs
+Author: CrossCompute Inc
+Author-email: support@crosscompute.com
+License: UNKNOWN
+Description: CrossCompute Extensions for Jupyter Notebook
+        ============================================
+        
+        Thanks to `Salah Ahmed <https://github.com/salah93>`_ for prototyping these extensions.
+        
+        Installation
+        ------------
+        ::
+        
+            pip install crosscompute-notebook-extensions
+            jupyter nbextension install \
+                --sys-prefix --py crosscompute_notebook_extensions
+            jupyter nbextension enable \
+                --sys-prefix --py crosscompute_notebook_extensions
+            jupyter serverextension enable \
+                --sys-prefix --py crosscompute_notebook_extensions
+        
+        Usage via command-line
+        ----------------------
+        ::
+        
+            crosscompute serve tests/notebooks/add-integers.ipynb
+            crosscompute serve tests/notebooks/map-locations.ipynb
+        
+        Usage via Jupyter Notebook
+        --------------------------
+        ::
+        
+            cd tests/notebooks
+            jupyter notebook
+        
+        Click the green paper plane icon (or press SHIFT-C SHIFT-P) to preview the notebook as a tool.
+        
+        0.4
+        ---
+        - Debug when previewing tool directly from notebook
+        - Ignore IPython magic
+        - Improve unicode support
+        - Save tool template if first cell is markdown
+        - Save result template if last cell is markdown
+        
+        0.3
+        ---
+        - Support custom base_url
+        
+        0.2
+        ---
+        - Add example notebooks
+        - Add ToolPreview redirect
+        - Fix Python 3 support
+        - Replace pgrep with psutil to support non-POSIX systems
+        
+        0.1
+        ---
+        - Add ToolPreview extension
+        - Extracte notebook support from crosscompute package
+Keywords: web crosscompute jupyter
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
