@@ -1,0 +1,85 @@
+﻿.. PySptools documentation master file, created by
+   sphinx-quickstart on Sun Sep 29 09:27:46 2013.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. meta::
+	:description: Python tools for hyperspectral imaging
+	:keywords: python, hyperspectral imaging, signal processing, library, software, endmembers, unmixing, pysptools, sam, sid, atgp, N-FINDR, NFINDR, spectroscopy, target detection, georessources, geoimaging, chemical imaging, pharmaceutical, pharma, minerals, spectral, remote sensing, hyperspectral drill core imaging
+
+Welcome to the PySptools Documentation
+**************************************
+
+Tools for hyperspectral imaging ::
+
+	Documentation at 2017-02-23.
+
+.. figure:: ./pic/pic_burner1.png
+   :scale: 100 %
+   :align: center
+   :alt: stacked abundance maps
+
+Hyperspectral imaging is used to **visualize chemistry**, the spatial relation between chemicals and the proportion of them. PySptools is a python module that implements spectral and hyperspectral algorithms. Specializations of the library are the endmembers extraction, unmixing process, supervised classification, target detection, noise reduction, convex hull removal and features extraction at spectrum level. The library is designed to be easy to use and almost all functionality has a plot function to save you time with the data analysis process. The actual sources of the algorithms are the Matlab Hyperspectral Toolbox of Isaac Gerg, the pwctools of M. A. Little, the Endmember Induction Algorithms toolbox (EIA), the HySime Matlab module of José Bioucas-Dias and José Nascimento and research papers. You can download PySptools from the PySptools
+Project Page hosted by Sourceforge.net or from the pypi packages repository.
+
+`My personal web site <http://ctherien.netlify.com/>`_ 
+
+What's New : version 0.14.0 (beta)
+===================================
+
+When I started this software library in 2013 the long-term goal was to make using machine learning on top of hyperspectral a snap. At the time, the scikit-learn library was a good choice for doing it. This version introduce an interface between the PySptools hyperspectral algorithms and the scikit-learn library. This is the very first version and it's why the new module **sklearn** is tagged alpha. Many improvements will follow.
+
+Following is a list of the new features and fixes.
+
+* update: util.ROIs: a new binary mask 'raw' added, see the add method documentation.
+* new: util.load_mat_file, load a 3D MatLab file.
+* new: util.shrink, reduce a hyperspectral image by half.
+* update: classification.svc: new parameter C=1 added to the fit method parameters list, the _crop method manage the new ROIs' 'raw' parameter.
+* a new module **sklearn**, this module partially implements an interface to the scikit-learn library, the new classes are:
+    * HyperBaseClassifier
+    * HyperScaledBaseClassifier
+    * HyperEstimatorCrossVal
+    * HyperKNeighborsClassifier
+    * HyperLogisticRegression
+    * HyperRandomForestClassifier
+    * HyperSVC
+* For an example of sklearn use, see the ipython notebook *nbex_skl_snow.html* in the Examples section.
+* See also the test file *test_sklearn.py*, others examples are in preparation.
+* As usual, small fixes here and there.
+
+For the next version, 0.14.1, these changes will apply:
+
+* The classification.SVC class will be remove, use sklearn.HyperSVC instead, they have the same funtionality, check the file test_HyperSVC.
+* The classification.KMeans class will be move to the sklearn module. At the same time it will be adapted to scikit-learn.
+
+
+Documentation
+=============
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction
+   installation
+   examples_front
+   abundance_maps
+   classification
+   noise
+   detection
+   distance
+   eea
+   material_count
+   sigproc
+   sklearn
+   spectro
+   util
+   glossary
+   links
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
