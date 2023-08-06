@@ -1,0 +1,40 @@
+Metadata-Version: 1.0
+Name: gopage
+Version: 1.3
+Summary: Py3 version
+Home-page: https://xgeric.github.io
+Author: xgeric
+Author-email: guxt1994@gmail.com
+License: MIT
+Description: # gopage
+        
+        ## Overview
+        
+        Gopage is a Google search page crawler. It provides concise APIs to download Google search results, and parse them into readable data structures.
+        
+        
+        
+        ## APIs
+        
+        ***Crawler*** is responsible for crawling Google search page, given a query sentence. ***Parser*** aims at parsing the html content of a Google search page into a Python list, in which each element is a dict consisting of 'title' and 'content' of the corresponding Google snippet. 
+        
+        Quick start:
+        
+        ```python
+        from gopage import crawler
+        from gopage import parser
+        
+        gpage = crawler.search('Tsinghua University')
+        snippets = parser.parse(gpage)
+        
+        from pprint import pprint
+        pprint(snippets)
+        
+        >>> 
+        ```
+        
+        
+        
+        
+Keywords: python google crawler
+Platform: UNKNOWN
