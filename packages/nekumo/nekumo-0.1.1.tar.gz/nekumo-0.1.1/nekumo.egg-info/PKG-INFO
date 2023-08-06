@@ -1,0 +1,80 @@
+Metadata-Version: 1.1
+Name: nekumo
+Version: 0.1.1
+Summary: Package description
+
+Home-page: https://github.com/Nekmo/nekumo-cloud
+Author: Nekmo
+Author-email: contacto@nekmo.com
+License: UNKNOWN
+Download-URL: https://github.com/Nekmo/nekumo-cloud/archive/master.zip
+Description: ############
+        Nekumo Cloud
+        ############
+        
+        Nekumo allows you to work with your files anywhere. Using Nekumo is very easy: run it in a directory and share
+        your files with the world.
+        
+        .. code-block::
+        
+            $ nekumo /directory/to/serve
+            Welcome to Nekumo Cloud! Your personal cloud. Serving:
+              /directory/to/serve/ (FS)
+            Interfaces on use:
+              http://0.0.0.0:7080 (AngularWeb)
+        
+        
+        Install
+        =======
+        
+        .. code-block::
+        
+            $ pip install nekumo
+        
+        
+        Features
+        ========
+        
+        - Open, move, copy and delete files.
+        - Thumbnails for your files without opening them.
+        - Preview files (audio, video, image).
+        - Send videos to Chromecast.
+        - Changes are displayed in real time (Websockets) including changes made by external programs.
+        - Modern Angular Material responsive web interface.
+        
+        
+        Future features
+        ---------------
+        
+        - Tests.
+        - Users and permissions.
+        - Openstack Gateway.
+        - Search.
+        - Upload files.
+        - Download multiple files.
+        - Text and sourcecode editor.
+        
+Keywords: nekumo,cloud,file,manager,player,media,center,video,audio
+Platform: linux
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: System :: Archiving
+Classifier: Topic :: System :: Filesystems
+Classifier: Topic :: Text Editors
+Classifier: Topic :: Text Processing
+Classifier: Environment :: Web Environment
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Multimedia
+Classifier: Topic :: Multimedia :: Video :: Display
+Classifier: Topic :: Multimedia :: Sound/Audio :: Players
+Classifier: Topic :: Multimedia :: Graphics :: Presentation
+Classifier: Topic :: Multimedia :: Graphics :: Viewers
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Natural Language :: English
+Classifier: Development Status :: 3 - Alpha
+Provides: nekumo
