@@ -1,0 +1,27 @@
+Metadata-Version: 2.0
+Name: bioma
+Version: 0.1.0
+Summary: Bio-related data management using graph databases and web semantics.
+Home-page: https://github.com/dmrib/bioma
+Author: Danilo Miranda Ribeiro
+Author-email: dmrib.cs@gmail.com
+License: MIT
+Keywords: bio web semantics graph database
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Intended Audience :: Science/Research
+Requires-Dist: jsonpickle
+Requires-Dist: pytest
+
+bioma is a bio-related data manager, designed to ease
+the storage, manipulation and exchange of information
+in scientific research. The system is built on top of
+graph databases and web semantics techniques, that
+differently from conventional relational databases
+allows adaptive growth of datasets, unconstrained by a
+previously defined data structure. Querying algorithms
+and a simplistic data representation (easily exported)
+are also included in the package.
+
