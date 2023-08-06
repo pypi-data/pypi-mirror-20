@@ -1,0 +1,6 @@
+recursive-include src *.pyx
+
+include *.md
+include *.py
+include LICENSE
+recursive-include tests *.py
