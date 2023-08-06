@@ -1,0 +1,29 @@
+
+#dygraphs {
+    min-width: 100%;
+}
+
+.dygraph-legend {
+    color: #313534;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: smaller;
+}
+
+.dygraph-axis-label.dygraph-axis-label-y {
+    color: #313534;
+    font-size: smaller;
+
+}
+
+.dygraph-axis-label.dygraph-axis-label-x {
+    color: #313534;
+    margin-top: 2px;
+    font-size: smaller;
+}
+
+.dygraph-label.dygraph-ylabel {
+    color: #313534;
+    margin-top: -10px;
+}
