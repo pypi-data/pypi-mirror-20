@@ -1,0 +1,33 @@
+Metadata-Version: 1.1
+Name: Teraffic
+Version: 1.2
+Summary: This utility provides an easy way of viewing total network traffic since the last boot.
+Home-page: https://github.com/sweepyoface/teraffic
+Author: Sweepyoface
+Author-email: github@sweepy.pw
+License: GNU GPLv3
+Description: Teraffic
+        ========
+        
+        This utility provides an easy way of viewing total network traffic since
+        the last boot.
+        
+        Usage
+        -----
+        
+        Usage: 
+          teraffic.py [options]
+        
+        Options:
+          -h, --help  show this help message and exit
+          -r, --raw   don't format the number of bytes
+          -i, --in    only show ingress traffic
+          -o, --out   only show egress traffic
+        
+Keywords: network traffic raw util
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Internet :: Log Analysis
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 2.7
