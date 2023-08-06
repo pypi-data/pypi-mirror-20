@@ -1,0 +1,17 @@
+setuptools
+collective.autopermission
+eke.biomarker
+eke.ecas
+eke.site
+eke.study
+Pillow
+plone.api
+plone.app.dexterity [grok]
+plone.app.relationfield
+plone.formwidget.namedfile
+plone.namedfile>=2.0.1
+Products.CMFPlone
+z3c.autoinclude
+
+[test]
+plone.app.testing
