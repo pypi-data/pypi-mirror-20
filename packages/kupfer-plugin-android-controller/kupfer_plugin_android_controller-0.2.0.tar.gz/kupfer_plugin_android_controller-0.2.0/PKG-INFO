@@ -1,0 +1,58 @@
+Metadata-Version: 1.1
+Name: kupfer_plugin_android_controller
+Version: 0.2.0
+Summary: Control your android device with ADB
+Home-page: https://github.com/hugosenari/android_controller
+Author: Hugo Sena Ribeiro
+Author-email: hugosenari@gmail.com
+License: MIT license
+Description: ==================
+        Android Controller
+        ==================
+        
+        
+        Control your android device with ADB.
+        
+        Require Kupfer https://github.com/kupferlauncher/kupfer/
+        
+        Also adb needs to be in PATH
+        
+        
+        * Free software: MIT license
+        
+        
+        Features
+        --------
+        
+        * Send to Device
+        * Media Control
+        * Volume Control
+        
+        Install
+        -------
+        
+        pip install kupfer_plugin_android_controller
+        
+        Or copy android_controller.py to ~/.local/share/kupfer/plugins/
+        
+        Credits
+        -------
+        
+        This package was created with Cookiecutter_ and the `cookiecutter-kupfer-plugin-package`_ project template.
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`cookiecutter-kupfer-plugin-package`: https://github.com/hugosenari/cookiecutter-kupfer-plugin-package
+        
+        
+Keywords: kupfer android_controller
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
