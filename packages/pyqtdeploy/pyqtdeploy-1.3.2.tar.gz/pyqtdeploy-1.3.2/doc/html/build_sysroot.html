@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building a System Root Directory &#8212; pyqtdeploy 1.3.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.3.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/logo_tn.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Building Static Packages" href="static_builds.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="static_builds.html" title="Building Static Packages"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyqtdeploy 1.3.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="building-a-system-root-directory">
+<h1>Building a System Root Directory<a class="headerlink" href="#building-a-system-root-directory" title="Permalink to this headline">¶</a></h1>
+<p>Experience shows that a major part of deploying an application is building the
+system root directory.  Care must be taken to manage the various different
+Python installations that may be involved (e.g the target installation, the
+matching host installation, and the host installation used to run
+<strong class="program">pyqtdeploy</strong> itself).  Cross-compiling third-party packages is another
+substantial area of potential problems, particularly for a Python developer who
+may not be familiar with compiling C++ code.</p>
+<p>Best practice for building the system root directory is still evolving.  It is
+anticipated that future versions of <strong class="program">pyqtdeploy</strong> will offer greater
+automated support for the task.  In the meantime the Mercurial repository
+contains a Python script called <a class="reference external" href="https://www.riverbankcomputing.com/hg/pyqtdeploy/file/tip/Developers/build-sysroot.py">build-sysroot.py</a>
+which can be used to create a basic system root directory containing a Qt
+installation, host and target Python installations and static versions of
+OpenSSL, sip, PyQt5, PyQt3D, PyQtChart, PyQtDataVisualization, PyQtPurchasing
+and QScintilla.  The script itself requires Python v3.5 or later and runs on
+Windows, OS X and Linux.  It is a work-in-progress and completely unsupported
+and its name and command line interface <em>will</em> change.  If you choose to use it
+then it is recommended that you maintain your own copy.</p>
+<p>The first step is to create the system root directory itself.  This will be
+refered to as <code class="docutils literal"><span class="pre">sysroot</span></code> from now on.  You should then create a sub-directory
+called <code class="docutils literal"><span class="pre">src</span></code>.  You should then copy the source packages of Python, sip and
+PyQt5 to the <code class="docutils literal"><span class="pre">src</span></code> directory.  For Qt you can use an existing Qt installation
+or build one from source.  For mobile platforms you would typically use one of
+the installers from The Qt Company.  If you are building Qt from source then
+copy the Qt source package to the <code class="docutils literal"><span class="pre">src</span></code> directory.</p>
+<div class="section" id="id1">
+<h2><strong class="program">build-sysroot.py</strong><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">build-sysroot.py</strong> will build and install OpenSSL, Qt, Python, sip,
+PyQt5, PyQt3D, PyQtChart, PyQtDataVisualization, PyQtPurchasing and QScintilla
+as specified using command line options:</p>
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-h">
+<code class="descname">--h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-build-sysroot-py-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will display a summary of the command line options.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-all">
+<code class="descname">--all</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-build-sysroot-py-all" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will build each of OpenSSL, Qt, Python, sip, PyQt5, PyQt3D, PyQtChart,
+PyQtDataVisualization, PyQtPurchasing and QScintilla in that order.  The
+order is important as there are interdependencies between the individual
+builds.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-build">
+<code class="descname">--build</code><code class="descclassname"> package [package ...]</code><a class="headerlink" href="#cmdoption-build-sysroot-py-build" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will build one or more of the individual packages in the order
+specified on the command line.  <em>package</em> is either <code class="docutils literal"><span class="pre">openssl</span></code>, <code class="docutils literal"><span class="pre">qt</span></code>,
+<code class="docutils literal"><span class="pre">python</span></code>, <code class="docutils literal"><span class="pre">sip</span></code>, <code class="docutils literal"><span class="pre">pyqt5</span></code>, <code class="docutils literal"><span class="pre">pyqt3d</span></code>, <code class="docutils literal"><span class="pre">pyqtchart</span></code>,
+<code class="docutils literal"><span class="pre">pyqtdatavisualization</span></code>, <code class="docutils literal"><span class="pre">pyqtpurchasing</span></code> or <code class="docutils literal"><span class="pre">qscintilla</span></code>.  You need
+to allow for the interdependencies between the builds.  For example, if you
+have updated the source package for sip then you should rebuild sip and
+PyQt5.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-clean">
+<code class="descname">--clean</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-build-sysroot-py-clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will deleted the contents of the <code class="docutils literal"><span class="pre">sysroot</span></code> directory before
+building.  The <code class="docutils literal"><span class="pre">src</span></code> directory is left untouched.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-build-sysroot-py-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will cause debug versions of packages to be built where possible.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-enable-dynamic-loading">
+<code class="descname">--enable-dynamic-loading</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-build-sysroot-py-enable-dynamic-loading" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will enable dynamic loading when building the target Python
+installation.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-qt">
+<code class="descname">--qt</code><code class="descclassname"> DIR</code><a class="headerlink" href="#cmdoption-build-sysroot-py-qt" title="Permalink to this definition">¶</a></dt>
+<dd><p>This specifies a directory containing an existing Qt installation which is
+used instead of building Qt from source.  However, you must still use the
+<a class="reference internal" href="#cmdoption-build-sysroot-py-build"><code class="xref std std-option docutils literal"><span class="pre">--build</span></code></a> option.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-sdk">
+<code class="descname">--sdk</code><code class="descclassname"> SDK</code><a class="headerlink" href="#cmdoption-build-sysroot-py-sdk" title="Permalink to this definition">¶</a></dt>
+<dd><p>This specifies the name of the SDK to use when building for Apple-based
+targets.  By default the latest SDK found for the MacOSX platform will be
+used.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-sysroot">
+<code class="descname">--sysroot</code><code class="descclassname"> DIR</code><a class="headerlink" href="#cmdoption-build-sysroot-py-sysroot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This specifies the name of the system root directory to be populated.  If
+it is not specified then the <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">SYSROOT</span></code> environment variable is
+used.</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-target">
+<code class="descname">--target</code><code class="descclassname"> {android-32</code><code class="descclassname">, </code><code class="descname">ios-64</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">linux-32</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">linux-64</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">osx-64</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">win-32</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">win-64</code><code class="descclassname">}</code><a class="headerlink" href="#cmdoption-build-sysroot-py-target" title="Permalink to this definition">¶</a></dt>
+<dd><p>This specifies the target platform.  The default is to build natively (i.e.
+where the host and target platforms are the same).</p>
+</dd></dl>
+
+<dl class="cmdoption">
+<dt id="cmdoption-build-sysroot-py-use-system-python">
+<code class="descname">--use-system-python</code><code class="descclassname"> VERSION</code><a class="headerlink" href="#cmdoption-build-sysroot-py-use-system-python" title="Permalink to this definition">¶</a></dt>
+<dd><p>This specifies that an existing host Python installation with the given
+version is used rather than building it from source.  The version is
+specified as the major and minor numbers separated by a period.  The
+target Python installation is always built from source.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="standard-build-locations">
+<h2>Standard Build Locations<a class="headerlink" href="#standard-build-locations" title="Permalink to this headline">¶</a></h2>
+<p>When <code class="docutils literal"><span class="pre">sysroot</span></code> has been created with <strong class="program">build-sysroot.py</strong> the
+following values should be used in the <strong>Locations</strong> tab.</p>
+<dl class="docutils">
+<dt><strong>Interpreter</strong></dt>
+<dd><code class="docutils literal"><span class="pre">$SYSROOT/bin/python</span></code></dd>
+<dt><strong>Source directory</strong></dt>
+<dd><code class="docutils literal"><span class="pre">$SYSROOT/build/Python-$PDY_PY_MAJOR.$PDY_PY_MINOR.$PDY_PY_MICRO</span></code></dd>
+<dt><strong>Include directory</strong></dt>
+<dd><code class="docutils literal"><span class="pre">$SYSROOT/include/python$PDY_PY_MAJOR.$PDY_PY_MINOR</span></code></dd>
+<dt><strong>Python library</strong></dt>
+<dd><code class="docutils literal"><span class="pre">$SYSROOT/lib/libpython$PDY_PY_MAJOR.$PDY_PY_MINOR.a</span></code></dd>
+<dt><strong>Standard library directory</strong></dt>
+<dd><code class="docutils literal"><span class="pre">$SYSROOT/lib/python$PDY_PY_MAJOR.$PDY_PY_MINOR</span></code></dd>
+<dt><strong>Build directory</strong></dt>
+<dd><code class="docutils literal"><span class="pre">build</span></code></dd>
+<dt><strong>qmake</strong></dt>
+<dd><code class="docutils literal"><span class="pre">$SYSROOT/bin/qmake</span></code></dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Building a System Root Directory</a><ul>
+<li><a class="reference internal" href="#id1"><strong class="program">build-sysroot.py</strong></a></li>
+<li><a class="reference internal" href="#standard-build-locations">Standard Build Locations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="static_builds.html"
+                        title="previous chapter">Building Static Packages</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/build_sysroot.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="static_builds.html" title="Building Static Packages"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyqtdeploy 1.3.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Riverbank Computing Limited.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

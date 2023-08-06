@@ -1,0 +1,4498 @@
+2017-03-04  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.3.2 for changeset 6ced54ce09db
+	[bde3753bac9c] [tip] <1.3-maint>
+
+	* NEWS:
+	Released as v1.3.2.
+	[6ced54ce09db] [1.3.2] <1.3-maint>
+
+	* doc/conf.py:
+	Updated the copyright notice in the docs.
+	[e15b645d03a6] <1.3-maint>
+
+2017-03-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* setup.py:
+	Fixed the URL in setup.py.
+	[a42b93635646] <1.3-maint>
+
+2017-03-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Added a missing CONST_CAST to the startup code.
+	[4be70fc4f45f] <1.3-maint>
+
+2017-02-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the meta-data for the nis module for macOS.
+	[550ea4e6060e] <1.3-maint>
+
+	* pyqtdeploy/python/pyconfig.py:
+	More Android configuration updates.
+	[708e3b612b5c] <1.3-maint>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Attempted to update the Android API levels in the Python
+	configuration.
+	[fc81a18c12f2] <1.3-maint>
+
+	* doc/build_sysroot.rst:
+	Updated the build-sysroot.py documentation.
+	[164b5dd750c0] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the Python meta-data for xml.dom.xmlbuilder.
+	[d5ee6e9fd083] <1.3-maint>
+
+	* Developers/build-sysroot.py:
+	Fixes for building OpenSSL on Windows.
+	[db32adb5f387] <1.3-maint>
+
+	* Developers/build-sysroot.py:
+	Added (untested) support for build-sysroot.py building OpenSSL on
+	Windows.
+	[a9613ee4ba6f] <1.3-maint>
+
+2017-02-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Added initial support for building OpenSSL to build-sysroot.py
+	(osx-64 only).
+	[cd5e4b55b898] <1.3-maint>
+
+2017-02-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, NEWS:
+	Documentation updates.
+	[20652cf43488] <1.3-maint>
+
+	* pyqtdeploy/python/install_python.py:
+	Install the limited Python library for v3.4 and later.
+	[b198d8b54778] <1.3-maint>
+
+	* Developers/build-sysroot.py:
+	Windows fix for build-sysroot.py.
+	[03ea95c26eeb] <1.3-maint>
+
+	* Developers/DeveloperNotes.txt, Developers/build-sysroot.py:
+	Build a debug version of QScintilla as well as the Python bindings.
+	[1aff9fc708d7] <1.3-maint>
+
+	* pyqtdeploy/packages/configurations/qscintilla/qscintilla-
+	android.cfg:
+	Disable printer support for QScintilla on Android.
+	[ecdc1b7a986c] <1.3-maint>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg:
+	Qt doesn't support printing on Android.
+	[d8f2af93c3ff] <1.3-maint>
+
+2017-02-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Python configuration fixes for Android.
+	[6e6385ae8fba] <1.3-maint>
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Enable -std=c99 when building Python v3.6.0 (specifically for
+	Android).
+	[15fa47c64bbf] <1.3-maint>
+
+	* pyqtdeploy/python/configure_python.py:
+	Don't try and patch Python v3.6.0.
+	[3c54df588987] <1.3-maint>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg:
+	Updated the configuration for iOS for Qt v5.8.0.
+	[04b046e141b9] <1.3-maint>
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the example project files.
+	[1afb4e67c509] <1.3-maint>
+
+	* demo/pyqt-demo.pdy:
+	Updated the demo example.
+	[0a4bd09ce281] <1.3-maint>
+
+	* doc/tutorial.rst:
+	Emphasised that the user has to provide compiled SSL libraries
+	themselves.
+	[243e0e947e59] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the meta-data fro blake2 and sha3.
+	[0bedf85bcd72] <1.3-maint>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.5.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.6.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.5.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.6.python, pyqt
+	deploy/builder/lib/bootstrap_external/bootstrap_external-3.5.python,
+	pyqtdeploy/builder/lib/bootstrap_external/bootstrap_external-3.6.pyt
+	hon:
+	Restored the previous (correct) handling of the frozen bootstrap
+	modules.
+	[dd790ce6dbe5] <1.3-maint>
+
+	* pyqtdeploy/metadata/supported_python_versions.py:
+	Fixed the handling of the Python v3.6.0 version number.
+	[ab16428a0967] <1.3-maint>
+
+2017-02-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py now handles ensurepip when building the host
+	Python.
+	[2d81756653d0] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Completed the standard library updates for Python v3.6.0.
+	[3981c2d3267c] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More v3.6.0 updates.
+	[ec5579918a0b] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More v3.6.0 standard library updates.
+	[c3bafc31676f] <1.3-maint>
+
+2017-02-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More standard library updates fro v3.6.0.
+	[55bd303f77c9] <1.3-maint>
+
+2017-02-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, NEWS, doc/static_builds.rst,
+	pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.5.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.5.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.6.python, pyqt
+	deploy/builder/lib/bootstrap_external/bootstrap_external-3.5.python,
+	pyqtdeploy/main_cli.py, pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.6.0.h,
+	pyqtdeploy/python/configure_python.py,
+	pyqtdeploy/python/pyconfig.py:
+	Initial support for Python v3.6.0 (standard library still to
+	update). The default Android API level is now 21 rather than 9.
+	[6c33bef4cdd1] <1.3-maint>
+
+2017-02-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt:
+	Add PyQt3D to the developer notes.
+	[3c545cb7ac71] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/patches/python-3.5.3.diff:
+	Added support for Python v3.5.3.
+	[575a71aea4ae] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/patches/python-3.4.6.diff:
+	Added support for Python v3.4.6.
+	[49d4a9c390bd] <1.3-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/patches/python-2.7.13.diff:
+	Added support for Python v2.7.13.
+	[7a2d84cf170f] <1.3-maint>
+
+2017-02-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py will now build PyQt3D.
+	[bfbbd090ecfe] <1.3-maint>
+
+2017-02-06  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Fixed the PyQt5 OpenGL configuration on Windows.
+	[ea84abf5cdb0] <1.3-maint>
+
+	* Developers/build-sysroot.py, pyqtdeploy/python/install_python.py:
+	Fixed the support for Python v2 based sysroots.
+	[ad728720bb64] <1.3-maint>
+
+2016-12-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	HAVE_STROPTS_H is now disabled for Linux as streams are not
+	supported (even though the .h file is present on many Linux
+	systems).
+	[e845fe54ad43] <1.3-maint>
+
+2016-11-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* NEWS, doc/command_line.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/build_page.py, pyqtdeploy/main_cli.py:
+	Added the --timeout command line option to pyqtdeploycli.
+	[bef6017b100c] <1.3-maint>
+
+2016-10-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, pyqtdeploy/metadata/pyqt5.py:
+	Added the PyQt3D modules.
+	[e4bdfca1b62f] <1.3-maint>
+
+	* demo/pyqt-demo.py:
+	Added PyQt3D to the demo.
+	[dd3470225365] <1.3-maint>
+
+	* doc/static_builds.rst, pyqtdeploy/packages/configurations/pyqt3d
+	/pyqt3d-android.cfg, pyqtdeploy/packages/configurations/pyqt3d
+	/pyqt3d-ios.cfg, pyqtdeploy/packages/configurations/pyqt3d/pyqt3d-
+	win.cfg, pyqtdeploy/packages/configurations/pyqt3d/pyqt3d.cfg:
+	Added support for static builds of PyQt3D.
+	[7480c9e1cae7] <1.3-maint>
+
+	* Developers/build-sysroot.py:
+	Added the --static-msvc-runtime option to build-sysroot.py.
+	[58186d64eb88] <1.3-maint>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py now staticaly links the MSVC runtime when building
+	Qt.
+	[30a14fe27b4c] <1.3-maint>
+
+2016-10-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	Fixed the instructions for statically linking the MSVC runtime.
+	[5f90f2f0a28d] <1.3-maint>
+
+2016-09-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/pyqt5.py:
+	Added support for the QtWebEngine module.
+	[d07573c68123] <1.3-maint>
+
+2016-08-30  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.3.1 for changeset ecb1cbe4fa20
+	[aafe30859f96] <1.3-maint>
+
+	* NEWS:
+	Released as v1.3.1.
+	[ecb1cbe4fa20] [1.3.1] <1.3-maint>
+
+2016-08-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, demo/build.bat:
+	Updated the developer notes.
+	[5ebf62396f51] <1.3-maint>
+
+	* Developers/build-sysroot.py, pyqtdeploy/python/install_python.py,
+	pyqtdeploy/python/windows.py:
+	Fix the installation of the system Python (current user and all
+	users) on Windows.
+	[78a23a820ae7] <1.3-maint>
+
+2016-08-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* demo/pyqt-demo.py:
+	Removed an errant import from the demo.
+	[da62ae25016c] <1.3-maint>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Updated the PyQt5 Windows configuration regarding OpenGL.
+	[d65b378c8f14] <1.3-maint>
+
+2016-08-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Python configuration changes for Android.
+	[978e7e0d8052] <1.3-maint>
+
+2016-08-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgignore, Developers/DeveloperNotes.txt, demo/build.bat,
+	demo/build.sh, demo/pyqt-demo.pdy, demo/pyqt-demo.py,
+	doc/build_sysroot.rst:
+	The demo application now imports all the add-on modules.
+	[07d0f91a8a1b] <1.3-maint>
+
+	* pyqtdeploy/metadata/pyqt5.py:
+	Fixes for the QtChart meta-data.
+	[7c1efdb891e0] <1.3-maint>
+
+2016-08-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/pyqt5.py:
+	QScintilla has QtPrintSupport as a dependency.
+	[bb39478b1277] <1.3-maint>
+
+2016-08-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py will now create a symlink to androiddeployqt.
+	[df7637c0a15e] <1.3-maint>
+
+2016-08-16  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/build_sysroot.rst, doc/static_builds.rst:
+	Updated the docs related to static builds and sysroots.
+	[1874075e1d34] <1.3-maint>
+
+	* Developers/DeveloperNotes.txt, Developers/build-sysroot.py:
+	build-sysroot.py now support PyQtChart, PyQtDataVisualization,
+	PyQtPurchasing and QScintilla.
+	[497142519b6c] <1.3-maint>
+
+2016-08-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/project/project.py:
+	Fixed a crash when trying to use the name of an unnamed project.
+	[e7ee432978c5] <1.3-maint>
+
+2016-08-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, NEWS,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.5.python,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/patches/python-3.5.2.diff,
+	pyqtdeploy/python/pyconfig.py:
+	Added support for Python v3.5.2.
+	[0e5dfe9f90ff] <1.3-maint>
+
+	* NEWS, pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/patches/python-2.7.12.diff,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/pyconfig.py:
+	Added support for Python v2.7.12.
+	[72095c56a608] <1.3-maint>
+
+	* NEWS, pyqtdeploy/metadata/python_metadata.py:
+	Added support for Python v3.4.5.
+	[842d51b3577f] <1.3-maint>
+
+2016-08-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgignore, Makefile, build.py, doc/conf.py,
+	doc/development_version.rst, doc/index.rst, rb-product:
+	Migrated from the old to the new build system.
+	[d5d825bf39f0] <1.3-maint>
+
+2016-07-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Fixed the names of the PyQtChart configuration files in the example
+	.pdy files.
+	[ab3201185440] <1.3-maint>
+
+	* pyqtdeploy/packages/configurations/pyqtchart/pyqtchart-android.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtchart-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtchart-win.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtchart.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart-
+	android.cfg, pyqtdeploy/packages/configurations/pyqtchart
+	/pyqtqtchart-ios.cfg, pyqtdeploy/packages/configurations/pyqtchart
+	/pyqtqtchart-win.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart.cfg:
+	Fixed the configuration files for PyQtChart.
+	[999f906fb4b0] <1.3-maint>
+
+2016-07-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot disables PyQt support for Python dbus.
+	[80d253eec08f] <1.3-maint>
+
+2016-07-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst:
+	Fixed a document typo.
+	[ffd8592eb143] <1.3-maint>
+
+2016-06-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.3 for changeset 01a56ea5b2c1
+	[12ef76e33e19]
+
+	* NEWS:
+	Released as v1.3.
+	[01a56ea5b2c1] [1.3]
+
+2016-05-29  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* NEWS:
+	Updated the NEWS file.
+	[08bd47199c27]
+
+	* doc/build_sysroot.rst, doc/images/application_source_tab.png,
+	doc/images/build_tab.png, doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/qmake_tab.png, doc/images/stdlib_packages_tab.png,
+	doc/static_builds.rst, doc/tutorial.rst:
+	Updated the documentation.
+	[29133a788c8f]
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the Qt version in the example .pdy files.
+	[1b4876bc8d7f]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py:
+	Implemented the build process timeout.
+	[fe33b628f131]
+
+2016-05-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, doc/static_builds.rst,
+	pyqtdeploy/python/pyconfig.py:
+	Updated the Python configuration for Android with some API specific
+	changes.
+	[42c27735b72b]
+
+	* doc/command_line.rst, doc/static_builds.rst, pyqtdeploy/main_cli.py:
+	The ANDROID_NDK_PLATFORM environment variable now supplies the
+	default Android API level if set.
+	[3f1986ced8da]
+
+	* doc/command_line.rst, pyqtdeploy/main_cli.py:
+	Changed the default Android API level to 9 which is the default
+	actually used by qmake.
+	[6caf1f2a3aee]
+
+	* doc/command_line.rst, pyqtdeploy/main_cli.py:
+	Changed the default Android API level to 10 (the Qt documentation
+	states 10 and 13 in different places).
+	[0b76d37b4b38]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Merged the v1.2 maintenance branch with the trunk.
+	[a9bd5ae038ea]
+
+	* doc/command_line.rst, pyqtdeploy/main_cli.py,
+	pyqtdeploy/python/configure_python.py,
+	pyqtdeploy/python/pyconfig.py:
+	Added the support (currently unused) for specifying the target
+	Android API level when configuring Python.
+	[351383644e2f] <1.2-maint>
+
+2016-05-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/build_sysroot.rst, doc/command_line.rst, doc/index.rst,
+	doc/static_builds.rst, doc/tutorial.rst,
+	doc/windows_dynamic_loading.rst:
+	Documented the (experimental) build-sysroot.py.
+	[1ad534a78789] <1.2-maint>
+
+2016-05-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst:
+	Updated the docs regarding auto-selecting sub-packages.
+	[4c7e9517ecda] <1.2-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the meta-data for the iso2022_kr encoding.
+	[53f097481be5] <1.2-maint>
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Added the checkbox to the Standard Library page to auto-select sub-
+	packages.
+	[b92d71a82563] <1.2-maint>
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/other_packages_page.py,
+	pyqtdeploy/gui/package_editor.py,
+	pyqtdeploy/gui/qrc_package_editor.py:
+	Some class renaming.
+	[fa573436be89] <1.2-maint>
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Trivial readability improvement.
+	[1d879c049522] <1.2-maint>
+
+2016-05-11  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.5.0.h:
+	Fixed the dynamic loading configuration for Python v3.5.
+	[0fa00f4ba5b5] <1.2-maint>
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Include invalid_parameter_handler.c in Python v3.5 Windows builds.
+	[575ceb51b8bf] <1.2-maint>
+
+	* pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Always use the version of zlib included in the Python source.
+	[e508683e250d] <1.2-maint>
+
+	* Developers/build-sysroot.py:
+	More Windows fixes for Qt.
+	[a631da747f66] <1.2-maint>
+
+	* Developers/build-sysroot.py:
+	Windows fixes for build-sysroot.py.
+	[b41655e2c232] <1.2-maint>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Disable HAVE_STD_ATOMIC for Linux as it breaks compilation of C++
+	modules.
+	[151aee274b34] <1.2-maint>
+
+2016-05-10  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Fixed build-sysroot.py building Qt on Linux.
+	[5d998b3b7a9c] <1.2-maint>
+
+2016-05-09  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py fixes for when Python is not being built.
+	[1cd5ca10e0d1] <1.2-maint>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Remove the QtDesigner module from PyQt5 configurations.
+	[37814ba2ec7f] <1.2-maint>
+
+	* Developers/build-sysroot.py:
+	Fixed the qmake symlink created by build-sysroot.py. Don't build the
+	Qt tools.
+	[90db5b80fea1] <1.2-maint>
+
+2016-05-08  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Make sure symlinks are relative only if the source is within
+	sysroot.
+	[f7a1c7f760c8] <1.2-maint>
+
+2016-05-05  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py now handles a non-system host Python installation
+	properly.
+	[9733f53ef792] <1.2-maint>
+
+2016-05-04  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Removed Web Engine modules from the PyQt5 configurations.
+	[45a1a3917779] <1.2-maint>
+
+	* Developers/build-sysroot.py:
+	Continued to refactor build-sysroot.py. It now builds all packages.
+	[072973069685] <1.2-maint>
+
+2016-04-29  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Started a major refactoring of build-sysroot.py. Currently it will
+	build Python natively on OS X.
+	[4ecfafffaa7b] <1.2-maint>
+
+2016-04-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Don't convert entries in sys.path that are resource paths (ie. start
+	with ':') to native separators.
+	[f9032002cb91] <1.2-maint>
+
+2016-04-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/pyqt_page.py, pyqtdeploy/metadata/pyqt5.py,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Updates for PyQt v5.6.
+	[8a86b77bb44b] <1.2-maint>
+
+2016-04-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Updated build-sysroot.py for Qt v5.6 and the current package naming
+	standards.
+	[53021cb484ca] <1.2-maint>
+
+2016-04-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg:
+	The PyQt5 iOS configuration now disables PyQt_MacOSXOnly which is
+	the more generic way of handling differences between iOS and OS X.
+	[60102e6bb1c5] <1.2-maint>
+
+2016-03-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.2.1 for changeset 415bcaacff4e
+	[7e209d54d359] <1.2-maint>
+
+	* NEWS:
+	Released as v1.2.1.
+	[415bcaacff4e] [1.2.1] <1.2-maint>
+
+2016-03-09  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/other_packages_page.py:
+	Handle the Other Packages Scan button being pressed before the
+	package directory has been set.
+	[f94ce74642ef] <1.2-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Meta-data fixes for the asyncio and concurrent.futures packages.
+	[8d89ed3e1132] <1.2-maint>
+
+2016-03-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/pyqt_page.py:
+	Work around a Qt problem on Linux where it likes to insert '&' into
+	the text of a button from time to time.
+	[84641000112f] <1.2-maint>
+
+2016-02-07  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed a regression in the handling of the uic package.
+	[ccfb10c212ea] <1.2-maint>
+
+2016-01-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	The importer now trivially rejects a module if the package name
+	doesn't match the path.
+	[6b734e8b1012] <1.2-maint>
+
+2016-01-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	Fixed object leaks in the importing of side-by-side packages.
+	[f6d134bddf14] <1.2-maint>
+
+2016-01-08  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.2 for changeset 2e4706805e80
+	[81a14a81b7bf]
+
+	* NEWS:
+	Released as v1.2.
+	[2e4706805e80] [1.2]
+
+2016-01-04  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/DeveloperNotes.txt, demo/build.sh:
+	Updates to the developer notes regarding iOS deployment.
+	[8a9f9ec0bc70]
+
+	* demo/pyqt-demo.py:
+	Updates to the demo.
+	[ca9592790d98]
+
+	* Makefile:
+	Added the clean of the demo to the Makefile.
+	[9faa0c8775b5]
+
+	* demo/build.bat, demo/build.sh, demo/pyqt-demo.pdy, demo/pyqt-
+	demo.py:
+	Added the simple demo application.
+	[a7b1239f4501]
+
+	* Developers/DeveloperNotes.txt, Developers/build-sysroot.py,
+	pyqtdeploy/python/pyconfig.py:
+	Fixed the Android Python configuration.
+	[77f5a1d23958]
+
+2016-01-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/qmake_tab.png, doc/images/stdlib_packages_tab.png,
+	doc/tutorial.rst:
+	Updated the screenshots in the tutorial.
+	[9ffb6f511d87]
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the example .pdy files.
+	[d23a63ce3c0f]
+
+	* pyqtdeploy/metadata/supported_python_versions.py:
+	Make sure the initial target Python version is the latest.
+	[e70429a440a4]
+
+	* pyqtdeploy/gui/build_page.py:
+	The name of the host interpreter is no longer needed.
+	[b932eb49d9b1]
+
+	* NEWS, doc/tutorial.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/project/project.py:
+	Added support for the PDY_PY_MAJOR, PDY_PY_MINOR and PDY_PY_MICRO
+	macros.
+	[85b45f577247]
+
+	* pyqtdeploy/builder/builder.py:
+	Match the sysroot directory used for the DLLs with that used by
+	pyqtdeploycli.
+	[b7c505eec027]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Added support for the .pyd and .dll files included in the Windows
+	installer.
+	[0165dcf73d22]
+
+2016-01-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/command_line.rst, doc/static_builds.rst,
+	doc/windows_dynamic_loading.rst:
+	Documented the install action of pyqtdeploycli.
+	[e667e551e53c]
+
+	* pyqtdeploy/python/install_python.py:
+	Installing the Windows platform Python now installs the extension
+	modules and external DLLs.
+	[4c74f83adffe]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the generated .pro file when installing DLLs.
+	[1fc4a009ca2a]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/python/install_python.py:
+	The standard Python DLLs and now installed with the application.
+	[ea018f0dfbcc]
+
+	* pyqtdeploy/builder/builder.py:
+	Tidy up the generated .pro file when using the Windows system
+	Python.
+	[c69fa136a0dc]
+
+	* Developers/build-sysroot.py, pyqtdeploy/python/windows.py:
+	build-sysroot.py fixes for Windows.
+	[a547e227b072]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/freeze.python,
+	pyqtdeploy/python/install_python.py:
+	Improved the error reporting when failing to freeze files.
+	[43d51d352e49]
+
+	* doc/conf.py, doc/tutorial.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/python/__init__.py, pyqtdeploy/python/install_python.py,
+	pyqtdeploy/python/windows.py:
+	If the name of the host Python interpreter is omitted then a
+	platform-specific default will be used.
+	[806a1b9a11f3]
+
+2015-12-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py, pyqtdeploy/python/install_python.py:
+	Completed the initial support for installing the system Python on
+	Windows.
+	[a5fd51bf322f]
+
+	* pyqtdeploy/__init__.py, pyqtdeploy/file_utilities.py,
+	pyqtdeploy/main_cli.py, pyqtdeploy/python/__init__.py,
+	pyqtdeploy/python/configure_python.py,
+	pyqtdeploy/python/install_python.py, pyqtdeploy/python/python.py,
+	pyqtdeploy/python/supported_versions.py:
+	Added the stub for installing Windows Python using pyqtdeploycli.
+	[58f76c1c251a]
+
+	* doc/tutorial.rst, pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/locations.py, pyqtdeploy/project/project.py,
+	pyqtdeploycli.pdy:
+	Reverted the recent changes relating to the support for Python
+	installed from the official installer as it is the wrong approach.
+	[8fd4d8a0f2ca]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/locations.py,
+	pyqtdeploy/project/project.py:
+	Make Windows native builds using the official installer a special
+	case.
+	[e2c31af19a1e]
+
+2015-12-30  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the example .pdy files.
+	[5db6f100ac10]
+
+	* pyqtdeploy/project/project.py:
+	Simple bug fix.
+	[645175298cab]
+
+	* doc/tutorial.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/locations.py, pyqtdeploy/gui/locations_page.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py:
+	The type of Python installation on Windows is now determined by
+	inspecting the registry rather than being set in the project file.
+	[2107de63c165]
+
+2015-12-29  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/locations.py, pyqtdeploy/gui/locations_page.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py:
+	Improved the support for using the official Windows installers to
+	provide the interpreter. May still be changed significantly if the
+	registry can be used.
+	[c3bc2d66f83c]
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	More tweaks to the Standard Library page.
+	[1a90f950acdb]
+
+	* doc/tutorial.rst, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/standard_library_page.py:
+	Moved the specification of the target Python version from the
+	Standard Library page to the Application Source page.
+	[78ef5050b509]
+
+	* doc/tutorial.rst, pyqtdeploy/project/project.py:
+	New projects now default to using the Python DLL on Windows.
+	[7726c519bfda]
+
+2015-12-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* NEWS, doc/command_line.rst, doc/tutorial.rst,
+	pyqtdeploy/builder/builder.py, pyqtdeploy/main_cli.py:
+	Added the --include-dir, --interpreter, --source-dir, --python-
+	library and
+	--standard-library-dir command line options to pyqtdeploycli.
+	[da8fe5942f97]
+
+2015-12-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Fixed the Python configuration for iOS.
+	[278b482151e5]
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py:
+	Some Python modules are implemented as frozen builtins.
+	[c54261bf9d5a]
+
+	* Developers/build-sysroot.py:
+	Improved the way build-sysroot.py finfs pyqtdeploycli on Windows.
+	[180df623de2d]
+
+	* Developers/build-sysroot.py:
+	Initial changes to build-sysroot.py to support Python v3.5 Windows
+	hosts.
+	[cc3df182505c]
+
+2015-12-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* NEWS:
+	Updated the NEWS file.
+	[19167e562cc8]
+
+	* doc/pyrcc.rst, pyqtdeploy/builder/lib/pdytools_module.cpp:
+	Added support for the PEP 302 get_data() optional import hook.
+	[6aa68598f356]
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	Implemented the PEP302 get_code(), get_source() and is_package()
+	methods.
+	[f4498b726860]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the Python standard library meta-data for SSL support.
+	[1a52637344db]
+
+2015-12-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the freezing of Python source files so that the .py name gets
+	embedded rather than the .pyo name.
+	[548c0e0e3bc8]
+
+	* THANKS:
+	Updated the THANKS file.
+	[2a09d44e9cb7]
+
+	* MANIFEST.in, THANKS:
+	Added the THANKS file.
+	[a172c2335ee9]
+
+	* NEWS, doc/command_line.rst, doc/windows_dynamic_loading.rst,
+	pyqtdeploy/main_cli.py, pyqtdeploy/python/python.py:
+	Added the --disable-patches command line option to pyqtdeploycli.
+	[b75e6d126cdb]
+
+2015-12-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the example .pdy files.
+	[4bb83c0a1692]
+
+	* NEWS:
+	Updated the NEWS file.
+	[aa2fb86027b7]
+
+	* doc/pyrcc.rst:
+	Fixed a document typo.
+	[bf6366c115d8]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.5.python, pyqt
+	deploy/builder/lib/bootstrap_external/bootstrap_external-3.5.python,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/pyconfig.py:
+	Bug fixes for Python v3.5.1.
+	[5e57ae834e3d]
+
+	* pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.python,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/patches/python-3.4.4.diff:
+	Updated for Python v3.4.4.
+	[9bff039c1281]
+
+2015-12-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Updated build-sysroot.py for the current latest versions.
+	[df0a3ca5a72b]
+
+	* pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.5.python,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py,
+	pyqtdeploy/python/configurations/patches/python-3.5.1.diff,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.11.h,
+	pyqtdeploy/python/pyconfig.py:
+	Updated for Python v3.5.1.
+	[2b9d368f8f6a]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.5.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap_external-3.5.python,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Updated the importlib changes for Python v3.5.0.
+	[d666b4c247aa]
+
+2015-12-16  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Updated python.pro for Python v3.5.0.
+	[1d87bcdcef38]
+
+	* pyqtdeploy/python/configurations/config_py3.c:
+	Fixed the _signal module for Python v3.5.
+	[9d284dfef6ba]
+
+	* pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.5.0.h,
+	pyqtdeploy/python/pyconfig.py:
+	Added the pyconfig.h support for Python v3.5.0.
+	[39d5b0f92beb]
+
+2015-12-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/metadata/supported_python_versions.py:
+	Updated the Python meta-data for v3.5.0.
+	[d7dc510aa27b]
+
+	* pyqtdeploy/python/configurations/patches/python-3.5.0.diff:
+	Added the patch for Python v3.5.0.
+	[c7a2c1bb2ef1]
+
+2015-12-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.11.h:
+	Completed the support for Python v2.7.11.
+	[749572976beb]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Updated the Python meta-data for v2.7.11.
+	[08914e38f12a]
+
+2015-11-01  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Removed the addition of -lintl when configuring Python2 for Linux.
+	(Hopefully it applies to all Linux distros and not just Ubuntu.)
+	[2b0623e1bc90]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the meta-data for the pdb module.
+	[dcff4925a5e2]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the meta-data for the bdb module.
+	[5425a96706b3]
+
+	* doc/windows_dynamic_loading.rst:
+	Added a comment to the docs related to dynamic loading on Windows to
+	mention ctypes.
+	[a2915d65d9d6]
+
+	* Merged the v1.1 maintenance branch.
+	[2a488f9597f7]
+
+2015-09-07  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg:
+	Disable the PyQt_MacCocoaViewContainer feature for PyQt5 on iOS.
+	[c948bd71d322] <1.1-maint>
+
+2015-08-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.1 for changeset 67f5436df36f
+	[3673147f5a85]
+
+	* NEWS:
+	Released as v1.1.
+	[67f5436df36f] [1.1]
+
+	* Developers/PyjniusNotes.txt:
+	Fixes for some relative imports in the pyjnius notes.
+	[e64813ceeb21]
+
+	* Developers/DeveloperNotes.txt:
+	Updates to the developer docs.
+	[7c2a92c040c4]
+
+2015-08-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/locations_tab.png:
+	Another updated screenshot.
+	[f3a27d19d65f]
+
+	* NEWS:
+	Updated the NEWS file.
+	[617135554259]
+
+	* doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png:
+	Updated the screenshots.
+	[5dd2376a099b]
+
+	* Developers/PyjniusNotes.txt:
+	Added the developer notes for pyjnius.
+	[cfebba5860b9]
+
+2015-08-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst:
+	Documented the support for building simple extension modules.
+	[bf18e162ba78]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/other_extension_modules_page.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py:
+	The Other Extension Modules page can now be used to build (simple)
+	extension modules as well as link against pre-built extension
+	modules. Bumped the internal project version number.
+	[397d35f52d0c]
+
+2015-08-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/project/project.py:
+	Added EGG-INFO ot the list of default exclusions.
+	[a2957ae59825]
+
+	* pyqtdeploy/builder/lib/post_configuration.pro:
+	Define Cython as a qmake 'compiler'.
+	[fe3f2b99cab0]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/post_configuration.pro:
+	Assember sources are collected in MASMSOURCES rather than SOURCES to
+	follow the qmake convention and to make the 'compiler' definition
+	position independent.
+	[2bc56b67e750]
+
+	* pyqtdeploy/project/project.py:
+	Added *.pxi to the default list of exclusions.
+	[6a4cbc21c70f]
+
+2015-08-09  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/patches/python-2.7.10.diff:
+	Fixed locale.py for Python v2.7.10 on Android.
+	[1d3dc9604664]
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py fixes.
+	[189536deb17f]
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py now builds Python v2 as well.
+	[073129862d75]
+
+	* pyqtdeploy/python/configurations/patches/python-3.4.3.diff:
+	Fixed locale.py so that it can be imported on Android (Python v3.4.3
+	only).
+	[c48b92a20b14]
+
+2015-08-08  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/patches/python-3.4.3.diff:
+	Fixed _bootlocale.py for Android.
+	[52efe522e080]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Another attempt at fixing command line arguments on Windows.
+	[de35ed8645ed]
+
+2015-08-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* build.py:
+	The development suffix now uses the date/time of the changeset
+	rather than the current date/time.
+	[c9c9898b0265]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Backed out changeset 939a6c76bc5b
+	[c06130e415e3]
+
+2015-07-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Fixed the handling of the command line on Windows for Python3.
+	[939a6c76bc5b]
+
+2015-07-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/packages/configurations/pyqt4/pyqt4-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart-ios.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla-ios.cfg:
+	Updated the iOS package configurations for PyQt4.
+	[347a0ca6a2eb]
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtdatavisualization
+	/pyqtdatavisualization-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtpurchasing/pyqtpurchasing-
+	ios.cfg, pyqtdeploy/packages/configurations/qscintilla/qscintilla-
+	ios.cfg:
+	Updated the iOS package configuration files for the PyQt_Process
+	feature.
+	[f5b8717c63c9]
+
+	* build.py, setup.py:
+	PEP440 related changes.
+	[7fdd946c5ef6]
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	Fixed a bug in pdytools that only seemed to trigger a crash on
+	Android.
+	[5f5cd94890df]
+
+	* Developers/DeveloperNotes.txt, Developers/build-sysroot.py:
+	Added the --debug flag to build-sysroot.py.
+	[936ec0aa1f27]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/python/configurations/python.pro:
+	Don't explicitly specify release builds in generated .pro files.
+	[22e3256f9bec]
+
+	* doc/static_builds.rst:
+	Replaced references to Digia by The Qt Company.
+	[8895f28403f7]
+
+	* Developers/DeveloperNotes.txt, Developers/build-sysroot.py:
+	Updated the target version of Qt for cross-compiling.
+	[e44339fb4363]
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the version of Qt in the example .pdy files.
+	[fd4b385b84fa]
+
+2015-07-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/pyqt4.py, pyqtdeploy/metadata/pyqt5.py,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Updates for PyQt v5.5.
+	[ac0fb9cee1c0]
+
+	* pyqtdeploy/file_utilities.py:
+	Some encodings will always be ASCII.
+	[fe9cc4791616]
+
+	* pyqtdeploy/python/pyconfig.py:
+	Completed the support for Python v2.7.10.
+	[e53f8d05509b]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Updated the Python libray meta-data for v2.7.10.
+	[a72d996cb51e]
+
+	* pyqtdeploy/python/configurations/patches/python-2.7.10.diff:
+	Added the patch file for Python v2.7.10.
+	[2893112a4b9d]
+
+	* pyqtdeploy/file_utilities.py:
+	Fixed another implicit decoding bug.
+	[3fe817ffbee3]
+
+	* pyqtdeploy/python/diff_parser.py:
+	Fixed a deprecated str to QByteArray conversion.
+	[3f6430ff73ac]
+
+	* build.py:
+	Removed some unused legacy code from build.py.
+	[5df68f772f3d]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Fixed the handling of an exception being passed back to the
+	operating system.
+	[db0a0117d309]
+
+	* doc/static/default.css,
+	pyqtdeploy/builder/lib/pre_configuration.pro:
+	Merged the 1.0-maint branch into the trunk.
+	[30337ac3959f]
+
+2015-05-06  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.0.1 for changeset 8a0f60d09bbb
+	[2d58d162ecf0] <1.0-maint>
+
+	* NEWS:
+	Released as v1.0.1.
+	[8a0f60d09bbb] [1.0.1] <1.0-maint>
+
+2015-05-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/conf.py, doc/static/classic.css, doc/static/default.css:
+	Updated the docs for Sphinx 1.3.1.
+	[4a3ed33929d1] <1.0-maint>
+
+	* doc/tutorial.rst, pyqtdeploy/gui/application_page.py:
+	Documented that the sys.path field can be used to specify external
+	ZIP files and eggs.
+	[5bd5285c6594] <1.0-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/config_py2.c,
+	pyqtdeploy/python/configurations/config_py3.c,
+	pyqtdeploy/python/configurations/python.pro:
+	zipimport is now an extension module (rather than core) and requires
+	the zlib module. It is enabled in order to import from .zip files
+	(and eggs).
+	[5a6953dda746] <1.0-maint>
+
+2015-04-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/config_py3.c,
+	pyqtdeploy/python/configurations/python.pro:
+	Changed the workaround for the apparent Python v3.4 bug in the
+	_struct.c module so that it is Windows specific and works with the
+	python.org Python library.
+	[77df83ededc3] <1.0-maint>
+
+2015-04-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Improved the handling of sub-scopes reduce the hardcoding.
+	[12b1bc84bb70] <1.0-maint>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/post_configuration.pro,
+	pyqtdeploy/metadata/python_metadata.py:
+	Fixed remaining issues with platform scope name and Windows sub-
+	scopes.
+	[c97ab970f4ca] <1.0-maint>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the unscoped inclusion of external libraries that modules in
+	the python.org Python library depends on.
+	[b6b1ae19a3d2] <1.0-maint>
+
+	* pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/post_configuration.pro,
+	pyqtdeploy/builder/lib/pre_configuration.pro, pyqtdeploycli.pdy:
+	Removed pre_configuration.pro and moved its contents to
+	post_configuration.pro because it requires the value of SOURCES to
+	be complete.
+	[83baa99746b0] <1.0-maint>
+
+	* pyqtdeploy/builder/builder.py:
+	Make sure the PC sub-directory is added to INCLUDEPATH when building
+	stdlib extension modules on Windows.
+	[307548fccd45] <1.0-maint>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the pathlib module to the Python meta-data.
+	[3494844f0449] <1.0-maint>
+
+2015-03-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 1.0 for changeset 792793701930
+	[d77711fb5a11]
+
+	* NEWS:
+	Released as v1.0.
+	[792793701930] [1.0]
+
+	* Developers/build-sysroot.py:
+	Updated build-sysroot.py for the latest Qt and Python versions.
+	[d2d1daf66d57]
+
+	* doc/images/locations_tab.png, pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the file locations in the examples to match current
+	versions.
+	[770e63d7c86d]
+
+2015-02-27  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/index.rst, doc/static_builds.rst, doc/tutorial.rst,
+	doc/windows_dynamic_loading.rst:
+	Added a section in the docs about dynamic loading under Windows.
+	[63abd1a94159]
+
+	* pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.python:
+	Updated the local copy of _bootstrap.py for Python v3.4.
+	[14fd3858ffa9]
+
+	* doc/images/stdlib_packages_tab.png, pyqtdeploy.pdy,
+	pyqtdeploy/metadata/supported_python_versions.py, pyqtdeploycli.pdy:
+	Added Python v3.4.3 as a separate supported version.
+	[1c3a62208d0d]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Updated the standard library meta-data for Python v3.4.3.
+	[c6647c643bb1]
+
+	* pyqtdeploy/python/configurations/patches/python-3.4.3.diff:
+	Added the Python patch fro v3.4.3.
+	[46aa1c44eeb0]
+
+2015-02-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the meta-data for distutils.command.
+	[5b3b5f16e555]
+
+2015-02-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added distutils (except distutils.command) to the Python meta-data.
+	[0f38d68b94a7]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the meta-data for the _multibytecodec module.
+	[d4d8c1bd3ec3]
+
+2015-02-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the metadata for building the _sqlite3 extension module.
+	[579b35a4adf1]
+
+2015-02-05  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py now supports the "building" of Qt on Android and
+	iOS.
+	[fb6f45132bbe]
+
+2015-02-04  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.10 for changeset 5e8056d39f8d
+	[c1fad5a8b48a]
+
+	* NEWS:
+	Released as v0.10.
+	[5e8056d39f8d] [0.10]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Updated the _md5 metadata.
+	[40bdd59d5e06]
+
+2015-02-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py:
+	Refactored the support for SSL.
+	[c6dc363e4c66]
+
+	* doc/images/stdlib_packages_tab.png, doc/tutorial.rst,
+	pyqtdeploy/gui/application_page.py, pyqtdeploy/gui/build_page.py,
+	pyqtdeploy/gui/filename_editor.py, pyqtdeploy/gui/locations_page.py,
+	pyqtdeploy/gui/other_extension_modules_page.py,
+	pyqtdeploy/gui/other_packages_page.py, pyqtdeploy/gui/pyqt_page.py,
+	pyqtdeploy/gui/qmake_page.py, pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/standard_library_page.py:
+	Made sure all GUI elements have What's This? help.
+	[27beebf3e299]
+
+	* doc/tutorial.rst:
+	Updated the docs regarding the standard library page.
+	[224e45325a26]
+
+2015-02-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Fixed a recursion problem when reseting external library qmake
+	specs.
+	[88c07a845fea]
+
+	* pyqtdeploy/builder/builder.py:
+	Fix the handling of quotes and escapes in external library qmake
+	specs.
+	[53e60e966b9c]
+
+2015-02-01  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/freeze.python,
+	pyqtdeploy/gui/build_page.py:
+	Fix problems with the jobs file on Windows and Python v2.
+	[3ac711cc42a1]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed a problem when repeatedly attempting failing builds.
+	[278eb8f98ab3]
+
+	* pyqtdeploy/project/project.py:
+	Fixed a problem with external extension modules.
+	[d4d7816c2729]
+
+2015-01-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/freeze.python, pyqtdeploycli.pdy:
+	Freezing files is now done by running the freeze program once rather
+	than once per file.
+	[e188ce1399d7]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/freeze.python:
+	Make sure frozen Python files have a sensible embedded name.
+	[d1e2c30409a2]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixes for the handling of external libraries.
+	[b36d142da133]
+
+	* pyqtdeploy/gui/project_gui.py:
+	Fixed the About dialog text.
+	[128767aa4ab4]
+
+	* doc/command_line.rst, pyqtdeploy/__init__.py,
+	pyqtdeploy/main_cli.py:
+	Added the show-version action to pyqtdeploycli.
+	[49295865e0b8]
+
+2015-01-30  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/stdlib_packages_tab.png:
+	Updated the screenshots.
+	[e1c46419ff67]
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Properly fix the enabling of the external libraries.
+	[0a9bfc3da72e]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Added SQLite to the external libraries.
+	[925a2cd3a16c]
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	The external library entries now get enabled properly when required.
+	[8b0960aefee7]
+
+2015-01-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.9 for changeset bfba54253142
+	[68c78b7657f2]
+
+	* NEWS:
+	Released as v0.9.
+	[bfba54253142] [0.9]
+
+	* doc/command_line.rst, doc/images/build_tab.png, doc/tutorial.rst:
+	Documented the ability to alter the number of generated resource
+	files.
+	[ed16702c81bc]
+
+	* pyqtdeploy/gui/build_page.py:
+	pyqtdeploy can now vary the number of .qrc files generated.
+	[8ed243169b61]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/main_cli.py:
+	Added the --resources option to pyqtdeploycli.
+	[207073e8abcd]
+
+2015-01-27  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/project/project.py:
+	The default for all platforms is to use a static Python.
+	[81ea775ef7bc]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Fixed the handling of projects with no application package.
+	[cd08de055733]
+
+	* doc/images/application_source_tab.png, doc/pyrcc.rst,
+	doc/tutorial.rst:
+	Updated the docs to cover accessing .qml files.
+	[acf38be532aa]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/qrc_package_editor.py, pyqtdeploy/project/project.py:
+	Fixes to allow the application package to be in the same directory
+	as the project file.
+	[e76122099108]
+
+	* pyqtdeploy/project/project.py:
+	Try not to break existing projects when updating to the latest
+	project format.
+	[d976414ec41d]
+
+2015-01-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/stdlib_packages_tab.png, doc/introduction.rst,
+	doc/static_builds.rst, doc/tutorial.rst,
+	pyqtdeploy/gui/standard_library_page.py:
+	Updated the documentation.
+	[570a10e45ec0]
+
+2015-01-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/qmake_tab.png, doc/images/stdlib_packages_tab.png:
+	Updated the screenshots.
+	[3fe106ef01dd]
+
+2015-01-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	No longer check that a Python .c or .h file exists because it may
+	not be needed for a particular scope.
+	[2d166cb37f95]
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py can now use the platform Python installation
+	(Windows only).
+	[c3608853c4d0]
+
+2015-01-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py, pyqtdeploycli.pdy:
+	Support for building against the standard Python libraries is now
+	configurable for all native platforms and is the default for
+	Windows.
+	[3e720ddb5784]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Debugging the support for using Python DLLs.
+	[3c611d064035]
+
+2015-01-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the Python DLL meta-data.
+	[32a83aad1cc7]
+
+	* pyqtdeploy/builder/builder.py:
+	Completed the implementation of the qmake configuration.
+	[e7e4fcd3d55a]
+
+2015-01-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the .pdy files.
+	[752f38fb2f1b]
+
+	* pyqtdeploy/gui/project_gui.py, pyqtdeploy/gui/qmake_page.py:
+	Added the qmake tab.
+	[de57c86a5a02]
+
+	* pyqtdeploy/gui/application_page.py:
+	Added the Python DLL checkbox to the application tab.
+	[148d76d07e94]
+
+	* pyqtdeploy.pdy, pyqtdeploy/project/project.py, pyqtdeploycli.pdy:
+	Added the QMakeConfiguration sub-element and the usepydll attribute
+	to the project file and bumped the version format to 5.
+	[418cb99bdefb]
+
+2015-01-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Use QProcess rather than subprocess.
+	[7309897690e4]
+
+	* pyqtdeploy/python/configurations/config_py3.c:
+	Further _struct related fixes.
+	[269677d40c75]
+
+	* build.py:
+	Preview's are now timestamp based rather than changeset based.
+	[d878a596b349]
+
+	* MANIFEST.in:
+	Fixed the manifest.
+	[6b6128884731]
+
+2015-01-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/python.pro:
+	Workaround the apparent _struct.c bug in Python v3.4.
+	[b5a878c6e6ad]
+
+	* pyqtdeploy/builder/builder.py:
+	Make sure embedded files are deletable when copied out.
+	[d2ded3218072]
+
+	* pyqtdeploy/builder/builder.py:
+	Don't use universal newlines because it introduces a dependency on
+	the user's locale.
+	[676323aac3f1]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the support for console applications.
+	[6f9af9faf7aa]
+
+	* pyqtdeploy/project/project.py:
+	Ensure that a project file is written as utf-8.
+	[b0b1ce56073b]
+
+	* Developers/build-sysroot.py:
+	Fixed the sip build.
+	[eb5e37e0f8a3]
+
+	* Developers/DeveloperNotes.txt,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.9.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.4.2.h:
+	Fixed the Windows pyconfig.h files for Python v2.7.9 and 3.4.2.
+	[021a0795de92]
+
+	* Developers/build-sysroot.py:
+	build-sysroot.py no longer removes the Python source directory after
+	building.
+	[4f2d890b98eb]
+
+	* pyqtdeploy/builder/builder.py:
+	Raise an exception if a Python extension module source file could
+	not be found.
+	[4d667140213e]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed a regression in the builder.
+	[4735aa70faf8]
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the Qt version in the project files.
+	[d3437a0200fb]
+
+2015-01-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Finished the Windows support for build-sysroot.py.
+	[79dd50228d95]
+
+2015-01-08  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Added initial support for Windows to build-system.py.
+	[d88610c3104c]
+
+2015-01-07  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Developers/build-sysroot.py:
+	Fixed the Linux host support. Clean up source directories after use.
+	[a30dd489a952]
+
+	* Developers/build-sysroot.py:
+	Added the Linux host to build-sysroot.py.
+	[3afc3bae16fc]
+
+	* Developers/build-sysroot.py:
+	Added support for building PyQt5 to build-sysroot.py.
+	[39c131709831]
+
+	* Developers/build-sysroot.py:
+	Added support for building Python to build-sysroot.py.
+	[a1528bb66482]
+
+	* DeveloperNotes.txt, Developers/DeveloperNotes.txt, Developers/build-
+	sysroot.py:
+	Created a developer-specific sub-directory. Added the initial build-
+	sysroot.py script.
+	[8f18797fd0ab]
+
+2015-01-06  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Make sure Py_OptimizeFlag is set correctly.
+	[f5f0655964be]
+
+2015-01-05  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg:
+	Removed the remaining QtWebKit and QtWebKitWidgets references.
+	[d43b73e3fd51]
+
+	* pyqtdeploy/packages/configurations/pyqt4/pyqt4-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-win.cfg:
+	Removed QtWebKit from all PyQt4 configurations.
+	[6d7add6c93d0]
+
+	* doc/command_line.rst, doc/static_builds.rst,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg:
+	Removed QtWebKit and QtWebKitWidgets from all PyQt5 configuration
+	files.
+	[558ebd9b5cd8]
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg:
+	Removed QtWebEngineWidgets from the PyQt5 configuration files as it
+	isn't built in a static Qt.
+	[0253319119f4]
+
+	* pyqtdeploy/builder/lib/post_configuration.pro,
+	pyqtdeploy/builder/lib/pre_configuration.pro,
+	pyqtdeploy/metadata/python_metadata.py:
+	Improved the support for ctypes, particularly on Windows.
+	[5c89c2c02909]
+
+	* pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/platforms.pro,
+	pyqtdeploy/builder/lib/post_configuration.pro,
+	pyqtdeploy/builder/lib/pre_configuration.pro, pyqtdeploycli.pdy:
+	Renamed platforms.pro and added a corresponding pre-configuration
+	file.
+	[54c85aaf1db4]
+
+	* pyqtdeploy/builder/lib/platforms.pro:
+	Removed UNICODE from DEFINES for Windows because it clashes with
+	_pickle.c.
+	[85740a66bdb2]
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	Fixed the names of the PlugIns and Frameworks directories in the
+	pdytools module.
+	[b6e53d272fcd]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the missing _bootlocale module.
+	[eff1d308907b]
+
+2015-01-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/stdlib_packages_tab.png:
+	Updated the tutorial screenshots.
+	[e6149809aa4b]
+
+	* pyqtdeploy.pdy, pyqtdeploycli.pdy:
+	Updated the example .pdy files.
+	[cd1dedd3fa91]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/metadata/pyqt4.py,
+	pyqtdeploy/metadata/pyqt5.py, pyqtdeploy/metadata/pyqt_metadata.py,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Added support for the QtWebChannel, QtWebEngineWidgets and QtXml
+	modules added in PyQt v5.4.
+	[17608e8e17e6]
+
+	* DeveloperNotes.txt, pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.0.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.9.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.h:
+	Added support for Python v2.7.9.
+	[6cc369e5d760]
+
+2014-11-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	pdytools now supports find_module() for Python v3.
+	[511418ce3f0c]
+
+2014-11-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Makefile, build.py, doc/conf.py, setup.py:
+	emove the VERSION file and read the version information from
+	version.py instead. setup.py will now create a minimal version.py if
+	needed. This should allow 'pip install -e ...' to be used from the
+	hg repo (although the version information won't be valid).
+	[4e78d4c46555]
+
+2014-11-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst:
+	Documented the support for adjacent extension modules.
+	[486f00f6ad3f]
+
+	* doc/images/pyqt_modules_tab.png, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/pyqt4.py, pyqtdeploy/metadata/pyqt5.py:
+	The sip module can now be explicitly included if required.
+	[141209d6c911]
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp,
+	pyqtdeploy/metadata/python_metadata.py:
+	The directory containing the executable is now derived from
+	sys.executable (rather than argv[0]). Added support for dynamically
+	loading extension modules that are installed adjacent to the
+	application executable.
+	[bfed4d707c20]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Define SOABI when dynamic loading is enabled.
+	[4db00ded0abe]
+
+2014-11-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pdytools_module.cpp:
+	The pdytools module now checks for Python v2.7 rather than v2.6.
+	[7d0093542e81]
+
+	* pyqtdeploy/builder/lib/platforms.pro:
+	Fixed a typo that prevented building on OS/X.
+	[f0f054c927df]
+
+2014-11-07  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added the sysconfig module to the Python meta-data.
+	[51e04c3166f6]
+
+	* pyqtdeploy/builder/lib/platforms.pro,
+	pyqtdeploy/metadata/python_metadata.py:
+	Added the missing _scproxy module for OS/X. Added the extra
+	frameworks that standard Python adds for OS/X.
+	[842a35d8150b]
+
+	* pyqtdeploy/project/project.py:
+	Extend the list of standard exclusions.
+	[cdc5e5c892ab]
+
+2014-11-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Scopes are handled properly in the source and include path of
+	required additional libraries.
+	[b6225cc2873d]
+
+2014-10-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Removed a stray semi-colon.
+	[29e40c1d5259]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the name of the source file of the _json module.
+	[ca2e809daf2a]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Added a missing const cast for Python v2.
+	[3c5174d61ca3]
+
+2014-10-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed a missing argument when buliding with extension modules.
+	[e64950c39edf]
+
+2014-10-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.8 for changeset 7caf2eafe471
+	[f6d53bbd39f7]
+
+	* NEWS:
+	Released as v0.8.
+	[7caf2eafe471] [0.8]
+
+	* doc/images/locations_tab.png, pyqtdeploy.pdy,
+	pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/supported_python_versions.py, pyqtdeploycli.pdy:
+	More fixes required for the move to supporting individual Python
+	patch levels. Updated the example projects and docs for the latest
+	versions of Python and Qt.
+	[cce6c102b145]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/__init__.py,
+	pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/pyqt4.py, pyqtdeploy/metadata/pyqt5.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py:
+	Refactored the implementation of supported Python versions.
+	[deaab736051d]
+
+2014-10-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/project/project.py:
+	Fixed a regression preventing the creation of new projects.
+	[c266407ad226]
+
+	* .hgtags:
+	Added tag 0.7 for changeset d1fb7fdd17f3
+	[7d35954a8a09]
+
+	* NEWS:
+	Released as v0.7.
+	[d1fb7fdd17f3] [0.7]
+
+	* DeveloperNotes.txt,
+	pyqtdeploy/python/configurations/patches/python-3.4.2.diff,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.4.0.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.4.2.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.4.h:
+	Completed the updates for Python v3.4.2.
+	[39b7577d1cd8]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Completed the reformatting of the Python meta-data.
+	[2cae7677481b]
+
+2014-10-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Partial reformatting of the Python meta-data to make it easier to
+	read.
+	[df64ec036841]
+
+	* DeveloperNotes.txt, doc/images/stdlib_packages_tab.png,
+	pyqtdeploy.pdy, pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py, pyqtdeploycli.pdy:
+	The Python standard library meta-data is now defined down to the
+	patch level. Updated the Python standard library meta-data for
+	Python v3.4.2.
+	[cb3300a52584]
+
+	* DeveloperNotes.txt,
+	pyqtdeploy/python/configurations/patches/python-3.3.6.diff:
+	Added support for Python v3.3.6.
+	[8e7e8005be72]
+
+	* doc/static_builds.rst:
+	Added documentation for building a static Qt with a static Windows C
+	runtime.
+	[4735aacaeb6b]
+
+2014-09-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/filename_editor_delegate.py:
+	Fixed a regression introduced when adding support for the auto-
+	commited file name.
+	[c483bce0ab49]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed a bug when building with other packages which meant that the
+	packages parent directory was wrongly included in the hierarchy.
+	[9b904878ce47]
+
+	* pyqtdeploy/gui/filename_editor.py:
+	Fixed a bug in the file name editor when there is no project.
+	[925d75ecbecc]
+
+	* pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/filename_editor_delegate.py:
+	The file name editor will now auto-commit when the file dialog is
+	used.
+	[80fd7697ba58]
+
+2014-09-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.6 for changeset 9dd8136231ec
+	[6590e3d96009]
+
+	* NEWS:
+	Released as v0.6.
+	[9dd8136231ec] [0.6]
+
+2014-09-10  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	Added a workaround for QTBUG-41204 to the docs.
+	[26fecd586dec]
+
+2014-09-04  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Stopped the interpreter freeing the name of the default filesystem
+	encoding.
+	[76ad579a1d54]
+
+	* NEWS:
+	Updated the NEWS file.
+	[2298595be6e4]
+
+	* pyqtdeploy/builder/builder.py:
+	Disable warnings as there is too much noise from the Python modules.
+	[9baf2826b80e]
+
+2014-09-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the meta-data for the gestalt module.
+	[1c7c8362c678]
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Fix a bug with Python sub-modules not being in the current version.
+	[ef909ecbd7a8]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Use PySys_SetArgvEx().
+	[2c502159d34a]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Fixed building Python v2 under Windows.
+	[512b596a1714]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Fixed the filesystem enconding on Windows.
+	[9a7d1567d50c]
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Make sure all explicitly included standard library modules are
+	initially visible.
+	[f4b0dba8feab]
+
+	* pyqtdeploy/gui/qrc_package_editor.py, pyqtdeploy/project/project.py:
+	Fixes to allow a previously defined application package to be
+	completely removed.
+	[1c7dbb63809e]
+
+2014-08-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/config_py3.c,
+	pyqtdeploy/python/configurations/python.pro:
+	The winreg module is now core for Python3.
+	[a72041d80805]
+
+	* pyqtdeploy/project/project.py:
+	Fixed the conversion to the internal file name format when the file
+	doesn't exist.
+	[47cc9842458b]
+
+	* pyqtdeploy/python/pyconfig.py:
+	Fixes for the Android configuration.
+	[a319d2af0ae9]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/build_page.py, pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/other_extension_modules_page.py,
+	pyqtdeploy/gui/other_packages_page.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/project/project.py:
+	Lots of refactoring to ensure a consistent internal representation
+	of file names in the GUI part of the application.
+	[06588aaf297b]
+
+2014-08-29  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/other_extension_modules_tab.png, doc/tutorial.rst:
+	Documented the use of scoped qmake variables.
+	[e7a21624269b]
+
+	* doc/tutorial.rst, pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/other_extension_modules_page.py,
+	pyqtdeploy/gui/other_packages_page.py,
+	pyqtdeploy/project/project.py, pyqtdeploycli.pdy:
+	Refactored so that scoped values are supported whenever the user can
+	enter DEFINES, INCLUDEPATH or LIBS. Filenames in INCLUDEPATH or LIBS
+	are automatically converted from project file relative names
+	possibly with embedded environment variables.
+	[3b37ad855efd]
+
+2014-08-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst:
+	More tweaks to the tutorial.
+	[4059d0e38193]
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/tutorial.rst,
+	pyqtdeploy.pdy, pyqtdeploy/gui/other_extension_modules_page.py,
+	pyqtdeploy/gui/other_extension_modules_subpage.py,
+	pyqtdeploy/gui/other_libraries_page.py,
+	pyqtdeploy/gui/other_packages_page.py,
+	pyqtdeploy/gui/other_packages_subpage.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploycli.pdy:
+	Moved the sub-tabs handling other packages and extension modules to
+	the top level.
+	[5b414d15a352]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Handle sys.exit() properly to extract the error code.
+	[151a08613980]
+
+2014-08-27  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/tutorial.rst, pyqtdeploy/__init__.py,
+	pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/build_page.py, pyqtdeploy/main_gui.py,
+	pyqtdeploycli.pdy:
+	Implemented support for explicit console applications. Implemented
+	support for non-bundle OS/X applications.
+	[2bfeddbb4dff]
+
+	* pyqtdeploy/gui/application_page.py, pyqtdeploycli.pdy:
+	Added the console and bundle buttons to the application tab.
+	[c560184faad6]
+
+	* pyqtdeploy.pdy, pyqtdeploy/project/project.py, pyqtdeploycli.pdy:
+	Added the console and bundle flags to the project.
+	[1b09956e59ba]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Selecting application modules should now expand and collapse (and
+	automatically remove sub-modules) in a helpful way.
+	[4d2f39f1e1ab]
+
+	* doc/command_line.rst, doc/introduction.rst, doc/static_builds.rst,
+	doc/tutorial.rst:
+	Updated the docs relating to the split between pyqtdeploy and
+	pyqtdeploycli.
+	[2ad828f0fbba]
+
+	* pyqtdeploy/main.py, pyqtdeploy/main_cli.py, pyqtdeploy/main_gui.py,
+	setup.py:
+	Refactored the setuptools wrappers/entry points.
+	[9d07f8a13991]
+
+	* pyqtdeploy.pdy:
+	Updated the pyqtdeploy project file for the refactored setuptools
+	wrappers.
+	[8b3d39ac3c39]
+
+	* pyqtdeploycli.pdy:
+	Added the project file for pyqtdeploycli.
+	[65a6e87d61e9]
+
+	* pyqtdeploy/file_utilities.py, pyqtdeploy/message_handler.py,
+	pyqtdeploy/targets.py:
+	Fixed some file permissions.
+	[c468a08d7c70]
+
+	* doc/tutorial.rst, pyqtdeploy/builder/builder.py:
+	On Windows any trailing version number is now removed from the name
+	of the host Python interpreter.
+	[2e0e4a71825c]
+
+	* pyqtdeploy/builder/builder.py:
+	Rename the generated main.cpp to pyqtdeploy_main.cpp as it has some
+	wierd side effects with MSVC.
+	[01d6af47df4d]
+
+	* pyqtdeploy/metadata/python_metadata.py, pyqtdeploy/python/python.py:
+	Fixed the pyexpat meta-data for Windows. Handle re-configuring an
+	already configured Python package.
+	[719ca709d74b]
+
+2014-08-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/platforms.pro,
+	pyqtdeploy/python/python.py:
+	More Windows fixes.
+	[356014bb2609]
+
+	* pyqtdeploy/packages/configurations/pyqt4/pyqt4-win.cfg:
+	Updated the PyQt4 package configuration for Windows.
+	[541960bf94a9]
+
+	* pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart-win.cfg,
+	pyqtdeploy/packages/configurations/pyqtdatavisualization
+	/pyqtdatavisualization-win.cfg,
+	pyqtdeploy/packages/configurations/pyqtpurchasing/pyqtpurchasing-
+	win.cfg, pyqtdeploy/packages/configurations/qscintilla/qscintilla-
+	win.cfg:
+	Added Windows specific package configuration files where required.
+	[ec379ec93f72]
+
+	* doc/tutorial.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/python/configurations/python.pro:
+	More Windows fixes.
+	[e08e78ba7865]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.7.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.3.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-3.4.h:
+	More Windows fixes.
+	[cc0363aa3157]
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Fixed the PyQt5 for Windows configuration file.
+	[1445c17aa867]
+
+	* doc/static_builds.rst, pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/config_py2.c,
+	pyqtdeploy/python/configurations/config_py3.c,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/python.py, setup.py:
+	Various fixes for building Python on Windows including splitting
+	pyqtdeploy to separate command line and GUI applications.
+	[287236a4e37c]
+
+2014-08-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Updated the standard library meta-data to build _ctypes on Linux.
+	[e4a5077f079b]
+
+	* doc/command_line.rst, doc/images/pyqt_modules_tab.png,
+	doc/introduction.rst, doc/pyrcc.rst, doc/static_builds.rst,
+	doc/tutorial.rst, pyqtdeploy.pdy:
+	The documentation is now up to date.
+	[94f4a06d7a03]
+
+2014-08-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the previous change for other C modules.
+	[d3d8c8d93e06]
+
+	* pyqtdeploy/builder/builder.py:
+	The LIBS and INCLUDEPATH of other modules can now contain
+	environment variables.
+	[31ece13c1ac8]
+
+	* pyqtdeploy/builder/builder.py:
+	The LIBS and INCLUDEPATH of an external library may know contain
+	environment variables.
+	[a5cebe0e9bec]
+
+	* .hgignore:
+	Ignore .DS_Store files.
+	[a086b6eda3c8]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/standard_library_page.py:
+	Improve error handling when a project data file is missing.
+	[a01220cbdb8e]
+
+	* pyqtdeploy.pdy:
+	Updated the projetc .pdy as the contents have changed.
+	[6421bcfd79ad]
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/stdlib_extension_modules_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/tutorial.rst:
+	Updated the tutorial images.
+	[b7cc6cb3868d]
+
+2014-08-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Completed the codec meta-data.
+	[5c950e87c9ec]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Added most of the encodings meta-data.
+	[5d9f9b2f489f]
+
+	* pyqtdeploy/gui/application_page.py:
+	Fixed the layout of the application tab when it has extra height.
+	[c0117ed306b1]
+
+	* pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Removed -lintl as an external library.
+	[bcaecaf0ad96]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	shutil no longer requires zipfile (and therefore -lz).
+	[40f91bd91233]
+
+2014-08-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Completed the Python standard library meta-data.
+	[14f09f0a9937]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[665faae119ac]
+
+	* README, doc/introduction.rst,
+	pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-win-2.6.h:
+	Removed support for Python v2.6.
+	[e249910e1c95]
+
+	* pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[10063d54ff2c]
+
+2014-08-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[ecf0b6db53f0]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[918f533a8127]
+
+2014-08-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[bc5e936bdfd6]
+
+	* pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[d6eac7b7733a]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	binascii no longer uses zlib.
+	[33ed57892662]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp,
+	pyqtdeploy/metadata/python_metadata.py:
+	More platform-specific meta-data handling fixes.
+	[62f078a71912]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[85ff315872cb]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More meta-data.
+	[5becd01cfdb1]
+
+2014-08-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More Python meta-data.
+	[33c86abde009]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/config_py2.c,
+	pyqtdeploy/python/configurations/config_py3.c:
+	Updates to the Python meta-data handling to properly handle Windows.
+	[4bdc224b992e]
+
+2014-08-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Added Windows-specific source files to the Python meta-data. More
+	Python meta-data.
+	[edf22f217e85]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Simplified the packaged editor now that it is no longer used for the
+	standard library.
+	[3adc212c9861]
+
+	* doc/pdytools_module.rst,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Implemented sys.frozen.
+	[e619a0902b76]
+
+	* pyqtdeploy.pdy:
+	Updated the pyqtdeploy .pdy project to follow the locations
+	conventions of the tutorial.
+	[f0c42c5a4c4d]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Fixed the value of sys.platform when configuring Python.
+	[778ba4dfffb0]
+
+2014-08-16  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.pdy, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	The dependencies for sub-packages now includes the parent package to
+	that the parents are implicitly required. Updated the pyqtdeploy
+	project file. Bug fixes.
+	[f3179d73920a]
+
+	* pyqtdeploy/gui/build_page.py,
+	pyqtdeploy/gui/standard_library_page.py:
+	Bug fixes.
+	[b67acc64900f]
+
+	* pyqtdeploy/builder/builder.py:
+	Builder fixes so the wiggly example now works again.
+	[1d21a704ec00]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/project/project.py:
+	Updated the builder for the refactored standard library support.
+	[1f9086d1d9f1]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py:
+	Refactored the standard library dependencies so it can be reused by
+	the builder.
+	[b83a47e3e818]
+
+2014-08-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/standard_library_page.py:
+	Implemented support for the optional use of SSL.
+	[7e5ad5d6f422]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/project/project.py:
+	Completed the support for specifying external libraries.
+	[d0971cdeca82]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Completed the selection of standard libraries.
+	[5fa46aa8247a]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	The Python meta-data now handles hidden dependencies so work around
+	the expensive import of the warnings module by importlib in Python
+	v3.4.
+	[e892985c7746]
+
+2014-08-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/project.py:
+	Updates to the project format for the Python version number and SSL
+	support. Continue the refactoring of the standard library page.
+	[a36d6a91aea4]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py:
+	Updated the project format to handle external libraries. Updated the
+	function to select the versioned Python meta-data.
+	[ec1ff11ebf09]
+
+	* pyqtdeploy/metadata/__init__.py,
+	pyqtdeploy/metadata/external_libs_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	External libraries used by the Python standard library now have
+	their own meta-data.
+	[9888abb16dc0]
+
+2014-08-11  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	The Python meta-data is now internally consistent (but not yet
+	complete).
+	[48f9f2e0afdd]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More Python v2 meta-data.
+	[2559f5bf44fe]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	The meta-data for Python v3 is now complete and consistent as far as
+	it goes.
+	[2fe6edc9afd2]
+
+2014-08-10  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More Python meta-data.
+	[842627e319b0]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More Python meta-data.
+	[5bf605e213e9]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More updates to the Python meta-data.
+	[a0b35b277c9f]
+
+2014-08-09  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	The meta-data for sub-packages is no longer nested.
+	[13ec72e80ad0]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	More Python meta-data.
+	[5ecbc7738974]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/gui/stdlib_extension_modules_subpage.py,
+	pyqtdeploy/gui/stdlib_packages_subpage.py,
+	pyqtdeploy/metadata/__init__.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py,
+	pyqtdeploy/python/configurations/config_py3.c:
+	Initial implementation of the revised Python meta-data. Beginning of
+	merged standard library tabs.
+	[4f35109207bf]
+
+2014-08-05  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Removed the special handling of site-packages in the builder.
+	[196dbdb1db85]
+
+	* doc/images/other_packages_tab.png, doc/tutorial.rst,
+	pyqtdeploy/gui/other_packages_subpage.py,
+	pyqtdeploy/gui/qrc_package_editor.py, pyqtdeploy/project/project.py:
+	The site-packges directory of the target standard library no longer
+	gets any special treatment.
+	[d9d7f711f6c4]
+
+2014-08-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png,
+	doc/images/stdlib_extension_modules_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/tutorial.rst:
+	Updated the docs to cover entry points and core extension modules.
+	[080630b35fce]
+
+	* pyqtdeploy/gui/application_page.py:
+	Fixed the placeholder text related to entry points.
+	[87ee8b59aefa]
+
+	* pyqtdeploy.pdy:
+	Added the dog food project file for pyqtdeploy.
+	[bb8194084a34]
+
+	* pyqtdeploy/metadata/python_metadata.py:
+	Fixed the atexit module meta-data.
+	[9c47ce702d9c]
+
+2014-08-01  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-2.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-2.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.3.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.3.python,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.python,
+	pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/builder/lib/freeze.python:
+	Renamed the embedded .py files so that they don't get frozen if we
+	deploy ourself.
+	[396920891a5c]
+
+	* doc/index.rst, doc/pdytools_module.rst, doc/pyqtdeploy_module.rst,
+	pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-2.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.3.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.py,
+	pyqtdeploy/builder/lib/pdytools_module.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_module.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Renamed the pyqtdeploy module to pdytools to avoid a clash with
+	pdydeploy itself when it is deployed.
+	[244be759681e]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-2.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.3.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_module.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp,
+	pyqtdeploy/project/project.py:
+	Refactored the resource handling so that there is only one resource
+	file. Refined the entry point support so that it is the same value
+	specified in a setup.py for setuptools.
+	[7d229309179d]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Implemented the call to the entry point (not yet working).
+	[f57f7024b341]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/build_page.py, pyqtdeploy/project/project.py:
+	Added support for specifying an explicit application executable.
+	Added project and GUI support for specifying an entry point.
+	[b8e30df22fed]
+
+	* pyqtdeploy/gui/stdlib_extension_modules_subpage.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Core extension modules are now displayed (disabled) in the list of
+	standard library extension modules.
+	[9add8002340d]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Fixed the saving and restoring of the check state when scanning a
+	directory.
+	[a4facecf1dc9]
+
+	* pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/stdlib_extension_modules_subpage.py:
+	A scanned directory now sorts ignoring any leading underscore.
+	[8360231c9df3]
+
+2014-07-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Gracefully handle the error if a directory being scanned does not
+	exist.
+	[72069c64cc0a]
+
+	* pyqtdeploy/builder/lib/freeze.py:
+	Fixed the encoding when freezing Python source files.
+	[e2ec0f959901]
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/extension_modules_tab.png, doc/images/locations_tab.png,
+	doc/images/other_extension_modules_tab.png,
+	doc/images/other_packages_tab.png, doc/images/packages_tab.png,
+	doc/images/pyqt_modules_tab.png,
+	doc/images/stdlib_extension_modules_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/tutorial.rst:
+	Updated the docs related to the standard library extension modules.
+	[63fc605ec45b]
+
+2014-07-30  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* DeveloperNotes.txt, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/stdlib_extension_modules_subpage.py,
+	pyqtdeploy/metadata/python_metadata.py,
+	pyqtdeploy/python/configurations/config_py2.c,
+	pyqtdeploy/python/configurations/config_py3.c,
+	pyqtdeploy/python/configurations/python.pro:
+	Completed the meta-data for the standard library extension modules.
+	[14aa7e33e634]
+
+	* pyqtdeploy/builder/builder.py:
+	Completed the support for standard library extension modules. (Still
+	to define all the meta-data.)
+	[34d231e3c6cd]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Added the standard library extension modules to the generated .pro
+	file. Fixes for an empty project. The Python meta-data now supports
+	a module having multiple source files.
+	[472d3f33404a]
+
+2014-07-29  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/other_extension_modules_subpage.py,
+	pyqtdeploy/gui/stdlib_extension_modules_subpage.py,
+	pyqtdeploy/project/__init__.py:
+	Completed the implementation of the standard library extension
+	modules page.
+	[5e093d4f0379]
+
+	* pyqtdeploy/project/project.py:
+	Added the standard library extension modules to the project data
+	structure.
+	[26aad0967120]
+
+	* pyqtdeploy/gui/stdlib_extension_modules_subpage.py:
+	The Python extension modules widget is now QTreeView-based.
+	[cb08cea2499f]
+
+	* pyqtdeploy/gui/stdlib_extension_modules_subpage.py:
+	Implemented the basic QTableWidget-based stdlib extension modules
+	widget.
+	[1a901293f4c0]
+
+	* pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/gui/stdlib_packages_subpage.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Changes to the GUI to ensure that the Python meta-data is always
+	valid and up to date when it is needed.
+	[d66f0e12361f]
+
+	* pyqtdeploy/gui/stdlib_packages_subpage.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Fixes for the refactored meta-data.
+	[960e4c818484]
+
+	* pyqtdeploy/gui/stdlib_packages_subpage.py,
+	pyqtdeploy/metadata/__init__.py, pyqtdeploy/metadata/metadata.py,
+	pyqtdeploy/metadata/pyqt4.py, pyqtdeploy/metadata/pyqt5.py,
+	pyqtdeploy/metadata/pyqt_metadata.py,
+	pyqtdeploy/metadata/python_metadata.py:
+	Refactored the Python version metadata so it can be expanded.
+	[2cd1b3d36aec]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/other_packages_subpage.py,
+	pyqtdeploy/gui/stdlib_packages_subpage.py:
+	Fixed a regression that appeared when converting the resource editor
+	to a layout.
+	[52855db94644]
+
+	* pyqtdeploy/gui/locations_page.py, pyqtdeploy/project/project.py:
+	Added the Python source directory to a project and the GUI.
+	[e4b4c5c3e3d5]
+
+2014-07-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/extension_modules_page.py,
+	pyqtdeploy/gui/other_extension_modules_subpage.py,
+	pyqtdeploy/gui/other_libraries_page.py,
+	pyqtdeploy/gui/other_packages_subpage.py,
+	pyqtdeploy/gui/packages_page.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/standard_library_page.py,
+	pyqtdeploy/gui/stdlib_extension_modules_subpage.py,
+	pyqtdeploy/gui/stdlib_packages_subpage.py,
+	pyqtdeploy/gui/stdlib_page.py:
+	Refactored the GUI and added the stub sub-page for specifiying
+	standard library extension modules.
+	[b3fb5daaf063]
+
+	* pyqtdeploy/gui/packages_page.py:
+	Fixed an exception when opening a new project with an existing one
+	already open.
+	[4ccbe007fbea]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Handle a SystemExit exception properly.
+	[bef19456e2e7]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed problems when the application source was separate from the
+	project file.
+	[921d40a6651c]
+
+	* pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	Added Enginio to the PyQt5 package configurations.
+	[9349e9c1a3b3]
+
+	* doc/images/pyqt_modules_tab.png, pyqtdeploy/metadata/pyqt5.py:
+	Added support for the Enginio module.
+	[cb860e1b0d55]
+
+2014-07-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	Updated the docs regarding static builds of the commercial add-ons.
+	[cf31fe50ed42]
+
+	* doc/images/pyqt_modules_tab.png, doc/static_builds.rst,
+	pyqtdeploy/metadata/pyqt5.py,
+	pyqtdeploy/packages/configurations/pyqtpurchasing/pyqtpurchasing-
+	android.cfg, pyqtdeploy/packages/configurations/pyqtpurchasing
+	/pyqtpurchasing-ios.cfg, pyqtdeploy/packages/configurations/pyqtpurc
+	hasing/pyqtpurchasing.cfg:
+	Added support for PyQtPurchasing.
+	[c5cd3894a806]
+
+2014-07-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Set Py_IgnoreEnvironmentFlag.
+	[6794457df9a4]
+
+2014-07-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.5 for changeset 10945a495818
+	[35b5c3dad38f]
+
+	* NEWS:
+	Released as v0.5.
+	[10945a495818] [0.5]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	Eliminate compiler warnings when compiling against Python v2.
+	[21528ef32d36]
+
+2014-07-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/python.py:
+	Fixed a regression is the Android Python configuration.
+	[dafe3de64cf8]
+
+	* pyqtdeploy/builder/builder.py:
+	Improved the error handling when the qmake executable doesn't exist.
+	[f5b8ea60dbca]
+
+	* setup.py:
+	Fixed the handling of package data in setup.py.
+	[4090efc7689f]
+
+	* NEWS:
+	Updated the NEWS file.
+	[3e254574e333]
+
+	* doc/images/application_source_tab.png, doc/tutorial.rst:
+	Documented the sys.path support.
+	[b2f9414e20e3]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp:
+	A sys.path directory may now include environment variables or be
+	relative to the directory containing the executable.
+	[51b86d066843]
+
+2014-07-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.c,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.cpp,
+	pyqtdeploy/file_utilities.py:
+	Refactored the common startup code to handle the encodings properly
+	and to let Qt handle the conversions.
+	[9269418aa529]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/project/project.py:
+	Added initial support for defining an application-specific sys.path.
+	[4689a9f5fa74]
+
+	* doc/static_builds.rst:
+	Added the reference to QTBUG-40353 to the docs.
+	[92fcb2ef2a0f]
+
+2014-07-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/command_line.rst, doc/development_version.rst, doc/index.rst,
+	doc/introduction.rst, doc/pyqtdeploy_module.rst, doc/pyrcc.rst,
+	doc/tutorial.rst:
+	Documentation updates.
+	[6ac0ddda7ba8]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.c:
+	The main application module now has a __file__ attribute.
+	[c7a027dfc88e]
+
+	* setup.py:
+	Added the bootstrap directory to setup.py.
+	[a37cadeabb58]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Removed the definition of VERSION for the Python configuration as it
+	is now never used.
+	[10ef4b23d20c]
+
+2014-07-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-2.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.3.py,
+	pyqtdeploy/builder/lib/bootstrap/bootstrap-3.4.py,
+	pyqtdeploy/builder/lib/bootstrap_py2.py,
+	pyqtdeploy/builder/lib/bootstrap_py3.py,
+	pyqtdeploy/file_utilities.py, pyqtdeploy/python/python.py:
+	Refactored the bootstrap support and added support for Python v3.3.
+	[c48008ba8830]
+
+	* DeveloperNotes.txt, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/bootstrap_py2.py,
+	pyqtdeploy/builder/lib/bootstrap_py3.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.c:
+	Updates to the bootstraps to reduce the changes needed.
+	[8e4e90af917b]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Properly escape VERSION.
+	[8eebd7f3e044]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_module.cpp:
+	The pyqtdeploy module no longer tries to handle ordinary
+	directories.
+	[1c75963f60d6]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Set the VERSION when compiling Python.
+	[d82a16401839]
+
+2014-07-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* DeveloperNotes.txt, doc/static_builds.rst:
+	Updated the static build docs for iOS.
+	[4b89bb3d2773]
+
+	* pyqtdeploy/builder/lib/bootstrap_py3.py:
+	Fixed issues with Python v3.4.1.
+	[2d7db205ef61]
+
+	* pyqtdeploy/python/configurations/config_py3.c:
+	Fixed the Python configuration for Python v3.3.x.
+	[cbe20f0e91b5]
+
+2014-07-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Fixed the python.pro file for Python v2.7.
+	[e5099ce4b10d]
+
+2014-07-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/stdlib_page.py:
+	Fixed a regression in the packages tab.
+	[01d1003b878e]
+
+2014-07-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/patches/python-2.7.8.diff,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/pyconfig.py:
+	Added configuration support for Python v2.7.8.
+	[a70a5f0c409a]
+
+	* pyqtdeploy/python/python.py:
+	Handle the case where we don;t provide patches for a Python version.
+	[fd6e45444e57]
+
+	* pyqtdeploy/python/configurations/patches/python-3.3.0.diff,
+	pyqtdeploy/python/configurations/patches/python-3.3.1.diff,
+	pyqtdeploy/python/configurations/patches/python-3.3.2.diff,
+	pyqtdeploy/python/configurations/patches/python-3.3.3.diff,
+	pyqtdeploy/python/configurations/patches/python-3.3.4.diff,
+	pyqtdeploy/python/configurations/patches/python-3.3.5.diff,
+	pyqtdeploy/python/configurations/patches/python-3.3.diff,
+	pyqtdeploy/python/configurations/patches/python-3.4.0.diff,
+	pyqtdeploy/python/configurations/patches/python-3.4.1.diff,
+	pyqtdeploy/python/configurations/patches/python-3.4.diff:
+	Completed the Android patches for all supported Python3 versions.
+	[a6de9ec25af8]
+
+	* doc/tutorial.rst,
+	pyqtdeploy/python/configurations/patches/python-3.3.diff,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/patch.py:
+	Python v3.3.0 can now be configured.
+	[1d5d2064744f]
+
+2014-07-10  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* DeveloperNotes.txt:
+	Updates to the developer documentation.
+	[2664a71fb643]
+
+	* DeveloperNotes.txt, NewVersions.txt, doc/index.rst, doc/qt_bugs.rst,
+	doc/static_builds.rst:
+	Documentation updates.
+	[9d63f6134952]
+
+	* pyqtdeploy/python/configurations/python.pro:
+	Fix to work around QTBUG-39300.
+	[63a9090856aa]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.c:
+	The default filesystem encoding needs to be explicitly set for
+	Android.
+	[b41f2708882a]
+
+2014-07-09  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/file_utilities.py,
+	pyqtdeploy/python/configurations/patches/python-3.4.diff,
+	pyqtdeploy/targets.py:
+	Python v3.4.0 now builds for Android.
+	[8785e52ae0d1]
+
+	* doc/index.rst, doc/qt_bugs.rst:
+	Added the section about Qt bugs to the docs.
+	[820c848c8130]
+
+2014-07-08  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.c,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/pyconfig.py, pyqtdeploy/python/python.py:
+	Fixes so that everything works again with Python v3.4.0.
+	[944ca94589b9]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_start.c,
+	pyqtdeploy/python/configurations/patches/python-3.4.diff,
+	pyqtdeploy/python/python.py:
+	More Android specific changes.
+	[f3f2b26bd78e]
+
+	* pyqtdeploy/python/configurations/patches/python-3.4.diff,
+	pyqtdeploy/python/pyconfig.py:
+	Further patch updates.
+	[103010c7d0fe]
+
+2014-07-06  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/configurations/patches/python-3.4.diff:
+	More updates to the Python v3.4 patch.
+	[f13bde4104b6]
+
+	* pyqtdeploy/python/configurations/patches/python-3.4.diff,
+	pyqtdeploy/python/pyconfig.py:
+	Updated the patch for Android.
+	[770bf0b67219]
+
+	* pyqtdeploy/python/configurations/pyconfig/pyconfig-android-
+	arm7-32.h, pyqtdeploy/python/pyconfig.py:
+	Added Android support to pyconfig.h.
+	[3535bd8ecd1f]
+
+2014-07-05  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Added iOS support to pyconfig.h.
+	[4c53ab9ce1d0]
+
+	* NewVersions.txt, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	linux-32.h, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	linux-64.h, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	osx-64.h, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	win-2.6.h, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	win-2.7.h, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	win-3.3.h, pyqtdeploy/python/configurations/pyconfig/pyconfig-
+	win-3.4.h, pyqtdeploy/python/python.py:
+	Added pyconfig.h support for Windows.
+	[bb3dc3d1260a]
+
+2014-06-27  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Updated the Python configurations for 64 bit Linux.
+	[e2b323d2dbfb]
+
+	* pyqtdeploy/__init__.py, pyqtdeploy/python/__init__.py,
+	pyqtdeploy/python/python.py, pyqtdeploy/targets.py:
+	Refactored --show-targets as there will no longer be target-specific
+	Python configuration files.
+	[559abe8f868a]
+
+2014-06-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Added the initial linux-32 target configuration.
+	[0c8e47316c73]
+
+	* doc/command_line.rst, pyqtdeploy/main.py,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/pyconfig.py, pyqtdeploy/python/python.py:
+	Added the --enable-dynamic-loading command line option.
+	[112649c09077]
+
+	* pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/pyconfig.py:
+	Disable support for dynamic loading. Updated python.pro for Python
+	v2.6.0.
+	[c6b269d4137a]
+
+2014-06-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* NewVersions.txt, pyqtdeploy/python/configurations/config.c,
+	pyqtdeploy/python/configurations/config_py2.c,
+	pyqtdeploy/python/configurations/config_py3.c,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/python.py:
+	config.c is now specific to the major Python version. Updated
+	python.pro for Python v2.6.
+	[9ebc78273f13]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/file_utilities.py,
+	pyqtdeploy/python/diff_parser.py, pyqtdeploy/python/patch.py,
+	pyqtdeploy/python/pyconfig.py, pyqtdeploy/python/python.py:
+	Switch to using the generated pyconfig.h file.
+	[eb7722e58dc9]
+
+	* pyqtdeploy/python/pyconfig.py:
+	Updated the pyconfig stub for OS/X.
+	[031cc80d47bd]
+
+2014-06-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/pyconfig.py:
+	Updated the pyconfig stub to Python v3.4.1.
+	[73b89aca2bb1]
+
+	* pyqtdeploy/python/pyconfig.py:
+	Updated the pyconfig stub for Python v3.3.0.
+	[969368c82974]
+
+	* pyqtdeploy/python/pyconfig.py:
+	Added the stub of the code to generate pyconfig.h (rather than using
+	an embedded target-specific file).
+	[2a03fff1efc5]
+
+	* NewVersions.txt:
+	Added the initial documentation for the process of adding support
+	for new versions.
+	[7e3daa6d2e96]
+
+2014-06-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png, doc/images/build_tab.png,
+	doc/images/extension_modules_tab.png, doc/images/locations_tab.png,
+	doc/images/packages_tab.png, doc/images/pyqt_modules_tab.png,
+	doc/images/site_packages_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/tutorial.rst:
+	Updated the docs for the revised Packages tab.
+	[41fb59e9187d]
+
+	* pyqtdeploy/gui/packages_page.py,
+	pyqtdeploy/gui/qrc_package_editor.py:
+	Fixed the "Remove All" button.
+	[dfb1dd30aa60]
+
+	* pyqtdeploy/project/project.py:
+	Added *-info to the default list of exclusions.
+	[7fdbbe9b9542]
+
+2014-06-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/packages_page.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/project/project.py:
+	The Site Packages page is now the generic Packages page which can
+	handle multiple package directories.
+	[5431b4cdc6b7]
+
+2014-06-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/build_tab.png, doc/tutorial.rst,
+	pyqtdeploy/gui/build_page.py:
+	Added the optimisation buttons to the build tab.
+	[e8a21934fd2a]
+
+	* doc/command_line.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/main.py:
+	Added the --opt command line option.
+	[956691162a53]
+
+	* pyqtdeploy/builder/builder.py:
+	By default asserts and docstrings are removed from frozen code.
+	[49b95c46712f]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-win.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart-
+	android.cfg, pyqtdeploy/packages/configurations/pyqtchart
+	/pyqtqtchart-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart.cfg,
+	pyqtdeploy/packages/configurations/pyqtdatavisualization
+	/pyqtdatavisualization-android.cfg,
+	pyqtdeploy/packages/configurations/pyqtdatavisualization
+	/pyqtdatavisualization-ios.cfg, pyqtdeploy/packages/configurations/p
+	yqtdatavisualization/pyqtdatavisualization.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla-
+	android.cfg, pyqtdeploy/packages/configurations/qscintilla
+	/qscintilla-ios.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla.cfg,
+	pyqtdeploy/packages/configurations/sip/sip.cfg,
+	pyqtdeploy/python/configurations/config.c,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/patch.py:
+	Various small fixes so that willy.py works using the new build
+	instructions.
+	[2ece0d0d26a6]
+
+	* setup.py:
+	setup.py now checks the version of Python.
+	[2f2b8b73aa54]
+
+2014-06-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/introduction.rst, doc/static_builds.rst,
+	pyqtdeploy/python/configurations/python.pro,
+	pyqtdeploy/python/configurations/qmake/python-3.4.pro,
+	pyqtdeploy/python/python.py:
+	The python.pro file no longer needs to be version specific. Updated
+	the docs to cover building Python.
+	[a5dc75615bee]
+
+	* pyqtdeploy/python/diff_parser.py, pyqtdeploy/python/patch.py:
+	Completed the support for patching Python.
+	[6452bc712778]
+
+	* pyqtdeploy/python/diff_parser.py:
+	Update the diff parser data structures.
+	[26a66ac9afe0]
+
+2014-06-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/diff_parser.py, pyqtdeploy/python/patch.py,
+	pyqtdeploy/python/python.py:
+	Added the diff parser.
+	[612af5de1f84]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/python/python.py:
+	Converted some of the verbose messages to ordinary progress
+	messages.
+	[40d748698265]
+
+2014-06-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/configurations/android-armv7-32-py34/Python-3.4.0.patch,
+	pyqtdeploy/configurations/android-armv7-32-py34/config.c,
+	pyqtdeploy/configurations/android-armv7-32-py34/pyconfig.h,
+	pyqtdeploy/configurations/android-armv7-32-py34/python.pro,
+	pyqtdeploy/configurations/osx-64-py34/python.pro,
+	pyqtdeploy/python/configurations/patches/python-3.4.diff,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-android-
+	arm7-32.h, pyqtdeploy/python/configurations/qmake/python-3.4.pro,
+	pyqtdeploy/python/patch.py, pyqtdeploy/python/python.py:
+	The qmake .pro file is now installed. Added the stub for applying
+	diffs to the Python source directory.
+	[de321eb04482]
+
+2014-06-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/python/python.py:
+	The pyconfig.h file is now installed.
+	[1444d5a7b443]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/configurations/linux-32-py34/config.c,
+	pyqtdeploy/configurations/linux-64-py34/config.c,
+	pyqtdeploy/configurations/osx-64-py34/config.c,
+	pyqtdeploy/python/configurations/config.c,
+	pyqtdeploy/python/python.py:
+	The module configuration file is now installed.
+	[54bfc5b62723]
+
+	* pyqtdeploy/__init__.py,
+	pyqtdeploy/configurations/osx-64-py34/pyconfig.h,
+	pyqtdeploy/file_utilities.py, pyqtdeploy/main.py,
+	pyqtdeploy/packages/__init__.py, pyqtdeploy/packages/packages.py,
+	pyqtdeploy/python/__init__.py,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-osx-64.h,
+	pyqtdeploy/python/python.py, pyqtdeploy/targets.py:
+	Refactored the handling of target validation.
+	[88301461be09]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/file_utilities.py:
+	Some more file handling refactoring.
+	[f6caaf3ed107]
+
+	* pyqtdeploy/configurations/linux-32-py34/pyconfig.h,
+	pyqtdeploy/configurations/linux-64-py34/pyconfig.h,
+	pyqtdeploy/file_utilities.py, pyqtdeploy/packages/packages.py,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-linux-32.h,
+	pyqtdeploy/python/configurations/pyconfig/pyconfig-linux-64.h,
+	pyqtdeploy/python/python.py:
+	Refactored the handling of files embedded in the pyqtdeploy source
+	code. Implemented the show-targets action.
+	[9d6eb2beafc6]
+
+2014-06-16  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/__init__.py, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/build_page.py, pyqtdeploy/main.py,
+	pyqtdeploy/message_handler.py, pyqtdeploy/python/python.py:
+	Refactored the handling of user messages so that things are better
+	separated.
+	[e90e96f1025c]
+
+	* pyqtdeploy/__init__.py, pyqtdeploy/main.py,
+	pyqtdeploy/packages/packages.py, pyqtdeploy/python/__init__.py,
+	pyqtdeploy/python/python.py, setup.py:
+	Added the stubs for configuring Python and the show-targets action.
+	[ff4542c4f578]
+
+	* setup.py:
+	Added the configuration files to setup.py.
+	[c084ffa31aa1]
+
+2014-06-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst, pyqtdeploy/packages/configurations/pyqtchart
+	/pyqtqtchart-android.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqtchart/pyqtqtchart.cfg,
+	pyqtdeploy/packages/configurations/pyqtdatavisualization
+	/pyqtdatavisualization-android.cfg,
+	pyqtdeploy/packages/configurations/pyqtdatavisualization
+	/pyqtdatavisualization-ios.cfg, pyqtdeploy/packages/configurations/p
+	yqtdatavisualization/pyqtdatavisualization.cfg,
+	pyqtdeploy/packages/configurations/qtcharts/qtcharts-android.cfg,
+	pyqtdeploy/packages/configurations/qtcharts/qtcharts-ios.cfg,
+	pyqtdeploy/packages/configurations/qtcharts/qtcharts.cfg,
+	pyqtdeploy/packages/configurations/qtdatavisualization
+	/qtdatavisualization-android.cfg,
+	pyqtdeploy/packages/configurations/qtdatavisualization
+	/qtdatavisualization-ios.cfg, pyqtdeploy/packages/configurations/qtd
+	atavisualization/qtdatavisualization.cfg:
+	Renamed the QtChart and QtDataVisualization configuration files to
+	reflect the Python bindings packages.
+	[bae2a0986525]
+
+	* doc/static_builds.rst, pyqtdeploy/packages/configurations/qscintilla
+	/qscintilla-android.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla-ios.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla.cfg,
+	pyqtdeploy/packages/configurations/qtcharts/qtcharts-android.cfg,
+	pyqtdeploy/packages/configurations/qtcharts/qtcharts-ios.cfg,
+	pyqtdeploy/packages/configurations/qtcharts/qtcharts.cfg,
+	pyqtdeploy/packages/configurations/qtdatavisualization
+	/qtdatavisualization-android.cfg,
+	pyqtdeploy/packages/configurations/qtdatavisualization
+	/qtdatavisualization-ios.cfg, pyqtdeploy/packages/configurations/qtd
+	atavisualization/qtdatavisualization.cfg:
+	Added the QScintilla, QtCharts and QtDataVisualization
+	configurations.
+	[8c20a0288877]
+
+	* doc/static_builds.rst,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-win.cfg:
+	Added the PyQt4 static build configuration files.
+	[490e628cddee]
+
+2014-06-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst, pyqtdeploy/configurations/android-
+	armv7-32-py34/pyqt5-android.cfg,
+	pyqtdeploy/configurations/ios/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-android.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-linux.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-osx.cfg,
+	pyqtdeploy/packages/configurations/pyqt5/pyqt5-win.cfg:
+	The PyQt5 build instructions now covers cross-compilation.
+	[b300668a5f23]
+
+	* doc/static_builds.rst, pyqtdeploy/configurations/ios/sip-ios.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla.cfg,
+	pyqtdeploy/packages/configurations/sip/sip.cfg:
+	The static sip instructions now cover native and cross-compiling.
+	[8c6e5fcf2cd3]
+
+	* README, doc/command_line.rst, doc/development_version.rst,
+	doc/index.rst, doc/introduction.rst, doc/pyqtdeploy_module.rst,
+	doc/static_builds.rst, doc/tutorial.rst:
+	Updated the docs for the revised command line.
+	[dd6b94c70f9d]
+
+2014-06-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/configurations/ios/pyqt4-ios.cfg,
+	pyqtdeploy/packages/configurations/pyqt4/pyqt4-ios.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla.cfg,
+	pyqtdeploy/packages/packages.py:
+	Implemented the configure option for supported packages.
+	[9f2981a3dc3f]
+
+	* pyqtdeploy/configurations/ios/qscintilla-ios.cfg,
+	pyqtdeploy/packages/configurations/qscintilla/qscintilla.cfg,
+	pyqtdeploy/packages/packages.py:
+	Implemented the show-packages action.
+	[a5860048037a]
+
+	* doc/tutorial.rst, pyqtdeploy/__init__.py, pyqtdeploy/main.py,
+	pyqtdeploy/packages/__init__.py, pyqtdeploy/packages/packages.py:
+	Refactored the command line argument parser so that the command line
+	is action based rather than projetc based. Added the stubs of the
+	--configure and --show-packages options.
+	[2c3341d73ec4]
+
+2014-05-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/configurations/android-armv7-32-py34/pyconfig.h:
+	Updated the Android pyconfig.h.
+	[5652674fbdb7]
+
+2014-05-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/configurations/android-armv7-32-py34/pyqt5-android.cfg:
+	Added the initial PyQt5 for Android configuration file.
+	[ec8db37189f5]
+
+	* pyqtdeploy/configurations/android-armv7-32-py34/Python-3.4.0.patch,
+	pyqtdeploy/configurations/android-armv7-32-py34/config.c,
+	pyqtdeploy/configurations/android-armv7-32-py34/pyconfig.h,
+	pyqtdeploy/configurations/android-armv7-32-py34/python.pro:
+	Added the Android configuration files for building Python v3.4.
+	[f40853720758]
+
+2014-05-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/configurations/ios/pyqt4-ios.cfg,
+	pyqtdeploy/configurations/ios/pyqt5-ios.cfg,
+	pyqtdeploy/configurations/ios/qscintilla-ios.cfg,
+	pyqtdeploy/configurations/ios/sip-ios.cfg,
+	pyqtdeploy/configurations/linux-32-py34/config.c,
+	pyqtdeploy/configurations/linux-32-py34/pyconfig.h,
+	pyqtdeploy/configurations/linux-64-py34/config.c,
+	pyqtdeploy/configurations/linux-64-py34/pyconfig.h,
+	pyqtdeploy/configurations/osx-64-py34/config.c,
+	pyqtdeploy/configurations/osx-64-py34/pyconfig.h,
+	pyqtdeploy/configurations/osx-64-py34/python.pro:
+	Added the initial configuration files (just so there is a backup).
+	[4bf47b2c204d]
+
+2014-05-16  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/metadata/metadata.py,
+	pyqtdeploy/metadata/pyqt4.py, pyqtdeploy/metadata/pyqt5.py:
+	Added support for PyQt4 applications built against Qt5.
+	[fcc0b9f19700]
+
+2014-05-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c,
+	pyqtdeploy/builder/lib/pyqtdeploy_start.c:
+	Renamed pyqtdeploy_main() to pyqtdeploy_start() as the Qt build
+	process for iOS doesn't seem to like functions with 'main' in their
+	names.
+	[7767bb6cd84e]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed a missing import.
+	[0696639dc2ae]
+
+2014-05-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/metadata/pyqt5.py:
+	Added support for the QtWebSockets module.
+	[27d9bfc4eb56]
+
+	* pyqtdeploy/metadata/pyqt5.py:
+	Added support for the QtQuickWidgets module.
+	[276e8f9ec307]
+
+2014-05-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	More updates to the static builds documentation.
+	[c0abd44d9aba]
+
+2014-05-11  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	More static build documentation updates.
+	[9e187b08b322]
+
+	* doc/static_builds.rst:
+	Started to update the static build docs to cover cross-compilation.
+	[24ffe7932631]
+
+2014-05-04  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.4 for changeset 4c83157a7115
+	[a195e18474a1]
+
+	* NEWS:
+	Released as v0.4.
+	[4c83157a7115] [0.4]
+
+	* pyqtdeploy/project/project.py:
+	Fixed the window title when there is no initial project.
+	[c718989589e4]
+
+	* pyqtdeploy/builder/lib/platforms.pro:
+	Added -ldl which now seems to be necessary for Linux (probably when
+	using a non-static Qt build).
+	[dab0c32c39f1]
+
+2014-05-03  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/project/project.py:
+	Fixed the error handling when the Python version can't be
+	determined.
+	[6fa819c454e8]
+
+2014-05-02  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/build_tab.png, doc/tutorial.rst,
+	pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py:
+	Documented the build tab.
+	[e4a73c71ffc1]
+
+	* pyqtdeploy/gui/build_page.py:
+	Fixed the handling of the build steps.
+	[634d50d0c289]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py,
+	pyqtdeploy/project/project.py:
+	Implemented the run application build step.
+	[a93fc98aa403]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py:
+	Implemented the make build step. Added the clean button.
+	[9afe6c95e879]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py:
+	Implemented the run qmake build step.
+	[5c33c252b425]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py:
+	Implemented the console and verbose buttons of the build page.
+	[38853221c33f]
+
+	* pyqtdeploy/gui/build_page.py:
+	Added the build status messages to the viewer.
+	[c31c59708900]
+
+	* doc/tutorial.rst, pyqtdeploy/main.py:
+	Added the --quiet command line option and documented it.
+	[f61ab2faa476]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py:
+	The build output is now captured in the viewer.
+	[adf109873ea1]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/build_page.py,
+	pyqtdeploy/gui/exception_handlers.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/main.py:
+	Removed the build menu and moved the functionality to the build
+	button.
+	[c203696a1021]
+
+2014-05-01  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/application_source_tab.png,
+	doc/images/extension_modules_tab.png, doc/images/locations_tab.png,
+	doc/images/pyqt_modules_tab.png, doc/images/site_packages_tab.png,
+	doc/images/stdlib_packages_tab.png:
+	Updated the tutorial screenshots.
+	[cf49ebc3fb8a]
+
+	* doc/images/locations_tab.png,
+	doc/images/python_configuration_tab.png, doc/tutorial.rst,
+	pyqtdeploy/builder/builder.py, pyqtdeploy/gui/locations_page.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/gui/stdlib_page.py,
+	pyqtdeploy/project/project.py:
+	The Python Configuration page is now the Locations page. Added the
+	build directory and qmake to the project and the Locations page.
+	Updated the docs.
+	[db4331219e20]
+
+	* pyqtdeploy/gui/build_page.py, pyqtdeploy/gui/project_gui.py:
+	Added the stub of the Build page.
+	[417fb4196667]
+
+	* doc/tutorial.rst, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/gui/stdlib_page.py,
+	pyqtdeploy/project/project.py:
+	Allow the use of environment variables in file and directory names.
+	[9f405610e843]
+
+	* pyqtdeploy/gui/application_page.py, pyqtdeploy/gui/better_form.py,
+	pyqtdeploy/gui/locations_page.py:
+	Refactored the forms implementation.
+	[34c0ebfb62c8]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/locations_page.py:
+	Use ExpandingFieldsGrow in all QFormLayouts in contravention of the
+	(dumb) OS/X guidelines.
+	[19d2aa5efb2a]
+
+	* pyqtdeploy/gui/locations_page.py:
+	Improved the appearence of the Locations page.
+	[13df3c203289]
+
+	* pyqtdeploy/gui/locations_page.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/python_page.py:
+	The Python Configuration page is now the Locations page.
+	[2286e5e39027]
+
+	* doc/tutorial.rst:
+	Updated the docs regarding PyQt inter-module dependencies.
+	[82d72e5da780]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/pyqt_page.py,
+	pyqtdeploy/metadata/__init__.py, pyqtdeploy/metadata/metadata.py,
+	pyqtdeploy/metadata/pyqt4.py, pyqtdeploy/metadata/pyqt5.py:
+	The PyQt page now understands module inter-dependencies.
+	Consolidated all of the PyQt module meta-data.
+	[39ad4d04d1bc]
+
+2014-04-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.3 for changeset 5f1b067857e4
+	[a49df5314d51]
+
+	* NEWS:
+	Released as v0.3.
+	[5f1b067857e4] [0.3]
+
+	* doc/static_builds.rst:
+	The docs now cover building 64 bit versions of Python on Windows.
+	[4cc4f304dffb]
+
+	* pyqtdeploy/builder/builder.py:
+	Handle the _s suffixes to modules added by PyQt4.
+	[7fd3ec45b8d6]
+
+2014-04-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* Makefile:
+	Added the missing version module from the sdist package.
+	[261382e038dc]
+
+	* doc/static_builds.rst:
+	Fixed a repeated Sphinx bug.
+	[3f19f549a908]
+
+	* doc/static_builds.rst:
+	Doc updates for building Python v2 on Windows.
+	[3f694e11897a]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_main.c,
+	pyqtdeploy/gui/stdlib_page.py:
+	Don't import site.py. Updated the list of required modules now that
+	site.py isn't imported.
+	[f86746143382]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/_bootstrap.py,
+	pyqtdeploy/builder/lib/bootstrap_py2.py,
+	pyqtdeploy/builder/lib/bootstrap_py3.py,
+	pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Refactored the bootstrap scripts to be more consistent and to work
+	again with Python v2.
+	[6b42f75fb318]
+
+	* pyqtdeploy/gui/python_page.py, pyqtdeploy/gui/stdlib_page.py,
+	pyqtdeploy/project/project.py:
+	Extract the target Python version number from the library name and
+	enforce the use of supported versions.
+	[d8c3c80a3075]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the handling of Windows native filenames in the generated .pro
+	file.
+	[82cb06871e4c]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Only import __bootstrap__ for Python v2.
+	[f7f663c1ef48]
+
+	* pyqtdeploy/gui/stdlib_page.py:
+	Fixed the detection of the Python version now that the set of
+	required modules has changed.
+	[c7951658bef5]
+
+2014-04-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	More Windows specific changes to the static builds documentation.
+	[16799fc8a611]
+
+	* pyqtdeploy/gui/stdlib_page.py:
+	Added some more Python3 modules required on Windows.
+	[69e5dc5790b8]
+
+	* .hgignore:
+	Updated .hgignore.
+	[3c18a6c69f7c]
+
+	* pyqtdeploy/gui/filename_editor.py:
+	Fixed the conversion to native separators.
+	[ed07c88afcf0]
+
+	* pyqtdeploy/gui/filename_editor.py:
+	Make sure user file selections are native.
+	[5af497463ad7]
+
+	* pyqtdeploy/gui/qrc_package_editor.py, pyqtdeploy/gui/stdlib_page.py:
+	The package scanner now excludes items by default and doesn't
+	exapand packages.
+	[01947b0219ef]
+
+	* pyqtdeploy/builder/lib/_bootstrap.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c,
+	pyqtdeploy/gui/stdlib_page.py:
+	Updated the required standard modules for Python3.
+	[f4982dbf93d3]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/_bootstrap.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Use a local copy of importlib/_bootstrap.py in preparation for
+	making a custom version.
+	[57fe26cb4789]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/platforms.pro:
+	Updated libraries for Windows. Add 'console' to CONFIG for non-GUI
+	applications.
+	[1f311977ea16]
+
+	* pyqtdeploy/builder/lib/platforms.pro:
+	Fixed the additional libraries needed by Windows.
+	[340806e4a742]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Fixed code so that it is C89 compatible for Windows.
+	[21f261481c73]
+
+	* doc/static_builds.rst:
+	More Windows related doc updates.
+	[2b0f6a400aaa]
+
+2014-04-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	More doc updates for Windows.
+	[5bdfa1a821fc]
+
+	* setup.py:
+	Fixed the description in setup.py.
+	[fa0cd25c7a1c]
+
+	* .hgignore:
+	Updated .hgignore.
+	[ce2d2535671a]
+
+	* doc/static_builds.rst:
+	Added some initial documentation about building static Python on
+	Windows.
+	[8ddecda850eb]
+
+2014-04-14  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.2 for changeset f84e0f8cf624
+	[3d746c50c8e8]
+
+	* NEWS:
+	Released as v0.2.
+	[f84e0f8cf624] [0.2]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Fixed the Python v2 support.
+	[3472a09e90f7]
+
+	* pyqtdeploy/project/project.py:
+	Fixed the handling of the name of a new project.
+	[26e96a71f0d0]
+
+	* pyqtdeploy/gui/stdlib_page.py:
+	Fixed the handling of atexit.py for Python v2.
+	[e73f8690f536]
+
+	* doc/images/stdlib_packages_tab.png, doc/tutorial.rst:
+	Updated the docs regarding required modules.
+	[430ebb9d0a3c]
+
+	* pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/gui/stdlib_page.py:
+	Ensure that the required Python modules are always included.
+	[c3e614bb5bbc]
+
+	* pyqtdeploy/gui/stdlib_page.py:
+	site-packages is automatically excluding from scans of the standard
+	library.
+	[d4f735dbb040]
+
+	* doc/images/application_source_tab.png,
+	doc/images/site_packages_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/static_builds.rst,
+	doc/tutorial.rst, pyqtdeploy/gui/qrc_package_editor.py:
+	Updated the docs. Renamed the "Clear" button to "Remove all".
+	[0b3e550069dd]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/gui/stdlib_page.py:
+	Added the Clear button to the package scanner.
+	[cad4c0a2c280]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/platforms.pro:
+	Linux targets now add -lutil to LIBS.
+	[7b5174856667]
+
+2014-04-13  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Only generate an application resource if it has included contents.
+	[b1238affbf16]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Fixed the scanning of the application package when its directory
+	contains the project file.
+	[05f79cbf5654]
+
+	* pyqtdeploy/gui/qrc_package_editor.py:
+	Fixed the Include All and Exclude All handling of the first item.
+	[b68988be0690]
+
+	* pyqtdeploy/main.py:
+	Handle exceptions when reading the project file using the command
+	line.
+	[5853f847f665]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_module.cpp:
+	The application modules are now in the top level of the resource
+	tree.
+	[8d4472504eba]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_module.cpp:
+	All the resources are generated in a separate sub-directory.
+	[58c1d0dd3959]
+
+	* pyqtdeploy/builder/builder.py:
+	Maek sure resource path names are normalised.
+	[56ff1d5f00ea]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/mfs_package_editor.py,
+	pyqtdeploy/gui/qrc_package_editor.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/gui/stdlib_page.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py:
+	Replaved the remaining references to Mfs by Qrc.
+	[86efcbdea959]
+
+	* doc/pyqtdeploy_module.rst:
+	Fixed a typo in the pyqtdeploy module docs.
+	[429652191ce4]
+
+	* NEWS, doc/index.rst, doc/pyqtdeploy_module.rst:
+	Added the pyqtdeploy module.
+	[2809167a1a91]
+
+	* pyqtdeploy/gui/project_gui.py:
+	Added the About dialog showing the release information.
+	[ec901d52f273]
+
+	* .hgignore, Makefile, build.py, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/pyqtdeploy_module.cpp:
+	Added the hexversion attribute to the pyqtdeploy module.
+	[457fa36dc382]
+
+2014-04-12  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c,
+	pyqtdeploy/builder/lib/pyqtdeploy_module.cpp:
+	Renamed the mfsimport module to pyqtdeploy.
+	[e6c214b6d31e]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/mfsimport.cpp:
+	Renamed mfsimporter to qrcimporter.
+	[5c7b021030f1]
+
+	* NEWS, README, doc/images/application_source_tab.png,
+	doc/images/extension_modules_tab.png,
+	doc/images/pyqt_modules_tab.png,
+	doc/images/python_configuration_tab.png,
+	doc/images/site_packages_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/introduction.rst,
+	doc/static_builds.rst, doc/tutorial.rst:
+	Updated the docs for PyQt4.
+	[fb57aeb9630e]
+
+	* pyqtdeploy/gui/project_gui.py:
+	Increased the default width of the main window.
+	[85326c60d5df]
+
+	* pyqtdeploy/main.py:
+	Fully configure the application details.
+	[373f9746d8c2]
+
+2014-04-11  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/gui/application_page.py, pyqtdeploy/gui/pyqt_page.py:
+	Added support for PyQt4 to the builder.
+	[4777fffdf453]
+
+	* pyqtdeploy/gui/application_page.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/pyqt_page.py:
+	Added support for PyQt4 to the PyQt Modules tab.
+	[3b326609feb4]
+
+	* pyqtdeploy/gui/application_page.py, pyqtdeploy/gui/project_gui.py:
+	The PyQt version can now be specified for the application.
+	[ff6960bb3db4]
+
+2014-04-10  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* README, doc/introduction.rst, pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/builder/lib/mfsimport.cpp:
+	Added support for Python v2.6.
+	[3b62c0dc2e1b]
+
+2014-04-09  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* README, doc/introduction.rst, doc/static_builds.rst,
+	doc/tutorial.rst:
+	Updated the docs regarding support for Python v2.7.
+	[94fe573f3d4f]
+
+	* pyqtdeploy/project/project.py:
+	Removed the Python3 attribute of the project file as it is not
+	needed.
+	[a88481b3dab4]
+
+	* pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Support for Python v2.7 is now working.
+	[7d619f4236d3]
+
+2014-04-08  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/freeze.py:
+	Frozen files only include the basename of the source file.
+	[89f4f1c2f734]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Added (not yet working) support for Python v2.7.
+	[13c0069e6c5d]
+
+2014-04-07  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/freeze.py:
+	The freeze script can now be run under Python v2.
+	[59172e73a7d1]
+
+	* pyqtdeploy/builder/builder.py:
+	Properly handle the output of the freeze script.
+	[1da98911392e]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/main.py:
+	Slightly better error reporting.
+	[e62725edec86]
+
+2014-03-31  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the handling of the Qt module.
+	[195795cfebed]
+
+2014-03-30  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/development_version.rst, doc/index.rst, doc/introduction.rst,
+	doc/static_builds.rst:
+	Documentation updates including a section on working with the
+	development version.
+	[f991b6f3732d]
+
+	* Makefile:
+	Renamed the 'release' target to 'upload'.
+	[7f00f6130f11]
+
+	* Makefile:
+	Fixed the twine command line.
+	[04c5170d9ade]
+
+2014-03-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* .hgtags:
+	Added tag 0.1 for changeset d336f40b2b7d
+	[5793249c019f]
+
+	* NEWS:
+	Released as v0.1.
+	[d336f40b2b7d] [0.1]
+
+	* Makefile:
+	Added the 'release' target to the Makefile to handle the upload to
+	PyPI.
+	[418d57758667]
+
+2014-03-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/tutorial.rst:
+	Emphasise the version of qmake to use.
+	[6549575f8da5]
+
+	* doc/tutorial.rst:
+	Completed the initial documentation.
+	[bd7eee4c733e]
+
+	* doc/tutorial.rst, pyqtdeploy/builder/builder.py:
+	Fixed the Build Project... menu option.
+	[6b25badadde7]
+
+	* doc/images/python_configuration_tab.png, doc/tutorial.rst:
+	Completed the GUI documentation.
+	[f05234109c81]
+
+	* doc/tutorial.rst:
+	Documented the Application Source tab.
+	[7a43a74c29f3]
+
+	* doc/images/application_source_tab.png,
+	doc/images/extension_modules_tab.png,
+	doc/images/pyqt_modules_tab.png,
+	doc/images/python_configuration_tab.png,
+	doc/images/site_packages_tab.png,
+	doc/images/stdlib_packages_tab.png, doc/images/unnamed.png,
+	doc/tutorial.rst:
+	Added the screenshots to the docs.
+	[86c7ebe8c578]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/extension_modules_page.py,
+	pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/filename_editor_delegate.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/gui/python_page.py,
+	pyqtdeploy/gui/site_packages_page.py, pyqtdeploy/gui/stdlib_page.py:
+	The memory filesystem package editor now correctly handles an
+	unspecified Python standard library directory.
+	[5b1f23ecfa77]
+
+	* doc/tutorial.rst, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/project/project.py:
+	A non-existant project file will cause a new project to be created.
+	[a8506b4591db]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/extension_modules_page.py,
+	pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/filename_editor_delegate.py:
+	The extension modules editor now includes a browse button for the
+	directory name.
+	[84a3fb26bde4]
+
+2014-03-24  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/project/project.py:
+	The builder now handles extension modules.
+	[8999f4f988d4]
+
+	* pyqtdeploy/project/project.py:
+	Added the project stubs for Python v2 and PyQt4 support.
+	[bb61b14b1e05]
+
+	* doc/tutorial.rst, pyqtdeploy/gui/extension_modules_page.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py:
+	Added the page for handling extension modules.
+	[595e1f436a77]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the handling of included non-Python files.
+	[5eab2412ea2f]
+
+	* pyqtdeploy/builder/builder.py:
+	Enable warnings in the generated .pro file.
+	[9dcf734e3304]
+
+	* pyqtdeploy/builder/builder.py:
+	Make sure site-packages is included even if no PyQt modules are.
+	[8e9a9e37d248]
+
+	* doc/tutorial.rst:
+	Added the documentation stub for the site-packages page.
+	[49532207d876]
+
+	* pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/site_packages_page.py:
+	Added the page handling site-packages.
+	[f9cf032c32bb]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/project/project.py:
+	Added support for adding the uic module.
+	[5371452a14b8]
+
+	* pyqtdeploy/project/project.py:
+	Added the site-packages package to the project file.
+	[5ed3b90110b9]
+
+2014-03-23  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/static_builds.rst:
+	Documented to building of static, native versions of the various
+	packages.
+	[d7c5192bad57]
+
+2014-03-22  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/index.rst, doc/static_builds.rst:
+	Added the stub of the docs covering static builds.
+	[7d62d6c7601b]
+
+	* .hgignore:
+	Added .hgignore.
+	[d3f3ad1c63a7]
+
+2014-03-21  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/introduction.rst:
+	Added the "Future Versions" section to the documentation.
+	[68e8fc398b31]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/pyqt_page.py:
+	Added support for QScintilla, QtChart and QtDataVisualization.
+	[8d2026ae1b0f]
+
+2014-03-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* doc/images/unnamed.png, doc/index.rst, doc/introduction.rst,
+	doc/tutorial.rst:
+	Work on the documentation.
+	[a3af5f70366b]
+
+	* pyqtdeploy/builder/builder.py:
+	Make sure the application is built in release mode.
+	[ffe000eb7a08]
+
+	* Makefile, README:
+	Updated the README.
+	[9d4ea0a42dd5]
+
+2014-03-19  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* setup.py:
+	Completed the PyPI metadata.
+	[a53ae8aca3c7]
+
+	* Makefile, doc/Makefile, doc/conf.py, doc/index.rst,
+	doc/introduction.rst, doc/static/default.css, doc/static/logo.png,
+	doc/static/logo_tn.ico:
+	Added the documentation stub.
+	[c96c646dc331]
+
+	* MANIFEST.in, Makefile, NEWS, README, build.py, pyqtdeploy.py,
+	pyqtdeploy/main.py, setup.py:
+	Refactored to create a setuptools generated wheel file.
+	[62ce2c983c61]
+
+	* pyqtdeploy.py, pyqtdeploy/__init__.py,
+	pyqtdeploy/builder/__init__.py, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c,
+	pyqtdeploy/gui/__init__.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/pyqt_page.py, pyqtdeploy/gui/python_page.py,
+	pyqtdeploy/gui/stdlib_page.py, pyqtdeploy/project/__init__.py,
+	pyqtdeploy/project/project.py, pyqtdeploy/user_exception.py:
+	Switched to the 2 clause BSD license.
+	[1601ecafa17a]
+
+2014-03-18  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/qt_page.py, pyqtdeploy/project/project.py:
+	Removed the Qt configuration page as it is no longer needed.
+	[3bb61c581ad3]
+
+	* pyqtdeploy/builder/builder.py:
+	Fix for when QtGui is selected.
+	[293fe0167f09]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the stdlib.qrc file.
+	[f5e6fcd28811]
+
+	* pyqtdeploy/builder/lib/freeze.py:
+	freeze.py now does a simple compile() rather than use the broken
+	modulefinder.
+	[287c8b16bed3]
+
+	* pyqtdeploy.py, pyqtdeploy/builder/builder.py,
+	pyqtdeploy/gui/mfs_package_editor.py:
+	Added the verbose command line argument. Added the 'Include all' and
+	'Exclude all' buttons to the package editor.
+	[d5abc9249623]
+
+2014-03-17  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/python_page.py, pyqtdeploy/gui/stdlib_page.py,
+	pyqtdeploy/project/project.py:
+	Added the standard library configuration page.
+	[32d583f659f9]
+
+	* pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Fix warnings with Python v3.4.0.
+	[8505a7dc9865]
+
+2014-03-16  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the import of simple modules (ie. sip).
+	[a28c76bda74c]
+
+2014-02-10  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Link against the Python library after all extension modules.
+	Register builtins with their fully package name.
+	[64166c28b0a0]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/project/project.py:
+	The resources are now split into application, stdlib and site-
+	packages.
+	[78d70f99f7c7]
+
+2014-02-06  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c,
+	pyqtdeploy/gui/python_page.py, pyqtdeploy/project/project.py:
+	Added support for including statically compiled PyQt and sip
+	extension modules.
+	[a7c0a6bf3054]
+
+2014-02-01  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py:
+	Non-Python source files now get copied to the memory filesystem.
+	[2c93157c06e5]
+
+	* pyqtdeploy/builder/builder.py:
+	Fixed the writing of the bootstrap module.
+	[22e648ca9b1a]
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Display any exception raised by the application.
+	[5b6db34d019f]
+
+	* pyqtdeploy/builder/builder.py,
+	pyqtdeploy/builder/lib/__bootstrap__.py,
+	pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/python_page.py, pyqtdeploy/project/project.py:
+	Implemented support for the application package.
+	[405856d65dd2]
+
+2014-01-30  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/project/project.py:
+	Added the sequence number attribute to a package.
+	[c42a9c52c148]
+
+	* pyqtdeploy/gui/mfs_package_editor.py:
+	Package directories that are not included are not expanded by
+	default.
+	[9fb2f4c3090d]
+
+	* pyqtdeploy/gui/mfs_package_editor.py:
+	Scanned package directories are ignore by default if they don't
+	contain an __init__.py.
+	[cec09a0aae82]
+
+	* pyqtdeploy/gui/mfs_package_editor.py:
+	Removed the separate "Included" column from the package editor.
+	[71dd60431051]
+
+2014-01-29  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/project/project.py:
+	Completed the implementation of the package editor.
+	[d44c9068187c]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/mfs_package_editor.py, pyqtdeploy/project/project.py:
+	Added support for definition package exclusions.
+	[18e9fab28bd4]
+
+2014-01-28  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/gui/file_name_edit.py, pyqtdeploy/gui/filename_editor.py,
+	pyqtdeploy/gui/python_page.py:
+	Some renames for consistency.
+	[8d7900e8e6af]
+
+	* pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/mfs_package_editor.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py:
+	Added the stub of the application package editor.
+	[fcccba98dfa8]
+
+2014-01-27  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	Fixes so that a simple hello world now works.
+	[76abc8914847]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/project/project.py:
+	The builder now creates the header files for the frozen modules.
+	[4ecbc1475da5]
+
+	* pyqtdeploy.py, pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c:
+	freeze.py is now a standalone script. Changes to pyqtdeploy_main()
+	as the __main__ module will now be frozen and not parts of a
+	resource file.
+	[ef2137632aab]
+
+	* pyqtdeploy/builder/freeze.py, pyqtdeploy/builder/lib/freeze.py,
+	pyqtdeploy/builder/lib/frozen_bootstrap.h,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/gui/python_page.py,
+	pyqtdeploy/gui/qt_page.py, pyqtdeploy/project/project.py:
+	The name of the host Python interpreter can now be specified.
+	[06125566a1f4]
+
+	* pyqtdeploy/builder/builder.py:
+	The builder now generates the source files.
+	[bbe25401c44e]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/gui/qt_page.py, pyqtdeploy/project/project.py:
+	Implemented the initial Qt configuration page.
+	[eeb1e9c3ddc2]
+
+2014-01-26  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/file_name_edit.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/gui/python_page.py,
+	pyqtdeploy/project/project.py:
+	Implemented the configuration of the target Python interpreter.
+	[b21ee6737f5f]
+
+	* pyqtdeploy/builder/builder.py:
+	Generate the qmake QT value.
+	[d73391020d44]
+
+	* pyqtdeploy/gui/project_gui.py, pyqtdeploy/gui/pyqt_page.py,
+	pyqtdeploy/project/project.py:
+	Added the PyQt modules configuration page.
+	[43468d75f301]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/project/project.py:
+	The application name is now derived from the name of the main script
+	file.
+	[9ff30a94911d]
+
+2014-01-25  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/project_gui.py:
+	Implemented the creation of the stub .pro file.
+	[4efc95eef4c5]
+
+	* pyqtdeploy/builder/builder.py, pyqtdeploy/gui/application_page.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/project/project.py:
+	Added the application configuration page.
+	[5b3e5724c1f4]
+
+	* pyqtdeploy.py, pyqtdeploy/__init__.py,
+	pyqtdeploy/builder/builder.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/project/__init__.py, pyqtdeploy/project/project.py,
+	pyqtdeploy/project/project_exception.py,
+	pyqtdeploy/user_exception.py:
+	Removed the freeze command line option. Added the build command line
+	option.
+	[c670326307f6]
+
+	* pyqtdeploy/__init__.py, pyqtdeploy/builder/__init__.py,
+	pyqtdeploy/builder/builder.py, pyqtdeploy/builder/freeze.py,
+	pyqtdeploy/builder/lib/__bootstrap__.py,
+	pyqtdeploy/builder/lib/frozen_bootstrap.h,
+	pyqtdeploy/builder/lib/mfsimport.cpp,
+	pyqtdeploy/builder/lib/pyqtdeploy_main.c, pyqtdeploy/freeze.py,
+	pyqtdeploy/lib/__bootstrap__.py, pyqtdeploy/lib/frozen_bootstrap.h,
+	pyqtdeploy/lib/mfsimport.cpp, pyqtdeploy/lib/pyqtdeploy_main.c,
+	pyqtdeploy/project/project.py:
+	Added the builder stub.
+	[60dce91d9f44]
+
+	* pyqtdeploy/gui/project_gui.py, pyqtdeploy/project/project.py:
+	Implemented the loading of a project.
+	[09c8c342e8a4]
+
+	* pyqtdeploy/project/project.py,
+	pyqtdeploy/project/project_exception.py:
+	Implemented the saving of a project.
+	[1c0333b2c559]
+
+	* pyqtdeploy.py, pyqtdeploy/__init__.py,
+	pyqtdeploy/gui/project_gui.py, pyqtdeploy/project/__init__.py,
+	pyqtdeploy/project/project.py,
+	pyqtdeploy/project/project_exception.py:
+	Completed the basic implementation of the project lifecycle menu
+	options.
+	[2833ef65a3f4]
+
+2014-01-20  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy.py, pyqtdeploy/gui/project_gui.py:
+	More development of the project GUI.
+	[4fcfd38a32a7]
+
+	* pyqtdeploy.py, pyqtdeploy/__init__.py, pyqtdeploy/freeze.py,
+	pyqtdeploy/gui/__init__.py, pyqtdeploy/gui/project_gui.py,
+	pyqtdeploy/pyqtdeploy.py:
+	Added the stub of the project GUI.
+	[b6a581ce2edd]
+
+2014-01-15  Phil Thompson  <phil@riverbankcomputing.com>
+
+	* pyqtdeploy/lib/__bootstrap__.py, pyqtdeploy/lib/frozen_bootstrap.h,
+	pyqtdeploy/lib/mfsimport.cpp, pyqtdeploy/lib/pyqtdeploy_main.c,
+	pyqtdeploy/pyqtdeploy.py:
+	Initial commit of the proof-of-concept stuff.
+	[15e8c9d5c0f8]

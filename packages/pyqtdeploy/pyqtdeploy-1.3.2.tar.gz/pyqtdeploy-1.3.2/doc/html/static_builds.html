@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building Static Packages &#8212; pyqtdeploy 1.3.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.3.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/logo_tn.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building a System Root Directory" href="build_sysroot.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="build_sysroot.html" title="Building a System Root Directory"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyqtdeploy 1.3.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="building-static-packages">
+<h1>Building Static Packages<a class="headerlink" href="#building-static-packages" title="Permalink to this headline">¶</a></h1>
+<p>In this section we describe how to build static versions of the various
+packages that might be part of a deployment.  As this covers cross-compiling
+(specifically to support mobile platforms) we refer to <em>host</em> and <em>target</em>
+installations.  All compiling is performed on the <em>host</em> system and generates
+code that will eventually run on the <em>target</em> system.  A <em>native</em> build is
+where the <em>host</em> and <em>target</em> systems are the same.</p>
+<p>You must have a host Python installation that is the same version as the target
+version you will be building.  Other than that there is nothing special about
+the host Python installation.  The notes refer to the host Python interpreter
+as <code class="docutils literal"><span class="pre">python</span></code> although the actual name you use will depend on your version of
+Python and the host platform.</p>
+<p>You must also have an appropriate target Qt installation.  This can be a
+regular native Qt installation, a static native Qt installation or a
+cross-compiling Qt installation.  For most target platforms it is not necessary
+to build a static version of Qt.  The main advantage of a static version is
+that it removes an external dependency and so eases deployment.  The main
+disadvantage is that it increases the size of the final executable.  The notes
+refer to the <strong class="program">qmake</strong> command of your Qt installation as <code class="docutils literal"><span class="pre">qmake</span></code>.
+You must make sure that you run the correct copy of <strong class="program">qmake</strong> if you
+have multiple versions of Qt installed.  When cross-compiling for mobile
+devices it is recommended that you use one of the binary installers provided by
+The Qt Company.</p>
+<p>You must also have a host SIP installation that is the same version as the
+target version you will be building.</p>
+<p>The notes refer to the make command as <code class="docutils literal"><span class="pre">make</span></code>.  If you are using Microsoft
+Visual C++ then use <code class="docutils literal"><span class="pre">nmake</span></code> instead.</p>
+<p>All packages are built in a target-specific system root directory identified by
+the <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">SYSROOT</span></code> environment variable (see
+<a class="reference internal" href="tutorial.html#ref-directory-structure"><span class="std std-ref">Choosing a Directory Structure</span></a>).  Only those command line options related to
+static and cross-compiled builds are specifed - you will probably want to
+specify other options to fully configure each package.</p>
+<p>The package configuration files created by the <a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-arg-configure"><code class="xref std std-option docutils literal"><span class="pre">configure</span></code></a> action of
+<strong class="program">pyqtdeploycli</strong> assume a default Qt installation, i.e. with features
+that would only be enabled by default on the particular platform.  For example,
+SSL support is disabled for Windows and Android targets.  If you have
+configured your Qt installation differently then you may need to modify the
+configuration files appropriately.</p>
+<div class="section" id="qt">
+<h2>Qt<a class="headerlink" href="#qt" title="Permalink to this headline">¶</a></h2>
+<p>To build a static, native version of Qt, change to the Qt source directory
+and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>./configure -prefix $SYSROOT/qt-X.Y.Z -static -release -nomake examples
+make
+make install
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">X.Y.Z</span></code> is the version number of Qt you are building.</p>
+<p>When cross-compiling for mobile devices it is recommended that you use one of
+the binary installers provided by The Qt Company.</p>
+<p>If your Qt installation is affected by <a class="reference external" href="https://bugreports.qt-project.org/browse/QTBUG-41204">QTBUG-41204</a> then you should not
+remove your Qt source directory after installing.</p>
+<div class="section" id="statically-linking-the-windows-c-runtime-library">
+<h3>Statically Linking the Windows C Runtime Library<a class="headerlink" href="#statically-linking-the-windows-c-runtime-library" title="Permalink to this headline">¶</a></h3>
+<p>If you wish to statically link the Windows C Library then you need to modify
+the <strong class="program">qmake</strong> configuration for your compiler before running
+<code class="docutils literal"><span class="pre">configure</span></code>.</p>
+<p>Assuming your compiler is MSVC then you need to edit the file
+<code class="docutils literal"><span class="pre">qtbase\mkspecs\common\msvc-desktop.conf</span></code> in the Qt source directory as
+follows:</p>
+<ul class="simple">
+<li>remove <code class="docutils literal"><span class="pre">embed_manifest_dll</span></code> and <code class="docutils literal"><span class="pre">embed_manifest_exe</span></code> from the <code class="docutils literal"><span class="pre">CONFIG</span></code>
+entry</li>
+<li>change all occurrences of <code class="docutils literal"><span class="pre">-MD</span></code> and <code class="docutils literal"><span class="pre">-MDd</span></code> with <code class="docutils literal"><span class="pre">-MT</span></code> and <code class="docutils literal"><span class="pre">-MTd</span></code>
+respectively.</li>
+</ul>
+<p>If that file does not exist (i.e. for older versions of Qt) then (assuming your
+compiler is MSVC 2015) then you need to edit the file
+<code class="docutils literal"><span class="pre">qtbase\\mkspecs\win32-msvc2015\qmake.conf</span></code> instead.</p>
+</div>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="windows-targets">
+<h3>Windows Targets<a class="headerlink" href="#windows-targets" title="Permalink to this headline">¶</a></h3>
+<p>On Windows it is strongly recommended that you do not use a static version of
+Python (see <a class="reference internal" href="windows_dynamic_loading.html#ref-win-dynload"><span class="std std-ref">Windows and Dynamic Loading of Extension Modules</span></a>).  Instead you should install the
+appropriate version of Python using the installer from <code class="docutils literal"><span class="pre">python.org</span></code>.  You
+should then use <strong class="program">pyqtdeploycli</strong> as follows to copy the relevant parts
+of the installation to the system root directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --sysroot $SYSROOT --package python --system-python X.Y install
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">X.Y</span></code> is the version number of Python you are using.  There is no need to
+specify the maintenance number.</p>
+</div>
+<div class="section" id="other-targets">
+<h3>Other Targets<a class="headerlink" href="#other-targets" title="Permalink to this headline">¶</a></h3>
+<p>When targeting Android the default API level is 21.  In order to use a
+different API level (e.g. 18) then first set the <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">ANDROID_NDK_PLATFORM</span></code>
+environment variable to <code class="docutils literal"><span class="pre">android-18</span></code>.</p>
+<p>It may also be necessary to set the <span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal"><span class="pre">ANDROID_NDK_TOOLCHAIN_VERSION</span></code> if
+Qt and the Android NDK disagree on which version of the toolchain to use.</p>
+<p>To build a static version of Python for non-Windows targets, change to the
+Python source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pyqtdeploycli</span> <span class="o">--</span><span class="n">package</span> <span class="n">python</span> <span class="o">--</span><span class="n">target</span> <span class="n">TARGET</span> <span class="n">configure</span>
+</pre></div>
+</div>
+<p>This will configure Python for a minimal sub-set of standard extension modules.</p>
+<p>To complete the build run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>qmake SYSROOT=$SYSROOT
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id1">[1]</a>, <a class="footnote-reference" href="#qmake" id="id2">[3]</a> and <a class="footnote-reference" href="#iphone" id="id3">[6]</a>.</p>
+</div>
+</div>
+<div class="section" id="sip">
+<h2>sip<a class="headerlink" href="#sip" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of sip, change to the sip source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package sip --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-tools --use-qmake --configuration=sip-TARGET.cfg
+qmake
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id4">[1]</a> and <a class="footnote-reference" href="#iphone" id="id5">[6]</a>.</p>
+</div>
+<div class="section" id="pyqt5">
+<h2>PyQt5<a class="headerlink" href="#pyqt5" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of PyQt5, change to the PyQt5 source directory and
+run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package pyqt5 --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-tools --no-qsci-api --no-designer-plugin --no-qml-plugin --configuration=pyqt5-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id6">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id7">[2]</a>, <a class="footnote-reference" href="#qmake" id="id8">[3]</a>, <a class="footnote-reference" href="#id45" id="id9">[4]</a> and <a class="footnote-reference" href="#iphone" id="id10">[6]</a>.</p>
+</div>
+<div class="section" id="pyqt4">
+<h2>PyQt4<a class="headerlink" href="#pyqt4" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of PyQt4, change to the PyQt4 source directory and
+run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package pyqt4 --target TARGET configure
+python configure-ng.py --static --sysroot=$SYSROOT --no-tools --no-qsci-api --no-designer-plugin --configuration=pyqt4-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id11">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id12">[2]</a>, <a class="footnote-reference" href="#qmake" id="id13">[3]</a>, <a class="footnote-reference" href="#id45" id="id14">[4]</a> and <a class="footnote-reference" href="#iphone" id="id15">[6]</a>.</p>
+</div>
+<div class="section" id="qscintilla">
+<h2>QScintilla<a class="headerlink" href="#qscintilla" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of the QScintilla library, change to the QScintilla
+source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Qt4Qt5</span>
+<span class="n">qmake</span> <span class="n">CONFIG</span><span class="o">+=</span><span class="n">staticlib</span>
+<span class="n">make</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>To build a static version of the Python bindings, change to the QScintilla
+source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>cd Python
+pyqtdeploycli --package qscintilla --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-sip-files --no-qsci-api --pyqt=PyQt5 --configuration=qscintilla-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id16">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id17">[2]</a>, <a class="footnote-reference" href="#qmake" id="id18">[3]</a>, <a class="footnote-reference" href="#id45" id="id19">[4]</a> and <a class="footnote-reference" href="#iphone" id="id20">[6]</a>.</p>
+</div>
+<div class="section" id="qt3d">
+<h2>Qt3D<a class="headerlink" href="#qt3d" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of the Python bindings, change to the PyQt3D source
+directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package pyqt3d --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-sip-files --no-qsci-api --configuration=pyqt3d-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id21">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id22">[2]</a>, <a class="footnote-reference" href="#qmake" id="id23">[3]</a>, <a class="footnote-reference" href="#id45" id="id24">[4]</a>, <a class="footnote-reference" href="#qtbug39300" id="id25">[5]</a> and
+<a class="footnote-reference" href="#iphone" id="id26">[6]</a>.</p>
+</div>
+<div class="section" id="qt-charts">
+<h2>Qt Charts<a class="headerlink" href="#qt-charts" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of the Python bindings, change to the PyQtChart
+source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package pyqtchart --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-sip-files --no-qsci-api --configuration=pyqtchart-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id27">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id28">[2]</a>, <a class="footnote-reference" href="#qmake" id="id29">[3]</a>, <a class="footnote-reference" href="#id45" id="id30">[4]</a>, <a class="footnote-reference" href="#qtbug39300" id="id31">[5]</a> and
+<a class="footnote-reference" href="#iphone" id="id32">[6]</a>.</p>
+</div>
+<div class="section" id="qt-data-visualization">
+<h2>Qt Data Visualization<a class="headerlink" href="#qt-data-visualization" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of the Python bindings, change to the
+PyQtDataVisualization source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package pyqtdatavisualization --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-sip-files --no-qsci-api --configuration=pyqtdatavisualization-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id33">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id34">[2]</a>, <a class="footnote-reference" href="#qmake" id="id35">[3]</a>, <a class="footnote-reference" href="#id45" id="id36">[4]</a>, <a class="footnote-reference" href="#qtbug39300" id="id37">[5]</a> and
+<a class="footnote-reference" href="#iphone" id="id38">[6]</a>.</p>
+</div>
+<div class="section" id="qt-purchasing">
+<h2>Qt Purchasing<a class="headerlink" href="#qt-purchasing" title="Permalink to this headline">¶</a></h2>
+<p>To build a static version of the Python bindings, change to the PyQtPurchasing
+source directory and run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>pyqtdeploycli --package pyqtpurchasing --target TARGET configure
+python configure.py --static --sysroot=$SYSROOT --no-sip-files --no-qsci-api --configuration=pyqtpurchasing-TARGET.cfg
+make
+make install
+</pre></div>
+</div>
+<p>See notes <a class="footnote-reference" href="#target" id="id39">[1]</a>, <a class="footnote-reference" href="#docstrings" id="id40">[2]</a>, <a class="footnote-reference" href="#qmake" id="id41">[3]</a>, <a class="footnote-reference" href="#id45" id="id42">[4]</a>, <a class="footnote-reference" href="#qtbug39300" id="id43">[5]</a> and
+<a class="footnote-reference" href="#iphone" id="id44">[6]</a>.</p>
+<p class="rubric">Notes</p>
+<table class="docutils footnote" frame="void" id="target" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id6">3</a>, <a class="fn-backref" href="#id11">4</a>, <a class="fn-backref" href="#id16">5</a>, <a class="fn-backref" href="#id21">6</a>, <a class="fn-backref" href="#id27">7</a>, <a class="fn-backref" href="#id33">8</a>, <a class="fn-backref" href="#id39">9</a>)</em> If you are building a native version of the package then you may
+omit the <code class="docutils literal"><span class="pre">--target</span></code> option.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="docstrings" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id12">2</a>, <a class="fn-backref" href="#id17">3</a>, <a class="fn-backref" href="#id22">4</a>, <a class="fn-backref" href="#id28">5</a>, <a class="fn-backref" href="#id34">6</a>, <a class="fn-backref" href="#id40">7</a>)</em> You may also wish to disable the automatic generation of
+docstrings using the <code class="docutils literal"><span class="pre">--no-docstrings</span></code> option.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="qmake" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id13">3</a>, <a class="fn-backref" href="#id18">4</a>, <a class="fn-backref" href="#id23">5</a>, <a class="fn-backref" href="#id29">6</a>, <a class="fn-backref" href="#id35">7</a>, <a class="fn-backref" href="#id41">8</a>)</em> On Windows make sure that the directory containing <strong class="program">qmake</strong>
+is on your <span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal"><span class="pre">PATH</span></code>.  On other platforms you may need to specify the
+<strong class="program">qmake</strong> executable using the <code class="docutils literal"><span class="pre">--qmake</span></code> option.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id45" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id14">2</a>, <a class="fn-backref" href="#id19">3</a>, <a class="fn-backref" href="#id24">4</a>, <a class="fn-backref" href="#id30">5</a>, <a class="fn-backref" href="#id36">6</a>, <a class="fn-backref" href="#id42">7</a>)</em> You may also need to specify the <code class="docutils literal"><span class="pre">sip</span></code> executable using the
+<code class="docutils literal"><span class="pre">--sip</span></code> option.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="qtbug39300" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id25">1</a>, <a class="fn-backref" href="#id31">2</a>, <a class="fn-backref" href="#id37">3</a>, <a class="fn-backref" href="#id43">4</a>)</em> If your Qt installation is affected by <a class="reference external" href="https://bugreports.qt-project.org/browse/QTBUG-39300">QTBUG-39300</a> then you will also
+need to add <code class="docutils literal"><span class="pre">&quot;CONFIG-=android_install&quot;</span></code> to the <strong class="program">qmake</strong> command
+line.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="iphone" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id10">3</a>, <a class="fn-backref" href="#id15">4</a>, <a class="fn-backref" href="#id20">5</a>, <a class="fn-backref" href="#id26">6</a>, <a class="fn-backref" href="#id32">7</a>, <a class="fn-backref" href="#id38">8</a>, <a class="fn-backref" href="#id44">9</a>)</em> <p><strong class="program">qmake</strong> generates <code class="docutils literal"><span class="pre">Makefile</span></code>s that support iOS devices
+and the simulator.  The default is to build and install for a device.  To
+build and install for the simulator, run the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">iphonesimulator</span>
+<span class="n">make</span> <span class="n">iphonesimulator</span><span class="o">-</span><span class="n">install</span>
+</pre></div>
+</div>
+<p>However, if your Qt installation is affected by <a class="reference external" href="https://bugreports.qt-project.org/browse/QTBUG-40353">QTBUG-40353</a> then the support
+for the <code class="docutils literal"><span class="pre">subdirs</span></code> template in <code class="docutils literal"><span class="pre">.pro</span></code> files is broken in that
+<strong class="program">qmake</strong> does not generate the <code class="docutils literal"><span class="pre">iphonesimulator-install</span></code> target
+in the top-level <code class="docutils literal"><span class="pre">Makefile</span></code>.  It is, therefore, necessary to explictly
+install from each of the sub-directories.</p>
+<p>For example, for sip you would run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">C</span> <span class="n">siplib</span> <span class="n">iphonesimulator</span><span class="o">-</span><span class="n">install</span>
+</pre></div>
+</div>
+<p>For PyQt you would run (for the <code class="docutils literal"><span class="pre">QtCore</span></code> module):</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">C</span> <span class="n">QtCore</span> <span class="n">iphonesimulator</span><span class="o">-</span><span class="n">install</span>
+<span class="n">make</span> <span class="n">install_init_py</span> <span class="n">install_uic_package</span>
+</pre></div>
+</div>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Building Static Packages</a><ul>
+<li><a class="reference internal" href="#qt">Qt</a><ul>
+<li><a class="reference internal" href="#statically-linking-the-windows-c-runtime-library">Statically Linking the Windows C Runtime Library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python">Python</a><ul>
+<li><a class="reference internal" href="#windows-targets">Windows Targets</a></li>
+<li><a class="reference internal" href="#other-targets">Other Targets</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sip">sip</a></li>
+<li><a class="reference internal" href="#pyqt5">PyQt5</a></li>
+<li><a class="reference internal" href="#pyqt4">PyQt4</a></li>
+<li><a class="reference internal" href="#qscintilla">QScintilla</a></li>
+<li><a class="reference internal" href="#qt3d">Qt3D</a></li>
+<li><a class="reference internal" href="#qt-charts">Qt Charts</a></li>
+<li><a class="reference internal" href="#qt-data-visualization">Qt Data Visualization</a></li>
+<li><a class="reference internal" href="#qt-purchasing">Qt Purchasing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="previous chapter">Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="build_sysroot.html"
+                        title="next chapter">Building a System Root Directory</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/static_builds.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="build_sysroot.html" title="Building a System Root Directory"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="Tutorial"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyqtdeploy 1.3.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Riverbank Computing Limited.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

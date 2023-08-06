@@ -1,0 +1,654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &#8212; pyqtdeploy 1.3.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.3.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/logo_tn.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building Static Packages" href="static_builds.html" />
+    <link rel="prev" title="The pdytools Module" href="pdytools_module.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="static_builds.html" title="Building Static Packages"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pdytools_module.html" title="The pdytools Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyqtdeploy 1.3.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p><strong class="program">pyqtdeploy</strong> is itself deployable and the root of the source package
+contains an appropriate <code class="docutils literal"><span class="pre">pyqtdeploy.pdy</span></code> project file.  In this section we
+use this as the basis of explaining <strong class="program">pyqtdeploy</strong>&#8216;s graphical user
+interface.  (Also included is a corresponding <code class="docutils literal"><span class="pre">pyqtdeploycli.pdy</span></code> project
+file for <strong class="program">pyqtdeploycli</strong>.  This demonstrates the deployment of a
+non-GUI application.)</p>
+<div class="section" id="choosing-a-directory-structure">
+<span id="ref-directory-structure"></span><h2>Choosing a Directory Structure<a class="headerlink" href="#choosing-a-directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>In order to deploy an application you have to assemble the various parts, e.g.
+target specific versions of Python, PyQt and sip.  In deciding how to organise
+this you might consider the following:</p>
+<ul class="simple">
+<li>consistency so that you can easily find things</li>
+<li>avoiding hardcoded paths in project files to make it easier to share them
+with other developers</li>
+<li>supporting multiple targets and easily switching between them.  For example
+you may be developing a mobile application that will be deployed to iOS and
+Android but are doing the main development and testing under Linux.</li>
+</ul>
+<p>We now describe a directory structure that addresses these issues.  It is only
+a recommendation and not a requirement.  Note that (with care) it is possble to
+create project files that are portable between all supported platforms.</p>
+<p>There is a top-level directory called <code class="docutils literal"><span class="pre">pyqtdeploy</span></code>.  Everything else will be
+placed in this directory or one of its sub-directories.  It does not matter
+where this directory is in the filesystem.  You may create it in your home
+directory or you may place it in a location where it can be shared with other
+users.  Once it is set up there is no need for it to be updated as part of the
+process of deploying an application.  In other words, a shared <code class="docutils literal"><span class="pre">pyqtdeploy</span></code>
+directory can be read-only for all users.</p>
+<p>Within the <code class="docutils literal"><span class="pre">pyqtdeploy</span></code> directory we create a system root directory for each
+target we are deploying to.  For example we might create directories called
+<code class="docutils literal"><span class="pre">sysroot-linux</span></code>, <code class="docutils literal"><span class="pre">sysroot-ios</span></code> and <code class="docutils literal"><span class="pre">sysroot-android</span></code>.  We can use an
+environment variable to point to the particular target system root directory we
+wish to use.  If we then use that environment variable in the project file then
+we can switch between targets without having to update the project file and so
+makes it possible to share the project file with other users.</p>
+<p><strong class="program">pyqtdeploy</strong> has the option to run <strong class="program">qmake</strong> which itself is
+target-specific and may be installed in different locations for different
+users.  We therefore create a symbolic link in each target-specific system root
+directory that points to the corresponding target-specific Qt installation.
+For example if you have installed the combined iOS and Android Qt binary
+installer in its default location then the iOS Qt directory will be
+<code class="docutils literal"><span class="pre">$HOME/QtX.Y.Z/X.Y/ios</span></code> and the Android Qt directory will be
+<code class="docutils literal"><span class="pre">$HOME/QtX.Y.Z/X.Y/android_arm7</span></code> (where <code class="docutils literal"><span class="pre">X.Y.Z</span></code> is the version number of
+Qt).</p>
+<p>This approach can be extended further by creating a symbolic link to the target
+specific system root directory and setting the environment variable to the
+location of the symbolic link.  To switch between targets you then just change
+the destination of the symbolic link.  If you develop with multiple terminal
+windows open then this has the advantage is that you only need to make the one
+change and it will take effect in all terminals - otherwise you need to
+remember to update the environment variable in each of your terminals.</p>
+<p>Throughout this documentation it is assumed that you have set an environment
+variable <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">SYSROOT</span></code> which points to your target specific root directory
+(possibly via a symbolic link).</p>
+</div>
+<div class="section" id="scoped-qmake-variables">
+<h2>Scoped <strong class="program">qmake</strong> Variables<a class="headerlink" href="#scoped-qmake-variables" title="Permalink to this headline">¶</a></h2>
+<p>A <strong class="program">pyqtdeploy</strong> project has several places where it is possible to
+enter the values of certain <strong class="program">qmake</strong> variables (specifically <code class="docutils literal"><span class="pre">QT</span></code>,
+<code class="docutils literal"><span class="pre">CONFIG</span></code>, <code class="docutils literal"><span class="pre">SOURCES</span></code>, <code class="docutils literal"><span class="pre">DEFINES</span></code>, <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> and <code class="docutils literal"><span class="pre">LIBS</span></code>) which will
+then be included in the generated <code class="docutils literal"><span class="pre">.pro</span></code> file.  <strong class="program">pyqtdeploy</strong> goes to
+some trouble to make it possible to create project files that can be used
+without modification across all supported host platforms.</p>
+<p>To this end the values of these <strong class="program">qmake</strong> variables may be <em>scoped</em> with
+any supported <strong class="program">qmake</strong> scope.  The most common requirement is to
+distinguish between Windows and non-Windows targets, therefore the most common
+scopes used will be <code class="docutils literal"><span class="pre">win32</span></code> and <code class="docutils literal"><span class="pre">!win32</span></code>.</p>
+<p>The scope is specified immediately before the value and separated by a <code class="docutils literal"><span class="pre">#</span></code>.
+For example, lets say that your application is targeted at all supported
+desktop targets and requires SSL support.  On Windows you want to link against
+a copy of the OpenSSL libraries that you have statically compiled and installed
+the header files and libraries in the <code class="docutils literal"><span class="pre">include</span></code> and <code class="docutils literal"><span class="pre">lib</span></code> sub-directories
+of the <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">SYSROOT</span></code> directory.  On Linux and OS X you want to dynamically
+link against the system SSL libraries.  Setting the <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> and
+<code class="docutils literal"><span class="pre">LIBS</span></code> variables to the following values will ensure that the generated code
+will compile as you require on all platforms:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INCLUDEPATH</span>     <span class="n">win32</span><span class="c1">#$SYSROOT/include</span>
+<span class="n">LIBS</span>            <span class="n">win32</span><span class="c1">#$SYSROOT/lib -lssl -lcrypto</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-pyqtdeploy-project">
+<h2>Creating a <strong class="program">pyqtdeploy</strong> Project<a class="headerlink" href="#creating-a-pyqtdeploy-project" title="Permalink to this headline">¶</a></h2>
+<p>The first stage of deploying a PyQt application is to create a
+<strong class="program">pyqtdeploy</strong> project for it by running:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pyqtdeploy</span> <span class="n">myproject</span><span class="o">.</span><span class="n">pdy</span>
+</pre></div>
+</div>
+<p>This will create a new project, or open an exiting one if the file
+<code class="docutils literal"><span class="pre">myproject.pdy</span></code> already exists.  A project is simply a file with a <code class="docutils literal"><span class="pre">.pdy</span></code>
+extension.</p>
+<p>A GUI will be displayed which consists of a <code class="docutils literal"><span class="pre">File</span></code> menu and a set of tabbed
+pages that handle different aspects of the application&#8217;s specification and
+building.</p>
+<p>The <code class="docutils literal"><span class="pre">File</span></code> menu contains the usual set of options to create a new project,
+open an existing project, save a project and rename a project.</p>
+<p>For the remainder of this tutorial we will use the <code class="docutils literal"><span class="pre">pyqtdeploy.pdy</span></code> project
+file included in the root of the source package.</p>
+</div>
+<div class="section" id="defining-the-application-source">
+<h2>Defining the Application Source<a class="headerlink" href="#defining-the-application-source" title="Permalink to this headline">¶</a></h2>
+<p>Python applications are usually structured in one of the following ways:</p>
+<ul class="simple">
+<li>a single standalone executable script that is installed in a <code class="docutils literal"><span class="pre">bin</span></code>
+directory somewhere</li>
+<li>a package installed in <code class="docutils literal"><span class="pre">site-packages</span></code> with a separate executable script
+installed in a <code class="docutils literal"><span class="pre">bin</span></code> directory</li>
+<li>a package installed in <code class="docutils literal"><span class="pre">site-packages</span></code> with a separate executable script
+that is automatically generated by <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code>.  The script calls an
+<em>entry point</em> in the package.  An <em>entry point</em> is the name of a module in
+the package and the name of a callable within the module separated by a
+<code class="docutils literal"><span class="pre">:</span></code>.</li>
+</ul>
+<p><strong class="program">pyqtdeploy</strong> itself uses the <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> based structure.</p>
+<p>The tab for defining the application source is shown below.</p>
+<img alt="_images/application_source_tab.png" class="align-center" src="_images/application_source_tab.png" />
+<dl class="docutils">
+<dt><strong>Name</strong></dt>
+<dd>is used to specify the name of the final application executable.  If it is
+not specified then it is derived from the name of the main script file.  If
+the application does not have a main script file then the name is derived
+from the name of the application package.</dd>
+<dt><strong>Main script file</strong></dt>
+<dd><p class="first">is used to specify the name of the executable Python script used to invoke
+the application.  It should not be specified if an entry point is
+specified.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Whenever a file or directory is specified, <strong class="program">pyqtdeploy</strong> always
+saves its name relative to the directory containing the project file if
+possible.  In this particular example the <code class="docutils literal"><span class="pre">pyqtdeploy</span></code> package
+directory is in the same directory as the <code class="docutils literal"><span class="pre">pyqtdeploy.pdy</span></code> project
+file.  Also, whenever a file or directory name is entered,
+<strong class="program">pyqtdeploy</strong> allows the embedding of environment variables
+which will be expanded when necessary.  The <span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal"><span class="pre">PDY_PY_MAJOR</span></code>,
+<span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal"><span class="pre">PDY_PY_MINOR</span></code> and <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal"><span class="pre">PDY_PY_MICRO</span></code> pseudo-environment
+variables can also be used which will be expanded to the relevant
+parts of the target Python version.</p>
+</div>
+</dd>
+<dt><strong>Entry Point</strong></dt>
+<dd>is used to specify the entry point of a <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code>-based
+application.  It should not be specified if a main script file is
+specified.</dd>
+<dt><strong>sys.path</strong></dt>
+<dd><p class="first">is used to specify additional directories, ZIP files and eggs that will be
+added to <code class="xref py py-data docutils literal"><span class="pre">sys.path</span></code>.  By default <strong class="program">pyqtdeploy</strong> generates an
+application that does not support the importing of packages or extension
+modules that are not embedded in the application.  Indeed, some platforms
+specifically disallow this.  However there are circumstances where this
+ability is desired:</p>
+<ul class="simple">
+<li>you need to use an extension module that does not support being
+statically compiled</li>
+<li>you allow users to write Python code that is imported by the application
+to configure or extend its functionality.</li>
+</ul>
+<p>The path is specified as a space separated list of directories.  Single or
+double quotes may be used to embed spaces in directory names.  Environment
+variables (specified using the standard UNIX notation) are expanded when
+the application is run.  Any relative directory names are assumed to be
+relative to the directory containing the application executable.  UNIX path
+separators should be used - the application will automatically do the
+appropriate conversions when running on Windows.</p>
+<p><strong class="program">pyqtdeploy</strong> also supports the dynamic loading of extension
+modules that are installed adjacent to the application executable (i.e. in
+the same directory as the application executable).  This is useful for
+packages that are implemented as a combination of pure Python modules and
+extension modules where the extension modules do not support being
+statically compiled.  The pure Python modules would be added just like any
+other Python package (see <a class="reference internal" href="#ref-other-packages"><span class="std std-ref">Adding Other Packages</span></a>).  The extension module
+must be named according to its normal position in the package structure.</p>
+<p>For example, suppose we have a package called <code class="docutils literal"><span class="pre">foo</span></code> which contains pure
+Python modules <code class="docutils literal"><span class="pre">__init__.py</span></code> and <code class="docutils literal"><span class="pre">bar.py</span></code> and a dynamically loaded
+extension module <code class="docutils literal"><span class="pre">baz.so</span></code>.  (The extension module would be called
+<code class="docutils literal"><span class="pre">baz.pyd</span></code> on Windows.)  When used with the deployed application the
+module must be installed as <code class="docutils literal"><span class="pre">foo.baz.so</span></code> (or <code class="docutils literal"><span class="pre">foo.baz.pyd</span></code>) in the same
+directory as the application executable.</p>
+<p>On OS X an extension module will also be searched for in the <code class="docutils literal"><span class="pre">PlugIns</span></code>
+and <code class="docutils literal"><span class="pre">Frameworks</span></code> sub-directories of the directory containing the
+application executable.</p>
+<p>Adjacent extension modules do not require <code class="xref py py-data docutils literal"><span class="pre">sys.path</span></code> to be set.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you wish to allow the importing of external extension modules then
+you will also need to ensure that Python has been built with this
+enabled.  See the <a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-enable-dynamic-loading"><code class="xref std std-option docutils literal"><span class="pre">--enable-dynamic-loading</span></code></a> option of the
+<a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-arg-configure"><code class="xref std std-option docutils literal"><span class="pre">configure</span></code></a> action.</p>
+</div>
+</dd>
+<dt><strong>Target Python version</strong></dt>
+<dd>is used to specify version of Python that you are targetting.</dd>
+<dt><strong>Target PyQt version</strong></dt>
+<dd>is used to specify that the application is either a PyQt4 or a PyQt5
+application.</dd>
+<dt><strong>Use console (Windows)</strong></dt>
+<dd>is checked if the application should use a console.  Specifically it adds
+<code class="docutils literal"><span class="pre">console</span></code> to the value of <code class="docutils literal"><span class="pre">CONFIG</span></code> in the generated <code class="docutils literal"><span class="pre">.pro</span></code> file and
+only affects Windows applications.  Normally this is handled automatically
+and a console is used only if the application does not use any GUI related
+PyQt module.  However it may be usefull during testing of deployed GUI
+applications to ensure that tracebacks (e.g. about missing modules) are
+captured and displayed.</dd>
+<dt><strong>Application bundle (OS X)</strong></dt>
+<dd>is checked if the application should be built as a bundle and only affects
+OS X applications.  It would normally be unchecked for command line (i.e.
+non-GUI) applications.</dd>
+<dt><strong>Application Package Directory</strong></dt>
+<dd><p class="first">contains the hierachy of files and directories that implement the
+application package and any associated data.  It is populated by clicking
+the <strong>Scan...</strong> button.  Each file or directory can then be checked if it
+is to be included in the package.  Note that if the main script file is a
+part of the application package then it&#8217;s entry must be explicitly
+unchecked (i.e. excluded).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Non-Python (i.e. data) files can also be included in the package.  An
+application typically accesses such files by using the
+<code class="xref py py-func docutils literal"><span class="pre">QFileInfo.absolutePath()</span></code> function on the <code class="xref py py-data docutils literal"><span class="pre">__file__</span></code>
+attribute of a module to obtain the name of the directory containing
+the data file.  This approach will also work with deployed applications
+so long as the file is accessed using the <code class="xref py py-class docutils literal"><span class="pre">QFile</span></code>
+class (rather than the standard Python file access functions).  However
+QML files require slightly different treatment as their locations are
+specified using a URL.</p>
+</div>
+</dd>
+<dt><strong>Scan...</strong></dt>
+<dd>is clicked to specify the name of the directory containing the Python
+package that implements the application.  (If the application consists of a
+single script then you would not use this.)  The hierachy will be scanned
+for all files and directories that don&#8217;t match any of the specified
+exclusions and will be displayed in the <strong>Application Package Directory</strong>.</dd>
+<dt><strong>Remove all</strong></dt>
+<dd>is clicked to remove all the scanned files and directories.</dd>
+<dt><strong>Include all</strong></dt>
+<dd>is clicked to check all scanned files and directories so that they are
+included in the application package.</dd>
+<dt><strong>Exclude all</strong></dt>
+<dd>is clicked to uncheck all scanned files and directories so that they are
+excluded from the application package.</dd>
+<dt><strong>Exclusions</strong></dt>
+<dd>is used to specify the list of <em>glob</em>-style patterns that are applied to
+the scanned files and directories.  Those items that match are then
+completely ignored.  To edit the list just double-click on the entry to
+modify or delete.  To add a new entry just double-click the list after the
+last entry.</dd>
+</dl>
+</div>
+<div class="section" id="additional-qmake-configuration">
+<h2>Additional <strong class="program">qmake</strong> Configuration<a class="headerlink" href="#additional-qmake-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The tab for defining additional <strong class="program">qmake</strong> configuration information is
+shown below.</p>
+<img alt="_images/qmake_tab.png" class="align-center" src="_images/qmake_tab.png" />
+<p>Any text entered here is added to the end of the <code class="docutils literal"><span class="pre">.pro</span></code> file generated by
+<strong class="program">pyqtdeploy</strong>.</p>
+</div>
+<div class="section" id="defining-the-pyqt-modules">
+<h2>Defining the PyQt Modules<a class="headerlink" href="#defining-the-pyqt-modules" title="Permalink to this headline">¶</a></h2>
+<p>The tab for defining the PyQt modules used by the application is shown below.
+If the application is a PyQt4 application then the PyQt4 modules will be shown
+instead.</p>
+<img alt="_images/pyqt_modules_tab.png" class="align-center" src="_images/pyqt_modules_tab.png" />
+<p>Simply check all the PyQt modules that are used.</p>
+<p><strong class="program">pyqtdeploy</strong> understands the dependencies between the different PyQt
+modules and will automatically check any additional modules that are required.
+Therefore the same effect could have been achieved by only specifying the
+<code class="xref py py-mod docutils literal"><span class="pre">QtWidgets</span></code> module.  However it is better to explicitly specify all
+the modules imported directly by the application.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These modules must be compiled statically.  If you plan to use a separately
+deployed copy of PyQt that will be dynamically loaded by your application
+then do not specify any modules here.</p>
+</div>
+</div>
+<div class="section" id="adding-standard-library-packages">
+<h2>Adding Standard Library Packages<a class="headerlink" href="#adding-standard-library-packages" title="Permalink to this headline">¶</a></h2>
+<p>The tab for defining the Python standard library packages used by the
+application is shown below.</p>
+<img alt="_images/stdlib_packages_tab.png" class="align-center" src="_images/stdlib_packages_tab.png" />
+<dl class="docutils">
+<dt><strong>Package</strong></dt>
+<dd><p class="first">is used to specify each of the target Python version&#8217;s standard library
+packages that is explicitly imported by the application.  Each package can
+be in one of three states:</p>
+<ul class="simple">
+<li><em>checked</em> meaning it is explicitly imported by the application</li>
+<li><em>partially checked</em> meaning it is implicitly imported by the application
+because an explicitly imported package depends on it, or the Python
+interpreter itself imports it</li>
+<li><em>unchecked</em> meaning it is not needed by the application.</li>
+</ul>
+<p>You should always check a package if the application explicitly imports it,
+even if it is already shown as partially checked.</p>
+<p class="last">Here we have checked the <code class="xref py py-mod docutils literal"><span class="pre">argparse</span></code> module and the <code class="xref py py-mod docutils literal"><span class="pre">_thread</span></code>,
+<code class="xref py py-mod docutils literal"><span class="pre">abc</span></code>, <code class="xref py py-mod docutils literal"><span class="pre">array</span></code>, <code class="xref py py-mod docutils literal"><span class="pre">atexit</span></code> and <code class="xref py py-mod docutils literal"><span class="pre">calendar</span></code> modules have
+been partially checked automatically.</p>
+</dd>
+<dt><strong>Auto-(de)select all sub-packages</strong></dt>
+<dd>is used to specify that, when a package is explicitly imported, all of its
+sub-packages and modules are also automatically explicitly imported.</dd>
+<dt><strong>Use standard Python shared library</strong></dt>
+<dd>is used to specify, on a per-platform basis, if the standard Python shared
+library is to be used instead of a specially compiled shared or static
+library.  When selected <strong class="program">pyqtdeploy</strong> assumes that all of the
+Python standard library that is implemented as C extension modules is
+implemented in the shared library.  The default is to enable this for
+Windows.  See also <a class="reference internal" href="windows_dynamic_loading.html#ref-win-dynload"><span class="std std-ref">Windows and Dynamic Loading of Extension Modules</span></a></dd>
+<dt><strong>Enable optional SSL support</strong></dt>
+<dd>is used to specify if the application requires SSL support to be enabled.
+Several packages in the Python standard library will enable SSL related
+functionality if it is available - even if your application doesn&#8217;t itself
+import the <code class="xref py py-mod docutils literal"><span class="pre">ssl</span></code> module.  Note that you still have to provide
+appropriately compiled SSL libraries and header files.</dd>
+</dl>
+<p>The remaining part of the tab relates to non-system libraries that may need to
+be linked with the application.  Typically they correspond to packages in the
+standard library that wrap them.  If a library is required, because a package
+that uses it is required, then the entry for the library will be enabled.  The
+corresponding <code class="docutils literal"><span class="pre">DEFINES</span></code>, <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> and <code class="docutils literal"><span class="pre">LIBS</span></code> fields will also be
+editable allowing those values to be set appropriately.  For example, if you
+have built a static copy of the library then you may need to specify the
+location of the library&#8217;s header files in the <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> field and add a
+<code class="docutils literal"><span class="pre">-L</span></code> flag to the <code class="docutils literal"><span class="pre">LIBS</span></code> field if the library is not installed in locations
+that will be found automatically by the compiler and linker.</p>
+<p><strong class="program">pyqtdeploy</strong> does not import any package from the standard library
+that uses any of these libraries and so they are all disabled.</p>
+</div>
+<div class="section" id="adding-other-packages">
+<span id="ref-other-packages"></span><h2>Adding Other Packages<a class="headerlink" href="#adding-other-packages" title="Permalink to this headline">¶</a></h2>
+<p>The tab for defining additional packages used by the application is shown
+below.</p>
+<img alt="_images/other_packages_tab.png" class="align-center" src="_images/other_packages_tab.png" />
+<p>This tab is used to scan a number of directories containing additional Python
+packages (i.e. other than those that are part of the Python standard library).
+You then specify which individual modules are needed, either implicitly or
+explicitly, by the application.</p>
+<p>To edit the list of directories just double-click on the entry to modify or
+delete.  To add a new entry just double-click the list after the last entry.</p>
+<p>In many cases you will want to add the <code class="docutils literal"><span class="pre">site-packages</span></code> directory of your host
+Python interpreter, i.e. the interpreter being used to develop the application,
+where all the additional packages required by your application are already
+installed.</p>
+<p><strong class="program">pyqtdeploy</strong> does not use any additional Python packages.</p>
+</div>
+<div class="section" id="adding-other-extension-modules">
+<h2>Adding Other Extension Modules<a class="headerlink" href="#adding-other-extension-modules" title="Permalink to this headline">¶</a></h2>
+<p>The tab for defining additional C extension modules used by the application is
+shown below.</p>
+<img alt="_images/other_extension_modules_tab.png" class="align-center" src="_images/other_extension_modules_tab.png" />
+<p>This tab is used to specify any additional C extension modules (i.e. other than
+those that are part of the Python standard library or PyQt) that will be
+statically linked into the application.</p>
+<p>These extension modules may already have been built, but this tab can also be
+used to compile them from source.  You would only normally do this for simple
+extension modules typically made up of a single source file.</p>
+<dl class="docutils">
+<dt><strong>Name</strong></dt>
+<dd>is the full (dot separated) package name of the extension module.</dd>
+<dt><strong>QT</strong></dt>
+<dd>are the values added to the <strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">QT</span></code> variable.</dd>
+<dt><strong>CONFIG</strong></dt>
+<dd>are the values added to the <strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">CONFIG</span></code> variable.</dd>
+<dt><strong>SOURCES</strong></dt>
+<dd><p class="first">are the names of the source files that will be compiled to create the
+extension module.  The file name extension determines which
+<strong class="program">qmake</strong> variable the file is added to:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">.asm</span></code> files are added to <code class="docutils literal"><span class="pre">MASMSOURCES</span></code></li>
+<li><code class="docutils literal"><span class="pre">.h</span></code> files are added to <code class="docutils literal"><span class="pre">HEADERS</span></code></li>
+<li><code class="docutils literal"><span class="pre">.java</span></code> files are added to <code class="docutils literal"><span class="pre">JAVASOURCES</span></code></li>
+<li><code class="docutils literal"><span class="pre">.l</span></code> files are added to <code class="docutils literal"><span class="pre">LEXSOURCES</span></code></li>
+<li><code class="docutils literal"><span class="pre">.pyx</span></code> files are added to <code class="docutils literal"><span class="pre">CYTHONSOURCES</span></code></li>
+<li><code class="docutils literal"><span class="pre">.y</span></code> files are added to <code class="docutils literal"><span class="pre">YACCSOURCES</span></code>.</li>
+</ul>
+<p class="last">Files with any other extension are added to <code class="docutils literal"><span class="pre">SOURCES</span></code>.</p>
+</dd>
+<dt><strong>DEFINES</strong></dt>
+<dd>are the values added to the <strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">DEFINES</span></code> variable.</dd>
+<dt><strong>INCLUDEPATH</strong></dt>
+<dd>are the values added to the <strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> variable.</dd>
+<dt><strong>LIBS</strong></dt>
+<dd>are the values added to the <strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">LIBS</span></code> variable.  If the
+extension module has already been compiled then this is used to link it
+with the application.</dd>
+</dl>
+<p>To edit the list just double-click on the entry to modify or delete.  To add a
+new entry just double-click the list after the last entry.</p>
+<p><strong class="program">pyqtdeploy</strong> does not use any additional C extension modules.</p>
+</div>
+<div class="section" id="defining-file-and-directory-locations">
+<h2>Defining File and Directory Locations<a class="headerlink" href="#defining-file-and-directory-locations" title="Permalink to this headline">¶</a></h2>
+<p>The tab for defining the locations of various files and directories needed by
+<strong class="program">pyqtdeploy</strong> is shown below.</p>
+<img alt="_images/locations_tab.png" class="align-center" src="_images/locations_tab.png" />
+<dl class="docutils">
+<dt><strong>Interpreter</strong></dt>
+<dd>is used to specify the <strong>host</strong> Python interpreter used to compile all of
+the Python modules used by the application.  This must be the same version
+as the <strong>target</strong> Python installation to ensure that the compiled bytecode
+can be executed by the deployed application.  (Of course if you are not
+cross-compiling the application then the host and target Python
+installations can be the same.)  On Windows any trailing version number
+will be automatically stripped.  This makes it easier to create project
+files that are portable across all platforms.  If it is not specified then
+<strong class="program">pyqtdeploy</strong> will use a platform-specific default.  On Windows it
+will inspect the registry to try and find the required version of Python,
+on other platforms it assumes that the required version is on
+<span class="target" id="index-5"></span><code class="xref std std-envvar docutils literal"><span class="pre">PATH</span></code>.  It can be overridden by the <a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-interpreter"><code class="xref std std-option docutils literal"><span class="pre">--interpreter</span></code></a>
+command line option of <strong class="program">pyqtdeploycli</strong>.</dd>
+<dt><strong>Source directory</strong></dt>
+<dd>is used to specify the name of the directory containing the Python source
+code.  It can be overridden by the <a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-source-dir"><code class="xref std std-option docutils literal"><span class="pre">--source-dir</span></code></a> command line
+option of <strong class="program">pyqtdeploycli</strong>.</dd>
+<dt><strong>Include directory</strong></dt>
+<dd>is used to specify the name of the directory containing the target Python
+installation&#8217;s <code class="docutils literal"><span class="pre">Python.h</span></code> file.  It can be overridden by the
+<a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-include-dir"><code class="xref std std-option docutils literal"><span class="pre">--include-dir</span></code></a> command line option of <strong class="program">pyqtdeploycli</strong>.</dd>
+<dt><strong>Python library</strong></dt>
+<dd>is used to specify the name of the target Python interpreter library.  Note
+that in this example the library is specified as a UNIX archive, however
+<strong class="program">pyqtdeploy</strong> will interpret it correctly on Windows.  It can be
+overridden by the <a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-python-library"><code class="xref std std-option docutils literal"><span class="pre">--python-library</span></code></a> command line option of
+<strong class="program">pyqtdeploycli</strong>.</dd>
+<dt><strong>Standard library directory</strong></dt>
+<dd>is used to specify the name of the directory containing the target Python
+interpreter&#8217;s standard library.  It can be overridden by the
+<a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-standard-library-dir"><code class="xref std std-option docutils literal"><span class="pre">--standard-library-dir</span></code></a> command line option of
+<strong class="program">pyqtdeploycli</strong>.</dd>
+<dt><strong>Build directory</strong></dt>
+<dd>is used to specify the name of the directory into which all the code
+generated by <strong class="program">pyqtdeploy</strong> will be placed.  It will be created
+automatically if necessary.  It can be overridden by the <a class="reference internal" href="command_line.html#cmdoption-pyqtdeploycli-output"><code class="xref std std-option docutils literal"><span class="pre">--output</span></code></a>
+command line option of <strong class="program">pyqtdeploycli</strong>.</dd>
+<dt><strong>qmake</strong></dt>
+<dd>is used to specify the name of the <strong class="program">qmake</strong> executable that is
+optionally used to build a <code class="docutils literal"><span class="pre">Makefile</span></code> for the application.</dd>
+</dl>
+</div>
+<div class="section" id="building-the-application">
+<h2>Building the Application<a class="headerlink" href="#building-the-application" title="Permalink to this headline">¶</a></h2>
+<p>Normally building an application is done from the command line.  However during
+the debugging of the deployment it is convenient to be able to complete the
+whole build process (generating code, running <strong class="program">qmake</strong>, running
+<strong class="program">make</strong> and running the final application executable) from within the
+GUI.</p>
+<p>The tab for building the application is shown below.</p>
+<img alt="_images/build_tab.png" class="align-center" src="_images/build_tab.png" />
+<p>The main area of the tab shows the output of the various stages of the build.</p>
+<dl class="docutils">
+<dt><strong>Build</strong></dt>
+<dd>is clicked to build the application.  The application code and
+<strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">.pro</span></code> file will be generated in the build directory.
+What else is done depends on the additional build steps that have been
+specified.</dd>
+<dt><strong>No asserts</strong></dt>
+<dd>is clicked to specify that all <code class="docutils literal"><span class="pre">assert</span></code> statements should be removed from
+frozen Python code.</dd>
+<dt><strong>No docstrings</strong></dt>
+<dd>is clicked to specify that all docstrings should be removed from frozen
+Python code.</dd>
+<dt><strong>Clean before building</strong></dt>
+<dd>is checked to specify that the build directory is deleted and recreated
+before starting a new build.</dd>
+<dt><strong>Verbose output</strong></dt>
+<dd>is checked specify that additional information is displayed during the
+build process.</dd>
+<dt><strong>Resource files</strong></dt>
+<dd>specifies the number of Qt <code class="docutils literal"><span class="pre">.qrc</span></code> resource files that are generated.  On
+Windows, MSVC cannot cope with very large resource files and complains of a
+lack of heap space.  If you run into this problem then try increasing the
+the number of resource files generated.</dd>
+<dt><strong>Timeout</strong></dt>
+<dd>specifies the number of seconds that the build processes are allowed to run
+for before being timed out.</dd>
+<dt><strong>Run qmake</strong></dt>
+<dd>is clicked to specify that <strong class="program">qmake</strong> will be run after generating
+the application code.  If this is disabled the later build steps will be
+disabled automatically.</dd>
+<dt><strong>Run make</strong></dt>
+<dd>is clicked to specify that <strong class="program">make</strong> (or <strong class="program">nmake</strong> on Windows)
+will be run after running <strong class="program">qmake</strong>.  The earlier build steps will
+be enabled automatically.  If this is disabled the later build steps will
+be disabled automatically.</dd>
+<dt><strong>Run application</strong></dt>
+<dd><p class="first">is clicked to specify that the application executable will be run after
+running <strong class="program">make</strong>.  The earlier build steps will be enabled
+automatically.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This only makes sense if you are building natively and not
+cross-compiling.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="creating-a-deployable-package">
+<h2>Creating a Deployable Package<a class="headerlink" href="#creating-a-deployable-package" title="Permalink to this headline">¶</a></h2>
+<p>Assuming you have built the application code and the <strong class="program">qmake</strong> <code class="docutils literal"><span class="pre">.pro</span></code>
+file, the build directory will now contain the source of (as far as
+<strong class="program">qmake</strong> is concerned) a Qt based C++ application.  To convert this
+into a deployable application you must follow the appropriate Qt documentation
+for compiling and packaging for your target platform.</p>
+<p>For desktop platforms this is probably as simple as running <strong class="program">qmake</strong>
+followed by <strong class="program">make</strong> (or <strong class="program">nmake</strong> on Windows).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure the version of <strong class="program">qmake</strong> used is the same as the one used
+to build PyQt.</p>
+</div>
+<p>For mobile platforms this will be considerably more complicated.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial</a><ul>
+<li><a class="reference internal" href="#choosing-a-directory-structure">Choosing a Directory Structure</a></li>
+<li><a class="reference internal" href="#scoped-qmake-variables">Scoped <strong class="program">qmake</strong> Variables</a></li>
+<li><a class="reference internal" href="#creating-a-pyqtdeploy-project">Creating a <strong class="program">pyqtdeploy</strong> Project</a></li>
+<li><a class="reference internal" href="#defining-the-application-source">Defining the Application Source</a></li>
+<li><a class="reference internal" href="#additional-qmake-configuration">Additional <strong class="program">qmake</strong> Configuration</a></li>
+<li><a class="reference internal" href="#defining-the-pyqt-modules">Defining the PyQt Modules</a></li>
+<li><a class="reference internal" href="#adding-standard-library-packages">Adding Standard Library Packages</a></li>
+<li><a class="reference internal" href="#adding-other-packages">Adding Other Packages</a></li>
+<li><a class="reference internal" href="#adding-other-extension-modules">Adding Other Extension Modules</a></li>
+<li><a class="reference internal" href="#defining-file-and-directory-locations">Defining File and Directory Locations</a></li>
+<li><a class="reference internal" href="#building-the-application">Building the Application</a></li>
+<li><a class="reference internal" href="#creating-a-deployable-package">Creating a Deployable Package</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pdytools_module.html"
+                        title="previous chapter">The <code class="docutils literal"><span class="pre">pdytools</span></code> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="static_builds.html"
+                        title="next chapter">Building Static Packages</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="static_builds.html" title="Building Static Packages"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pdytools_module.html" title="The pdytools Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyqtdeploy 1.3.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Riverbank Computing Limited.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>
