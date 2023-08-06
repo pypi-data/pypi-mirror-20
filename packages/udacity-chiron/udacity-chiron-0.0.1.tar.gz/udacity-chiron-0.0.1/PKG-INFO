@@ -1,0 +1,35 @@
+Metadata-Version: 1.0
+Name: udacity-chiron
+Version: 0.0.1
+Summary: CLI tool for interacting with Chiron feedback service.
+Home-page: http://github.com/udacity/udacity-chiron
+Author: S. Charles Brubaker
+Author-email: cb@udacity.com
+License: MIT
+Description: ==============
+        Chiron
+        ==============
+        
+        Chiron is the command-line tool for submitting code to Udacity's automatic feedback agent.
+        
+        Usage
+        ---------
+        
+        To submit your code
+        ::
+            udacity submit <PROJECT_NAME>
+        
+        This will create a zipfile containing the required files and submit it to an automated feedback agent.  When you are  satisfied with the result, you may submit this zipfile for a human review.
+        
+        In case you accidentally removed the zipfile, you may list all of your submissions with the command
+        
+        ::
+            udacity ls <PROJECT_NAME>
+        
+        To re-download the zipfile and the feedback, use
+        
+        ::
+            udacity get <SUBMISSION_ID>
+        
+Keywords: Udacity
+Platform: UNKNOWN
