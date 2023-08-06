@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PyTuning &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="#"/>
+        <link rel="next" title="Basic Concepts" href="basic.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>PyTuning</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pytuning">
+<h1>PyTuning<a class="headerlink" href="#pytuning" title="Permalink to this headline">¶</a></h1>
+<p>PyTuning is a Python library intended for the exploration of musical scales
+and microtonalities. It can be used by developers who need ways of calculating,
+analyzing, and manipulating musical scales, but it can also be used interactively.</p>
+<p>It makes heavy use of the <a class="reference external" href="http://www.sympy.org/">SymPy</a> package, a pure-Python
+computer algebra system, which allows scales and scale degrees to be
+manipulated symbolically, with no loss of precision. There is also an optional
+dependency on <a class="reference external" href="http://matplotlib.org/">Matplotlib</a> (and
+<a class="reference external" href="http://seaborn.pydata.org/">Seaborn</a>) for some visualizations that have been
+included in the package.</p>
+<p>Some of the package&#8217;s features include:</p>
+<ul class="simple">
+<li>Creation of scales in a variety of ways (EDO, Euler-Fokker, Diatonic, Harmonic,
+from generator intervals, etc.)</li>
+<li>Ability to represent created scales in ways that are understood by external
+software (Scala, Timidity, Fluidsynth, Yoshimi, Zynaddsubfx).</li>
+<li>Some analysis functions (for example, PyTuning provides a framework for searching
+for scale modes based upon defined metric functions and combinatorial analysis). Also
+included are some number-theoretic functions, such as prime limits and odd limits.</li>
+<li>Some scale visualizations.</li>
+<li>Interactive use.</li>
+</ul>
+<p>As a simple example, to create a 31-TET scale and then create a tuning table for
+the timidity soft-synth:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>
+<span class="n">tuning_table</span> <span class="o">=</span> <span class="n">create_timidity_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">reference_note</span><span class="o">=</span><span class="mi">69</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The design of PyTuning is purposefully simple so that non-computer professionals can
+use it without much difficultly (musicians, musicologist, interested people of all
+stripes).</p>
+<p>In scope this project is similar to the <a class="reference external" href="http://www.huygens-fokker.org/scala/">Scala</a>
+software package, with a few differences:</p>
+<ul class="simple">
+<li>Scala is a mature, full-featured package that includes many, many scales
+and functions for manipulating and analyzing those scales. This project
+is much newer and less mature; its scope is currently much less (but
+hopefully it will be easy to extend).</li>
+<li>PyTuning is written in Python and relies on modern, well maintained dependencies.
+Scala is written in Ada, and while this is an interesting choice, it probably
+limits the population of users who <em>could</em> change or extend it should a need
+arise.</li>
+<li>Scala is mainly an application. PyTuning is a development library, but with
+ways for non-programmers to use it interactively.</li>
+<li>This package does <em>not</em> interact with sound cards or audio drivers, so one
+can&#8217;t play a scale directly. There are, however,
+functions for exporting scales into other software packages so that music
+and sound can be produced.</li>
+</ul>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>PyTuning runs under Python 2.7.X and 3.X.</p>
+<p>The easiest way to install PyTuning is via the Python Package Index, with
+which Pytuning is <a class="reference external" href="https://pypi.python.org/pypi/PyTuning/">registered</a>:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pytuning</span>
+</pre></div>
+</div>
+<p>There are two hard dependencies for PyTuning: <a class="reference external" href="http://www.sympy.org/en/index.html">SymPy</a> and
+<a class="reference external" href="http://www.numpy.org/">NumPy</a>. SymPy is a pure Python library and <code class="docutils literal"><span class="pre">pip</span></code> will handle
+its installation nicely. NumPy is a more complicated package and if installed via <code class="docutils literal"><span class="pre">pip</span></code> may
+involve much compilation; it would probably behoove you to install the package manually via
+whatever mechanism your platform provides before <code class="docutils literal"><span class="pre">pip</span></code> installing the package .</p>
+<p>If you are running the package interactively it is recommended that the Jupyter interactive
+shell be installed. This is discussed in the documentation under the notes on Interactive use.</p>
+<p>The source-code is available on <a class="reference external" href="https://github.com/MarkCWirt/PyTuning">GitHub</a>, where
+it can be cloned and installed.</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Documentation for the package can be found on <a class="reference external" href="http://pytuning.readthedocs.io/">Read the Docs</a>.</p>
+</div>
+<div class="section" id="roadmap">
+<h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
+<p>More scales, more visualizations, more analysis functions. Pull requests are welcome!</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="index">
+<h2>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basic.html" class="btn btn-neutral float-right" title="Basic Concepts" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

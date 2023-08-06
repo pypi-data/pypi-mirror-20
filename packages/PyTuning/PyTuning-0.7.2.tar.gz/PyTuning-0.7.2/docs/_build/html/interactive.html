@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using PyTuning Interactively &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="prev" title="Visualizations" href="graphics.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using PyTuning Interactively</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-jupyter">Installing Jupyter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#native-packages">Native Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#third-party-packages">Third Party Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-the-environment">Setting the Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-very-brief-introduction-to-jupyter">A (Very) Brief Introduction to Jupyter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tab-completion">Tab Completion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tool-tips">Tool Tips</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#history">History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rich-display">Rich Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graphics">Graphics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-sample-session">A Sample Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helper-functions">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-in-a-persistant-way">Running in a Persistant Way</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Using PyTuning Interactively</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/interactive.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-pytuning-interactively">
+<h1>Using PyTuning Interactively<a class="headerlink" href="#using-pytuning-interactively" title="Permalink to this headline">¶</a></h1>
+<p>With a little knowledge of Python, one can use PyTuning in an
+interactive environment.</p>
+<p>If you plan on doing this, I recommend using the <a class="reference external" href="http://jupyter.org/qtconsole/stable/">Jupyter
+QtConsole</a>. Jupyter is a
+full-featured interactive environment for several programming languages
+(the project started as IPython, but has expanded to cover many
+languages).</p>
+<p>Included in the distribution is a script, <code class="docutils literal"><span class="pre">interactive.py</span></code>, which is
+useful for setting up your environment.</p>
+<div class="section" id="installing-jupyter">
+<h2>Installing Jupyter<a class="headerlink" href="#installing-jupyter" title="Permalink to this headline">¶</a></h2>
+<p>(Note: I have experience with Linux and MacOS, so these instructions are
+focused on these platforms. Jupyter runs under Windows, but I have no
+experience on that platform.)</p>
+<p>On Linux, good ways of installing Jupyter include using your native
+package manager or installing it via a third-party distribution.</p>
+<div class="section" id="native-packages">
+<h3>Native Packages<a class="headerlink" href="#native-packages" title="Permalink to this headline">¶</a></h3>
+<p>On Ubuntu Jupyter is still referred to as IPython. On Xenial, for example,
+there are packages for both Python 2.7 and Python 3:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>vagrant@ubuntu-xenial:~$ aptitude search qtconsole
+p   ipython-qtconsole                       - enhanced interactive Python shell - Qt console
+p   ipython3-qtconsole                      - enhanced interactive Python 3 shell - Qt console
+vagrant@ubuntu-xenial:~$
+</pre></div>
+</div>
+<p>On Arch Linux:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>mark@lucid:~$ pacman -Ss qtconsole
+community/python-qtconsole 4.2.1-1
+    Qt-based console for Jupyter with support for rich media output
+community/python2-qtconsole 4.2.1-1
+    Qt-based console for Jupyter with support for rich media output
+mark@lucid:~$
+</pre></div>
+</div>
+<p>(PyTuning will run under either Python 2.7 or Python 3.X, so the version
+you install is up to you.)</p>
+<p>I would also suggest installing Matplotlib so that graphics can be used
+within the console, i.e:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>vagrant@ubuntu-xenial:~$ aptitude search matplotlib
+p   python-matplotlib                        - Python based plotting system in a style similar to
+p   python-matplotlib:i386                   - Python based plotting system in a style similar to
+p   python-matplotlib-data                   - Python based plotting system (data package)
+p   python-matplotlib-dbg                    - Python based plotting system (debug extension)
+p   python-matplotlib-dbg:i386               - Python based plotting system (debug extension)
+p   python-matplotlib-doc                    - Python based plotting system (documentation packag
+p   python-matplotlib-venn                   - Python plotting area-proportional two- and three-w
+p   python3-matplotlib                       - Python based plotting system in a style similar to
+p   python3-matplotlib:i386                  - Python based plotting system in a style similar to
+p   python3-matplotlib-dbg                   - Python based plotting system (debug extension, Pyt
+p   python3-matplotlib-dbg:i386              - Python based plotting system (debug extension, Pyt
+p   python3-matplotlib-venn                  - Python 3 plotting area-proportional two- and three
+vagrant@ubuntu-xenial:~$
+</pre></div>
+</div>
+<p>And optionally Seaborn:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>vagrant@ubuntu-xenial:~$ aptitude search seaborn
+p   python-seaborn                           - statistical visualization library
+p   python3-seaborn                          - statistical visualization library
+vagrant@ubuntu-xenial:~$
+</pre></div>
+</div>
+<p>(But note that Seaborn is a bit large. See the discussion in <a class="reference internal" href="graphics.html"><span class="doc">Visualizations</span></a>.)</p>
+</div>
+<div class="section" id="third-party-packages">
+<h3>Third Party Packages<a class="headerlink" href="#third-party-packages" title="Permalink to this headline">¶</a></h3>
+<p>Jupyter can also be installed via third-party Python distributions. This
+is my preferred way of doing it, and on MacOS it is (in my opinion) the
+only viable option. I imagine that a third-party distribution would be
+the easiest way to do this on Windows.</p>
+<p>One good distribution is Continuum Analytics <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a>. Once
+miniconda is <a class="reference external" href="http://conda.pydata.org/docs/install/quick.html">installed</a>, the
+<code class="docutils literal"><span class="pre">conda</span></code> tool can be used to install the necessary packages:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>vagrant@ubuntu-xenial:~$ conda install jupyter qtconsole matplotlib seaborn sympy numpy
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="setting-the-environment">
+<h2>Setting the Environment<a class="headerlink" href="#setting-the-environment" title="Permalink to this headline">¶</a></h2>
+<p>The PyTuning distribution contains a script, <code class="docutils literal"><span class="pre">interactive.py</span></code>, that can
+be used to import the package into your namespace, as well as setting up
+some convenience functions. Where that script lives on your computer can
+vary by platform as well as python distribution. If you&#8217;re on Linux
+and installed PyTuning with your system python, there&#8217;s a good chance
+it&#8217;s in <code class="docutils literal"><span class="pre">/usr/bin</span></code>. If you installed into the Miniconda distribution, then
+it will probably be somewhere like <code class="docutils literal"><span class="pre">~/miniconda/bin</span></code>.</p>
+<p>Once you&#8217;ve launched the console, this script should be loaded into
+the environment with the <code class="docutils literal"><span class="pre">%load</span></code> command. This will load it into the console,
+but you&#8217;ll need to execute it. This is normally done with <code class="docutils literal"><span class="pre">Shitf-enter</span></code>,
+although <code class="docutils literal"><span class="pre">Control-enter</span></code> may be used on some platforms/versions.</p>
+<img alt="_images/qtconsole_boot.png" src="_images/qtconsole_boot.png" />
+<p>This will bring load the script into the console, at which point a
+<code class="docutils literal"><span class="pre">[Shit-Enter]</span></code> will execute it.</p>
+<img alt="_images/interactive.png" src="_images/interactive.png" />
+</div>
+<div class="section" id="a-very-brief-introduction-to-jupyter">
+<h2>A (Very) Brief Introduction to Jupyter<a class="headerlink" href="#a-very-brief-introduction-to-jupyter" title="Permalink to this headline">¶</a></h2>
+<p>There are a few things about Jupyter which are useful for
+interacting with the Python interpreter.</p>
+<div class="section" id="tab-completion">
+<h3>Tab Completion<a class="headerlink" href="#tab-completion" title="Permalink to this headline">¶</a></h3>
+<p>Jupyter has a very good tab completion system which can save a lot
+of typing.</p>
+<p>As a first example, the <code class="docutils literal"><span class="pre">%load</span></code> command (above) can use completion
+to navigate to the file. One need only type enough to disambiguate each
+directory in the path and the tab will complete it, much in the same
+way that the bash shell will do so.</p>
+<p>Tab completion can also be used to find functions that are defined
+in your namespace. As an example, by typing <code class="docutils literal"><span class="pre">create_</span></code> into the
+console and hitting tab you will see all objects and functions that
+begin with that string, and by hitting the tab a second time a selector
+will be brought up that allows you to select the function you&#8217;re
+after:</p>
+<img alt="_images/tab1.png" src="_images/tab1.png" />
+</div>
+<div class="section" id="tool-tips">
+<h3>Tool Tips<a class="headerlink" href="#tool-tips" title="Permalink to this headline">¶</a></h3>
+<p>Jupyter also has a nice tool-tip function that will show a function&#8217;s
+documentation once the opening <code class="docutils literal"><span class="pre">(</span></code> is typed:</p>
+<img alt="_images/tooltip.png" src="_images/tooltip.png" />
+</div>
+<div class="section" id="history">
+<h3>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h3>
+<p>Jupyter also has a nice history function. If, for example, at some point
+in your session you entered the following:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+</pre></div>
+</div>
+<p>Then, later on in the session if you type <code class="docutils literal"><span class="pre">scale</span> <span class="pre">=</span></code>, each time you
+hit the up arrow it will search through your history and bring up lines
+beginning with that character string. You can then edit that line and make
+changes.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">scale2</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rich-display">
+<h3>Rich Display<a class="headerlink" href="#rich-display" title="Permalink to this headline">¶</a></h3>
+<p>By default scales and degrees will be displayed symbolically. If you want
+text display you can use the <code class="xref py py-func docutils literal"><span class="pre">print()</span></code> function.</p>
+<img alt="_images/rich_printing.png" src="_images/rich_printing.png" />
+</div>
+<div class="section" id="graphics">
+<h3>Graphics<a class="headerlink" href="#graphics" title="Permalink to this headline">¶</a></h3>
+<p>With <code class="docutils literal"><span class="pre">matplotlib</span></code> installed one also has access to graphics. A graph can
+be displayed within the console, or it can be displayed in a simple
+viewer that allows some editing and the saving of the graphic file in
+a few different formats (JPEG, PNG, SVG). The viewer comes up automatically.
+If you close it at want to bring it back up later, you can use the <code class="docutils literal"><span class="pre">show()</span></code>
+function (i.e., <code class="docutils literal"><span class="pre">matrix.show()</span></code>).</p>
+<img alt="_images/graphics.png" src="_images/graphics.png" />
+<p>Note that by re-sizing the window, you re-size the graphic.</p>
+<p>You can also save the figure directly from the console:</p>
+<img alt="_images/figsave.png" src="_images/figsave.png" />
+</div>
+</div>
+<div class="section" id="a-sample-session">
+<h2>A Sample Session<a class="headerlink" href="#a-sample-session" title="Permalink to this headline">¶</a></h2>
+<p>On my personal website I <a class="reference external" href="http://www.pataphysical.info/a-new-musical-scale.html">discuss a scale</a>
+that I&#8217;ve been working with recently for music composition. It&#8217;s a mode
+of the harmonic scale which minimizes dissonance by one of the metrics
+included in the distribution. In the following session I create the scale
+and create two tuning tables (a timidity and scala table) for use in
+music composition.</p>
+<img alt="_images/session1.png" src="_images/session1.png" />
+</div>
+<div class="section" id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">interactive.py</span></code> also creates a few helper functions for the creation
+of scales. They wrap the base functions in an interactive prompt and
+define a global variable, <code class="docutils literal"><span class="pre">scales</span></code> into which the calculated scale
+is placed.</p>
+<p>As an example, to create a harmonic scale:</p>
+<img alt="_images/helpers1.png" src="_images/helpers1.png" />
+<p>Only a few functions have yet been written, but more will be included in
+future releases.</p>
+<dl class="function">
+<dt id="pytuning.interactive.harmonic_scale">
+<code class="descclassname">pytuning.interactive.</code><code class="descname">harmonic_scale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.interactive.harmonic_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a harmonic scale in an interactive environment.</p>
+<p>This function will prompt for the first and last harmonic, as well as 
+the user&#8217;s desire for normalization. It assumes the standard octave of 2.</p>
+<p>The output is put into the global <code class="docutils literal"><span class="pre">scale</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pytuning.interactive.edo_scale">
+<code class="descclassname">pytuning.interactive.</code><code class="descname">edo_scale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.interactive.edo_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an EDO scale in an interactive environment.</p>
+<p>This function will prompt for the number of divisions (tones) and the
+formal octave.</p>
+<p>The output is put into the global <code class="docutils literal"><span class="pre">scale</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pytuning.interactive.euler_fokker">
+<code class="descclassname">pytuning.interactive.</code><code class="descname">euler_fokker</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.interactive.euler_fokker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a scale of the Euler Fokker Genus in an interactive environment.</p>
+<p>This function will prompt for generator primes and the
+formal octave. Note that multiplicities is not prompted for, so if there are
+repetitions they will need to be spelled out separately.</p>
+<p>The output is put into the global <code class="docutils literal"><span class="pre">scale</span></code>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="running-in-a-persistant-way">
+<h2>Running in a Persistant Way<a class="headerlink" href="#running-in-a-persistant-way" title="Permalink to this headline">¶</a></h2>
+<p>Jupyter also offers an <a class="reference external" href="http://jupyter.org/">interactive notebook</a>, similar
+to a Matlab notebook. For more complicated analysis it is my preferred way
+of interacting with the PyTuning library. Documentation, graphics, equations, code,
+and output calculations can all be included. It can be installed in a way
+that is similar to the console (and in fact may be installed along with it,
+depending on how the packages maintainers on your platform have chosen to
+break things up).</p>
+<p>The Github repository for this project has a directory which
+contains a <a class="reference external" href="https://github.com/MarkCWirt/PyTuning/tree/master/docs/notebooks">rendered notebook</a>
+that shows an exploration of pentatonic scales in the Pythagorean tuning.
+Github renders notebooks well, so you can see what&#8217;s possible to decide if you
+want to install the software. If you&#8217;re going to be doing anything really
+complicated in an interactive environment, I would recommend installing and
+using this.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="graphics.html" class="btn btn-neutral" title="Visualizations" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

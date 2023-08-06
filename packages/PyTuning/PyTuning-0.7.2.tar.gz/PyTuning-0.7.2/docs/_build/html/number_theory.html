@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Number Theory &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Utilities" href="utilities.html"/>
+        <link rel="prev" title="Tuning Tables" href="tables.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Number Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#odd-limits">Odd Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prime-limits">Prime Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prime-factorization-of-degrees">Prime Factorization of Degrees</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Number Theory</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/number_theory.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="number-theory">
+<h1>Number Theory<a class="headerlink" href="#number-theory" title="Permalink to this headline">¶</a></h1>
+<p>While this part of the package isn&#8217;t particularly fleshed out yet, there are
+a few number-theoretic functions for the analysis of scales.</p>
+<div class="section" id="odd-limits">
+<h2>Odd Limits<a class="headerlink" href="#odd-limits" title="Permalink to this headline">¶</a></h2>
+<p>PyTuning contains functions for finding the <a class="reference external" href="https://en.wikipedia.org/wiki/Limit_(music)#Odd_limit">odd Limit</a> for both intervals
+and scales.</p>
+<p>We can define and interval &#8211; say, <img class="math" src="_images/math/09f389d3520b53117436504eccdfb362699c487f.png" alt="\frac{45}{32}"/>, and find its odd-limit
+with the following:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.number_theory</span> <span class="k">import</span> <span class="n">odd_limit</span>
+
+<span class="n">interval</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">limit</span> <span class="o">=</span> <span class="n">odd_limit</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which yields and answer of 45.</p>
+<p>One can also find the odd limit of an entire scale with the <code class="docutils literal"><span class="pre">find_odd_limit_for_scale()</span></code>
+function:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_euler_fokker_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.number_theory</span> <span class="k">import</span> <span class="n">find_odd_limit_for_scale</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">limit</span> <span class="o">=</span> <span class="n">find_odd_limit_for_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which yields 135. (Examining the scale:</p>
+<div class="math">
+<p><img src="_images/math/e835d7625d8d24a0a7ccce7e033e5ee718608fff.png" alt="\left [ 1, \quad \frac{135}{128}, \quad \frac{9}{8}, \quad \frac{5}{4},
+\quad \frac{45}{32}, \quad \frac{3}{2}, \quad \frac{27}{16},
+\quad \frac{15}{8}, \quad 2\right ]"/></p>
+</div><p>you will see that this is the largest odd number, and is found in
+the second degree.)</p>
+<dl class="function">
+<dt id="pytuning.number_theory.odd_limit">
+<code class="descclassname">pytuning.number_theory.</code><code class="descname">odd_limit</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.number_theory.odd_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the odd-limit of an interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>i</strong> &#8211; The interval (a <code class="docutils literal"><span class="pre">sympy.Rational</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The odd-limit for the interval.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pytuning.number_theory.find_odd_limit_for_scale">
+<code class="descclassname">pytuning.number_theory.</code><code class="descname">find_odd_limit_for_scale</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.number_theory.find_odd_limit_for_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the odd-limit of an interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> &#8211; The scale (a list of <code class="docutils literal"><span class="pre">sympy.Rational</span></code> values)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The odd-limit for the scale.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="prime-limits">
+<h2>Prime Limits<a class="headerlink" href="#prime-limits" title="Permalink to this headline">¶</a></h2>
+<p>One can also compute <a class="reference external" href="https://en.wikipedia.org/wiki/Limit_(music)#Prime_limit">prime limits</a>
+for both scales and intervals. Extending the above example, one would assume that the
+Euler-Fokker scale would have a prime-limit of 5, since that&#8217;s the highest prime used
+in the generation, and in fact:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_euler_fokker_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.number_theory</span> <span class="k">import</span> <span class="n">find_prime_limit_for_scale</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">limit</span> <span class="o">=</span> <span class="n">find_prime_limit_for_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will return 5 as the limit.</p>
+<dl class="function">
+<dt id="pytuning.number_theory.prime_limit">
+<code class="descclassname">pytuning.number_theory.</code><code class="descname">prime_limit</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.number_theory.prime_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the prime-limit of an interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>i</strong> &#8211; The interval (a <code class="docutils literal"><span class="pre">sympy.Rational</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The prime-limit for the interval.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pytuning.number_theory.find_prime_limit_for_scale">
+<code class="descclassname">pytuning.number_theory.</code><code class="descname">find_prime_limit_for_scale</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.number_theory.find_prime_limit_for_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the prime-limit of an interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> &#8211; The scale (a list of <code class="docutils literal"><span class="pre">sympy.Rational</span></code> values)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The prime-limit for the scale.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="prime-factorization-of-degrees">
+<h2>Prime Factorization of Degrees<a class="headerlink" href="#prime-factorization-of-degrees" title="Permalink to this headline">¶</a></h2>
+<p>PyTuning has functions for breaking a ratio down into prime factors, and
+the inverse of reassembling them.</p>
+<dl class="function">
+<dt id="pytuning.number_theory.prime_factor_ratio">
+<code class="descclassname">pytuning.number_theory.</code><code class="descname">prime_factor_ratio</code><span class="sig-paren">(</span><em>r</em>, <em>return_as_vector=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.number_theory.prime_factor_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decompose a ratio (degree) to prime factors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> &#8211; The degree to factor (<code class="docutils literal"><span class="pre">sympy.Rational</span></code>)</li>
+<li><strong>return_as_vector</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, return the factors as a vector
+(see below)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The factoring of the ratio</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>By default this function will return a <code class="docutils literal"><span class="pre">dict</span></code>, with each key
+being a prime, and each value being the exponent of the factorization.</p>
+<p>As an example, the syntonic comma, <img class="math" src="_images/math/c465df235080f08b5415024c2fb11aa3bfbeb131.png" alt="\frac{81}{80}"/>, can be factored:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">syntonic_comma</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">prime_factor_ratio</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>which can be interpreted as:</p>
+<div class="math">
+<p><img src="_images/math/23e25b56045285cd6821434408463454d8f94911.png" alt="\frac{3^4}{2^{4} \cdot 5^{1}}"/></p>
+</div><p>If <code class="docutils literal"><span class="pre">return_as_vector</span></code> is <code class="docutils literal"><span class="pre">True</span></code>, the function will return a tuple, 
+with each position a successive prime. The above example yields:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">syntonic_comma</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">prime_factor_ratio</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">return_as_vector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that zeros will be included in the vector, thus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">243</span><span class="p">,</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">prime_factor_ratio</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">return_as_vector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">prime_factor_ratio</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pytuning.number_theory.create_ratio_from_primes">
+<code class="descclassname">pytuning.number_theory.</code><code class="descname">create_ratio_from_primes</code><span class="sig-paren">(</span><em>factors</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.number_theory.create_ratio_from_primes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a prime factorization of a ratio, reconstruct the ratio. This function
+in the inverse of <code class="xref py py-func docutils literal"><span class="pre">prime_factor_ratio()</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>factors</strong> &#8211; The factors. Can be a <code class="docutils literal"><span class="pre">dict</span></code> or a <code class="docutils literal"><span class="pre">tuple</span></code> 
+(see <code class="docutils literal"><span class="pre">prime_factor_ratio</span></code> for a discussion).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The ratio (<code class="docutils literal"><span class="pre">sympy</span></code> value).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utilities.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tables.html" class="btn btn-neutral" title="Tuning Tables" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

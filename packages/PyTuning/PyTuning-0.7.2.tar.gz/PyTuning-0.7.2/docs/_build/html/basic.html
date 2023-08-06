@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic Concepts &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Scale Creation" href="scales.html"/>
+        <link rel="prev" title="PyTuning" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scales">Scales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#degrees">Degrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modes">Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mode-objects">Mode Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tuning-tables">Tuning Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-functions">Metric Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Basic Concepts</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/basic.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-concepts">
+<h1>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h1>
+<p>PyTuning is purposefully designed to be as simple as possible, so that
+non-programmers (musicologists, musicians, etc.) can use it without too
+much difficulty: the data structures are relatively simple; there are
+currently no classes defined, instead opting for an imperative/procedural
+approach.</p>
+<p>Regardless of how it is used (interactively or as a development library),
+the user should have a good understanding of some of the basic, foundational
+concepts the package uses.</p>
+<div class="section" id="scales">
+<h2>Scales<a class="headerlink" href="#scales" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>scale</strong> is, simply, a list of degrees. By convention the list is bookended
+by the unison and the octave, with each degree given as a frequency ratio
+relative to the root tone of the scale. The first degree is
+always <img class="math" src="_images/math/d839e144267ecbb8a87acbc8a7dfda7824a1693e.png" alt="1"/>, the ratio of the first degree to the first degree. Most
+commonly the last degree is <img class="math" src="_images/math/16d14f59441fe3b3d7c57975e6e10cbf2474c220.png" alt="2"/>, as the octave is usually twice
+the frequency of the root (although the package has some support for
+non-standard &#8220;octaves&#8221;).</p>
+<p>As an example, this is the standard 12-tone equal temperament scale (sometimes
+referred to as 12-TET, or 12-EDO, for Equal Division of the Octave).</p>
+<div class="math">
+<p><img src="_images/math/3561b502bdcc5a1adc4952cc413e9a2b8dab22e3.png" alt="\left [ 1, \quad \sqrt[12]{2}, \quad \sqrt[6]{2}, \quad \sqrt[4]{2}, \quad \sqrt[3]{2}, \quad 2^{\frac{5}{12}}, \quad \sqrt{2},
+\quad 2^{\frac{7}{12}}, \quad 2^{\frac{2}{3}}, \quad 2^{\frac{3}{4}}, \quad 2^{\frac{5}{6}}, \quad 2^{\frac{11}{12}}, \quad 2\right ]"/></p>
+</div><p>A few things to note:</p>
+<ul class="simple">
+<li>As mentioned previously, the scale includes the unison and octave.</li>
+<li>Each scale degree is a SymPy number, so it is represented symbolically.
+Note that algebraic simplifications are performed by default.</li>
+<li>Even though the length of this list of 13, it is considered a 12 note
+scale, because the unison and the octave is in actuality the same note.
+Many of the functions in this package ask one to choose the number of notes
+or degrees to be used in this function. For these you should follow
+this convention.</li>
+</ul>
+<p>(For those who are curious: the generation of scales is documented in
+<a class="reference internal" href="scales.html"><span class="doc">Scale Creation</span></a>, but the above scale was generated with the following code:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_edo_scale</span>
+<span class="n">edo_12_scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simplified versions of most functions are provided in the interactive
+environment.)</p>
+</div>
+<div class="section" id="degrees">
+<h2>Degrees<a class="headerlink" href="#degrees" title="Permalink to this headline">¶</a></h2>
+<p>Scale degrees (which are expressed as frequency rations relative to the
+tonic of the scale) are expressed in <a class="reference external" href="http://www.sympy.org/en/index.html">SymPy</a>
+values. In practical terms the <code class="docutils literal"><span class="pre">Integer</span></code> and <code class="docutils literal"><span class="pre">Rational</span></code> class will be
+used the most, but SymPy is a full-featured package, and you may benefit
+from having some familiarity with it.</p>
+<p>An example of a few degrees:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="n">unison</span>           <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                      <span class="c1"># Normal unison</span>
+<span class="n">octave</span>           <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>                      <span class="c1"># Normal octave</span>
+<span class="n">perfect_fifth</span>    <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>                   <span class="c1"># As a rational number</span>
+<span class="n">minor_second_tet</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># the 12th root of 2</span>
+                                                      <span class="c1"># could also by sp.root(2,12)</span>
+<span class="n">lucy_L</span>           <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>                 <span class="c1"># Lucy scale Long step</span>
+</pre></div>
+</div>
+<p>Will yield the following:</p>
+<div class="math">
+<p><img src="_images/math/b5b2001c04cbc3f5319c05735a7153a85f61fb7b.png" alt="1 \\
+2 \\
+\frac{3}{2} \\
+\sqrt[12]{2} \\
+2^{\frac{1}{2 \pi}}"/></p>
+</div><p>SymPy manipulates all values analytically, but sometimes one needs a floating
+approximation to a degree (for example, tuning a synthesizer usually needs
+frequencies expressed as floating point numbers). For the <code class="docutils literal"><span class="pre">evalf()</span></code>
+member function can be used:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">unison</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+<span class="mf">1.00000000000000</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">octave</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+<span class="mf">2.00000000000000</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perfect_fifth</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+<span class="mf">1.50000000000000</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">minor_second_tet</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+<span class="mf">1.05946309435930</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lucy_L</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+<span class="mf">1.11663288009114</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modes">
+<h2>Modes<a class="headerlink" href="#modes" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>mode</strong> is a selection of notes from a scale, and is itself a list of
+degrees (and therefore is also a scale). A mode can be produced from a scale
+by applying a <strong>mask</strong> to the scale. Again, the functions involved are
+documented elsewhere, but as example this is how we would produce the
+standard major scale (which in the context of this package would be
+referred to as a mode):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">major_mask</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">major_mode</span> <span class="o">=</span> <span class="n">mask_scale</span><span class="p">(</span><span class="n">edo_12_scale</span><span class="p">,</span> <span class="n">major_mask</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which produces the following scale:</p>
+<div class="math">
+<p><img src="_images/math/3ad9a0e617cf910e895ec5908d31bad28f2f60d4.png" alt="\left [ 1, \quad \sqrt[6]{2}, \quad \sqrt[3]{2}, \quad 2^{\frac{5}{12}},
+\quad 2^{\frac{7}{12}}, \quad 2^{\frac{3}{4}}, \quad 2^{\frac{11}{12}},
+\quad 2\right ]"/></p>
+</div></div>
+<div class="section" id="mode-objects">
+<h2>Mode Objects<a class="headerlink" href="#mode-objects" title="Permalink to this headline">¶</a></h2>
+<p>Some functions in this package return a <strong>mode object</strong>. For
+example, the <code class="docutils literal"><span class="pre">find_best_modes()</span></code> function will take a scale and find
+a mode (or modes), based upon some consonance metric function.
+Here is one such object, which is implemented as a Python <code class="docutils literal"><span class="pre">dict</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;mask&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+ <span class="s1">&#39;metric_3&#39;</span><span class="p">:</span> <span class="mf">22.1402597402597</span><span class="p">,</span>
+ <span class="s1">&#39;original_scale&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span>
+  <span class="mi">256</span><span class="o">/</span><span class="mi">243</span><span class="p">,</span>
+  <span class="mi">9</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span>
+  <span class="mi">32</span><span class="o">/</span><span class="mi">27</span><span class="p">,</span>
+  <span class="mi">81</span><span class="o">/</span><span class="mi">64</span><span class="p">,</span>
+  <span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>
+  <span class="mi">1024</span><span class="o">/</span><span class="mi">729</span><span class="p">,</span>
+  <span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+  <span class="mi">128</span><span class="o">/</span><span class="mi">81</span><span class="p">,</span>
+  <span class="mi">27</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span>
+  <span class="mi">16</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span>
+  <span class="mi">243</span><span class="o">/</span><span class="mi">128</span><span class="p">,</span>
+  <span class="mi">2</span><span class="p">],</span>
+ <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="o">/</span><span class="mi">27</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">27</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+ <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+ <span class="s1">&#39;sum_distinct_intervals&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+ <span class="s1">&#39;sum_p_q&#39;</span><span class="p">:</span> <span class="mi">161</span><span class="p">,</span>
+ <span class="s1">&#39;sum_p_q_for_all_intervals&#39;</span><span class="p">:</span> <span class="mi">4374</span><span class="p">,</span>
+ <span class="s1">&#39;sum_q_for_all_intervals&#39;</span><span class="p">:</span> <span class="mi">1822</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The meaning of these keys:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">original_scale</span></code> is the original scale which was input into the function.
+In this example is was a Pythagorean scale.</li>
+<li><code class="docutils literal"><span class="pre">scale</span></code> is the output scale of the function</li>
+<li><code class="docutils literal"><span class="pre">mask</span></code> is the mask of the original scale that produces the output</li>
+<li><code class="docutils literal"><span class="pre">steps</span></code> is similar to mask, but reported in a different format. Each
+entry in the steps list represents the number of degrees in the original
+scale between successive degrees in the returned scale. The standard
+major scale, for example, would be represented by
+<img class="math" src="_images/math/a06c8326bc615fd7e88aa4fc9bdc4b876b751d7b.png" alt="\left[ 2, 2, 1, 2, 2, 2, 1 \right]"/> .</li>
+</ul>
+<p>In this example there are also other keys included. <code class="docutils literal"><span class="pre">sum_distinct_intervals</span></code>,
+<code class="docutils literal"><span class="pre">sum_p_q</span></code>, <code class="docutils literal"><span class="pre">sum_p_q_for_all_intervals</span></code>, <code class="docutils literal"><span class="pre">sum_q_for_all_intervals</span></code>,  and
+<code class="docutils literal"><span class="pre">metric_3</span></code> are the outputs of calculated metric functions. This particular mode,
+for example, has a rating of 161 by the <code class="docutils literal"><span class="pre">sum_p_q</span></code> metric.</p>
+<p>Metric functions are describe briefly below, and in more detail in
+<a class="reference internal" href="metrics.html"><span class="doc">Metric Functions</span></a>.</p>
+</div>
+<div class="section" id="tuning-tables">
+<h2>Tuning Tables<a class="headerlink" href="#tuning-tables" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="tables.html"><span class="doc">Tuning Tables</span></a> are a representation of a scale, usually a string (which can
+be written to a file), which can be understood by an external software
+package. As an example, to take a standard Pythagorean scale and
+produce a representation understood by Scala:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">pythag_scale</span>       <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+<span class="n">scala_tuning_table</span> <span class="o">=</span> <span class="n">create_scala_tuning</span><span class="p">(</span><span class="n">pythag_scale</span><span class="p">,</span> <span class="s2">&quot;Pythagorean Scale&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The variable <code class="docutils literal"><span class="pre">scala_tuning_table</span></code> now contains the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>! Scale produced by pytuning. For tuning yoshimi or zynaddsubfx,
+! only include the portion below the final &#39;!&#39;
+!
+Pythagorean Scale
+ 12
+!
+256/243
+9/8
+32/27
+81/64
+4/3
+1024/729
+3/2
+128/81
+27/16
+16/9
+243/128
+2/1
+</pre></div>
+</div>
+<p>For many tuning tables one has to pin the scale to some reference
+frequency. For this the convention of MIDI note number is employed. For
+example, in the MIDI standard the note <code class="docutils literal"><span class="pre">69</span></code> is A 440 Hz, so by
+specifying a reference of 69, the corresponding entry in the table
+would be 400 Hz, and this would represent the root or tonic degree of
+the scale.</p>
+<p>Exporting the above scale in a <a class="reference external" href="http://csound.github.io/">Csound</a> compatible
+format:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csound_tuning_table</span> <span class="o">=</span> <span class="n">create_csound_tuning</span><span class="p">(</span><span class="n">pythag_scale</span><span class="p">,</span> <span class="n">reference_note</span><span class="o">=</span><span class="mi">69</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>yields the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="mi">0</span> <span class="mi">256</span> <span class="o">-</span><span class="mi">2</span>     <span class="mf">8.14815</span>     <span class="mf">8.70117</span>     <span class="mf">9.16667</span>     <span class="mf">9.65706</span>    <span class="mf">10.31250</span>    <span class="mf">10.86420</span>    <span class="mf">11.60156</span>    <span class="mf">12.22222</span> \
+               <span class="mf">13.05176</span>    <span class="mf">13.75000</span>    <span class="mf">14.48560</span>    <span class="mf">15.46875</span>    <span class="mf">16.29630</span>    <span class="mf">17.40234</span>    <span class="mf">18.33333</span>    <span class="mf">19.31413</span> \
+               <span class="mf">20.62500</span>    <span class="mf">21.72840</span>    <span class="mf">23.20313</span>    <span class="mf">24.44444</span>    <span class="mf">26.10352</span>    <span class="mf">27.50000</span>    <span class="mf">28.97119</span>    <span class="mf">30.93750</span> \
+               <span class="mf">32.59259</span>    <span class="mf">34.80469</span>    <span class="mf">36.66667</span>    <span class="mf">38.62826</span>    <span class="mf">41.25000</span>    <span class="mf">43.45679</span>    <span class="mf">46.40625</span>    <span class="mf">48.88889</span> \
+               <span class="mf">52.20703</span>    <span class="mf">55.00000</span>    <span class="mf">57.94239</span>    <span class="mf">61.87500</span>    <span class="mf">65.18519</span>    <span class="mf">69.60938</span>    <span class="mf">73.33333</span>    <span class="mf">77.25652</span> \
+               <span class="mf">82.50000</span>    <span class="mf">86.91358</span>    <span class="mf">92.81250</span>    <span class="mf">97.77778</span>   <span class="mf">104.41406</span>   <span class="mf">110.00000</span>   <span class="mf">115.88477</span>   <span class="mf">123.75000</span> \
+              <span class="mf">130.37037</span>   <span class="mf">139.21875</span>   <span class="mf">146.66667</span>   <span class="mf">154.51303</span>   <span class="mf">165.00000</span>   <span class="mf">173.82716</span>   <span class="mf">185.62500</span>   <span class="mf">195.55556</span> \
+              <span class="mf">208.82813</span>   <span class="mf">220.00000</span>   <span class="mf">231.76955</span>   <span class="mf">247.50000</span>   <span class="mf">260.74074</span>   <span class="mf">278.43750</span>   <span class="mf">293.33333</span>   <span class="mf">309.02606</span> \
+              <span class="mf">330.00000</span>   <span class="mf">347.65432</span>   <span class="mf">371.25000</span>   <span class="mf">391.11111</span>   <span class="mf">417.65625</span>   <span class="mf">440.00000</span>   <span class="mf">463.53909</span>   <span class="mf">495.00000</span> \
+              <span class="mf">521.48148</span>   <span class="mf">556.87500</span>   <span class="mf">586.66667</span>   <span class="mf">618.05213</span>   <span class="mf">660.00000</span>   <span class="mf">695.30864</span>   <span class="mf">742.50000</span>   <span class="mf">782.22222</span> \
+              <span class="mf">835.31250</span>   <span class="mf">880.00000</span>   <span class="mf">927.07819</span>   <span class="mf">990.00000</span>  <span class="mf">1042.96296</span>  <span class="mf">1113.75000</span>  <span class="mf">1173.33333</span>  <span class="mf">1236.10425</span> \
+             <span class="mf">1320.00000</span>  <span class="mf">1390.61728</span>  <span class="mf">1485.00000</span>  <span class="mf">1564.44444</span>  <span class="mf">1670.62500</span>  <span class="mf">1760.00000</span>  <span class="mf">1854.15638</span>  <span class="mf">1980.00000</span> \
+             <span class="mf">2085.92593</span>  <span class="mf">2227.50000</span>  <span class="mf">2346.66667</span>  <span class="mf">2472.20850</span>  <span class="mf">2640.00000</span>  <span class="mf">2781.23457</span>  <span class="mf">2970.00000</span>  <span class="mf">3128.88889</span> \
+             <span class="mf">3341.25000</span>  <span class="mf">3520.00000</span>  <span class="mf">3708.31276</span>  <span class="mf">3960.00000</span>  <span class="mf">4171.85185</span>  <span class="mf">4455.00000</span>  <span class="mf">4693.33333</span>  <span class="mf">4944.41701</span> \
+             <span class="mf">5280.00000</span>  <span class="mf">5562.46914</span>  <span class="mf">5940.00000</span>  <span class="mf">6257.77778</span>  <span class="mf">6682.50000</span>  <span class="mf">7040.00000</span>  <span class="mf">7416.62551</span>  <span class="mf">7920.00000</span> \
+             <span class="mf">8343.70370</span>  <span class="mf">8910.00000</span>  <span class="mf">9386.66667</span>  <span class="mf">9888.83402</span> <span class="mf">10560.00000</span> <span class="mf">11124.93827</span> <span class="mf">11880.00000</span> <span class="mf">12515.55556</span>
+</pre></div>
+</div>
+<p>This is a 128-entry table, mapping note number to absolute frequency. Csound&#8217;s
+<code class="docutils literal"><span class="pre">table</span></code> opcode can be used to index into the table and play the appropriate
+frequency, using something like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">inote</span>     <span class="n">init</span>          <span class="n">p4</span>
+<span class="n">iveloc</span>    <span class="n">init</span>          <span class="n">p5</span>
+<span class="n">ifreq</span>     <span class="n">table</span>         <span class="n">inote</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">a1</span>        <span class="n">oscil</span>         <span class="n">iveloc</span><span class="p">,</span> <span class="n">ifreq</span><span class="p">,</span> <span class="mi">2</span>
+          <span class="n">outs</span>          <span class="n">a1</span><span class="p">,</span> <span class="n">a1</span>
+</pre></div>
+</div>
+<p>(This assumes that p4 in the orchestra file contains MIDI note numbers,
+of course. If you use a different convention there are translation opcodes
+that can be used.)</p>
+</div>
+<div class="section" id="metric-functions">
+<h2>Metric Functions<a class="headerlink" href="#metric-functions" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="metrics.html"><span class="doc">Metric Functions</span></a> are functions that takes a scale as an input and returns
+a numeric value calculated from that scale. It is used, for example, in
+<code class="docutils literal"><span class="pre">find_best_modes()</span></code> to evaluate the consonance of a scale (<code class="docutils literal"><span class="pre">find_best_modes()</span></code>
+uses a metric to evaluate the consonance of all possible modes of a scale and
+returns the evaluation of those modes as a <strong>mode_object</strong>).</p>
+<p>The return value of a metric function should be a <code class="docutils literal"><span class="pre">dict</span></code> with a unique string
+identifier as the key and the metric as the value.</p>
+<p>As an example, the following is one of the package-defined metrics:</p>
+<dl class="function">
+<dt>
+<code class="descclassname">pytuning.metrics.</code><code class="descname">sum_p_q_for_all_intervals</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span></dt>
+<dd><p>Calculate a metric for a scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale (i.e., a list of <code class="docutils literal"><span class="pre">sympy.Rational</span></code> values)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metric.</td>
+</tr>
+</tbody>
+</table>
+<p>This metric is an estimate of scale consonance. It is formed by examining
+all unique intervals in the scale, and creating a numeric value based upon
+the summation of the numerators and denominators for all those intervals.</p>
+<p>While the metric is numerically defined for ratios expressed as irrational or
+transcendental numbers, it is really only meaningful for scales with just
+degrees (ratios expressed as rational numbers).</p>
+<p>Smaller values are more consonant.</p>
+</dd></dl>
+
+<p>As an example of use, the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pythag</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+<span class="n">metric</span> <span class="o">=</span> <span class="n">sum_p_q_for_all_intervals</span><span class="p">(</span><span class="n">pythag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>yields the following:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;sum_p_q_for_all_intervals&#39;</span><span class="p">:</span> <span class="mi">1092732</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scales.html" class="btn btn-neutral float-right" title="Scale Creation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="PyTuning" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

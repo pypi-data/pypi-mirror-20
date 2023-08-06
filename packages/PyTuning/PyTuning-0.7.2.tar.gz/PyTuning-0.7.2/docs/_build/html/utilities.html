@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utilities &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Visualizations" href="graphics.html"/>
+        <link rel="prev" title="Number Theory" href="number_theory.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interval-normalization">Interval Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distinct-intervals">Distinct Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#converting-a-ratio-to-a-cent-value">Converting a Ratio to a Cent Value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#converting-a-cent-value-to-a-ratio">Converting a Cent Value to a Ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#converting-a-note-number-to-a-frequency">Converting a Note Number to a Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#naming-a-ratio">Naming A Ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-two-scales">Comparing Two Scales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/utilities.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<p>The PyTuning package contains some utilities which may be useful. In general these
+tend to be smaller utilities and tasks that are useful in the analysis
+of musical scales, but they are not full-featured &#8220;things&#8221; in and of themselves.</p>
+<div class="section" id="interval-normalization">
+<h2>Interval Normalization<a class="headerlink" href="#interval-normalization" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.normalize_interval">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">normalize_interval</code><span class="sig-paren">(</span><em>interval</em>, <em>octave=2</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.normalize_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize a musical interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>interval</strong> &#8211; The interval to normalize. Should be a frequency
+ratio, most usefully expressed as a <cite>sympy.Rational</cite>
+or related data item</li>
+<li><strong>octave</strong> &#8211; The formal octave. Defaults to 2</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The interval, normalized</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that any formal octave can be used. In normal usage a
+2 will be used (i.e., a doubling of frequency is an octave).</p>
+<p>Normalization works by finding the smallest power of two (or <code class="docutils literal"><span class="pre">octave</span></code>) that when multiplied
+by the interval (in the case of an interval less than 1) or divided into
+the interval (for intervals greater than 2) will bring the interval into
+the target range of <img class="math" src="_images/math/c099adfb70f1969f331d1a0174df9534991805f8.png" alt="1 \le i \le 2"/>.</p>
+</dd></dl>
+
+<p>As an example, the interval <img class="math" src="_images/math/1815109876301c8a07f66eedc532688a096f042e.png" alt="9"/> would normalize to <img class="math" src="_images/math/9f20ccd57569590848e19d4ada743753a850a1d1.png" alt="\frac{9}{8}"/>, because
+9 needs to be scaled down by three octaves to fall within the limit of 1 and 2:</p>
+<div class="math">
+<p><img src="_images/math/69d1f7a7b750980bbd065ba9df8c240184f6a77b.png" alt="\frac{9}{8} = \frac{9}{2^3}"/></p>
+</div><div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ni</span> <span class="o">=</span> <span class="n">normalize_interval</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ni</span><span class="p">)</span>
+<span class="mi">9</span><span class="o">/</span><span class="mi">8</span>
+</pre></div>
+</div>
+<p>One can also normalize on a non-standard interval, for example, 3:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ni</span> <span class="o">=</span> <span class="n">normalize_interval</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">34</span><span class="p">),</span> <span class="n">octave</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ni</span><span class="p">)</span>
+<span class="mi">34</span><span class="o">/</span><span class="mi">27</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="distinct-intervals">
+<h2>Distinct Intervals<a class="headerlink" href="#distinct-intervals" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.distinct_intervals">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">distinct_intervals</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.distinct_intervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the distinct intervals in a scale, including inversions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale to analyze</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A list of distinct intervals</td>
+</tr>
+</tbody>
+</table>
+<p>The scale should be specified as a list of <code class="docutils literal"><span class="pre">sympy</span></code> numerical
+values (<code class="docutils literal"><span class="pre">Rational</span></code> or <code class="docutils literal"><span class="pre">Integer</span></code>). Note that the convention adopted
+in this code is that scale[0] is a unison and scale[-1] is
+the formal octave (often 2).</p>
+<p>As an example of a valid scale, a standardized Pythagorean
+tuning could be passed into the function:</p>
+<div class="math">
+<p><img src="_images/math/ac92c94cbeca780066ecc8f05ff3e2acde313642.png" alt="\left [ 1, \frac{256}{243}, \frac{9}{8}, \frac{32}{27}, 
+\frac{81}{64}, \frac{4}{3}, \frac{1024}{729}, \frac{3}{2}, 
+\frac{128}{81}, \frac{27}{16}, \frac{16}{9}, 
+\frac{243}{128}, 2\right ]"/></p>
+</div><p>If one were hand-crafting this scale, it would look something like:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">243</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The function returns a list in rational/symbolic terms. If numerical
+values are needed, one can, for example, map <code class="docutils literal"><span class="pre">ratio_to_cents</span></code> to
+obtain it:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">di</span> <span class="o">=</span> <span class="n">distinct_intervals</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+<span class="n">di_in_cents</span> <span class="o">=</span> <span class="p">[</span><span class="n">ratio_to_cents</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">di</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p><code class="docutils literal"><span class="pre">distinct_intervals()</span></code> returns all the distinct intervals within a musical
+scale. Note, though, that it does not include the unison (or the octave) in the
+results, as all scales contain those intervals by definitions.</p>
+<p>As an example, if we were to take a Pythagorean scale and find the intervals
+that exist within it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">pythag</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+<span class="n">di</span> <span class="o">=</span> <span class="n">distinct_intervals</span><span class="p">(</span><span class="n">pythag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>we end up with:</p>
+<div class="math">
+<p><img src="_images/math/666a72e94207c2ce81be71fc4906f8f3b952d614.png" alt="\left [ \frac{2187}{2048}, \quad \frac{256}{243}, \quad \frac{8192}{6561}, \quad \frac{262144}{177147},
+\quad \frac{4096}{2187}, \quad \frac{3}{2}, \quad \frac{243}{128}, \quad \frac{1024}{729},
+\quad \frac{19683}{16384}, \quad \frac{729}{512},
+\quad \frac{6561}{4096},
+\quad \frac{65536}{59049}, \quad \frac{177147}{131072}, \quad \frac{59049}{32768}, \quad \frac{81}{64}, \quad
+\frac{32}{27}, \quad \frac{27}{16},
+\quad \frac{4}{3}, \quad \frac{9}{8}, \quad \frac{32768}{19683},
+\quad \frac{16}{9}, \quad \frac{128}{81}\right ]"/></p>
+</div></div>
+<div class="section" id="converting-a-ratio-to-a-cent-value">
+<h2>Converting a Ratio to a Cent Value<a class="headerlink" href="#converting-a-ratio-to-a-cent-value" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.ratio_to_cents">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">ratio_to_cents</code><span class="sig-paren">(</span><em>ratio</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.ratio_to_cents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a scale degree to a cent value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ratio</strong> &#8211; The scale degree (<code class="docutils literal"><span class="pre">sympy</span></code> value)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The scale degree in cents</td>
+</tr>
+</tbody>
+</table>
+<p>Calculates:</p>
+<div class="math">
+<p><img src="_images/math/76eab82a5a3f914f2a16757f28d853df7ef723c8.png" alt="\sqrt[2^{\left[ \frac{1}{1200} \right]}]{\text{degree}}"/></p>
+</div><p>Note that this function returns a floating point number,
+not a <code class="docutils literal"><span class="pre">sympy</span></code> ratio.</p>
+</dd></dl>
+
+<p>This function is useful if you have a symbolic value (a rational or
+transcendental, for example) and you want to see its value in cents
+(a logarithmic scale in which there are 1200 steps in a factor of
+two). For example:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">interval</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># A perfect fifth</span>
+<span class="n">cents</span> <span class="o">=</span> <span class="n">ratio_to_cents</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cents</span><span class="p">)</span>
+<span class="mf">701.955000865387</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-a-cent-value-to-a-ratio">
+<h2>Converting a Cent Value to a Ratio<a class="headerlink" href="#converting-a-cent-value-to-a-ratio" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.cents_to_ratio">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">cents_to_ratio</code><span class="sig-paren">(</span><em>cents</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.cents_to_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a cent value to a ratio</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cents</strong> &#8211; The degree value in cents</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the frequency ratio</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>This function takes a cent value and returns it as a frequency ratio (a
+<code class="docutils literal"><span class="pre">sympy</span></code> floating point number).</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cents_to_ratio</span><span class="p">(</span><span class="mf">700.0</span><span class="p">))</span>
+<span class="mf">1.49830707687668</span>
+</pre></div>
+</div>
+<p>(In other words, the 12-EDO fifth (700 cents) is very close to that of the
+Pythagorean fifth (<img class="math" src="_images/math/3d316a6b1f70479abfabb145a07b94db09a91e34.png" alt="\frac{3}{2}"/>, or 1.5).)</p>
+</div>
+<div class="section" id="converting-a-note-number-to-a-frequency">
+<h2>Converting a Note Number to a Frequency<a class="headerlink" href="#converting-a-note-number-to-a-frequency" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.note_number_to_freq">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">note_number_to_freq</code><span class="sig-paren">(</span><em>note</em>, <em>scale=None</em>, <em>reference_note=69</em>, <em>reference_frequency=440.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.note_number_to_freq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a note number (MIDI) to a frequency (Hz).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>note</strong> (<em>reference</em>) &#8211; The note number (0&lt;=note&lt;=127)</li>
+<li><strong>scale</strong> &#8211; The scale. If none it assume EDO 12.</li>
+<li><strong>note</strong> &#8211; The conversions reference note</li>
+<li><strong>reference_frequency</strong> &#8211; The frequency of the reference note</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The frequency of the note in Hertz</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The default values for <code class="docutils literal"><span class="pre">reference_note</span></code> and
+<code class="docutils literal"><span class="pre">reference_frequency</span></code> correspond to standard
+orchestral tuning, a4 = 440 Hz.</p>
+</dd></dl>
+
+<p>With this function we can calculate the frequency of any note number.
+If defaults to the MIDI standard, which pegs note number 69 to
+440 Hz and uses a 12-EDO scale.</p>
+<p>As an example, MIDI note 60 (Middle-C):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">note_number_to_freq</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+<span class="mf">261.625565300599</span>
+</pre></div>
+</div>
+<p>But if, for example, we wanted to use a different pitch standard, we
+could peg A to 444 Hz.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">note_number_to_freq</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="n">reference_frequency</span><span class="o">=</span><span class="mf">444.0</span><span class="p">))</span>
+<span class="mf">264.003979530604</span>
+</pre></div>
+</div>
+<p>You can also pass in a non-EDO tuning if you&#8217;re converting a different kind
+of scale to frequencies. This is used often in the code associated with the
+tuning tables.</p>
+</div>
+<div class="section" id="naming-a-ratio">
+<h2>Naming A Ratio<a class="headerlink" href="#naming-a-ratio" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.ratio_to_name">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">ratio_to_name</code><span class="sig-paren">(</span><em>ratio</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.ratio_to_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a scale degree to a name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ratio</strong> &#8211; The input scale degree (a <code class="docutils literal"><span class="pre">sympy</span></code> value)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The degree name if found, <code class="docutils literal"><span class="pre">None</span></code> otherwise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>This function will look up the name of a ratio and return it (returning <code class="docutils literal"><span class="pre">None</span></code>)
+if it is not found.</p>
+<p>As an example:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">pythag</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">ratio_to_name</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pythag</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">names</span></code> now contains:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;Unison&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Minor Second&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Major Second&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Minor Third&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Major Third&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Perfect Fourth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Diminished Fifth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Perfect Fifth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Minor Sixth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Major Sixth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Minor Seventh&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Pythagorean Major Seventh&#39;</span><span class="p">,</span>
+<span class="s1">&#39;Octave&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>There are currently about 260 intervals in the internal catalog, so while not
+complete, the database is fairly extensive.</p>
+</div>
+<div class="section" id="comparing-two-scales">
+<h2>Comparing Two Scales<a class="headerlink" href="#comparing-two-scales" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.utilities.compare_two_scales">
+<code class="descclassname">pytuning.utilities.</code><code class="descname">compare_two_scales</code><span class="sig-paren">(</span><em>scale1, scale2, reference_freq=220.0, title=['Scale1', 'Scale2']</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.utilities.compare_two_scales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare two scales</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param scale1:</th><td class="field-body">The first scale (list of <code class="docutils literal"><span class="pre">sympy</span></code> values)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">param scale2:</th><td class="field-body">The second scale (list of <code class="docutils literal"><span class="pre">sympy</span></code> values)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param reference_freq:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The frequency (Hz) of the first degree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">param title:</th><td class="field-body">The scale names (list of strings with len = 2)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">None</span></code>, (ie nothing)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<p>This function will produce a simple textual representation of the difference
+between two scales. As an example, comparing the 12-EDO and Pythagorean scales:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_edo_scale</span><span class="p">,</span> <span class="n">create_pythagorean_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.utilities</span> <span class="k">import</span> <span class="n">compare_two_scales</span>
+
+<span class="n">scale_1</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">scale_2</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+
+<span class="n">compare_two_scales</span><span class="p">(</span><span class="n">scale_1</span><span class="p">,</span> <span class="n">scale_2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;12-TET&#39;</span><span class="p">,</span> <span class="s1">&#39;Pythagorean&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>produces:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span>          <span class="mi">12</span><span class="o">-</span><span class="n">TET</span>              <span class="n">Pythagorean</span>
+    <span class="n">Cents</span>       <span class="n">Freq</span>      <span class="n">Cents</span>       <span class="n">Freq</span>  <span class="n">Delta</span><span class="p">(</span><span class="n">Cents</span><span class="p">)</span>
+<span class="o">=========</span>  <span class="o">=========</span>  <span class="o">=========</span>  <span class="o">=========</span>  <span class="o">============</span>
+   <span class="mf">0.0000</span>   <span class="mf">220.0000</span>     <span class="mf">0.0000</span>   <span class="mf">220.0000</span>        <span class="mf">0.0000</span>
+ <span class="mf">100.0000</span>   <span class="mf">233.0819</span>    <span class="mf">90.2250</span>   <span class="mf">231.7695</span>        <span class="mf">9.7750</span>
+ <span class="mf">200.0000</span>   <span class="mf">246.9417</span>   <span class="mf">203.9100</span>   <span class="mf">247.5000</span>       <span class="o">-</span><span class="mf">3.9100</span>
+ <span class="mf">300.0000</span>   <span class="mf">261.6256</span>   <span class="mf">294.1350</span>   <span class="mf">260.7407</span>        <span class="mf">5.8650</span>
+ <span class="mf">400.0000</span>   <span class="mf">277.1826</span>   <span class="mf">407.8200</span>   <span class="mf">278.4375</span>       <span class="o">-</span><span class="mf">7.8200</span>
+ <span class="mf">500.0000</span>   <span class="mf">293.6648</span>   <span class="mf">498.0450</span>   <span class="mf">293.3333</span>        <span class="mf">1.9550</span>
+ <span class="mf">600.0000</span>   <span class="mf">311.1270</span>   <span class="mf">588.2700</span>   <span class="mf">309.0261</span>       <span class="mf">11.7300</span>
+ <span class="mf">700.0000</span>   <span class="mf">329.6276</span>   <span class="mf">701.9550</span>   <span class="mf">330.0000</span>       <span class="o">-</span><span class="mf">1.9550</span>
+ <span class="mf">800.0000</span>   <span class="mf">349.2282</span>   <span class="mf">792.1800</span>   <span class="mf">347.6543</span>        <span class="mf">7.8200</span>
+ <span class="mf">900.0000</span>   <span class="mf">369.9944</span>   <span class="mf">905.8650</span>   <span class="mf">371.2500</span>       <span class="o">-</span><span class="mf">5.8650</span>
+<span class="mf">1000.0000</span>   <span class="mf">391.9954</span>   <span class="mf">996.0900</span>   <span class="mf">391.1111</span>        <span class="mf">3.9100</span>
+<span class="mf">1100.0000</span>   <span class="mf">415.3047</span>  <span class="mf">1109.7750</span>   <span class="mf">417.6562</span>       <span class="o">-</span><span class="mf">9.7750</span>
+<span class="mf">1200.0000</span>   <span class="mf">440.0000</span>  <span class="mf">1200.0000</span>   <span class="mf">440.0000</span>        <span class="mf">0.0000</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="graphics.html" class="btn btn-neutral float-right" title="Visualizations" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="number_theory.html" class="btn btn-neutral" title="Number Theory" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

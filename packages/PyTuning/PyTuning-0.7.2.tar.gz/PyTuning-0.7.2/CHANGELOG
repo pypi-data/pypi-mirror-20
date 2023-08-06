@@ -1,0 +1,25 @@
+Date:       6 March 2017
+Version:    0.7.2
+
+    Something of a check-point release. Nothing too earth-shattering,
+    but there hasn't been much done on the code lately, so I wanted
+    to include what's been laying around for a few months.
+
+    * Added the ability to change the reference frequency of the
+      tuning tables, so that one isn't limited to the 12-EDO standard
+      for the mapping.
+    * New functions:
+      * `prime_factor_ratio()`
+      * `create_ratio_from_primes()`
+
+Date:       2 December 2016
+Version:    0.7.1
+
+    * Corrections to typos in the documentation.
+    * Change to sphinx so that autofunction is supported on readthedocs.io.
+
+Date:       1 December 2016
+Version:    0.7.0
+
+    * Initial Public Release.
+

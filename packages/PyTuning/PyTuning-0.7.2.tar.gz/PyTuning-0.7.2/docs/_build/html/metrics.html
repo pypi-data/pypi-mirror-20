@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Metric Functions &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Scale Analysis and Creation (Redux)" href="scale_analysis.html"/>
+        <link rel="prev" title="Scale Creation" href="scales.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Metric Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sum-p-q">sum_p_q()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sum-distinct-intervals">sum_distinct_intervals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-3">metric_3()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sum-p-q-for-all-intervals">sum_p_q_for_all_intervals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sum-q-for-all-intervals">sum_q_for_all_intervals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#all-metrics">All Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Metric Functions</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/metrics.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metric-functions">
+<h1>Metric Functions<a class="headerlink" href="#metric-functions" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>metric function</strong> is a function that takes a scale as input and
+returns a calculated value. As mentioned in <a class="reference internal" href="basic.html"><span class="doc">Basic Concepts</span></a>, it returns
+a Python <code class="docutils literal"><span class="pre">dict</span></code> with the metric name as the key, and the metric value
+as the value.</p>
+<p>The currently defined metrics all estimate the consonance or dissonance of
+a scale.</p>
+<div class="section" id="sum-p-q">
+<h2>sum_p_q()<a class="headerlink" href="#sum-p-q" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.metrics.sum_p_q">
+<code class="descclassname">pytuning.metrics.</code><code class="descname">sum_p_q</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.metrics.sum_p_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a metric for a scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <code class="docutils literal"><span class="pre">dict</span></code> with the metric value.</td>
+</tr>
+</tbody>
+</table>
+<p>This is an estimate of scale consonance. It is derived 
+from summing the numerators and denominators of the 
+scale degrees.</p>
+<p>Smaller values are more consonant.</p>
+<p>Note that this metric looks at the degrees of the scale, so it is somewhat
+tonic-focused. The similar metric <code class="docutils literal"><span class="pre">sum_p_q_for_all_intervals()</span></code> is similar, 
+but it sums the numerator and denominator values for all distinct intervals within
+the scale.</p>
+<p>While the metric is numerically defined for ratios expressed as irrational or
+transcendental numbers, it is really only meaningful for scales with just
+degrees (ratios expressed as rational numbers).</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sum_p_q</span><span class="p">(</span><span class="n">create_pythagorean_scale</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>yields:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;sum_p_q&#39;</span><span class="p">:</span> <span class="mi">3138</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="sum-distinct-intervals">
+<h2>sum_distinct_intervals()<a class="headerlink" href="#sum-distinct-intervals" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.metrics.sum_distinct_intervals">
+<code class="descclassname">pytuning.metrics.</code><code class="descname">sum_distinct_intervals</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.metrics.sum_distinct_intervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a metric for a scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <code class="docutils literal"><span class="pre">dict</span></code> with the metric value.</td>
+</tr>
+</tbody>
+</table>
+<p>This metric is an estimate of scale consonance. Numerically
+it is the number of distinct intervals within the
+scale (including all ratios and their inversions).</p>
+<p>Smaller values are more consonant.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sum_distinct_intervals</span><span class="p">(</span><span class="n">create_pythagorean_scale</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>yields:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;sum_distinct_intervals&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="metric-3">
+<h2>metric_3()<a class="headerlink" href="#metric-3" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.metrics.metric_3">
+<code class="descclassname">pytuning.metrics.</code><code class="descname">metric_3</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.metrics.metric_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a metric for a scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <code class="docutils literal"><span class="pre">dict</span></code> with the metric value.</td>
+</tr>
+</tbody>
+</table>
+<p>Metric 3 is an estimate of scale consonance. Given a
+ratio p/q, it is a heuristic given by the following:</p>
+<div class="math">
+<p><img src="_images/math/ae2178ea5171403e9f83162ca1f554cabaa49c84.png" alt="\begin{align}
+m_3 &amp;= \sum{\frac{1}{\frac{p-q}{q}}}
+&amp;= \sum{\frac{q}{p-q}}
+\end{align}"/></p>
+</div><p>Smaller values are more consonant.</p>
+<p>The summation takes place over all of the intervals in the scale. It does not
+form a set of distinct intervals.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="sum-p-q-for-all-intervals">
+<h2>sum_p_q_for_all_intervals()<a class="headerlink" href="#sum-p-q-for-all-intervals" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.metrics.sum_p_q_for_all_intervals">
+<code class="descclassname">pytuning.metrics.</code><code class="descname">sum_p_q_for_all_intervals</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.metrics.sum_p_q_for_all_intervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a metric for a scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale (i.e., a list of <code class="docutils literal"><span class="pre">sympy.Rational</span></code> values)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metric.</td>
+</tr>
+</tbody>
+</table>
+<p>This metric is an estimate of scale consonance. It is formed by examining
+all unique intervals in the scale, and creating a numeric value based upon
+the summation of the numerators and denominators for all those intervals.</p>
+<p>While the metric is numerically defined for ratios expressed as irrational or
+transcendental numbers, it is really only meaningful for scales with just
+degrees (ratios expressed as rational numbers).</p>
+<p>Smaller values are more consonant.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="sum-q-for-all-intervals">
+<h2>sum_q_for_all_intervals()<a class="headerlink" href="#sum-q-for-all-intervals" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.metrics.sum_q_for_all_intervals">
+<code class="descclassname">pytuning.metrics.</code><code class="descname">sum_q_for_all_intervals</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.metrics.sum_q_for_all_intervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a metric for a scale.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale (i.e., a list of <code class="docutils literal"><span class="pre">Rational</span></code> s)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metric.</td>
+</tr>
+</tbody>
+</table>
+<p>Metric 5 is an estimate of scale consonance. It is summation
+of the denominators of the normalized distinct ratios
+of the scale.</p>
+<p>Smaller values are more consonant.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="all-metrics">
+<h2>All Metrics<a class="headerlink" href="#all-metrics" title="Permalink to this headline">¶</a></h2>
+<p>There is also a function that calculates all defined metrics for a
+scale.</p>
+<dl class="function">
+<dt id="pytuning.metrics.all_metrics">
+<code class="descclassname">pytuning.metrics.</code><code class="descname">all_metrics</code><span class="sig-paren">(</span><em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.metrics.all_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate all metrics for the scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scale</strong> &#8211; The scale (i.e., a list of <code class="docutils literal"><span class="pre">Rational</span></code> s)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <code class="docutils literal"><span class="pre">dict</span></code> containing all metrics.</td>
+</tr>
+</tbody>
+</table>
+<p>As an example:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">pythag</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span><span class="n">pythag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will (currently) produce:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s1">&#39;metric_3&#39;</span><span class="p">:</span> <span class="mf">49.9049074891784</span><span class="p">,</span>
+ <span class="s1">&#39;sum_distinct_intervals&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+ <span class="s1">&#39;sum_p_q&#39;</span><span class="p">:</span> <span class="mi">3138</span><span class="p">,</span>
+ <span class="s1">&#39;sum_p_q_for_all_intervals&#39;</span><span class="p">:</span> <span class="mi">1092732</span><span class="p">,</span>
+ <span class="s1">&#39;sum_q_for_all_intervals&#39;</span><span class="p">:</span> <span class="mi">452817</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If new metrics are coded they should be added to the <code class="docutils literal"><span class="pre">__all__</span></code> data member
+for inclusion here.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scale_analysis.html" class="btn btn-neutral float-right" title="Scale Analysis and Creation (Redux)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scales.html" class="btn btn-neutral" title="Scale Creation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

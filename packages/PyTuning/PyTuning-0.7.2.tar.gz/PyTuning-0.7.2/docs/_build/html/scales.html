@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scale Creation &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Metric Functions" href="metrics.html"/>
+        <link rel="prev" title="Basic Concepts" href="basic.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scale Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-harmonic-scale">The Harmonic Scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equal-divsion-of-the-octave-equal-temprament">Equal Divsion of the Octave (Equal Temprament)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scales-from-a-generator-interval">Scales from a Generator Interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-pythagorean-scale">The Pythagorean Scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-quarter-comma-meantone-scale">The Quarter-Comma Meantone Scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#euler-fokker-genera">Euler-Fokker Genera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#diatonic-scales">Diatonic Scales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Scale Creation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/scales.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scale-creation">
+<h1>Scale Creation<a class="headerlink" href="#scale-creation" title="Permalink to this headline">¶</a></h1>
+<p>There are several scale-creation functions in the package. They are found in
+<code class="docutils literal"><span class="pre">pytuning.scales</span></code> and can be imported into the program&#8217;s namespace with</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>(Note that for interactive use these are imported by default).</p>
+<div class="section" id="the-harmonic-scale">
+<h2>The Harmonic Scale<a class="headerlink" href="#the-harmonic-scale" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll start with the harmonic scale; it will illustrate many of the concepts
+used in scale creation.</p>
+<p>There are two important concepts to understand:</p>
+<ul class="simple">
+<li>Normalization: If a scale is normalized (which is the default in all cases),
+then the intervals of the scale are normalized to fall within a single octave.
+This means scaling the interval either up or down the number of octaves needed
+to make the interval fall between the unison and the octave.</li>
+<li>The Octave: Normally an octave is defined as a doubling of frequency (<img class="math" src="_images/math/16d14f59441fe3b3d7c57975e6e10cbf2474c220.png" alt="2"/>),
+but it is possible to define an octave by some other number. If this is the case
+the normalization will takes place over this new octave.</li>
+</ul>
+<p>The function to create a harmonic scale is, <code class="docutils literal"><span class="pre">create_harmonic_scale</span></code>:</p>
+<dl class="function">
+<dt id="pytuning.scales.create_harmonic_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_harmonic_scale</code><span class="sig-paren">(</span><em>first_harmonic</em>, <em>last_harmonic</em>, <em>normalize=True</em>, <em>octave=2</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_harmonic_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a harmonic scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>first_harmonic</strong> &#8211; The first harmonic</li>
+<li><strong>last_harmonic</strong> &#8211; The last harmonic</li>
+<li><strong>normalize</strong> &#8211; If true, normalize the scale to an octave 
+(2/1 by default, otherwise taken from <code class="docutils literal"><span class="pre">octave</span></code>)</li>
+<li><strong>octave</strong> &#8211; The definition of the formal octave.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The scale</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>As an example of use, a normalized scale constructed from harmonics
+3 to 20:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which yields:</p>
+<div class="math">
+<p><img src="_images/math/08125051c20ae13d2f12ec5a089c59f5b07bf226.png" alt="\left [ 1, \frac{13}{12}, \frac{7}{6}, \frac{5}{4}, \frac{4}{3}, 
+\frac{17}{12}, \frac{3}{2}, \frac{19}{12}, \frac{5}{3}, \frac{11}{6}, 2\right ]"/></p>
+</div><p>To create a non-normalized scale:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which yields:</p>
+<div class="math">
+<p><img src="_images/math/7c290290b6a9f376e13bd524c33c7aff161f6953.png" alt="\left [ 1, \frac{4}{3}, \frac{5}{3}, 2, \frac{7}{3}, \frac{8}{3}, 3, 
+\frac{10}{3}\right ]"/></p>
+</div></dd></dl>
+
+<p>As an example, if we create a non-normalized harmonic scale of 10 harmonics:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">harmonic_scale</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We have the following scale:</p>
+<div class="math">
+<p><img src="_images/math/653b645a313c6d3f5113b225dd373e51a2b95794.png" alt="\left [ 1, \quad 2, \quad 3, \quad 4, \quad 5, \quad 6, \quad 7,
+\quad 8, \quad 9, \quad 10\right ]"/></p>
+</div><p>If we normalize it each interval is scaled by a power of two to fall within 1
+and 2. So, for example, the <img class="math" src="_images/math/1815109876301c8a07f66eedc532688a096f042e.png" alt="9"/> becomes <img class="math" src="_images/math/9f20ccd57569590848e19d4ada743753a850a1d1.png" alt="\frac{9}{8}"/>, because the
+nine must be scaled by three octaves to fall within that range:</p>
+<div class="math">
+<p><img src="_images/math/69d1f7a7b750980bbd065ba9df8c240184f6a77b.png" alt="\frac{9}{8} = \frac{9}{2^3}"/></p>
+</div><p>So the normalized scale is:</p>
+<div class="math">
+<p><img src="_images/math/bd8501f05c501081ef5527f7493bc55b95aacf82.png" alt="\left [ 1, \quad \frac{9}{8}, \quad \frac{5}{4}, \quad
+\frac{3}{2}, \quad \frac{7}{4}, \quad 2\right ]"/></p>
+</div><p>But if we change our octave definition to be <img class="math" src="_images/math/18acc1fa0d022fd729f0749ddc5f669917d3fb15.png" alt="3"/>, we normalize on powers
+of 3:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">harmonic_scale</span> <span class="o">=</span> <span class="n">create_harmonic_scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">octave</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>yields:</p>
+<div class="math">
+<p><img src="_images/math/8670c2d222cab19f2c98fd5df787a7efe8eef532.png" alt="\left [ 1, \quad \frac{10}{9}, \quad \frac{4}{3}, \quad \frac{5}{3},
+\quad 2, \quad \frac{7}{3}, \quad \frac{8}{3}, \quad 3\right ]"/></p>
+</div></div>
+<div class="section" id="equal-divsion-of-the-octave-equal-temprament">
+<h2>Equal Divsion of the Octave (Equal Temprament)<a class="headerlink" href="#equal-divsion-of-the-octave-equal-temprament" title="Permalink to this headline">¶</a></h2>
+<p>Equal temperament scales can be created with the <code class="docutils literal"><span class="pre">create_edo_scale()</span></code>
+function. Note that this function does <em>not</em> accept a <code class="docutils literal"><span class="pre">normalize</span></code> argument, because
+EDO scales are normalized by definition. If does, however, allow you to change the
+definition of the formal octave.</p>
+<dl class="function">
+<dt id="pytuning.scales.create_edo_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_edo_scale</code><span class="sig-paren">(</span><em>number_tones</em>, <em>octave=2</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_edo_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an equal division of octave (EDO, ET) scale.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>number_tones</strong> &#8211; The number of tones/divisions in the scale</li>
+<li><strong>octave</strong> &#8211; The formal octave (frequency ratio)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example, 12T-ET:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">edo_scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will yield the normal equal-tempered scale used in western music:</p>
+<div class="math">
+<p><img src="_images/math/6d6d0e2c18d73e5a3d3e2b4986d989043ac74f35.png" alt="\left [ 1, \sqrt[12]{2}, \sqrt[6]{2}, \sqrt[4]{2}, \sqrt[3]{2}, 2^{\frac{5}{12}}, 
+\sqrt{2}, 2^{\frac{7}{12}}, 2^{\frac{2}{3}}, 2^{\frac{3}{4}}, 2^{\frac{5}{6}}, 
+2^{\frac{11}{12}}, 2\right ]"/></p>
+</div><p>Note that the length of the scale is 13, as both the unison and octave are
+included by convention.</p>
+<p>It is also possible to have a non-2 formal octave. The code:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">edo_scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will yield:</p>
+<div class="math">
+<p><img src="_images/math/1d61d4a96a7a86d81ed6f930a20f36425f5da90c.png" alt="\left [ 1, \sqrt[12]{3}, \sqrt[6]{3}, \sqrt[4]{3}, \sqrt[3]{3}, 3^{\frac{5}{12}}, 
+\sqrt{3}, 3^{\frac{7}{12}}, 3^{\frac{2}{3}}, 3^{\frac{3}{4}}, 3^{\frac{5}{6}}, 
+3^{\frac{11}{12}}, 3\right ]"/></p>
+</div></dd></dl>
+
+</div>
+<div class="section" id="scales-from-a-generator-interval">
+<h2>Scales from a Generator Interval<a class="headerlink" href="#scales-from-a-generator-interval" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">create_equal_interval_scale()</span></code> function will generate a scale from a
+generator interval. This is the base function for several other scale types
+(for example, the Pythagorean scale is created with a generator interval
+of <img class="math" src="_images/math/3d316a6b1f70479abfabb145a07b94db09a91e34.png" alt="\frac{3}{2}"/>).</p>
+<p>In he creation of a scale, the generator interval can either be used
+directly (for, for example, making each successive tone a generator
+interval above the previous tone), or in an inverted sense (making each
+interval a generator <em>down</em> from the previous). This function starts
+from the unison and walks down the number specified, walking up for the rest
+of the intervals.</p>
+<dl class="function">
+<dt id="pytuning.scales.create_equal_interval_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_equal_interval_scale</code><span class="sig-paren">(</span><em>generator_interval</em>, <em>scale_size=12</em>, <em>number_down_intervals=6</em>, <em>epsilon=None</em>, <em>sort=True</em>, <em>octave=2</em>, <em>remove_duplicates=True</em>, <em>normalize=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_equal_interval_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a scale with equal-interval tuning</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>generator_interval</strong> &#8211; The interval to use for generation (<code class="docutils literal"><span class="pre">sympy</span></code> value)</li>
+<li><strong>scale_size</strong> &#8211; The number of degrees in the scale</li>
+<li><strong>number_down_intervals</strong> &#8211; The number of inverted intervals to use in
+scale construction.</li>
+<li><strong>epsilon</strong> &#8211; Rounding parameter. If set to <code class="docutils literal"><span class="pre">None</span></code> no rounding is
+done. Otherwise the scale degrees are rounded to the nearest
+epsilon</li>
+<li><strong>sort</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, sort the output by degree size</li>
+<li><strong>octave</strong> &#8211; The formal octave</li>
+<li><strong>remove_duplicates</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code> remove duplicate entries</li>
+<li><strong>normalize</strong> &#8211; IF <code class="docutils literal"><span class="pre">True</span></code>, normalize the degrees to the octave</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In general one should keep epsilon at <code class="docutils literal"><span class="pre">None</span></code> and perform and
+rounding outside the function.</p>
+<p>This is a base function from which several other scales are derived,
+including:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>The Pythagorean scale</dt>
+<dd><p class="first">A scale with a perfect
+fifth (3/2) as the generating interval</p>
+<div class="last math">
+<p><img src="_images/math/9325c1b1d2d3a440e6cd284461bf0eb61e458cfb.png" alt="P_5 = \frac{3}{2}"/></p>
+</div></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>The quarter-comma meantone scale</dt>
+<dd><p class="first">A scale in which the generating
+interval is a perfect fifth narrowed by one quarter of syntonic
+comma</p>
+<div class="last math">
+<p><img src="_images/math/cd808b2cbf45c0725f57f0ab38601eb5559f6cd2.png" alt="P_5 = \frac{\frac{3}{2}}{\sqrt[4]{\frac{81}{80}}}"/></p>
+</div></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>EDO Scales</dt>
+<dd><p class="first">EDO scales can be generated from an appropriate selection of the
+fifth. For example, the 12-TET scale would use the fifth:</p>
+<div class="last math">
+<p><img src="_images/math/44474d0b92606c79d0c967bdb67259f5da815583.png" alt="P_5 = \sqrt[\frac{7}{12}]{2}"/></p>
+</div></dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="the-pythagorean-scale">
+<h2>The Pythagorean Scale<a class="headerlink" href="#the-pythagorean-scale" title="Permalink to this headline">¶</a></h2>
+<p>This is the standard Pythagorean scale. Note that we can choose the number of
+up and down intervals in the scale. The default yields the standard scale, with the
+fourth degree as a diminished fifth, as opposed to the augmented fourth.</p>
+<dl class="function">
+<dt id="pytuning.scales.create_pythagorean_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_pythagorean_scale</code><span class="sig-paren">(</span><em>scale_size=12</em>, <em>number_down_fifths=6</em>, <em>epsilon=None</em>, <em>sort=True</em>, <em>octave=2</em>, <em>remove_duplicates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_pythagorean_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Pythagorean scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scale_size</strong> &#8211; The number of degrees in the scale</li>
+<li><strong>number_down_fifths</strong> &#8211; The number of inverted fifths to use in
+scale construction.</li>
+<li><strong>epsilon</strong> &#8211; Rounding parameter. If set to <code class="docutils literal"><span class="pre">None</span></code> no rounding is
+done. Otherwise the scale degrees are rounded to the nearest
+epsilon</li>
+<li><strong>sort</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, sort the output by degree size</li>
+<li><strong>octave</strong> &#8211; The formal octave</li>
+<li><strong>remove_duplicates</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code> remove duplicate entries</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The Pythagorean scale is an even-interval scale with the
+following generating interval:</p>
+<div class="math">
+<p><img src="_images/math/9325c1b1d2d3a440e6cd284461bf0eb61e458cfb.png" alt="P_5 = \frac{3}{2}"/></p>
+</div></dd></dl>
+
+<p>So, for the standard scale we can use:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>yielding:</p>
+<div class="math">
+<p><img src="_images/math/62e515bea1990d47b6d70e34cb57a6f8410a4abe.png" alt="\left [ 1, \quad \frac{256}{243}, \quad \frac{9}{8}, \quad \frac{32}{27}, \quad
+\frac{81}{64}, \quad \frac{4}{3}, \quad \frac{1024}{729},
+\quad \frac{3}{2}, \quad \frac{128}{81}, \quad \frac{27}{16},
+\quad \frac{16}{9}, \quad \frac{243}{128}, \quad 2\right ]"/></p>
+</div><p>If we wanted the augmented fourth:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">(</span><span class="n">number_down_fifths</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>yielding:</p>
+<div class="math">
+<p><img src="_images/math/44664191964ebb9a0fb9cafbd363a06ba28008e4.png" alt="\left [ 1, \quad \frac{256}{243}, \quad \frac{9}{8}, \quad \frac{32}{27},
+\quad \frac{81}{64}, \quad \frac{4}{3}, \quad \frac{729}{512},
+\quad \frac{3}{2}, \quad \frac{128}{81}, \quad \frac{27}{16},
+\quad \frac{16}{9}, \quad \frac{243}{128}, \quad 2\right ]"/></p>
+</div></div>
+<div class="section" id="the-quarter-comma-meantone-scale">
+<h2>The Quarter-Comma Meantone Scale<a class="headerlink" href="#the-quarter-comma-meantone-scale" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.scales.create_quarter_comma_meantone_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_quarter_comma_meantone_scale</code><span class="sig-paren">(</span><em>scale_size=12</em>, <em>number_down_fifths=6</em>, <em>epsilon=None</em>, <em>sort=True</em>, <em>octave=2</em>, <em>remove_duplicates=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_quarter_comma_meantone_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a quarter-comma meantone scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scale_size</strong> &#8211; The number of degrees in the scale</li>
+<li><strong>number_down_fifths</strong> &#8211; The number of inverted fifths to use in
+scale construction.</li>
+<li><strong>epsilon</strong> &#8211; Rounding parameter. If set to <code class="docutils literal"><span class="pre">None</span></code> no rounding is
+done. Otherwise the scale degrees are rounded to the nearest
+epsilon</li>
+<li><strong>sort</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, sort the output by degree size</li>
+<li><strong>octave</strong> &#8211; The formal octave</li>
+<li><strong>remove_duplicates</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code> remove duplicate entries</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The quarter-comma meantone scale is an even-interval scale with the
+following generating interval:</p>
+<div class="math">
+<p><img src="_images/math/cd808b2cbf45c0725f57f0ab38601eb5559f6cd2.png" alt="P_5 = \frac{\frac{3}{2}}{\sqrt[4]{\frac{81}{80}}}"/></p>
+</div><p>which is a perfect fifth (in a Pythagorean sense) narrowed by
+one quarter of the syntonic comma.</p>
+</dd></dl>
+
+<p>An example of use:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_quarter_comma_meantone_scale</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>yields:</p>
+<div class="math">
+<p><img src="_images/math/45da4e5ed406331ccb3050b47c617411a2796a8d.png" alt="\left [ 1, \quad \frac{8}{25} 5^{\frac{3}{4}}, \quad \frac{\sqrt{5}}{2},
+\quad \frac{4 \sqrt[4]{5}}{5}, \quad \frac{5}{4}, \quad \frac{2}{5} 5^{\frac{3}{4}},
+\quad \frac{16 \sqrt{5}}{25}, \quad \sqrt[4]{5},
+\quad \frac{8}{5}, \quad \frac{5^{\frac{3}{4}}}{2},
+\quad \frac{4 \sqrt{5}}{5}, \quad \frac{5 \sqrt[4]{5}}{4},
+\quad 2\right ]"/></p>
+</div></div>
+<div class="section" id="euler-fokker-genera">
+<h2>Euler-Fokker Genera<a class="headerlink" href="#euler-fokker-genera" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.scales.create_euler_fokker_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_euler_fokker_scale</code><span class="sig-paren">(</span><em>intervals</em>, <em>multiplicities</em>, <em>octave=2</em>, <em>normalize=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_euler_fokker_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a scale in the Euler-Fokker Genera</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>intervals</strong> &#8211; The factors to use for the construction (usually prime
+numbers)</li>
+<li><strong>multiplicities</strong> &#8211; The multiplicities of the factors (see below)</li>
+<li><strong>octave</strong> &#8211; The formal octave</li>
+<li><strong>normalize</strong> &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, normalize the intervals to the octave.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal"><span class="pre">intervals</span></code> and <code class="docutils literal"><span class="pre">multiplicities</span></code> should both be lists of equal length.
+The entries in <code class="docutils literal"><span class="pre">multiplicities</span></code> give the number of each factor to use.
+Therefore the following:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">intervals</span>     <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="n">multiplicities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">scale</span>         <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Will create a scale with one 3, one 5, and one 7 as generators.</p>
+<p>The above will produce the following scale:</p>
+<div class="math">
+<p><img src="_images/math/4550199eb6babfecda4751156031b41eacb0a216.png" alt="\left [ 1, \frac{35}{32}, \frac{5}{4}, \frac{21}{16}, \frac{3}{2}, \frac{105}{64}, 
+\frac{7}{4}, \frac{15}{8}, 2\right ]"/></p>
+</div><p>Also note that the two statements will generate the same output:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">intervals</span>     <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="n">multiplicities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">scale1</span>        <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">)</span>
+
+<span class="n">intervals</span>     <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="n">multiplicities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">scale2</span>        <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">)</span>
+
+<span class="n">scale1</span> <span class="o">==</span> <span class="n">scale2</span>
+<span class="kc">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="diatonic-scales">
+<h2>Diatonic Scales<a class="headerlink" href="#diatonic-scales" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.scales.create_diatonic_scale">
+<code class="descclassname">pytuning.scales.</code><code class="descname">create_diatonic_scale</code><span class="sig-paren">(</span><em>generators</em>, <em>specification</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.scales.create_diatonic_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a diatonic scale.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>generators</strong> &#8211; The generator intervals (see below)</li>
+<li><strong>specification</strong> &#8211; The scale specification. This is a list
+of <code class="docutils literal"><span class="pre">chars</span></code> that correspond to entries in the generators. Note that
+if all the character representations are a single character, you can
+pass the specification in as a string for convenience.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The specified scale</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal"><span class="pre">generators</span></code> is a list of tuples, the first member of which is an interval
+specification, the second of which is a character representation. The entries
+in <code class="docutils literal"><span class="pre">specification</span></code> should correspond to this value.</p>
+<p>As an example, we can create the 12 EDO generators thus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">edo12_constructors</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">Pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">)),</span> <span class="s2">&quot;T&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">Pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">)),</span> <span class="s2">&quot;s&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>We can then create the standard major mode with:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">create_diatonic_scale</span><span class="p">(</span><span class="n">edo12_constructors</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">,</span><span class="s2">&quot;T&quot;</span><span class="p">,</span><span class="s2">&quot;s&quot;</span><span class="p">,</span><span class="s2">&quot;T&quot;</span><span class="p">,</span><span class="s2">&quot;T&quot;</span><span class="p">,</span><span class="s2">&quot;T&quot;</span><span class="p">,</span><span class="s2">&quot;s&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>which will yield:</p>
+<div class="math">
+<p><img src="_images/math/e9ee490893c8dc36e0e2a79fc278509f7f26f4e6.png" alt="\left [ 1, \quad \sqrt[6]{2}, \quad \sqrt[3]{2}, \quad 2^{\frac{5}{12}}, 
+\quad 2^{\frac{7}{12}}, \quad 2^{\frac{3}{4}}, \quad 2^{\frac{11}{12}}, 
+\quad 2\right ]"/></p>
+</div></dd></dl>
+
+<p>As another example of creating a diatonic scale, we can use the five-limit
+constructors (which are defined in <code class="docutils literal"><span class="pre">pytuning.constants</span></code>):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">five_limit_constructors</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="s2">&quot;s&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span>  <span class="s2">&quot;t&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>   <span class="s2">&quot;T&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>to create <em>Ptolemy&#8217;s Intense Diatonic Scale</em>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.constants</span> <span class="k">import</span> <span class="n">five_limit_constructors</span>
+<span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_diatonic_scale</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_diatonic_scale</span><span class="p">(</span><span class="n">five_limit_constructors</span><span class="p">,</span>
+  <span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>which gives us:</p>
+<div class="math">
+<p><img src="_images/math/f577ac1be5ac0b19d7dcc07ac3e9939b26316c83.png" alt="\left [ 1, \quad \frac{9}{8}, \quad \frac{5}{4}, \quad \frac{4}{3}, \quad
+\frac{3}{2}, \quad \frac{5}{3}, \quad \frac{15}{8}, \quad 2\right ]"/></p>
+</div><p>Note that if every identifier is a single-character string, <code class="docutils literal"><span class="pre">specification</span></code>
+can also be passed in as a string. So this is equivalent:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.constants</span> <span class="k">import</span> <span class="n">five_limit_constructors</span>
+<span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_diatonic_scale</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_diatonic_scale</span><span class="p">(</span><span class="n">five_limit_constructors</span><span class="p">,</span> <span class="s2">&quot;TtsTtTs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metrics.html" class="btn btn-neutral float-right" title="Metric Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basic.html" class="btn btn-neutral" title="Basic Concepts" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

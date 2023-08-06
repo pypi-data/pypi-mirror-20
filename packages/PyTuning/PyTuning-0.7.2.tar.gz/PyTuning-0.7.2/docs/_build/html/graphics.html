@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Visualizations &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Using PyTuning Interactively" href="interactive.html"/>
+        <link rel="prev" title="Utilities" href="utilities.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tuning Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Visualizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-consonance-matrix">The Consonance Matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Visualizations</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/graphics.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="visualizations">
+<h1>Visualizations<a class="headerlink" href="#visualizations" title="Permalink to this headline">¶</a></h1>
+<p>PyTuning includes some visualizations for the analysis of scales, but this
+is not yet fleshed out.</p>
+<p>The graphics are via <a class="reference external" href="http://matplotlib.org/">Matplotlib</a>, which is the <em>de facto</em>
+implementation of analytical graphics for python. There is also an optional
+dependency on <a class="reference external" href="http://seaborn.pydata.org/">Seaborn</a>. Seaborn is good to include
+if you can &#8211; it makes the graphs better &#8211; but it&#8217;s a large package, owning
+to its dependencies (which include <a class="reference external" href="https://www.scipy.org/">SciPy</a>
+and <a class="reference external" href="http://pandas.pydata.org/">Pandas</a>; great packages, but
+extensive and large). If you have disk space to spare you may want to install it;
+otherwise you can get my with Matplotlib alone. On my system SciPy and Pandas
+weigh in at about 200 megabytes, not including any dependencies that <em>they</em> require.
+Matplotlib, on the other hand, is about 26 megabytes.</p>
+<div class="section" id="the-consonance-matrix">
+<h2>The Consonance Matrix<a class="headerlink" href="#the-consonance-matrix" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s nice to be able to get an intuitive feeling for the consonance or dissonance
+of a scale. For this, the <strong>consonance matrix</strong> is provided.</p>
+<p>The consonance matrix forms an interval between every degree in the scale and
+applies a metric function to it. The default metric function just measures the
+denominator of the interval after any simplification it can undergo
+(and is really only meaningful for degrees which are expressed an integer ratios).</p>
+<p>As an example, we can create a scale of the Euler-Fokker type:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>which is</p>
+<div class="math">
+<p><img src="_images/math/645fe4d0a753458b467ffd89097220b32c0c453b.png" alt="\left [ 1, \quad \frac{9}{8}, \quad \frac{5}{4}, \quad \frac{45}{32},
+\quad \frac{3}{2}, \quad \frac{15}{8}, \quad 2\right ]"/></p>
+</div><p>Now, to create a consonance matrix:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.visualizations</span> <span class="k">import</span> <span class="n">consonance_matrix</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">consonance_matrix</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">matrix</span></code> now contains a matplotlib <code class="docutils literal"><span class="pre">Figure</span></code>. To write it as PNG:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">matrix</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;consonance.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Which yields:</p>
+<img alt="_images/consonance.png" src="_images/consonance.png" />
+<p>Because this function accepts an arbitrary metric, it can be used for any analysis
+performed on the intervals of a scale; it does not need to really be a measurement
+or estimate of consonance. As an example, let&#8217;s say that (for some reason) you&#8217;re
+interested in how far from unity each interval is:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">metric_unity</span><span class="p">(</span><span class="n">degree</span><span class="p">):</span>
+    <span class="n">normalized_degree</span> <span class="o">=</span> <span class="n">normalize_interval</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">abs</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">normalized_degree</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">consonance_matrix</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">metric_function</span><span class="o">=</span><span class="n">metric_unity</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Distance from Unity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Our graph now looks like:</p>
+<img alt="_images/unity.png" src="_images/unity.png" />
+<p>We could even do something like look for perfect fifths within our scale:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">metric_fifth</span><span class="p">(</span><span class="n">degree</span><span class="p">):</span>
+    <span class="n">p5</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">normalized_degree</span> <span class="o">=</span> <span class="n">normalize_interval</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">normalize_interval</span><span class="p">(</span><span class="n">p5</span> <span class="o">/</span> <span class="n">normalized_degree</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">consonance_matrix</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">metric_function</span><span class="o">=</span><span class="n">metric_fifth</span><span class="p">,</span>
+  <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Relation to Perfect Fifth&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which gives us:</p>
+<img alt="_images/p5.png" src="_images/p5.png" />
+<p>where the highlighted cells denote perfect fifths.</p>
+<p>You&#8217;ll note that the entry for <img class="math" src="_images/math/09f389d3520b53117436504eccdfb362699c487f.png" alt="\frac{45}{32}"/> and <img class="math" src="_images/math/2fe4b9bdb69db63fa5f64c093e847334a92c4d9c.png" alt="\frac{15}{8}"/> is 1
+(a perfect fifth). We can verify this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">normalize_interval</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>  <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">)))</span>
+<span class="mi">3</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="pytuning.visualizations.consonance_matrix">
+<code class="descclassname">pytuning.visualizations.</code><code class="descname">consonance_matrix</code><span class="sig-paren">(</span><em>scale</em>, <em>metric_function=None</em>, <em>figsize=(10</em>, <em>8)</em>, <em>title='Consonance Matrix'</em>, <em>annot=True</em>, <em>cmap=None</em>, <em>fig=None</em>, <em>vmin=None</em>, <em>vmax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.visualizations.consonance_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a consonance matrix for a scale</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scale</strong> &#8211; The scale to analyze (list of frequency ratios)</li>
+<li><strong>metric_function</strong> &#8211; The metric function (see below)</li>
+<li><strong>figsize</strong> &#8211; Size of the figure (tuple, in inches)</li>
+<li><strong>title</strong> &#8211; the graph title</li>
+<li><strong>annot</strong> &#8211; If <cite>True</cite>, display the value of the metric in the
+grid cell</li>
+<li><strong>cmap</strong> &#8211; A custom <code class="docutils literal"><span class="pre">matplotlib</span></code> colormap, if desired</li>
+<li><strong>fig</strong> &#8211; a <code class="docutils literal"><span class="pre">matplotlib.figure.Figure</span></code> or <code class="docutils literal"><span class="pre">None</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>
+a figure will be created</li>
+<li><strong>vmin</strong> &#8211; If secified, the lowest value of the range to plot. Only
+works if Seaborn is included.</li>
+<li><strong>vman</strong> &#8211; If secified, the largest value of the range to plot. Only
+works if Seaborn is included.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a <code class="docutils literal"><span class="pre">matplotlib.Figure</span></code> for display</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The consonance matrix is created by taking each scale degree
+along the bottom and left edges of a matrix, forming a frequency
+ratio between the left and bottom value, and applying the
+metric function to that value.</p>
+<p>The default metric function is the denominator of the normalized
+ratio &#8211; the thought being that the smaller this number is the
+more consonant the interval.</p>
+<p>If a user-specified metric function is used, that function
+should accept one parameter (the ratio) and return one value.
+As an example, the default metric function:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">metric_denom</span><span class="p">(</span><span class="n">degree</span><span class="p">):</span>
+    <span class="n">normalized_degree</span> <span class="o">=</span> <span class="n">normalize_interval</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">fraction</span><span class="p">(</span><span class="n">normalized_degree</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that, as with most parts of this code, the ratios
+should be expressed in terms of <code class="docutils literal"><span class="pre">sympy</span></code> values, usually
+<code class="docutils literal"><span class="pre">sympy.Rational</span></code>&#8216;s</p>
+<p>A note of figures: With the default of fig=None, this function
+will just produce a figure and return it for display. However,
+if one wants to plot multiple figures and can pre-allocate it.
+This is useful, for example, if one wants to plot multiple
+figures on the same chart. As an example, the following will plot
+two separate consonance matrices, side-by-side:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">consonance_matrix</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Full Scale&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">consonance_matrix</span><span class="p">(</span><span class="n">mode_scale</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mode Scale&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">vmin</span></code> and <code class="docutils literal"><span class="pre">vmax</span></code> are useful if you&#8217;re plotting multiple graphs in
+the same figure; they can be used to ensure that all the component graphs
+use the same scale, so that visually the graphs are related. Otherwise each
+graph will have its own scale.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="interactive.html" class="btn btn-neutral float-right" title="Using PyTuning Interactively" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="utilities.html" class="btn btn-neutral" title="Utilities" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

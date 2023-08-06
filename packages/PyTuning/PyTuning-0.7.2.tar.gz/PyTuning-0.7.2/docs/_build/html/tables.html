@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tuning Tables &mdash; PyTuning 0.7.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="PyTuning 0.7.1 documentation" href="index.html"/>
+        <link rel="next" title="Number Theory" href="number_theory.html"/>
+        <link rel="prev" title="Scale Analysis and Creation (Redux)" href="scale_analysis.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTuning
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scales.html">Scale Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Metric Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale_analysis.html">Scale Analysis and Creation (Redux)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tuning Tables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#timidity">Timidity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scala">Scala</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fluidsynth">Fluidsynth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#csound">Csound</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="number_theory.html">Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Visualizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Using PyTuning Interactively</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">PyTuning</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Tuning Tables</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/tables.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tuning-tables">
+<h1>Tuning Tables<a class="headerlink" href="#tuning-tables" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>tuning table</strong> is a text representation of a scale that can be interpreted
+by an external program. This is usually used to tune a synthesizer or other
+sound source so that the scale can be used in a musical composition.</p>
+<p>Some tuning tables &#8211; such as that used by Scala &#8211; describe the scale in
+absolute terms, but most need to have a reference defined so that the scale
+degrees can be mapped to a frequency. For this purpose the PyTuning package
+has adopted the MIDI standard for note numbers and frequencies.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Octave</th>
+<th class="head">C</th>
+<th class="head">C#</th>
+<th class="head">D</th>
+<th class="head">D#</th>
+<th class="head">E</th>
+<th class="head">F</th>
+<th class="head">F#</th>
+<th class="head">G</th>
+<th class="head">G#</th>
+<th class="head">A</th>
+<th class="head">A#</th>
+<th class="head">B</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>-2</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+<tr class="row-odd"><td>-1</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>32</td>
+<td>33</td>
+<td>34</td>
+<td>35</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>36</td>
+<td>37</td>
+<td>38</td>
+<td>39</td>
+<td>40</td>
+<td>41</td>
+<td>42</td>
+<td>43</td>
+<td>44</td>
+<td>45</td>
+<td>46</td>
+<td>47</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>48</td>
+<td>49</td>
+<td>50</td>
+<td>51</td>
+<td>52</td>
+<td>53</td>
+<td>54</td>
+<td>55</td>
+<td>56</td>
+<td>57</td>
+<td>58</td>
+<td>59</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>60</td>
+<td>61</td>
+<td>62</td>
+<td>63</td>
+<td>64</td>
+<td>65</td>
+<td>66</td>
+<td>67</td>
+<td>68</td>
+<td>69</td>
+<td>70</td>
+<td>71</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>72</td>
+<td>73</td>
+<td>74</td>
+<td>75</td>
+<td>76</td>
+<td>77</td>
+<td>78</td>
+<td>79</td>
+<td>80</td>
+<td>81</td>
+<td>82</td>
+<td>83</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>84</td>
+<td>85</td>
+<td>86</td>
+<td>87</td>
+<td>88</td>
+<td>89</td>
+<td>90</td>
+<td>91</td>
+<td>92</td>
+<td>93</td>
+<td>94</td>
+<td>95</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>96</td>
+<td>97</td>
+<td>98</td>
+<td>99</td>
+<td>100</td>
+<td>101</td>
+<td>102</td>
+<td>103</td>
+<td>104</td>
+<td>105</td>
+<td>106</td>
+<td>107</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>108</td>
+<td>109</td>
+<td>110</td>
+<td>111</td>
+<td>112</td>
+<td>113</td>
+<td>114</td>
+<td>115</td>
+<td>116</td>
+<td>117</td>
+<td>118</td>
+<td>119</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>120</td>
+<td>121</td>
+<td>122</td>
+<td>123</td>
+<td>124</td>
+<td>125</td>
+<td>126</td>
+<td>127</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>So, for example, note number 69 corresponds to middle A, whereas 60
+corresponds to middle C. The frequency standard is 12-EDO, and the note
+69 is pegged to 440 Hz. Thus if you passed <code class="docutils literal"><span class="pre">69</span></code> as the reference note,
+the 69&#8217;th entry in the table would be 440 Hz and this would correspond to the
+first degree of the scale. <code class="docutils literal"><span class="pre">60</span></code> would cause the first degree of the scale
+to be assigned to that note number (with a corresponding frequency of
+about 261.6 Hz). The <a class="reference external" href="http://timidity.sourceforge.net/">timidity</a> soft synth
+is an example of a synthesizer that needs this reference note and frequency.</p>
+<p>In general the table will need to be output to disk so that it can read
+by the program. This can be done with something like:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.tuning_tables</span> <span class="k">import</span> <span class="n">create_timidity_tuning</span>
+<span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_euler_fokker_scale</span>
+
+<span class="n">reference_note</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_euler_fokker_scale</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">tuning</span> <span class="o">=</span> <span class="n">create_timidity_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">reference_note</span><span class="o">=</span><span class="n">reference_note</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;timidity.table&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">table</span><span class="p">:</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tuning</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will cause the generated scale:</p>
+<div class="math">
+<p><img src="_images/math/e835d7625d8d24a0a7ccce7e033e5ee718608fff.png" alt="\left [ 1, \quad \frac{135}{128}, \quad \frac{9}{8}, \quad \frac{5}{4},
+\quad \frac{45}{32}, \quad \frac{3}{2}, \quad \frac{27}{16},
+\quad \frac{15}{8}, \quad 2\right ]"/></p>
+</div><p>to be written to a disk file, <code class="docutils literal"><span class="pre">timidity.table</span></code>, which can be understood
+by timidity:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">timidity</span> <span class="o">-</span><span class="n">Z</span> <span class="n">timidity</span><span class="o">.</span><span class="n">table</span> <span class="n">score</span><span class="o">.</span><span class="n">mid</span>
+</pre></div>
+</div>
+<div class="section" id="timidity">
+<h2>Timidity<a class="headerlink" href="#timidity" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.tuning_tables.create_timidity_tuning">
+<code class="descclassname">pytuning.tuning_tables.</code><code class="descname">create_timidity_tuning</code><span class="sig-paren">(</span><em>scale</em>, <em>reference_note=60</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.tuning_tables.create_timidity_tuning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Timidity++ tuning table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scale</strong> &#8211; The scale to model (list of frequency ratios)</li>
+<li><strong>reference_note</strong> &#8211; The MIDI number of the absolute frequency reference</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Timidity tuning table as a <code class="docutils literal"><span class="pre">String</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The default value of <code class="docutils literal"><span class="pre">reference_note</span></code> pegs
+the scale to to the standard concert tuning of middle C (A = 440Hz).</p>
+<p>The Timidity table is basically a list of integers for all defined
+MIDI note numbers, with each entry as 1000 times the note frequency</p>
+<p>As a somewhat detailed example, let&#8217;s say that the user had a 12-EDO
+scale constructed, and wanted to pin the tonic note to
+the standard A440. The following will do this:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_edo_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.tuning_tables</span> <span class="k">import</span> <span class="n">create_timidity_tuning</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">tuning_table</span> <span class="o">=</span> <span class="n">create_timidity_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">reference_note</span><span class="o">=</span><span class="mi">69</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>with the first part of the table given by:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Timidity tuning table created by pytuning,</span>
+<span class="c1"># call timidity with the -Z option to enable.</span>
+<span class="c1"># Note reference: 69; Freq reference: 440.000000 Hz</span>
+<span class="mi">8176</span>
+<span class="mi">8662</span>
+<span class="mi">9177</span>
+<span class="mi">9723</span>
+<span class="mi">10301</span>
+<span class="mi">10913</span>
+<span class="mi">11562</span>
+<span class="mi">12250</span>
+<span class="mi">12978</span>
+</pre></div>
+</div>
+<p>To use the table, one starts Timidity with the <strong>-Z</strong> option, i.e:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">timidity</span> <span class="o">-</span><span class="n">Z</span> <span class="n">table</span><span class="o">.</span><span class="n">name</span> <span class="o">-</span><span class="n">iA</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="scala">
+<h2>Scala<a class="headerlink" href="#scala" title="Permalink to this headline">¶</a></h2>
+<p>The Scala tuning table can be used with the <a class="reference external" href="http://www.huygens-fokker.org/scala/">Scala package</a>, but it can also
+be used to tune the soft synth <a class="reference external" href="http://zynaddsubfx.sourceforge.net/">Zynaddsubfx</a>,
+as well as its derivative <a class="reference external" href="https://sourceforge.net/projects/yoshimi/">Youshimi</a>.
+With the soft synths you will need to explicitly set the reference note and
+frequency in the scale GUI.</p>
+<dl class="function">
+<dt id="pytuning.tuning_tables.create_scala_tuning">
+<code class="descclassname">pytuning.tuning_tables.</code><code class="descname">create_scala_tuning</code><span class="sig-paren">(</span><em>scale</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.tuning_tables.create_scala_tuning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Scala scale file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scale</strong> &#8211; The scale (list of frequency ratios)</li>
+<li><strong>name</strong> &#8211; The name of the scale</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Scala file as a <code class="docutils literal"><span class="pre">String</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The Scala file can be used to tune various things, most
+germane being Yoshimi. However, keep in mind that the Scala
+file does <strong>not</strong> include a base note or frequency, so for tuning
+purposes those data will need to be captured or input in
+some other way.</p>
+<p>As an example of use, the Scala file for the default Pythagorean
+tuning can be calculated thus:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales.pythagorean</span> <span class="k">import</span> <span class="n">create_pythagorean_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.tuning_tables</span> <span class="k">import</span> <span class="n">create_scala_tuning</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_pythagorean_scale</span><span class="p">()</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">create_scala_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span><span class="s2">&quot;Pythagorean Tuning&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which yields:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span>! Scale produced by pytuning. For tuning yoshimi or zynaddsubfx,
+! only include the portion below the final &#39;!&#39;
+!
+Pythagorean Tuning
+12
+!
+256/243
+9/8
+32/27
+81/64
+4/3
+1024/729
+3/2
+128/81
+27/16
+16/9
+243/128
+2/1
+</pre></div>
+</div>
+<p>Note that the Scala file uses exact ratios where possible, otherwise
+it will convert to a cent value. Thus the code:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_edo_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.tuning_tables</span> <span class="k">import</span> <span class="n">create_scala_tuning</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">create_scala_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span><span class="s2">&quot;12-TET Tuning&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will produce:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span>! Scale produced by pytuning. For tuning yoshimi or zynaddsubfx,
+! only include the portion below the final &#39;!&#39;
+12-TET Tuning
+12
+!
+100.00000
+200.00000
+300.00000
+400.00000
+500.00000
+600.00000
+700.00000
+800.00000
+900.00000
+1000.00000
+1100.00000
+2/1
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="fluidsynth">
+<h2>Fluidsynth<a class="headerlink" href="#fluidsynth" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pytuning.tuning_tables.create_fluidsynth_tuning">
+<code class="descclassname">pytuning.tuning_tables.</code><code class="descname">create_fluidsynth_tuning</code><span class="sig-paren">(</span><em>scale, reference_note=60, chan=[0], bank=0, prog=[0]</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.tuning_tables.create_fluidsynth_tuning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Fluidsynth tuning table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scale</strong> &#8211; The scale to model (list of frequency ratios)</li>
+<li><strong>reference_note</strong> &#8211; The MIDI number of the absolute frequency reference</li>
+<li><strong>chan</strong> &#8211; A list of channels for which to create the table</li>
+<li><strong>bank</strong> &#8211; The bank for the tuning table</li>
+<li><strong>prog</strong> &#8211; A list of program numbers for the tuning table</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Fluidsynth tuning table as a <code class="docutils literal"><span class="pre">String</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The default value of <code class="docutils literal"><span class="pre">reference_note</span></code> pegs
+the scale to to the standard concert tuning of middle C (A = 440Hz).</p>
+<p>The Fluidsyny tuning model allows each channel, bank, and program
+to have a different tuning. Thus, if one, say, wants all programs
+to be tuned to the scale, the tuning table can get quite large.</p>
+<p>As a somewhat detailed example, let&#8217;s say that the user had a 12-EDO
+scale constructed, and wanted to pin the tonic note to
+the standard A440. The following will do this:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_edo_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.tuning_tables</span> <span class="k">import</span> <span class="n">create_timidity_tuning</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">tuning_table</span> <span class="o">=</span> <span class="n">create_fluidsynth_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">reference_note</span><span class="o">=</span><span class="mi">69</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>with the first part of the table given by:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Fluidsynth Tuning Table created by pytuning</span>
+<span class="c1"># Note reference: 69; Freq reference: 440.000000 Hz</span>
+<span class="n">tuning</span> <span class="n">tuning000</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mf">100.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mf">200.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mf">300.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mf">400.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mf">500.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">6</span> <span class="mf">600.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">7</span> <span class="mf">700.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">8</span> <span class="mf">800.000000</span>
+<span class="n">tune</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">9</span> <span class="mf">900.000000</span>
+</pre></div>
+</div>
+<p>To use the table, one should start fluidsynth with the <strong>-f</strong> option:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">fluidsynth</span> <span class="o">-</span><span class="n">f</span> <span class="n">table</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="csound">
+<h2>Csound<a class="headerlink" href="#csound" title="Permalink to this headline">¶</a></h2>
+<p>For use in <a class="reference external" href="http://csound.github.io/">Csound</a> PyTuning will generate a
+table of frequencies that can be used as a table lookup, mapped to MIDI note
+number. As mentioned in the basic concepts, the easiest way to use this
+is via the <code class="docutils literal"><span class="pre">table</span></code> opcode:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">inote</span>     <span class="n">init</span>          <span class="n">p4</span>
+<span class="n">iveloc</span>    <span class="n">init</span>          <span class="n">p5</span>
+<span class="n">ifreq</span>     <span class="n">table</span>         <span class="n">inote</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">a1</span>        <span class="n">oscil</span>         <span class="n">iveloc</span><span class="p">,</span> <span class="n">ifreq</span><span class="p">,</span> <span class="mi">2</span>
+          <span class="n">outs</span>          <span class="n">a1</span><span class="p">,</span> <span class="n">a1</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="pytuning.tuning_tables.create_csound_tuning">
+<code class="descclassname">pytuning.tuning_tables.</code><code class="descname">create_csound_tuning</code><span class="sig-paren">(</span><em>scale</em>, <em>reference_note=60</em>, <em>table_num=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pytuning.tuning_tables.create_csound_tuning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a CSound tuning table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scale</strong> &#8211; The scale (list of frequency ratios)</li>
+<li><strong>reference_note</strong> &#8211; The MIDI number of the absolute frequency reference</li>
+<li><strong>table_num</strong> &#8211; The <strong>f</strong> table number to use</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>CSound has many ways of generating microtonalities. For <code class="docutils literal"><span class="pre">pytuning</span></code>
+a table lookup keyed on MIDI note number is used.</p>
+<p>As an example of use, let&#8217;s say that we want to use the 12-EDO
+scale with the tonic at A440:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytuning.scales</span> <span class="k">import</span> <span class="n">create_edo_scale</span>
+<span class="kn">from</span> <span class="nn">pytuning.tuning_tables</span> <span class="k">import</span> <span class="n">create_timidity_tuning</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">create_edo_scale</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">create_csound_tuning</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">reference_note</span><span class="o">=</span><span class="mi">69</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will produce the following output, which can be included in the
+CSound score file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="mi">0</span> <span class="mi">256</span> <span class="o">-</span><span class="mi">2</span>     <span class="mf">8.17580</span>     <span class="mf">8.66196</span>     <span class="mf">9.17702</span>     <span class="mf">9.72272</span>    <span class="mf">10.30086</span>    <span class="mf">10.91338</span>    <span class="mf">11.56233</span>    <span class="mf">12.24986</span> \
+               <span class="mf">12.97827</span>    <span class="mf">13.75000</span>    <span class="mf">14.56762</span>    <span class="mf">15.43385</span>    <span class="mf">16.35160</span>    <span class="mf">17.32391</span>    <span class="mf">18.35405</span>    <span class="mf">19.44544</span> \
+               <span class="mf">20.60172</span>    <span class="mf">21.82676</span>    <span class="mf">23.12465</span>    <span class="mf">24.49971</span>    <span class="mf">25.95654</span>    <span class="mf">27.50000</span>    <span class="mf">29.13524</span>    <span class="mf">30.86771</span> \
+               <span class="mf">32.70320</span>    <span class="mf">34.64783</span>    <span class="mf">36.70810</span>    <span class="mf">38.89087</span>    <span class="mf">41.20344</span>    <span class="mf">43.65353</span>    <span class="mf">46.24930</span>    <span class="mf">48.99943</span> \
+               <span class="mf">51.91309</span>    <span class="mf">55.00000</span>    <span class="mf">58.27047</span>    <span class="mf">61.73541</span>    <span class="mf">65.40639</span>    <span class="mf">69.29566</span>    <span class="mf">73.41619</span>    <span class="mf">77.78175</span> \
+               <span class="mf">82.40689</span>    <span class="mf">87.30706</span>    <span class="mf">92.49861</span>    <span class="mf">97.99886</span>   <span class="mf">103.82617</span>   <span class="mf">110.00000</span>   <span class="mf">116.54094</span>   <span class="mf">123.47083</span> \
+              <span class="mf">130.81278</span>   <span class="mf">138.59132</span>   <span class="mf">146.83238</span>   <span class="mf">155.56349</span>   <span class="mf">164.81378</span>   <span class="mf">174.61412</span>   <span class="mf">184.99721</span>   <span class="mf">195.99772</span> \
+              <span class="mf">207.65235</span>   <span class="mf">220.00000</span>   <span class="mf">233.08188</span>   <span class="mf">246.94165</span>   <span class="mf">261.62557</span>   <span class="mf">277.18263</span>   <span class="mf">293.66477</span>   <span class="mf">311.12698</span> \
+              <span class="mf">329.62756</span>   <span class="mf">349.22823</span>   <span class="mf">369.99442</span>   <span class="mf">391.99544</span>   <span class="mf">415.30470</span>   <span class="mf">440.00000</span>   <span class="mf">466.16376</span>   <span class="mf">493.88330</span> \
+              <span class="mf">523.25113</span>   <span class="mf">554.36526</span>   <span class="mf">587.32954</span>   <span class="mf">622.25397</span>   <span class="mf">659.25511</span>   <span class="mf">698.45646</span>   <span class="mf">739.98885</span>   <span class="mf">783.99087</span> \
+              <span class="mf">830.60940</span>   <span class="mf">880.00000</span>   <span class="mf">932.32752</span>   <span class="mf">987.76660</span>  <span class="mf">1046.50226</span>  <span class="mf">1108.73052</span>  <span class="mf">1174.65907</span>  <span class="mf">1244.50793</span> \
+             <span class="mf">1318.51023</span>  <span class="mf">1396.91293</span>  <span class="mf">1479.97769</span>  <span class="mf">1567.98174</span>  <span class="mf">1661.21879</span>  <span class="mf">1760.00000</span>  <span class="mf">1864.65505</span>  <span class="mf">1975.53321</span> \
+             <span class="mf">2093.00452</span>  <span class="mf">2217.46105</span>  <span class="mf">2349.31814</span>  <span class="mf">2489.01587</span>  <span class="mf">2637.02046</span>  <span class="mf">2793.82585</span>  <span class="mf">2959.95538</span>  <span class="mf">3135.96349</span> \
+             <span class="mf">3322.43758</span>  <span class="mf">3520.00000</span>  <span class="mf">3729.31009</span>  <span class="mf">3951.06641</span>  <span class="mf">4186.00904</span>  <span class="mf">4434.92210</span>  <span class="mf">4698.63629</span>  <span class="mf">4978.03174</span> \
+             <span class="mf">5274.04091</span>  <span class="mf">5587.65170</span>  <span class="mf">5919.91076</span>  <span class="mf">6271.92698</span>  <span class="mf">6644.87516</span>  <span class="mf">7040.00000</span>  <span class="mf">7458.62018</span>  <span class="mf">7902.13282</span> \
+             <span class="mf">8372.01809</span>  <span class="mf">8869.84419</span>  <span class="mf">9397.27257</span>  <span class="mf">9956.06348</span> <span class="mf">10548.08182</span> <span class="mf">11175.30341</span> <span class="mf">11839.82153</span> <span class="mf">12543.85395</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="number_theory.html" class="btn btn-neutral float-right" title="Number Theory" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scale_analysis.html" class="btn btn-neutral" title="Scale Analysis and Creation (Redux)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mark Conway Wirt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
