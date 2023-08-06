@@ -1,0 +1,6 @@
+
+        [console_scripts]
+        axsemantics=axsemantics_cli.main:cli
+        axsemantics-atml=axsemantics_cli.analyze:atml3file
+        axsemantics-convert-bmecat=axsemantics_cli.convert_bmecat:convert_bmecat
+    
