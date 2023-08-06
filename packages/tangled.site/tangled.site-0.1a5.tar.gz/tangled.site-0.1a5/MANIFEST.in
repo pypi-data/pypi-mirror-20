@@ -1,0 +1,5 @@
+include CHANGELOG
+include LICENSE
+include buildout.cfg
+include tangled/site/defaults.ini
+recursive-include tangled/site/themes/* *
