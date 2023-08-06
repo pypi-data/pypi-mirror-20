@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta charset='utf-8'> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+        <style type="text/css">
+            a {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Showcase</h1>
+            <h5>Root: <a href="{{ url_for('show') }}">{{ base }}</a></h5>
+            <h5>
+                {% block path %}
+                {% for segment in path %}
+                {% if loop.index != 1 %} / {% endif %}
+                {% if loop.last and is_dir %}
+                {{ segment.1 }}
+                {% else %}
+                <a href="{{ segment.0 }}{% if loop.last and not is_dir %}?download=true" title="download{% endif %}">{{ segment.1 }}</a>
+                {% endif %}
+                {% endfor %}
+                {% endblock %}
+            </h5>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
+
+
