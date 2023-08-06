@@ -1,0 +1,48 @@
+Metadata-Version: 2.0
+Name: markdown-extra
+Version: 0.2.0
+Summary: Set of extensions for markdown
+Home-page: https://github.com/Nicals/markdown-meta
+Author: Nicolas Appriou
+Author-email: nicolas.appriou@gmail.com
+License: MIT
+Keywords: markdown yaml
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Text Processing :: Markup :: HTML
+Requires-Dist: markdown
+Requires-Dist: pyYAML
+
+Markdown Extra
+==============
+
+.. image:: https://readthedocs.org/projects/markdown-extra/badge/?version=latest
+   :target: http://markdown-extra.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
+.. image:: https://badge.fury.io/py/markdown-extra.svg
+   :target: https://badge.fury.io/py/markdown-extra
+   :alt: Version
+
+Set of extensions for ``python-markdown``.
+
+Features
+--------
+
+``MetaExtension`` adds metadata support in YAML format.
+
+``SummaryExtension`` allows to extract a summary from a markdown file.
+
+Check out the doc: `<https://markdown-extra.readthedocs.io>`_
+
+
+Installation
+------------
+
+Install from PyPI with ``pip``: ``pip install markdown-extra``.
+
+
