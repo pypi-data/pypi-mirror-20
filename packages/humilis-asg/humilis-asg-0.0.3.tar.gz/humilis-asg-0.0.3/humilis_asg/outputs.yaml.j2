@@ -1,0 +1,40 @@
+---
+outputs:
+    BucketName:
+        Description:
+            The name of the S3 bucket where logs will be stored
+        Value:
+            Ref: Bucket
+    ElbSecurityGroup:
+        Description:
+            The ID of the Elastic Load Balancer security group
+        Value:
+            Ref:
+                ElbSecurityGroup
+    {% for subnet in subnets %}
+    InstanceSecurityGroup{{loop.index}}:
+        Description:
+            The ID of the security group for the instances in subnet {{loop.index}}
+        Value:
+            Ref:
+                InstanceSecurityGroup{{loop.index}}
+    {% if domain %}
+    Elb{{loop.index}}DnsName:
+        Description:
+            The DNS name of the ELB in subnet {{subnet}}.
+        Value:
+            {% if subdomain %}
+            "{{subdomain}}.{{domain}}"
+            {% else %}
+            "{{_env.name}}-{{_env.stage.lower()}}-{{_layer.name}}-{{loop.index}}.{{domain}}"
+            {% endif %}
+    {% else %}
+    Elb{{loop.index}}RawDnsName:
+        Description:
+            The DNS name of the ELB in subnet {{subnet}}.
+        Value:
+            Fn::GetAtt:
+                - Elb{{loop.index}}
+                - DNSName
+    {% endif %}
+    {% endfor %}
