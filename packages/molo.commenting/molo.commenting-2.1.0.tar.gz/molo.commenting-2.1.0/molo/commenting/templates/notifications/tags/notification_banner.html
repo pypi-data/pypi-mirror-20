@@ -1,0 +1,10 @@
+{% load i18n %}
+<div class="notifications-list__item">
+{% if user.is_authenticated and number_unread_notifications > 0 %}
+<a href="{% url 'molo.commenting:reply_list' %}">
+  <div style="background-color: orange;width:100%">
+    {% trans "Unread replies:" %} {{ number_unread_notifications }}
+  </div>
+</a>
+{% endif %}
+</div>

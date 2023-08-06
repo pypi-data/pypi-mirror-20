@@ -1,0 +1,28 @@
+{% load wagtailcore_tags i18n %}
+<div class="notification-block">
+    <p>---------------------</p>
+    <p>
+      {% with notice.target as article %}
+      {% with notice.action_object as comment %}
+        {% if comment.user_name.lower == 'anonymous' %}
+        {{comment.user_name}}
+      {% else %}
+        {% if not comment.user.profile.alias %}
+          {% trans "Anonymous" %}
+        {% else %}
+          {{comment.user.profile.alias}}
+        {% endif %}
+      {% endif %}
+
+        {% trans "replied to your comment on" %}
+        <a href="{% pageurl article %}">{{ article.title }}</a>
+        {{ notice.timesince }} {% trans "ago" %}
+      {% endwith %}
+      {% endwith %}
+    </p>
+    <h2>Your Comment:</h2>
+    <p>{{ notice.action_object.parent.comment }}</p>
+
+    <h2>Their Reply:</h2>
+    <p>{{ notice.action_object.comment }}</p>
+</div>
