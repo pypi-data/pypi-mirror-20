@@ -1,0 +1,48 @@
+Metadata-Version: 1.1
+Name: kiwilite
+Version: 0.0.1
+Summary: A single-file database storages key-value pairs.
+Home-page: http://github.com/ibelie/kiwilite/python
+Author: joungtao
+Author-email: joungtao@gmail.com
+License: MIT License
+Description: 
+        Install:
+        	pip install kiwilite
+        
+        Usage:
+        	import kiwilite
+        
+        	with kiwilite.Open('<path-to-db-file>') as storage:
+        
+        		# Set map data of key and value and save storage file.
+        		storage.Set({'<key>': '<value>'})
+        
+        		# Get value bytes of key.
+        		<value> = storage.Get('<key>')
+        
+        		# Log: a list of timestones.
+        		[<list>, <of>, <timestones>] = storage.Log(<start-timestamp>, <end-timestamp>)
+        
+        		# Rollback to the last timestone before timestamp,
+        		# and clear all data after timestamp.
+        		storage.Rollback(<timestamp>)
+        
+        		# Lighten to the first timestone after timestamp,
+        		# and clear all invalid data before timestamp.
+        		# Data will not lose, but cannot rollback before timestamp.
+        		storage.Lighten(<timestamp>)
+        
+Keywords: noSql,key-value,database,kiwilite
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
