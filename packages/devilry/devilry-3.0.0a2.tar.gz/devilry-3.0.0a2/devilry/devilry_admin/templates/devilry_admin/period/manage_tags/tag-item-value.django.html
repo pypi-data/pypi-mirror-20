@@ -1,0 +1,56 @@
+{% extends 'django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete.django.html' %}
+
+{% load i18n %}
+{% load cradmin_tags %}
+{% load devilry_core_tags %}
+
+{% block title %}
+    <div class="devilry-heading-with-buttons">
+        <h2 class="devilry-heading-with-buttons__heading devilry-admin-period-tags-listbuilder-itemvalue-title">
+            {% if me.value.prefix == '' %}
+                {{ me.get_title }}
+            {% else %}
+                {{ me.get_title }} (imported)
+            {% endif %}
+        </h2>
+        <div class="devilry-heading-with-buttons__buttons">
+            {% block editbutton %} {{ block.super }} {% endblock %}
+            {% block deletebutton %} {{ block.super }} {% endblock %}
+        </div>
+    </div>
+{% endblock title %}
+
+{% block description %}
+    <p class="text-muted">
+        {% devilry_relatedusers_on_period_tag me.value %}
+    </p>
+{% endblock %}
+
+{% block end-of-content %}
+    <div class="devilry-dashboard-container-withtopmargin">
+        <p class="paragraph paragraph--nomargin">
+            <a href="{% cradmin_instance_url appname='manage_tags' viewname='add_students' tag=me.value.tag %}"
+                    id="devilry_admin_period_manage_tags_add_students_{{ me.value.tag }}"
+                    class="btn btn--fixedwidth btn--fixedwidth-wide btn-default btn-sm">
+                {% trans 'Add students' %}
+            </a>
+            <a href="{% cradmin_instance_url appname='manage_tags' viewname='add_examiners' tag=me.value.tag %}"
+                    id="devilry_admin_period_manage_tags_add_examiners_{{ me.value.tag }}"
+                    class="btn btn--fixedwidth btn--fixedwidth-wide btn-default btn-sm">
+                {% trans 'Add examiners' %}
+            </a>
+        </p>
+        <p class="paragraph paragraph--nomargin">
+            <a href="{% cradmin_instance_url appname='manage_tags' viewname='remove_students' tag=me.value.tag %}"
+                    id="devilry_admin_period_manage_tags_remove_students_{{ me.value.tag }}"
+                    class="btn btn--fixedwidth btn--fixedwidth-wide btn--danger-muted btn-sm">
+                {% trans 'Remove students' %}
+            </a>
+            <a href="{% cradmin_instance_url appname='manage_tags' viewname='remove_examiners' tag=me.value.tag %}"
+                    id="devilry_admin_period_manage_tags_remove_examiners_{{ me.value.tag }}"
+                    class="btn btn--fixedwidth btn--fixedwidth-wide btn--danger-muted btn-sm">
+                {% trans 'Remove examiners' %}
+            </a>
+        </p>
+    </div>
+{% endblock end-of-content %}
