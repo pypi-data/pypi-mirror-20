@@ -1,0 +1,11 @@
+#!/usr/bin/python3.4
+"""
+Filter and sort mails from mboxes for archiving and reporting
+"""
+import mboxattachments
+import sys
+
+
+mboxattachments.cli2(sys.argv[1:])
+
+#mboxattachments.main()
