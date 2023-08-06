@@ -1,0 +1,95 @@
+Metadata-Version: 1.1
+Name: niceware
+Version: 0.1.1
+Summary: Convert cryptographic keys to human-readable phrases, or generate random-yet-memorable passphrases
+Home-page: https://github.com/moreati/python-niceware
+Author: Alex Willmer
+Author-email: alex@moreati.org.uk
+License: MIT license
+Description: Niceware for Python
+        ===================
+        
+        .. image:: https://img.shields.io/pypi/v/niceware.svg
+                :target: https://pypi.python.org/pypi/niceware
+                :alt: PyPI status
+        
+        .. image:: https://img.shields.io/travis/moreati/python-niceware.svg
+                :target: https://travis-ci.org/moreati/python-niceware
+                :alt: Build status
+        
+        .. image:: https://readthedocs.org/projects/python-niceware/badge/?version=latest
+                :target: https://python-niceware.readthedocs.io/en/latest/?badge=latest
+                :alt: Documentation Status
+        
+        .. image:: https://pyup.io/repos/github/moreati/python-niceware/shield.svg
+             :target: https://pyup.io/repos/github/moreati/python-niceware/
+             :alt: Updates
+        
+        
+        A Python port of Niceware_, for generating random-yet-memorable passwords.
+        Each word provides 16 bits of entropy, so a useful password requires at least
+        3 words.
+        
+        Because the wordlist is of exactly size 2^16, Niceware is also useful for converting cryptographic keys and other sequences of random bytes into human-readable phrases. With Niceware, a 128-bit key is equivalent to an 8-word phrase.
+        
+        * Free software: MIT license
+        * Documentation: https://python-niceware.readthedocs.io.
+        
+        Usage
+        -----
+        
+        To insall
+        
+        .. code:: console
+        
+            $ pip install niceware
+        
+        To generate an 8-byte passphrase
+        
+        .. code:: python
+        
+            >>> import niceware
+            >>> niceware.generate_passphrase(8)
+            ['deathtrap', 'stegosaur', 'nilled', 'nonscheduled']
+        
+        Niceware for Python uses ``os.urandom`` for entropy.
+        
+        Credits
+        -------
+        
+        Niceware for Python is a port of Niceware_, by yan_.
+        
+        This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+        
+        .. _Niceware: https://github.com/diracdeltas/niceware
+        .. _yan: https://diracdeltas.github.io/blog/about/
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+        
+        
+        =======
+        History
+        =======
+        
+        0.1.1 (2017-03-12)
+        ------------------
+        
+        * README fixes, no code changes
+        
+        0.1.0 (2017-03-11)
+        ------------------
+        
+        * First release on PyPI.
+        
+Keywords: niceware
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
