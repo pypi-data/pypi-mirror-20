@@ -1,0 +1,102 @@
+Metadata-Version: 1.0
+Name: g3ar
+Version: 0.2.6
+Summary: Python Coding Toolkit for Pentester.
+Home-page: https://github.com/VillanCh/g3ar
+Author: v1ll4n
+Author-email: v1ll4n@villanch.top
+License: BSD 2-Clause License
+Description: # g3ar 渗透编程工具包： 极速打造渗透测试工具
+        完美支持： Python2  
+        单元测试通过： Python3
+        
+        [![Build Status](https://travis-ci.org/VillanCh/g3ar.svg?branch=master)](https://travis-ci.org/VillanCh/g3ar)
+        
+        ## 功能概述
+        
+        1. 多线程与多进程管理：
+        	* 线程池与多线程调用极简化
+        	* 异步
+        	* Taskbulter 对进程内的线程监控与管理
+        * 爆破用字典管理：
+        	* 支持任意大小的字典读取（大字典不再发愁）
+        	* 进度保存
+        	* 获取当前进行进度
+        * 日志记录器：
+        	* 日志管理极简化
+        	* 装饰器接口
+        	* 自动追踪函数，日志记录函数的调用，Trace，和异常情况
+        
+        ## 安装
+        
+        ### By pip
+        
+        	pip install g3ar
+        
+        ### By easy_install
+        
+            easy_install g3ar
+        
+        ### By Github：
+        
+        	git clone https://github.com/VillanCh/g3ar.git
+          cd g3ar
+        	pip install -r requirements.txt
+        	python setup.py install
+        
+        ## 帮助手册与 Quick Look
+        
+        查看 `docs/build/html/index.html`
+        
+        
+        ###Version: 0.2.2
+        Add get_result to TaskBulter
+        
+        ###Version: 0.2.1
+        Add print_utils function! It 's great to print table easily!
+        
+        ###Version: 0.2.0bx
+        Fix bugs and make g3ar stable
+        
+        ###Version: 0.1.9
+        Fix A little bug in TaskBulter (result_pipe issue)
+        
+        ###Version: 0.1.8
+        Add result_callback to TaskBulter
+        
+        ###Version: 0.1.7
+        Add type filter to inspect_utils.get_fields(obj, [type, public])
+        
+        ###Version: 0.1.6
+        Add inspect_utils.get_classes() to gain classes from module instance
+        
+        ###Version: 0.1.5
+        Support Py3
+        
+        ###Version: 0.0.7b1
+        Add print_utils (print_bar)
+        
+        ###Version: 0.0.6b4
+        Fix bugs
+        
+        ###Version: 0.0.6b1
+        Add utils to support some useful module(ip calc, python-ping(root needed!))
+        
+        ###Version: 0.0.6
+        4 Useful Class Added and completed
+        
+        ###Version: 0.0.5b1
+        Add README.md & HISTORY.md in setup()
+        
+        ###Version: 0.0.5
+        Fix Bugs and Add test.py to unittest
+        
+        ###Version: 0.0.1alpha3
+        Add shortcut for every available and useful class.
+        
+        ###Version: 0.0.1alpha2
+        Check import and fix little bugs XD.
+        
+        ###Version: 0.0.1alpha
+        Changes: initial & test install.
+Platform: UNKNOWN
