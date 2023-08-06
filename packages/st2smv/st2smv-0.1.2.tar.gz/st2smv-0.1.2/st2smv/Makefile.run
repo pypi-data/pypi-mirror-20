@@ -1,0 +1,73 @@
+MODEL = model.json
+COI_INFO = coi_info.json
+MAX_COI = 100
+PY_SCRIPT = st2smv
+MODULES = $(wildcard *\.smv)
+
+PIT_DIR = pits
+PIT_SMV = $(sort $(wildcard $(PIT_DIR)/*\.smv))
+PIT_CEX = $(patsubst %.smv,%.cex,$(PIT_SMV))
+
+PDT_SMV = $(sort $(wildcard pdt-*\.smv))
+PDT_CEX = $(patsubst %.smv,%.cex,$(PDT_SMV))
+
+CEX = $(sort $(wildcard *\.cex))
+CSV = $(patsubst %.cex,%.csv,$(CEX))
+
+ABSTRACTIONS_DIR = abstractions
+
+SOLVER = SynthSMV
+DEFAULTARGS = -df -coi -dynamic
+# ARGS = -dcx -disable_sexp2bdd_caching
+ARGS = -dcx
+
+%.cex: %.smv $(MODEL)
+	@echo '-->' $@;
+
+	$(eval BASENAME = $(basename $@))
+
+	@if [ -e $< ]; then \
+	if \
+	[ -e $(COI_INFO) ]; then ABSTRACTIONS="--metadata "$(COI_INFO); \
+	else ABSTRACTIONS=""; \
+	fi; \
+	$(PY_SCRIPT) --combine \
+	--plugins connectivity --plugin-options max_coi=$(MAX_COI) \
+	--variables $(notdir $(BASENAME)) \
+	-i $(MODULES) $(MODEL) $< $$ABSTRACTIONS \
+	| tee $(BASENAME).combined \
+	| $(SOLVER) $(DEFAULTARGS) $(ARGS) -v 1 /dev/stdin > $@ 2> /dev/null; \
+	$(PY_SCRIPT) --combine \
+	--plugins connectivity --plugin-options max_coi=$(MAX_COI) \
+	--variables $(notdir $(BASENAME)) \
+	-i $(MODULES) $(MODEL) $< \
+	$$ABSTRACTIONS \
+	| $(SOLVER) $(DEFAULTARGS) $(ARGS) -lp /dev/stdin > $(BASENAME).prop; \
+	fi
+
+	@echo '<--' $@;
+
+%.smv:
+	@true
+%.json:
+	@true
+
+%.csv: %.cex
+	@if [ -e $(notdir $<) ]; then \
+	cat $< | counterexample.py > $@; \
+	fi
+
+pits: $(PIT_CEX)
+
+pdts: $(PDT_CEX)
+
+.FORCE:
+.PHONY: .FORCE
+
+csvs: $(CSV)
+
+list:
+	@echo $(PIT_SMV);
+	@echo $(PIT_CEX);
+	@echo $(PDT_SMV);
+	@echo $(PDT_CEX);
