@@ -1,0 +1,53 @@
+Metadata-Version: 1.1
+Name: buildout.wheel
+Version: 0.2.0
+Summary: Experimental Buildout extension to provide wheel support
+Home-page: https://github.com/buildout/buildout.wheel
+Author: Jim Fulton
+Author-email: jim@jimfulton.info
+License: MIT License
+Description: ========================================================
+        Experimental Buildout extension to provide wheel support
+        ========================================================
+        
+        To get wheel support in Buildout 2.8 or later, include the buildout
+        wheel extension::
+        
+          [buildout]
+          extensions = buildout.wheel
+          ...
+        
+        =======
+        Changes
+        =======
+        
+        0.2.0 (2017-03-12)
+        ==================
+        
+        - Make use of newer support in buildout for per-extension binary dist UNPACKERs
+          for a much cleaner implementation of wheel support.
+        
+        - Also, make use of newer support in buildout for installed non-egg
+          distributions to get rid of humpty as dependency. Wheel packages will be
+          installed as ``.ovo`` directories inside ``eggs-directory``.
+        
+        0.1.2 (2017-02-13)
+        ==================
+        
+        Initial release
+        
+Keywords: development build
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Buildout
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

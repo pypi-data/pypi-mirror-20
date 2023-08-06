@@ -1,0 +1,8 @@
+include *.rst
+include LICENSE.txt
+include buildout.cfg
+include shootout.cfg
+recursive-include src *.c
+recursive-include src *.h
+recursive-include src *.py
+

@@ -1,0 +1,6 @@
+
+[zc.buildout.extension]
+wheel = buildout.wheel:load
+
+[zc.buildout.unloadextension]
+wheel = buildout.wheel:unload
