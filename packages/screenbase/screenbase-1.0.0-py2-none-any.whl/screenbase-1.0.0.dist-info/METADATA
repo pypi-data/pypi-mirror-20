@@ -1,0 +1,36 @@
+Metadata-Version: 2.0
+Name: screenbase
+Version: 1.0.0
+Summary: Tool for automatically copying screenshots into your Keybase public folder
+Home-page: https://github.com/jlindsey/screenbase
+Author: Josh Lindsey
+Author-email: joshua.s.lindsey@gmail.com
+License: GPL-3.0+
+Keywords: screenshots keybase
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Utilities
+Requires-Dist: pyperclip (>=1.5.27)
+Requires-Dist: watchdog (>=0.8.2)
+
+Screenbase
+==========
+
+A very simple tool that monitors your desktop for new screenshots, moves them to
+your `public Keybase filesystem <https://keybase.io/docs/kbfs>`_, and copies the
+link to your clipboard.
+
+Works on macOS and (probably) Linux.
+
+Dependencies
+------------
+
+On macOS, install `terminal-notifier` from homebrew to have notifications when
+complete.
+
+
+
