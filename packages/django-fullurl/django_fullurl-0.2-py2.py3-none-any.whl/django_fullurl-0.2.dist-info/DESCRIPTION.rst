@@ -1,0 +1,88 @@
+.. image:: https://img.shields.io/pypi/v/django-fullurl.svg
+    :target: https://pypi.python.org/pypi/django-fullurl
+
+.. image:: https://img.shields.io/pypi/l/django-fullurl.svg
+    :target: https://pypi.python.org/pypi/django-fullurl
+
+.. image:: https://img.shields.io/pypi/wheel/django-fullurl.svg
+    :target: https://pypi.python.org/pypi/django-fullurl
+
+.. image:: https://img.shields.io/pypi/pyversions/django-fullurl.svg
+    :target: https://pypi.python.org/pypi/django-fullurl
+
+.. image:: https://travis-ci.org/Flimm/django-fullurl.svg?branch=master
+    :target: https://travis-ci.org/Flimm/django-fullurl
+
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
+    :target: https://saythanks.io/to/Flimm
+
+------
+
+Introduction
+=============
+
+**django-fullurl** adds two new template tags: ``fullurl`` and ``staticurl``. They behave like ``url`` and ``staticurl`` respectively, but they always return an absolute URL with the scheme and authority/domain parts.
+
+For example, take this ``url`` tag::
+
+   {% url "articles:article" slug="hello" %}
+
+In our example, this prints::
+
+    /articles/hello
+
+This is called by some an absolute URL, because it begins with a forward-slash. However, it is not an *absolute* absolute URL, because it does not contain the scheme and authority parts.
+
+If we replace ``url`` with ``fullurl``, it will print this result::
+
+    http://example.com/articles/hello
+
+Behind the scenes, it uses `request.build_absolute_uri <https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpRequest.build_absolute_uri>`_ to determine the correct scheme and authority/domain parts.
+
+In the same way that ``fullurl`` behaves like ``url``, ``fullstatic`` behaves like the ``static`` template tag.
+
+Installation
+============
+
+Run on the command-line::
+
+    $ pip install django-fullurl
+
+Make sure these two apps are included in your ``INSTALLED_APPS`` settings::
+
+    INSTALLED_APPS = [
+        'django.contrib.staticfiles',
+        'fullurl',
+        # ...
+    ]
+
+Make sure ``django.template.context_processors.request`` is included in your context processors.
+
+Example usage
+=============
+
+OpenGraph URLs need to be absolute, including scheme and authority parts. Here's how you can use ``fullurl`` and ``fullstatic`` to help with this::
+
+    {% load fullurl %}
+
+    <meta property="og:url" content="{% fullurl "articles:article" article=article %}">
+    <meta property="og:image" content="{% fullstatic "cat.jpg" %}">
+
+
+
+=========
+Changelog
+=========
+
+0.2 (2017-03-02)
+----------------
+
+* Add support for Django 1.8 and Django 1.9, in addition to Django 1.10.
+* Add support for Python 2.7, Python 3.2, 3.3, 3.4 and 3.5, in addition to Python 3.6.
+
+0.1 (2017-03-01)
+----------------
+
+* First release on PyPI.
+
+
