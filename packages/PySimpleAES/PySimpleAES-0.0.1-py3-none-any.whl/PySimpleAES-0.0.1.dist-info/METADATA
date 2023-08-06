@@ -1,0 +1,34 @@
+Metadata-Version: 2.0
+Name: PySimpleAES
+Version: 0.0.1
+Summary: Python AES encryptation
+Home-page: https://github.com/FRReinert/AES
+Author: Fabricio Roberto reinert
+Author-email: fabricio.reinert@live.com
+License: MIT license
+Keywords: Python,AES,cryptography
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: cryptography
+
+# AES
+AES cryptography in Python
+
+## Installing
+1. Clone or fork the project
+2. `pip install -r requirements.txt`
+
+## Usage
+You can find a very simple usage on the `examples.py`
+
+## Tests
+* Tested on Python 3.6 32 bits
+* Tested on Windows 10 x64
+
+
+
+
