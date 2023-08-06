@@ -1,0 +1,28 @@
+Metadata-Version: 2.0
+Name: pyrsnapshot
+Version: 0.2.3
+Summary: A rsnapshot re-implementation with push-over-ssh capability
+Home-page: https://github.com/svirpridon/pyrsnapshot
+Author: Jonathan Booth
+Author-email: jbooth@gmail.com
+License: GPLv3
+Keywords: rsync backup
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: System :: Archiving :: Backup
+Classifier: Topic :: System :: Systems Administration
+Requires-Dist: arrow
+Requires-Dist: assertpy
+Requires-Dist: fabric3
+Requires-Dist: nose2
+
+UNKNOWN
+
+
