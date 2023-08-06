@@ -1,0 +1,34 @@
+Metadata-Version: 2.0
+Name: pinyinflix
+Version: 1.1.0
+Summary: Converts mandarin chinese .srt files to pinyin-annotated .dfxp files that can be used with Netflix.
+Home-page: https://github.com/astromme/pinyinflix
+Author: Andrew Stromme
+Author-email: andrew.stromme@gmail.com
+License: APACHE2.0
+Keywords: netflix subtitle subtitles subs chinese mandarin pinyin hanzi srt dfxp
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: jieba
+Requires-Dist: pinyin
+
+# pinyinflix
+Converts mandarin chinese .srt files to pinyin-annotated .dfxp files that can be used with Netflix.
+
+## Installation
+
+```pip install pinyinflix```
+
+## Usage
+
+```pinyinflix input_file.srt output_file.dfxp```
+
+
