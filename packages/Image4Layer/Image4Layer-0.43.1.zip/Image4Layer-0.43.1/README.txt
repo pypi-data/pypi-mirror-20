@@ -1,0 +1,279 @@
+Image4Layer
+===========
+
+It is implemented by 'pillow' in blend mode of CSS3. And more...
+
+Install
+=======
+
+::
+
+    pip install image4layer
+
+Usage
+=====
+
+.. code:: python
+
+    from PIL import Image
+    from image4layer import Image4Layer
+
+    source = Image.open("tests/ducky.png")
+    backdrop = Image.open("tests/backdrop.png")
+
+.. code:: python
+
+    Image4Layer.__version__
+
+::
+
+    '0.43'
+
+Separable blend modes
+=====================
+
+normal
+~~~~~~
+
+.. code:: python
+
+    Image4Layer.normal(backdrop, source)
+
+.. figure:: imgs/output_5_0.png
+   :alt: png
+
+   png
+
+multiply
+~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.multiply(backdrop, source)
+
+.. figure:: imgs/output_7_0.png
+   :alt: png
+
+   png
+
+screen
+~~~~~~
+
+.. code:: python
+
+    Image4Layer.screen(backdrop, source)
+
+.. figure:: imgs/output_9_0.png
+   :alt: png
+
+   png
+
+overlay
+~~~~~~~
+
+.. code:: python
+
+    Image4Layer.overlay(backdrop, source)
+
+.. figure:: imgs/output_11_0.png
+   :alt: png
+
+   png
+
+darken
+~~~~~~
+
+.. code:: python
+
+    Image4Layer.darken(backdrop, source)
+
+.. figure:: imgs/output_13_0.png
+   :alt: png
+
+   png
+
+lighten
+~~~~~~~
+
+.. code:: python
+
+    Image4Layer.lighten(backdrop, source)
+
+.. figure:: imgs/output_15_0.png
+   :alt: png
+
+   png
+
+color-dodge
+~~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.color_dodge(backdrop, source)
+
+.. figure:: imgs/output_17_0.png
+   :alt: png
+
+   png
+
+color-burn
+~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.color_burn(backdrop, source)
+
+.. figure:: imgs/output_19_0.png
+   :alt: png
+
+   png
+
+hard-light
+~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.hard_light(backdrop, source)
+
+.. figure:: imgs/output_21_0.png
+   :alt: png
+
+   png
+
+soft-light
+~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.soft_light(backdrop, source)
+
+.. figure:: imgs/output_23_0.png
+   :alt: png
+
+   png
+
+difference
+~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.difference(backdrop, source)
+
+.. figure:: imgs/output_25_0.png
+   :alt: png
+
+   png
+
+exclusion
+~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.exclusion(backdrop, source)
+
+.. figure:: imgs/output_27_0.png
+   :alt: png
+
+   png
+
+Non-separable blend modes
+=========================
+
+hue
+~~~
+
+.. code:: python
+
+    Image4Layer.hue(backdrop, source)
+
+.. figure:: imgs/output_30_0.png
+   :alt: png
+
+   png
+
+saturation
+~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.saturation(backdrop, source)
+
+.. figure:: imgs/output_32_0.png
+   :alt: png
+
+   png
+
+color
+~~~~~
+
+.. code:: python
+
+    Image4Layer.color(backdrop, source)
+
+.. figure:: imgs/output_34_0.png
+   :alt: png
+
+   png
+
+luminosity
+~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.luminosity(backdrop, source)
+
+.. figure:: imgs/output_36_0.png
+   :alt: png
+
+   png
+
+More blend modes
+================
+
+vivid-light
+~~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.vivid_light(backdrop, source)
+
+.. figure:: imgs/output_39_0.png
+   :alt: png
+
+   png
+
+pin-light
+~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.pin_light(backdrop, source)
+
+.. figure:: imgs/output_41_0.png
+   :alt: png
+
+   png
+
+linear-dodge
+~~~~~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.linear_dodge(backdrop, source)
+
+.. figure:: imgs/output_43_0.png
+   :alt: png
+
+   png
+
+subtract
+~~~~~~~~
+
+.. code:: python
+
+    Image4Layer.subtract(backdrop, source)
+
+.. figure:: imgs/output_45_0.png
+   :alt: png
+
+   png
