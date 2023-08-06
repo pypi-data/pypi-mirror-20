@@ -1,0 +1,75 @@
+Metadata-Version: 2.0
+Name: hammerhead
+Version: 0.0.1
+Summary: Testing batch and stream of network packets
+Home-page: https://github.com/sieben/hammerhead
+Author: Rémy Léone
+Author-email: remy.leone@inria.fr
+License: BSD license
+Keywords: hammerhead
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: Click (>=6.0)
+
+===============================
+Hammerhead
+===============================
+
+
+.. image:: https://img.shields.io/pypi/v/hammerhead.svg
+        :target: https://pypi.python.org/pypi/hammerhead
+
+.. image:: https://img.shields.io/travis/sieben/hammerhead.svg
+        :target: https://travis-ci.org/sieben/hammerhead
+
+.. image:: https://readthedocs.org/projects/hammerhead/badge/?version=latest
+        :target: https://hammerhead.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. image:: https://pyup.io/repos/github/sieben/hammerhead/shield.svg
+     :target: https://pyup.io/repos/github/sieben/hammerhead/
+     :alt: Updates
+
+
+Testing batch and stream of network packets
+
+
+* Free software: BSD license
+* Documentation: https://hammerhead.readthedocs.io.
+
+
+Features
+--------
+
+* TODO
+
+Credits
+---------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+
+=======
+History
+=======
+
+0.0.1 (2017-03-29)
+------------------
+
+* First release on PyPI.
+
+
