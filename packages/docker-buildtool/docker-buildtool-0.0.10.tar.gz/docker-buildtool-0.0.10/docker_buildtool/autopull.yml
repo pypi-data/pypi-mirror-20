@@ -1,0 +1,11 @@
+docker-buildtool:
+  setup: pip install -e .
+  git: git@github.com:openai/docker-buildtool
+openai-schedule:
+  setup: pip install -e .
+  git: git@github.com:openai/openai-schedule
+gym:
+  setup: pip install -e .
+  git: git@github.com:openai/gym
+gym-demonstration:
+  git: git@github.com:openai/gym-demonstration
