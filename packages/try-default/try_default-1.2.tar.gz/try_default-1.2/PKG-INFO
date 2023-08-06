@@ -1,0 +1,37 @@
+Metadata-Version: 1.1
+Name: try_default
+Version: 1.2
+Summary: A microlibrary for handling exceptions
+Home-page: https://github.com/jocke-l/try-default
+Author: Joakim Saario
+Author-email: joakim@5monkeys.se
+License: 3-Clause BSD License
+Description: try-default
+        ===========
+        
+        A microlibrary for handling exceptions.
+        
+        Example:
+        
+        .. code-block:: python
+        
+            from try_default import try_default
+        
+            foo = []
+            result = try_default(lambda: foo[0], {IndexError: 'n/a'})
+            # result: 'n/a'
+        
+            foo = ['spam']
+            result = try_default(lambda: foo[0], {IndexError: 'n/a'})
+            # result: 'spam'
+        
+            bar = {'egg': foo[0]}
+            result = try_default(lambda: bar['spam'], {IndexError: 'n/a'})
+            # Raises KeyError
+        
+Keywords: util,functional,exceptions,microlibrary
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Intended Audience :: Developers
