@@ -1,0 +1,6 @@
+#!python
+
+import cricketlivescore
+score  = cricketlivescore.get()
+for i in range(len(score)):
+		print score[i].title
