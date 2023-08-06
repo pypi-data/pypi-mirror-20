@@ -1,0 +1,145 @@
+Metadata-Version: 1.0
+Name: Image4Layer
+Version: 0.43.3
+Summary: <h1 id="image4layer">Image4Layer</h1>
+<p>It is implemented by 'pillow' in blend mode of CSS3. And more...</p>
+<h1 id="install">Install</h1>
+<pre><code>pip install image4layer</code></pre>
+<h1 id="usage">Usage</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> PIL <span class="im">import</span> Image
+<span class="im">from</span> image4layer <span class="im">import</span> Image4Layer
+
+source <span class="op">=</span> Image.<span class="bu">open</span>(<span class="st">&quot;tests/ducky.png&quot;</span>)
+backdrop <span class="op">=</span> Image.<span class="bu">open</span>(<span class="st">&quot;tests/backdrop.png&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.__version__</code></pre></div>
+<pre><code>&#39;0.43&#39;</code></pre>
+<h1 id="separable-blend-modes">Separable blend modes</h1>
+<h3 id="normal">normal</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.normal(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_5_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="multiply">multiply</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.multiply(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_7_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="screen">screen</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.screen(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_9_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="overlay">overlay</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.overlay(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_11_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="darken">darken</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.darken(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_13_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="lighten">lighten</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.lighten(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_15_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="color-dodge">color-dodge</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.color_dodge(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_17_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="color-burn">color-burn</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.color_burn(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_19_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="hard-light">hard-light</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.hard_light(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_21_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="soft-light">soft-light</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.soft_light(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_23_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="difference">difference</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.difference(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_25_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="exclusion">exclusion</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.exclusion(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_27_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h1 id="non-separable-blend-modes">Non-separable blend modes</h1>
+<h3 id="hue">hue</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.hue(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_30_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="saturation">saturation</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.saturation(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_32_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="color">color</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.color(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_34_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="luminosity">luminosity</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.luminosity(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_36_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h1 id="more-blend-modes">More blend modes</h1>
+<h3 id="vivid-light">vivid-light</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.vivid_light(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_39_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="pin-light">pin-light</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.pin_light(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_41_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="linear-dodge">linear-dodge</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.linear_dodge(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_43_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="subtract">subtract</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Image4Layer.subtract(backdrop, source)</code></pre></div>
+<div class="figure">
+<img src="imgs/output_45_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+
+Home-page: https://github.com/pashango2/Image4Layer
+Author: Toshiyuki Ishii
+Author-email: pashango2@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
