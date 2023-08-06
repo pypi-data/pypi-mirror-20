@@ -1,0 +1,158 @@
+---
+meta:
+    description:
+        Autoscaling Group behind a Load Balancer
+
+    parameters:
+        vpc_id:
+            description:
+                The ID of the target VPC
+            value:
+
+        # For backwards compatibility, use vpc_id instead
+        vpc:
+            description:
+                The ID of the target VPC
+            value:
+
+        subnet_id:
+            description:
+                The ID of the target subnet.
+            value:
+
+
+        # For backwards compatibility, use subnet_id instead 
+        subnet:
+            description:
+                The ID of the target subnet.
+            value:
+
+        ami_id:
+            description:
+                The AMI ID
+            value:
+
+
+        # For backwards compatibility, use ami_id instead
+        image_id:
+            description:
+                The AMI ID
+            value:
+
+        key_name:
+            description:
+                The name of the SSH key to inject in the EC2 instances
+            value:
+
+        ip_whitelist:
+            description:
+                The whitelisted IPs that will be able to access the ELB
+            value:
+                - 0.0.0.0/0
+
+        sg_whitelist:
+            description:
+                The list of security groups that will be given access to the ELB
+            value: []
+
+        listeners:
+            description:
+                List of listeners in the ELB
+            value:
+                - {"protocol": "tcp", "port": 22}
+                - {"protocol": "http", "port": 80}
+                - {"protocol": "https", "port": 443}
+                - {"protocol": "https", "port": 4244}
+                - {"protocol": "https", "port": 4248}
+
+        instance_type:
+            description:
+                The instance type
+            value:
+                t2.micro
+
+        bid:
+            description:
+                If provided, spot instances at this bid will be used
+            value:
+
+        domain:
+            description:
+                The name of the DNS domain for the ELB
+            value:
+
+        hosted_zone_id:
+            description:
+                The ID of the Route 53 hosted DNS zone
+            value:
+
+        logging_enabled:
+            description:
+                Enable logging everywhere
+            value:
+                yes
+
+        public:
+            description:
+                Should the ELB be accessible from the internet?
+            value:
+                yes
+
+        desired_capacity:
+            description:
+                The desired ASG capacity
+            value:
+                1
+
+        maximum_capacity:
+            description:
+                The maximum ASG capacity
+            value:
+                100
+
+        minimum_capacity:
+            description:
+                The maximum ASG capacity
+            value:
+                0
+
+        ebs_optimized:
+            description:
+                Use EBS optimized instances
+            value:
+                no
+
+        spot_price:
+            description:
+                Set a bid if you want spot instances.
+            value:
+
+        idle_timeout:
+            description:
+                Close connection after being idle for this amount of seconds.
+            value:
+                1800
+
+        subdomain:
+            description:
+                A fixed subdomain for the ELB DNS name
+            value:
+
+        health_check_target:
+            description:
+                The target for the ELB health checks
+            value:
+                "HTTP:80/"
+
+        ssl_certificate_id:
+            description:
+                The ID of the SSL ACM certificate
+            value:
+
+        has_efs:
+            description:
+                If set to yes then an Elastic File System will be attached to the instances
+            value:
+                no
+
+
