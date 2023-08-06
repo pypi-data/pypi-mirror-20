@@ -1,0 +1,1 @@
+/bin/cc  -fPIC -I../../clipssrc/src -DCLIPS_MAJOR=6 -DCLIPS_MINOR=30 -L../../clipssrc/lib -L../clipssrc/lib -L/usr/local/lib -lclips -shared -Wl,-soname,testmod.so -o testmod.so CMakeFiles/testmod.dir/testmod.c.o -lpython2.7 

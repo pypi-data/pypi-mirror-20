@@ -1,0 +1,1 @@
+/bin/cc  -fPIC -I/usr/local/include/clips6 -DCLIPS_MAJOR=6 -DCLIPS_MINOR=30 -L/usr/local/lib  -lclips -shared -Wl,-soname,dummy_package.so -o dummy_package.so CMakeFiles/dummy_package.dir/dummy_package.c.o -lpython2.7 

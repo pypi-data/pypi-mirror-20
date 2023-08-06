@@ -1,0 +1,1 @@
+/bin/cc  -fPIC -I/usr/local/include/clips6 -DCLIPS_MAJOR=6 -DCLIPS_MINOR=30 -L/usr/local/lib  -lclips -shared -Wl,-soname,require.so -o require.so CMakeFiles/require.dir/require.c.o -lpython2.7 
