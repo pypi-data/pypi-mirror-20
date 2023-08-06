@@ -1,0 +1,28 @@
+==============
+0.3.8 -> 0.3.9
+==============
+
+On 22/03/2017:
+
+- Fix import of formatted OFX files (ie. with indented tags)
+
+
+==============
+0.3.6 -> 0.3.8
+==============
+
+On 06/11/2015:
+
+- Improve PEP8 Compliance
+- Manage file encoding based on OFX Header content
+- Fix problem with file names in uppercase (eg. README.rst)
+
+=====
+0.3.5
+=====
+
+- Port from mercurial to git.
+- Move from bitbucket to github.
+- Publish on Pypi.
+- Rework some code (4 years after)
+- Pypi and classifiers setup
