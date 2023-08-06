@@ -1,0 +1,328 @@
+Metadata-Version: 1.1
+Name: pygenstub
+Version: 1.0a6
+Summary: Python stub file generator.
+Home-page: https://bitbucket.org/uyar/pygenstub
+Author: H. Turgut Uyar
+Author-email: uyar@tekir.org
+License: GPL
+Description: pygenstub
+        =========
+        
+        pygenstub is a utility for generating stub files from Python source files.
+        It takes a source file as input and creates a stub file with the same base name
+        and the ``.pyi`` extension.
+        
+        pygenstub can be installed using pip::
+        
+          $ pip install pygenstub
+        
+        Installation creates a script named ``pygenstub`` which can be used
+        as follows::
+        
+          $ pygenstub foo.py
+        
+        This command will generate the file ``foo.pyi`` in the same directory
+        as the input file. If the output file already exists, it will be overwritten.
+        
+        .. tip::
+        
+           This utility can be used with the Unix ``watch`` command or PyCharm file
+           watchers to update stub files automatically when source files are modified.
+        
+        Features
+        --------
+        
+        If the docstring of a function includes a **sig** field, the value of that
+        field will be used to generate a prototype:
+        
+        :code:
+        
+           .. code-block:: python
+        
+              def foo(a, b):
+                  """Do foo.
+        
+                  :sig: (int, str) -> None
+                  """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              def foo(a: int, b: str) -> None: ...
+        
+        Methods are handled the same way as functions except that there is no type hint
+        for the ``self`` parameter (assuming it's the first parameter):
+        
+        :code:
+        
+           .. code-block:: python
+        
+              class Foo:
+                  def foo(self, a):
+                      """Do foo.
+        
+                      :sig: (int) -> None
+                      """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              class Foo:
+                  def foo(self, a: int) -> None: ...
+        
+        **Imported names**
+        
+        Imported type names in the source will be used in the stub file *if needed*:
+        
+        :code:
+        
+           .. code-block:: python
+        
+              from x import A, B, C
+        
+              def foo(a, b):
+                  """Do foo.
+        
+                  :sig: (A, B) -> A
+                  """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              from x import A, B
+        
+              def foo(a: A, b: B) -> A: ...
+        
+        Note that the name ``C`` is not imported in the stub file.
+        
+        **Dotted names**
+        
+        Dotted type names will generate import lines in the stub file if they're
+        not already imported:
+        
+        :code:
+        
+           .. code-block:: python
+        
+              import x
+        
+              def foo(a, b):
+                  """Do foo.
+        
+                  :sig: (x.A, y.B) -> m.n.C
+                  """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              import x
+              import y
+              import m.n
+        
+              def foo(a: x.A, b: y.B) -> m.n.C: ...
+        
+        **Names from the typing module**
+        
+        Unresolved names will be looked up from the ``typing`` module.
+        
+        :code:
+        
+           .. code-block:: python
+        
+              def foo(a, b):
+                  """Do foo.
+        
+                  :sig: (List[int], Mapping[str, int]) -> Iterable[str]
+                  """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              from typing import Iterable, List, Mapping
+        
+              def foo(a: List[int], b: Mapping[str, int]) -> Iterable[str]: ...
+        
+        **Default values**
+        
+        If a parameter has a default value, the prototype will contain the triple dots
+        placeholder for it:
+        
+        :code:
+        
+           .. code-block:: python
+        
+              def foo(a, b=''):
+                  """Do foo.
+        
+                  :sig: (int, Optional[str]) -> None
+                  """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              from typing import Optional
+        
+              def foo(a: int, b: Optional[str] = ...) -> None: ...
+        
+        **Base classes**
+        
+        The imports needed for base classes will be included or generated using
+        the same rules as described above (imported, dotted, etc.):
+        
+        :code:
+        
+           .. code-block:: python
+        
+              from x import A
+        
+              class Foo(A, y.B):
+                  def foo(self, a):
+                      """Do foo.
+        
+                      :sig: (int) -> None
+                      """
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              from x import A
+              import y
+        
+              class Foo(A, y.B):
+                  def foo(self, a: int) -> None: ...
+        
+        **Class signatures**
+        
+        If the docstring of a class has a signature field, it will be used as
+        the signature field of its ``__init__`` method unless that method already
+        has a signature.
+        
+        :code:
+        
+           .. code-block:: python
+        
+              class Foo:
+                  """A foo.
+        
+                  :sig: (int) -> None
+                  """
+        
+                  def __init__(self, a):
+                      self.a = a
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              class Foo:
+                  def __init__(self, a: int) -> None: ...
+        
+        **Type comments**
+        
+        Type hints for assignments can be written using ``# sig:`` comments.
+        
+        :code:
+        
+           .. code-block:: python
+        
+              n = 42  # sig: int
+        
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              n = ...  # type: int
+        
+        The rules for importing names as described above also apply here.
+        
+        .. note::
+        
+           The reason for using ``# sig`` comment instead of a ``# type`` comment
+           would be to avoid having to import the types.
+        
+        **Instance variables**
+        
+        Within classes, assingments to attributes of ``self`` will generate
+        annotations under the class:
+        
+        :code:
+        
+           .. code-block:: python
+        
+              class Foo:
+                  def foo(self):
+                      self.y = 'spam'  # sig: str
+        
+        :stub:
+        
+           .. code-block:: python
+        
+              class Foo:
+                  y = ...  # type: str
+        
+        Disclaimer
+        ----------
+        
+        Some or all of these actions are probably in the "not a good idea" category.
+        Anyway, if you're not using ``.pyi`` files, it should be harmless.
+        
+        
+        
+        
+        History
+        =======
+        
+        1.0a6 (2017-03-06)
+        ------------------
+        
+        * Improvements on imported names.
+        * Updated documentation and tests.
+        
+        1.0a5 (2017-02-07)
+        ------------------
+        
+        * Support for methods.
+        * Support for instance variables.
+        * Support for base classes.
+        * Shortened the field name from "signature" to "sig".
+        * Use three dots instead of actual value for parameter defaults.
+        * Dropped support for Python 2.
+        
+        1.0a4 (2017-01-06)
+        ------------------
+        
+        * Long stubs are now spread over multiple lines.
+        * Better handling of parameter defaults that are tuples.
+        * Bugfix: handling of parameter defaults that have the value None.
+        
+        1.0a3 (2017-01-06)
+        ------------------
+        
+        * Proper support for names from the typing module in input parameters.
+        * Added parameter default values to stubs.
+        
+        1.0a2 (2017-01-03)
+        ------------------
+        
+        * Support for Python 2.7.
+        
+        1.0a1 (2017-01-03)
+        ------------------
+        
+        * First release on PyPI.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.4
