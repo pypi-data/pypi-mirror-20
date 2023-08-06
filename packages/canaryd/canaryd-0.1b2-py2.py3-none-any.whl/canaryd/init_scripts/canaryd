@@ -1,0 +1,40 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          canaryd
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start canaryd
+# Description:       Start canaryd
+### END INIT INFO
+
+DAEMON="canaryd"
+NAME="tinc"
+DESC="tinc daemons"
+TCONF="/etc/tinc"
+NETSFILE="$TCONF/nets.boot"
+NETS=""
+
+# Fail if canaryd doesn't exist
+command -v $DAEMON || exit 1
+
+# Load any defaults
+[ -r /etc/default/canaryd ] && . /etc/default/canaryd
+
+case "$1" in
+  start)
+    echo "Starting canaryd..."
+  ;;
+  stop)
+    echo "Stopping canaryd..."
+  ;;
+  status)
+    echo "Status?"
+  ;;
+  *)
+    echo "Usage: /etc/init.d/$NAME {start|stop|status}"
+    exit 1
+  ;;
+esac
+
+exit 0
