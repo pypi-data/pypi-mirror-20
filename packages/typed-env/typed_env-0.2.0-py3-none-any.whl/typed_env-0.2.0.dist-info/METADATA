@@ -1,0 +1,38 @@
+Metadata-Version: 2.0
+Name: typed-env
+Version: 0.2.0
+Summary: Fast-fail environment variable library.
+Home-page: https://github.com/mkurnikov/typed-env
+Author: Maxim Kurnikov
+Author-email: maxim.kurnikov@gmail.com
+License: MIT
+Platform: UNKNOWN
+
+How to publish to Pypi:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Ensure that version is bumped:
+
+::
+
+    bumpversion major/minor/patch
+
+Clean building directory:
+
+::
+
+    rm -rf build/ dist/ 
+
+Build a wheel:
+
+::
+
+    python setup.py bdist_wheel
+
+And upload to the pypi:
+
+::
+
+    twine upload dist/* -r pypi
+
+
