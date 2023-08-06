@@ -1,0 +1,75 @@
+Metadata-Version: 1.1
+Name: CandyTable
+Version: 1.7
+Summary: UNKNOWN
+Home-page: https://github.com/david30907d/HomeWork/tree/master/Python-%E6%9B%BE%E5%AD%B8%E6%96%87/hw1-CandyCrush
+Author: davidtnfsh
+Author-email: davidtnfsh@gmail.com
+License: GPL3.0
+Download-URL: https://github.com/david30907d/HomeWork/archive/v1.7.tar.gz
+Description: 
+        # CandyTable
+        
+        一個產生出CandyCrush初始table的小工具
+        
+        ## Prerequisities
+        
+        本套件pythno2跟python3皆通用<br>
+        若不能執行麻煩回報`Pull Requests`
+        
+        ## Installing
+        
+        - 安裝 Install：`pip install CandyTable`
+        
+        ## Running & Testing
+        
+        ## Run
+        
+        執行下列指令：
+        
+        ```
+        import CandyTable
+        c = CandyTable.CandyTable(10,10)
+        c.main()
+        ```
+        
+        - 輸入想要的顏色數量： ![table3](candy3.png)
+        - 最高支援到35色，若初始圖片不可能讓三顆糖果連線，則自動refresh： ![table35](candy35_refresh.png)
+        
+          ![table35-1](candy35final.png)
+        
+        - 取得這張CandyTable的資訊：<br>
+          `a.table`：
+        
+          ```
+          {
+            10: u'[0;33;40m 🍬 [0m',
+            11: u'[0;33;40m 🍬 [0m',
+            12: u'[0;32;40m 🍬 [0m',
+            13: u'[0;31;40m 🍬 [0m',
+            14: u'[0;33;40m 🍬 [0m',
+            15: u'[0;33;40m 🍬 [0m',
+            16: u'[0;32;40m 🍬 [0m',
+            17: u'[0;31;40m 🍬 [0m',
+            18: u'[0;33;40m 🍬 [0m',
+            19: u'[0;32;40m 🍬 [0m',
+            ...
+            108: u'[0;33;40m 🍬 [0m',
+            109: u'[0;33;40m 🍬 [0m'
+          }
+          ```
+        
+          x座標為1~10，y座標為0~9<br>
+          字串一樣代表該位置的糖果是一樣的。
+        
+        ## Built With
+        
+        - python2.7
+        
+        ## License
+        
+        This package use `GPL3.0` License.
+        
+        
+Keywords: CandyTable
+Platform: UNKNOWN
