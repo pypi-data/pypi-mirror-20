@@ -1,0 +1,63 @@
+{% load i18n %}
+
+<!-- Title Block -->
+<div class="library-title-block">
+    <div class="">
+        <h4 class="title-block-title" style=""> {% trans "Widget Manager" %} </h4>
+    </div>
+
+    <!-- nav bar -->
+    <ul class="nav nav-tabs library-tools">
+        <li class="active">
+            <a href="#widget-crud-settings" class="nav-library-tab-link" data-toggle="tab">
+                <i class="ion-settings add-tooltip library-tools-icon" data-bind="tooltip: { title: '{% trans "Settings" %}', placement: 'bottom' }"></i>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<!-- Tabs Content -->
+<div class="tab-content listing-container">
+
+    <div id="widget-crud-settings" class="tab-pane fade in active">
+
+        <div class="node-widget-label" style="">
+            <div class="control-label">
+                {% trans "Widget Label" %}
+            </div>
+            <div class="pad-no">
+                <input type="" placeholder="{% trans "Widget Label" %}" id="" class="form-control input-md widget-input" data-bind="value: widget().get('label'), valueUpdate: 'keyup'">
+            </div>
+        </div>
+
+        <div data-bind='component: {
+            name: widgetLookup[widget().get("widget_id")()].name,
+            params: {
+                config: widget().configJSON,
+                configForm: true,
+                value: ko.observable(null),
+                node: widget().node,
+                graph: graph
+            }
+        }'></div>
+
+        <!-- ko if: widget().node.datatypeConfigComponent -->
+        <div data-bind='component: {
+            name: widget().node.datatypeConfigComponent,
+            params: widget().node
+        }'></div>
+        <!-- /ko -->
+
+        <div class="node-widget-label" style="">
+            <div class="control-label">
+                {% trans "Template" %}
+            </div>
+            <div class="pad-no" data-bind="with: widget">
+                <select class="design" data-bind="value: $data.get('widget_id'), options: $parent.widgetList(), optionsText: 'name', optionsValue: 'id', chosen: {disable_search_threshold: 10, width: '100%'}"></select>
+            </div>
+        </div>
+
+    </div>
+
+</div>
