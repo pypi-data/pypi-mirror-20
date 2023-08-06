@@ -1,0 +1,82 @@
+Metadata-Version: 2.0
+Name: spotify-downloader
+Version: 0.4
+Summary: A CLI tool to download albums on Spotify via youtube-dl.
+Home-page: https://github.com/AnthonyBloomer
+Author: Anthony Bloomer
+Author-email: ant0@protonmail.ch
+License: UNKNOWN
+Keywords: spotify,youtube
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Requires-Dist: eyed3
+Requires-Dist: requests
+Requires-Dist: spotipy
+
+spotify-dl
+========================
+
+A command line utility to download albums on Spotify via youtube-dl.
+
+
+Install
+^^^^^^^
+
+::
+
+    pip install spotify-downloader
+
+
+Setup
+^^^^^
+
+You will need to set your youtube API key as an environment variable.
+
+::
+
+    export YOUTUBE_API_KEY='your_api_key'
+
+
+Usage
+^^^^^
+
+::
+
+    usage: spotify-dl [-h] album_id
+
+    positional arguments:
+      album_id    The Spotify ID for the album.
+
+    optional arguments:
+      -h, --help  show this help message and exit
+
+Example
+^^^^^^^
+
+::
+
+    spotify-dl 60cRh5MCFNOrFeQykKnDej
+
+
+Developing locally
+^^^^^^^^^^^^^^^^^^
+
+::
+
+    git clone https://github.com/AnthonyBloomer/spotify-dl.git && cd spotify-dl
+    virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
+    python setup.py install
+
+
+
+
+
+
