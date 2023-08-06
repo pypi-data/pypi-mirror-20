@@ -1,0 +1,6 @@
+[console_scripts]
+gcli = guillotina.commands.cli:CliCommand
+gcreate = guillotina.commands.create:CreateCommand
+gshell = guillotina.commands.shell:ShellCommand
+guillotina = guillotina.commands.server:ServerCommand
+
