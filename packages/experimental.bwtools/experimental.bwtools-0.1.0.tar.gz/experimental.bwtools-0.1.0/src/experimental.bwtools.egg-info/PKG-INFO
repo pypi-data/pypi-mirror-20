@@ -1,0 +1,94 @@
+Metadata-Version: 1.1
+Name: experimental.bwtools
+Version: 0.1.0
+Summary: Experimental bandwidth tools
+Home-page: https://pypi.python.org/pypi/experimental.bwtools
+Author: Alessandro Pisa
+Author-email: alessandro.pisa@gmail.com
+License: GPL version 2
+Description: .. This README is meant for consumption by humans and pypi. Pypi can render rst files so please do not use Sphinx features.
+           If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
+           This text does not appear on pypi or github. It is a comment.
+        
+        ====================
+        experimental.bwtools
+        ====================
+        
+        A product that tries to understand the network connection quality
+        of the clients
+        
+        Documentation
+        -------------
+        
+        This package injects a small JavaScript file that
+        every N minutes
+        starts an asynchronous download of reosources from the site.
+        
+        The measured performanced are then stored in a cookie and
+        can be used to activate or deactivate features in your site.
+        
+        This package does not take care of switching on and off the features.
+        
+        
+        Installation
+        ------------
+        
+        Install experimental.bwtools by adding it to your buildout::
+        
+            [buildout]
+        
+            ...
+        
+            eggs =
+                experimental.bwtools
+        
+        
+        and then running ``bin/buildout``
+        
+        
+        Contribute
+        ----------
+        
+        - Issue Tracker: https://github.com/collective/experimental.bwtools/issues
+        - Source Code: https://github.com/collective/experimental.bwtools
+        
+        
+        Support
+        -------
+        
+        If you are having issues, please let us know:
+        
+        - https://github.com/collective/experimental.bwtools/issues
+        
+        License
+        -------
+        
+        The project is licensed under the GPLv2.
+        
+        
+        Contributors
+        ============
+        
+        - Alessandro Pisa, alessandro.pisa@gmail.com
+        
+        
+        Changelog
+        =========
+        
+        
+        0.1.0 (2017-03-02)
+        ------------------
+        
+        - Initial release.
+          [ale-rt]
+        
+Keywords: Python Plone
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Plone
+Classifier: Framework :: Plone :: 5.0
+Classifier: Framework :: Plone :: 5.1
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
