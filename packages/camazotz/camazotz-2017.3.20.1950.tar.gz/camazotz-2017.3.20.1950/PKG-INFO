@@ -1,0 +1,59 @@
+Metadata-Version: 1.0
+Name: camazotz
+Version: 2017.3.20.1950
+Summary: template Python program
+Home-page: https://github.com/wdbm/camazotz
+Author: Will Breaden Madden
+Author-email: wbm@protonmail.ch
+License: GPLv3
+Description: camazotz
+        ========
+        
+        C code in Python code
+        
+        introduction
+        ============
+        
+        Camazotz compiles and loads C code in Python code. Specifically, it
+        enables insertion of C code directly into Python files, which can be
+        dynamically linked and called via ctypes.
+        
+        setup
+        =====
+        
+        .. code:: bash
+        
+            pip install camazotz
+        
+        usage
+        =====
+        
+        .. code:: bash
+        
+            export CC="gcc"
+        
+        .. code:: python
+        
+            import camazotz
+        
+            library = camazotz.C(
+                """
+                #include <stdio.h>
+                
+                int factorial(int x){
+                    int result = 1;
+                    while (x > 1){
+                        result *= x;
+                        x--;
+                    }
+                
+                    return result;
+                }
+                """
+            )
+        
+            function_factorial = library["factorial"]
+            print("5! =", function_factorial(5))
+            print("4! =", function_factorial(4))
+        
+Platform: UNKNOWN
