@@ -1,0 +1,19 @@
+pip-tools
+check-manifest
+pylint
+pytest
+pytest-cov
+docutils
+wheel
+twine
+
+# https://github.com/travis-ci/travis-ci/issues/7028
+# (remove after upgrading to Travis trusty images)
+docutils < 0.13.1
+
+# Pin down the versions of Sphinx and Alabaster as used on Read the Docs
+# (you can see them in the generated page footers).
+# This will have to be checked and synchronized from time to time.
+# Not sure if good idea.
+Sphinx==1.3.5
+alabaster==0.7.9
