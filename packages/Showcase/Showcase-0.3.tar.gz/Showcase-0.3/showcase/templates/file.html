@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Viewing /{{ fname }}{% endblock %}
+
+{% block content %}
+<pre><code>{{ body.decode('utf-8') }}</code></pre> 
+{% endblock %}
