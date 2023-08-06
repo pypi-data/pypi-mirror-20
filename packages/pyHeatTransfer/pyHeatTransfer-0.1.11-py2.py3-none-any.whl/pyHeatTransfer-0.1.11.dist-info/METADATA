@@ -1,0 +1,33 @@
+Metadata-Version: 2.0
+Name: pyHeatTransfer
+Version: 0.1.11
+Summary: Heat Transfer Library v0.1 includes GUI and nacent materials database.
+Home-page: https://github.com/OSUmageed/pyHeatTransfer
+Author: Daniel J Magee
+Author-email: mageed@oregonstate.edu
+License: MIT
+Keywords: heat transfer engineering education
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: CoolProp
+Requires-Dist: deco
+Requires-Dist: kivy
+Requires-Dist: matplotlib
+Requires-Dist: nose
+Requires-Dist: numpy
+Requires-Dist: pygame
+
+The GUI launches a simulation that computes temperature of 3D solid in environment with finite difference scheme returns contour plot on plane.
+
+
