@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block ng_app %}fileManager{% endblock %}
+
+{% block css %}
+    {% if not debug %}
+    <link href="{{ url_for('static', filename='dist/fileManager.css') }}" rel="stylesheet">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{#    <div id="file-manager" class="page-layout simple right-sidenav layout-row full-height" layout="row"#}
+{#         ng-controller="FileManagerController as vm" style="overflow: hidden;">#}
+    <div id="file-manager" class="page-layout simple right-sidenav" layout="row"
+         ng-controller="FileManagerController">
+
+        <!-- MAIN SIDENAV (EXTRA SIDENAV) -->
+        <md-sidenav class="main-sidenav" md-component-id="main-sidenav"
+                    ng-include="fmTemplates.main_sidenav.templateUrl" ms-scroll
+                    ms-sidenav-helper>
+        </md-sidenav>
+        <!-- / MAIN SIDENAV (EXTRA SIDENAV) -->
+
+        <!-- CENTER -->
+        <div class="center" layout="column" flex>
+
+            <!-- HEADER -->
+            <div class="header md-accent-bg">
+
+                <div class="header-content" layout="column" layout-align="space-between">
+
+                    <!-- TOOLBAR -->
+                    <div class="toolbar" layout="row" layout-align="space-between">
+
+                        <md-button class="md-icon-button main-sidenav-toggle" ng-click="toggleSidenav('main-sidenav')"
+                                   aria-label="Toggle Main Sidenav" translate
+                                   translate-attr-aria-label="FILE.TOOGLE_MAIN_SIDENAV">
+                            <md-icon md-font-set="mdi" md-font-icon="mdi-menu" class="icon"></md-icon>
+                        </md-button>
+
+                        <div class="right-side" layout="row">
+                            <md-button class="md-icon-button" aria-label="Search" translate
+                                       translate-attr-aria-label="FM.SEARCH">
+                                <md-icon md-font-set="mdi" md-font-icon="mdi-magnify"></md-icon>
+                                <md-tooltip><span translate="FM.SEARCH">Search</span></md-tooltip>
+                            </md-button>
+
+                            <md-button ng-if="currentView === 'list'" class="md-icon-button"
+                                       ng-click="toggleView()"
+                                       aria-label="view type" translate
+                                       translate-attr-aria-label="FM.GRID_VIEW">
+                                <md-icon md-font-set="mdi" md-font-icon="mdi-view-module"></md-icon>
+                                <md-tooltip><span translate="FM.GRID_VIEW">Grid View</span></md-tooltip>
+                            </md-button>
+
+                            <md-button ng-if="currentView === 'grid'" class="md-icon-button" aria-label="view type"
+                                       ng-click="toggleView()" translate
+                                       translate-attr-aria-label="FM.LIST_VIEW">
+                                <md-icon md-font-set="mdi" md-font-icon="mdi-view-headline"></md-icon>
+                                <md-tooltip><span translate="FM.LIST_VIEW">List View</span></md-tooltip>
+                            </md-button>
+                        </div>
+                    </div>
+                    <!-- / TOOLBAR -->
+
+                    <!-- BREADCRUMB -->
+                    <div class="breadcrumb text-truncate" layout="row" layout-align="start center">
+                        <span ng-click="navigateTo(root);">Root</span>
+                        <md-icon md-font-set="mdi" md-font-icon="mdi-chevron-right" class="icon separator"
+                                 ng-if="breadcrumb.length"></md-icon>
+                        <span ng-repeat="entry in breadcrumb track by $index" ng-class="($last ? 'is-last' : '')"
+                              ng-click="navigateTo(entry.path)">
+                            {% raw %}{{ entry.name }}{% endraw %}
+                            <md-icon md-font-set="mdi" md-font-icon="mdi-chevron-right" class="icon separator"></md-icon>
+                        </span>
+                    </div>
+                    <!-- / BREADCRUMB -->
+                </div>
+
+                <!-- ADD FILE BUTTON -->
+                <div id="file-uploader"
+                     flow-init="ngFlowOptions"
+                     flow-name="ngFlow.flow"
+                     flow-files-submitted="upload()"
+                     flow-file-added="fileAdded($file)"
+                     flow-file-success="fileSuccess($file, $message)"
+                     flow-complete="uploadComplete()">
+
+                    <md-button flow-btn class="add-file-button md-fab md-warn"
+                               aria-label="Add file" translate
+                               ng-click="notImplemented();"
+                               translate-attr-aria-label="FM.ADD_FILE">
+                        <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
+                    </md-button>
+                </div>
+                <!-- / ADD FILE BUTTON -->
+            </div>
+            <!-- / HEADER -->
+
+            <!-- CONTENT -->
+            <md-content class="content" flex ms-scroll>
+                <div class="loading" ng-if="!isLoaded">
+                    <md-progress-circular md-diameter="96"></md-progress-circular>
+                </div>
+                <div ng-if="!entries.length && isLoaded">
+                    <div flex-xs flex="40" flex-offset="30" layout="column" id="directory-empty">
+                        <md-card>
+                            <div class="md-card-image">
+                                <i class="mdi mdi-package-variant"></i>
+                            </div>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Directory is empty</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>
+                                    There is still nothing in this directory. This may be a good time to upload a file.
+                                    Think about it, okay?
+                                </p>
+                            </md-card-content>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button class="md-icon-button" aria-label="Favorite">
+                                    <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button" aria-label="Settings">
+                                    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button" aria-label="Share">
+                                    <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+                                </md-button>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+
+                </div>
+                <div ng-if="entries.length && currentView === 'grid'"
+                     ng-include="fmTemplates.grid_view.templateUrl"></div>
+                <div ng-if="entries.length && currentView === 'list'"
+                     ng-include="fmTemplates.list_view.templateUrl"></div>
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+        <!-- SIDENAV -->
+        <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
+                    md-component-id="details-sidenav" ng-controller="DetailsSidenavCtrl"
+                    ng-include="fmTemplates.details_sidenav.templateUrl"
+                    ms-scroll ms-sidenav-helper>
+        </md-sidenav>
+        <!-- / SIDENAV -->
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    {% if not debug %}
+        <script src="{{ url_for('static', filename='dist/fileManager.js') }}"></script>
+    {% endif %}
+    <script>
+        {% if debug %}
+        SystemJS.import('/.nekumo/static/src/components/fileManager/manager.js');
+        {% else %}
+            SystemJS.import('src/components/fileManager/manager.js');
+        {% endif %}
+    </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+
+{% endblock %}

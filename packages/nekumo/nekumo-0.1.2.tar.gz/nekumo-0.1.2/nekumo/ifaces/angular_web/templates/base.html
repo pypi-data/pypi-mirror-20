@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="{% block ng_app %}{% endblock %}">
+    <head>
+        {% block head %}
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <!-- https://docs.angularjs.org/error/$location/nobase -->
+        <base href="/">
+        <meta name="description" content="">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <base href="/">
+
+        {% if not debug %}
+        <link href="{{ url_for('static', filename='dist/common.css') }}" rel="stylesheet">
+        {% endif %}
+        {% block extra_head %}
+            {% block css %}{% endblock %}
+        {% endblock %}
+        {% endblock %}
+    </head>
+    <body ng-controller="nekumoCtrl" class="ng-cloak" md-theme="default">
+        <div id="main" class="animate-slide-up {% block main_class %}{% endblock %}" ui-view="main" layout="column">
+            <div id="layout-content-only" class="template-layout" layout="column" flex ng-controller="nekumoCtrl">
+                <md-content id="content" class="animate-slide-up md-hue-2" ui-view="content" flex>
+                    {% block content %}
+                    {% endblock %}
+                </md-content>
+            </div>
+        </div>
+        <script>
+            var debug = {{ debug|tojson|safe }};
+        </script>
+        {% if debug %}
+            <script src="{{ url_for('static', filename='src/libs/system.js') }}"></script>
+            <script src="{{ url_for('static', filename='config.js') }}"></script>
+        {% else %}
+            <script src="{{ url_for('static', filename='dist/system-build.js') }}"></script>
+            <script src="{{ url_for('static', filename='dist/common.js') }}"></script>
+        {% endif %}
+
+        {% block js %}{% endblock %}
+    </body>
+</html>

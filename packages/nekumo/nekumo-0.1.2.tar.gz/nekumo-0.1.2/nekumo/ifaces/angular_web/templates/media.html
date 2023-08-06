@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block ng_app %}mediaApp{% endblock %}
+
+{% block css %}
+    {% if not debug %}
+    <link href="{{ url_for('static', filename='dist/media.css') }}" rel="stylesheet">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{#    <div id="file-manager" class="page-layout simple right-sidenav layout-row full-height" layout="row"#}
+{#         ng-controller="FileManagerController as vm" style="overflow: hidden;">#}
+    <div id="media" class="page-layout simple right-sidenav" layout="row" ng-controller="mediaCtrl">
+
+        <!-- MAIN SIDENAV (EXTRA SIDENAV) -->
+        <md-sidenav class="main-sidenav" md-component-id="main-sidenav"
+                    ng-include="templates.main_sidenav.templateUrl" ms-scroll
+                    ms-sidenav-helper>
+        </md-sidenav>
+        <!-- / MAIN SIDENAV (EXTRA SIDENAV) -->
+
+        <!-- CENTER -->
+        <div class="center" layout="column" flex>
+
+            <!-- HEADER -->
+            <div class="header md-accent-bg">
+
+                <div class="header-content" layout="column" layout-align="space-between">
+                    <div ng-include="templates.header.templateUrl" include-replace></div>
+
+                    <!-- BREADCRUMB -->
+                    <div class="breadcrumb text-truncate" layout="row" layout-align="start center">
+                        <span ng-click="navigateTo(root);">Root</span>
+                        <md-icon md-font-set="mdi" md-font-icon="mdi-chevron-right" class="icon separator"
+                                 ng-if="breadcrumb.length"></md-icon>
+                        <span ng-repeat="entry in breadcrumb track by $index" ng-class="($last ? 'is-last' : '')"
+                              ng-click="navigateTo(entry.path)">
+                            {% raw %}{{ entry.name }}{% endraw %}
+                            <md-icon md-font-set="mdi" md-font-icon="mdi-chevron-right" class="icon separator"></md-icon>
+                        </span>
+                    </div>
+                    <!-- / BREADCRUMB -->
+                </div>
+            </div>
+            <md-nav-bar
+                    class="center"
+                    md-selected-nav-item="category"
+                    nav-bar-aria-label="navigation links">
+                <md-nav-item md-nav-click="goto('page1')" name="all">
+                    All
+                </md-nav-item>
+                <md-nav-item md-nav-click="goto('page2')" name="images">
+                    Images
+                </md-nav-item>
+                <md-nav-item md-nav-click="goto('page3')" name="videos">
+                    Video
+                </md-nav-item>
+                <md-nav-item md-nav-click="goto('page3')" name="audios">
+                    Audios
+                </md-nav-item>
+                <md-nav-item md-nav-click="goto('page3')" name="config">
+                    Config
+                </md-nav-item>
+            </md-nav-bar>
+
+            <!--
+            <md-tabs md-dynamic-height id="media-tabs" md-center-tabs="true">
+                <md-tab label="All">
+
+                </md-tab>
+                <md-tab label="Images">
+
+                </md-tab>
+                <md-tab label="Video">
+
+                </md-tab>
+                <md-tab label="Music">
+
+                </md-tab>
+            </md-tabs>
+
+            -->
+
+            <!-- / HEADER -->
+
+            <!-- CONTENT -->
+            <md-content class="content" flex ms-scroll>
+{#                <media selected-src="'http://192.168.88.11:7080{{ entry.iface_path }}'"></media>#}
+                <!--
+                <div class="loading" ng-if="!isLoaded">
+                    <md-progress-circular md-diameter="96"></md-progress-circular>
+                </div> -->
+                <!-- <div ng-include="'/.nekumo/static/src/components/media/grid.html'"></div> -->
+                <grid entries="imageEntries" title="Images"
+                      is-selected="category == 'images'"
+                      ng-if="['images', 'all'].indexOf(category) >= 0"></grid>
+                <grid entries="videoEntries" title="Videos"
+                      is-selected="category == 'videos'"
+                      ng-if="['videos', 'all'].indexOf(category) >= 0"></grid>
+                <grid entries="audioEntries" title="Audios"
+                      is-selected="category == 'audios'"
+                      ng-if="['audios', 'all'].indexOf(category) >= 0"></grid>
+
+                <!-- TODO: Loop infinito -->
+                <!--
+                <grid entries="otherEntries | orderBy:['-isDir', 'name']" title="Others"
+                      is-selected="category == 'others'"
+                      ng-if="['others', 'all'].indexOf(category) >= 0"></grid>
+                      -->
+
+                <!-- TODO:  | orderBy:['-isDir', 'name'] (loop infinito) -->
+                <grid entries="otherEntries" title="Others"
+                      ng-if="['others', 'all'].indexOf(category) >= 0"
+                                      is-selected="category == 'others'"
+                                      ></grid>
+
+                <ng-include src="templates.no_results.templateUrl"
+                    ng-if="category == 'all' && !imageEntries && !videoEntries && !audioEntries &&
+                    !otherEntries"></ng-include>
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    {% if not debug %}
+        <script src="{{ url_for('static', filename='dist/media.js') }}"></script>
+        <!-- TODO: -->
+        <script src="{{ url_for('static', filename='dist/videoPlayer.js') }}"></script>
+    {% endif %}
+    <script>
+    {% if debug %}
+        SystemJS.import('/.nekumo/static/src/components/media/media.js');
+    {% else %}
+        SystemJS.import('src/components/media/media.js');
+    {% endif %}
+    </script>
+    <!-- Chromecast -->
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+
+{% endblock %}
