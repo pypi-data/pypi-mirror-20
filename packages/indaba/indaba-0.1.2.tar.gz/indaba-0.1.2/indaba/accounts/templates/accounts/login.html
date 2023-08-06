@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+{% block headline %}<h1>Login</h1>{% endblock%}
+
+{% block content %}
+    <div class="container">
+{% crispy form %}
+</div>
+{% endblock %}

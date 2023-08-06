@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<section id="contact" class="single-page scrollblock">
+      <div class="container">
+        
+        <h1>Submit your talk for PyconZim</h1>
+{% crispy form %}
+</div>
+      <!-- /.container -->
+    </section>
+{% endblock %}

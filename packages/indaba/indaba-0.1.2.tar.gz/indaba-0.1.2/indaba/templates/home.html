@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ******************** HeaderWrap ********************-->
+    <div id="headerwrap">
+      <header class="clearfix">
+        <!-- <h1><span>PyConZim 2017</span> The conference for the python programming community.</h1> -->
+        <div class="container">
+          <div class="row">
+            <div class="span12">
+              <h2>Join our maling list for updates</h2>
+              <input type="text" name="your-email" placeholder="you@yourmail.com" class="cform-text" size="40" title="your email">
+              <input type="submit" value="Notify me" class="cform-submit">
+            </div>
+          </div>
+          <div class="row">
+            <div class="span12">
+              <ul class="icon">
+                <li><a href="#" target="_blank"><i class="icon-twitter-circled"></i></a></li>
+                <li><a href="#" target="_blank"><i class="icon-gplus-circled"></i></a></li>
+                <li><a href="#" target="_blank"><i class="icon-flickr"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+<!--******************** Team Section ********************-->
+    <section id="talks" class="single-page scrollblock">
+      <div class="container">
+        <div class="align"><i class="icon-megaphone"></i></div>
+        <h1>Call For Speakers</h1>
+        <!-- Five columns -->
+        <div class="row">
+          
+          <!-- ./span2 -->
+          
+          
+          
+          
+          <!-- ./span2 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+          <div class="span10 offset1">
+            <hr class="featurette-divider">
+            <div class="featurette">
+              <h2 class="featurette-heading">Want to speak at Pycon Zimbabwe 2017? <span class="muted">|<a href={% url 'talks:create_talks' %}> Please submit a talk proposal!</a></span></h2>
+              <p>We are accepting proposals for talks, workshops(tutorials), sprints, and demos.</p>
+              <p></p>
+              <p></p>
+            </div>
+            <!-- /.featurette -->
+            <hr class="featurette-divider">
+          </div>
+          <!-- .span10 -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+
+
+<!--******************** Feature ********************-->
+    <!--<div class="scrollblock">-->
+    <!--  <section id="feature">-->
+    <!--    <div class="container">-->
+    <!--      <div class="row">-->
+    <!--        <div class="span12">-->
+    <!--          <article>-->
+    <!--            <p>PyCon Zimbabwe 2017 will be held In August in Harare.</p>-->
+                
+    <!--          </article>-->
+    <!--        </div>-->
+    <!--        <1!-- ./span12 --1>-->
+    <!--      </div>-->
+    <!--      <1!-- .row --1>-->
+    <!--    </div>-->
+    <!--    <1!-- ./container --1>-->
+    <!--  </section>-->
+    <!--</div>-->
+    <!--<hr>-->
+    <!--<1!--******************** Portfolio Section ********************--1>-->
+    <section id="portfolio" class="single-page scrollblock">
+      <div class="container">
+        <div class="align"><i class="icon-thumbs-up"></i></div>
+        <!-- Five columns -->
+        <div class="row">
+
+            <h1 class="uk-text-center uk-heading-large">Become A Sponsor</h1>
+            <h2 class="uk-margin-large-top">Why we need sponsors</h2>
+
+                <div>
+                    <p>PyConZim is wholly organized by volunteers. We therefore need sponsors to help us cover the costs of:
+       
+                </div>
+                <div>
+                    
+                        <li>basic running expenses;</li>
+                        <li>Provide a decent location to host PyConZim;</li>
+                        <li>Reimburse the travel and accommodation costs of our international speakers;</li>
+                        <li>catering and refreshments;</li>
+                        <li>educational materials for the tutorials;</li>
+                        <li>video recording of talks!</li>
+                    </ul>
+                    <p>If you are interested and wish to get more information, then please contact us via <a href="mailto:zim.pycon@gmail.com">zim.pycon@gmail.com</a>.</p>
+                </div>
+            </div>
+            <h2>Sponsor Packages</h2>
+            <div class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-4" data-uk-grid-margin>
+                <div>
+                    <h3>Bronze <span>($)</span></h3>
+                    <ul class="uk-list uk-list-space list-icon list-icon-chevron-right">
+                        <li>Small logo on the PyConZim website linked to your own website</li>
+                        <li>Small logo on folders and banners</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Silver <span>($)</span></h3>
+                    <ul class="uk-list uk-list-space list-icon list-icon-chevron-right">
+                        <li>Your name mentioned on the PyConZim</li>
+                        <li>Medium logo on the PyZim website linked to your own website</li>
+                        <li>Medium logo on folders and banners</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Gold <span>($)</span></h3>
+                    <ul class="uk-list uk-list-space list-icon list-icon-chevron-right">
+                        <li>Your name mentioned on the PyConZim website</li>
+                        <li>Introduction section about you on the PyCOnZim website</li>
+                        <li>Big logo on the PyConZim website linked to your own website</li>
+                        <li>Big logo on folders and banners</li>
+
+
+                    </ul>
+                </div>
+                
+            </div>
+        </section>
+    </div>
+</div>
+
+<!--******************** Team Section ********************-->
+    <section id="about" class="single-page scrollblock">
+      <div class="container">
+        <div class="align"><i class="icon-attention"></i></div>
+        <h1>About PyConZim</h1>
+          <div class="span10 offset1">
+            <hr class="featurette-divider">
+            <div class="featurette">
+              <h2 class="featurette-heading">Want to know more? <span class="muted"></span></h2>
+              <p>PyCon Zimbabwe is organized by volunteers and python enthusiasts from the python programming community in Zimbabwe</p>
+              <p>The first PyconZim was held from 24-25 November 2016,at the Zesa National Traing Centre. It brought delegates and speakers from the USA, South Africa, Namibia and Zimbabwe.The second edition of PyConZim is also also expected to bring speakers from Africa and the rest of the world</p>
+	      <p>The two day conference will bring together students, professionals, experts and enthusiasts who wish to share their knowledge and passion about Python and related technologies. Its purpose is to increase the visibility of developers, organizations, and companies within the community. The conference is suited for all skill levels, from early beginners to expert developers. There will also be a `Django Girls Harare Workshop <http://djangogirls.org/harare>`_ during the conference.
+	      </p>
+            </div>
+            <!-- /.featurette -->
+            <hr class="featurette-divider">
+          </div>
+          <!-- .span10 -->
+        </div>
+        <!-- /.row -->
+      <!-- /.container -->
+    </section>
+
+<!--******************** Contact Section ********************-->
+    <section id="contact" class="single-page scrollblock">
+      <div class="container">
+        <div class="align"><i class="icon-mail-2"></i></div>
+        <h1>Contact us now!</h1>
+        <div class="row">
+          <div class="span12">
+            <div class="cform" id="theme-form">
+              <form action="#" method="post" class="cform-form">
+                <div class="row">
+                  <div class="span6"> <span class="your-name">
+                    <input type="text" name="your-name" placeholder="Your Name" class="cform-text" size="40" title="your name">
+                    </span> </div>
+                  <div class="span6"> <span class="your-email">
+                    <input type="text" name="your-email" placeholder="Your Email" class="cform-text" size="40" title="your email">
+                    </span> </div>
+                </div>
+                <div class="row">
+                  <div class="span6"> <span class="company">
+                    <input type="text" name="company" placeholder="Your Company" class="cform-text" size="40" title="company">
+                    </span> </div>
+                  <div class="span6"> <span class="website">
+                    <input type="text" name="website" placeholder="Your Website" class="cform-text" size="40" title="website">
+                    </span> </div>
+                </div>
+                <div class="row">
+                  <div class="span12"> <span class="message">
+                    <textarea name="message" class="cform-textarea" cols="40" rows="10" title="drop us a line."></textarea>
+                    </span> </div>
+                </div>
+                <div>
+                  <input type="submit" value="Send message" class="cform-submit pull-left">
+                </div>
+                <div class="cform-response-output"></div>
+              </form>
+            </div>
+          </div>
+          <!-- ./span12 -->
+        </div>
+        <!-- /.row -->
+      </div>
+
+{% endblock %}
