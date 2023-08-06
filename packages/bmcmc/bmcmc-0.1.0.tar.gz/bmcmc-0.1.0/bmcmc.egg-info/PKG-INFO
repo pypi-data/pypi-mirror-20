@@ -1,0 +1,35 @@
+Metadata-Version: 1.1
+Name: bmcmc
+Version: 0.1.0
+Summary: An MCMC package for Bayesian data analysis
+Home-page: https://github.com/sanjibs/bmcmc
+Author: Sanjib Sharma
+Author-email: bug.sanjib@gmail.com
+License: BSD
+Description: bmcmc
+        ======
+        **An  MCMC package for Bayesian data analysis**
+        
+        bmcmc is a general purpose mcmc package which should be 
+        useful for Bayesian data analysis. It
+        uses an adaptive scheme for automatic tuning of
+        proposal distributions. It can also handle
+        hierarchical Bayesian models via
+        Metropolis-Within-Gibbs scheme.
+        
+        
+        AUTHOR
+        -------
+        Sanjib Sharma  
+        
+        
+        Documentation
+        -------------
+        For latest documentation see here.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2.7
