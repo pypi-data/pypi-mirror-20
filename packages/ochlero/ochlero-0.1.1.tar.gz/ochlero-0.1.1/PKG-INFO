@@ -1,0 +1,52 @@
+Metadata-Version: 1.1
+Name: ochlero
+Version: 0.1.1
+Summary: systemd log monitor that publishes to an MQTT bus on specific events
+Home-page: http://softwarefactory-project.io
+Author: Matthieu Huin
+Author-email: softwarefactory-dev@redhat.com
+License: UNKNOWN
+Description: OCHLERO
+        =======
+        
+        Ochlero is a script that monitors the systemd journal for specific events that
+        trigger publications on an MQTT queue.
+        
+        "Ochlero" comes from "Ochlerotatus Triseriatus", a species of tree hole breeding
+        mosquitoes (https://en.wikipedia.org/wiki/Ochlerotatus_triseriatus), ie
+        mosquitoes that like logs...
+        
+        Running and testing
+        -------------------
+        
+        Ochlero is tested against and runs on python 2.7 and python 3.5.
+        
+        With python 2.x you need to install the systemd and mqtt wrappers on your system.
+        On CentOS or Fedora, you can do so with the following command (extra repositories
+        such as EPEL might need to be activated):
+        
+        :: sudo yum install systemd-python python-paho-mqtt
+        
+        This is necessary due to a problem in the PyPI version of the systemd wrapper.
+        
+        With python 3.5, running
+        
+        :: pip install -r requirements.txt
+        
+        should be enough.
+        
+        To start ochlero, simply run
+        
+        :: ochlero -c /path/to/config/file
+        
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
