@@ -1,0 +1,35 @@
+Metadata-Version: 1.1
+Name: osxlaunch
+Version: 0.1.1
+Summary: Utility to working with OSX launchd environment variables.
+Home-page: https://github.com/zzzirk/osxlaunch
+Author: Louis Zirkel III
+Author-email: zzzirk@gmail.com
+License: BSD License
+Description: osxlaunch
+        =========
+        
+        .. image:: https://api.travis-ci.org/zzzirk/osxlaunch.svg?branch=master
+                :target: https://travis-ci.org/zzzirk/osxlaunch
+        
+        Library and tools to work with OSX launchd environment variables.
+        
+        Provides a library and tools to generate plist files for consumption by
+        the macOS launchd daemon to maintain environment variables.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: System :: Installation/Setup
+Classifier: Topic :: Utilities
