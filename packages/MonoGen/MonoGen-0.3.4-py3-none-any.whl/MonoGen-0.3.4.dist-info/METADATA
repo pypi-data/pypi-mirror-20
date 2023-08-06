@@ -1,0 +1,21 @@
+Metadata-Version: 2.0
+Name: MonoGen
+Version: 0.3.4
+Summary: Bulk PTC account creator.
+Home-page: https://github.com/Noctem/MonoGen
+Author: David Christenson
+Author-email: mail@noctem.xyz
+License: GPL v3
+Download-URL: https://github.com/Noctem/MonoGen/releases
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Requires-Dist: requests[security] (>=2.10.0)
+Requires-Dist: selenium (>=2.53.6)
+Requires-Dist: selenium-requests
+
+MonoGen creates PTC accounts by creating a chrome session and automatically entering data in the required fields.
+
+
