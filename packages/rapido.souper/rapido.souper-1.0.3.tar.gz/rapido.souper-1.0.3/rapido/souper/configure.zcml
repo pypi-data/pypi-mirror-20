@@ -1,0 +1,19 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           >
+
+  <adapter
+    for="rapido.core.interfaces.IRapidable"
+    provides="rapido.core.interfaces.IStorage"
+    factory=".soup.SoupStorage"
+  />
+
+  <adapter
+    for="souper.interfaces.IRecord
+         rapido.core.interfaces.IRapidable"
+    provides="rapido.souper.interfaces.IRecord"
+    factory=".record.Record"
+  />
+
+</configure>
