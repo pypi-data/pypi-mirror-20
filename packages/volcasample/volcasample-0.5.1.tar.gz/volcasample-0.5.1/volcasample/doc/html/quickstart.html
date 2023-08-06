@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quickstart Guide &mdash; Volcasample 0.5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Volcasample 0.5.0 documentation" href="index.html"/>
+        <link rel="next" title="Commands" href="cli.html"/>
+        <link rel="prev" title="Volcasample package documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Volcasample
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-project-for-your-samples">Create a project for your samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#populate-the-project-with-your-sound-files">Populate the project with your sound files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-how-big-those-files-are">Check how big those files are</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-how-those-files-sound">Check how those files sound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-which-files-to-send">Define which files to send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-patch-for-the-volca-device">Create a patch for the Volca device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Implementation details</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Volcasample</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Quickstart Guide</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/quickstart.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quickstart-guide">
+<h1>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-a-project-for-your-samples">
+<h2>Create a project for your samples<a class="headerlink" href="#create-a-project-for-your-samples" title="Permalink to this headline">¶</a></h2>
+<p>There are 100 sample slots on your Volca. A <cite>project</cite> is a directory
+with 100 more inside it. You create this structure like so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ~/py3-vs/bin/volcasample project --new
+
+Creating project tree at ~/volcasamples
+
+.......................................................... OK.
+</pre></div>
+</div>
+<p>You&#8217;ll see that the <code class="docutils literal"><span class="pre">volcasamples</span></code> directory contains others named
+<code class="docutils literal"><span class="pre">00</span></code>, <code class="docutils literal"><span class="pre">01</span></code>, and so on up to <code class="docutils literal"><span class="pre">99</span></code>.</p>
+</div>
+<div class="section" id="populate-the-project-with-your-sound-files">
+<h2>Populate the project with your sound files<a class="headerlink" href="#populate-the-project-with-your-sound-files" title="Permalink to this headline">¶</a></h2>
+<p>Place into each numbered directory a maximum of one audio file.
+You can record samples yourself, or take them from disks or sites
+online.</p>
+<p>They must be in uncompressed PCM <cite>.wav</cite> format. Data should be 16 or
+24 bit, sampled at a rate of 44.1 or 48KHz.</p>
+</div>
+<div class="section" id="check-how-big-those-files-are">
+<h2>Check how big those files are<a class="headerlink" href="#check-how-big-those-files-are" title="Permalink to this headline">¶</a></h2>
+<p>The Volca Sample allows only 40MB of audio and a maximum of 65s total
+playback time. So it&#8217;s likely not every file in your project will fit
+at once.</p>
+<p>Use the program to <cite>audition</cite> your project. First, we&#8217;ll get a report
+on the relative sizes of those samples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ~/py3-vs/bin/volcasample audition --silent
+
+Auditioning project at ~/volcasamples
+
+0000000000111111111122.....6666666666777777777788888888889999999999
+0123456789012345678901.....0123456789012345678901234567890123456789
+.::.:::.:..:     :    .....       :Iiiii:iIIiiiiiiiIiiiIiiiiiiiiiii
+</pre></div>
+</div>
+<p>The output is truncated here. The program outputs a symbol for each of
+the 100 samples in the project. The symbols are as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Size</th>
+<th class="head">Sound</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>space</td>
+<td>Zero</td>
+<td>There is no audio in this slot</td>
+</tr>
+<tr class="row-odd"><td>.</td>
+<td>Tiny</td>
+<td>The audio is momentary</td>
+</tr>
+<tr class="row-even"><td>:</td>
+<td>Small</td>
+<td>The audio is a short tone or reverberation</td>
+</tr>
+<tr class="row-odd"><td>i</td>
+<td>Medium</td>
+<td>The audio has some length, like a repeated beat</td>
+</tr>
+<tr class="row-even"><td>I</td>
+<td>Large</td>
+<td>A lengthy sample</td>
+</tr>
+<tr class="row-odd"><td>#</td>
+<td>Full</td>
+<td>A sample so big it cannot fit the Volca even on its own</td>
+</tr>
+</tbody>
+</table>
+<p>The three lines of output will be the basis of how we define the subset
+of samples to be sent to the Volca. So let&#8217;s save it to a file for
+later:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ~/py3-vs/bin/volcasample audition --silent &gt; ~/volcasamples/patch.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-how-those-files-sound">
+<h2>Check how those files sound<a class="headerlink" href="#check-how-those-files-sound" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>audition</cite> command in its normal form will play to us each sample
+in turn. We can repeat this command to decide which samples to include
+and which to leave out:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ~/py3-vs/bin/volcasample audition
+
+Auditioning project at ~/volcasamples
+
+0000000000111111111122.....6666666666777777777788888888889999999999
+0123456789012345678901.....0123456789012345678901234567890123456789
+.::.:::.:..:     :    .....       :Iiiii:iIIiiiiiiiIiiiIiiiiiiiiiii
+</pre></div>
+</div>
+<p>The output is the same as before but as each symbol appears, the sample
+it relates to is played. This takes longer than the <code class="docutils literal"><span class="pre">--silent</span></code>
+version of the command.</p>
+</div>
+<div class="section" id="define-which-files-to-send">
+<h2>Define which files to send<a class="headerlink" href="#define-which-files-to-send" title="Permalink to this headline">¶</a></h2>
+<p>Use a text editor to open the file we created earlier, eg:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ vim ~/volcasamples/patch.txt
+</pre></div>
+</div>
+<p>In order to make sure that our favourite samples get sent to the Volca,
+we leave unchanged the symbols which sit in those slots. But
+we have two options for the slots whose samples we don&#8217;t have use for:</p>
+<ul class="simple">
+<li>Leave that slot unchanged on the Volca because we don&#8217;t think it&#8217;s
+taking much space</li>
+<li>Delete the sample in that slot to free up space for the ones we like</li>
+</ul>
+<p>In your text editor, change the symbol to a space if you want to
+preserve the sound which the Volca stores in that slot. Change the
+symbol to an <cite>X</cite> to delete it:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>0000000000111111111122.....6666666666777777777788888888889999999999
+0123456789012345678901.....0123456789012345678901234567890123456789
+.::.:::.:..:XXXXX:XXXX.....XXXXXXX:Iiiii:iIXiiiiiiiIXXXXXXXXXXXXXXX
+</pre></div>
+</div>
+<p>Save the patch file again when you have finished.</p>
+</div>
+<div class="section" id="create-a-patch-for-the-volca-device">
+<h2>Create a patch for the Volca device<a class="headerlink" href="#create-a-patch-for-the-volca-device" title="Permalink to this headline">¶</a></h2>
+<p>Direct your edited patch file into the <cite>patch</cite> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ~/py3-vs/bin/volcasample patch --silent &lt; ~/volcasamples/patch.txt
+</pre></div>
+</div>
+<p>The program will create a <cite>volcasamples.wav</cite> file which you must play
+into your Volca&#8217;s <cite>sync</cite> input. Alternatively, you can omit the
+<code class="docutils literal"><span class="pre">--silent</span></code> flag and the patch pattern will play immediately.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cli.html" class="btn btn-neutral float-right" title="Commands" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Volcasample package documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 D. Haynes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

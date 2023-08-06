@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Commands &mdash; Volcasample 0.5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Volcasample 0.5.0 documentation" href="index.html"/>
+        <link rel="next" title="Implementation details" href="api.html"/>
+        <link rel="prev" title="Quickstart Guide" href="quickstart.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Volcasample
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-volcasample.cli">Command Line Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Implementation details</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Volcasample</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Commands</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="commands">
+<span id="id1"></span><h1>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-volcasample.cli">
+<span id="command-line-interface"></span><h2>Command Line Interface<a class="headerlink" href="#module-volcasample.cli" title="Permalink to this headline">¶</a></h2>
+<p>CLI interface to the Volca Sample toolkit.</p>
+<p>Operation via CLI requires a set of common options.
+Each subcommand may have extra options, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">volcasample</span> <span class="o">&lt;</span><span class="n">common</span> <span class="n">options</span><span class="o">&gt;</span> <span class="n">SUBCOMMAND</span> <span class="o">&lt;</span><span class="n">subcommand</span> <span class="n">options</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">volcasample</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">project</span> <span class="n">PROJECT</span><span class="p">]</span>
+                   <span class="p">[</span><span class="o">--</span><span class="n">start</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">56</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">62</span><span class="p">,</span><span class="mi">63</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">76</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">92</span><span class="p">,</span><span class="mi">93</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">}]</span>
+                   <span class="p">[</span><span class="o">--</span><span class="n">span</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">56</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">62</span><span class="p">,</span><span class="mi">63</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">76</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">92</span><span class="p">,</span><span class="mi">93</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">}]</span>
+                   <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">log</span> <span class="n">LOG_PATH</span><span class="p">]</span>
+                   <span class="p">{</span><span class="n">project</span><span class="p">,</span><span class="n">audition</span><span class="p">,</span><span class="n">patch</span><span class="p">}</span> <span class="o">...</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--project</span></kbd></td>
+<td>path to project directory [/home/tundish/volcasamples]</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--start</span></kbd></td>
+<td><p class="first">Select the project index to begin at.</p>
+<p class="last">Possible choices: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--span</span></kbd></td>
+<td><p class="first">Select the number of slots to operate on.</p>
+<p class="last">Possible choices: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--version</span></kbd></td>
+<td>Print the current version number</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></td>
+<td>Increase the verbosity of output</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--log</span></kbd></td>
+<td>Set a file path for log output</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>Sub-commands:</dt>
+<dd><dl class="first last docutils">
+<dt><strong>project</strong></dt>
+<dd><p class="first">Volca Sample &#8216;project&#8217; command.</p>
+<p>Operates on your project tree.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">volcasample</span> <span class="n">project</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">new</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">check</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">vote</span> <span class="n">VOTE</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="last docutils">
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--new</span></kbd></td>
+<td>Create a new project.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--check</span></kbd></td>
+<td>Check the audio file(s) can be loaded to the Volca. This command converts stereo files to mono if necessary.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--vote</span></kbd></td>
+<td>Change your vote on an audio file. Use +1, -1 to adjust the vote up or down. Otherwise supply a digit as the vote value.</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><strong>audition</strong></dt>
+<dd><p class="first">Volca Sample &#8216;audition&#8217; command.</p>
+<p>Evaluate your project audio.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">volcasample</span> <span class="n">audition</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">silent</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="last docutils">
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--silent</span></kbd></td>
+<td>Don&#8217;t play project audio file(s).</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt><strong>patch</strong></dt>
+<dd><p class="first">Volca Sample &#8216;patch&#8217; command.</p>
+<p>Create a patch for your Volca.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">volcasample</span> <span class="n">patch</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">silent</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">vote</span> <span class="n">VOTE</span><span class="p">]</span> <span class="p">[</span><span class="n">instructions</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="last docutils">
+<dt>Positional arguments:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>instructions</kbd></td>
+<td>Define patch instructions.</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>Options:</dt>
+<dd><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--silent</span></kbd></td>
+<td>Don&#8217;t play patch file.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--vote</span></kbd></td>
+<td>Set a threshold for votes. Samples with a vote total below this value will not be included in the patch.</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="Implementation details" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral" title="Quickstart Guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 D. Haynes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
