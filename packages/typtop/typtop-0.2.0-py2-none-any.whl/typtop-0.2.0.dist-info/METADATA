@@ -1,0 +1,23 @@
+Metadata-Version: 2.0
+Name: typtop
+Version: 0.2.0
+Summary: Adaptive typo-tolerant password checking for Debian logins
+Home-page: https://github.com/rchatterjee/pam-typopw
+Author: Rahul Chatterjee, Yuval Pnueli
+Author-email: rc737@cornell.edu
+License: MIT
+Download-URL: https://github.com/rchatterjee/pam-typopw/tarball/0.2.0
+Keywords: Password,typo-tolerance,login-with-errors,Login
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Requires-Dist: cryptography
+Requires-Dist: distro
+Requires-Dist: psutil
+Requires-Dist: pyyaml
+Requires-Dist: requests (==2.11.1)
+Requires-Dist: word2keypress
+Requires-Dist: zxcvbn
+
+UNKNOWN
+
+
