@@ -1,0 +1,80 @@
+Metadata-Version: 2.0
+Name: django-geopostcodes
+Version: 0.2.1
+Summary: Django modelling for http://www.geopostcodes.com
+Home-page: http://github.com/alexhayes/django-geopostcodes
+Author: Alex Hayes
+Author-email: alex@alution.com
+License: MIT
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.9
+Classifier: Framework :: Django :: 1.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: MacOS :: MacOS X
+Requires-Dist: django-countries (==4.1)
+
+===================
+django-geopostcodes
+===================
+
+|Build Status|_ |Docs Status|_ |Coverage Status|_ |Code Status|_
+
+.. |Build Status| image:: https://travis-ci.org/alexhayes/django-geopostcodes.png?branch=master
+.. _Build Status: https://travis-ci.org/alexhayes/django-geopostcodes
+.. |Docs Status| image:: https://readthedocs.org/projects/django-geopostcodes/badge/?version=latest
+.. _Docs Status: http://django-geopostcodes.readthedocs.org/en/latest/index.html
+.. |Coverage Status| image:: https://codecov.io/gh/alexhayes/django-geopostcodes/badge.svg
+.. _Coverage Status: https://codecov.io/gh/alexhayes/django-geopostcodes
+.. |Code Status| image:: https://landscape.io/github/alexhayes/django-geopostcodes/master/landscape.png
+.. _Code Status: https://landscape.io/github/alexhayes/django-geopostcodes/
+
+Django modelling for `geopostcodes.com`_
+
+NOTE: This repository does not include the actual data, you must purchase this
+from `geopostcodes.com`_ and then import it, as per the documentation
+at `django-geopostcodes.readthedocs.org`_
+
+``django-geopostcodes`` supports Python 2.7, 3.3, 3.4 and pypy for Django 1.7 and 1.8.
+
+Docs
+====
+
+Available at `django-geopostcodes.readthedocs.org`_
+
+
+License
+=======
+
+This software is licensed under the `MIT License`. See the LICENSE_
+file in the top distribution directory for the full license text.
+
+
+Author
+======
+
+Alex Hayes <alex@alution.com>
+
+.. _Django: https://www.djangoproject.com/
+.. _Models: https://docs.djangoproject.com/en/stable/topics/db/models/
+.. _django-geopostcodes.readthedocs.org: http://django-geopostcodes.readthedocs.org/en/latest/
+.. _LICENSE: https://github.com/alexhayes/django-geopostcodes/blob/master/LICENSE
+.. _geopostcodes.com: http://www.geopostcodes.com
+
+
