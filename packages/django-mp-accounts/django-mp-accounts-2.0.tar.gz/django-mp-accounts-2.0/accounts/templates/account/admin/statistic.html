@@ -1,0 +1,42 @@
+
+{% extends 'admin/base_site.html' %}
+
+{% load i18n %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans 'Статистика' %}</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <td colspan="2"><b>{% trans 'Користувачі' %}</b></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Загальна кількість користувачів' %}</td>
+                            <td>{{ all_users_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Кількість активних користувачів' %}</td>
+                            <td>{{ active_users_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Кількість неактивних користувачів' %}</td>
+                            <td>{{ inactive_users_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Кількість користувачів для персоналу' %}</td>
+                            <td>{{ staff_users_count }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

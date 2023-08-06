@@ -1,0 +1,49 @@
+
+{% extends 'account/profile/base.html' %}
+
+{% load i18n %}
+
+
+{% block content %}
+    {% with user=request.user %}
+        <table class="table table-striped table-bordered">
+            <tbody>
+                <tr>
+                    <th>{% trans "Ім'я" %}</th>
+                    <td>{% if user.first_name %}{{ user.first_name }}{% else %}&mdash;{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Прізвище" %}</th>
+                    <td>{% if user.last_name %}{{ user.last_name }}{% else %}&mdash;{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Адреса електронної пошти' %}</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans 'Дата реєстрації' %}</th>
+                    <td>{{ user.date_joined }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Телефон" %}</th>
+                    <td>{% if user.profile.mobile %}{{ user.profile.mobile }}{% else %}&mdash;{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Адреса" %}</th>
+                    <td>{% if user.profile.address %}{{ user.profile.address }}{% else %}&mdash;{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a href="{% url 'accounts:edit' %}" class="btn btn-primary">
+                {% trans 'Редагувати профіль' %}
+            </a>
+            <a href="{% url 'account_change_password' %}" class="btn btn-primary">
+                {% trans 'Змінити пароль' %}
+            </a>
+            <a href="{% url 'accounts:remove' %}" class="btn btn-danger pull-right">
+                {% trans 'Видалити профіль' %}
+            </a>
+        </div>
+    {% endwith %}
+{% endblock %}

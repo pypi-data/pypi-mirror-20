@@ -1,0 +1,428 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-08 20:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: forms.py:20
+msgid "Mobile"
+msgstr "Телефон"
+
+#: forms.py:23 models.py:13
+msgid "Address"
+msgstr "Адрес"
+
+#: forms.py:45
+msgid "Password"
+msgstr "Пароль"
+
+#: forms.py:59
+msgid "The entered password is not valid!"
+msgstr "Неправильный пароль"
+
+#: models.py:11
+msgid "Mobile number"
+msgstr "Телефон"
+
+#: templates/account/email/email_confirmation_message.txt:1
+#, python-format
+msgid ""
+"Hello from %(site_name)s!\n"
+"\n"
+"You're receiving this e-mail because user %(user_display)s at "
+"%(site_domain)s has given yours as an e-mail address to connect their "
+"account.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s\n"
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.txt:7
+#, python-format
+msgid ""
+"Thank you from %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: templates/account/email/email_confirmation_subject.txt:3
+msgid "Please Confirm Your E-mail Address"
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.txt:1
+#, python-format
+msgid ""
+"Hello from %(site_name)s!\n"
+"\n"
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account at %(site_domain)s.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.txt:8
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.txt:10
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: templates/account/email/password_reset_key_subject.txt:3
+#, fuzzy
+#| msgid "Password reset unsuccessful"
+msgid "Password Reset E-mail"
+msgstr "Ошибка возобновления пароля"
+
+#: templates/account/email_confirm.html:10
+#, fuzzy
+#| msgid "email address"
+msgid "Confirm E-mail Address"
+msgstr "Адрес электронной почты"
+
+#: templates/account/email_confirm.html:17
+#, python-format
+msgid ""
+"\n"
+"                            Please confirm that\n"
+"                            <a href=\"mailto:%(email)s\">%(email)s</a>\n"
+"                            is an e-mail address for user %(user_display)s.\n"
+"                        "
+msgstr ""
+
+#: templates/account/email_confirm.html:27
+msgid "Confirm"
+msgstr ""
+
+#: templates/account/email_confirm.html:36
+#, python-format
+msgid ""
+"\n"
+"                            This e-mail confirmation link expired or is "
+"invalid.\n"
+"                            Please <a href=\"%(email_url)s\">issue a new e-"
+"mail confirmation request</a>.\n"
+"                        "
+msgstr ""
+
+#: templates/account/login.html:19
+msgid "Вхід на сайт"
+msgstr "Вход на сайт"
+
+#: templates/account/login.html:25
+msgid "Логін"
+msgstr ""
+
+#: templates/account/login.html:32
+msgid "Пароль"
+msgstr ""
+
+#: templates/account/login.html:40
+msgid "Забули пароль?"
+msgstr "Забыли пароль?"
+
+#: templates/account/login.html:47
+msgid "Увійти"
+msgstr "Войти"
+
+#: templates/account/logout.html:16
+msgid "Ви впевнені, що бажаєте вийти?"
+msgstr ""
+
+#: templates/account/logout.html:19
+msgid "Вийти"
+msgstr ""
+
+#: templates/account/logout.html:20
+#, fuzzy
+#| msgid "Увійти на сайт"
+msgid "Повернутись на сайт"
+msgstr "Войти на сайт"
+
+#: templates/account/password_change.html:16
+#: templates/account/password_change.html:41
+#: templates/account/password_reset_from_key.html:12
+#: templates/account/password_reset_from_key_done.html:11
+#, fuzzy
+#| msgid "Password"
+msgid "Change Password"
+msgstr "Пароль"
+
+#: templates/account/password_change.html:43
+#: templates/account/profile/change.html:49
+#: templates/account/profile/remove.html:29
+msgid "Скасувати"
+msgstr "Отмена"
+
+#: templates/account/password_reset.html:17
+#: templates/account/password_reset_done.html:12
+#, fuzzy
+#| msgid "Password"
+msgid "Password Reset"
+msgstr "Пароль"
+
+#: templates/account/password_reset.html:23
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:36
+#, fuzzy
+#| msgid "Password"
+msgid "Reset My Password"
+msgstr "Пароль"
+
+#: templates/account/password_reset.html:39
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/account/password_reset_done.html:18
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:12
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:16
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:36
+#, fuzzy
+#| msgid "Password"
+msgid "change password"
+msgstr "Пароль"
+
+#: templates/account/password_reset_from_key.html:39
+#: templates/account/password_reset_from_key_done.html:12
+#, fuzzy
+#| msgid "The entered password is not valid!"
+msgid "Your password is now changed."
+msgstr "Неправильный пароль"
+
+#: templates/account/profile/base.html:13
+msgid "Профіль"
+msgstr "Профиль"
+
+#: templates/account/profile/change.html:16
+msgid "Редагування профілю"
+msgstr "Редактирование профиля"
+
+#: templates/account/profile/change.html:47
+msgid "Зберегти"
+msgstr "Сохранить"
+
+#: templates/account/profile/index.html:12
+msgid "Ім'я"
+msgstr "Имя"
+
+#: templates/account/profile/index.html:16
+msgid "Прізвище"
+msgstr "Фамилия"
+
+#: templates/account/profile/index.html:20
+msgid "Адреса електронної пошти"
+msgstr "Адрес электронной почты"
+
+#: templates/account/profile/index.html:24
+msgid "Дата реєстрації"
+msgstr "Дата регистрации"
+
+#: templates/account/profile/index.html:28
+msgid "Телефон"
+msgstr "Телефон"
+
+#: templates/account/profile/index.html:32
+msgid "Адреса"
+msgstr "Адрес"
+
+#: templates/account/profile/index.html:39
+msgid "Редагувати профіль"
+msgstr "Редактировать профиль"
+
+#: templates/account/profile/index.html:42
+msgid "Змінити пароль"
+msgstr "Изменить пароль"
+
+#: templates/account/profile/index.html:45
+msgid "Видалити профіль"
+msgstr "Удалить профиль"
+
+#: templates/account/profile/remove.html:16
+msgid "Видалення профілю"
+msgstr "Удаление профиля"
+
+#: templates/account/profile/remove.html:17
+msgid "Будь ласка, підтвердіть свій пароль, щоб видалити свій профіль."
+msgstr "Пожалуйста, подтвердите свой пароль, чтобы удалить свой профиль."
+
+#: templates/account/profile/remove.html:27
+msgid "Видалити"
+msgstr "Удалить"
+
+#: templates/account/signup.html:20
+msgid "Sign Up"
+msgstr ""
+
+#: templates/account/signup.html:22
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: templates/account/signup.html:58
+msgid "Зареєструватись"
+msgstr "Зарегистрироваться"
+
+#: views.py:26
+msgid "Profile successfully changed"
+msgstr "Профиль успешно изменен"
+
+#: views.py:50
+msgid "Profile successfully removed"
+msgstr "Профиль успешно удален"
+
+#~ msgid "Activate users"
+#~ msgstr "Активировать учетные записи"
+
+#~ msgid "Re-send activation emails"
+#~ msgstr "Выслать ключи активации заново"
+
+#~ msgid ""
+#~ "This email address is already in use. Please supply a different email "
+#~ "address."
+#~ msgstr ""
+#~ "Этот адрес электронной почты уже используется. Пожалуйста, введите другой "
+#~ "адрес."
+
+#~ msgid "user"
+#~ msgstr "пользователь"
+
+#~ msgid "activation key"
+#~ msgstr "ключ активации"
+
+#~ msgid "registration profile"
+#~ msgstr "карточка регистрации"
+
+#~ msgid "registration profiles"
+#~ msgstr "карточки регистрации"
+
+#~ msgid "Натисніть тут щоб активувати свій аккаунт на сайті"
+#~ msgstr "Нажмите здесь, чтобы активировать свой аккаунт на сайте"
+
+#~ msgid "Посилання буде дійсне протягом"
+#~ msgstr "Ссылка будет действительно в течение"
+
+#~ msgid "днів"
+#~ msgstr "дней"
+
+#~ msgid "Щоб відновити пароль на сайті"
+#~ msgstr "Чтобы восстановить пароль на сайте"
+
+#~ msgid "перейдіть на сторінку"
+#~ msgstr "перейдите на страницу"
+
+#~ msgid "Відновлення паролю"
+#~ msgstr "Восстановление пароля"
+
+#~ msgid "Зміна паролю"
+#~ msgstr "Изменение пароля"
+
+#~ msgid "Реєстрація"
+#~ msgstr "Регистрация"
+
+#~ msgid "Історія замовлень"
+#~ msgstr "История заказов"
+
+#~ msgid "Список побажань"
+#~ msgstr "Список пожеланий"
+
+#~ msgid "Мої замовлення"
+#~ msgstr "Мои заказы"
+
+#~ msgid "К-сть продуктів"
+#~ msgstr "Кол-во продуктов"
+
+#~ msgid "Сума"
+#~ msgstr "Сумма"
+
+#~ msgid "Звіт"
+#~ msgstr "Отчет"
+
+#~ msgid "Завантажити звіт"
+#~ msgstr "Скачать отчет"
+
+#~ msgid "У Вас поки немає замовлень"
+#~ msgstr "У Вас пока нет заказов"
+
+#~ msgid "Активація аккаунту не вдалась"
+#~ msgstr "Активация аккаунта не удалась"
+
+#~ msgid "Ваш аккаунт активовано."
+#~ msgstr "Ваш аккаунт активирован."
+
+#~ msgid "Підтвердження реєстрації"
+#~ msgstr "Подтверждение регистрации"
+
+#~ msgid "Ви вийшли з свого профілю"
+#~ msgstr "Вы вышли из своего профиля"
+
+#~ msgid "Пароль успішно змінено"
+#~ msgstr "Пароль успешно изменен"
+
+#~ msgid "Адреса не правильна"
+#~ msgstr "Неправильный адрес"
+
+#~ msgid ""
+#~ "На Вашу пошту було відправлене повідомлення з подальшими інструкціями"
+#~ msgstr "На почту было отправлено сообщение с дальнейшими инструкциями"
+
+#~ msgid "перейдіть на сторінку;"
+#~ msgstr "перейдите на страницу;"
+
+#~ msgid "Введіть Ваш Email"
+#~ msgstr "Введите Ваш Email"
+
+#~ msgid "Відправити"
+#~ msgstr "Отправить"
+
+#~ msgid "Реєстрація в даний час закрита."
+#~ msgstr "Регистрация в настоящее время закрыта."
+
+#~ msgid ""
+#~ "На Ваш Email було надіслано повідомлення для підтвердження реєстрації."
+#~ msgstr "На Ваш Email отправлено сообщение для подтверждения регистрации."
+
+#~ msgid "Перейти на головну"
+#~ msgstr "Перейти на главную"
+
+#~ msgid "We sent you a message with a password reset link"
+#~ msgstr "Мы отправили Вам ссилку на страницу возобновления пароля"
+
+#~ msgid "Password successfully changed"
+#~ msgstr "Пароль успешно изменен"

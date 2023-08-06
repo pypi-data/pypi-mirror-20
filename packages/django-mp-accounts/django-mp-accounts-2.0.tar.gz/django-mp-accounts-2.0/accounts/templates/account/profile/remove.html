@@ -1,0 +1,32 @@
+
+{% extends 'account/profile/base.html' %}
+
+{% load i18n widget_tweaks %}
+
+
+{% block content %}
+
+     {% if form.errors %}
+        <div class="alert alert-danger">
+            {{ form.errors.as_text }}
+        </div>
+    {% endif %}
+
+    <form action="{{ request.get_full_path }}" method="post" class="well">
+        <h2>{% trans 'Видалення профілю' %}</h2>
+        <p>{% trans 'Будь ласка, підтвердіть свій пароль, щоб видалити свій профіль.' %}</p>
+        {% csrf_token %}
+
+        <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+            <label for="{{ form.password.auto_id }}">
+                {{ form.password.label }}
+            </label>
+            {{ form.password|add_class:"form-control unicase-form-control text-input" }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{% trans 'Видалити' %}</button>
+
+        <a href="{% url 'accounts:profile' %}" class="btn btn-default pull-right">{% trans 'Скасувати' %}</a>
+    </form>
+
+{% endblock %}

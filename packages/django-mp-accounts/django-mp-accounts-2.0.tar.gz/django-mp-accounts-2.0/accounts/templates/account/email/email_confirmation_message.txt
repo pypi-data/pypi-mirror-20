@@ -1,0 +1,9 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello {{ user_display }},
+
+Thank you for registering on {{ site_domain }}.
+
+To complete the registration, go to the following link {{ activate_url }}
+
+Best regards,
+{{ site_domain }}
+{% endblocktrans %}{% endautoescape %}

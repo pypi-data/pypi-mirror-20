@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load i18n widget_tweaks %}
+
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="container alert alert-danger">
+            {{ form.errors.as_text }}
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <form action="{{ request.get_full_path }}" method="post">
+
+                    <h2>{% trans 'Вхід на сайт' %}</h2>
+
+                    {% csrf_token %}
+
+                    <div class="form-group {% if form.login.errors %}has-error{% endif %}">
+                        <label for="{{ form.login.auto_id }}">
+                            {% trans 'Логін' %}<span>*</span>
+                        </label>
+                        {{ form.login|add_class:"form-control unicase-form-control text-input" }}
+                    </div>
+
+                    <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+                        <label for="{{ form.password.auto_id }}">
+                            {% trans 'Пароль' %}<span>*</span>
+                        </label>
+                        {{ form.password|add_class:"form-control unicase-form-control text-input" }}
+                    </div>
+
+                    <div>
+                        {{ form.remember.label_tag }} {{ form.remember }}
+
+                        <a class="pull-right" href="{% url 'account_reset_password' %}">{% trans "Забули пароль?" %}</a>
+                    </div>
+
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-lg btn-primary">{% trans 'Увійти' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

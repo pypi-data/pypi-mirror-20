@@ -1,0 +1,63 @@
+
+{% extends "base.html" %}
+
+{% load i18n widget_tweaks %}
+
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="container alert alert-danger">
+            {{ form.errors.as_text }}
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form action="{% url 'account_signup' %}" method="post">
+
+                    <h2>{% trans "Sign Up" %}</h2>
+
+                    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+                    {% csrf_token %}
+
+                    <div class="form-group {% if form.username.errors %}has-error{% endif %}">
+                        <label for="{{ form.username.auto_id }}">
+                            {{ form.username.label }} <span>*</span>
+                        </label>
+                        {{ form.username|add_class:"form-control unicase-form-control text-input"}}
+                    </div>
+
+                    <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                        <label for="{{ form.email.auto_id }}">
+                            {{ form.email.label }} <span>*</span>
+                        </label>
+                        {{ form.email|add_class:"form-control unicase-form-control text-input" }}
+                    </div>
+
+                    <div class="form-group {% if form.password11.errors %}has-error{% endif %}">
+                        <label for="{{ form.password1.auto_id }}">
+                            {{ form.password1.label }} <span>*</span>
+                        </label>
+                        {{ form.password1|add_class:"form-control unicase-form-control text-input" }}
+                    </div>
+
+                    <div class="form-group {% if form.password2.errors %}has-error{% endif %}">
+                        <label for="{{ form.password2.auto_id }}">
+                            {{ form.password2.label }} <span>*</span>
+                        </label>
+                        {{ form.password2|add_class:"form-control unicase-form-control text-input" }}
+                    </div>
+
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-lg btn-primary">{% trans 'Зареєструватись' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
