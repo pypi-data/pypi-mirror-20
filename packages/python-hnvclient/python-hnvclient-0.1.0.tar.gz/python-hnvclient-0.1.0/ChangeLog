@@ -1,0 +1,52 @@
+CHANGES
+=======
+
+0.1.0
+-----
+
+* Add missing resource reference in FrontendIPConfigurations
+* Rename the project from "hnv" to "hnvclient"
+* Update the field name for the AccessControlList references
+* Change oslo.config with a global dictionary
+* Fix unittests on Python 3.x
+* Add support for load balancer mux
+* Update the README.rst file
+* Remove pylint Travis-CI job
+* Applies OpenStack project cookiecutter
+* Fix the refresh_model method
+* Fix IPConfiguration submodel from NetworkInterfaces
+* Create the resource_ref if it is required
+* Fix LogicalSubnetworks IPConfiguration references
+* Improve the structure of IPConfiguration model
+* Avoid false positives in resource hinting
+* Improve SubNetworks model structure
+* Update the endpoint for LogicalSubnetworks
+* Remove get all handler for singleton models
+* Add support for load balancer manager
+* Inject information regarding parent and grandparent
+* Minor refactoring of parent fields
+* Add support for BGP routers
+* Add support for load balancers
+* Improve the model for resource references
+* Improve the VirtualNetwork model
+* Add support for public IP addresses
+* Add support for network connections
+* Update the README.md file
+* Rename module from hnv_client to hnv
+* Update the Travis-CI jobs
+* Add support for oslo config generator
+* Add support for Sphynx documentation
+* Update the metadata from setup.cfg
+* Add support for route tables
+* Add support for virtual switch manager
+* Add support for access control lists
+* Add support for virtual networks
+* Add support for network interfaces
+* Add support for logical networks
+* Add base HNV model
+* Add basic client for HVN REST API
+* Add utilities for tests in order ease the project testing
+* Add support for config options management
+* Add base data model in order to improve data representation
+* Add support for Travis-CI jobs
+* Initial structure
