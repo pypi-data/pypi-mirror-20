@@ -1,0 +1,10 @@
+.wc-workspace-tab-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.wc-workspace-tab-content.dragging {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
