@@ -1,0 +1,232 @@
+Rerun
+=====
+
+Command-line script to re-run the given command when files change.
+
+In most circumstances, this project is superceded by
+https://github.com/tartley/rerun2 a ten-line Bash script which uses inotify
+instead of polling, and gracefully handles commands containing shell aliases
+and the like. However, rerun2:
+* Won't work outside of Linuxland.
+* Doesn't see filesystem events on mounts in a VM.
+* Doesn't take any command-line args to modify behaviour.
+so this original 'rerun' still has its uses.
+
+Install
+=======
+
+::
+
+    pip install rerun
+
+Usage
+=====
+
+::
+
+    rerun [--help|-h] [--verbose|-v] [--ignore|-i=<file>] [--version] <command>
+
+Where::
+
+    <command>           Command to execute as a single arg, i.e. put it inside
+                        double quotes, or else spaces and other special
+                        characters should be escaped.
+    --help|-h           Show this help message and exit.
+    --ignore|-i=<file>  File or directory to ignore. Any directories of the
+                        given name (and their subdirs) are excluded from the
+                        search for changed files. Any modification to files of
+                        the given name are ignored. The given value is
+                        compared to basenames, so for example, "--ignore=def"
+                        will skip the contents of directory "./abc/def/" and
+                        will ignore file "./ghi/def". Can be specified multiple
+                        times.
+    --interactive, -I   Run the command in an interactive shell. This allows
+                        the use of shell aliases and functions, but is slower,
+                        less reliable and noisier on stdout/stderr, because it
+                        sources ~/.bashrc and the like before running the
+                        command. Not available on Windows.
+    --verbose|-v        Display the names of changed files before the command
+                        output.
+    --version           Show version number and exit.
+
+Example
+=======
+
+::
+
+    rerun --verbose --ignore=myoutputdir "python -m unittest mymodule"
+
+This will run your tests whenever you save your source code in the current
+dir or its subdirectories, but it won't rerun the tests a second time when .pyo
+files get updated as a result of executing the tests, nor when our program
+writes to myoutputdir.
+
+This is handy for seeing the new test results in another console window after
+you hit 'save' in your editor, without having to change window focus.
+
+Description
+===========
+
+Rerun detects changes to files by polling file modification times once per
+second. It looks in the current directory and all its subdirectories. On
+detecting any changes, it clears the terminal and reruns the given command.
+
+It always ignores directories called .svn, .git, .hg, .bzr, build and dist.
+Additions to this list can be given using --ignore.
+
+It always ignores files ending with .pyc or .pyo. This isn't currently
+user-overrideable.
+
+While polling sounds sub-optimal, I've yet to encounter a project large
+enough that rerun's resource usage was even noticeable. (Plus, see discussion
+of 'watchdog' below.)
+
+Dependencies
+============
+
+Tested on MacOSX, Ubuntu, WindowsXP, Windows 7.
+
+Tested on Python 2.6, 2.7 and 3.4.
+
+Installing using 'pip' will also install any other Python packages that are
+required. (see setup.py 'install_requires')
+
+Hacking
+=======
+
+To install development dependencies:
+
+on Python 2.6:
+
+    pip install -r requirements_dev_2.6.txt
+
+On later versions of Python:
+
+    pip install -r requirements_dev.txt
+
+These will also install the runtime dependencies (i.e. requirements.txt,
+which just references the 'install_requires' field in setup.py) so you only
+ever need to install one requirements file.
+
+To run tests:
+
+    make test
+
+See the content of Makefile for a cheatsheet of other commonly used commands
+I use while working on rerun.
+
+TODO
+====
+
+Print a timestamp at the top of the screen, so user can see when the command
+was last run.
+
+Let user press a key to force a rerun.
+
+Should this just be broken down into a command that waits for filesystem events
+and exits? Arguably calling "command" from the shell is many times easier than
+calling it from within "rerun". Then 'rerun' could be written simply as a Bash
+function. Other bash functions could use the same pattern to iterate after
+waiting for a keypress, or a sleep (to poll.)
+
+Known Problems
+==============
+
+See issues at https://github.com/tartley/rerun/issues
+
+Alternatives
+============
+
+PyPI package 'watchdog' is a cross-platform library for handling file-system
+events, which includes script 'watchmedo', which looks like a more serious and
+heavy-duty version of 'Rerun'.
+
+https://pypi.python.org/pypi/watchdog
+
+However, I can't get watchmedo to work for my primary use case, which is
+re-running tests when files are saved by Vim. This is due to the way Vim writes
+to temporary files and then moves the temp file to overwrite data atomically.
+Vim thus guarantees that the user never loses data, but also fails to generate
+the correct FS events that watchmedo is looking for.
+
+
+Thanks
+======
+
+Huge thanks to StackOverflow user 'rici', for explaining how to interpret
+shell aliases and functions in the given command using an interactive shell,
+and then how to retrieve the lost terminal once that shell terminates.
+http://stackoverflow.com/questions/25099895/from-python-start-a-shell-that-can-interpret-functions-and-aliases
+
+Thanks to Bitbucket user sgourley for reporting, chasing up and even
+offering to fix issue #1, an egregious bug in ignoring directories, before
+I finally spotted the error. Thanks for the prods!
+
+The idea came from the Bash command 'watch', and inspiration for this
+implementation came from an old blog post by Jeff Winkler, whos website
+http://jeffwinkler.net seems to have now died.
+
+
+Changes
+=======
+
+1.0.28
+    Add .cache (pytest) and 'node_modules' to the default ignored dirs.
+
+1.0.27
+    Deleted version, I messed up the PyPI upload.
+
+1.0.26
+    Prevent crash when a watched file gets deleted.
+
+1.0.25
+    Documentation tweaks.
+
+1.0.24
+    Last version broke rerun on Windows. Fixed now.
+    (module 'pwd', which we started using to identify the user's default shell,
+    doesn't exist on Windows.) So '-I' or '--interactive' won't work on
+    Windows, but probably the distinction between a regular shell and an
+    interactive one is meaningless there anyway.
+
+1.0.23
+    Running the given command using a *non*-interactive shell is now the
+    default behaviour. Running an interactive shell for each command invocation
+    requires sourcing .bashrc and the like, and hence is is slow, noisy on
+    stdout, and error-prone. For example, virtualenvwrapper often fails to
+    initialise properly and generates lots of output about it. An interactive
+    shell can be requested when required (i.e. when the command to be run
+    contains shell aliases or functions) with '--interactive' or '-I'.
+
+1.0.22
+    No longer crashes when a broken symlink exists under the cwd.
+
+1.0.21
+    Run user's given command in an interactive shell, so that shell aliases
+    and functions are correctly interpreted.
+
+1.0.20
+    (First release since migration to github)
+    Fix to run under Python 3 again, specifically tested on 3.4.
+
+1.0.19
+    Now expects commands to be a single arg (i.e. spaces etc should be
+    escaped, or the whole command quoted) thus allowing rerun to work on
+    composite commands, such as pipelines.
+
+1.0.18
+    Now runs on Python 2.6, and is tested on Python 3.3.
+
+
+Contact
+=======
+
+:Documentation & download:
+    http://pypi.python.org/pypi/rerun/
+
+:Souce code and issues:
+    https://github.com/tartley/rerun
+
+:Contact the author:
+    Jonathan Hartley, email: tartley at domain tartley.com, Twitter: @tartley.
+
