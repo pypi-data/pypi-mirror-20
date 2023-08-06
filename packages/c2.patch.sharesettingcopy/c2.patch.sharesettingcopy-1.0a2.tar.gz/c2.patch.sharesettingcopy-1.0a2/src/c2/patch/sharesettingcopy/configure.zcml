@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="c2.patch.sharesettingcopy">
+
+  <includeDependencies package="." />
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include package=".controlpanel" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="c2.patch.sharesettingcopy"
+      directory="profiles/default"
+      description="Installs the c2.patch.sharesettingcopy add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <subscriber
+    for="zope.lifecycleevent.IObjectCopiedEvent"
+    handler=".event.copy_permision"
+  />
+
+</configure>
