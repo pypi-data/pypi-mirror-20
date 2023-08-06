@@ -1,0 +1,148 @@
+'\" t
+.\"     Title: feedcommas
+.\"    Author: Michał Góral
+.\" Generator: Asciidoctor 1.5.4
+.\"      Date: 2017-03-10
+.\"    Manual: Feed Commas Manual
+.\"    Source: Feed Commas 0.2.0-4-ga1b4
+.\"  Language: English
+.\"
+.TH "FEED\-COMMAS" "1" "2017-03-10" "Feed Commas 0.2.0\-4\-ga1b4" "Feed Commas Manual"
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.ss \n[.ss] 0
+.nh
+.ad l
+.de URL
+\\$2 \(laURL: \\$1 \(ra\\$3
+..
+.if \n[.g] .mso www.tmac
+.LINKSTYLE blue R < >
+.SH "NAME"
+feedcommas \- user\-friendly console CommaFeed client.
+.SH "SYNOPSIS"
+.sp
+\fBfeed\-commas\fP [\fIOPTIONS\fP] ..
+.SH "OPTIONS"
+.sp
+The following parameters can be passed to Feed Commas when it\(cqs started:
+.SS "General options"
+.sp
+\fB\-c, \-\-config\fP=\fICONFIG_FILE\fP
+.RS 4
+Use a \fICONFIG_FILE\fP as Feed Commas\(aq configuration file. This file is used
+instead of the one which would be normally found by a default configuration
+search. If \fICONFIG_FILE\fP doesn\(cqt exists, it is created.
+.sp
+Feed Commas reports if \fICONFIG_FILE\fP is incorrect somehow or if it couldn\(cqt be
+created and quits in that case.
+.RE
+.SS "Program information"
+.sp
+\fB\-\-help\fP
+.RS 4
+Prints a short summary of available program options and quits.
+.RE
+.sp
+\fB\-\-version\fP
+.RS 4
+Prints a version of Feed Commas and quits.
+.RE
+.SH "CONFIGURATION"
+.sp
+Feed Commas can be configured by setting options in a standard
+.URL "https://en.wikipedia.org/wiki/INI_file" "ini\-style" " "
+configuration file. If not specified via \f[CR]\-c,
+\-\-config\fP flag, configuration is searched in a filesystem in a way described by
+.URL "https://specifications.freedesktop.org/basedir\-spec/basedir\-spec\-latest.html" "XDG Base Directory Specification" "."
+In practice it means that for
+most users it will be located in \f[CR]~/.config/feed\-commas/config.ini\fP. However,
+any of below files can be read if previous ones weren\(cqt found:
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP " 1." 4.2
+.\}
+\f[CR]$XDG_CONFIG_HOME/feed\-commas/config.ini\fP. If \f[CR]$XDG_CONFIG_HOME\fP is not set,
+it defaults to \f[CR]$HOME/.config\fP.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP " 2." 4.2
+.\}
+any of \f[CR]$XDG_DATA_DIRS/feed\-commas/config.ini\fP. \f[CR]$XDG_DATA_DIRS\fP is
+colon\-separated list of directories to check. If it is not set, it defaults
+to \f[CR]/etc/xdg\fP.
+.RE
+.sp
+If configuration file is not found, Feed Commas will create one.
+.sp
+Before Feed Commas terminates, configuration written back.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+.B Note\fP Specific configuration files
+.ps -1
+.br
+.sp
+You can tell Feed Commas to use a specific configuration file by using \f[CR]\-c,
+\-\-config\fP switch. Feed Commas will read it (or create it if it doesn\(cqt exist)
+and everything else will work the same as with configuration found by above
+method.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+$ feed\-commas \-c ~/feedcommasrc
+.fi
+.if n \{\
+.RE
+.\}
+.sp .5v
+.RE
+.SH "COPYRIGHT"
+.sp
+Copyright \(co 2017 Michał Góral.
+.sp
+Feed Commas is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+.sp
+Feed Commas is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+.SH "BUGS AND ISSUES"
+.sp
+Please report any bugs at \c
+.URL "https://gitlab.com/mgoral/feed\-commas/issues" "" "."
+.SH "SEE ALSO"
+.SS "Full Documentation"
+.sp
+This man page doesn\(cqt cover the whole usage of Feed Commas. A complete manual is
+available online: \c
+.URL "http://pythonhosted.org/feedcommas/" "" "."
+.sp
+You can also generate it by running \fBmake\fP inside Feed Commas\(aq \fBdocs\fP directory.
+.SH "AUTHOR(S)"
+.sp
+\fBMichał Góral\fP
+.RS 4
+Author(s).
+.RE

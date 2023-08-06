@@ -1,0 +1,282 @@
+diff --git a/src/feedcommas/app.py b/src/feedcommas/app.py
+index 8e2dfc6..14d8944 100644
+--- a/src/feedcommas/app.py
++++ b/src/feedcommas/app.py
+@@ -134,7 +134,8 @@ def main():
+     cmd_handler = actions.CommandHandler()
+     register_global_commands(cmd_handler)
+ 
+-    urwid_loop = urwid.MainLoop(None, unhandled_input=unhandled_handler)
++    urwid_loop = urwid.MainLoop(None, unhandled_input=unhandled_handler,
++                                pop_ups=True)
+ 
+     cols = cfg['colors']
+     scr = urwid_loop.screen
+diff --git a/src/feedcommas/config.py b/src/feedcommas/config.py
+index 858f745..c1e883d 100644
+--- a/src/feedcommas/config.py
++++ b/src/feedcommas/config.py
+@@ -114,6 +114,11 @@ def config(section=None):
+     return _cfg
+ 
+ 
++def exists():
++    '''Returns whether there was found any configuration file.'''
++    return os.path.exists(config_path())
++
++
+ def write_config(cfg):
+     '''Writes back any changes in configuration to the file. If there's no
+     configuration under a `config_path()`, creates one.'''
+diff --git a/src/feedcommas/content.py b/src/feedcommas/content.py
+index 672d392..7e5ca40 100644
+--- a/src/feedcommas/content.py
++++ b/src/feedcommas/content.py
+@@ -27,6 +27,7 @@ import functools
+ import feedcommas.config as config
+ import feedcommas.client as client
+ import feedcommas.cache as cache
++from feedcommas.utils import get_password_cmd
+ 
+ 
+ @contextlib.contextmanager
+@@ -69,10 +70,7 @@ class Provider:
+ 
+         self._password = None
+         if server_cfg['password-cmd']:
+-            enc = sys.stdout.encoding
+-            cmd = server_cfg['password-cmd']
+-            self._password = subprocess.check_output(cmd, shell=True).decode(enc)
+-            self._password = self._password.rstrip('\r\n')
++            self._password = get_password_cmd(server_cfg['password-cmd'])
+ 
+         workers_no = config.get_value(server_cfg, 'workers', 2, int)
+         self._pool = mp.Pool(processes=workers_no,
+@@ -95,22 +93,22 @@ class Provider:
+     @cache.get('articles')
+     def get_articles(self, callback, *args, **kwargs):
+         '''Request list of articles'''
+-        self._async_call(client.get_articles, callback, *args, **kwargs)
++        return self._async_call(client.get_articles, callback, *args, **kwargs)
+ 
+     @cache.modify([('articles', _mark_article)])
+     def mark(self, callback, *args, **kwargs):
+         '''Mark category or entry, depending on `type_`'''
+-        self._async_call(client.mark, callback, *args, **kwargs)
++        return self._async_call(client.mark, callback, *args, **kwargs)
+ 
+     def star(self, callback, *args, **kwargs):
+         '''Star an entry.'''
+-        self._async_call(client.star, callback, *args, **kwargs)
++        return self._async_call(client.star, callback, *args, **kwargs)
+ 
+     @cache.get('feeds')
+     def get_feeds(self, callback):
+         '''Request a tree of subscribed feeds. Returns a root feed ('All'
+         feed)'''
+-        self._async_call(client.get_feeds, callback)
++        return self._async_call(client.get_feeds, callback)
+ 
+     @cache.modify([('feeds', _mark_feed)])
+     def feed_updated(self, node):
+@@ -122,11 +120,15 @@ class Provider:
+         CommaFeed.'''
+         return
+ 
++    def login(self, callback, username, password):
++        '''Tries to login.'''
++        return self._async_call(client.star, callback, username, password)
++
+     def _async_call(self, fn, callback, *args, **kwargs):
+         cb = functools.partial(self._cb, real_callback=callback)
+-        self._pool.apply_async(fn, args, kwargs,
+-                               callback=cb,
+-                               error_callback=self._send_errors)
++        return self._pool.apply_async(fn, args, kwargs,
++                                      callback=cb,
++                                      error_callback=self._send_errors)
+ 
+     def _cb(self, data, real_callback):
+         real_callback(data)
+diff --git a/src/feedcommas/utils.py b/src/feedcommas/utils.py
+index 34da2e3..b31bcb5 100644
+--- a/src/feedcommas/utils.py
++++ b/src/feedcommas/utils.py
+@@ -18,7 +18,16 @@
+ '''Utility functions'''
+ 
+ import os
++import sys
+ import errno
++import subprocess
++
++
++def get_password_cmd(cmd):
++    '''Returns an output of password-cmd.'''
++    enc = sys.stdout.encoding
++    password = subprocess.check_output(cmd, shell=True).decode(enc)
++    return password.rstrip('\r\n')
+ 
+ 
+ def mkdir_p(path):
+diff --git a/src/feedcommas/widgets.py b/src/feedcommas/widgets.py
+index b89265a..0594e2d 100644
+--- a/src/feedcommas/widgets.py
++++ b/src/feedcommas/widgets.py
+@@ -18,16 +18,19 @@
+ '''Custom widgets used by Feed Commas'''
+ 
+ import os
++import sys
+ import functools
+ import collections
+ import webbrowser
+ import threading
++import enum
+ import urwid
+ 
+ import feedcommas.cache as cache
+ from feedcommas.client import NodeData
+ from feedcommas.actions import handle_key
+ from feedcommas.config import config
++from feedcommas.utils import get_password_cmd
+ from feedcommas.locale import _
+ from feedcommas.log import log, Level
+ 
+@@ -640,6 +643,96 @@ class Display(urwid.Columns):
+                                        limit=self._articles.limit)
+ 
+ 
++
++class CredentialsDialog:
++    '''Modal dialog which is used to get user credentials when they're not
++    set.'''
++    class Exit(Exception):
++        def __init__(self, ret):
++            self.ret = ret
++            super().__init__()
++
++    class Status(enum.Enum):
++        Ok = 0
++        Cancel = 1
++
++
++    def __init__(self, provider):
++        self._provider = provider
++
++        self._cmds = urwid.command_map.copy()
++        self._cmds.restore_defaults()
++        self._cmds['tab'] = 'cursor down'
++        self._cmds['shift tab'] = 'cursor up'
++
++        ok = self._w(urwid.Button, _('Ok'))
++        cancel = self._w(urwid.Button, _('Cancel'))
++
++        urwid.connect_signal(ok, 'click', self._edit_done)
++        urwid.connect_signal(cancel, 'click', self._cancel)
++
++        self.username = self._w(urwid.Edit, _('Name or email: '))
++        self.password = self._w(urwid.Edit, _('Password: '), mask='*')
++        self.pass_cmd = self._w(urwid.Edit, _('Password command (optional): '))
++        self.out = self._w(urwid.Text, '')
++
++
++        w = self._w(urwid.Pile, [
++            urwid.Text([('title', _('Log in to CommaFeed'))]),
++            urwid.Divider(),
++            self.username,
++            self.password,
++            self.pass_cmd,
++            self.out,
++            self._w(urwid.GridFlow, [ok, cancel], 10, 2, 0, 'right')
++        ])
++
++        w = urwid.LineBox(w)
++        w = urwid.Padding(w, align='center', width=80)
++        w = urwid.Filler(w, valign='middle')
++
++        self.view = w
++
++    def _w(self, cls, *args, **kwargs):
++        ret = cls(*args, **kwargs)
++        ret._command_map = self._cmds
++        return ret
++
++    def run(self):
++        palette = [
++            (None, '', ''),
++            ('title', 'bold,yellow', '')
++        ]
++
++        self.loop = urwid.MainLoop(self.view, palette)
++        try:
++            self.loop.run()
++        except CredentialsDialog.Exit as e:
++            return e.ret
++
++    def _cancel(self, *args):
++        raise CredentialsDialog.Exit(CredentialsDialog.Status.Cancel)
++
++    def _edit_done(self, *args):
++        username = self.username.get_edit_text()
++        if self.pass_cmd.get_edit_text():
++            cmd = self.pass_cmd.get_edit_text()
++            password = get_pass_cmd(cmd)
++        else:
++            password = self.password.get_edit_text()
++
++        if username and password:
++            result = self._provider.login(username, password)
++            print(result)
++
++    def _credentials_confirmed(self):
++        server = config.config()['server']
++        server['username'] = self.username.get_edit_text()
++        server['password'] = self.password.get_edit_text()
++        server['password-cmd'] = self.password_cmd.get_edit_text()
++        urwid.emit_signal(self, 'done')
++
++
+ class MainWindow(urwid.Frame):
+     '''Urwid top widget.'''
+     def __init__(self, provider, urwid_loop, cmd_handler):
+@@ -647,9 +740,6 @@ class MainWindow(urwid.Frame):
+         urwid.connect_signal(log, 'log', self.log)
+         urwid.connect_signal(log, 'clear', self.log_clear)
+ 
+-        self.display = Display(provider, urwid_loop, cmd_handler)
+-        super().__init__(self.display, footer=self.commandline)
+-
+         urwid.connect_signal(self.commandline, 'command',
+                              self._command_finished)
+         urwid.connect_signal(self.commandline, 'command',
+@@ -659,6 +749,15 @@ class MainWindow(urwid.Frame):
+ 
+         provider.add_error_handler(functools.partial(self.log, Level.error))
+ 
++        sv = config()['server']
++        if not sv['username'] and not sv['password'] and not sv['password-cmd']:
++            dialog = CredentialsDialog(provider)
++            dialog.run()
++
++        self.display = Display(provider, urwid_loop, cmd_handler)
++        super().__init__(self.display, footer=self.commandline)
++
++
+     def keypress(self, size, key):
+         if key == ':':  # hardcoded by design
+             self.focus_position = 'footer'
+@@ -678,3 +777,13 @@ class MainWindow(urwid.Frame):
+ 
+     def _command_finished(self, *args, **kwargs):
+         self.focus_position = 'body'
++
++
++    def create_pop_up(self):
++        pop_up = U()
++        urwid.connect_signal(pop_up, 'close',
++            lambda button: self.close_pop_up())
++        return pop_up
++
++    def get_pop_up_parameters(self):
++        return {'left':0, 'top':1, 'overlay_width':32, 'overlay_height':7}
