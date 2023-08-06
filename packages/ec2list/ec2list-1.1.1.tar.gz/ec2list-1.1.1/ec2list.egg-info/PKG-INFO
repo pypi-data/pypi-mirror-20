@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: ec2list
+Version: 1.1.1
+Summary: Lists your ec2 instances in the command line.
+Home-page: https://github.com/meyju/ec2list
+Author: Julian Meyer
+Author-email: jm@julianmeyer.de
+License: GPL
+Description: ec2list
+        =======
+        
+        Script for commandline worker, to list your ec2
+        instances. Support's awscli/boto profiles and
+        multiple aws regions.
+Keywords: aws amazon web services ec2 list admin
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: System Administrators
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
