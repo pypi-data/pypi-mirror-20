@@ -1,0 +1,23 @@
+Metadata-Version: 2.0
+Name: wagtailclearstream
+Version: 0.0.1
+Summary: Improvement to StreamField UI by extending StreamBlock.
+Home-page: https://github.com/heymonkeyriot/wagtailclearstream
+Author: Edd Baldry
+Author-email: edd.baldry@gmail.com
+License: MIT
+Keywords: development
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Dist: Django (>=1.7.1)
+Requires-Dist: wagtail (>=1.7.0)
+
+This gives support to StreamField UI by allowing neater nesting of StreamField blocks, allowing StreamField blocks to be opened or collapsed, and ensuring that a user confirms the deletion of a StreamField block before it is deleted.
+
+

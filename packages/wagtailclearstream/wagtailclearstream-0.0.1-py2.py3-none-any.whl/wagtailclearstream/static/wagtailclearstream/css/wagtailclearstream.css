@@ -1,0 +1,276 @@
+.content, #content {
+  /* need to use .content as #content isn't used on snippets */ }
+  .content .help, #content .help {
+    width: auto;
+    position: static;
+    display: block;
+    float: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 28px; }
+    .content .help:before, #content .help:before {
+      margin-top: 0; }
+  .content p.help::before, #content p.help::before {
+    /* to give consistency between multifieldpanel help text and other panels */
+    border-radius: 100%;
+    display: block;
+    float: left;
+    content: '?';
+    border: 1px solid #666;
+    color: #666;
+    height: 15px;
+    width: 15px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 1.1em;
+    margin: 0.1em 0.5em 0 0; }
+  .content .help.help, #content .help.help {
+    opacity: 0.8; }
+  .content input:focus, .content textarea:focus, .content select:focus, .content .richtext:focus, .content .taggit:focus, #content input:focus, #content textarea:focus, #content select:focus, #content .richtext:focus, #content .taggit:focus {
+    background: white; }
+  .content .richtext, #content .richtext {
+    padding: 1em; }
+    .content .richtext *:last-child, #content .richtext *:last-child {
+      margin-bottom: 0; }
+  .content .object, #content .object {
+    padding-left: 20px;
+    padding-right: 20px; }
+    .content .object.empty, #content .object.empty {
+      padding-left: 50px; }
+    .content .object > fieldset, #content .object > fieldset {
+      max-width: none;
+      width: 100%; }
+    .content .object > .help + fieldset, #content .object > .help + fieldset {
+      padding-top: 0; }
+  .content .full, #content .full {
+    padding: 0 20px; }
+    .content .full > fieldset, #content .full > fieldset {
+      margin-left: 0;
+      padding-top: 0; }
+    .content .full input, #content .full input {
+      padding-left: 7px;
+      padding-right: 0;
+      background: transparent;
+      border: 0; }
+    .content .full > .help + fieldset input, #content .full > .help + fieldset input {
+      padding-top: 20px; }
+  .content .sequence-member,
+  .content .sequence-container,
+  .content .sequence-container-inner,
+  .content .fields,
+  .content .field-content, #content .sequence-member,
+  #content .sequence-container,
+  #content .sequence-container-inner,
+  #content .fields,
+  #content .field-content {
+    width: 100%; }
+  .content .field-content > .help.help.help.help.help, #content .field-content > .help.help.help.help.help {
+    padding-left: 3px;
+    margin-top: 7px; }
+  .content .stream-field.stream-field.stream-field.stream-field, #content .stream-field.stream-field.stream-field.stream-field {
+    padding: 20px 20px 20px 10px; }
+    .content .stream-field.stream-field.stream-field.stream-field > fieldset, #content .stream-field.stream-field.stream-field.stream-field > fieldset {
+      padding-top: 14px; }
+    .content .stream-field.stream-field.stream-field.stream-field .sequence-member, #content .stream-field.stream-field.stream-field.stream-field .sequence-member {
+      border: 1px solid #fcf2f2;
+      border-radius: 4px;
+      margin: 20px 0; }
+      .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner {
+        background-color: white; }
+        .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner input, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner textarea, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner select, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .richtext, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .tagit, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner input, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner textarea, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner select, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .richtext, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .tagit {
+          box-sizing: border-box;
+          border-radius: 6px;
+          width: 100%;
+          font-family: Open Sans,Arial,sans-serif;
+          border: 1px solid #e6e6e6 !important;
+          padding: 0.9em 1.2em !important;
+          background-color: #fafafa !important;
+          -webkit-appearance: none;
+          color: #333;
+          font-size: 1.2em;
+          font-weight: 300;
+          outline: none; }
+          .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner input:focus, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner textarea:focus, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner select:focus, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .richtext:focus, .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .tagit:focus, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner input:focus, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner textarea:focus, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner select:focus, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .richtext:focus, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member-inner .tagit:focus {
+            background-color: white !important;
+            border-color: #54d0d0 !important; }
+      .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member {
+        background: white; }
+        .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member .sequence-member, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member .sequence-member {
+          background: #f2f2f2; }
+          .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member .sequence-member .sequence-member, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member .sequence-member .sequence-member {
+            background: white; }
+            .content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member .sequence-member .sequence-member .sequence-member, #content .stream-field.stream-field.stream-field.stream-field .sequence-member .sequence-member .sequence-member .sequence-member .sequence-member {
+              background: #f2f2f2; }
+      .content .stream-field.stream-field.stream-field.stream-field .sequence-member.collapsed .sequence-member-inner, #content .stream-field.stream-field.stream-field.stream-field .sequence-member.collapsed .sequence-member-inner {
+        display: none; }
+    .content .stream-field.stream-field.stream-field.stream-field .sequence-member-inner, #content .stream-field.stream-field.stream-field.stream-field .sequence-member-inner {
+      padding: 20px; }
+    .content .stream-field.stream-field.stream-field.stream-field .sequence-controls, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls {
+      background: #fcf2f2;
+      border-radius: 0;
+      border: none;
+      display: flex;
+      height: 44px;
+      justify-content: flex-end;
+      opacity: 1;
+      overflow: hidden;
+      position: static;
+      visibility: visible; }
+      .content .stream-field.stream-field.stream-field.stream-field .sequence-controls label, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls label {
+        margin-top: 14px;
+        color: #333; }
+        .content .stream-field.stream-field.stream-field.stream-field .sequence-controls label span, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls label span {
+          color: #666; }
+      .content .stream-field.stream-field.stream-field.stream-field .sequence-controls button, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls button {
+        background: transparent;
+        border: none;
+        height: 44px;
+        width: 44px; }
+        .content .stream-field.stream-field.stream-field.stream-field .sequence-controls button::before, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls button::before {
+          color: #333; }
+        .content .stream-field.stream-field.stream-field.stream-field .sequence-controls button:hover, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls button:hover {
+          background: #f37e77; }
+          .content .stream-field.stream-field.stream-field.stream-field .sequence-controls button:hover::before, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls button:hover::before {
+            color: #fff; }
+        .content .stream-field.stream-field.stream-field.stream-field .sequence-controls button.collapse, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls button.collapse {
+          background-color: #f37e77;
+          border-radius: 0;
+          margin-left: -13px;
+          margin-right: 14px; }
+          .content .stream-field.stream-field.stream-field.stream-field .sequence-controls button.collapse::before, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls button.collapse::before {
+            color: #fff; }
+      .content .stream-field.stream-field.stream-field.stream-field .sequence-controls h3, #content .stream-field.stream-field.stream-field.stream-field .sequence-controls h3 {
+        flex: 1; }
+    .content .stream-field.stream-field.stream-field.stream-field .help, #content .stream-field.stream-field.stream-field.stream-field .help {
+      margin: 0;
+      padding-top: 0;
+      padding-bottom: 0; }
+    .content .stream-field.stream-field.stream-field.stream-field .stream-menu .toggle, #content .stream-field.stream-field.stream-field.stream-field .stream-menu .toggle {
+      opacity: 0;
+      visibility: hidden; }
+    .content .stream-field.stream-field.stream-field.stream-field .sequence-container:hover > .stream-menu .toggle,
+    .content .stream-field.stream-field.stream-field.stream-field .sequence-member:hover > .stream-menu .toggle, #content .stream-field.stream-field.stream-field.stream-field .sequence-container:hover > .stream-menu .toggle,
+    #content .stream-field.stream-field.stream-field.stream-field .sequence-member:hover > .stream-menu .toggle {
+      opacity: 1;
+      visibility: visible; }
+    .content .stream-field.stream-field.stream-field.stream-field .sequence-container > .stream-menu .toggle, #content .stream-field.stream-field.stream-field.stream-field .sequence-container > .stream-menu .toggle {
+      top: 8px; }
+    .content .stream-field.stream-field.stream-field.stream-field .fields label, #content .stream-field.stream-field.stream-field.stream-field .fields label {
+      display: block;
+      width: auto;
+      float: none; }
+    .content .stream-field.stream-field.stream-field.stream-field .fields .field, #content .stream-field.stream-field.stream-field.stream-field .fields .field {
+      display: block;
+      width: auto;
+      float: none; }
+
+.hallotoolbar.hallotoolbar {
+  margin-top: 0;
+  margin-left: 0; }
+  .hallotoolbar.hallotoolbar.full {
+    margin-left: 15px; }
+
+/* The help text has slightly different rules on snippet pages */
+.object .object-help.help {
+  display: block;
+  position: relative;
+  width: 100%; }
+
+.object-help ~ .multiple {
+  padding-top: 0 !important;
+  /* Needing to use important because .multiple .object is defined afterwards by page-editor.css */ }
+
+.multiple {
+  width: 100%;
+  /* Need to make below a mixin */ }
+  .multiple > li {
+    border-radius: 3px;
+    padding: 0; }
+    .multiple > li > fieldset {
+      padding: 0 20px; }
+  .multiple .model_choice_field.select label {
+    padding-top: 0.2em; }
+  .multiple .controls {
+    background: #e6e6e6;
+    border: none;
+    opacity: 1;
+    visibility: visible;
+    position: static;
+    border-radius: 0;
+    display: flex;
+    justify-content: flex-end; }
+    .multiple .controls label {
+      margin-top: 7px;
+      color: #666; }
+    .multiple .controls button {
+      background: transparent;
+      border: none; }
+      .multiple .controls button::before {
+        color: #666; }
+      .multiple .controls button:hover::before {
+        color: #43b1b0; }
+
+.content .richtext.expanded, #content .richtext.expanded {
+  border-radius: 6px;
+  border-width: 1px 1px;
+  font-family: Open Sans,Arial,sans-serif;
+  margin: 60px 0 20px 0;
+  padding: 1.8em 1.2em !important;
+  -webkit-appearance: none; }
+
+.object-help ~ fieldset > .fields > li > .field > .field-content > .input > .richtext {
+  margin-top: 0px !important; }
+
+.multi-field > fieldset > ul > li {
+  border-bottom: 1px solid #e6e6e6;
+  margin: 0 0 1em 0; }
+
+.delete-open-toggle.icon-cross {
+  background-color: #e6e6e6 !important;
+  margin-right: -1px; }
+  .delete-open-toggle.icon-cross:hover {
+    background-color: #666 !important; }
+
+.delete-dialog {
+  background-color: #e6e6e6;
+  cursor: pointer;
+  display: block;
+  float: right;
+  padding: 13px 14px; }
+  .delete-dialog a {
+    color: #000;
+    display: block; }
+    .delete-dialog a:hover {
+      background-color: #f37e77;
+      color: #fff; }
+  .delete-dialog:hover {
+    background-color: #f37e77; }
+    .delete-dialog:hover a {
+      color: #fff; }
+  .delete-dialog.closed {
+    display: none; }
+
+.icon-streamfield {
+  margin: -10px 10px 0 0;
+  display: inline-block;
+  border: 1px solid #d9d9d9;
+  padding: 4px 4px 4px 7px;
+  border-radius: 3px; }
+
+.block_field.stream-field h2 label::after {
+  border: 1px solid #f37e77;
+  color: #666;
+  content: "Open/close all";
+  cursor: pointer;
+  float: right;
+  margin: -4px 25px;
+  padding: 6px; }
+
+.block_field.stream-field h2 label:hover::after {
+  background-color: #f37e77;
+  color: #fff; }
+
+.fixed {
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+  margin-left: 180px !important;
+  position: fixed !important; }
