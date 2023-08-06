@@ -1,0 +1,59 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="python: 1"
+      i18n:domain="ftw.collectionblock"
+      tal:define="block_info view/get_block_info">
+
+    <h2 tal:content="block_info/title"
+        tal:condition="block_info/show_title">
+    </h2>
+
+    <tal:items tal:define="items view/block_results;">
+
+        <p tal:condition="not: items"
+           i18n:translate="">No content available</p>
+
+        <ul class="collection-row" tal:condition="items">
+            <li class="collection-item" tal:repeat="item items">
+                <a class="collection-item" tal:attributes="href item/getURL">
+                    <div class="collection-body">
+                        <span class="byline">
+                            <span tal:content="python: view.toLocalizedTime(item)"/>
+                            <tal:author condition="python:view.get_author(item)">
+                                <span i18n:translate="collection_listing_author_label">
+                                    by
+                                    <span tal:content="python:view.get_author(item)"
+                                          i18n:name="author">Author</span>
+                                </span>
+                            </tal:author>
+                        </span>
+                        <h3 class="title" tal:content="item/Title" />
+                        <span class="description" tal:content="item/Description">Description</span>
+                    </div>
+                </a>
+            </li>
+
+        </ul>
+
+        <tal:footer tal:define="more_link_url block_info/more_link_url;
+                                more_link_label block_info/more_link_label;
+                                rss_url block_info/rss_link_url"
+                    tal:condition="items">
+            <div class="collection-footer"
+                 tal:condition="python: more_link_url or rss_url">
+                    <a class="collection-more"
+                       tal:condition="more_link_url"
+                       title="More"
+                       i18n:attributes="title more_link_label"
+                       tal:attributes="href more_link_url"
+                       tal:content="more_link_label"/>
+                    <a class="collection-rss"
+                       tal:condition="rss_url"
+                       tal:attributes="href rss_url"
+                       i18n:translate="">Subscribe to the RSS feed</a>
+               </div>
+        </tal:footer>
+
+    </tal:items>
+
+</html>
