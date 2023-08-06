@@ -1,0 +1,38 @@
+
+
+  /  |                          /  |
+ _$$ |_    __    __   ______   _$$ |_     ______    ______
+/ $$   |  /  |  /  | /      \ / $$   |   /      \  /      \
+$$$$$$/   $$ |  $$ |/$$$$$$  |$$$$$$/   /$$$$$$  |/$$$$$$  |
+  $$ | __ $$ |  $$ |$$ |  $$ |  $$ | __ $$ |  $$ |$$ |  $$ |
+  $$ |/  |$$ \__$$ |$$ |__$$ |  $$ |/  |$$ \__$$ |$$ |__$$ |
+  $$  $$/ $$    $$ |$$    $$/   $$  $$/ $$    $$/ $$    $$/
+   $$$$/   $$$$$$$ |$$$$$$$/     $$$$/   $$$$$$/  $$$$$$$/
+          /  \__$$ |$$ |                          $$ |
+          $$    $$/ $$ |                          $$ |
+           $$$$$$/  $$/                           $$/
+Hello!
+
+Thanks for installing TypToP (version: 0.2.11).  This software
+attaches a new pluggable authentication module (PAM) to some of your
+common authentication processes, such as su, login, screensaver etc.,
+and observes for password typing mistakes. It records your frequent
+typing mistakes, and enable logging in with slight vairations of your
+actual login password that are frequent and safe to do so.
+
+This is a research prototype, and we are collecting some anonymous
+non-sensitive data about your password typing patterns to verify our
+design. The details of what we collect, how we collect and store, and
+the security blueprint of this software can be found in the GitHub
+page: https://github.com/rchatterjee/pam-typopw.  The participation in the study is completely voluntary,
+and you can opt out at any time while still keep using the software.
+
+Checkout other options (such as opting out of the study) of the
+utility script typtop by running:
+
+$ typtops.py --help
+
+Note, You have to initiate this for each user who intend to use the
+benefit of adaptive typo-tolerant password login.
+
+
