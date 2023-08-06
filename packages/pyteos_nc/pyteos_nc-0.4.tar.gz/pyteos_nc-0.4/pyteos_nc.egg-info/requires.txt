@@ -1,0 +1,15 @@
+numpy>=1.6
+netCDF4
+scipy
+psutil
+
+[recipes]
+click
+pyteos_air>=1.0
+
+[testing]
+flake8
+coverage
+pytest-cov
+pytest
+xarray

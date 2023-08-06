@@ -1,0 +1,4 @@
+[console_scripts]
+pyteos_gen = pyteos_nc.generators:generators
+pyteos_nc = pyteos_nc.netcdf_interface:main
+
