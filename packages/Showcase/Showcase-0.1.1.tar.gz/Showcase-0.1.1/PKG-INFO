@@ -1,0 +1,39 @@
+Metadata-Version: 1.0
+Name: Showcase
+Version: 0.1.1
+Summary: Like SimpleHTTPServer, only worse
+Home-page: UNKNOWN
+Author: James Rutherford
+Author-email: jim@jimr.org
+License: UNKNOWN
+Description: ========
+        Showcase
+        ========
+        
+        A slightly nicer, probably less secure version of ``python -m SimpleHTTPServer``.
+        
+        
+        Installation
+        ============
+        
+        ``pip install showcase``
+        
+        Usage
+        =====
+        
+        Not for production use, etc, but in development, something like::
+        
+            FLASK_APP=showcase.app FLASK_DEBUG=1 flask run
+        
+        and in production, something more like::
+        
+            gunicorn showcase:app
+        
+        To have it start somewhere other than where it is installed, set the ``SHOWCASE_DIR`` environment variable.
+        
+        License
+        =======
+        
+        See ``LICENSE.txt``.
+        
+Platform: UNKNOWN
