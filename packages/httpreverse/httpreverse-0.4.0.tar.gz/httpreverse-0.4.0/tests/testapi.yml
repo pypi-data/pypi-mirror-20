@@ -1,0 +1,89 @@
+label: Hotel API
+description: An API to check room reservations
+
+
+defaults:
+
+  structured_param_type: json
+  structured_body_type: json
+
+contexts:
+
+  roomapi:
+    size: double
+    customers: ["John Doe", "Jane Doe"]
+  note:
+    notetitle: This is note
+    notetext: A note related to the reservation
+
+templates:
+
+  roomapi:
+    request:
+      method: GET
+      path: /hotel/reservations
+    response:
+      type: application/json
+      parser: httpreverse.util:parse_json
+
+operations:
+
+  list-singlerooms:
+    label: List single room reservations
+    description: List all reserved single rooms
+    template: roomapi
+    request:
+      params:
+        size: single
+
+  list-doublerooms:
+    label: List double room reservations
+    description: List all reserved double rooms
+    context: roomapi
+    template: roomapi
+    request:
+      params:
+        size: $size
+
+  list-rooms:
+    label: List room reservations
+    description: List reserved rooms
+    template: roomapi
+    request:
+      params:
+        size:
+
+  {% for size in sizes %}
+
+  list-{{size}}-rooms:
+    label: List {{size}} room reservations
+    description: List all reserved {{size}} rooms
+    template: roomapi
+    request:
+      params:
+        size: {{size}}
+
+  {% endfor %}
+
+  add-reservation:
+    label: Add reservation
+    description: Add a room reservation
+    context: roomapi
+    template: roomapi
+    request:
+      required: [size, customers]
+      method: POST
+      body:
+        type: application/json
+        value: {"size": $size, "customers": $customers}
+
+  add-note:
+    label: Add reservation note
+    description: Add a room reservation note
+    context: note
+    template: roomapi
+    request:
+      method: POST
+      params:
+        note: [$notetitle, $notetext]
+      body: $notetitle $notetext
