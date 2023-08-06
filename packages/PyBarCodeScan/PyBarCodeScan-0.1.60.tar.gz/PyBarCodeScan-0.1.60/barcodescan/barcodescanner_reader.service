@@ -1,0 +1,9 @@
+[Unit]
+Description=Reads barcodes from hardware and send them to barcodescanner_server
+
+[Service]
+Type=simple
+ExecStart=/venv/bin/barcodescanner_reader
+
+[Install]
+WantedBy=multi-user.target
