@@ -1,0 +1,97 @@
+Metadata-Version: 1.1
+Name: Inventicode
+Version: 1.0.1
+Summary: Create labels with QR and barcodes.
+Home-page: https://github.com/d9pouces/inventicode
+Author: mgallet
+Author-email: github@19pouces.net
+License: CeCILL-B
+Description: Inventicode
+        ===========
+        
+        Web app for registering objects (an object is just a name associated to a comment and a serial number) and printing sheets of labels with EAN13 barcodes or QR codes. You can also associate a state and a category to these objects.
+        
+        You define models of paper (size, number, size and background image of labels) and template for labels.
+        
+        Use cases
+        ---------
+        
+          * printing customized labels with QR or bar codes,
+          * changing the state or the category of a set of objects by only scanning their barcode, one-by-one, 
+          * identify a given object by scanning its barcode in the search bar,
+          * displaying the object page by scanning its QR code.
+        
+        Installation
+        ------------
+        
+            sudo apt-get install python3.5 python3.5-dev build-essential
+            pip install inventicode
+            CONFIG_FILENAME=`inventicode-django  config ini -v 2 | head -n 1 | grep ".ini" | cut -d '"' -f 2`
+            # create required folders
+            mkdir -p `dirname $FILENAME` $HOME/inventicode
+            # prepare a limited configuration file
+            cat << EOF > $FILENAME
+            [global]
+            data = $HOME/inventicode
+            EOF
+            # create the database (SQLite by default)
+            inventicode-django migrate
+            # prepare static files (CSS, JS, …)
+            inventicode-django collectstatic --noinput
+            # create an admin user
+            inventicode-django createsuperuser
+            inventicode-aiohttp
+        
+        You can define new templates for each label, and the default one is:
+        
+            {% load inventicode %}<h2>{{ code.name }}</h2>
+            <img class="name qr_code" style="" alt="{{ code.name }}" src="{{ code.name|qr_code|base64_url }}" />
+            <img class="short_identifier bar_code" style="width: 4cm;" alt="{{ code.short_identifier }}" src="{{ code.short_identifier|bar_code:'ean13'|base64_url }}" />
+            <h3>{{ code.long_identifier }}</h3>
+        
+        Available values are:
+        
+          * code.name
+          * code.comment
+          * code.serial
+          * code.long_identifier  (URL to the model)
+          * code.short_identifier (unique code, usable as EAN13 barcode)
+        
+        If you load `inventicode`, you can use some filters:
+        
+          * `qr_code`: QR code as SVG (string)
+          * `bar_code`: bar code as SVG (string). Available barcodes are 'code39', 'ean', 'ean13', 'ean8', 'gs1', 'gtin', 'isbn', 'isbn10', 'isbn13', 'issn', 'jan', 'pzn', 'upc', 'upca'.
+          * `base64_url`: transform a string as an embedded base64 url.
+        
+        You can also define a CSS for the whole page, and the default one is:
+        
+            .qr_code {
+                width: 1cm;
+                height: 1cm;
+            }
+            h2 {
+                width: 100%;
+                text-align: center;
+            }
+            h3 {
+                text-align: center;
+                top: 1cm;
+                position: relative;
+                text-transform: uppercase;
+            }
+            img.bar_code {
+                width: 3cm;
+                top: 1cm;
+                left: -2cm;
+            }
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: BSD
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: License :: OSI Approved :: CEA CNRS Inria Logiciel Libre License, version 2.1 (CeCILL-2.1)
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
