@@ -1,0 +1,422 @@
+{% extends 'profile/_base_profile.html' %}{% load humanize lookup staticfiles %}
+
+{% block head_title %}{{ geography.this.short_name }} - {{ block.super }}{% endblock %}
+
+{% block head_meta_description %}Population data from {{ geography.this.short_name}}, broken down by category.{% endblock %}
+
+{% block head_facebook_tags %}
+    <meta property="og:title" content="{{ HURUMAP.name}} profile: {% firstof geography.this.full_name geography.this.short_name %}" />
+    <meta property="og:site_name" content="{{ HURUMAP.name }}" />
+    <meta property="og:url" content="{{ HURUMAP.url }}{{ request.path }}" />
+    <meta property="og:description" content="Population data from {{ geography.this.short_name}}, broken down by category." />
+    <meta property="og:type" content="article" />
+{% endblock %}
+
+{% block head_css_extra %}
+<link rel="stylesheet" href="{% static 'css/vendor/leaflet-0.6.4.css' %}" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="{% static 'css/vendor/leaflet-0.6.4.ie.css' %}" />
+<![endif]-->
+<link href="{% static 'css/vendor/leaflet.label.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block body_id %}profile{% endblock %}
+
+{% block header_content %}
+<div id="cover-map" class="clearfix">
+    <div id="slippy-map"></div>
+    <div id="cover-profile" class="wrapper">
+        <article class="clearfix column-half">
+            <header id="header-box" class="column-full">
+                <h1 class="title">{{ geography.this.short_name }}</h1>
+                <p class="caption">
+                  {{ geography.this.geo_level|capfirst }}
+                  {% if geography.parents %}
+                      in
+                      {% for level, g in geography.parents.items %}
+                        <a href="/profiles/{{ g.full_geoid }}-{{ g.short_name|slugify }}/">{{ g.short_name }}</a>{% if not forloop.last %},{%endif%}
+                      {% endfor %}
+                  {% endif %}
+                </p>
+            </header>
+
+            <div class="column-half">
+                <div class="stat">
+                    <span class="primary">
+                        {% block profile_header_population %}
+                        <span class="value">{{ demographics.total_population.values.this|floatformat:"0" }}</span>
+                        <span class="name">Population</span>
+                        {% endblock %}
+                    </span>
+                </div>
+            </div>
+            {% if geography.this.square_kms %}
+            <div class="column-half">
+                <div class="stat">
+                    <span class="secondary">
+                        <span class="value">{% if geography.this.square_kms < 1.0 %}{{ geography.this.square_kms|floatformat:"3" }}{% else %}{{ geography.this.square_kms|floatformat:"1" }}{% endif %}</span>
+                        <span class="name"> square kilometres</span>
+                    </span>
+                    {% if demographics.population_density.values.this %}
+                    <span class="secondary">
+                        {% block profile_header_density %}
+                        <span class="value">{{ demographics.population_density.values.this|floatformat:"1" }}</span>
+                        <span class="name"> people per square kilometre</span>
+                        {% endblock %}
+                    </span>
+                    {% endif %}
+                    {% block geography_extra_sq_km %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if geography.this.show_extra_links %}
+                {% include "profile/_blocks/_header_extra_links.html" %}
+            {% endif %}
+
+            {% block profile_header_tail %}{% endblock %}
+        </article>
+    </div>
+</div>
+<section class="clearfix" id="compare-place-picker">
+    <div class="typeahead-container">
+        <input name="place_select" id="compare-place-select" type="text" value="" autocomplete="off"/>
+        <button>GO</button>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+{% comment %}
+<section class="clearfix" id="query-topic-picker">
+    <h2>Find data for this place</h2>
+    <div class="typeahead-container">
+        <input name="topic_select" id="topic-select" type="text" placeholder="Search by table or column name..." autocomplete="off">
+    </div>
+</section>
+{% endcomment %}
+
+{% block profile_preamble %}
+
+<!--<p class="explain">Interact with charts and statistics for additional information. {{geo_id1}} {{geo_id2}}</p>-->
+{% endblock %}
+
+<section class="filters">
+    <div class="filter-row">
+        <p><i>Filter results</i></p>
+    </div>
+    {% for key, values in all_sections.items %}
+    <div class="filter-row" data-filter="{{key}}">
+        <i class="fa {{values.icon}}"></i>  {{values.topic|title}}
+        <span class="end">+</span>
+    </div>
+    {% for topic in values.profiles %}
+    <div class="filter-row-sub {{key}}-sub">
+        <span>{{topic|title}}</span>
+        {% if topic in raw_selected_sections %}
+        <div class="box-checked" data-filter="{{topic}}"></div>
+        {% else %}
+        <div class="box-unchecked" data-filter="{{topic}}"></div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <div class="filters-reset"><p>Reset</p></div>
+</section>
+
+<div class="profiles-container">
+    {% block profile_detail %}
+    <article id="example" class="clearfix">
+        <header class="section-contents">
+            <h1>Example</h1>
+        </header>
+        <div class="section-container">
+            <section class="clearfix stat-row">
+                <h2 class="header-for-columns"><a class="permalink" href="#here" id="here">Your stats go here <i class="fa fa-link"></i></a></h2>
+            </section>
+
+        </div>
+    </article>
+    {% endblock profile_detail %}
+</div>
+
+{% if not compare_view %}
+<br clear="all">
+<!-- suggest a dataset section -->
+<center>
+    <article id="suggestdata" class="clearfix">
+        <div class="shell">
+            <p>Can't find the data you are looking for or would like to suggest some data to the site?</p>
+            <center><button>Suggest Data</button></center>
+        </div>
+    </article>
+</center>
+{% endif %}
+{% endblock content %}
+
+
+{% block body_javascript_extra %}
+{{ block.super }}
+
+{% block profile_javascript_libs %}
+<script src="{% static 'js/vendor/leaflet-0.6.4.js' %}"></script>
+<script src="{% static 'js/vendor/topojson.v1.min.js' %}"></script>
+<script src="{% static 'js/vendor/leaflet.label.js' %}"></script>
+<script src="{% static 'js/charts.js' %}"></script>
+<script src="{% static 'js/head2head.js' %}"></script>
+<script src="{% static 'js/maps_static.js' %}"></script>
+<script src="{% static 'js/profile_map.js' %}"></script>
+{% endblock %}
+<script>
+    function position_filters() {
+         //Position the filters and the data section accordingly
+        if (! $('body').hasClass('profile-head2head-frame') && $( window ).width() > 800 ) {
+            w = $( window ).width() - $( '.content-container.wrapper' ).width();
+            w = Math.round(w/2);
+            if (w < 0 || $(window).width() < $( '.content-container.wrapper' ).width()) w = 10;
+            $('.filters').css('margin-left', (w - 10) + 'px');
+            $('.profiles-container').css('width', ($( '.content-container.wrapper' ).width() - $('.filters').width() - 15 )+ 'px');
+            $('#suggestdata').css('width', $('.profiles-container').width() + 'px');
+            h = $('#slippy-map').height() + $('#page-header').height() + $('#compare-place-picker').height() + 24
+            $('.filters').css('top', h);
+            $('.filters').css('display', 'block');
+        }
+        if ($( window ).width() < 800) {
+            $('.filters').css('display', 'none');
+        }
+        $('.wrapper').css('display', 'block');
+    }
+    position_filters()
+
+    //Focus the compare input area
+    $('#compare-place-select').val('Compare this with another place')
+    $('#compare-place-select').focus(function() {
+        $(this).val('')
+    });
+
+    //Toogle filters
+    function hide_categories(f) {
+        $('.' + f + '-sub').css('display', 'none')
+        $('[data-filter='+ f +'] .end').html('+')
+        $('[data-filter='+ f +']').click( function() { f = $(this).attr('data-filter'); $(this).off(); show_categories(f) });
+    }
+
+    function show_categories(f) {
+        $('.' + f + '-sub').css('display', 'block')
+        $('[data-filter='+ f +'] .end').html('-')
+        $('[data-filter='+ f +']').click( function() { f = $(this).attr('data-filter');$(this).off(); hide_categories(f) });
+    }
+    $('.filter-row').click(function() {
+        f = $(this).attr('data-filter')
+        $(this).off()
+        show_categories(f);
+    });
+
+    $('.filters-reset').click(function() {
+        arr = $('.box-unchecked')
+        for (var i = 0; i < arr.length; i++) {
+            x = arr[i]
+            $(x).removeClass('box-unchecked')
+            $(x).addClass('box-checked')
+            v = $(x).attr('data-filter')
+            v = v.toLowerCase().replace(/ /g, '_')
+            $('#' + v).css('display', 'block')
+            bind_check_box()
+        }
+        return false;
+    });
+
+</script>
+<script type="text/javascript">
+
+// Create all the charts
+var Charts = {},
+    chartContainers = $('[id^=chart-]'),
+    defaultDataRelease = '{{ geography.census_release }}',
+    profileData = {{ profile_data_json }};
+
+var gracefulType = function(chartType) {
+    // convert certain chart types to more readable versions at narrow widths
+    if (browserWidth <= 640) {
+        if (chartType == 'column' || chartType == 'histogram') {
+            return 'bar'
+        } else if (chartType == 'grouped_column') {
+            return 'grouped_bar'
+        }
+    }
+    return chartType
+}
+
+var makeCharts = function() {
+    $.each(chartContainers, function(i, obj) {
+        $(obj).empty();
+        var chartID = $(this).prop('id'),
+            chartDataKey = chartID.replace('chart-','').replace('alt-',''),
+            chartDataID = chartDataKey.split('-'),
+            chartType = gracefulType(chartDataID[0]),
+            chartData = profileData[chartDataID[1]],
+            chartChartTitle = $(this).data('chart-title'),
+            chartChartShowYAxis = $(this).data('chart-show-y-axis'),
+            chartInitialSort = $(this).data('initial-sort'),
+            chartStatType = $(this).data('stat-type'),
+            chartDecimalPlaces = $(this).data('decimal-places'),
+            chartQualifier = $(this).data('qualifier') || null,
+            geographyData = profileData['geography'],
+            comparisonLevels = {{ HURUMAP.comparative_levels|safe }};
+
+        // allow arbitrary nesting in API data structure
+        var drilldown = chartDataID.length - 1;
+        if (drilldown >= 2) {
+            for (var n = 2; n <= drilldown; n++) {
+                chartData = chartData[chartDataID[n]]
+            }
+        }
+
+        // determine whether data point is from anything other
+        // than the primary ACS release for this page
+        for (var key in chartData) if (chartData.hasOwnProperty(key)) break;
+        var thisRelease = chartData[key]['acs_release'],
+            noteRelease = (thisRelease != defaultDataRelease) ? thisRelease + ' data' : null;
+
+        /*chartQualifier = (chartQualifier && noteRelease) ? Array(chartQualifier, noteRelease)
+            .filter(function(n) { return n }).join('; ') : null;*/
+
+        var chartstuff = {
+            chartContainer: chartID,
+            chartDataKey: chartDataKey,
+            chartType: chartType,
+            chartHeight: 160,
+            chartData: chartData,
+            chartQualifier: chartQualifier,
+            chartChartTitle: chartChartTitle,
+            chartInitialSort: chartInitialSort,
+            chartStatType: chartStatType,
+            chartDecimalPlaces: chartDecimalPlaces,
+            geographyData: geographyData,
+            comparisonLevels: comparisonLevels
+        }
+        try {
+            Charts[i] = Chart(chartstuff);
+        } catch(e) {
+            console.log("Error making chart " + chartID)
+            console.log(chartstuff);
+        }
+    });
+}
+
+var maps = new ProfileMaps();
+maps.drawMapsForProfile(profileData.geography);
+
+makeCharts();
+
+// listen for resize, redraw charts to new dimensions
+var lazyRedrawCharts = _.debounce(function() {
+    window.browserWidth = document.documentElement.clientWidth;
+    window.browserHeight = document.documentElement.clientHeight;
+    makeCharts();
+}, 50);
+$(window).resize(lazyRedrawCharts);
+
+// for touch devices, still allow context toggle
+$('.stat-row').on('click', '.stat', function() {
+    $(this).find('.context').toggle();
+});
+
+var parentLinkContainer = null;
+if (!!parentLinkContainer) {
+    // set up the listener for trigger to reveal hidden groups
+    $('#header-box').on('click', '.link-reveal', function() {
+        $(this).hide().next('.hidden').show();
+        return false;
+    });
+
+    // hit the /parents API endpoint
+    $.getJSON(parentGeoAPI)
+        .done(function(results) {
+            // filter out 'this' from the parents
+            var parents = _.reject(results['parents'], function(p) {
+                return p.relation === 'this';
+            });
+            // list of unique parent sumlev types, maintaining order
+            var parentRelations = _.uniq(_.pluck(parents, 'sumlevel'));
+            // collect parents into individual sumlev groups
+            var parentGroups = _.groupBy(parents, function(d) {
+                return d.sumlevel;
+            });
+            // for each parent sumlev type ...
+            var parentLinkSets = _.map(parentRelations, function(r) {
+                // ... compile a set of links to individual profile pages
+                var parentLinkSet = _.map(parentGroups[r], function(v, k) {
+                    return '<a href="/profiles/' + v.geoid + '-' + slugify(v.display_name) + '/">' + v.display_name + '</a>';
+                });
+                var numParents = parentLinkSet.length;
+                // if more than one of a sumlev type, group behind reveal link
+                if (numParents > 1) {
+                    return '<a href="#" class="link-reveal">'+numParents+' '+ sumlevMap[r]['plural'] +'</a><span class="hidden">'+parentLinkSet.join(', ')+'</span>';
+                } else {
+                    // just one of this sumlev type, so add it to list
+                    return parentLinkSet;
+                }
+            })
+            // push the whole thing into the header box ... thingy
+            parentLinkContainer.html(parentLinksPrefix + parentLinkSets.join(', '));
+            $('body').trigger('glossaryUpdate', parentLinkContainer);
+        });
+}
+
+function bind_check_box() {
+    $('.box-checked').click(function(){
+        $(this).removeClass('box-checked')
+        $(this).addClass('box-unchecked')
+        v = $(this).attr('data-filter')
+        v = v.toLowerCase().replace(/ /g, '_')
+        $('#' + v).css('display', 'none')
+        unbind_check_box()
+    });
+}
+function unbind_check_box() {
+    $('.box-unchecked').click(function(){
+        $(this).removeClass('box-unchecked')
+        $(this).addClass('box-checked')
+        v = $(this).attr('data-filter')
+        v = v.toLowerCase().replace(/ /g, '_')
+        $('#' + v).css('display', 'block')
+        bind_check_box()
+    });
+}
+$(document).ready(function() {
+    position_filters();
+
+    /**Hide sections that are not selected **/
+    topics = {{selected_sections|safe}}
+    $('.profiles-container article.clearfix').each(function() {
+        i = topics.indexOf($(this).attr('id'))
+        if (i < 0) {
+            $(this).css('display', 'none');
+        }
+        /**if (topics.length > 1) {
+            $('.filter-row-sub').each(function() {
+                 $(this).css('display', 'block');
+            });
+        }**/
+    });
+
+    bind_check_box();
+    unbind_check_box();
+
+    //Makes the filters sidebar scroll along with the page
+    var h = $('#slippy-map').height() + $('#page-header').height() + $('#compare-place-picker').height()+ 24
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > h) {
+            $('.filters').addClass('affix');
+            y = ($(document).height() - $('#page-footer').height() - ($('.partners').height() * 2.5))
+            z = ($(window).scrollTop() +  $('.filters').height())
+            $(".filters").css("top", Math.min(90, y - z) + 'px');
+        } else {
+            $('.filters').removeClass('affix')
+            $(".filters").css("top", h + 'px');
+        }
+    });
+});
+</script>
+{% endblock %}
