@@ -1,0 +1,63 @@
+Metadata-Version: 1.1
+Name: git-pr
+Version: 0.2.0
+Summary: Tool to fetch GitHub pull requests.
+Home-page: http://github.com/ikalnytskyi/git-pr/
+Author: Ihor Kalnytskyi
+Author-email: ihor@kalnytskyi.com
+License: MIT
+Description: ========
+         git-pr
+        ========
+        
+        .. image:: https://img.shields.io/pypi/v/git-pr.svg
+           :target: https://pypi.python.org/pypi/git-pr
+        
+        .. image:: https://img.shields.io/pypi/l/git-pr.svg
+           :target: https://pypi.python.org/pypi/git-pr
+        
+        .. image:: https://travis-ci.org/ikalnytskyi/git-pr.svg?branch=master
+           :target: https://travis-ci.org/ikalnytskyi/git-pr
+        
+        A git command for fetching GitHub's pull requests to local copy.
+        
+        .. code:: bash
+        
+            $ [sudo] pip install git-pr
+        
+        Usage
+        -----
+        
+        https://github.com/ikalnytskyi/git-pr/pull/42
+        
+        .. code:: bash
+        
+            $ git pr 42
+            $ git pr github 42
+            $ git pr 42 --branch pr/42
+            $ git pr https://github.com/ikalnytskyi/git-pr.git 42
+        
+        
+        Links
+        -----
+        
+        * Documentation: https://git-pr.readthedocs.org/
+        * Source: https://github.com/ikalnytskyi/git-pr
+        * Bugs: https://github.com/ikalnytskyi/git-pr/issues
+        
+Keywords: git github pull-request
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Topic :: Terminals
+Classifier: Topic :: Software Development
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
