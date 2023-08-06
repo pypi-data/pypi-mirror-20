@@ -1,0 +1,47 @@
+title: Schema for Jenkins Slack Notification plugin configuration
+type: object
+additionalProperties: false
+
+properties:
+  team_subdomain:
+    type: string
+    description: |
+      Your team's Slack subdomain. If you sign in to slack at https://example.slack.com/, your subdomain is 'example'.
+  token:
+    type: string
+    description: |
+      The integration token to be used to send notifications to Slack.
+      You can copy this from the settings page within Slack.
+  token_credential_id:
+    type: string
+    description: |
+      The ID for the integration token from the Credentials plugin to be used to send notifications to Slack.
+      The "Kind" of the credential must be "Secret text".
+  channel:
+    type: string
+    description: |
+      Enter the channel names to which notifications should be sent. Note that this can include
+      names of channels OR channel id numbers, e.g. "#builds", and that multiple values may appear comma separated.
+      While names are more readable, channel ids will not change over time and are therefore more resilient.
+  webhook_token:
+    type: string
+    description: |
+      This token is used to verify requests between Slack and Jenkins.
+      You can copy this token from the settings page for your outgoing webhook within Slack.
+  webhook_url:
+    type: string
+    description: |
+      This is the webhook endpoint to send requests to, e.g. webhook, slackwebhook.
+      The webhook endpoint is mapped to the root address of your Jenkins instance and needs to be publicly accessible.
+      If your Jenkins instance is http://myjenkins.example.com and your webhook endpoint is slackwebhook,
+      you would set your Slack outgoing webhook url to http://myjenkins.example.com/slackwebhook/.
+      Note that the trailing slash is required.
+anyOf:
+- required:
+  - team_subdomain
+  - token
+  - channel
+- required:
+  - team_subdomain
+  - token_credential_id
+  - channel
