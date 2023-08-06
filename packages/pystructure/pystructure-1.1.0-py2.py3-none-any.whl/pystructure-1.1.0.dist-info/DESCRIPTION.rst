@@ -1,0 +1,143 @@
+Copyright (c) 2017 hanks
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Description: |Build Status| |Coverage Status|
+        
+        pystructure
+        ===========
+        
+        A tiny tool to help reading source code with showing structure of python
+        source code
+        
+        Why
+        ===
+        
+        I use PyCharm as my python IDE, and sometimes I can use ``structure``
+        navigation view to check code structure easily, like below:
+        
+        .. figure:: https://github.com/hanks/pystructure/blob/master/docs/images/pycharm-structure.jpg?raw=true
+           :alt: structure
+        
+           structure
+        
+        It is useful when you read some open source codes, and for me, I like to
+        write memo for code structure down in my note, but you can not copy the
+        structure information to text from PyCharm, so I create this tool to
+        help me easily to output text version of structure of python code.
+        
+        Installation
+        ============
+        
+        ``pip install pystructure``
+        
+        Usage
+        =====
+        
+        ::
+        
+            > pystructure
+        
+            Usage:
+                pystructure.py SRC_PATH [-o FILE | --output=FILE]
+        
+        ::
+        
+            > pystructure pystructure.py
+        
+            v __VERSION__
+            c PYSymbol(object)
+              v GLOBAL_VAR
+              v FUNCTION
+              v CLASS
+              v METHOD
+              v ATTRIBUTE
+              v PRIVATE_METHOD
+            c PYStructureVisitor(object)
+              v PREFIX
+              v LITERAL_VALUE_PREFIX
+              f __init__(self)
+              f visit(self, node_list)
+              f visit_Assign(self, node)
+              f visit_ClassDef(self, node)
+              f visit_FunctionDef(self, node)
+              f visit_literal_Num(self, node)
+              f visit_literal_Name(self, node)
+              f visit_literal_Str(self, node)
+              f visit_literal_List(self, node)
+              f visit_literal_Tuple(self, node)
+              f visit_literal_Dict(self, node)
+              f _get_visit_result(self, node, prefix="PREFIX")
+              f _get_literal_value_list(self, node_list)
+              f _build_func_signature(self, func_name, args_list, default_list, kwarg, vararg)
+              f method_dict(self)
+            c StructureParser(object)
+              f __init__(self)
+              f accept(self, visitor)
+              f load(self, src)
+              f export(self)
+              f _format_structure(self, root, level=0, output=None)
+            f main()
+        
+        Implementation
+        ==============
+        
+        -  ast - Build-in python library, to do static analytic for the source
+           code
+        -  docopt - A great tool to help to create beautiful CLI for you
+        
+        Contribution
+        ============
+        
+        1. Fork the repository on GitHub.
+        2. Make a branch off of master and commit your changes to it.
+        3. Run the tests with tox
+        
+        -  Either use tox to build against all supported Python versions (if you
+           have them installed) or use tox -e py{version} to test against a
+           specific version, e.g., tox -e py27 or tox -e py33.
+        
+        4. Submit a Pull Request to the master branch on GitHub.
+        
+        If you’d like to have a development environment for ``pystructure``, you
+        should create a virtualenv and then do ``pip install -e .`` from within
+        the directory.
+        
+        Lisence
+        =======
+        
+        MIT Lisence
+        
+        .. |Build Status| image:: https://travis-ci.org/hanks/pystructure.svg?branch=master
+           :target: https://travis-ci.org/hanks/pystructure
+        .. |Coverage Status| image:: https://coveralls.io/repos/github/hanks/pystructure/badge.svg?branch=master
+           :target: https://coveralls.io/github/hanks/pystructure?branch=master
+        
+Keywords: pystructure structure ast
+Platform: UNKNOWN
+Classifier: Topic :: Utilities
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
