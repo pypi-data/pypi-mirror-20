@@ -1,0 +1,46 @@
+Metadata-Version: 1.1
+Name: astm-serial
+Version: 0.1.5
+Summary: astm e1381 communication with serial port
+Home-page: https://github.com/rendiya/astm-serial
+Author: rendiya
+Author-email: ligerrendy@gmail.com
+License: Apache2
+Description: sampel communication with astm e1381 protocol.
+        
+        ready on pip
+        
+        ```
+        pip install astm-serial
+        ```
+        
+        for documentation please visit http://astm-serial.readthedocs.io/
+        
+        under construction
+        
+        schema communication:
+        ```
+        client > ENQ
+        server > ACK
+        client > DATA
+        server > ACK
+        client > EOT
+        ```
+        NAK handling
+        ```
+        client > ???
+        server > NAK
+        client > EOT
+        ```
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Communications
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
