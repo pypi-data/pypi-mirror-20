@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.rst
+requirements.txt
+setup.py
+test-requirements.txt
+persist_queue.egg-info/PKG-INFO
+persist_queue.egg-info/SOURCES.txt
+persist_queue.egg-info/dependency_links.txt
+persist_queue.egg-info/top_level.txt
+persistqueue/__init__.py
+persistqueue/exceptions.py
+persistqueue/queue.py
+persistqueue/sqlqueue.py
+tests/__init__.py
+tests/test_queue.py
+tests/test_sqlqueue.py
