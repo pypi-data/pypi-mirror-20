@@ -1,0 +1,44 @@
+Metadata-Version: 1.0
+Name: js.angular-xeditable
+Version: 0.6.0
+Summary: Fanstatic packaging of Angular-xeditable
+Home-page: UNKNOWN
+Author: Fanstatic Developers
+Author-email: fanstatic@googlegroups.com
+License: BSD
+Description: js.angular_xeditable
+        ********************
+        
+        Introduction
+        ============
+        
+        This library packages `Angular-xeditable`_ for `fanstatic`_.
+        
+        .. _`fanstatic`: http://fanstatic.org
+        .. _`Angular-xeditable`: https://vitalets.github.io/angular-xeditable/
+        
+        This requires integration between your web framework and ``fanstatic``,
+        and making sure that the original resources (shipped in the ``resources``
+        directory in ``js.angular_xeditable``) are published to some URL.
+        
+        
+        How to use?
+        ===========
+        
+        
+        You can import ``angular_xeditable`` from ``js.angular_xeditable`` and
+        `need`` it where you want these resources to be included on a page::
+        
+          >>> from js.angular_xeditable import angular_xeditable
+          >>> angular_xeditable.need()
+        
+        
+        CHANGES
+        *******
+        
+        0.6.0 (2017-03-15)
+        ==================
+        
+        - Initial release.
+        
+Platform: UNKNOWN
