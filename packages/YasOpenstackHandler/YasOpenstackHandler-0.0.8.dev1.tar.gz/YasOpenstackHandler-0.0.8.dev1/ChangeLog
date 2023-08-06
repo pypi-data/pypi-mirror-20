@@ -1,0 +1,106 @@
+CHANGES
+=======
+
+* Fix syntax error
+
+0.0.7
+-----
+
+* Join strings correctly
+* Error better
+* Thread deleted reply
+* Notify of existance in thread
+* Don't create a server with an already used name
+* Don't search for None image
+* Update list handler
+* Always reply in threads
+* fix typo
+* Catch meta parsing err and raise useful one
+* Add meta
+* Reply with id rather than object string
+* fix typo
+* Search for image
+* fix typo
+* Handle image and description in create
+
+0.0.6
+-----
+
+* Add missing config section
+
+0.0.5
+-----
+
+* Add Jinja2 requirement
+
+0.0.4
+-----
+
+* Fix readme name
+* Update README for python package
+* Update .gitignore
+* Simplify Structure name semantically
+* Add author and author_email
+* Default branch to '' rather than allowing None
+* Pass data correctly
+* Use correct var
+* Import sys
+* Get userdata attr correctly
+* More debugging
+* pass explicit positional args to super
+* Added debug statement for userdata
+* Make userdata file path relative to sys.prefix
+* Add ability to template userdata
+
+0.0.1
+-----
+
+* Add TODO, don't explicitly inherit from object
+* define openstackHandler.matches
+* Remove errant :
+* Simplify match handling
+* Use re.search rather than match
+* Remove errant ,
+* Correct log use
+* Remove unpassed args to handler
+* Refer to client correctly
+* Replace || with or
+* Remove dup prop in configuration
+* Update configuration
+* Fix strings
+* Add missing comma
+* Update config file to be fully useful
+* Adjust facade interface for new version of yas
+* Default message to ''
+* return response fom handler
+* Don't set a security group
+* Raise a handlererror instead
+* Catch novaclient BadRequest
+* Add yaml configuration files
+* Replace env config with yaml
+* Replace example handler functions with openstack ones
+* Convert project to YasHandler
+* Remove unused makefile
+* Remove unused deps; add yas as dep
+* Remove unused api component
+* Remove extar
+* Whitespace change
+* Add example slackbot config
+* slack: make create,list, and delete work
+* Add mock handlers and some other stuff
+* Make the bot not respond to itself
+* Work towards slack bot
+* Some halfway updates to implement the openstack lib on the api
+* Create openstack passthrough lib
+* Make slackbot listen
+* Add initial slackbot
+* Add post method to Ping resource
+* Add /.eggs/ to git ignore
+* Add facade.bot.slack module
+* Simplify module path
+* Add /.eggs/ to git ignore
+* Add a Server resource with create and delete
+* Drop database deps
+* Bump novaclient api version with comment
+* Add server/list endpoint
+* Initial commit with ping endpoint
