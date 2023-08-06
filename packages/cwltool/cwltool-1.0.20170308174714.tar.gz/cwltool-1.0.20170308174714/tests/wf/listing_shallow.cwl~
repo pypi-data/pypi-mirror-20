@@ -1,0 +1,11 @@
+class: CommandLineTool
+cwlVersion: v1.0
+requirements:
+  LoadListingRequirement:
+    loadListing: deep
+inputs:
+  d: Directory
+outputs:
+  blub: stdout
+arguments:
+  [echo, "$(inputs.d.listing)"]
