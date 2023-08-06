@@ -1,0 +1,17 @@
+<ROSETTASCRIPTS>
+
+  <xi:include href="shared_defs.xml"/>
+
+  <MOVERS>
+    <PackRotamersMover name="fixbb"
+        task_operations="cli,resfile,ex" scorefxn="scorefxn_cst"/>
+  </MOVERS>
+
+  <PROTOCOLS>
+    <!-- Constraints added using mover because command-line is ignored -->
+    <Add mover_name=cst/>
+    <Add mover_name=fixbb/>
+  </PROTOCOLS>
+
+</ROSETTASCRIPTS>
+
