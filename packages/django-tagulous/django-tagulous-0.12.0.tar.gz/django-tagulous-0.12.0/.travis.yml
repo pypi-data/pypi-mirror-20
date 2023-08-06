@@ -1,0 +1,47 @@
+language: python
+python: 3.5
+install:
+  - pip install "virtualenv<14.0.0" tox
+before_script:
+  - sh -c "if [ '$DATABASE_ENGINE' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS tagulous_tests;' -U postgres; fi"
+  - sh -c "if [ '$DATABASE_ENGINE' = 'pgsql' ]; then psql -c 'create database tagulous_tests;' -U postgres; fi"
+  - sh -c "if [ '$DATABASE_ENGINE' = 'mysql' ]; then mysql -e 'create database IF NOT EXISTS tagulous_tests'; fi"
+script:
+  - tox
+env:
+  # Django 1.4
+  - TOXENV=py27-django1.4
+  # Django 1.5
+  - TOXENV=py27-django1.5
+  - TOXENV=py32-django1.5
+  - TOXENV=py33-django1.5
+  # Django 1.6
+  - TOXENV=py27-django1.6
+  - TOXENV=py32-django1.6
+  - TOXENV=py33-django1.6
+  # Django 1.7
+  - TOXENV=py27-django1.7
+  - TOXENV=py32-django1.7
+  - TOXENV=py33-django1.7
+  - TOXENV=py34-django1.7
+  # Django 1.8 - LTS, so test mysql and pgsql for 2.7 and 3.4
+  - TOXENV=py27-django1.8
+  - TOXENV=py27-django1.8 DATABASE_ENGINE=mysql DATABASE_USER=travis
+  - TOXENV=py27-django1.8 DATABASE_ENGINE=pgsql DATABASE_USER=postgres
+  - TOXENV=py32-django1.8
+  - TOXENV=py33-django1.8
+  - TOXENV=py34-django1.8
+  - TOXENV=py34-django1.8 DATABASE_ENGINE=mysql DATABASE_USER=travis
+  - TOXENV=py34-django1.8 DATABASE_ENGINE=pgsql DATABASE_USER=postgres
+  # Django 1.9
+  - TOXENV=py27-django1.9
+  - TOXENV=py34-django1.9
+  - TOXENV=py35-django1.9
+  # Django 1.10 - latest, so test mysql and pgsql for 2.7 and 3.5
+  - TOXENV=py27-django1.10
+  - TOXENV=py27-django1.10 DATABASE_ENGINE=mysql DATABASE_USER=travis
+  - TOXENV=py27-django1.10 DATABASE_ENGINE=pgsql DATABASE_USER=postgres
+  - TOXENV=py34-django1.10
+  - TOXENV=py35-django1.10
+  - TOXENV=py35-django1.10 DATABASE_ENGINE=mysql DATABASE_USER=travis
+  - TOXENV=py35-django1.10 DATABASE_ENGINE=pgsql DATABASE_USER=postgres
