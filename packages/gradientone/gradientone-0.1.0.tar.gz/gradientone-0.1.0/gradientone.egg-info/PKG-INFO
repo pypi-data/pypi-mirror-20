@@ -1,0 +1,124 @@
+Metadata-Version: 1.1
+Name: gradientone
+Version: 0.1.0
+Summary: Gateway client for GradientOne
+Home-page: https://gitlab.com/gradientone/gateway-client
+Author: GradientOne Team
+Author-email: dev@gradientone.com
+License: MIT
+Description: ## Gateway Client
+        
+        The client code connecting test and measurement devices to the cloud.
+        
+        Includes a controller for managing updates to the client.
+        
+        
+        Setup
+        -----
+        
+        Install ubuntu packages:
+        
+        ```bash
+        sudo apt-get update
+        sudo apt-get install --fix-missing build-essential checkinstall openssh-server libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev  libgdbm-dev libc6-dev libbz2-dev libssl-dev hdf5-tools
+        ```
+        
+        
+        ##### Install pip
+        
+        ```bash
+        cd
+        sudo curl -O https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py
+        sudo /usr/local/bin/python distribute_setup.py
+        sudo easy_install pip
+        ```
+        
+        ##### Install python libraries:
+        
+        ```bash
+        sudo pip install -r requirements.txt
+        ```
+        
+        Copy **gradient\_one.cfg.sample** to **/etc/gradient\_one.cfg** and edit the variables to include the GATEWAY_AUTH_TOKEN, among others.
+        
+        ```bash
+        sudo cp gradient_one.cfg.sample /etc/gradient_one.cfg
+        ```
+        
+        ----
+        
+        ### Client Controller 
+        The client controller requires GitPython. Install it first with:
+        
+        ```
+        $ sudo pip install GitPython
+        ```
+        
+        #### Configure Your Settings!
+        
+        Set up your **/etc/gradient_one.cfg** file (most importantly the DOMAIN)
+        
+        If you don't do this first, the client_controller will not run.
+        
+        ----
+        
+        #### Get the source code
+        
+        Then clone this repository and go into the directory
+        
+        ```
+        $ git clone git@gitlab.com:gradientone/client_controller.git
+        ```
+        
+        #### Usage
+        
+        ```
+        $ cd client_controller
+        $ sudo python client_controller.py
+        ```
+        
+        #### For permanent deployments. You can skip for local development.
+        
+        Create a cron job to take care of this. Paste the following in the crontab file.
+        
+        ``` 
+        # cron job that logs status and restarts if failed
+        * * * * * ps up `cat /tmp/mydaemon.pid ` >/dev/null && echo "Working at: $(date)" >> /tmp/debug.log || echo "Restart at: $(date)" >> /tmp/debug.log || echo "Failed Restart at: $(date)" >> /tmp/debug.log  # noqa
+        * * * * * ps up `cat /tmp/mydaemon.pid ` >/dev/null || /usr/local/bin/python [REPLACE WITH PATH TO THIS FILE] 2> /tmp/err.log  # noqa
+        0 0 */3 * * > /tmp/debug.log
+        ```
+        
+        
+        Files
+        -----
+        - **client_controller.py** - Updates and executes client code
+        - **gateway_client.py** - The main module that directs traffic
+        - **transformers.py** - Takes the config data and transforms it to python-ivi instructions. Fetches the instrument response and passes that data on to the Transmitter object
+        - **transmitters.py** - Transmits the instrument data to the server
+        - **gateway_helpers.py** - Helper functions like "get_instrument" for getting a python-ivi instrument instance for configuring and fetching data
+        
+        Typical Instrument Run Workflow
+        ------------
+        
+        1. User clicks "Run"
+        2. **panelcontrol.py** (AppEngine side) makes a testrun
+        3. **gateway_client.py** grabs the instructions
+        4. **transformers.py** sends configuration to instrument and fetches response
+        5. **transmitters.py** posts the data to the server
+        6. **testcomplete.py** (AppEngine side) stores the data and indexes the data
+        7. User can query for result on the Results page
+        
+        
+        
+Keywords: test and measurement device control and data collection
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
