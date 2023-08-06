@@ -1,0 +1,59 @@
+Metadata-Version: 2.0
+Name: verifyreq
+Version: 0.1.1
+Summary: Tool to verify requirement file installations.
+Home-page: https://github.com/gwax/verifyreq
+Author: George Leslie-Waksman
+Author-email: waksman@gmail.com
+License: MIT
+Keywords: distutils setuptools egg pip requirements
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Build Tools
+
+verifyreq
+=========
+
+Tool to verify requirement file installations.
+
+
+Usage
+=====
+
+verifyreq is a fairly straightforward tool. Run it with any number of
+requirement files as arguments and it will check that everything in the
+requirement files is installed and consistent in the current environment.
+
+.. code:: bash
+
+    verifyreq requirements.txt
+
+If everything is consistent, there will be some output and the exit code
+will be zero. If there are any problems, a stack trace will be emitted with
+(hopefully) useful information and there will be a non-zero exit code.
+
+
+Changelog
+=========
+
+0.1.1
+-----
+
+- Only check through files once.
+
+0.1.0
+-----
+
+- Initial release
+
+
