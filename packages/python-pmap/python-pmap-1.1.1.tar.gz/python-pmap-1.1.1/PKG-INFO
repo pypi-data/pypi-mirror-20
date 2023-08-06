@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: python-pmap
+Version: 1.1.1
+Summary: Clojure's pmap implementation for Python.
+Home-page: https://github.com/hcarvalhoalves/python-pmap
+Author: Henrique Carvalho Alves
+Author-email: hcarvalhoalves@gmail.com
+License: UNKNOWN
+Description: [Clojure's pmap](https://clojuredocs.org/clojure.core/pmap) implementation for Python.
+        
+        ### Usage
+        
+        ```
+        from pmap import pmap
+        
+        def fn(ele):
+        	return do_some_IO(ele)
+        
+        seq = xrange(10000)
+        
+        for result in pmap(fn, seq):
+        	print result
+        
+        ```
+Platform: UNKNOWN
