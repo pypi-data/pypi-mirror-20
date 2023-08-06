@@ -1,0 +1,88 @@
+Metadata-Version: 2.0
+Name: breakers
+Version: 0.1.0
+Summary: Usable Circuit Breaker pattern implementation
+Home-page: https://github.com/elemepi/breakers
+Author: maralla
+Author-email: imaralla@icloud.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
+breakers
+========
+
+.. image:: https://travis-ci.org/elemepi/breakers.svg?branch=master
+    :target: https://travis-ci.org/elemepi/breakers
+
+Usable Circuit Breaker pattern implementation.
+
+
+Install
+-------
+
+.. code:: bash
+
+    $ pip install breakers
+
+
+Usage
+-----
+
+.. code:: python
+
+    import functools
+    from breakers import Breaker
+
+    def circuit_breaker(time_span=20000, unit=1000, calls_limit=10,
+                        error_limit=0.5, retry_time=10000):
+        def deco(func):
+            # Create breaker
+            if not hasattr(func, '__breaker__'):
+                func.__breaker__ = Breaker(time_span, unit, calls_limit,
+                                           error_limit, retry_time)
+            breaker = func.__breaker__
+
+            @functools.wraps(func)
+            def wraps(*args, **kwargs):
+                if not breaker.is_allow():
+                    raise RuntimeError('Circuit breaker')
+
+                exc = None
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    exc = e
+                    raise
+                finally:
+                    if exc:
+                        breaker.add_failure(1)
+                    else:
+                        breaker.add_success(1)
+            return wraps
+        return deco
+
+    @circuit_breaker()
+    def f():
+        import random
+        if random.randint(1, 4) in (1, 2):
+            raise ValueError
+        return 'succeed'
+
+
