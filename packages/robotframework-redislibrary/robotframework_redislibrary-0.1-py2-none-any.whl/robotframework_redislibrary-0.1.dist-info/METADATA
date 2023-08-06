@@ -1,0 +1,23 @@
+Metadata-Version: 2.0
+Name: robotframework-redislibrary
+Version: 0.1
+Summary: robotframework-redislibrary is a Robot Framework test library for manipulating in-memory data which store in Redis
+Home-page: https://github.com/nottyo/robotframework-redislibrary.git
+Author: Traitanit Huangsri
+Author-email: traitanit.hua@gmail.com
+License: UNKNOWN
+Keywords: robotframework redislibrary redis
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: Public Domain
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Testing
+Requires-Dist: tox
+Requires-Dist: coverage
+Requires-Dist: robotframework (>=3.0)
+Requires-Dist: redis (==2.10.5)
+
+UNKNOWN
+
+
