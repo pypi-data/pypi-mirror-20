@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>HelloWorld package</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body role="document">
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="challenges.html" title="challenges package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="README: Challenges"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Challenges 0.1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="helloworld-package">
+<h1>HelloWorld package</h1>
+<div class="section" id="submodules">
+<h2>Submodules</h2>
+</div>
+<div class="section" id="module-HelloWorld.HelloWorld">
+<span id="helloworld-helloworld-module"></span><h2>HelloWorld.HelloWorld module</h2>
+<p>This is the HelloWorld challenge to teach the usage of the library by a
+minimal example.</p>
+<p>This challenge takes a number and a word and composes a new word based
+on the input.</p>
+<p>The class fully focuses on the &#8220;business logic&#8221; by overwriting just two
+methods of parent class &lt;challenge.challenge.Challenge&gt;:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&lt;build&gt;: This sets up the data model from the given input lines.</li>
+<li>&lt;calc&gt;: This is the core algorithm of the challenge.</li>
+</ul>
+</div></blockquote>
+<p>This design pattern is called the &#8220;Template Method Pattern&#8221;. While the parent
+class handles the common parts of the challenge flow, the child class just
+encapsulates what is special.</p>
+<p>The two methods above is just the bare minimum to implement. For more complex
+challenges you will overwrite or extend other parts of the parent class.</p>
+<p>Have a look into the parent class, especially into the &lt;main&gt; function, that
+controls the execution of the challenge. Also have a look into the parents
+&lt;__init__&gt; method to see what instance variables are already prepared to serve
+the communication of the methods.</p>
+<p>By the class variable &lt;sample&gt; a minimal example of the possible input is
+given. This is recommended for every challenge. It is useful during
+development or for smoke tests. Otherwise this class variable
+will be overwritten by injection of an instance variable of the same name.</p>
+<dl class="class">
+<dt id="HelloWorld.HelloWorld.HelloWorld">
+<em class="property">class </em><code class="descclassname">HelloWorld.HelloWorld.</code><code class="descname">HelloWorld</code><a class="reference internal" href="_modules/HelloWorld/HelloWorld.html#HelloWorld"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="challenges.html#challenges.challenge.Challenge" title="challenges.challenge.Challenge"><code class="xref py py-class docutils literal"><span class="pre">challenges.challenge.Challenge</span></code></a></p>
+<p>This is the HelloWorld Challenge class.</p>
+<p>This challenge takes a word as input and a number at which position
+to split the word. It returns a new word composed of the switched parts
+with a blank in between.</p>
+<dl class="method">
+<dt id="HelloWorld.HelloWorld.HelloWorld.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorld.html#HelloWorld.build"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Parse the input lines and set up the model.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HelloWorld.HelloWorld.HelloWorld.calc">
+<code class="descname">calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorld.html#HelloWorld.calc"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Swap head and tail of the model and store to result.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="HelloWorld.HelloWorld.HelloWorld.sample">
+<code class="descname">sample</code><em class="property"> = '\n        5\n        WorldHello\n    '</em></dt>
+<dd><p>This is the input sample. It can be overwritten by injection.</p>
+<ul class="simple">
+<li>first line: integer</li>
+<li>second line: word</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-HelloWorld.HelloWorldTestCase">
+<span id="helloworld-helloworldtestcase-module"></span><h2>HelloWorld.HelloWorldTestCase module</h2>
+<dl class="class">
+<dt id="HelloWorld.HelloWorldTestCase.HelloWorldTestCase">
+<em class="property">class </em><code class="descclassname">HelloWorld.HelloWorldTestCase.</code><code class="descname">HelloWorldTestCase</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorldTestCase.html#HelloWorldTestCase"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="HelloWorld.HelloWorldTestCase.HelloWorldTestCase.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorldTestCase.html#HelloWorldTestCase.setUp"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="HelloWorld.HelloWorldTestCase.HelloWorldTestCase.test__init__">
+<code class="descname">test__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorldTestCase.html#HelloWorldTestCase.test__init__"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="HelloWorld.HelloWorldTestCase.HelloWorldTestCase.test_build">
+<code class="descname">test_build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorldTestCase.html#HelloWorldTestCase.test_build"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="HelloWorld.HelloWorldTestCase.HelloWorldTestCase.test_calc">
+<code class="descname">test_calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HelloWorld/HelloWorldTestCase.html#HelloWorldTestCase.test_calc"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-HelloWorld">
+<span id="module-contents"></span><h2>Module contents</h2>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, Elmar Hinz.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>README: Challenges</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body role="document">
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HelloWorld.html" title="HelloWorld package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Challenges"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Challenges 0.1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="readme-challenges">
+<h1>README: Challenges</h1>
+<p>Library to assist programming, testing and execution of solutions for coding
+challenges like those on stepik.org</p>
+<div class="section" id="a-minimal-hello-world-class-add">
+<h2>A Minimal Hello World Class &lt;Add&gt;</h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">challenges.challenge</span> <span class="kn">import</span> <span class="n">Challenge</span>
+
+<span class="k">class</span> <span class="nc">Add</span><span class="p">(</span><span class="n">Challenge</span><span class="p">):</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        5, 6</span>
+<span class="s1">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_to_integers</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The class to write lets you focus on the core algorithms of the challenge while keeping stuff like opening, reading and
+writing of files out of the way. You inherit several methods to set up the model or to format your result for writing.</p>
+<p>While the class variable <cite>sample</cite> just holds a minimal example of the input, the actual input is later injected by
+the <strong>Challenge Runner</strong> via the command line. In Bioinformatics this is often a large file of DNA.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p>See a more verbose example of HelloWorld.</p>
+<ul class="last simple">
+<li><a class="reference external" href="https://github.com/elmar-hinz/Python.Challenges/blob/master/HelloWorld/HelloWorld.py">https://github.com/elmar-hinz/Python.Challenges/blob/master/HelloWorld/HelloWorld.py</a></li>
+<li><a class="reference external" href="https://github.com/elmar-hinz/Python.Challenges/blob/master/HelloWorld/HelloWorldTestCase.py">https://github.com/elmar-hinz/Python.Challenges/blob/master/HelloWorld/HelloWorldTestCase.py</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-challenge-runner-supports-the-following-features">
+<h2>The Challenge Runner Supports the Following Features</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Listing available challenges</li>
+<li>Scaffolding a new challenge directory, with a challenge class and a unit test class</li>
+<li>Executing the small <cite>sample</cite> within the challenge class</li>
+<li>Reading input files from the command line</li>
+<li>Result output on the command line</li>
+<li>Writing <cite>sample.txt</cite> and matching <cite>result.txt</cite> into the challenges directory</li>
+<li>Running the unit test case of a challenge</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-layout-of-your-directory-looks-like-this">
+<h2>The Layout of Your Directory Looks Like This</h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>myChallenges/
+    Challenge1/Challenge1.py
+    Challenge1/Challenge1TestCase.py
+    Challenge2/Challenge2.py
+    Challenge2/Challenge2TestCase.py
+    ... more challenges ...
+</pre></div>
+</div>
+<p>The names <cite>Challenge1</cite> and <cite>Challenge2</cite> are just placeholders for the names you choose during scaffolding.</p>
+</div>
+<div class="section" id="running-the-challenge-runner">
+<h2>Running the Challenge Runner</h2>
+<p>The directory <cite>myChallenges/</cite> is the base directory of your challenges project. It&#8217;s the directory from where to use the
+<strong>Challenge Runner</strong>.</p>
+<div class="section" id="list-the-available-challenges">
+<h3>List the Available Challenges</h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge --list
+* Challenge1
+* Challenge2
+* ...
+</pre></div>
+</div>
+</div>
+<div class="section" id="scaffolding-a-new-challenge">
+<h3>Scaffolding a New Challenge</h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge --scaffold Challenge3
+</pre></div>
+</div>
+<p>You now find the files:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>myChallenges/
+    Challenge3/Challenge3.py
+    Challenge3/Challenge3TestCase.py
+</pre></div>
+</div>
+<p>Check it&#8217;s working by running the unit test case.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge --unittest Challenge3
+...
+----------------------------------------------------------------------
+Ran <span class="m">1</span> tests in 0.001s
+
+OK
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-sample-from-the-class-file">
+<h3>Run &lt;sample&gt; from the Class File</h3>
+<p>This is the small sample directly coded into the challenge class.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge --klass Challenge1
+<span class="o">[</span>the result output goes here<span class="o">]</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p>You will automatically find the latest output in two files, independent from the input method you choose.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>myChallenges/Challenge1/latest.txt
+myChallenges/latest.txt
+</pre></div>
+</div>
+<p class="last">These files are just for convenience and are overwritten by the next run.</p>
+</div>
+</div>
+<div class="section" id="read-sample-from-an-input-file">
+<h3>Read Sample from an Input File</h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge Challenge1 --file ~/Downloads/data.txt
+<span class="o">[</span>the result output goes here<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="storing-data-and-results">
+<h3>Storing Data and Results</h3>
+<p>Did you pass the challenge? Was the online grader content with the upload of <cite>latest.txt</cite>? Then you should store data
+and result.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge Challenge1 --file ~/Downloads/data.txt --write
+</pre></div>
+</div>
+<p>You will find the files:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>myChallenges/Challenge1/sample.txt
+myChallenges/Challenge1/result.txt
+</pre></div>
+</div>
+<p>This files are stored until the next run with the <cite>&#8211;write</cite> flag.</p>
+</div>
+<div class="section" id="help">
+<h3>Help</h3>
+<p>To quickly see all available options.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>challenge --help
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="naming-conventions">
+<h2>Naming Conventions</h2>
+<p>The naming conventions follow the standards as defined by <strong>PEP 8 &#8211; Style Guide for Python Code</strong></p>
+<p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a></p>
+<p>There are two deliberate exceptions:</p>
+<ol class="arabic">
+<li><p class="first">Challenge module names are <strong>CamelCase</strong>:</p>
+<blockquote>
+<div><p>In contradiction to the style guide directory and class file of the challenges are not all lowercase. Especially the
+first character must be uppercase. This is used to find and list the challenge directories between other modules.
+Even more, the directory, the class file and the class name must all use the same word, with the <cite>.py</cite> extension for
+the file.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Inherited class attributes and methods don&#8217;t have a leading underscore:</p>
+<blockquote>
+<div><p>The inherited functions and methods of the challenge are not a public API and the style guides recommends leading
+underscores. As inheritance is a core concept of the challenge class, this would lead to a hell of leading
+underscores. For this reason we don&#8217;t follow the style guide in this recommendation.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This solftware requieres Python 3.</p>
+</div>
+<div class="section" id="clone-from-github">
+<h3>Clone from Github</h3>
+<p>You can clone (or download) the Challenges project directly from Github. In this case the scripts and pathes are not
+configured globally. Either you configure it globally or you place your challenges immediately into the projects folder
+so that the paths are detected relatively.</p>
+<div class="section" id="put-your-challenges-immediately-into-the-projects-folder">
+<h4>Put Your Challenges Immediately Into the Projects Folder</h4>
+<p>This is the most simple setup to get started. After downloading change into the download folder an try to run the
+<cite>HelloWorld</cite> unit test. In this case the command is in the <cite>bin</cite> directory, you call it as <cite>bin/challenge</cite>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; bin/challenge -u HelloWorld
+...
+----------------------------------------------------------------------
+Ran <span class="m">3</span> tests in 0.001s
+
+OK
+</pre></div>
+</div>
+<p>Now you are ready to create your challenge side-by-side with the <cite>HelloWorld</cite> challenge.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; bin/challenge -s MyChallenge
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="use-pip-to-install-challenges">
+<h3>Use &lt;pip&gt; to Install &lt;challenges&gt;</h3>
+<p>If you have a fully configured python 3 environment up and running you can install &lt;challenges&gt; with pip3.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; pip3 search challenges
+prompt&gt; pip3 install challenges
+</pre></div>
+</div>
+<p>The library will be included into the python class path. The runner will be globally available as <cite>challenge</cite> or
+alternatively as <cite>stepik</cite>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>prompt&gt; challenge -V
+challenge 0.1.2
+
+prompt&gt; stepik -V
+stepik 0.1.2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, Elmar Hinz.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
+    </div>
+  </body>
+</html>
