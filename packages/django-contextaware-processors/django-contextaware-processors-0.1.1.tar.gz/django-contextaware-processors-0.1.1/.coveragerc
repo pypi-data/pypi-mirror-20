@@ -1,0 +1,18 @@
+[run]
+source = contextaware_processors
+omit =
+    contextaware_processors/tests/*
+branch = True
+data_file = .coverage
+timid = False
+
+[report]
+exclude_lines =
+    pragma: no cover
+precision = 0
+show_missing = True
+omit =
+    contextaware_processors/tests/*
+
+[xml]
+output = coverage.xml
