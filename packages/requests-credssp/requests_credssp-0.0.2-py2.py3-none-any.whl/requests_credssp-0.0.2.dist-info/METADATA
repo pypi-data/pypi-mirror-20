@@ -1,0 +1,27 @@
+Metadata-Version: 2.0
+Name: requests-credssp
+Version: 0.0.2
+Summary: HTTPS CredSSP authentication with the requests library.
+Home-page: https://github.com/jborean93/requests-credssp
+Author: Jordan Borean
+Author-email: jborean93@gmail.com
+License: ISC
+Keywords: authentication auth microsoft credssp winrm
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: ntlm-auth
+Requires-Dist: ordereddict
+Requires-Dist: pyOpenSSL
+Requires-Dist: requests
+
+UNKNOWN
+
+
