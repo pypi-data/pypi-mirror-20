@@ -1,0 +1,33 @@
+- import "yass.macros" as yass with context
+
+!!! 5
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+        + yass.meta_tags()
+        + yass.meta_social_graph()
+        + yass.meta_page_title()
+        + yass.meta_page_description()
+        + yass.css(src='vendor/font-awesome/css/font-awesome.min.css')
+        + yass.css(src='vendor/bootstrap/css/bootstrap.min.css' )
+        + yass.css(src='vendor/jquery-oembed/jquery.oembed.css')
+        + yass.css(src='vendor/yass/commons.css')
+        + yass.css(src='css/style.css')
+        + yass.js(src='vendor/jquery/jquery.min.js')
+        + yass.google_analytics()
+
+    body
+        .container.
+            {% block body %}{% endblock %}
+
+
+        + yass.js(src='vendor/yass/commons.js')
+        + yass.js(src='vendor/bootstrap/js/bootstrap.min.js')
+        + yass.js(src='vendor/jquery-timeago/jquery.timeago.js')
+        + yass.js(src='vendor/jquery-oembed/jquery.oembed.js')
+        + yass.js(src='js/app.js')
+
+
