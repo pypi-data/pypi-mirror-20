@@ -1,0 +1,623 @@
+# Translations template for MOM/GTW/JNJ.
+# Copyright (C) 2016 Mag. Christian Tanzer, Martin Glueck
+# This file is distributed under the same license as the MOM/GTW/JNJ
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MOM/GTW/JNJ 1.0\n"
+"Report-Msgid-Bugs-To: tanzer@swing.co.at,martin@mangari.org\n"
+"POT-Creation-Date: 2016-02-05 11:50+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.1.1\n"
+
+#: _GTW/_OMP/_PAP/_E164/Error.py:59
+#, python-format
+msgid "; subscriber number must have at least %s digits; got %s digits instead"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/_E164/Error.py:74
+#, python-format
+msgid "; subscriber number must have at most %s digits; got %s digits instead"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Person.py:169 _GTW._OMP._PAP.Person:0
+msgid "Academic title"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0 _GTW._OMP._PAP.Address_Position:0
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Address"
+msgid_plural "Addresses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Address of company"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Address of person"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Address of subject"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address_Position:0
+msgid "Address_Position"
+msgid_plural "Address_Positions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "City"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "City, town, or village"
+msgstr ""
+
+#: _GTW._OMP._PAP.Company:0 _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company"
+msgid_plural "Companys"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company has Address"
+msgid_plural "Company has Addresses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company has Email"
+msgid_plural "Company has Emails"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company has Phone"
+msgid_plural "Company has Phones"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company has Url"
+msgid_plural "Company has Urls"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company linked to Address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company linked to Email"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company linked to Phone"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Company linked to Url"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0 _GTW/_OMP/_PAP/_E164/Country.py:278
+msgid "Country"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Phone.py:90 _GTW._OMP._PAP.Phone:0
+msgid "Country code"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject:0
+msgid "Date of birth [`start`] (and death [`finish`])"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject:0
+msgid "Date_Interval_lifetime"
+msgid_plural "Date_Interval_lifetimes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Email:0
+msgid "Email address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Email:0
+msgid "Email address (including domain)"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Email of company"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Email of person"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Email of subject"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Extension"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Extension number used in PBX"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Attr_Type.py:43
+msgid "Female"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/IM_Handle.py:42
+msgid "First internet-wide instant messaging service"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "First name"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "First name of person"
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Geographical latitude"
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Geographical longitude"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address_Position:0
+msgid "Geographical position"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address_Position:0
+msgid "Geographical position of an Address."
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Height"
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Height above mean sea level"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid "International country code of phone number (without prefix)"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/IM_Handle.py:43
+msgid "Internet relay chat"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Last name"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Last name of person"
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Latitude"
+msgstr ""
+
+#: _GTW._OMP._PAP.Legal_Entity:0
+msgid "Legal_Entity"
+msgid_plural "Legal_Entitys"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject:0
+msgid "Lifetime"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a company to a address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a company to a email"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a company to a phone number"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a company to a url"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a person to a address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a person to a email"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a person to a phone number"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Link a person to a url"
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Longitude"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Attr_Type.py:44
+msgid "Male"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Middle name"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Middle name of person"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Model a (postal) address."
+msgstr ""
+
+#: _GTW._OMP._PAP.Company:0
+msgid "Model a company."
+msgstr ""
+
+#: _MOM._Attr.Position:0
+msgid "Model a geographical position."
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Model a person."
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid "Model a phone number"
+msgstr ""
+
+#: _GTW._OMP._PAP.Email:0
+msgid "Model an email address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Company:0
+msgid "Name of company."
+msgstr ""
+
+#: _GTW._OMP._PAP.Legal_Entity:0
+msgid "Name of legal_entity."
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid ""
+"National destination code of phone number (without prefix).\n"
+"\n"
+"The national destination code selects a geographic area, e.g.,\n"
+"a city or district, a mobile provider, or a specific service."
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Phone.py:110 _GTW._OMP._PAP.Phone:0
+msgid "Network destination code"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/_E164/Error.py:43
+#, python-format
+msgid "Not a proper phone number for %s: %s"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Property.py:53
+msgid "Office"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/graph.py:87
+msgid "PAP graph"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0 _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person"
+msgid_plural "Persons"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person has Address"
+msgid_plural "Person has Addresses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person has Email"
+msgid_plural "Person has Emails"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person has Phone"
+msgid_plural "Person has Phones"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person has Url"
+msgid_plural "Person has Urls"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person linked to Address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person linked to Email"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person linked to Phone"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Person linked to Url"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0 _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Phone"
+msgid_plural "Phones"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Phone number of company"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Phone number of person"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Phone number of subject"
+msgstr ""
+
+#: _GTW._OMP._PAP.Company:0
+msgid "Place where this company is registered."
+msgstr ""
+
+#: _MOM._Attr.Position:0 _GTW._OMP._PAP.Address_Position:0
+msgid "Position"
+msgid_plural "Positions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Address_Position:0
+msgid "Postal address of the `position`"
+msgstr ""
+
+#: _GTW._OMP._PAP.Property:0 _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Property"
+msgid_plural "Propertys"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Property of subject"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Region"
+msgstr ""
+
+#: _GTW._OMP._PAP.Company:0
+msgid "Registered in"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Sex"
+msgstr ""
+
+#: _GTW._OMP._PAP.Person:0
+msgid "Sex of a person."
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Short description of the address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Email:0
+msgid "Short description of the email"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Short description of the link"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid "Short description of the phone"
+msgstr ""
+
+#: _GTW._OMP._PAP.Property:0
+msgid "Short description of the property"
+msgstr ""
+
+#: _GTW._OMP._PAP.Url:0
+msgid "Short description of the url"
+msgstr ""
+
+#: _GTW._OMP._PAP.Group:0 _GTW._OMP._PAP.Legal_Entity:0
+#: _GTW._OMP._PAP.Company:0
+msgid "Short name"
+msgstr ""
+
+#: _GTW._OMP._PAP.Company:0
+msgid "Short name of company."
+msgstr ""
+
+#: _GTW._OMP._PAP.Group:0
+msgid "Short name of group."
+msgstr ""
+
+#: _GTW._OMP._PAP.Legal_Entity:0
+msgid "Short name of legal_entity."
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "State or province or region"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Street"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Street (or place) and house number"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject:0 _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject"
+msgid_plural "Subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject has Address"
+msgid_plural "Subject has Addresses"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject has Email"
+msgid_plural "Subject has Emails"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject has Phone"
+msgid_plural "Subject has Phones"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject has Property"
+msgid_plural "Subject has Propertys"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject has Url"
+msgid_plural "Subject has Urls"
+msgstr[0] ""
+msgstr[1] ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject linked to Address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject linked to Email"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject linked to Phone"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject linked to Property"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Subject linked to Url"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Phone.py:128 _GTW._OMP._PAP.Phone:0
+msgid "Subscriber number"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid ""
+"Subscriber number (without country code, network destination code, "
+"extension)"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/Person.py:170
+msgid "Title"
+msgstr ""
+
+#: _GTW._OMP._PAP.Url:0
+msgid "URL value referrring to a specific resource."
+msgstr ""
+
+#: _GTW._OMP._PAP.Url:0
+msgid "Uniform resource locator, aka URL"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/_E164/Polisher.py:82
+#, python-format
+msgid "Unknown country code %s"
+msgstr ""
+
+#: _GTW/_OMP/_PAP/_E164/Polisher.py:110
+#, python-format
+msgid "Unknown network destination code %s"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Url of company"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Url of person"
+msgstr ""
+
+#: _GTW._OMP._PAP.Subject_has_Property:0
+msgid "Url of subject"
+msgstr ""
+
+#: _GTW._OMP._PAP.Url:0
+msgid "Value"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid ""
+"Value for `ndc` must contain at least `ndc_min_length`\n"
+"digits, must not be longer than `ndc_max_length` digits."
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid ""
+"Value for `sn` must contain at least `sn_min_length`\n"
+"digits, must not be longer than `sn_max_length` digits."
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Zip code"
+msgstr ""
+
+#: _GTW._OMP._PAP.Address:0
+msgid "Zip code of address"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid "ndc_length_valid"
+msgstr ""
+
+#: _GTW._OMP._PAP.Phone:0
+msgid "sn_length_valid"
+msgstr ""
+
