@@ -1,0 +1,47 @@
+Metadata-Version: 1.1
+Name: infmin
+Version: 0.1.2
+Summary: Text file minimizing CLI tool
+Home-page: https://github.com/Scottz0r/infmin
+Author: Scott Clewell
+Author-email: scott.clewell@gmail.com
+License: MIT
+Description: ======
+        infmin
+        ======
+        
+        Input File Minimizer - a text file minimizing CLI tool.
+        
+        Usage
+            ``infmin [-h] [-f FILE] [-C DIRECTORY] [-r] [-s] in_file lines``
+        
+        Arguments
+        =========
+        
+        Positional arguments
+        
+        #. ``in_file``: The file to minimize.
+        #. ``lines``: The number of lines to output.
+        
+        At least one of the following arguments is required:
+        
+        -f    Output file name.
+        -C    Output directory.
+        
+        Optional arguments:
+        
+        -r    Randomly skip lines while minimizing.
+        --silent    Suppress output messages while minimizing.
+        -h    Show help.
+        
+Keywords: infmin file minimize
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
