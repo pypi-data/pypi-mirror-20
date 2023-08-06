@@ -1,0 +1,29 @@
+Metadata-Version: 1.1
+Name: webdriver-start
+Version: 1.0.1
+Summary: Reliable module for starting up Selenium Webdriver, with custom user-agent and custom profile
+Home-page: https://github.com/SkullTech/webdriver-start
+Author: Sumit Ghosh
+Author-email: sumit.ghosh32@gmail.com
+License: MIT
+Description: # webdriver-start
+        Reliable module for starting up Selenium Webdriver, with custom user-agent and custom profile
+        
+        ## Installation
+        Install it using pip: `pip install webdriver-start`
+        
+        ## Usage
+        ```
+        import wdstart
+        driver = wdstart.start_webdriver(driver_name='Chrome', user_agent='Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19(KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19', profile_path='C:\Users\SkullTech\AppData\Local\Google\Chrome\User Data')
+        ```
+        
+Keywords: selenium webdriver development
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
