@@ -1,0 +1,64 @@
+lim
+===
+
+|PyPI-License| |PyPI-Version| |Documentation Status|
+
+Lim is an efficient implementation of Generalized Linear Mixed Models
+for genomic analysis.
+
+Install
+-------
+
+The recommended way of installing it is via
+`conda <http://conda.pydata.org/docs/index.html>`__
+
+.. code:: bash
+
+    conda install -c conda-forge limix-inference
+    conda install h5py pandas tabulate pytest
+
+and then
+
+.. code:: bash
+
+    pip install lim
+
+Running the tests
+-----------------
+
+After installation, you can test it
+
+::
+
+    python -c "import lim; lim.test()"
+
+as long as you have `pytest <http://docs.pytest.org/en/latest/>`__.
+
+Documentation
+-------------
+
+Refer to the `documentation <http://lim.readthedocs.io/en/latest/>`__
+for detailed information.
+
+Authors
+-------
+
+-  **Christoph Lippert** - https://github.com/clippert
+-  **Danilo Horta** - https://github.com/Horta
+-  **Oliver Stegle** - https://github.com/ostegle
+-  **Paolo Francesco Casale** - https://github.com/fpcasale
+
+License
+-------
+
+This project is licensed under the MIT License -- see the
+`LICENSE <LICENSE>`__ file for details.
+
+.. |PyPI-License| image:: https://img.shields.io/pypi/l/lim.svg?style=flat-square
+   :target: https://pypi.python.org/pypi/lim/
+.. |PyPI-Version| image:: https://img.shields.io/pypi/v/lim.svg?style=flat-square
+   :target: https://pypi.python.org/pypi/lim/
+.. |Documentation Status| image:: https://readthedocs.org/projects/lim/badge/?style=flat-square&version=latest
+   :target: http://lim.readthedocs.io/en/latest/
+
+
