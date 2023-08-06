@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+import fire
+import hurricane_factory
+
+
+class HurricaneFactory(object):
+    """
+    Manage CloudFormation at massive scale
+    """
+
+    def init(self, bucket, path, region='us-east-1'):
+        """
+        Initialize Hurricane Factory in the AWS account your session is currently authorized for.
+        """
+        hurricane_factory.commands.init(bucket, path, region)
+
+    def deploy(self, first=5, second=123):
+        """
+        Does Multiplication
+        """
+        print({"first": first, "second": second})
+        return first * second
+
+
+if __name__ == '__main__':
+    fire.Fire(HurricaneFactory)
