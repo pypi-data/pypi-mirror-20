@@ -1,0 +1,17 @@
+pillow>=4.0.0
+smbus2
+spidev
+RPi.GPIO
+
+[docs]
+sphinx >= 1.5.3
+
+[qa]
+flake8
+rstcheck
+
+[test]
+mock
+pytest
+pytest-cov
+pytest-warnings
