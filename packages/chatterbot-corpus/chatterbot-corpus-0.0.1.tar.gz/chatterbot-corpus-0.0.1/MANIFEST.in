@@ -1,0 +1,8 @@
+include license.md
+include readme.md
+
+recursive-include chatterbot_corpus/* *.json
+recursive-include chatterbot_corpus/* *.csv
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co~]
