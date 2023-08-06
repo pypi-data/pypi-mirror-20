@@ -1,0 +1,16 @@
+[paths]
+source =
+   src/matrix
+   */site-packages/matrix
+
+[run]
+branch = true
+source =
+    matrix
+    tests
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
