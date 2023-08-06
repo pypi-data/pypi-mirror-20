@@ -1,0 +1,104 @@
+Metadata-Version: 1.1
+Name: txrc
+Version: 0.2.3
+Summary: Twisted Retrying Caller Inspired by Terry Jones
+Home-page: https://txrc.readthedocs.org/en/v0.2.3/
+Author: Matt Bogosian
+Author-email: matt@bogosian.net
+License: MIT License
+Description: .. -*- encoding: utf-8; mode: rst -*-
+            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            >>>>>>>>>>>>>>>> IMPORTANT: READ THIS BEFORE EDITING! <<<<<<<<<<<<<<<<
+            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            Please keep each sentence on its own unwrapped line.
+            It looks like crap in a text editor, but it has no effect on rendering, and it allows much more useful diffs.
+            Thank you!
+        
+        Copyright and other protections apply.
+        Please see the accompanying |LICENSE|_ and |CREDITS|_ file(s) for rights and restrictions governing use of this software.
+        All rights not expressly waived or licensed are reserved.
+        If those files are missing or appear to be modified from their originals, then please contact the author before viewing or using this software in any capacity.
+        
+        .. |LICENSE| replace:: ``LICENSE``
+        .. _`LICENSE`: LICENSE
+        .. |CREDITS| replace:: ``CREDITS``
+        .. _`CREDITS`: CREDITS
+        
+        .. image:: https://travis-ci.org/posita/txrc.svg?branch=v0.2.3
+            :target: https://travis-ci.org/posita/txrc?branch=v0.2.3
+            :alt: [Build Status]
+        
+        .. image:: https://coveralls.io/repos/posita/txrc/badge.svg?branch=v0.2.3
+            :target: https://coveralls.io/r/posita/txrc?branch=v0.2.3
+            :alt: [Coverage Status]
+        
+        Curious about integrating your project with the above services?
+        Jeff Knupp (|@jeffknupp|_) `describes how <https://www.jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/>`__.
+        
+        .. |@jeffknupp| replace:: **@jeffknupp**
+        .. _`@jeffknupp`: https://github.com/jeffknupp
+        
+        ``txrc`` - Twisted Retrying Caller Inspired by Terry Jones
+        ==========================================================
+        
+        .. image:: https://img.shields.io/pypi/v/txrc/0.2.3.svg
+            :target: https://pypi.python.org/pypi/txrc
+            :alt: [v0.2.3 Version]
+        
+        .. image:: https://readthedocs.org/projects/txrc/badge/?version=v0.2.3
+            :target: https://txrc.readthedocs.org/en/v0.2.3/
+            :alt: [v0.2.3 Documentation]
+        
+        .. image:: https://img.shields.io/pypi/l/txrc/0.2.3.svg
+            :target: http://opensource.org/licenses/MIT
+            :alt: [v0.2.3 License]
+        
+        .. image:: https://img.shields.io/pypi/pyversions/txrc/0.2.3.svg
+            :target: https://pypi.python.org/pypi/txrc
+            :alt: [v0.2.3 Supported Python Versions]
+        
+        .. image:: https://img.shields.io/pypi/implementation/txrc/0.2.3.svg
+            :target: https://pypi.python.org/pypi/txrc
+            :alt: [v0.2.3 Supported Python Implementations]
+        
+        .. image:: https://img.shields.io/pypi/status/txrc/0.2.3.svg
+            :target: https://pypi.python.org/pypi/txrc
+            :alt: [v0.2.3 Development Stage]
+        
+        ..
+        
+        ``txrc`` enables retrying calls in `Twisted <https://twistedmatrix.com/>`_.
+        It is based on `Terry Jones's proposal <http://blogs.fluidinfo.com/terry/2009/11/12/twisted-code-for-retrying-function-calls/>`__.
+        It is licensed under the `MIT License <https://opensource.org/licenses/MIT>`_.
+        See the |LICENSE|_ file for details.
+        Source code is `available on GitHub <https://github.com/posita/txrc>`__.
+        See `the docs <https://txrc.readthedocs.org/en/v0.2.3/>`__ for more information.
+        
+        Examples
+        --------
+        
+        .. TODO
+        
+        Coming soon.
+        
+        Issues
+        ------
+        
+        If you find a bug, or want a feature, please `file an issue <https://github.com/posita/txrc/issues>`__ (if it hasn't already been filed).
+        If you're willing and able, consider `contributing <https://txrc.readthedocs.org/en/v0.2.3/contrib.html>`__.
+        
+Platform: UNKNOWN
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Twisted
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
