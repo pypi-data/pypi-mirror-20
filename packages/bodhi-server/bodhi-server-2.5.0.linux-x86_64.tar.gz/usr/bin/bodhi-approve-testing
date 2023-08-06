@@ -1,0 +1,10 @@
+#!/usr/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'bodhi-server==2.5.0','console_scripts','bodhi-approve-testing'
+__requires__ = 'bodhi-server==2.5.0'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('bodhi-server==2.5.0', 'console_scripts', 'bodhi-approve-testing')()
+    )
