@@ -1,0 +1,92 @@
+Metadata-Version: 1.1
+Name: micros
+Version: 1.0.1
+Summary: A skeleton command line program in Python.
+Home-page: https://github.com/zwennesm/micros-cli
+Author: Martijn Zwennes
+Author-email: martijn.zwennes@debijenkorf.nl
+License: Apache Licence 2.0
+Description: micros-cli
+        ==========
+        
+        *A skeleton command line program in Python.*
+        
+        
+        
+        Usage
+        -----
+        
+        To authenticate with AWS (the AWS credential file is normally located at ~/.aws/credentials):
+        
+            micros authenticate <cred-file> <aws_key> <aws_secret>
+        
+        Create a new project:
+        
+            micros create <project>
+        
+        Deploy your files to S3:
+        
+            micros deploy <project> <directory> [--create_www] [--create_hosted]
+            
+        Run the project locally (use this command in the root of your project):
+        
+            micros run <port>
+            
+        Delete the static website and remove all files (permanent):
+        
+            micros delete <project>
+        
+        Show help dialog:
+        
+            micros --help
+        
+        Show current version:
+        
+            micros --version
+        
+        
+        Options:
+            
+            --help                         Show this screen.
+            --version                      Show version.
+            --create_www                   Create a second S3 bucket with prepended 'www.' which redirects to the default
+            --create_host                  Create hosted Route 53 zone on AWS
+        
+        Examples:
+        
+            micros authenticate ~/.aws/credentials 76231 18290
+            micros create festive_season
+            micros run 8080
+            micros deploy festive_season local/directory/
+            micros delete festive_season
+        
+        
+        Installation
+        ------------
+        
+        Install dependencies:
+            
+            pip install -e .[test]
+        
+        Run tests:
+            
+            python setup.py test
+        
+        This will trigger `py.test <http://pytest.org/latest/>`_, along with its popular
+        `coverage <https://pypi.python.org/pypi/pytest-cov>`_ plugin.
+        
+        Build:
+            
+            python setup.py sdist bdist_wheel
+            twine upload dist/*
+        
+        This will build both a source tarball of your CLI tool, as well as a newer wheel
+        build (*and this will, by default, run on all platforms*).
+        
+        The ``twine upload`` command (which requires you to install the `twine
+        <https://pypi.python.org/pypi/twine>`_ tool) will then securely upload your
+        new package to PyPI so everyone in the world can use it!
+        
+Keywords: cli
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
