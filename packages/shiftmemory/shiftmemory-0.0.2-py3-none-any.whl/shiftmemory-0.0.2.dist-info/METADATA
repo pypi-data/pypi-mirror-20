@@ -1,0 +1,29 @@
+Metadata-Version: 2.0
+Name: shiftmemory
+Version: 0.0.2
+Summary: Python3 cache library
+Home-page: https://github.com/projectshift/shift-memory
+Author: Dmitry Belyakov
+Author-email: dmitrybelyakov@gmail.com
+License: MIT License
+Download-URL: https://github.com/projectshift/shift-memory/archive/v0.0.2.tar.gz
+Keywords: python3,cache,redis,memcache
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Programming Language :: Python :: 3
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Utilities
+Requires-Dist: arrow (==0.4.4)
+Requires-Dist: click (==6.6)
+Requires-Dist: colorama (==0.3.2)
+Requires-Dist: hiredis (==0.1.5)
+Requires-Dist: redis (==2.10.3)
+
+UNKNOWN
+
+
