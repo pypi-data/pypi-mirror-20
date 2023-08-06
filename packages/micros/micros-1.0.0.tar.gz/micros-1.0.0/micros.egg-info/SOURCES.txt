@@ -1,0 +1,16 @@
+MANIFEST.in
+setup.cfg
+setup.py
+micros/__init__.py
+micros/__main__.py
+micros/cli.py
+micros/commands/__init__.py
+micros/commands/authenticate.py
+micros/commands/base.py
+micros/commands/create.py
+micros/commands/delete.py
+micros/commands/deploy.py
+micros/commands/run.py
+tests/test_cli.py
+tests/__pycache__/test_cli.cpython-27-PYTEST.pyc
+tests/__pycache__/test_cli.cpython-35-PYTEST.pyc
