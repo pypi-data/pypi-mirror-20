@@ -1,0 +1,35 @@
+Metadata-Version: 1.1
+Name: branchmgr
+Version: 1.0.0
+Summary: A tool for managing GitHub branch permissions.
+Home-page: http://python-hyper.org
+Author: Cory Benfield
+Author-email: cory@lukasa.co.uk
+License: MIT License
+Description: Branch Manager for GitHub
+        =========================
+        
+        This tool manages branch permissions for GitHub repositories. The goal is to
+        ensure that branches of repositories in your organisation are appropriately
+        protected by controlling their status only via the API, rather than manually
+        configuring the branch status.
+        
+        Right now this tool is in an early alpha.
+        
+        
+        Release History
+        ===============
+        
+        1.0.0 (2017-03-15)
+        ------------------
+        
+        - Initial release, with support for setting protected branches with the
+          configuration used by the Python Hyper project.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
