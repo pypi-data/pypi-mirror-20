@@ -1,0 +1,16 @@
+app: VidCutter
+union: true
+
+ingredients:
+  dist: xenial
+  sources: 
+    - deb http://archive.ubuntu.com/ubuntu/ xenial main universe
+  ppas:
+    - ozmartian/apps
+
+script:
+  - cat > usr/bin/vidcutter <<\EOF
+  - #!/bin/bash
+  - python3 -m vidcutter $*
+  - EOF
+  - mv usr/lib/x86_64-linux-gnu/caca/*.so* usr/lib/x86_64-linux-gnu/
