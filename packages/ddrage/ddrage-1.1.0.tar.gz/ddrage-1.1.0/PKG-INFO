@@ -1,0 +1,89 @@
+Metadata-Version: 1.1
+Name: ddrage
+Version: 1.1.0
+Summary: Simulator for ddRADseq (double digest restriction site associdated DNA squencing) datasets. Generates reads (FASTQ format) that can be analyzed and validated using a ground truth file (YAML).
+Home-page: UNKNOWN
+Author: Henning Timm
+Author-email: henning.timm@uni-due.de
+License: MIT
+Description: RAGE - ddRAD Data Generator
+        ============================
+        
+        RAGE (ddRAD Data Generator) is a software to simulate double digest restriction site associated DNA sequencing reads.
+        The generated datasets can be used to test ddRAD analysis tools and validate their results.
+        
+        The documentation, including a tutorial, can be found `here <https://ddrage.readthedocs.io/>`_.
+        
+        
+        System Requirements
+        ~~~~~~~~~~~~~~~~~~~
+        
+        - python >= 3.5
+        - numpy
+        - scipy
+        - matplotlib
+        - pyyaml
+        - numba
+        
+        For the docs:
+        
+        - sphinx
+        - sphinx_rtd_theme
+        
+        For parameter visualization:
+        
+        - bokeh
+        
+        
+        Installation
+        ~~~~~~~~~~~~
+        
+        We recommend the installation using conda:
+        
+        .. code-block:: shell
+        
+           $ conda create -c bioconda -n rage  python rage
+           $ source activate rage
+        
+        Alternatively, you can download the source code from `bitbucket`_ and install it using the setup script:
+        
+        .. code-block:: shell
+        
+           $ git clone https://bitbucket.org/genomeinformatics/rage.git
+           $ cd rage
+           /rage$ python setup.py install
+        
+        In this case you have to install the requirements listed above.
+        
+        
+        .. _bitbucket: https://bitbucket.org/genomeinformatics/rage
+        
+        
+        Usage
+        ~~~~~
+        
+        To simulate a ddRAD dataset, call rage from the command line:
+        
+        .. code-block:: shell
+        
+           $ rage
+        
+        you can specify parameters to change dataset parameters such as number of individuals (``-n``), nr of loci (``-l``), and coverage (``--coverage``):
+        
+        .. code-block:: shell
+        
+           $ rage -n 6 -l 10000 --coverage 30
+        
+        This creates a dataset with reads from 6 individuals at 10000 loci with an expected coverage of 30.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
