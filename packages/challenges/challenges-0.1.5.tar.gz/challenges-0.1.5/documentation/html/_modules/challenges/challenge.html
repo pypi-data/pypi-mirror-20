@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>challenges.challenge &mdash; Challenges 0.1.5 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Challenges 0.1.5 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for challenges.challenge</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">types</span>
+
+
+<div class="viewcode-block" id="Challenge"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge">[docs]</a><span class="k">class</span> <span class="nc">Challenge</span><span class="p">:</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="s1">&#39;sample&#39;</span>
+    <span class="n">line_break</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">split_pattern</span> <span class="o">=</span> <span class="s1">&#39;\s+|\s?,\s?&#39;</span>
+    <span class="n">edge_pattern</span> <span class="o">=</span> <span class="s1">&#39;^(\d+)-&gt;(\d+)(:(\d+))?$&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">SimpleNamespace</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">SimpleNamespace</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<div class="viewcode-block" id="Challenge.main"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.main">[docs]</a>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">()</span></div>
+
+    <span class="c1"># --------------------------------------------------</span>
+    <span class="c1"># Default workflow</span>
+    <span class="c1"># --------------------------------------------------</span>
+
+<div class="viewcode-block" id="Challenge.read"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Challenge.build"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Challenge.calc"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.calc">[docs]</a>    <span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Challenge.format"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">)</span></div>
+
+    <span class="c1"># --------------------------------------------------</span>
+    <span class="c1"># Accessing lines</span>
+    <span class="c1"># --------------------------------------------------</span>
+
+<div class="viewcode-block" id="Challenge.line"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.line">[docs]</a>    <span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="n">number</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Challenge.lines"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.lines">[docs]</a>    <span class="k">def</span> <span class="nf">lines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span></div>
+
+<div class="viewcode-block" id="Challenge.line_to_integers"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.line_to_integers">[docs]</a>    <span class="k">def</span> <span class="nf">line_to_integers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line_nr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>
+                <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">split_pattern</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">line_nr</span><span class="p">))]</span></div>
+
+<div class="viewcode-block" id="Challenge.line_to_floats"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.line_to_floats">[docs]</a>    <span class="k">def</span> <span class="nf">line_to_floats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line_nr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>
+                <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">split_pattern</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">line_nr</span><span class="p">))]</span></div>
+
+<div class="viewcode-block" id="Challenge.line_to_edge"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.line_to_edge">[docs]</a>    <span class="k">def</span> <span class="nf">line_to_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_edge</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">split_pattern</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">nr</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="Challenge.read_edges"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.read_edges">[docs]</a>    <span class="k">def</span> <span class="nf">read_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">nr</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">nr</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_pattern</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_edge</span><span class="p">(</span><span class="n">match</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">nr</span> <span class="o">==</span> <span class="n">last</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">nr</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_to_edge</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">SimpleNamespace</span><span class="p">()</span>
+        <span class="n">edge</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">edge</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">edge</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">edge</span>
+
+    <span class="c1"># --------------------------------------------------</span>
+    <span class="c1"># Formatting</span>
+    <span class="c1"># --------------------------------------------------</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Challenge.format_list_of_integers"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.format_list_of_integers">[docs]</a>    <span class="k">def</span> <span class="nf">format_list_of_integers</span><span class="p">(</span><span class="n">integers</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">joint</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">integers</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Challenge.format_path"><a class="viewcode-back" href="../../challenges.html#challenges.challenge.Challenge.format_path">[docs]</a>    <span class="k">def</span> <span class="nf">format_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integers</span><span class="p">,</span> <span class="n">backwards</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">backwards</span><span class="p">:</span>
+            <span class="n">joint</span> <span class="o">=</span> <span class="s1">&#39;&lt;-&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">joint</span> <span class="o">=</span> <span class="s1">&#39;-&gt;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_list_of_integers</span><span class="p">(</span><span class="n">integers</span><span class="p">,</span> <span class="n">joint</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Elmar Hinz.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
