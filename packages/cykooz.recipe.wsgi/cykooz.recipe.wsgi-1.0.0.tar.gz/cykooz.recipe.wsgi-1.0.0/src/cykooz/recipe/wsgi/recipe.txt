@@ -1,0 +1,41 @@
+cykooz.recipe.wsgi
+==================
+
+Create a testing buildout.cfg::
+
+    >>> from zc.buildout.testing import *
+    >>> write("buildout.cfg", """
+    ... [buildout]
+    ... parts = wsgi
+    ... index = https://pypi.python.org/simple/
+    ...
+    ... [wsgi]
+    ... recipe = cykooz.recipe.wsgi
+    ... eggs = cykooz.recipe.wsgi
+    ... app_fabric = cykooz.recipe.wsgi:get_wsgi_app
+    ... environ =
+    ...     CHAMELEON_CACHE = true
+    ... initialization =
+    ...     a = 0
+    ... """)
+
+Run buildout::
+
+    >>> dummy = system(buildout)
+
+Check the generated script::
+
+    >>> import os
+    >>> print(open(os.path.join(sample_buildout, 'bin', 'wsgi')).read())
+    #!...
+    import sys
+    sys.path[0:0] = [
+        ...
+    ]
+    import os
+    os.environ['CHAMELEON_CACHE'] = 'true'
+    a = 0
+    from cykooz.recipe.wsgi import get_wsgi_app as get_app
+    application = get_app()
+    <BLANKLINE>
+
