@@ -1,0 +1,634 @@
+{% from 'utils.html' import apply_dattrs, apply_classes %}
+
+{% macro dictlist_dl(data, filterkeys=[], filtervals=[], classes=[], data_attrs=[], asdict=False) %}
+{#
+    Make a definition list from a dictionary - the correspondence should be dt: key, dd: value
+    Usage:
+    {{ dictlist_dl({'foo': 'bar'}) }}
+    <dl>
+        <dt>foo</dt>
+        <dd>bar</dd>
+    </dl>
+
+    Or use a namedtuple by specifying `asdict`:
+    {{ dict_list_dl(namedtuple, asdict=True) }}
+#}
+{% if asdict %}{% set data = data._asdict() %}{% endif %}
+<dl class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+    {% for k, v in data.items() -%}
+        {% if k not in filterkeys and v not in filtervals %}
+            <dt>{{ k }}</dt>
+            <dd>{{ v }}</dd>
+        {% endif %}
+    {% endfor %}
+</dl>
+{%- endmacro %}
+
+
+{% macro dict2list(data, type='ul', filterkeys=[], filtervals=[], asdict=False) %}
+{#
+    Makes a list from a dictionary.
+    Usage:
+    {{ dict2list({'foo': 'bar'}) }}
+    <ul>
+        <li><strong>foo</strong>: bar</li>
+    </ul>
+
+    Or use a namedtuple by specifying `asdict`:
+    {{ dict_list_dl(namedtuple, asdict=True) }}
+#}
+{% if asdict %}{% set data = data._asdict() %}{% endif %}
+<{{ type }}>
+    {% for k, v in data.items() %}
+        {% if k not in filterkeys and v not in filtervals %}
+            <li><strong>{{ k }}</strong>: {{ v }}</li>
+        {% endif %}
+    {% endfor %}
+</{{ type }}>
+{%- endmacro %}
+
+
+{% macro list2list(data, type='ul',
+                   filtervals=[], icons={},
+                   classes=[],
+                   icondir='left') %}
+{#
+    Makes a OL/UL from a list, with optional icons
+    Usage:
+    {{ list2list(['Toyota', 'V2', '747', 'John Deere'], icons={'Toyota': ['fa', 'fa-car'], 'V2': ['fa', 'fa-rocket']}, icondir='right') }}
+    Returns:
+    <ul>
+        <li>Toyota <span class="fa fa-car"></span></li>
+        <li>V2 <span class="fa fa-rocket"></span></li>
+        <li>747</li>
+        <li>John Deere</li>
+    </ul>
+
+    Change alignment to left or right by specifying `icondir`:
+    {{ list2list(['Toyota'], icons={'Toyota': ['car']}, icondir='left') }}
+#}
+<{{ type }} class="{{ apply_classes(classes) }}">
+    {% for item in data %}
+        {% if item and item not in filtervals %}
+            <li>
+                {% if item in icons.keys() %}
+                    {% if icondir == 'left' %}
+                        <span class="{{ apply_classes(icons[item]) }}"></span>
+                        {{ item }}
+                    {% else %}
+                        {{ item }}
+                        <span class="{{ apply_classes(icons[item]) }}"></span>
+                    {% endif %}
+                {% else %}
+                    {{ item }}
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</{{ type }}>
+{%- endmacro %}
+
+
+{% macro dictlist2nav(data, type='ul', filterkeys=[], filtervals=[], classes=[], data_attrs=[]) %}
+{#
+    Make a list of links with nav element.
+    Format must be a list of dictionaries.
+    Supports *one* level of nesting.
+#}
+{% if asdict %}{% set data = data._asdict() %}{% endif %}
+<nav class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+    <{{ type }}>
+        {% for item in data %}
+            {% for k, v in item.items() %}
+                {% if k not in filterkeys and v not in filtervals %}
+                    <li><a href="{{ k }}">{{ v }}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </{{ type }}>
+</nav>
+{%- endmacro %}
+
+
+{% macro dictlist2dropdown(data, name=None, filterkeys=[], filtervals=[], classes=[], data_attrs=[], asdict=False) %}
+{#
+    Make a dropdown element.
+    Format must be a list of dictionaries.
+#}
+{% if asdict %}{% set data = data._asdict() %}{% endif %}
+<select {% if name %}name="{{ name }}"{% endif %} class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+    {% for item in data %}
+        {% for k, v in item.items() %}
+            {% if k not in filterkeys and v not in filtervals %}
+                <option value="{{ k }}">{{ v }}</option>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</select>
+{%- endmacro %}
+
+
+{% macro list2dropdown(data, filtervals=[], classes=[], data_attrs=[]) %}
+{#
+    Make a dropdown element.
+    Format must be a list. Value and text are the same.
+#}
+<select class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+    {% for item in data %}
+        {% if item not in filtervals %}
+            <option value="{{ item }}">{{ item }}</option>
+        {% endif %}
+    {% endfor %}
+</select>
+{%- endmacro %}
+
+
+{% macro dictlist2checkboxes(data, fieldset_class='fieldset-group',
+                             filterkeys=[], filtervals=[], data_attrs=[],
+                             asdict=False) %}
+{#
+    Make a checkbox group, where keys are input names, and values are labels.
+    Format must be a list of dictionaries.
+#}
+{% if asdict %}{% set data = data._asdict() %}{% endif %}
+<fieldset class="{{ fieldset_class }}" {{ apply_dattrs(data_attrs) }}>
+    {% for item in data %}
+        {% for k, v in item.items() %}
+            {% if k not in filterkeys and v not in filtervals %}
+                <label>
+                    {{ v }}
+                    <input type="checkbox" name="{{ k }}">
+                </label>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</fieldset>
+{%- endmacro %}
+
+
+{% macro objects2table(objs, classes=[], data_attrs=[],
+                       filterkeys=[],
+                       filtervals=[],
+                       filter_headings=[],
+                       pk_link=None,
+                       handle_links=True,
+                       id=None,
+                       field_macros={},
+                       header_macros={},
+                       asdict=False,
+                       order=None
+                       )
+-%}
+{#
+    Create table from a list of objects (class instantiations). Also add links for primary keys if specified.
+
+    {{
+        objects2table(
+            data,
+            data_attrs={'datatable': 'true'},
+            filterkeys=['do-not-want'],
+            filtervals=['some-val'],
+            field_macros={'somefield': some_macro},
+            header_macros={'some-header': some_header_macro},
+            filter_headings=['some-heading'],
+            classes=['table', 'table-striped', 'table-bordered'],
+        )
+    }}
+
+    If your data is a named tuple, use asdict=True to convert it.
+#}
+{% if asdict %}{% set data = data._asdict() %}{% endif %}
+<table {% if id %}id="{{ id }}"{% endif %}
+    class="{{ apply_classes(classes) }}"
+    {{ apply_dattrs(data_attrs) }}>
+    <thead>
+        {% for obj in objs %}
+            {% if order %}
+                {% set obj = obj|sort_dict_keys_from_reflist(order) %}
+            {% else %}
+                {% set obj = obj.items() %}
+            {% endif %}
+            {% if loop.first %}
+                {% set header_keys = header_macros.keys() %}
+                {% for item in obj %}
+                    {% set heading = item[0] %}
+                    {# Allow filtering of headings. #}
+                    {% if heading not in filterkeys and heading not in filter_headings %}
+                        {% if heading in header_keys %}
+                            <th>{{ header_macros[heading](heading) }}</th>
+                        {% else %}
+                            <th>{{ heading }}</th>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for obj in objs %}
+            {% if order %}
+                {% set obj = obj|sort_dict_keys_from_reflist(order) %}
+            {% else %}
+                {% set obj = obj.items() %}
+            {% endif %}
+            <tr>
+                {% for item in obj %}
+                    {% set k = item[0] %}
+                    {% set v = item[1] %}
+                    {# Allowing filtering of keys and values. #}
+                    {% if k not in filterkeys %}
+                        {% if v not in filtervals %}
+                            <td>
+                                {# Handle all primary key links, a common occurence #}
+                                {% if pk_link and k == 'id' %}
+                                    <a href="{{ pk_link }}/{{ v }}">{{ v }}</a>
+                                {% elif handle_links and v|is_url %}
+                                    <a href="{{ v }}" target="_blank">{{ v }}</a>
+                                {% elif k in field_macros.keys() %}
+                                    {# If a field macro is specified by key, call it on this field for arbitrary levels of customization #}
+                                    {{ field_macros[k](v) }}
+                                {% else %}
+                                    {{ v }}
+                                {% endif %}
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{%- endmacro %}
+
+
+{% macro wtform_errors_field(field, errors, bg=True) -%}
+{#
+    Specify an error field list for a given field and its errors.
+    Usage:
+    {{ wtform_errors_field(<Field>, <FieldErrors>) }}
+    Disable or enable coloring with `bg`:
+    {{ wtform_errors_field(<Field>, <FieldErrors>, bg=False) }}
+#}
+    {% if bg %}<div class="alert alert-danger">{% endif %}
+        <p class="{{ 'text-danger' if not bg else '' }}"><strong>Error(s) for '{{ field }}': </strong></p>
+        <ul class="{{ 'text-danger' if not bg else '' }}">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% if bg %}</div>{% endif %}
+{%- endmacro %}
+
+
+{% macro wtform_errors(formobj) -%}
+{#
+    Show a list of form errors based on a given wtform instance.
+    Usage:
+    {{ wtform_errors(<FormObj>) }}
+#}
+{% if formobj.errors %}
+    {% for field, errors in formobj.errors.items() %}
+        {{ wtform_errors_field(field, errors) }}
+    {% endfor %}
+{% endif %}
+{%- endmacro %}
+
+
+{% macro wtform_form(formobj,
+                     action='.',
+                     align='left',
+                     btn_classes=[],
+                     btn_text='Submit',
+                     button_wrapper=True,
+                     colsizes=[4, 8],
+                     classes=[],
+                     data_attrs=[],
+                     enctype=None,
+                     field_classes={},
+                     field_macros={},
+                     fieldset_groups=[],
+                     fieldset_fallback='__unlabeled',
+                     formid=None,
+                     horizontal=False,
+                     hrule=True,
+                     input_classes=[],
+                     legend=None,
+                     linebreaks=True,
+                     method='GET',
+                     questionize=True,
+                     preserve_formfield=True,
+                     reset_btn=True,
+                     reset_btn_classes=[],
+                     submit=True,
+                     uploads=True,
+                     use_fieldset=True,
+                     wrap_inputs=False
+    )
+-%}
+{#
+    Generate an entire wtform object with layout options and many customization options. Options include:
+    - Error handling/styling
+    - Horizontal or vertical layout
+    - Per-field macro customization
+    - Per-field styling
+    - Data-attributes, classes, ids
+    - Automatically add "?" to BooleanFields if `questionize` is set.
+    - Add a button wrapper for styling
+    - Add a input/label wrapper for styling
+    - Add reset button
+    - Wrap in fieldset/legend option
+    - Upload support (enctype)
+    - Other standard form options
+    - All the other magic that comes from wtforms (descriptions, help text, defaults, error handling, etc...)
+    - Automatically group fields by a various fieldsets (see below)
+    - Determine column sizes
+
+    Usage:
+    {{
+        wtform_form(
+            <FormObj>,
+            action=url_for('myapp.index'),
+            method='POST',
+            classes=['form', 'form-inline'],
+            input_classes=['input-lg', 'form-control'],
+            btn_text='Go',
+            formid='myform',
+            horizontal=True,
+            align='right',
+            submit=False,
+            field_macros={
+                'field1': myfield1macro,
+                'field2': myfield2macro,
+            },
+            field_classes={
+                'myfield': ['class1', 'class2'],
+            },
+            fieldset_groups=[
+                ('group1', ('foo1', 'bar1', 'foo2')),
+                (('group2', 'Some intro description for this group.'), ('foo3', 'bar2', 'foo3')),
+            ],
+        )
+    }}
+
+    Field macros can be used to customized individual fields however you like, given a macro.
+#}
+<form action="{{ action }}" method="{{ method }}"
+    class="{{ apply_classes(classes) }}"
+    {% if enctype %}
+        enctype="{{ enctype }}"
+    {% endif %}
+    {{ apply_dattrs(data_attrs) }} role="form" {% if formid %}id="{{ formid }}"{% endif %}>
+        {% if use_fieldset and not fieldset_groups %}<fieldset class="text-{{ align }}">{% endif %}
+            {% if legend and not fieldset_groups %}
+                <legend>{{ legend }}</legend>
+            {% endif %}
+
+            {# This macro is only to DRY up the usage in the below loop. #}
+            {%- macro _load_field(field, last=False) %}
+                {% set valid_field = field.type not in ['CSRFTokenField', 'HiddenField'] %}
+                {% if valid_field %}
+                    {{ _wtform_field(
+                        field,
+                        colsizes=colsizes,
+                        input_classes=input_classes,
+                        horizontal=horizontal,
+                        hrule=hrule,
+                        align=align,
+                        questionize=questionize,
+                        linebreaks=linebreaks,
+                        wrap_inputs=wrap_inputs,
+                        field_classes=field_classes,
+                        field_macros=field_macros,
+                        last=last,
+                        )
+                    }}
+                {% else %}
+                    {{ field }}
+                {% endif %}
+            {% endmacro -%}
+
+            {%- macro _fields(fields) %}
+                {% for field in fields %}
+                    {# Deal with fields utilizing the `FormField` class for grouping subfields. #}
+                    {% if field.type == 'FormField' and not preserve_formfield %}
+                        {% for subfield in field %}
+                            {{ _load_field(subfield, last=loop.last) }}
+                        {% endfor %}
+                    {% else %}
+                        {{ _load_field(field, last=loop.last) }}
+                    {% endif %}
+                {% endfor %}
+            {% endmacro -%}
+
+            {#
+                Load all fields by groups if fieldset_groups is present,
+                otherwise load as normal iteration.
+            #}
+            {% if fieldset_groups %}
+                {% set groups = formobj|group_by(
+                    fieldset_groups, 'name', fallback=fieldset_fallback) %}
+                {% for label, fields in groups.items() %}
+                    {% if label|length == 2 %}
+                        {# If the user specifies a 2-tuple inside here,
+                        we take the first index as the fieldset legend and second one as an optional legend
+                        introductory description #}
+                        {% set legend = label[0] %}
+                        {% set legend_desc = label[1] %}
+                    {% else %}
+                        {% set legend = label %}
+                        {% set legend_desc = '' %}
+                    {% endif %}
+                    {% if label != '__unlabeled' and fields %}
+                        <fieldset class="fieldset-group-{{ legend|css_selector }}">
+                            <legend>
+                                {{ legend }}
+                                {% if legend_desc %}
+                                    <span class="fieldset-legend-description">{{ legend_desc }}</span>
+                                {% endif %}
+                            </legend>
+                    {% endif %}
+                    {{ _fields(fields) }}
+                    {% if legend != '__unlabeled' and fields %}
+                        </fieldset>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {{ _fields(formobj) }}
+            {% endif %}
+
+        {% if use_fieldset and not fieldset_groups %}</fieldset>{% endif %}
+
+        {% if submit %}
+            {% if button_wrapper %}<div class="wtform-form button-wrapper">{% endif %}
+                {# Add typical form submit button. #}
+                <button type="submit" class="{{ apply_classes(btn_classes) }}">{{ btn_text }}</button>
+                {# Add a reset field values button if specified. #}
+                {% if reset_btn %}
+                    <button type="reset" class="{{ apply_classes(reset_btn_classes) }}">Reset</button>
+                {% endif %}
+            {% if button_wrapper %}</div>{% endif %}
+        {% endif %}
+    </form>
+{%- endmacro %}
+
+
+{# Handle the complex logic inside of `wtform_form` in a separate macro. Not for public use. #}
+{%- macro _wtform_field(field,
+                        input_classes=[],
+                        colsizes=[4, 8],
+                        horizontal=False,
+                        hrule=True,
+                        align='left',
+                        questionize=True,
+                        linebreaks=True,
+                        wrap_inputs=False,
+                        field_classes={},
+                        field_macros={},
+                        last=False
+) %}
+    {% set use_field_macro = field.name in field_macros.keys() %}
+
+    {% if horizontal %}<div class="row">{% endif %}
+    {# Only show labels and descriptions if they are normal fields. #}
+    {% if wrap_inputs and not horizontal %}
+        <span class="input-wrapper-{{ field.name }}">
+    {% endif %}
+
+    {% if horizontal %}
+        <div class="col-lg-{{ colsizes[0] }} col-md-{{ colsizes[1] }} col-sm-12 col-xs-12 {{ 'text-' + align }}">
+        {% if wrap_inputs %}
+            <span class="input-wrapper-{{ field.name }}">
+        {% endif %}
+    {% endif %}
+
+    {% if not use_field_macro and field.type != 'SubmitField' %}
+        {% set qmark = '?'
+            if field.type == 'BooleanField' and questionize else ''
+        %}
+
+        {{ field.label(text=field.label.text + qmark) }}
+
+        {% if field.flags.required %}
+            {% if horizontal and linebreaks %}<br>{% endif %}
+            <small class="text-danger required-label">* Required</small>
+            {% if linebreaks %}<br>{% endif %}
+        {% endif %}{# end `if field.flags.required` #}
+
+    {% endif %}
+
+    {% if field.description and not use_field_macro %}
+        {% if horizontal and linebreaks %}<br>{% endif %}
+        <small class="field-description">{{ field.description }}</small>
+    {% endif %}{# end `if field.description` #}
+
+    {% if horizontal %}
+        </div><!--end horizontal-col-->
+        {# If horizontal mode is enabled,
+            we can't group the fields etc into a single wrapper,
+            so we apply to each section in each respective column #}
+        {% if wrap_inputs %}</span>{% endif %}
+        <div class="col-lg-{{ colsizes[1] }} col-md-{{ colsizes[1] }} col-sm-12 col-xs-12">
+        {% if wrap_inputs %}
+            <span class="input-wrapper-{{ field.name }}">
+        {% endif %}
+    {% endif %}{# end `if horizontal` #}
+
+    {% if horizontal %}
+        <div class="{{ 'has-error' if field.errors else '' }} text-left">
+    {% endif %}{# end `if horizontal` #}
+
+    {% if use_field_macro %}
+        {{ field_macros[field.name](field) }}
+    {% else %}
+
+        {# Add custom classes if set #}
+        {% if field_classes.get(field.name) %}
+            {% set _classes = input_classes + field_classes[field.name] %}
+        {% else %}
+            {% set _classes = input_classes %}
+        {% endif %}
+
+        {# Wrap error around individual field if not using horizontal wrapper #}
+        {% if field.errors %}<div class="has-error">{% endif %}
+        {{ field(class_=_classes|join(' ')) }}
+        {% if field.errors %}</div>{% endif %}
+
+    {% endif %}
+
+    {% if linebreaks and not use_field_macro %}<br>{% endif %}
+    {% if field.errors and not use_field_macro %}
+        {{ wtform_errors_field(field.label, field.errors, bg=False) }}
+    {% endif %}
+
+    {% if horizontal %}</div>{% endif %}
+    {% if linebreaks and not use_field_macro %}<br>{% endif %}
+
+    {% if horizontal %}
+        </div>
+        {# If horizontal mode is enabled,
+            we can't group the fields etc into a single wrapper,
+            so we apply to each section in each respective column #}
+        {% if wrap_inputs %}</span>{% endif %}
+    {% endif %}
+
+    {% if horizontal %}
+        </div>
+        {% if not last and hrule %}<hr>{% endif %}
+    {% endif %}
+    {% if wrap_inputs and not horizontal %}</span>{% endif %}
+{% endmacro -%}
+
+
+{%- macro recurse_dictlist(val, type='ul', classes=[], data_attrs=[]) %}
+{#
+    Uses the jinja2 recursive looping to recurse over a dictionary and display as a list (ordered or unordered), or display a default value otherwise.
+#}
+    {% if val is mapping %}
+        <{{ type }} class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+            {% for k, v in val.items() recursive %}
+                {% if v is mapping %}
+                    <li>
+                        <strong>{{ k }}:</strong>
+                        <{{ type }} class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+                            {{ loop(v.items()) }}
+                        </{{ type }}>
+                    </li>
+                {% else %}
+                    <li>
+                        {% if v|islist %}
+                            <{{ type }} class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+                                {% for item in v %}
+                                    <li>
+                                        {% for itemv in v recursive %}
+                                            {{ recurse_dictlist(itemv, type=type) }}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </li>
+                            </{{ type }}>
+                        {% else %}
+                            <strong>{{ k }}</strong>: {{ v }}
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </{{ type }}>
+    {% elif val|islist %}
+        {# Handle presumed to be jinja2 dictsort formatted items #}
+        <{{ type }} class="{{ apply_classes(classes) }}" {{ apply_dattrs(data_attrs) }}>
+            {% for tupleval in val recursive %}
+                {% if tupleval|length == 2 %}
+                    {% set k = tupleval[0] %}
+                    {% set v = tupleval[1] %}
+                    <li>
+                        <strong>{{ k }}:</strong>
+                        {{ recurse_dictlist(v, type=type) }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </{{ type }}>
+    {% else %}
+        {{ val }}
+    {% endif %}
+{%- endmacro %}
