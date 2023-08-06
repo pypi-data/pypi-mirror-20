@@ -1,0 +1,25 @@
+Metadata-Version: 1.1
+Name: django-mp-flatpages
+Version: 3.0
+Summary: Django flatpages app
+Home-page: https://github.com/pmaigutyak/mp-flatpages
+Author: Paul Maigutyak
+Author-email: pmaigutyak@gmail.com
+License: MIT
+Download-URL: https://github.com/pmaigutyak/mp-flatpages/archive/3.0.tar.gz
+Description: 
+        requiremnets.txt
+        
+        -e git://github.com/pmaigutyak/mp-flatpages.git#egg=mp-flatpages
+        
+        
+        urls.py
+        
+        from flatpages.views import flatpage
+        
+        
+        urlpatterns = [
+            url(r'^(?P<url>.*)$', flatpage, name='flatpage'),
+        ]
+        
+Platform: UNKNOWN
