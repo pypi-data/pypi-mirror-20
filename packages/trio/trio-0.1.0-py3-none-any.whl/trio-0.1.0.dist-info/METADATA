@@ -1,0 +1,43 @@
+Metadata-Version: 2.0
+Name: trio
+Version: 0.1.0
+Summary: An async/await-native I/O library for humans and snake people
+Home-page: https://github.com/python-trio/trio
+Author: Nathaniel J. Smith
+Author-email: njs@pobox.com
+License: MIT -or- Apache License 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: BSD
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: System :: Networking
+Requires-Python: >=3.5
+Requires-Dist: attrs
+Requires-Dist: sortedcontainers
+Requires-Dist: async-generator (>=1.6)
+Requires-Dist: cffi; os_name == 'nt'
+
+Trio is an experimental attempt to produce a production-quality,
+`permissively licensed
+<https://github.com/python-trio/trio/blob/master/LICENSE>`__,
+async/await-native I/O library for Python, with an emphasis on
+**usability** and **correctness** – we want to make it *easy* to
+get things *right*.
+
+Docs: https://trio.readthedocs.io
+
+Issues: https://github.com/python-trio/trio/issues
+
+Repository: https://github.com/python-trio/trio
+
+
