@@ -1,0 +1,41 @@
+Metadata-Version: 1.1
+Name: miniserver
+Version: 0.1.0
+Summary: A short description for your project.
+Home-page: UNKNOWN
+Author: Fábio Macêdo Mendes
+Author-email: fabiomacedomendes@gmail.com
+License: UNKNOWN
+Description: ``miniweb`` is a Python module that allow us to build hassle free small web
+        projects. It is based on Django, but it is extremely simplified and requires no
+        boilerplate. The goal is to provide a nice environment to teach programming
+        for non-programmers (specially kids) and introduce them to basic web technology.
+        
+        Hello World
+        -----------
+        
+        This is our first web server
+        
+        .. code-block:: python
+        
+            from miniweb import *
+        
+            @url
+            def index():
+                return 'Hello World!'
+        
+            start_server()
+        
+        
+        
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Software Development :: Libraries
