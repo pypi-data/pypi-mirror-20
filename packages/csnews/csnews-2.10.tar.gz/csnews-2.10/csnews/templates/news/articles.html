@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title%}{% trans "Albisteak" %}{% endblock %}
+{% block content%}
+
+<h1>Albisteak</h1>
+
+{% if articles%}
+<div class="news">
+
+{% for article in articles %}
+
+<div class="newsitem">
+{% if article.image%}
+<img src="{{ article.image.get_width90_url }}" alt="" class="newsphoto"/>
+{% endif %}
+<h2><a href="{{article.get_absolute_url}}">{{article.title}}</a></h2>
+
+<p class="data">{{article.published}} &nbsp;&brvbar;&nbsp; {{article.tags}}</p>
+{{article.summary|safe}}
+<p><a href="{{article.get_absolute_url}}" class="smalllink">Gehiago irakurri...</a></p>
+
+
+</div>
+
+{% endfor %}
+
+</div>
+{% endif %}
+{% endblock %}
+
+{% block menu%}
+
+{% endblock %}

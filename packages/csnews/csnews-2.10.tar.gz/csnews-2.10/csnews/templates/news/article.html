@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% if obj %}{% block title%}{{obj.title}} {% endblock %}{%endif%}
+
+{% block content%}
+
+<div class="news">
+<h1>{{obj.title}}</h1>
+
+<p class="data">{{obj.published}} &nbsp;&brvbar;&nbsp; {{obj.tags}}</p>
+<div class="summary">{{obj.summary|safe}}</div>
+{{obj.body|safe}}
+
+{% endblock %}
+
+{%block menu%}
+{% if obj.image%}
+<img src="{{ obj.image.get_menusize_url }}" alt="" />
+{% endif %}
+
+{%endblock%}
