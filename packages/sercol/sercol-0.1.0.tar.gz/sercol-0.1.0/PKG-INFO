@@ -1,0 +1,28 @@
+Metadata-Version: 1.1
+Name: sercol
+Version: 0.1.0
+Summary: Rich collection class with grouping and filtering helpers
+Home-page: https://github.com/iskandr/collection
+Author: Alex Rubinsteyn
+Author-email: alex.rubinsteyn@mssm.edu
+License: http://www.apache.org/licenses/LICENSE-2.0.html
+Description: |Build Status| |Coverage Status|
+        
+        sercol
+        ======
+        
+        Rich collection class with grouping and filtering helpers. Used as a
+        base class for ``varcode.EffectCollection``,
+        ``varcode.VariantCollection``, and ``mhctools.EpitopeCollection``.
+        
+        .. |Build Status| image:: https://travis-ci.org/hammerlab/sercol.svg?branch=master
+           :target: https://travis-ci.org/hammerlab/sercol
+        .. |Coverage Status| image:: https://coveralls.io/repos/github/hammerlab/sercol/badge.svg?branch=master
+           :target: https://coveralls.io/github/hammerlab/sercol?branch=master
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
