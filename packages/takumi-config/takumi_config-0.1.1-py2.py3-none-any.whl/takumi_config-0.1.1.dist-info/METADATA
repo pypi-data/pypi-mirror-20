@@ -1,0 +1,57 @@
+Metadata-Version: 2.0
+Name: takumi-config
+Version: 0.1.1
+Summary: Takumi service framework configuration module
+Home-page: https://github.com/elemecreativelab/takumi-config
+Author: Eleme Lab
+Author-email: imaralla@icloud.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: PyYAML (==3.12)
+
+takumi-config
+=============
+
+.. image:: https://travis-ci.org/elemepi/takumi-config.svg?branch=master
+    :target: https://travis-ci.org/elemepi/takumi-config
+
+Takumi framework configuration manager. All configs are yaml files.
+There two different kinds of configs.
+
+* Env configs are independent to applications. Default path ``/etc/takumi/env.yaml``. All fields are optional by default.
+
+* Application related configs. Default path ``$APP_ROOT/app.yaml``. Required fields: ``app_name``.
+
+All configs can be accessed through the object ``config`` from takumit_config module.
+Env configs are stored in ``config.env``.
+
+Usage
+-----
+
+For the given config files::
+
+    # /etc/takumi/env.yaml
+    env: prod
+
+    # app.yaml
+    name: echo
+    app: echo:service
+    settings: settings
+
+    # settings.py
+    DB_DSN = 'psycopg2+postgresql://root:123@localhost:5432/dev'
+
+.. code-block:: python
+
+    >>> from takumi_config import config
+    >>> print(config.env.name)
+    'prod'
+    >>> print(config.app_name)
+    'echo'
+    >>> config.settings.update({'TEST': True, 'HELLO': 'world'})
+    >>> print(config.settings['TEST'])
+    True
+    >>> print(config.settings['DB_DSN'])
+    'psycopg2+postgresql://root:123@localhost:5432/dev'
+
+
