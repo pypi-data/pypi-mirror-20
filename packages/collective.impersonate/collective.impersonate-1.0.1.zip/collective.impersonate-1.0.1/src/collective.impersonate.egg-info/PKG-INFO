@@ -1,0 +1,82 @@
+Metadata-Version: 1.1
+Name: collective.impersonate
+Version: 1.0.1
+Summary: Allow administrator to impersonate another user, for debugging purposes.
+Home-page: https://pypi.python.org/pypi/collective.impersonate
+Author: NiteoWeb Ltd.
+Author-email: info@niteoweb.com
+License: GPL version 2
+Description: ======================
+        collective.impersonate
+        ======================
+        
+        Allow administrator to impersonate another user. Useful for verifying
+        workflow/permission set up on real content.
+        
+        
+        Installation
+        ------------
+        
+        Install collective.impersonate by adding it to your buildout::
+        
+            [buildout]
+        
+            ...
+        
+            eggs =
+                collective.impersonate
+        
+        
+        and then running ``bin/buildout``
+        
+        
+        Usage
+        -----
+        
+        Install then head to http://<YOUR-PLONE-SITE>/@@impersonate. Enter a valid
+        user id and click Impersonate.
+        
+        Logout when you are finished.
+        
+        
+        License
+        -------
+        
+        The project is licensed under the GPLv2.
+        
+        Based on the old niteoweb.loginas package:
+        https://pypi.python.org/pypi/niteoweb.loginas
+        
+        
+        Contributors
+        ============
+        
+        - Nejc Zupan, nejc.zupan@gmail.com
+        
+        
+        Changelog
+        =========
+        
+        
+        1.0.1 (2017-03-07)
+        ------------------
+        
+        - Brownbag release.
+          [zupo]
+        
+        
+        1.0 (2017-03-07)
+        ----------------
+        
+        - Initial release.
+          [zupo]
+        
+Keywords: Python Plone
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Plone
+Classifier: Framework :: Plone :: 5.0
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
