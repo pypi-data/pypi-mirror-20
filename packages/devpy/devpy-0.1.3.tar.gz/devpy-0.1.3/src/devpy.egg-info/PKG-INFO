@@ -1,0 +1,78 @@
+Metadata-Version: 1.1
+Name: devpy
+Version: 0.1.3
+Summary: Tools to help development and debugging
+Home-page: https://github.com/sametmax/devpy/
+Author: Sam & Max
+Author-email: lesametlemax@gmail.com
+License: MIT
+Description: DEVPY
+        -----
+        
+        Devpy is a set of tools to ease Python development.
+        
+        Install
+        =========
+        
+        ::
+        
+            pip install devpy
+        
+        
+        Autolog
+        ========
+        
+        Setuping proper loging is tedious, so you may want to do it later, but you wish you could get basic logging right now::
+        
+            import devpy
+        
+            # Get a logger that automatically log to console and a rotating file
+            # The rotating file is setup in the temp directory of your system, in
+            # a subdir named after your script name.
+            # The file path is printed at the begining of the program.
+        
+            log = devpy.autolog() # log is a regular stdlib logger object
+        
+            # start logging:
+        
+            log.info('Yes')
+        
+        Once you have time to setup logging seriously, you can just replace the autolog with a regular custom Python logger, and all your logs will still work.
+        
+        Setting the environment variable DEVPY_LOG_LEVEL to an integer or a level name (debug, info, error, warning, critical...) will set the autolog log to it.
+        
+        
+        Stacktrace helper
+        =================
+        
+        Format the stack trace so that:
+        
+        - it separates the various logicial blocs
+        - it emphasis the lines of your program and not the stdlb
+        - lines of your program are syntax highlighted
+        
+        Just do::
+        
+            import devpy
+            devpy.color_traceback()
+        
+        
+        All helpers at once
+        ===================
+        
+        Two ways::
+        
+            import devpy
+            log = devpy.dev_mode()  # can set color_traceback=True, autolog=True
+        
+            # or just
+            # import devpy.develop as log
+            # for a one liner to activate it all
+Keywords: devpy dev
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Operating System :: OS Independent
