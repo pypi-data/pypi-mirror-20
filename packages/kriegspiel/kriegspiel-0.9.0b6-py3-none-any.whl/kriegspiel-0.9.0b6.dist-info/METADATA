@@ -1,0 +1,45 @@
+Metadata-Version: 2.0
+Name: kriegspiel
+Version: 0.9.0b6
+Summary: Python Kriegspiel Game
+Home-page: https://github.com/Kriegspiel/ks-game
+Author: Alexander Filatov
+Author-email: alexander@kriegspiel.org
+License: MIT
+Keywords: kriegspiel chess variant
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Games/Entertainment
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: python-chess[uci]
+Provides-Extra: test
+Requires-Dist: pytest; extra == 'test'
+
+# Python Kriegspiel Game
+
+Supported Kriegspiel rules:
+
+1. Berkeley + Public Any
+
+In plan:
+
+1. Pure Berkeley
+2. Crazykrieg
+
+
+### How-to
+
+Run tests
+``` bash
+# clone
+git clone https://github.com/Kriegspiel/ks-game.git
+# install dependencies
+cd ks-game && pip install -r requirements.txt
+# run tests
+python -m pytest tests/
+```
+
+
