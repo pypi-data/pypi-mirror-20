@@ -1,0 +1,17 @@
+Graphical Asynchronous Music Player Client
+========================
+
+GAMPC is an MPD client written in Python/Gtk+.
+
+
+Requirements
+------------
+
+- Python 2 or 3
+- PyGObject
+- GLib 2.42 GObject Introspection
+- Gtk+ 3.14 GObject Introspection
+- Python modules:
+
+  * ampd (Asynchronous Music Player Client)
+  * apsw
