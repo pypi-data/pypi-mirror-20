@@ -1,0 +1,61 @@
+Metadata-Version: 1.1
+Name: A-library
+Version: 3.4
+Summary: Automated Library is a software to ease the entire library-book issuing process contributing to overall standards of the library and ensuring transparent and smooth conduction of the library processes
+Home-page: https://github.com/R-Wolf/CFD_A_library
+Author: Aurors
+Author-email: sshanukr@gmail.com
+License: MIT
+Description: =====
+        A_library
+        =====
+        
+        An automated library software to catalogue books and efficiently displays its details.
+        
+        Features
+        -----------
+        
+        * Implemented in Django Framework and MySql database.
+        * Goodreads Api is used for book description, review, rating and book cover.
+        * Automatic fine calculation.
+        * A reminder mail is send when a book is due.
+        * Users image is displayed from IITK database.
+        * Admin and various staff accounts.
+        
+        Install via pip
+        ----------------------
+        pip install Alibrary
+        
+        Install via Github
+        -----------------------
+        git clone https://github.com/R-Wolf/CFD_A_library
+        
+        Requirements
+        ^^^^^^^^^^^^
+        * regex
+        * pytz
+        * requests
+        
+        Run
+        ----
+        A code block::
+        
+           python manage.py makemigrations
+           python manage.py migrate
+           python manage.py runserver
+        
+          
+        Detailed documentation is in the "docs" directory.
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
