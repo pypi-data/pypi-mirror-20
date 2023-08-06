@@ -1,0 +1,180 @@
+Metadata-Version: 1.1
+Name: blink
+Version: 0.2.0
+Summary: Python API for the Blink Home Security Camera System
+Home-page: https://github.com/keredson/blink
+Author: Derek Anderson
+Author-email: public@kered.org
+License: UNKNOWN
+Description: .. figure:: https://cloud.githubusercontent.com/assets/2049665/24316082/58e34c7e-10b9-11e7-93fa-88ca46f13d46.png
+           :alt: image
+        
+           image
+        
+        Blink
+        =====
+        
+        Python API for the Blink Home Security Camera System
+        
+        This is based off the documentation at:
+        https://github.com/MattTW/BlinkMonitorProtocol
+        
+        Usage
+        -----
+        
+        .. code:: python
+        
+            import blink
+            b = blink.Blink()
+            events = b.events()
+            an_event = events[0]
+            mp4_data = b.download_video(an_event)
+        
+        This assumes you have a file ``~/.blinkconfig`` that looks like this:
+        
+        ::
+        
+            me@somewhere.net: my_password
+        
+        Alternatively, you can init Blink like so:
+        
+        ::
+        
+            b = blink.Blink(email='me@somewhere.net', password='my_password')
+        
+        Archiving Video
+        ---------------
+        
+        Blink eventually deletes old video clips. If you want to archive your
+        videos locally, run:
+        
+        ::
+        
+            $ python -m blink --archive path/to/archive_dir
+        
+        Typically this would be put into a cron job.
+        
+        API
+        ---
+        
+        +-----------+--------------+--------------+--------+
+        | Function  | Description  | Implemented  | Works  |
+        +===========+==============+==============+========+
+        | ``connect | Client login | yes          | yes    |
+        | ()``      | to the Blink |              |        |
+        |           | Servers.     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``network | Obtain       | yes          | yes    |
+        | s()``     | information  |              |        |
+        |           | about the    |              |        |
+        |           | Blink        |              |        |
+        |           | networks     |              |        |
+        |           | defined for  |              |        |
+        |           | the logged   |              |        |
+        |           | in user.     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``sync_mo | Obtain       | yes          | yes    |
+        | dules(net | information  |              |        |
+        | work)``   | about the    |              |        |
+        |           | Blink Sync   |              |        |
+        |           | Modules on   |              |        |
+        |           | the given    |              |        |
+        |           | network.     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``arm(net | Arm the      | yes          | no     |
+        | work)``   | given        |              |        |
+        |           | network      |              |        |
+        |           | (start       |              |        |
+        |           | recording/re |              |        |
+        |           | porting      |              |        |
+        |           | motion       |              |        |
+        |           | events).     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``disarm( | Disarm the   | yes          | no     |
+        | network)` | given        |              |        |
+        | `         | network      |              |        |
+        |           | (stop        |              |        |
+        |           | recording/re |              |        |
+        |           | porting      |              |        |
+        |           | motion       |              |        |
+        |           | events.      |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``command | Get status   | yes          | unknow |
+        | _status() | info on the  |              | n      |
+        | ``        | given        |              |        |
+        |           | command.     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``homescr | Return       | yes          | yes    |
+        | een()``   | information  |              |        |
+        |           | displayed on |              |        |
+        |           | the home     |              |        |
+        |           | screen of    |              |        |
+        |           | the mobile   |              |        |
+        |           | client.      |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``events( | Get events   | yes          | yes    |
+        | network)` | for a given  |              |        |
+        | `         | network      |              |        |
+        |           | (sync        |              |        |
+        |           | module).     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``downloa | Get a video  | yes          | yes    |
+        | d_video(e | clip from    |              |        |
+        | vent)``   | the events   |              |        |
+        |           | list.        |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``downloa | Get a        | yes          | no     |
+        | d_thumbna | thumbnail    |              |        |
+        | il(event) | from the     |              |        |
+        | ``        | events list. |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``cameras | Gets a list  | yes          | yes    |
+        | (network) | of cameras.  |              |        |
+        | ``        |              |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``clients | Gets         | yes          | yes    |
+        | ()``      | information  |              |        |
+        |           | about        |              |        |
+        |           | devices that |              |        |
+        |           | have         |              |        |
+        |           | connected to |              |        |
+        |           | the blink    |              |        |
+        |           | service.     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``regions | Gets         | yes          | yes    |
+        | ()``      | information  |              |        |
+        |           | about        |              |        |
+        |           | supported    |              |        |
+        |           | regions.     |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``health( | Gets         | yes          | yes    |
+        | )``       | information  |              |        |
+        |           | about system |              |        |
+        |           | health.      |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``capture | Captures a   | no           |        |
+        | _video(ca | new video    |              |        |
+        | mera)``   | for a        |              |        |
+        |           | camera.      |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``capture | Captures a   | no           |        |
+        | _thumbnai | new          |              |        |
+        | l(camera) | thumbnail    |              |        |
+        | ``        | for a        |              |        |
+        |           | camera.      |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``unwatch | Gets a list  | no           |        |
+        | ed_videos | of unwatched |              |        |
+        | ()``      | videos.      |              |        |
+        +-----------+--------------+--------------+--------+
+        | ``delete( | Deletes a    | no           |        |
+        | video)``  | video.       |              |        |
+        +-----------+--------------+--------------+--------+
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
