@@ -1,0 +1,65 @@
+Metadata-Version: 2.0
+Name: pywe-exception
+Version: 1.0.2
+Summary: Wechat Exception Module for Python.
+Home-page: https://github.com/sdkwe/pywe-exception
+Author: Hackathon
+Author-email: kimi.huang@brightcells.com
+License: UNKNOWN
+Keywords: Wechat Weixin Exception
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
+==============
+pywe-exception
+==============
+
+Wechat Exception Module for Python.
+
+Installation
+============
+
+::
+
+    pip install pywe-exception
+
+
+Usage
+=====
+
+::
+
+    In [1]: from pywe_exception import WeChatException, WeChatPayException
+
+    In [2]: raise WeChatException({"errcode": 40125, "errmsg": "invalid appsecret, view more at http://t.cn/RAEkdVq hint: [MVpSma0994e544]"})
+    ---------------------------------------------------------------------------
+    WeChatException                           Traceback (most recent call last)
+    <ipython-input-2-793779f73857> in <module>()
+    ----> 1 raise WeChatException({"errcode": 40125, "errmsg": "invalid appsecret, view more at http://t.cn/RAEkdVq hint: [MVpSma0994e544]"})
+
+    WeChatException: {'errcode': 40125, 'errmsg': 'invalid appsecret, view more at http://t.cn/RAEkdVq hint: [MVpSma0994e544]'}
+
+
+Method
+======
+
+::
+
+    class WeChatException(Exception):
+        """ WeChatException """
+
+
+    class WeChatPayException(Exception):
+    """ WeChatPayException """
+
+
+
