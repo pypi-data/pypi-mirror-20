@@ -1,0 +1,29 @@
+CHANGES
+=======
+
+* Change name to a valid one
+
+0.0.1
+-----
+
+* Add author info to setup.cfg
+* Search rather than match
+* Let yas handle some logging
+* Return from the test method
+* Be less special
+* more narcissim
+* use self
+* Make sure reply is passed to the function using it
+* Remove unused configuration options
+* Remove independent management of logging
+* pass log function itself
+* Use logger provided by yas
+* Finish updating logger
+* Update logging configuration
+* Still need to import YasHandler from yas
+* Update all refs to yas to be to the handler
+* Update gitignore
+* Revert setup.py
+* Add missing )
+* Attempt to register with yas on install
+* Initial commit with create handler
