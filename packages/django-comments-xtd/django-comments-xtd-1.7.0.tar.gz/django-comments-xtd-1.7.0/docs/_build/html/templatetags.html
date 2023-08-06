@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Filters and Template Tags &mdash; django-comments-xtd 1.6.5 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="django-comments-xtd 1.6.5 documentation" href="index.html"/>
+        <link rel="next" title="Customizing django-comments-xtd" href="extending.html"/>
+        <link rel="prev" title="Control Logic" href="logic.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> django-comments-xtd
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick start guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Demo projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic.html">Control Logic</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Filters and Template Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#get-xtdcomment-tree">Get Xtdcomment Tree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-usage">Example usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-xtdcomment-count">Get Xtdcomment Count</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Example usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-last-xtdcomments">Get Last Xtdcomments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#xtd-comment-gravatar">Xtd Comment Gravatar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#render-last-xtdcomments">Render Last Xtdcomments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Example usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#render-markup-comment">Render Markup Comment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Example usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Customizing django-comments-xtd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">django-comments-xtd</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Filters and Template Tags</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/templatetags.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="ref-templatetags"></span><div class="section" id="filters-and-template-tags">
+<span id="index-0"></span><h1>Filters and Template Tags<a class="headerlink" href="#filters-and-template-tags" title="Permalink to this headline">¶</a></h1>
+<p>Django-comments-xtd comes with 4 tags and two filters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Tag <a class="reference internal" href="#std:templatetag-get_xtdcomment_tree"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_tree</span></code></a></li>
+<li>Tag <a class="reference internal" href="#std:templatetag-get_xtdcomment_count"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_count</span></code></a></li>
+<li>Tag <code class="xref std std-ttag docutils literal"><span class="pre">get_last_xtdcomments</span></code></li>
+<li>Filter <a class="reference internal" href="#std:templatetag-xtd_comment_gravatar"><code class="xref std std-ttag docutils literal"><span class="pre">xtd_comment_gravatar</span></code></a></li>
+<li>Tag <code class="xref std std-ttag docutils literal"><span class="pre">render_last_xtdcomments</span></code></li>
+<li>Filter <a class="reference internal" href="#std:templatetag-render_markup_comment"><code class="xref std std-ttag docutils literal"><span class="pre">render_markup_comment</span></code></a></li>
+</ul>
+</div></blockquote>
+<p>To use any of them in your templates you first need to load them:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">comments_xtd</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<span class="target" id="index-1"></span><div class="section" id="get-xtdcomment-tree">
+<span id="std:templatetag-get_xtdcomment_tree"></span><h2>Get Xtdcomment Tree<a class="headerlink" href="#get-xtdcomment-tree" title="Permalink to this headline">¶</a></h2>
+<p>Tag syntax:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">get_xtdcomment_tree</span> <span class="nv">for</span> <span class="o">[</span><span class="nv">object</span><span class="o">]</span> <span class="k">as</span> <span class="o">[</span><span class="nv">varname</span><span class="o">]</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Returns a dictionary to the template context under the name given in <code class="docutils literal"><span class="pre">[varname]</span></code> with the comments posted to the given <code class="docutils literal"><span class="pre">[object]</span></code>. The dictionary has the form:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;xtdcomment&#39;</span><span class="p">:</span> <span class="n">xtdcomment_object</span><span class="p">,</span>
+    <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="n">list_of_child_xtdcomment_dicts</span> <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The comments will be ordered by the <code class="docutils literal"><span class="pre">thread_id</span></code> and <code class="docutils literal"><span class="pre">order</span></code> within the thread, as stated by the setting <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_LIST_ORDER"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_LIST_ORDER</span></code></a>.</p>
+<div class="section" id="example-usage">
+<h3>Example usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h3>
+<p>Get an ordered dictionary with the comments posted to a given blog story and store the dictionary in a template context variabled called <code class="docutils literal"><span class="pre">comment_tree</span></code>:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">get_xtdcomment_tree</span> <span class="nv">for</span> <span class="nv">story</span> <span class="k">as</span> <span class="nv">comments_tree</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<span class="target" id="index-2"></span></div>
+</div>
+<div class="section" id="get-xtdcomment-count">
+<span id="std:templatetag-get_xtdcomment_count"></span><h2>Get Xtdcomment Count<a class="headerlink" href="#get-xtdcomment-count" title="Permalink to this headline">¶</a></h2>
+<p>Tag syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">get_xtdcomment_count</span> <span class="k">as</span> <span class="p">[</span><span class="n">varname</span><span class="p">]</span> <span class="k">for</span> <span class="p">[</span><span class="n">app</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="p">[[</span><span class="n">app</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">...</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Gets the comment count for the given pairs <code class="docutils literal"><span class="pre">&lt;app&gt;.&lt;model&gt;</span></code> and populates the template context with a variable containing that value, whose name is defined by the <code class="docutils literal"><span class="pre">as</span></code> clause.</p>
+<div class="section" id="id1">
+<h3>Example usage<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Get the count of comments the model <code class="docutils literal"><span class="pre">Story</span></code> of the app <code class="docutils literal"><span class="pre">blog</span></code> have received, and store it in the context variable <code class="docutils literal"><span class="pre">comment_count</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">get_xtdcomment_count</span> <span class="k">as</span> <span class="n">comment_count</span> <span class="k">for</span> <span class="n">blog</span><span class="o">.</span><span class="n">story</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Get the count of comments two models, <code class="docutils literal"><span class="pre">Story</span></code> and <code class="docutils literal"><span class="pre">Quote</span></code>, have received and store it in the context variable <code class="docutils literal"><span class="pre">comment_count</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">get_xtdcomment_count</span> <span class="k">as</span> <span class="n">comment_count</span> <span class="k">for</span> <span class="n">blog</span><span class="o">.</span><span class="n">story</span> <span class="n">blog</span><span class="o">.</span><span class="n">quote</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="get-last-xtdcomments">
+<span id="index-3"></span><h2>Get Last Xtdcomments<a class="headerlink" href="#get-last-xtdcomments" title="Permalink to this headline">¶</a></h2>
+<p>Tag syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">get_last_xtdcomments</span> <span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="k">as</span> <span class="p">[</span><span class="n">varname</span><span class="p">]</span> <span class="k">for</span> <span class="p">[</span><span class="n">app</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="p">[[</span><span class="n">app</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">...</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Gets the list of the last N comments for the given pairs <code class="docutils literal"><span class="pre">&lt;app&gt;.&lt;model&gt;</span></code> and stores it in the template context whose name is defined by the <code class="docutils literal"><span class="pre">as</span></code> clause.</p>
+<div class="section" id="id2">
+<h3>Example usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Get the list of the last 10 comments two models, <code class="docutils literal"><span class="pre">Story</span></code> and <code class="docutils literal"><span class="pre">Quote</span></code>, have received and store them in the context variable <code class="docutils literal"><span class="pre">last_10_comment</span></code>. You can then loop over the list with a <code class="docutils literal"><span class="pre">for</span></code> tag:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">get_last_xtdcomments</span> <span class="mi">10</span> <span class="k">as</span> <span class="n">last_10_comments</span> <span class="k">for</span> <span class="n">blog</span><span class="o">.</span><span class="n">story</span> <span class="n">blog</span><span class="o">.</span><span class="n">quote</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">last_10_comments</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">last_10_comments</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">comment</span><span class="o">.</span><span class="n">comment</span><span class="o">|</span><span class="n">linebreaks</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">...</span>
+  <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">No</span> <span class="n">comments</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<span class="target" id="index-4"></span></div>
+</div>
+<div class="section" id="xtd-comment-gravatar">
+<span id="std:templatetag-xtd_comment_gravatar"></span><h2>Xtd Comment Gravatar<a class="headerlink" href="#xtd-comment-gravatar" title="Permalink to this headline">¶</a></h2>
+<p>Filter syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">comment</span><span class="o">.</span><span class="n">email</span><span class="o">|</span><span class="n">xtd_comment_gravatar</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>A simple gravatar filter that inserts the <a class="reference external" href="http://www.gravatar.com/">gravatar</a> image associated to an email address.</p>
+<p>This filter has been named <code class="docutils literal"><span class="pre">xtd_comment_gravatar</span></code> as oposed to simply <code class="docutils literal"><span class="pre">gravatar</span></code> to avoid potential name collisions with other gravatar filters the user might have opted to include in the template.</p>
+</div>
+<div class="section" id="render-last-xtdcomments">
+<span id="index-5"></span><h2>Render Last Xtdcomments<a class="headerlink" href="#render-last-xtdcomments" title="Permalink to this headline">¶</a></h2>
+<p>Tag syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">render_last_xtdcomments</span> <span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="k">for</span> <span class="p">[</span><span class="n">app</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="p">[[</span><span class="n">app</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">...</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Renders the list of the last N comments for the given pairs <code class="docutils literal"><span class="pre">&lt;app&gt;.&lt;model&gt;</span></code> using the following search list for templates:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">django_comments_xtd/&lt;app&gt;/&lt;model&gt;/comment.html</span></code></li>
+<li><code class="docutils literal"><span class="pre">django_comments_xtd/&lt;app&gt;/comment.html</span></code></li>
+<li><code class="docutils literal"><span class="pre">django_comments_xtd/comment.html</span></code></li>
+</ul>
+</div></blockquote>
+<div class="section" id="id3">
+<h3>Example usage<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Render the list of the last 5 comments posted, either to the blog.story model or to the blog.quote model. See it in action in the <em>Multiple Demo Site</em>, in the <em>blog homepage</em>, template <code class="docutils literal"><span class="pre">blog/homepage.html</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">render_last_xtdcomments</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">blog</span><span class="o">.</span><span class="n">story</span> <span class="n">blog</span><span class="o">.</span><span class="n">quote</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<span class="target" id="index-6"></span></div>
+</div>
+<div class="section" id="render-markup-comment">
+<span id="std:templatetag-render_markup_comment"></span><h2>Render Markup Comment<a class="headerlink" href="#render-markup-comment" title="Permalink to this headline">¶</a></h2>
+<p>Filter syntax:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">comment.comment</span><span class="o">|</span><span class="nf">render_markup_comment</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Renders a comment using a markup language specified in the first line of the comment. It uses <a class="reference external" href="https://github.com/bartTC/django-markup">django-markup</a> to parse the comments with a markup language parser and produce the corresponding output.</p>
+<div class="section" id="id4">
+<h3>Example usage<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>A comment posted with a content like:</p>
+<blockquote>
+<div><div class="highlight-text"><div class="highlight"><pre><span></span>#!markdown
+An [example](http://url.com/ &quot;Title&quot;)
+</pre></div>
+</div>
+</div></blockquote>
+<p>Would be rendered as a markdown text, producing the output:</p>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://url.com/&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Title&quot;</span><span class="p">&gt;</span>example<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Available markup languages are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>, when starting the comment with <code class="docutils literal"><span class="pre">#!markdown</span></code>.</li>
+<li><a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a>, when starting the comment with <code class="docutils literal"><span class="pre">#!restructuredtext</span></code>.</li>
+<li>Linebreaks, when starting the comment with <code class="docutils literal"><span class="pre">#!linebreaks</span></code>.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="extending.html" class="btn btn-neutral float-right" title="Customizing django-comments-xtd" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="logic.html" class="btn btn-neutral" title="Control Logic" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Daniel Rus Morales.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.6.5',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

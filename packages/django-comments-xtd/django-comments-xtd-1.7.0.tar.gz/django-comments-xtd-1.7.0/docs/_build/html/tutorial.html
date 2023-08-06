@@ -1,0 +1,1306 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; django-comments-xtd 1.6.5 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="django-comments-xtd 1.6.5 documentation" href="index.html"/>
+        <link rel="next" title="Demo projects" href="example.html"/>
+        <link rel="prev" title="Quick start guide" href="quickstart.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> django-comments-xtd
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick start guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparation">Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changes-in-templates">Changes in templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#template-style-customization">Template Style Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comment-list">Comment list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#form-class">Form class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#form-template">Form template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preview-template">Preview template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#posted-template">Posted template</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moderation">Moderation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disallow-black-listed-domains">Disallow black listed domains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moderate-on-bad-words">Moderate on bad words</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#threads">Threads</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#different-max-thread-levels">Different max thread levels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flags">Flags</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#removal-suggestion">Removal suggestion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-notifications">Getting notifications</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#liked-it-disliked-it">Liked it, Disliked it</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Demo projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic.html">Control Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templatetags.html">Filters and Template Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Customizing django-comments-xtd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">django-comments-xtd</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<span id="ref-tutorial"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial guides you through the steps to use every feature of django-comments-xtd together with the <a class="reference external" href="https://github.com/django/django-contrib-comments">Django Comments Framework</a>.</p>
+<p>The Django project used throughout the tutorial is available to <a class="reference external" href="https://github.com/danirus/django-comments-xtd/demo/bare-project.tar.gz">download</a>. Use it at your will to apply the changes while reading each section.</p>
+<div class="section" id="preparation">
+<span id="index-0"></span><h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>If you opt for coding the examples, download the bare Django project tarball from this <a class="reference external" href="https://github.com/danirus/django-comments-xtd/demo/bare-project.tar.gz">GitHub page</a> and decompress it in a directory of your choice.</p>
+<p>The most comfortable approach to set it up consist of creating a virtualenv and installing all the dependencies within it. The dependencies are just a bunch of lightweight packages.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ virtualenv -p python3.5 ~/venv/comments-xtd-tutorial
+$ <span class="nb">source</span> ~/venv/comments-xtd-tutorial/bin/activate
+$ <span class="nb">cd</span> ~/src
+$ wget https://github.com/danirus/django-comments-xtd/demo/democx.tar.gz
+$ tar -xvzf democx.tar.gz
+$ <span class="nb">cd</span> democx
+</pre></div>
+</div>
+</div></blockquote>
+<p>Take a look at the project. The starting point of this tutorial is a simple Django project with a blog application and a few posts. During the following sections we will configure the project to enable comments to the <code class="docutils literal"><span class="pre">Post</span></code> model and try every possible commenting scenario.</p>
+</div>
+<div class="section" id="configuration">
+<span id="id1"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configure the project to support django-comments and django-comments-xtd, start installing the packages and then let&#8217;s change the minimum number of settings to enable comments.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install Django pytz django-contrib-comments django-comments-xtd <span class="se">\</span>
+              docutils Markdown django-markup
+</pre></div>
+</div>
+</div></blockquote>
+<p>Edit the settings module of the project, <code class="docutils literal"><span class="pre">democx/democx/settings.py</span></code>, and make the following changes:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;django_comments&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django_comments_xtd&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+<span class="o">...</span>
+<span class="n">COMMENTS_APP</span> <span class="o">=</span> <span class="s1">&#39;django_comments_xtd&#39;</span>
+
+<span class="c1"># Either enable sending mail messages to the console:</span>
+<span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.console.EmailBackend&#39;</span>
+
+<span class="c1"># Or set up the EMAIL_* settings so that Django can send emails:</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s2">&quot;smtp.mail.com&quot;</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="s2">&quot;587&quot;</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s2">&quot;alias@mail.com&quot;</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s2">&quot;yourpassword&quot;</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">DEFAULT_FROM_EMAIL</span> <span class="o">=</span> <span class="s2">&quot;Helpdesk &lt;helpdesk@yourdomain&gt;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Edit the urls module of the project, <code class="docutils literal"><span class="pre">democx/democx/urls.py</span></code>, to mount the URL patterns of django_comments_xtd to the path <code class="docutils literal"><span class="pre">/comments/</span></code>. The urls installed with django_comments_xtd include those required by django_comments too:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^comments/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;django_comments_xtd.urls&#39;</span><span class="p">)),</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now let Django create the tables for the two new applications and launch the development server:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py migrate
+$ python manage.py runserver
+</pre></div>
+</div>
+</div></blockquote>
+<p>Be sure that the domain field of the <code class="docutils literal"><span class="pre">Site</span></code> instance points to the correct domain, which for the development server is expected to be  <code class="docutils literal"><span class="pre">localhost:8000</span></code>. The value is being used by django_comments_xtd to create comment verification URLs, follow-up cancellation URLs, etc. You can edit the site instance in the admin interface to set it to the right value.</p>
+<p>After these simple changes the project is ready to use comments, we just need to modify the templates to include the <code class="docutils literal"><span class="pre">comments</span></code> templatetag module.</p>
+</div>
+<div class="section" id="changes-in-templates">
+<h2>Changes in templates<a class="headerlink" href="#changes-in-templates" title="Permalink to this headline">¶</a></h2>
+<p>The tutorial project comes ready with a blog application that contains a Post model. Our goal is to provide blog stories with comments, so that people can post comments to the stories and read the comments other people have posted.</p>
+<p>The blog application, located in <code class="docutils literal"><span class="pre">democx/blog</span></code> contains a <code class="docutils literal"><span class="pre">blog_detail.html</span></code> template in the <code class="docutils literal"><span class="pre">templates/blog</span></code> directory. We have to edit the template and load the <code class="docutils literal"><span class="pre">comments</span></code> templatetag module, which is provided by the <a class="reference external" href="https://github.com/django/django-contrib-comments">Django Comments Framework</a>:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Let&#8217;s insert now the tags to:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Show the number of comments posted to the blog story,</li>
+<li>List the comments already posted, and</li>
+<li>Show the comment form, so that people can post comments.</li>
+</ol>
+</div></blockquote>
+<p>By using the <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-get_comment_count" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">get_comment_count</span></code></a> tag we will show the number of comments posted, right below the text of the blog post. The last part of the template should look like this:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">get_comment_count</span> <span class="nv">for</span> <span class="nv">post</span> <span class="k">as</span> <span class="nv">comment_count</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;padding-top:20px&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Back to the post list<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="ni">&amp;nbsp;&amp;sdot;&amp;nbsp;</span>
+  <span class="cp">{{</span> <span class="nv">comment_count</span> <span class="cp">}}</span> comments have been posted.
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now let&#8217;s do the changes to list the comments. We can make use of two template tags, <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-render_comment_list" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">render_comment_list</span></code></a> and <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-get_comment_list" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">get_comment_list</span></code></a>. The former renders a template with the comments while the latter put the comment list in a variable in the context of the template.</p>
+<p>When using the first, <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-render_comment_list" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">render_comment_list</span></code></a>, with a <code class="docutils literal"><span class="pre">blog.post</span></code> object, Django will look for the template <code class="docutils literal"><span class="pre">list.html</span></code> in the following directories:</p>
+<blockquote>
+<div><div class="highlight-shell"><div class="highlight"><pre><span></span>comments/blog/post/list.html
+comments/blog/list.html
+comments/list.html
+</pre></div>
+</div>
+</div></blockquote>
+<p>Let&#8217;s use <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-render_comment_list" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">render_comment_list</span></code></a> in our <code class="docutils literal"><span class="pre">blog/blog_detail.html</span></code> template to add the list of comments at the end of the page, before the <code class="docutils literal"><span class="pre">endblock</span></code> tag:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comments&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">render_comment_list</span> <span class="nv">for</span> <span class="nv">post</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Below the list of comments we want to display the comment form (later we will put the form first), so that users can send their own comments. There are two tags available for such purpose, the <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-render_comment_form" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">render_comment_form</span></code></a> and the <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-get_comment_form" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">get_comment_form</span></code></a>. The former renders a template with the comment form while the latter puts the form in the context of the template giving more control over the fields.</p>
+<p>At the moment we will use the first tag, <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/quickstart.html#std:templatetag-render_comment_form" title="(in Django Comments v1.7)"><code class="xref std std-ttag docutils literal"><span class="pre">render_comment_form</span></code></a>:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comment&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>Your comment<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">render_comment_form</span> <span class="nv">for</span> <span class="nv">post</span> <span class="cp">%}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Finally, before completing this first set of changes, we could show the number of comments along each post title in the blog&#8217;s home page. We would have to edit the <code class="docutils literal"><span class="pre">blog/home.html</span></code> template and make the following changes:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+
+...
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;date&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">get_comment_count</span> <span class="nv">for</span> <span class="nv">post</span> <span class="k">as</span> <span class="nv">comment_count</span> <span class="cp">%}</span>
+  Published <span class="cp">{{</span> <span class="nv">post.publish</span> <span class="cp">}}</span> by <span class="cp">{{</span> <span class="nv">post.author</span> <span class="cp">}}</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment_count</span> <span class="cp">%}</span>
+  <span class="ni">&amp;sdot;&amp;nbsp;</span><span class="cp">{{</span> <span class="nv">comment_count</span> <span class="cp">}}</span> comments
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we are ready to send comments. If you are logged in the admin site, your comments won&#8217;t need to be confirmed by mail. To test the reception of the mail confirmation request do logout of the admin interface.</p>
+<p>By default the setting <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL</span></code></a> is <code class="docutils literal"><span class="pre">0</span></code>, which means comments can not be nested. In the following sections we will enable threaded comments, we will allow users to flag comments and we will set up comment moderation.</p>
+</div>
+<div class="section" id="template-style-customization">
+<h2>Template Style Customization<a class="headerlink" href="#template-style-customization" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">democx</span></code> project uses the fronted web framework, <a class="reference external" href="http://getbootstrap.com">Bootstrap</a>, which allows fast interface development. There are other client side frameworks, this example uses <a class="reference external" href="http://getbootstrap.com">Bootstrap</a> because it&#8217;s probably the most popular.</p>
+<p>We will adapt our templates to integrate the list of comments and the comment form with the look provided by Bootstrap CSS classes.</p>
+<div class="section" id="comment-list">
+<h3>Comment list<a class="headerlink" href="#comment-list" title="Permalink to this headline">¶</a></h3>
+<p>We must create a template <code class="docutils literal"><span class="pre">list.html</span></code> inside the <code class="docutils literal"><span class="pre">democx/templates/comments</span></code> directory with the following content:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-list&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;comments&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">for</span> <span class="nv">comment</span> <span class="k">in</span> <span class="nv">comment_list</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;c</span><span class="cp">{{</span> <span class="nv">comment.id</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;permalink text-muted&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">get_comment_permalink</span> <span class="nv">comment</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>¶<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;&amp;sdot;</span>
+        <span class="cp">{{</span> <span class="nv">comment.submit_date</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.url</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}{{</span> <span class="nv">comment.name</span> <span class="cp">}}{%</span> <span class="k">if</span> <span class="nv">comment.url</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.comment</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="form-class">
+<h3>Form class<a class="headerlink" href="#form-class" title="Permalink to this headline">¶</a></h3>
+<p>In order to customize the fields of the comment form we will create a new form class inside the blog application and change the setting <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_FORM_CLASS"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_FORM_CLASS</span></code></a> to point to that new form class.</p>
+<p>First, create a new file <code class="docutils literal"><span class="pre">forms.py</span></code> inside the <code class="docutils literal"><span class="pre">democx/blog</span></code> directory with the following content:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+
+<span class="kn">from</span> <span class="nn">django_comments_xtd.forms</span> <span class="kn">import</span> <span class="n">XtdCommentForm</span>
+
+
+<span class="k">class</span> <span class="nc">MyCommentForm</span><span class="p">(</span><span class="n">XtdCommentForm</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;comment&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">followup_suffix</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;comment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">followup_suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyCommentForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">field_name</span> <span class="o">==</span> <span class="s1">&#39;followup&#39;</span><span class="p">:</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;id_followup</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">followup_suffix</span>
+                <span class="k">continue</span>
+            <span class="n">field_obj</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">})</span>
+            <span class="k">if</span> <span class="n">field_name</span> <span class="o">==</span> <span class="s1">&#39;comment&#39;</span><span class="p">:</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;cols&#39;</span><span class="p">)</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;rows&#39;</span><span class="p">)</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;placeholder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Your comment&#39;</span><span class="p">)</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;font-size: 1.1em&quot;</span>
+            <span class="k">if</span> <span class="n">field_name</span> <span class="o">==</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span>
+                <span class="n">field_obj</span><span class="o">.</span><span class="n">help_text</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Optional&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In <code class="docutils literal"><span class="pre">democx/democs/settings.py</span></code> add the following:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">COMMENTS_XTD_FORM_CLASS</span> <span class="o">=</span> <span class="s2">&quot;blog.forms.MyCommentForm&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="form-template">
+<h3>Form template<a class="headerlink" href="#form-template" title="Permalink to this headline">¶</a></h3>
+<p>Now we must create a file <code class="docutils literal"><span class="pre">form.html</span></code> within the <code class="docutils literal"><span class="pre">democx/template/comments</span></code> directory containing the code that renders the comment form. It must include each and every visible form field: <code class="docutils literal"><span class="pre">comment</span></code>, <code class="docutils literal"><span class="pre">name</span></code>, <code class="docutils literal"><span class="pre">email</span></code>, <code class="docutils literal"><span class="pre">url</span></code> and <code class="docutils literal"><span class="pre">follow</span> <span class="pre">up</span></code>:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">comment_form_target</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-horizontal&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;next&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;comments-xtd-sent&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">/&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger hidden&quot;</span> <span class="na">data-comment-element</span><span class="o">=</span><span class="s">&quot;errors&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">field</span> <span class="k">in</span> <span class="nv">form</span> <span class="cp">%}</span>
+      <span class="cp">{%</span> <span class="k">if</span> <span class="nv">field.is_hidden</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">field</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display:none&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">form.honeypot</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group </span><span class="cp">{%</span> <span class="k">if</span> <span class="s1">&#39;comment&#39;</span> <span class="k">in</span> <span class="nv">form.errors</span> <span class="cp">%}</span><span class="s">has-error</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.comment</span> <span class="cp">}}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group </span><span class="cp">{%</span> <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="k">in</span> <span class="nv">form.errors</span> <span class="cp">%}</span><span class="s">has-error</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;id_name&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;control-label col-lg-3 col-md-3&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.name.label</span> <span class="cp">}}</span>
+      <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.name</span> <span class="cp">}}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group </span><span class="cp">{%</span> <span class="k">if</span> <span class="s1">&#39;email&#39;</span> <span class="k">in</span> <span class="nv">form.errors</span> <span class="cp">%}</span><span class="s">has-error</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;id_email&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;control-label col-lg-3 col-md-3&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.email.label</span> <span class="cp">}}</span>
+      <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.email</span> <span class="cp">}}</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;help-block&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">form.email.help_text</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group </span><span class="cp">{%</span> <span class="k">if</span> <span class="s1">&#39;url&#39;</span> <span class="k">in</span> <span class="nv">form.errors</span> <span class="cp">%}</span><span class="s">has-error</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;id_url&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;control-label col-lg-3 col-md-3&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.url.label</span> <span class="cp">}}</span>
+      <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">form.url</span> <span class="cp">}}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-3 col-md-offset-3 col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;id_followup</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">cid</span> <span class="cp">%}</span><span class="s">_</span><span class="cp">{{</span> <span class="nv">cid</span> <span class="cp">}}{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+            <span class="cp">{{</span> <span class="nv">form.followup</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;&amp;nbsp;</span><span class="cp">{{</span> <span class="nv">form.followup.label</span> <span class="cp">}}</span>
+          <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-3 col-md-offset-3 col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;send&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;preview&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;preview&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-default&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="preview-template">
+<h3>Preview template<a class="headerlink" href="#preview-template" title="Permalink to this headline">¶</a></h3>
+<p>When we click on the preview button Django looks for the <code class="docutils literal"><span class="pre">preview.html</span></code> template in different directories and with different names:</p>
+<blockquote>
+<div><div class="highlight-shell"><div class="highlight"><pre><span></span>comments/blog_post_preview.html
+comments/blog_preview.html
+comments/blog/post/preview.html
+comments/blog/preview.html
+comments/preview.html
+</pre></div>
+</div>
+</div></blockquote>
+<p>We will provide the last of them by adding the file <code class="docutils literal"><span class="pre">preview.html</span></code> to the <code class="docutils literal"><span class="pre">democx/templates/comments/</span></code> directory with the following code:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Preview your comment:&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nv">comment</span> <span class="cp">%}</span>
+      <span class="p">&lt;</span><span class="nt">em</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Empty comment.&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">form.cleaned_data.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">form.cleaned_data.email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{%</span> <span class="k">now</span> <span class="s2">&quot;N j, Y, P&quot;</span> <span class="cp">%}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">form.cleaned_data.url</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">form.cleaned_data.url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+          <span class="cp">{{</span> <span class="nv">form.cleaned_data.name</span> <span class="cp">}}</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">form.cleaned_data.url</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;visible-lg-block visible-md-block&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well well-lg&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;comments/form.html&quot;</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="posted-template">
+<h3>Posted template<a class="headerlink" href="#posted-template" title="Permalink to this headline">¶</a></h3>
+<p>Finally, when we hit the send button and the comment gets succesfully processed Django renders the template <code class="docutils literal"><span class="pre">comments/posted.html</span></code>. We can modify the look of this template by adding a new <code class="docutils literal"><span class="pre">posted.html</span></code> file to our <code class="docutils literal"><span class="pre">democx/templates/comments</span></code> directory with the following code:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h3</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Comment confirmation requested.&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">blocktrans</span> <span class="cp">%}</span>A confirmation message has been sent to your
+email address. Please, click on the link in the message to confirm
+your comment.<span class="cp">{%</span> <span class="k">endblocktrans</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we have the form and the core templates integrated with the <a class="reference external" href="http://getbootstrap.com">Bootstrap</a> framework. You can visit a blog post and give it a try. Remember that to get the comment confirmation request by email you must sign out of the admin interface.</p>
+<p>You might want to adapt the design of the rest of <a class="reference internal" href="templates.html#ref-templates"><span class="std std-ref">Templates</span></a> provided by django-comments-xtd.</p>
+</div>
+</div>
+<div class="section" id="moderation">
+<span id="index-1"></span><h2>Moderation<a class="headerlink" href="#moderation" title="Permalink to this headline">¶</a></h2>
+<p>One of the differences between django-comments-xtd and other commenting applications is the fact that by default it requires comment confirmation by email when users are not logged in, a very effective feature to discard unwanted comments. However there might be cases in which we would prefer to follow a different approach. The Django Comments Framework has the <a class="reference external" href="http://django-contrib-comments.readthedocs.io/en/latest/moderation.html">moderation capabilities</a> upon which we can build our own comment filtering.</p>
+<p>Comment moderation is often established to fight spam, but may be used for other purposes, like triggering actions based on comment content, rejecting comments based on how old is the subject being commented and whatnot.</p>
+<p>In this section we want to set up comment moderation for our blog application, so that comments sent to a blog post older than a year will be automatically flagged for moderation. Also we want Django to send an email to registered <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-MANAGERS" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">MANAGERS</span></code></a> of the project when the comment is flagged.</p>
+<p>Let&#8217;s start adding our email address to the <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-MANAGERS" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">MANAGERS</span></code></a> in the <code class="docutils literal"><span class="pre">democx/democx/settings.py</span></code> module:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">MANAGERS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;Joe Bloggs&#39;</span><span class="p">,</span> <span class="s1">&#39;joe.bloggs@example.com&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we have to create a new <code class="docutils literal"><span class="pre">Moderator</span></code> class that inherits from Django Comments Frammework&#8217;s <code class="docutils literal"><span class="pre">CommentModerator</span></code>. This class enables moderation by defining a number of class attributes. Read more about it in <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/moderation.html#moderation-options">moderation options</a>, in the official documentation of the Django Comments Framework.</p>
+<p>We also need to register our <code class="docutils literal"><span class="pre">Moderator</span></code> class with the django-comments-xtd&#8217;s <code class="docutils literal"><span class="pre">moderator</span></code> object. We need to use django-comments-xtd&#8217;s object instead of django-contrib-comments&#8217; because we still want to have confirmation by email for non-registered users, nested comments, follow-up notifications, etc.</p>
+<p>Let&#8217;s add those changes to <code class="docutils literal"><span class="pre">democx/blog/model.py</span></code> module:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="c1"># New imports to add below the current ones.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">django_comments.moderation</span> <span class="kn">import</span> <span class="n">CommentModerator</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">django.contrib.comments.moderation</span> <span class="kn">import</span> <span class="n">CommentModerator</span>
+
+<span class="kn">from</span> <span class="nn">django_comments_xtd.moderation</span> <span class="kn">import</span> <span class="n">moderator</span>
+
+<span class="o">...</span>
+
+<span class="c1"># Add this code at the end of the file.</span>
+<span class="k">class</span> <span class="nc">PostCommentModerator</span><span class="p">(</span><span class="n">CommentModerator</span><span class="p">):</span>
+    <span class="n">email_notification</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">auto_moderate_field</span> <span class="o">=</span> <span class="s1">&#39;publish&#39;</span>
+    <span class="n">moderate_after</span> <span class="o">=</span> <span class="mi">365</span>
+
+<span class="n">moderator</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">PostCommentModerator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>We may want to customize the look of the <code class="docutils literal"><span class="pre">moderated.html</span></code> template. Let&#8217;s create the directory <code class="docutils literal"><span class="pre">django_comments_xtd</span></code> under <code class="docutils literal"><span class="pre">democx/templates</span></code> and create inside the file <code class="docutils literal"><span class="pre">moderated.html</span></code> with the following code:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Comment requires approval.&quot;</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Comment in moderation&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">blocktrans</span> <span class="cp">%}</span>Your comment has to be reviewed before approbal.<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+  It has been put automatically in moderation.<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+  Thank you for your patience and understanding.<span class="cp">{%</span> <span class="k">endblocktrans</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Additionally we need a <code class="docutils literal"><span class="pre">comments/comment_notification_email.txt</span></code> template. This template is used by django-contrib-comments to render the email message that <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-MANAGERS" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">MANAGERS</span></code></a> receive when using the moderation option <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/moderation.html#django_comments.moderation.CommentModerator.email_notification">email_notification</a>, as we do above in our <code class="docutils literal"><span class="pre">PostCommentModerator</span></code> class. Django-comments-xtd comes already with such a template.</p>
+<p>Now we are ready to try the moderation in place. Let&#8217;s visit the web page of a blog post with a <code class="docutils literal"><span class="pre">publish</span></code> datetime older than a year and try to send a comment. After confirming the comment you must be redirected to the <code class="docutils literal"><span class="pre">moderated.html</span></code> template and your comment must be put on hold for approval.</p>
+<p>On the other hand if you send a comment to a blog post created within the last year your comment will not be hold for moderation. Exercise it with both, a user logged in (login in the <a class="reference external" href="http://localhost:8000/admin/">admin</a> site with username <strong>admin</strong> and password <strong>admin</strong> will suffice) and logged out (click on <strong>log out</strong> at the top-right corner of the <a class="reference external" href="http://localhost:8000/admin/">admin</a> site).</p>
+<p>When sending a comment to a blog post with a user logged in the comment doesn&#8217;t have to be confirmed. However, when you send it logged out the comment has to be confirmed by clicking on the confirmation link. Right after the user clicks on the link in the confirmation email the comment is put on hold pending for approval.</p>
+<p>In both cases, if you have provided an active email address in the <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-MANAGERS" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">MANAGERS</span></code></a> setting, you will receive a notification about the reception of a new comment, an email with a subject contaning the site domain within angle brackets. If you did not received such message, you might need to review your email settings. Read above the <a class="reference internal" href="#configuration"><span class="std std-ref">Configuration</span></a> section and see what are the settings you must enable. Add a hash in front of the <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-EMAIL_BACKEND" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">EMAIL_BACKEND</span></code></a> setting to comment it, this way Django won&#8217;t use the console to output emails but rather the default email backend along with the rest of email settings provided.</p>
+<p>A reminder to finish this section: we need to review those comments put on hold. For such purpose we should visit the comments-xtd app in the <a class="reference external" href="http://localhost:8000/admin/">admin</a> interface. After reviewing the non-public comments, we must tick the box of those we want to approve, select the action <strong>Approve selected comments</strong> and click on the <strong>Go</strong> button.</p>
+<div class="section" id="disallow-black-listed-domains">
+<h3>Disallow black listed domains<a class="headerlink" href="#disallow-black-listed-domains" title="Permalink to this headline">¶</a></h3>
+<p>In case you wanted to disable the comment confirmation by email you might be interested in setting up some sort of control to reject spammers. In this section we will go through the steps to disable comment confirmation while enabling a comment filtering solution based on Joe Wein&#8217;s <a class="reference external" href="http://www.joewein.net/spam/blacklist.htm">blacklist</a> of spamming domains. We will also add a moderation function that will put on hold comments containing <a class="reference external" href="https://gist.github.com/ryanlewis/a37739d710ccdb4b406d">badwords</a>.</p>
+<p>Let us first disable comment confirmation, we need to edit the <code class="docutils literal"><span class="pre">settings.py</span></code> module:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">COMMENTS_XTD_CONFIRM_EMAIL</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Django-comments-xtd comes with a Moderator class that inherits from <code class="docutils literal"><span class="pre">CommentModerator</span></code> and implements a method <code class="docutils literal"><span class="pre">allow</span></code> that will do the filtering for us. We just have to change our <code class="docutils literal"><span class="pre">democx/blog/models.py</span></code> module and replace <code class="docutils literal"><span class="pre">CommentModerator</span></code> with <code class="docutils literal"><span class="pre">SpamModerator</span></code>, as follows:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Remove the CommentModerator imports and leave only this:</span>
+<span class="kn">from</span> <span class="nn">django_comments_xtd.moderation</span> <span class="kn">import</span> <span class="n">moderator</span><span class="p">,</span> <span class="n">SpamModerator</span>
+
+<span class="c1"># Our class Post PostCommentModerator now inherits from SpamModerator</span>
+<span class="k">class</span> <span class="nc">PostCommentModerator</span><span class="p">(</span><span class="n">SpamModerator</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">moderator</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">PostCommentModerator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we can add a domain to the <code class="docutils literal"><span class="pre">BlackListed</span></code> model in the <a class="reference external" href="http://localhost:8000/admin/">admin</a> interface. Or we could download a <a class="reference external" href="http://www.joewein.net/spam/blacklist.htm">blacklist</a> from Joe Wein&#8217;s website and load the table with actual spamming domains.</p>
+<p>Once we have a <code class="docutils literal"><span class="pre">BlackListed</span></code> domain we can try to send a new comment and use an email address with such a domain. Be sure to log out before trying, otherwise django-comments-xtd will use the logged in user credentials and ignore the email given in the comment form.</p>
+<p>Sending a comment with an email address of the blacklisted domain triggers a <strong>Comment post not allowed</strong> response, which would have been a HTTP 400 Bad Request response with <code class="docutils literal"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">False</span></code> in production.</p>
+</div>
+<div class="section" id="moderate-on-bad-words">
+<h3>Moderate on bad words<a class="headerlink" href="#moderate-on-bad-words" title="Permalink to this headline">¶</a></h3>
+<p>Let us now create our own Moderator class by subclassing <code class="docutils literal"><span class="pre">SpamModerator</span></code>. The goal is to provide a <code class="docutils literal"><span class="pre">moderate</span></code> method that looks in the content of the comment and returns <code class="docutils literal"><span class="pre">False</span></code> whenever it finds a bad word in the message. The effect of returning <code class="docutils literal"><span class="pre">False</span></code> is that the comment&#8217;s <code class="docutils literal"><span class="pre">is_public</span></code> attribute will be put to <code class="docutils literal"><span class="pre">False</span></code> and therefore the comment will be on hold waiting for approval.</p>
+<p>The blog application comes already with what we are going to consider a bad word (for the purpose of this tutorial, we will use this <a class="reference external" href="https://gist.github.com/ryanlewis/a37739d710ccdb4b406d">badwords</a> list), which are listed in the <code class="docutils literal"><span class="pre">democx/blog/badwords.py</span></code> module.</p>
+<p>We will assume that we already have a list of <code class="docutils literal"><span class="pre">BlackListed</span></code> domains in our database, as explained in the previous section, and we don&#8217;t want further spam control, so we want to disable comment confirmation by email. Let&#8217;s edit the <code class="docutils literal"><span class="pre">settings.py</span></code> module:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">COMMENTS_XTD_CONFIRM_EMAIL</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Then let&#8217;s edit the <code class="docutils literal"><span class="pre">democx/blog/models.py</span></code> module and add the following code corresponding to our new <code class="docutils literal"><span class="pre">PostCommentModerator</span></code>:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Below the other imports:</span>
+<span class="kn">from</span> <span class="nn">django_comments_xtd.moderation</span> <span class="kn">import</span> <span class="n">moderator</span><span class="p">,</span> <span class="n">SpamModerator</span>
+<span class="kn">from</span> <span class="nn">.badwords</span> <span class="kn">import</span> <span class="n">badwords</span>
+
+<span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">PostCommentModerator</span><span class="p">(</span><span class="n">SpamModerator</span><span class="p">):</span>
+    <span class="n">email_notification</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">moderate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comment</span><span class="p">,</span> <span class="n">content_object</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># Make a dictionary where the keys are the words of the message and</span>
+        <span class="c1"># the values are their relative position in the message.</span>
+        <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">word</span>
+            <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">word</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">ret</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">clean</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">i</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())])</span>
+        <span class="k">for</span> <span class="n">badword</span> <span class="ow">in</span> <span class="n">badwords</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">badword</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">badword</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lastindex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">for</span> <span class="n">subword</span> <span class="ow">in</span> <span class="n">badword</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">subword</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">lastindex</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="n">subword</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">lastindex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                                <span class="n">lastindex</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="n">subword</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">lastindex</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="n">subword</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">break</span>
+                <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">badword</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">msg</span><span class="p">[</span><span class="n">badword</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="n">lastindex</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PostCommentModerator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">moderate</span><span class="p">(</span><span class="n">comment</span><span class="p">,</span>
+                                                          <span class="n">content_object</span><span class="p">,</span>
+                                                          <span class="n">request</span><span class="p">)</span>
+
+<span class="n">moderator</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">PostCommentModerator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we can send a comment to a blog post and put any of the words listed in the <a class="reference external" href="https://gist.github.com/ryanlewis/a37739d710ccdb4b406d">badwords</a> list in the message. After clicking on the send button we must see the <code class="docutils literal"><span class="pre">moderated.html</span></code> template and the comment must be put on hold for approval.</p>
+<p>If you enable comment confirmation by email, the comment will be put on hold after the user clicks on the confirmation link in the email.</p>
+</div>
+</div>
+<div class="section" id="threads">
+<span id="index-2"></span><h2>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h2>
+<p>Up until this point in the tutorial django-comments-xtd has been configured to disallow nested comments. Every comment is at thread level 0. It is so because by default the setting <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL</span></code></a> is set to 0.</p>
+<p>When the <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL</span></code></a> is greater than 0, comments below the maximum thread level may receive replies that will be nested up to the maximum thread level. A comment in a the thread level below the <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL</span></code></a> will show a <strong>Reply</strong> link that allows users to send nested comments.</p>
+<p>In this section we will enable nested comments by modifying <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL</span></code></a> and apply some changes to our <code class="docutils literal"><span class="pre">blog_detail.html</span></code> template. We will use the tag <a class="reference internal" href="templatetags.html#std:templatetag-get_xtdcomment_tree"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_tree</span></code></a> that retrieves the comments in a nested data structure, and we will create a new template to render the nested comments.</p>
+<p>We will also introduce the setting <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_LIST_ORDER"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_LIST_ORDER</span></code></a>, that allows altering the default order in which we get the list of comments. By default comments are ordered by thread and their position inside the thread, which turns out to be in ascending datetime of arrival. In this example we would like to list newer comments first.</p>
+<p>Let&#8217;s start by editing the <code class="docutils literal"><span class="pre">democx/democx/settings.py</span></code> module to set up a maximum thread level of 1 and a comment ordering to retrieve newer comments first:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">COMMENTS_XTD_MAX_THREAD_LEVEL</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># default is 0</span>
+<span class="n">COMMENTS_XTD_LIST_ORDER</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;-thread_id&#39;</span><span class="p">,</span> <span class="s1">&#39;order&#39;</span><span class="p">)</span>  <span class="c1"># default is (&#39;thread_id&#39;, &#39;order&#39;)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we have to modify the blog post detail template to load the <code class="docutils literal"><span class="pre">comments_xtd</span></code> templatetag module and make use of the <a class="reference internal" href="templatetags.html#std:templatetag-get_xtdcomment_tree"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_tree</span></code></a> tag. We also want to move the comment form from the bottom of the page to a more visible position right below the blog post, followed by the list of comments.</p>
+<p>Let&#8217;s edit <code class="docutils literal"><span class="pre">democx/blog/templates/blog/blog_detail.html</span></code> to make it look like follows:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{{</span> <span class="nv">post.title</span> <span class="cp">}}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h3</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header text-center&quot;</span><span class="p">&gt;</span>My blog<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">post.title</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;date&quot;</span><span class="p">&gt;</span>
+  Published <span class="cp">{{</span> <span class="nv">post.publish</span> <span class="cp">}}</span> by <span class="cp">{{</span> <span class="nv">post.author</span> <span class="cp">}}</span>
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{{</span> <span class="nv">post.body</span><span class="o">|</span><span class="nf">linebreaks</span> <span class="cp">}}</span>
+
+<span class="cp">{%</span> <span class="k">get_comment_count</span> <span class="nv">for</span> <span class="nv">post</span> <span class="k">as</span> <span class="nv">comment_count</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;post-footer text-center&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Back to the post list<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="ni">&amp;nbsp;&amp;sdot;&amp;nbsp;</span>
+  <span class="cp">{{</span> <span class="nv">comment_count</span> <span class="cp">}}</span> comments have been posted.
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">render_comment_form</span> <span class="nv">for</span> <span class="nv">post</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment_count</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-list&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">get_xtdcomment_tree</span> <span class="nv">for</span> <span class="nv">post</span> <span class="k">as</span> <span class="nv">comments_tree</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;blog/comments_tree.html&quot;</span> <span class="k">with</span> <span class="nv">comments</span><span class="o">=</span><span class="nv">comments_tree</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>At the end of the file we use another template to render the list of comments. This template will render all the comments in the same thread level and will call itself to render those in nested levels. Let&#8217;s create the template <code class="docutils literal"><span class="pre">blog/comments_tree.html</span></code> and add the following code to it:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">item</span> <span class="k">in</span> <span class="nv">comments</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.level</span> <span class="o">==</span> <span class="m">0</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;c</span><span class="cp">{{</span> <span class="nv">item.comment.id</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">item.comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comment&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">item.comment.submit_date</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.url</span> <span class="k">and</span> <span class="k">not</span> <span class="nv">item.comment.is_removed</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">item.comment.url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}{{</span> <span class="nv">item.comment.name</span> <span class="cp">}}{%</span> <span class="k">if</span> <span class="nv">item.comment.url</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="ni">&amp;nbsp;&amp;nbsp;</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;permalink&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;comment permalink&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">get_comment_permalink</span> <span class="nv">item.comment</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>¶<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.is_removed</span> <span class="cp">%}</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;This comment has been removed.&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="cp">{{</span> <span class="nv">item.comment.comment</span><span class="o">|</span><span class="nf">render_markup_comment</span> <span class="cp">}}</span>
+        <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.allow_thread</span> <span class="k">and</span> <span class="k">not</span> <span class="nv">item.comment.is_removed</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;small mutedlink&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">item.comment.get_reply_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Reply&quot;</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nv">item.comment.is_removed</span> <span class="k">and</span> <span class="nv">item.children</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;blog/comments_tree.html&quot;</span> <span class="k">with</span> <span class="nv">comments</span><span class="o">=</span><span class="nv">item.children</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.level</span> <span class="o">==</span> <span class="m">0</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This template uses the tag <a class="reference internal" href="templatetags.html#std:templatetag-xtd_comment_gravatar"><code class="xref std std-ttag docutils literal"><span class="pre">xtd_comment_gravatar</span></code></a> included within the <code class="docutils literal"><span class="pre">comments_xtd.py</span></code> templatetag module, that loads the gravatar image associated with an email address. It also uses <a class="reference internal" href="templatetags.html#std:templatetag-render_markup_comment"><code class="xref std std-ttag docutils literal"><span class="pre">render_markup_comment</span></code></a>, that will render the comment using either markdown, restructuredtext, or linebreaks.</p>
+<p>Another important remark on this template is that it calls itself recursively to render nested comments for each comment. The tag <a class="reference internal" href="templatetags.html#std:templatetag-get_xtdcomment_tree"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_tree</span></code></a> retrieves a list of dictionaries. Each dictionary contains two attributes: <code class="docutils literal"><span class="pre">comment</span></code> and <code class="docutils literal"><span class="pre">children</span></code>. The attribute <code class="docutils literal"><span class="pre">comment</span></code> is the <code class="docutils literal"><span class="pre">XtdComment</span></code> object and the attribute <code class="docutils literal"><span class="pre">children</span></code> is another list of dictionaries with the nested comments.</p>
+<p>We don&#8217;t necessarily have to use <a class="reference internal" href="templatetags.html#std:templatetag-get_xtdcomment_tree"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_tree</span></code></a> to render nested comments. It is possible to render them by iterating over the list of comments and accessing the level attribute. Take a look at the <code class="docutils literal"><span class="pre">simple_threaded</span></code> demo project, the <code class="docutils literal"><span class="pre">list.html</span></code> template iterates over the list of comments adding an increasing left padding depending on the thread level the comment belongs to.</p>
+<p>Finally we might want to adapt the <code class="docutils literal"><span class="pre">django_comments_xtd/reply.html</span></code> template, that will be rendered when the user clicks on the reply link:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Comment reply&quot;</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.content_object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.content_object</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Reply to comment&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.submit_date</span><span class="o">|</span><span class="nf">date</span><span class="s2">:&quot;N j, Y, P&quot;</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+          <span class="cp">{{</span> <span class="nv">comment.user_name</span> <span class="cp">}}{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.comment</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;visible-lg-block visible-md-block&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well well-lg&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;comments/form.html&quot;</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="different-max-thread-levels">
+<h3>Different max thread levels<a class="headerlink" href="#different-max-thread-levels" title="Permalink to this headline">¶</a></h3>
+<p>There might be cases in which nested comments have a lot of sense and others in which we would prefer a plain comment sequence. We can handle both scenarios under the same Django project with django-comments-xtd.</p>
+<p>We just have to use both settings, the <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL</span></code></a> and <a class="reference internal" href="settings.html#std:setting-COMMENTS_XTD_MAX_THREAD_LEVEL_BY_APP_MODEL"><code class="xref std std-setting docutils literal"><span class="pre">COMMENTS_XTD_MAX_THREAD_LEVEL_BY_APP_MODEL</span></code></a>. The former would be set to the default wide site thread level while the latter would be a dictionary of app.model literals as keys and the corresponding maximum thread level as values.</p>
+<p>If we wanted to disable nested comments site wide, and enable nested comments up to level one for blog posts, we would need to set it up as follows in our <code class="docutils literal"><span class="pre">settings.py</span></code> module:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">COMMENTS_XTD_MAX_THREAD_LEVEL</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># site wide default</span>
+<span class="n">COMMENTS_XTD_MAX_THREAD_LEVEL_BY_MODEL</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Objects of the app blog, model post, can be nested</span>
+    <span class="c1"># up to thread level 1.</span>
+        <span class="s1">&#39;blog.post&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="flags">
+<h2>Flags<a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h2>
+<p>The Django Comments Framework comes with support for <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/example.html#flagging">flagging</a> comments, so that a comment can receive the following flags:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Removal suggestion</strong>, when a registered user suggests the removal of a comment.</li>
+<li><strong>Moderator deletion</strong>, when a comment moderator marks the comment as deleted.</li>
+<li><strong>Moderator approval</strong>, when a comment moderator sets the comment as approved.</li>
+</ul>
+</div></blockquote>
+<p>Django-comments-xtd extends the functionality provided by django-contrib-comments with two more flags:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Liked it</strong>, when a registered user likes the comment.</li>
+<li><strong>Disliked it</strong>, when a registered user dislikes the comment.</li>
+</ul>
+</div></blockquote>
+<p>In this section we will see how to enable a user with the capacity to flag a comment for removal with the <strong>Removal suggestion</strong> flag, how to express likeability, conformity, acceptance or acknowledgement with the <strong>Liked it</strong> flag, and how to express the opposite with the <strong>Disliked it</strong> flag.</p>
+<p>One important requirement to flag a comment is that the user setting the flag must be authenticated. In other words, comments can not be flagged by anonymous users.</p>
+<div class="section" id="removal-suggestion">
+<h3>Removal suggestion<a class="headerlink" href="#removal-suggestion" title="Permalink to this headline">¶</a></h3>
+<p>Let us start by enabling the link that allows a user to suggest a comment removal. This functionality is already provided by django-contrib-comments. We will simply put it in the template.</p>
+<p>To place the flag link we need to edit the <code class="docutils literal"><span class="pre">blog/comments_tree.html</span></code> template. We will show the flag link at the right side of the comment&#8217;s header:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span>...
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">item</span> <span class="k">in</span> <span class="nv">comments</span> <span class="cp">%}</span>
+  ...
+        <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">item.comment.submit_date</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.url</span> <span class="k">and</span> <span class="k">not</span> <span class="nv">item.comment.is_removed</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">item.comment.url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+            <span class="cp">{{</span> <span class="nv">item.comment.name</span> <span class="cp">}}{%</span> <span class="k">if</span> <span class="nv">item.comment.url</span> <span class="cp">%}</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="ni">&amp;nbsp;&amp;nbsp;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;permalink&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">get_comment_permalink</span> <span class="nv">item.comment</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>¶<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+
+          <span class="c">&lt;!-- Add this to enable flagging a comment --&gt;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">request.user.is_authenticated</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pull-right&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mutedlink&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;comments-flag&#39;</span> <span class="nv">item.comment.pk</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-flag&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;flag comment&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+  ...
+</pre></div>
+</div>
+</div></blockquote>
+<p>Additionally we might want to adapt the style of two related templates: <code class="docutils literal"><span class="pre">comments/flag.html</span></code> and <code class="docutils literal"><span class="pre">comments/flagged.html</span></code>. The first presents a form to the user to confirm the removal suggestion, while the second renders a confirmation message once the user has flagged the comment.</p>
+<p>Let&#8217;s create the template <code class="docutils literal"><span class="pre">flag.html</span></code> in the directory <code class="docutils literal"><span class="pre">democx/templates/comments</span></code> with this content:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Flag this comment&quot;</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.content_object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.content_object</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Really flag this comment?&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Click on the flag button if you want to suggest the removal of the following comment:&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.submit_date</span><span class="o">|</span><span class="nf">date</span><span class="s2">:&quot;N j, Y, P&quot;</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+            <span class="cp">{{</span> <span class="nv">comment.user_name</span> <span class="cp">}}</span>
+            <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.comment</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;visible-lg-block visible-md-block&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well well-lg&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;.&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-horizontal&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-3 col-md-offset-3 col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-danger&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Flag&quot;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-default&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>cancel<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>And the template <code class="docutils literal"><span class="pre">flagged.html</span></code> in the same directory <code class="docutils literal"><span class="pre">democx/templates/comments</span></code> with the code:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Thanks for flagging&quot;</span> <span class="cp">%}</span>.<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.content_object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.content_object</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header text-center&quot;</span><span class="p">&gt;</span>Thanks for flagging<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Thank you for taking the time to improve the quality of discussion in our site.&quot;</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we can try it, let&#8217;s suggest a removal. First we need to login in the <a class="reference external" href="http://localhost:8000/admin/">admin</a> interface so that we are not an anonymous user. Then we can visit any of the blog posts to which we have sent comments. When hovering the comments we must see a flag at the right side of the comment&#8217;s header. If we click on it we will land in the page where we are requested to confirm our suggestion to remove the comment. If we click on the red <strong>Flag</strong> button we will create the <strong>Removal suggestion</strong> flag for the comment.</p>
+<p>Once we have flagged a comment we can find the flag entry in the <a class="reference external" href="http://localhost:8000/admin/">admin</a> interface, under the <strong>Comment flags</strong> model, under the Django Comments application.</p>
+<div class="section" id="getting-notifications">
+<h4>Getting notifications<a class="headerlink" href="#getting-notifications" title="Permalink to this headline">¶</a></h4>
+<p>A user might want to flag a comment on the basis of a violation of our site&#8217;s terms of use, maybe on hate speech content, racism or the like. To prevent a comment from staying published long after it has been flagged we might want to receive notifications on flagging events.</p>
+<p>For such purpose django-comments-xtd provides the class <code class="xref std std-pclass docutils literal"><span class="pre">XtdCommentModerator</span></code>, which extends django-contrib-comments&#8217; <code class="xref std std-pclass docutils literal"><span class="pre">CommentModerator</span></code>.</p>
+<p>In addition to all the <a class="reference external" href="https://django-contrib-comments.readthedocs.io/en/latest/moderation.html#moderation-options">options</a> offered by the parent class <code class="xref std std-pclass docutils literal"><span class="pre">XtdCommentModerator</span></code> exposes the attribute <code class="docutils literal"><span class="pre">removal_suggestion_notification</span></code>. When this attribute is set to <code class="docutils literal"><span class="pre">True</span></code> Django will send an email to the <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-MANAGERS" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">MANAGERS</span></code></a> on every <strong>Removal suggestion</strong> flag created.</p>
+<p>Let&#8217;s use <code class="xref std std-pclass docutils literal"><span class="pre">XtdCommentModerator</span></code> in our demo. If you are using the class <code class="docutils literal"><span class="pre">SpamModerator</span></code> already in the <code class="docutils literal"><span class="pre">democx/blog/models.py</span></code> module, then simply add <code class="docutils literal"><span class="pre">removal_suggestion_notification</span> <span class="pre">=</span> <span class="pre">True</span></code> to your Moderation class, as <code class="docutils literal"><span class="pre">SpamModerator</span></code> already inherits from <code class="docutils literal"><span class="pre">XtdCommentModerator</span></code>. Otherwise add the following code:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_comments_xtd.moderation</span> <span class="kn">import</span> <span class="n">moderator</span><span class="p">,</span> <span class="n">XtdCommentModerator</span>
+
+<span class="o">...</span>
+<span class="k">class</span> <span class="nc">PostCommentModerator</span><span class="p">(</span><span class="n">XtdCommentModerator</span><span class="p">):</span>
+    <span class="n">removal_suggestion_notification</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">moderator</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">PostCommentModerator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Be sure that <code class="docutils literal"><span class="pre">PostCommentModerator</span></code> is the only moderation class registered for the <code class="docutils literal"><span class="pre">Post</span></code> model, and be sure as well that the <a class="reference external" href="https://docs.djangoproject.com/en/1.10/_objects/ref/settings/#std:setting-MANAGERS" title="(in Django v1.10)"><code class="xref std std-setting docutils literal"><span class="pre">MANAGERS</span></code></a> setting contains a valid email address. The email is based on the template <code class="docutils literal"><span class="pre">django_comments_xtd/removal_notification_email.txt</span></code> already provided within the django-comments-xtd app. After these changes flagging a comment with a <strong>Removal suggestion</strong> must trigger an email.</p>
+</div>
+</div>
+<div class="section" id="liked-it-disliked-it">
+<h3>Liked it, Disliked it<a class="headerlink" href="#liked-it-disliked-it" title="Permalink to this headline">¶</a></h3>
+<p>Django-comments-xtd adds two new flags: the <strong>Liked it</strong> and the <strong>Disliked it</strong> flags.</p>
+<p>Unlike the <strong>Removal suggestion</strong> flag, the <strong>Liked it</strong> and <strong>Disliked it</strong> flags are mutually exclusive. So that a user can&#8217;t like and dislike a comment at the same time, only the last action counts. Users can click on the links at any time and only the last action will prevail.</p>
+<p>In this section we will make changes in the <code class="docutils literal"><span class="pre">democx</span></code> project to give our users the capacity to like or dislike comments. We can start by adding the links to the <code class="docutils literal"><span class="pre">comments_tree.html</span></code> template. The links could go immediately after rendering the comment content, at the left side of the Reply link:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span>...
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">item.comment.comment</span><span class="o">|</span><span class="nf">render_markup_comment</span> <span class="cp">}}</span>
+          <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+          <span class="c">&lt;!-- Add here the links to let users express whether they like the comment. --&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;comments-xtd-like&#39;</span> <span class="nv">item.comment.pk</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mutedlink&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;small&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">item.likedit</span><span class="o">|</span><span class="nf">length</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;small glyphicon glyphicon-thumbs-up&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-muted&quot;</span><span class="p">&gt;</span><span class="ni">&amp;sdot;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;comments-xtd-dislike&#39;</span> <span class="nv">item.comment.pk</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mutedlink&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;small&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">item.dislikedit</span><span class="o">|</span><span class="nf">length</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;small glyphicon glyphicon-thumbs-down&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-muted&quot;</span><span class="p">&gt;</span><span class="ni">&amp;sdot;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+          <span class="c">&lt;!-- And the reply link --&gt;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">item.comment.allow_thread</span> <span class="k">and</span> <span class="k">not</span> <span class="nv">item.comment.is_removed</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;small mutedlink&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">item.comment.get_reply_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+            <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Reply&quot;</span> <span class="cp">%}</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+...
+</pre></div>
+</div>
+</div></blockquote>
+<p>Having the links in place, if we click on any of them we will end up in either the <code class="docutils literal"><span class="pre">like.html</span></code> or the <code class="docutils literal"><span class="pre">dislike.html</span></code> templates. These two templates are new, and meant to request the user to confirm the operation.</p>
+<p>We can create new versions of these templates in the <code class="docutils literal"><span class="pre">democx/templates/django_comments_xtd</span></code> directory to adapt them to the look of the project. Let&#8217;s create first <code class="docutils literal"><span class="pre">like.html</span></code> with the following content:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Confirm your opinion&quot;</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.content_object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.content_object</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header text-center&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">already_liked_it</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;You liked this comment, do you want to change it?&quot;</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Do you like this comment?&quot;</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Please, confirm your opinion on this comment:&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.submit_date</span><span class="o">|</span><span class="nf">date</span><span class="s2">:&quot;N j, Y, P&quot;</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+            <span class="cp">{{</span> <span class="nv">comment.user_name</span> <span class="cp">}}</span>
+            <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.comment</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;visible-lg-block visible-md-block&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">already_liked_it</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-warning&quot;</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">trans</span> <span class="s1">&#39;Click on the &quot;withdraw&quot; button if you want to withdraw your positive opinion on this comment.&#39;</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well well-lg&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;.&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-horizontal&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;next&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-3 col-md-offset-3 col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">already_liked_it</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s1">&#39;Withdraw&#39;</span> <span class="cp">%}{%</span> <span class="k">else</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s1">&#39;I like it&#39;</span> <span class="cp">%}{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-default&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;cancel&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>And this could be the content for the <code class="docutils literal"><span class="pre">dislike.html</span></code> template:</p>
+<blockquote>
+<div><div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments_xtd</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Confirm your opinion&quot;</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">header</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;homepage&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nb">block</span><span class="nv">.super</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;blog:post_list&#39;</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> -
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.content_object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.content_object</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header text-center&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">already_disliked_it</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;You didn&#39;t like this comment, do you want to change it?&quot;</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Do you dislike this comment?&quot;</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Please, confirm your opinion on this comment:&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-left&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="cp">{{</span> <span class="nv">comment.user_email</span><span class="o">|</span><span class="nf">xtd_comment_gravatar</span> <span class="cp">}}</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h6</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-heading&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{{</span> <span class="nv">comment.submit_date</span><span class="o">|</span><span class="nf">date</span><span class="s2">:&quot;N j, Y, P&quot;</span> <span class="cp">}}</span><span class="ni">&amp;nbsp;</span>-<span class="ni">&amp;nbsp;</span>
+          <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.user_url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_new&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+            <span class="cp">{{</span> <span class="nv">comment.user_name</span> <span class="cp">}}</span>
+            <span class="cp">{%</span> <span class="k">if</span> <span class="nv">comment.user_url</span> <span class="cp">%}</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">comment.comment</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;visible-lg-block visible-md-block&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">already_liked_it</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-warning&quot;</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">trans</span> <span class="s1">&#39;Click on the &quot;withdraw&quot; button if you want to withdraw your negative opinion on this comment.&#39;</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well well-lg&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;.&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-horizontal&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;next&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-lg-offset-3 col-md-offset-3 col-lg-7 col-md-7&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">already_liked_it</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s1">&#39;Withdraw&#39;</span> <span class="cp">%}{%</span> <span class="k">else</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s1">&#39;I dislike it&#39;</span> <span class="cp">%}{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-default&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">comment.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;cancel&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>One last change we need to do consist in adding the argument <code class="docutils literal"><span class="pre">with_participants</span></code> to the tag <a class="reference internal" href="templatetags.html#std:templatetag-get_xtdcomment_tree"><code class="xref std std-ttag docutils literal"><span class="pre">get_xtdcomment_tree</span></code></a> in the blog detail template. The immediate effect of this argument is that in addition to the comment and the children of the comment, in each dictionary of the list retrieved by the template tag we will have the list of users who liked the comment and the list of users who disliked it:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="n">comment_object</span><span class="p">,</span>
+        <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="nb">list</span><span class="p">,</span> <span class="n">of</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">comment</span><span class="p">,</span> <span class="n">dicts</span> <span class="p">],</span>
+        <span class="s1">&#39;likedit&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">user_who_liked_it_1</span><span class="p">,</span> <span class="n">user_who_liked_it_2</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s1">&#39;dislikedit&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">user_who_disliked_it_1</span><span class="p">,</span> <span class="n">user_who_disliked_it_2</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now we have all the changes ready, we can like/dislike comments to see the feature in action.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example.html" class="btn btn-neutral float-right" title="Demo projects" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral" title="Quick start guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Daniel Rus Morales.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.6.5',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
