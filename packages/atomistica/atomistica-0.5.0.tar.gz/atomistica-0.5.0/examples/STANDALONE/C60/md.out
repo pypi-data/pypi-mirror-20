@@ -1,0 +1,211 @@
+Simulation {
+
+    # 'eV/A' or 'H/Bohr'
+    system_of_units = "eV/A";
+
+    # If true, the simulation box will be centered around the origin. Otherwise the origin will be the lower left corner.
+    centered_box = "no";
+
+    # Center the initial structure within the simulation cell.
+    center_molecule = "no";
+
+    # Compute per atom virial information to be used with e.g. the Slicing module.
+    per_atom_virial = "yes";
+
+    # Periodicity in x-, y- and z-direction.
+    pbc = "1, 1, 1";
+
+    # Screen output interval.
+    scr_freq = "10";
+
+    # File output interval (=> traj.xyz).
+    file_freq = "100";
+
+    # Time step.
+    dt = "2.500000e-02";
+
+    # Maximum displacement (adaptive time stepping enabled if greater than 0).
+    max_dr = "-1.000000e+00";
+
+    # Maximum number of iterations.
+    n_iterations = "-1";
+
+    # When to stop simulation (time).
+    max_time = "1.000000e+02";
+
+    # Size of internal particles object.
+    max_nat = "-1";
+
+    # Cutoff used for the binning routing (same as the interaction cut-off if < 0).
+    bin_size = "-1.000000e+00";
+
+    # Average number of neighbors (for neighbor list initialization).
+    avgn = "50";
+
+    # Specify cutoff. Shell larger than the interaction range will be treated as a skin depth/Verlet shell.
+    cutoff = "-1.000000e+00";
+
+    # Additional shell added to the cutoff (skin depth/Verlet shell).
+    cutoff_add = "-1.000000e+00";
+
+    # Sort particles before binning.
+    sort = "no";
+
+    # Force binning in every time step even when Verlet shells are enabled (cutoff_add > 0).
+    force_binning = "no";
+
+    # Reset velocities to zero at the beginning of the simulation (overrides input file).
+    clear_velocities = "no";
+
+    # Reset charges to zero at the beginning of the simulation (overrides input file).
+    clear_charges = "no";
+
+    # Initially translate the system by these values.
+    translate_by = "0.000000, 0.000000, 0.000000";
+    LeesEdwards {
+
+        # Constant velocity.
+        dv = "0.000000, 0.000000, 0.000000";
+
+        # Shear rate.
+        gamma = "0.000000, 0.000000, 0.000000";
+
+        # Oscillation period (no oscillation < 0.0).
+        tau = "-1.000000e+00";
+
+        # Amplitude of the oscillation (velocity).
+        amplitude = "0.000000, 0.000000, 0.000000";
+    };
+    Rebo2 {
+
+        # Elements for which to use this potential (default: C,H).
+        elements = "C,H";
+
+        # Q for H-H interaction (inner).
+        HH_Q = "3.704715e-01";
+
+        # A for H-H interaction (inner).
+        HH_A = "3.281736e+01";
+
+        # alpha for H-H interaction (inner).
+        HH_alpha = "3.536299e+00";
+
+        # B1 for H-H interaction (inner).
+        HH_B1 = "2.963259e+01";
+
+        # beta1 for H-H interaction (inner).
+        HH_beta1 = "1.715892e+00";
+
+        # Q for C-H interaction (inner).
+        CH_Q = "3.407757e-01";
+
+        # A for C-H interaction (inner).
+        CH_A = "1.499410e+02";
+
+        # alpha for C-H interaction (inner).
+        CH_alpha = "4.102550e+00";
+
+        # B1 for C-H interaction (inner).
+        CH_B1 = "3.235519e+01";
+
+        # beta1 for C-H interaction (inner).
+        CH_beta1 = "1.434458e+00";
+
+        # Q for C-C interaction (inner).
+        CC_Q = "3.134603e-01";
+
+        # A for C-C interaction (inner).
+        CC_A = "1.095354e+04";
+
+        # alpha for C-C interaction (inner).
+        CC_alpha = "4.746539e+00";
+
+        # B1 for C-C interaction (inner).
+        CC_B1 = "1.238879e+04";
+
+        # B2 for C-C interaction (inner).
+        CC_B2 = "1.756741e+01";
+
+        # B3 for C-C interaction (inner).
+        CC_B3 = "3.071493e+01";
+
+        # beta1 for C-C interaction (inner).
+        CC_beta1 = "4.720452e+00";
+
+        # beta2 for C-C interaction (inner).
+        CC_beta2 = "1.433213e+00";
+
+        # beta3 for C-C interaction (inner).
+        CC_beta3 = "1.382691e+00";
+
+        # r1 for C-C interaction (inner).
+        CC_in_r1 = "1.700000e+00";
+
+        # r2 for C-C interaction (inner).
+        CC_in_r2 = "2.000000e+00";
+
+        # r1 for C-H interaction.
+        CH_r1 = "1.300000e+00";
+
+        # r2 for C-H interaction.
+        CH_r2 = "1.800000e+00";
+
+        # r1 for H-H interaction.
+        HH_r1 = "1.100000e+00";
+
+        # r2 for H-H interaction.
+        HH_r2 = "1.700000e+00";
+
+        # Include the dihedral term?
+        dihedral = "no";
+
+        # Initialize all tables to zero.
+        zero_tables = "no";
+    };
+    OutputEnergy {
+
+        # Output frequency (-1 means output every time step).
+        freq = "-1.000000e+00";
+
+        # Output quantities averaged over the time interval *freq*.
+        average = "yes";
+    };
+    OutputNC {
+
+        # Output interval.
+        freq = "1.000000e+01";
+
+        # Output per-atom potential energies.
+        epot = "no";
+    };
+    PetersT {
+
+        # Group of particles to thermalize.
+        group = "1";
+
+        # Target temperature.
+        T = "3.000000e+02";
+
+        # Linear temperature ramp.
+        dT = "0.000000e+00";
+
+        # Temperature coupling dissipation constant.
+        gamma = "1.000000e+00";
+
+        # Write energy balance to 'peter_t.out'.
+        energy_out = "no";
+
+        # Cut-off distance. A linear weighting function is used
+        cutoff = "4.000000e+00";
+    };
+    DomainDecomposition {
+
+        # Number of domains in each direction, i.e. type of the decomposition.
+        decomposition = "1, 1, 1";
+    };
+    Parallel3D {
+
+        # Number of domains in each direction, i.e. type of the decomposition.
+        decomposition = "1, 1, 1";
+    };
+};

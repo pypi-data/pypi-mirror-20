@@ -1,0 +1,30 @@
+
+/========================================================================
+/
+/   atoms.bx
+/
+/   input file BOPfox code: on-site parameters for all atoms
+/   masses from http://www.chem.qmul.ac.uk/iupac/AtWt
+/
+/========================================================================
+
+/-------------------------------------------------
+Version = v2ox
+/-------------------------------------------------
+
+Atom             = Nb
+Mass             = 92.906
+ValenceOrbitals  = 5
+ValenceElectrons = 3.6
+onsitelevels     = 1.5
+#Jii              = 0.0
+Jii              = 50.0
+ 
+Atom             = N
+Mass             = 14.0
+ValenceOrbitals  = 4
+ValenceElectrons = 5.0              
+onsitelevels     = -11.0  0.0
+#Jii              = 0.0
+Jii              = 50.0
+

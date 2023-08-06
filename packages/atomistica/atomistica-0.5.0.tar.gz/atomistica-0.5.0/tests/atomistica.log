@@ -1,0 +1,99 @@
+Welcome to - Atomistica -
+
+   Atomistica revision:  0.4.6+8.g4788d60
+   Atomistica rev date:  2017-02-27T20:17:38+0000
+   Atomistica URL:       git@github.com:Atomistica/atomistica.git
+
+   architecture:         x86_64
+
+   build host:           PC-L193
+   build date:           Feb 27 2017 20:19:26
+   compiler version:     numpy-distutils
+   compile options:      
+
+   run date:             Feb 27 2017 20:30:13
+
+ - particles_update_elements -
+     1 elements found.
+     1 = H  (    64 atoms found)
+
+ - particles_update_elements -
+     2 elements found.
+     1 = Na (    32 atoms found)
+     2 = Cl (    32 atoms found)
+
+- pme_bind_to -
+     cutoff   =    5.00000
+     * alpha  =    1.10524
+     grid     =    10   10   10
+- neighbors_request_interaction_range -
+     old interaction range  = .00000000000000000
+     request                = 5.00000000000000000
+
+
+- neighbors_update -
+     Initializing neighbor list.
+     interaction_range  =         5.0000000000
+     verlet_shell       =         0.0000000000
+     cutoff             =         5.0000000000
+     avgn               =        100
+     Memory estimate: .19630432128906250  MB
+
+- neighbors_binning_init -
+     Binning enabled.
+     cutoff     =      5.000
+     box_size   = (     11.280    11.280    11.280 )
+     n_cells    = (          3         3         3 )
+     cell_size  = (      3.760     0.000     0.000     0.000     3.760     0.000     0.000     0.000     3.760 )
+
+ - particles_update_elements -
+     1 elements found.
+     1 = H  (   100 atoms found)
+
+ - particles_update_elements -
+     2 elements found.
+     1 = Na (    50 atoms found)
+     2 = Cl (    50 atoms found)
+
+- neighbors_del -
+     Average number of neighbors per atom = 23.88689365671641696
+
+- pme_bind_to -
+     cutoff   =    5.00000
+     * alpha  =    1.10524
+     grid     =    10   10   10
+- neighbors_request_interaction_range -
+     old interaction range  = .00000000000000000
+     request                = 5.00000000000000000
+
+
+- neighbors_update -
+     Initializing neighbor list.
+     interaction_range  =         5.0000000000
+     verlet_shell       =         0.0000000000
+     cutoff             =         5.0000000000
+     avgn               =        100
+     Memory estimate: .30671691894531250  MB
+
+- neighbors_binning_init -
+     Binning enabled.
+     cutoff     =      5.000
+     box_size   = (     13.097    13.097    13.097 )
+     n_cells    = (          3         3         3 )
+     cell_size  = (      4.366     0.000     0.000     0.000     4.366     0.000     0.000     0.000     4.366 )
+
+
+   simulation started:  Feb 27 2017 20:30:13
+   simulation ended:    Feb 27 2017 20:30:18
+
+====> TIMINGS <====
+                                                                   time[s]     calls
+                                                                   -------     -----
+ MDCORE                                                              5.780         1
+   - pme_energy_and_forces                                           3.479      2704
+       - fill_neighbor_list                                          1.382      2376
+       - ** remainder **                                             2.097
+   - pme_potential                                                   0.005         4
+       - fill_neighbor_list                                          0.003         4
+       - ** remainder **                                             0.002
+   - ** remainder **                                                 2.296
