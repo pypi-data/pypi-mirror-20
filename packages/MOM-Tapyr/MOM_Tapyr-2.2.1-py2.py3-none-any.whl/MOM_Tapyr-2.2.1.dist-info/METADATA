@@ -1,0 +1,50 @@
+Metadata-Version: 2.0
+Name: MOM-Tapyr
+Version: 2.2.1
+Summary: Framework for the implementation of essential object models.
+Home-page: https://github.com/Tapyr/tapyr
+Author: Christian Tanzer
+Author-email: tanzer@swing.co.at
+License: BSD License
+Platform: Any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: TFL
+Requires-Dist: CAL
+Requires-Dist: babel
+Requires-Dist: python-dateutil
+Requires-Dist: sqlalchemy
+Provides-Extra: bcrypt
+Requires-Dist: bcrypt; extra == 'bcrypt'
+Provides-Extra: deploy
+Requires-Dist: plumbum; extra == 'deploy'
+Provides-Extra: doc
+Requires-Dist: plumbum; extra == 'doc'
+Requires-Dist: sphinx; extra == 'doc'
+Provides-Extra: postgresql
+Requires-Dist: psycopg2; extra == 'postgresql'
+
+MOM provides a framework for the definition and implementation of essential
+object models. MOM supports multiple database backends, one of them based on
+sqlalchemy.
+
+MOM is distributed under the conditions of the `BSD 3-Clause
+License <http://www.c-tanzer.at/license/bsd_3c.html>`_.
+
+MOM is available as a `git repository`_.
+You can clone that repository with::
+
+    git clone git@github.com:Tapyr/tapyr.git
+
+Reports of bugs in MOM should be submitted to the `git repository`_.
+
+.. _`git repository`: https://github.com/Tapyr/tapyr
+
