@@ -1,0 +1,39 @@
+Metadata-Version: 2.0
+Name: Flask-Environment
+Version: 0.3.1
+Summary: Configure a Flask application with various file formats.
+Home-page: https://github.com/nZac/flask-environment
+Author: Nick Zaccardi
+Author-email: nicholas.zaccardi@gmail.com
+License: MIT
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: flask (>=0.11)
+Provides-Extra: dev
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: pytoml; extra == 'dev'
+Requires-Dist: tox; extra == 'dev'
+Provides-Extra: toml
+Requires-Dist: pytoml (==0.1.11); extra == 'toml'
+
+
+Flask-Environment
+------------------
+
+Flask-Environment allows configuration of a Flask project with various
+serialization formats.
+
+
+0.3.1 - 2017-02-24
+##################
+
+* Update the homepage URL
+
+
