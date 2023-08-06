@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MIT Moira &#8212; mit_moira 0.0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-mit_moira">
+<span id="mit-moira"></span><h1>MIT Moira<a class="headerlink" href="#module-mit_moira" title="Permalink to this headline">¶</a></h1>
+<p>Python client for accessing MIT&#8217;s <a class="reference external" href="http://kb.mit.edu/confluence/display/istcontrib/Moira+Overview">Moira</a> system.
+This client uses the <a class="reference external" href="https://en.wikipedia.org/wiki/SOAP">SOAP</a> API, which has a few unusual limitations, and
+requires X.509 client certificates for access.</p>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mit_moira.Moira">
+<em class="property">class </em><code class="descclassname">mit_moira.</code><code class="descname">Moira</code><span class="sig-paren">(</span><em>cert_path</em>, <em>key_path</em>, <em>proxy_id=''</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira" title="Permalink to this definition">¶</a></dt>
+<dd><p>The client that accesses Moira&#8217;s SOAP API, powered by
+<a class="reference external" href="http://docs.python-zeep.org">zeep</a>. Requires an X.509 certificate and
+private key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cert_path</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The path to an X.509 certificate file</li>
+<li><strong>key_path</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The path to an X.509 private key file</li>
+<li><strong>proxy_id</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; Used in many API calls. Do not set this
+unless you know what you&#8217;re doing.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="mit_moira.Moira.client">
+<code class="descname">client</code><em class="property"> = None</em><a class="headerlink" href="#mit_moira.Moira.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of <a class="reference external" href="http://docs.python-zeep.org/en/master/api.html#zeep.Client" title="(in Zeep v1.3.0)"><code class="xref py py-class docutils literal"><span class="pre">zeep.Client</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.user_lists">
+<code class="descname">user_lists</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.user_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up all the lists that the user is a member of.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The MIT username of the user</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">names of the lists that this user is a member of.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of strings</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.list_members">
+<code class="descname">list_members</code><span class="sig-paren">(</span><em>name</em>, <em>type='USER'</em>, <em>recurse=True</em>, <em>max_results=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.list_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up all the members of a list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the list</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The type of results to return. &#8220;USER&#8221; to get users,
+&#8220;LIST&#8221; to get lists.</li>
+<li><strong>recurse</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Presumably, whether to recurse into member lists
+when retrieving users.</li>
+<li><strong>max_results</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Maximum number of results to return.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">names of the members of the list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of strings</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.list_attributes">
+<code class="descname">list_attributes</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.list_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up the attributes of a list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">attributes of the list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.list_exists">
+<code class="descname">list_exists</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.list_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does this list exist?</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether the list exists</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.add_member_to_list">
+<code class="descname">add_member_to_list</code><span class="sig-paren">(</span><em>username</em>, <em>listname</em>, <em>member_type='USER'</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.add_member_to_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a member to an existing list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The username of the user to add</li>
+<li><strong>listname</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the list to add the user to</li>
+<li><strong>member_type</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; Normally, this should be &#8220;USER&#8221;.
+If you are adding a list as a member of another list,
+set this to &#8220;LIST&#8221;, instead.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.create_list">
+<code class="descname">create_list</code><span class="sig-paren">(</span><em>name</em>, <em>description='Created by mit_moira client'</em>, <em>is_active=True</em>, <em>is_public=True</em>, <em>is_hidden=True</em>, <em>is_group=False</em>, <em>is_nfs_group=False</em>, <em>is_mail_list=False</em>, <em>use_mailman=False</em>, <em>mailman_server=''</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.create_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the new list</li>
+<li><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; A short description of this list</li>
+<li><strong>is_active</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Should the new list be active?
+An inactive list cannot be used.</li>
+<li><strong>is_public</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Should the new list be public?
+If a list is public, anyone may join without requesting
+permission. If not, the owners control entry to the list.</li>
+<li><strong>is_hidden</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Should the new list be hidden?
+Presumably, a hidden list doesn&#8217;t show up in search queries.</li>
+<li><strong>is_group</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Something about AFS?</li>
+<li><strong>is_nfs_group</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Presumably, create an
+<a class="reference external" href="https://en.wikipedia.org/wiki/Network_File_System">NFS group</a>
+for this group? I don&#8217;t actually know what this does.</li>
+<li><strong>is_mail_list</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Presumably, create a mailing list.</li>
+<li><strong>use_mailman</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Presumably, use
+<a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Mailman">GNU Mailman</a>
+to manage the mailing list.</li>
+<li><strong>mailman_server</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The Mailman server to use, if <code class="docutils literal"><span class="pre">use_mailman</span></code>
+is True.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.update_list">
+<code class="descname">update_list</code><span class="sig-paren">(</span><em>name</em>, <em>new_name=None</em>, <em>description='Updated by mit_moira client'</em>, <em>is_active=True</em>, <em>is_public=True</em>, <em>is_hidden=True</em>, <em>is_group=False</em>, <em>is_nfs_group=False</em>, <em>is_mail_list=False</em>, <em>use_mailman=False</em>, <em>mailman_server=''</em><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.update_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update an existing list. Be warned that this will overwrite
+<em>all</em> attributes on the list, not just the ones you specify!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the existing list to be updated</li>
+<li><strong>new_name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; If you wish to change the name of the list,
+set it here. Otherwise, the name will remain the same.</li>
+<li><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; A short description of this list</li>
+<li><strong>is_active</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Should the list be active?
+An inactive list cannot be used.</li>
+<li><strong>is_public</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Should the list be public?
+If a list is public, anyone may join without requesting
+permission. If not, the owners control entry to the list.</li>
+<li><strong>is_hidden</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Should the list be hidden?
+Presumably, a hidden list doesn&#8217;t show up in search queries.</li>
+<li><strong>is_group</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Something about AFS?</li>
+<li><strong>is_nfs_group</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; <p>Presumably, have an
+<a class="reference external" href="https://en.wikipedia.org/wiki/Network_File_System">NFS group</a>
+for this group? I don&#8217;t actually know what this does.</p>
+</li>
+<li><strong>is_mail_list</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; Presumably, have a mailing list.</li>
+<li><strong>use_mailman</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; <p>Presumably, have
+<a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Mailman">GNU Mailman</a>
+manage the mailing list.</p>
+</li>
+<li><strong>mailman_server</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The Mailman server to use, if <code class="docutils literal"><span class="pre">use_mailman</span></code>
+is True.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mit_moira.Moira.print_capabilities">
+<code class="descname">print_capabilities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mit_moira.Moira.print_capabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print out the capabilities of this SOAP API.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MIT Moira</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, MIT Office of Digital Learning.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
